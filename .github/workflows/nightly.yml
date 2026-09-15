@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "30 22 * * *"
   workflow_dispatch:
+    inputs:
+      force:
+        description: "Open a pull request even when only stars and timestamps moved"
+        type: boolean
+        default: false
   pull_request:
     paths: ["tools/**", "data/seeds.txt", ".github/workflows/nightly.yml"]
 
@@ -34,12 +39,27 @@ jobs:
           GH_TOKEN: ${{ github.token }}
       - run: npm run render
       - run: npm run lint
-      - name: Open or update the scan pull request
+      - name: Decide whether the change is worth a pull request
+        id: worth
         if: github.event_name != 'pull_request'
+        run: |
+          if node tools/changed.mjs > change.txt; then
+            echo "open=true" >> "$GITHUB_OUTPUT"
+          elif [ "${{ inputs.force }}" = "true" ] || [ "$(date -u +%u)" = "7" ]; then
+            echo "weekly refresh: stars and timestamps only" > change.txt
+            echo "open=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "open=false" >> "$GITHUB_OUTPUT"
+            git checkout -- .
+          fi
+          cat change.txt || true
+          rm -f change.txt
+      - name: Open or update the scan pull request
+        if: github.event_name != 'pull_request' && steps.worth.outputs.open == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
           branch: nightly-scan
           title: "Nightly scan: refresh footprints and badges"
           commit-message: "Nightly scan: refresh footprints and badges"
-          body: "Automated rescan of every candidate repo against the current Claude Code release. Review the diff in README.md and data/mods.json, then merge."
+          body: "Automated rescan of every candidate repo against the current Claude Code release. Opened only when a mod appeared, disappeared, changed footprint, stopped validating, or the Claude Code version moved; Sundays also refresh stars. Review the diff in README.md and data/mods.json, then merge."
           labels: scan
