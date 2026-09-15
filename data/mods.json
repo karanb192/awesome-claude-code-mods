@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-15T06:19:38.904Z",
+  "generated": "2026-09-15T07:04:59.633Z",
   "claudeVersion": "2.1.272",
   "repos": 92,
   "mods": [
@@ -134,7 +134,7 @@
         "PromptHint",
         "Pane"
       ],
-      "stars": 145089,
+      "stars": 145097,
       "pushedAt": "2026-09-15T00:42:25Z",
       "createdAt": "2025-02-22T17:41:21Z",
       "license": null,
@@ -228,7 +228,7 @@
         "subagent spawns"
       ],
       "draws": [],
-      "stars": 145089,
+      "stars": 145097,
       "pushedAt": "2026-09-15T00:42:25Z",
       "createdAt": "2025-02-22T17:41:21Z",
       "license": null,
@@ -283,7 +283,7 @@
       },
       "sees": [],
       "draws": [],
-      "stars": 145089,
+      "stars": 145097,
       "pushedAt": "2026-09-15T00:42:25Z",
       "createdAt": "2025-02-22T17:41:21Z",
       "license": null,
@@ -515,7 +515,7 @@
       ],
       "draws": [],
       "stars": 30,
-      "pushedAt": "2026-09-15T06:00:32Z",
+      "pushedAt": "2026-09-15T06:58:07Z",
       "createdAt": "2026-02-24T21:54:13Z",
       "license": "MIT",
       "archived": false,
@@ -526,7 +526,7 @@
       "repo": "lossless-claude/lcm",
       "path": ".",
       "name": "lcm",
-      "description": "Lossless context management \u2014 DAG-based summarization that preserves every message",
+      "description": "Lossless context management — DAG-based summarization that preserves every message",
       "author": "Pedro Almeida",
       "homepage": "https://lossless-claude.com",
       "url": "https://github.com/lossless-claude/lcm",
@@ -677,7 +677,7 @@
       "path": ".",
       "name": "cc-arcade",
       "description": "Games above the Claude Code prompt (snake, Tetris, 2048, Minesweeper, Flappy, Pong, typing test, Space Invaders, Doom) plus a pet that grows as Claude tests, commits and edits. Clones of the genre, not affiliated with or endorsed by Tetris Holding, Taito, Atari or id Software. Needs function hooks (early access) and an interactive terminal.",
-      "author": "Seza Akg\u00fcn",
+      "author": "Seza Akgün",
       "homepage": "https://github.com/sezaakgun/cc-arcade",
       "url": "https://github.com/sezaakgun/cc-arcade",
       "kind": "mod",
@@ -760,7 +760,7 @@
       "draws": [
         "AbovePrompt"
       ],
-      "stars": 15,
+      "stars": 17,
       "pushedAt": "2026-09-15T00:19:51Z",
       "createdAt": "2026-09-13T14:36:00Z",
       "license": "MIT",
@@ -1014,7 +1014,7 @@
       ],
       "draws": [],
       "stars": 4,
-      "pushedAt": "2026-09-15T03:28:48Z",
+      "pushedAt": "2026-09-15T07:00:10Z",
       "createdAt": "2026-06-17T15:42:44Z",
       "license": "Apache-2.0",
       "archived": false,
@@ -1317,7 +1317,7 @@
         "status": "failed",
         "claudeVersion": "2.1.272",
         "errors": [
-          "modules../signet.ts: claude-function: /private/tmp/claude-501/-Users-karanbansal-100x-karan-claude-code-mods/b6c4644b-a08b-4b67-b23d-bf3db57fc967/scratchpad/acm-clones/wandercom__signet-eval/adapters/claude-function/hooks/signet.ts, compiled line 41 `on(\"PreToolUse\", async ($, e, next) => {`: \"PreToolUse\" is not an event; $ is always spelled $.noun.event(...) at the call site, on is always on(\"<event>\", hook), and nex\u2026 [+32 chars]"
+          "modules../signet.ts: claude-function: /tmp/acm-clones/wandercom__signet-eval/adapters/claude-function/hooks/signet.ts, compiled line 41 `on(\"PreToolUse\", async ($, e, next) => {`: \"PreToolUse\" is not an event; $ is always spelled $.noun.event(...) at the call site, on is always on(\"<event>\", hook), and next.to always next.to(e, \"<tier>\")"
         ]
       },
       "reach": {
@@ -1463,7 +1463,7 @@
         "status": "failed",
         "claudeVersion": "2.1.272",
         "errors": [
-          "modules../register.ts: bad-event: /private/tmp/claude-501/-Users-karanbansal-100x-karan-claude-code-mods/b6c4644b-a08b-4b67-b23d-bf3db57fc967/scratchpad/acm-clones/ray-manaloto__dotfiles/tests/fixtures/fnhook/bad-event/hooks/register.ts, compiled line 2 `on(\"classic.SessionStartt\", async (_$, e, next) => next(e));`: \"classic.SessionStartt\" is not an event; $ is always spelled $.noun.event(...) at the call site, on is al\u2026 [+65 chars]"
+          "modules../register.ts: bad-event: /tmp/acm-clones/ray-manaloto__dotfiles/tests/fixtures/fnhook/bad-event/hooks/register.ts, compiled line 2 `on(\"classic.SessionStartt\", async (_$, e, next) => next(e));`: \"classic.SessionStartt\" is not an event; $ is always spelled $.noun.event(...) at the call site, on is always on(\"<event>\", hook), and next.to always next.to(e, \"<tier>\")"
         ]
       },
       "reach": {
@@ -1632,7 +1632,7 @@
         "status": "failed",
         "claudeVersion": "2.1.272",
         "errors": [
-          "modules../register.ts: parse-error: /private/tmp/claude-501/-Users-karanbansal-100x-karan-claude-code-mods/b6c4644b-a08b-4b67-b23d-bf3db57fc967/scratchpad/acm-clones/ray-manaloto__dotfiles/tests/fixtures/fnhook/parse-error/hooks/register.ts does not parse: Unexpected end of file (line 3, column 36)"
+          "modules../register.ts: parse-error: /tmp/acm-clones/ray-manaloto__dotfiles/tests/fixtures/fnhook/parse-error/hooks/register.ts does not parse: Unexpected end of file (line 3, column 36)"
         ]
       },
       "reach": {
@@ -1745,7 +1745,7 @@
       "path": ".",
       "name": "cc-pr-tracker",
       "description": "Watch GitHub PRs from a Claude Code session: merge state, review and required checks above the prompt, with alerts when they change",
-      "author": "Seza Akg\u00fcn",
+      "author": "Seza Akgün",
       "homepage": "https://github.com/sezaakgun/cc-pr-tracker",
       "url": "https://github.com/sezaakgun/cc-pr-tracker",
       "kind": "mod",
@@ -2983,7 +2983,7 @@
       "repo": "ippoan/gh-actions-live",
       "path": "mods/pr-bridge-watch",
       "name": "pr-bridge-watch",
-      "description": "gh pr create / pr-push.sh \u3067 PR \u304c\u3067\u304d\u305f\u3089\u3001\u305d\u306e branch \u306e CI \u3092 gh-actions-bridge \u306e ws /watch \u306b Monitor \u3067\u7e4b\u3050 Claude Mod (function hooks)",
+      "description": "gh pr create / pr-push.sh で PR ができたら、その branch の CI を gh-actions-bridge の ws /watch に Monitor で繋ぐ Claude Mod (function hooks)",
       "author": "ippoan",
       "homepage": "https://github.com/ippoan/gh-actions-live",
       "url": "https://github.com/ippoan/gh-actions-live/tree/main/mods/pr-bridge-watch",
@@ -3861,7 +3861,7 @@
         "Pane"
       ],
       "stars": 0,
-      "pushedAt": "2026-09-15T06:17:30Z",
+      "pushedAt": "2026-09-15T06:47:36Z",
       "createdAt": "2026-09-11T19:26:30Z",
       "license": "MIT",
       "archived": false,

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-15T06:19:38.904Z",
+  "generated": "2026-09-15T07:04:59.633Z",
   "claudeVersion": "2.1.272",
   "repos": 92,
   "mods": [
@@ -134,7 +134,7 @@
         "PromptHint",
         "Pane"
       ],
-      "stars": 145089,
+      "stars": 145097,
       "pushedAt": "2026-09-15T00:42:25Z",
       "createdAt": "2025-02-22T17:41:21Z",
       "license": null,
@@ -228,7 +228,7 @@
         "subagent spawns"
       ],
       "draws": [],
-      "stars": 145089,
+      "stars": 145097,
       "pushedAt": "2026-09-15T00:42:25Z",
       "createdAt": "2025-02-22T17:41:21Z",
       "license": null,
@@ -283,7 +283,7 @@
       },
       "sees": [],
       "draws": [],
-      "stars": 145089,
+      "stars": 145097,
       "pushedAt": "2026-09-15T00:42:25Z",
       "createdAt": "2025-02-22T17:41:21Z",
       "license": null,
@@ -515,7 +515,7 @@
       ],
       "draws": [],
       "stars": 30,
-      "pushedAt": "2026-09-15T06:00:32Z",
+      "pushedAt": "2026-09-15T06:58:07Z",
       "createdAt": "2026-02-24T21:54:13Z",
       "license": "MIT",
       "archived": false,
@@ -760,7 +760,7 @@
       "draws": [
         "AbovePrompt"
       ],
-      "stars": 15,
+      "stars": 17,
       "pushedAt": "2026-09-15T00:19:51Z",
       "createdAt": "2026-09-13T14:36:00Z",
       "license": "MIT",
@@ -1014,7 +1014,7 @@
       ],
       "draws": [],
       "stars": 4,
-      "pushedAt": "2026-09-15T03:28:48Z",
+      "pushedAt": "2026-09-15T07:00:10Z",
       "createdAt": "2026-06-17T15:42:44Z",
       "license": "Apache-2.0",
       "archived": false,
@@ -1317,7 +1317,7 @@
         "status": "failed",
         "claudeVersion": "2.1.272",
         "errors": [
-          "modules../signet.ts: claude-function: /private/tmp/claude-501/-Users-karanbansal-100x-karan-claude-code-mods/b6c4644b-a08b-4b67-b23d-bf3db57fc967/scratchpad/acm-clones/wandercom__signet-eval/adapters/claude-function/hooks/signet.ts, compiled line 41 `on(\"PreToolUse\", async ($, e, next) => {`: \"PreToolUse\" is not an event; $ is always spelled $.noun.event(...) at the call site, on is always on(\"<event>\", hook), and nex… [+32 chars]"
+          "modules../signet.ts: claude-function: /tmp/acm-clones/wandercom__signet-eval/adapters/claude-function/hooks/signet.ts, compiled line 41 `on(\"PreToolUse\", async ($, e, next) => {`: \"PreToolUse\" is not an event; $ is always spelled $.noun.event(...) at the call site, on is always on(\"<event>\", hook), and next.to always next.to(e, \"<tier>\")"
         ]
       },
       "reach": {
@@ -1463,7 +1463,7 @@
         "status": "failed",
         "claudeVersion": "2.1.272",
         "errors": [
-          "modules../register.ts: bad-event: /private/tmp/claude-501/-Users-karanbansal-100x-karan-claude-code-mods/b6c4644b-a08b-4b67-b23d-bf3db57fc967/scratchpad/acm-clones/ray-manaloto__dotfiles/tests/fixtures/fnhook/bad-event/hooks/register.ts, compiled line 2 `on(\"classic.SessionStartt\", async (_$, e, next) => next(e));`: \"classic.SessionStartt\" is not an event; $ is always spelled $.noun.event(...) at the call site, on is al… [+65 chars]"
+          "modules../register.ts: bad-event: /tmp/acm-clones/ray-manaloto__dotfiles/tests/fixtures/fnhook/bad-event/hooks/register.ts, compiled line 2 `on(\"classic.SessionStartt\", async (_$, e, next) => next(e));`: \"classic.SessionStartt\" is not an event; $ is always spelled $.noun.event(...) at the call site, on is always on(\"<event>\", hook), and next.to always next.to(e, \"<tier>\")"
         ]
       },
       "reach": {
@@ -1632,7 +1632,7 @@
         "status": "failed",
         "claudeVersion": "2.1.272",
         "errors": [
-          "modules../register.ts: parse-error: /private/tmp/claude-501/-Users-karanbansal-100x-karan-claude-code-mods/b6c4644b-a08b-4b67-b23d-bf3db57fc967/scratchpad/acm-clones/ray-manaloto__dotfiles/tests/fixtures/fnhook/parse-error/hooks/register.ts does not parse: Unexpected end of file (line 3, column 36)"
+          "modules../register.ts: parse-error: /tmp/acm-clones/ray-manaloto__dotfiles/tests/fixtures/fnhook/parse-error/hooks/register.ts does not parse: Unexpected end of file (line 3, column 36)"
         ]
       },
       "reach": {
@@ -3861,7 +3861,7 @@
         "Pane"
       ],
       "stars": 0,
-      "pushedAt": "2026-09-15T06:17:30Z",
+      "pushedAt": "2026-09-15T06:47:36Z",
       "createdAt": "2026-09-11T19:26:30Z",
       "license": "MIT",
       "archived": false,
