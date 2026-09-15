@@ -1,0 +1,6 @@
+{
+  "name": "hello-mod",
+  "version": "0.1.0",
+  "description": "The smallest Claude Mod: logs one line when the session starts and refuses one Bash command. Three files, no dependencies, exists so you can see the validator print a footprint.",
+  "author": { "name": "Karan Bansal" }
+}
