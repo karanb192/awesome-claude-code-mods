@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Renders data/mods.json into the README's generated blocks, one SVG badge pair
-// per mod under badges/, and the standalone scoreboard page under site/.
+// per mod under badges/ and docs/badges/, and the standalone scoreboard page under docs/,
+// which GitHub Pages serves at https://mods.karanbansal.in/.
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { LEVEL_NAMES } from './grade.mjs'
@@ -32,11 +33,15 @@ function badge(label, value, color) {
 `
 }
 
-mkdirSync('badges', { recursive: true })
+// badges/ is what the README and contributing.md link via raw.githubusercontent.com; docs/badges/ is the same
+// set served from the Pages domain.
+const BADGE_DIRS = ['badges', 'docs/badges']
+for (const dir of BADGE_DIRS) mkdirSync(dir, { recursive: true })
+const writeBadge = (file, svg) => { for (const dir of BADGE_DIRS) writeFileSync(`${dir}/${file}`, svg) }
 for (const m of [...mods, ...builtins]) {
-  writeFileSync(`badges/${slug(m)}-reach.svg`, badge('reach', `L${m.reach.level} ${reachText(m)}`, LEVEL_COLORS[m.reach.level]))
+  writeBadge(`${slug(m)}-reach.svg`, badge('reach', `L${m.reach.level} ${reachText(m)}`, LEVEL_COLORS[m.reach.level]))
   const ok = m.validate.status !== 'failed'
-  writeFileSync(`badges/${slug(m)}-validates.svg`, badge('validates on', ok ? data.claudeVersion : `fails on ${data.claudeVersion}`, ok ? '#2da44e' : '#d1242f'))
+  writeBadge(`${slug(m)}-validates.svg`, badge('validates on', ok ? data.claudeVersion : `fails on ${data.claudeVersion}`, ok ? '#2da44e' : '#d1242f'))
 }
 
 const count = pred => mods.filter(pred).length
@@ -74,6 +79,8 @@ const trow = m => `<tr data-level="${m.reach.level}" data-name="${esc(m.name)} $
 const site = `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Claude Mods scoreboard: every mod on GitHub and what it can reach</title>
+<meta name="description" content="Every Claude Code mod found on GitHub, with what each one can reach and see, read off Claude's own plugin validator. ${mods.length} mods scanned against Claude Code ${esc(data.claudeVersion)} on ${asOf}.">
+<link rel="canonical" href="https://mods.karanbansal.in/">
 <style>
 :root{--ink:#1b1f24;--muted:#5f6b7a;--line:#e4e7ec;--soft:#f6f8fa;--accent:#0b6bcb}
 *{box-sizing:border-box}body{max-width:1100px;margin:0 auto;padding:28px 20px 60px;color:var(--ink);background:#fff;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
@@ -106,7 +113,7 @@ q.addEventListener('input',apply);lvl.addEventListener('change',apply);apply();
 document.querySelectorAll('#t th[data-k]').forEach(function(th,i){th.addEventListener('click',function(){var idx=[].indexOf.call(th.parentNode.children,th),dir=th.dataset.dir==='asc'?'desc':'asc';th.dataset.dir=dir;var tb=document.querySelector('#t tbody');rows.sort(function(a,b){var x=a.children[idx].textContent.trim(),y=b.children[idx].textContent.trim();var nx=parseFloat(x.replace(/^L/,'')),ny=parseFloat(y.replace(/^L/,''));var c=(!isNaN(nx)&&!isNaN(ny))?nx-ny:x.localeCompare(y);return dir==='asc'?c:-c});rows.forEach(function(r){tb.appendChild(r)})})});
 </script></body></html>
 `
-mkdirSync('site', { recursive: true })
-writeFileSync('site/index.html', site)
-writeFileSync('site/mods.json', JSON.stringify(data, null, 2) + '\n')
-console.log(`rendered ${mods.length} mods and ${builtins.length} built-ins into README.md, badges/ and site/`)
+mkdirSync('docs', { recursive: true })
+writeFileSync('docs/index.html', site)
+writeFileSync('docs/mods.json', JSON.stringify(data, null, 2) + '\n')
+console.log(`rendered ${mods.length} mods and ${builtins.length} built-ins into README.md, badges/, docs/ and docs/badges/`)
