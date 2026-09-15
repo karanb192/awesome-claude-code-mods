@@ -58,3 +58,33 @@ test('visibility names what a hook can observe', () => {
   assert.deepEqual(visibility([{ event: '*', matcher: {} }]), ['everything'])
   assert.deepEqual(drawsOn([{ event: 'ui.render', matcher: { component: 'Pane' } }, { event: 'turn.start', matcher: {} }]), ['Pane'])
 })
+
+import { fingerprint, describeChange } from './changed.mjs'
+
+const base = { claudeVersion: '2.1.272', mods: [
+  { id: 'a/b:.', kind: 'mod', name: 'x', description: 'd', hooks: [], calls: ['$.ui.log'], reach: { level: 0 }, sees: [], validate: { status: 'passed' }, archived: false, stars: 5 },
+  { id: 'c/d:tests/f', kind: 'fixture', name: 'f', description: '', hooks: [], calls: [], reach: { level: 0 }, sees: [], validate: { status: 'passed' }, archived: false, stars: 0 },
+] }
+const clone = () => JSON.parse(JSON.stringify(base))
+
+test('stars and timestamps are not a change', () => {
+  const after = clone(); after.mods[0].stars = 900; after.generated = 'later'
+  assert.equal(fingerprint(base), fingerprint(after))
+  assert.deepEqual(describeChange(base, after), [])
+})
+
+test('a new mod, a footprint change, a validate flip and a version bump are changes', () => {
+  const after = clone()
+  after.mods[0].calls = ['$.ui.log', '$.http.fetch']; after.mods[0].reach.level = 3
+  after.mods.push({ ...clone().mods[0], id: 'e/f:.', name: 'y' })
+  after.claudeVersion = '2.1.280'
+  assert.notEqual(fingerprint(base), fingerprint(after))
+  assert.deepEqual(describeChange(base, after), ['Claude Code 2.1.272 to 2.1.280', 'new: e/f:.', 'a/b:.: reach L0 to L3'])
+  const broken = clone(); broken.mods[0].validate.status = 'failed'
+  assert.deepEqual(describeChange(base, broken), ['a/b:.: validate passed to failed'])
+})
+
+test('fixtures never count', () => {
+  const after = clone(); after.mods[1].calls = ['$.http.fetch']
+  assert.equal(fingerprint(base), fingerprint(after))
+})

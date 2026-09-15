@@ -44,4 +44,5 @@ npm run lint        # awesome-lint on README.md
 npm run discover    # refresh data/repos.txt (needs gh logged in)
 npm run scan        # clone, validate, write data/mods.json (needs the claude CLI)
 npm run render      # regenerate README blocks, badges/ and site/
+node tools/changed.mjs   # exit 0 if the scan differs from HEAD on anything but stars and timestamps
 ```
