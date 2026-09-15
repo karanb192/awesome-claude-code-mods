@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Claude Mods scoreboard: every mod on GitHub and what it can reach</title>
+<meta name="description" content="Every Claude Code mod found on GitHub, with what each one can reach and see, read off Claude's own plugin validator. 31 mods scanned against Claude Code 2.1.272 on 2026-09-15.">
+<link rel="canonical" href="https://mods.karanbansal.in/">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ground:#f5f7f6;--ink:#16211d;--muted:#5b6864;--line:#d6ddd9;--well:#e9eeeb;--l0:#cfe4da;--l1:#86b8a6;--l2:#337a66;--l3:#113d33;--bad:#a8321e;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
+*{box-sizing:border-box}html{background:var(--ground)}
+body{max-width:1120px;margin:0 auto;padding:40px 24px 80px;color:var(--ink);background:var(--ground);font:15px/1.55 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+a{color:inherit;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--l1)}a:hover{text-decoration-color:var(--ink)}
+:focus-visible{outline:2px solid var(--l2);outline-offset:2px}
+code{font:12.5px/1.5 var(--mono)}
+h1{font-size:2rem;line-height:1.15;font-weight:600;letter-spacing:-0.01em;margin:0 0 12px;max-width:26ch}
+h2{font-size:1.15rem;font-weight:600;margin:56px 0 12px}
+p{max-width:66ch;margin:0 0 12px}
+.lead{color:var(--muted);margin-bottom:28px}
+.strip{display:flex;gap:2px;height:56px;margin:0 0 10px}
+.seg{flex:1 1 0;min-width:4px;display:block;border-radius:2px;text-decoration:none}
+.seg:hover,.seg:focus-visible{outline:2px solid var(--ink);outline-offset:1px;z-index:1}
+.l0{background:var(--l0)}.l1{background:var(--l1)}.l2{background:var(--l2)}.l3{background:var(--l3)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin:0 0 20px}
+.lv{font:inherit;font-size:14px;color:var(--ink);background:none;border:0;padding:6px 0;display:inline-flex;align-items:center;gap:8px;cursor:pointer;border-bottom:2px solid transparent}
+.lv i{width:14px;height:14px;border-radius:2px;display:inline-block}
+.lv b{font-weight:500;color:var(--muted)}
+.lv[aria-pressed="true"]{border-bottom-color:var(--ink)}
+.tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:28px 0 8px}
+.tools input{font:inherit;font-size:14px;padding:8px 12px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink);min-width:260px}
+.count{color:var(--muted);font-size:14px}
+.wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+th,td{text-align:left;padding:12px 12px;border-top:1px solid var(--line);vertical-align:top}
+thead th{border-top:0;background:var(--well);font-weight:500;font-size:13px;white-space:nowrap}
+th button{font:inherit;font-weight:500;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+th button:hover{text-decoration-color:var(--ink)}
+td a{font-weight:500}
+.repo{display:block;font:12px/1.4 var(--mono);color:var(--muted);margin-top:2px}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.reach{min-width:190px}
+.track{display:inline-flex;gap:3px;margin-bottom:5px}
+.track i{width:22px;height:9px;border-radius:2px;background:var(--well)}
+.track i.on.l0{background:var(--l0)}.track i.on.l1{background:var(--l1)}.track i.on.l2{background:var(--l2)}.track i.on.l3{background:var(--l3)}
+.labels{display:block;font-size:13px;color:var(--muted)}
+.sees{color:var(--muted);max-width:220px}
+.ver code{color:var(--l2)}.ver.bad code{color:var(--bad)}
+details{margin-top:6px;font-size:12.5px;color:var(--muted)}summary{cursor:pointer;color:var(--muted)}
+dl{margin:6px 0 0}dt{font-weight:500;margin-top:4px}dd{margin:0}dd code{color:var(--ink);word-break:break-word}
+tr:target td{background:#fbf6e3}
+.quiet table{color:var(--muted)}
+footer{margin-top:64px;color:var(--muted);font-size:13px;max-width:66ch}
+@media (max-width:720px){body{padding:24px 16px 60px}h1{font-size:1.5rem}.sees,th.sees,.ver,th.ver{display:none}.strip{height:40px}.reach{min-width:150px}}
+</style></head><body>
+<h1>31 Claude Code mods on GitHub, and how far each one reaches into your machine</h1>
+<p class="lead">Read straight off Claude Code's own plugin validator, which lists a mod's hooks and <code>$</code> calls before any of its code runs. Scanned against Claude Code 2.1.272 on 2026-09-15, rescanned nightly. Source, method and the curated list: <a href="https://github.com/karanb192/awesome-claude-code-mods">awesome-claude-code-mods</a>.</p>
+<div class="strip" role="img" aria-label="One segment per mod, coloured by reach level, deepest first"><a class="seg l3" href="#lossless-claude--lcm--lcm" title="lcm: L3 network, runs processes, writes files, drives Claude, draws" data-level="3"></a><a class="seg l3" href="#jagreehal--autotel--autotel" title="autotel: L3 network, reads env vars, draws" data-level="3"></a><a class="seg l3" href="#pleaseai--honmoon--honmoon-redact" title="honmoon-redact: L3 network, runs processes, draws" data-level="3"></a><a class="seg l3" href="#ippoan--gh-actions-live--pr-bridge-watch" title="pr-bridge-watch: L3 network, runs processes, drives Claude, draws" data-level="3"></a><a class="seg l2" href="#wandercom--kindex--kindex-modern" title="kindex-modern: L2 runs processes, drives Claude, draws" data-level="2"></a><a class="seg l2" href="#TheSmokeDev--taskchad-os--homie-persona-cognition" title="homie-persona-cognition: L2 runs processes, reads env vars" data-level="2"></a><a class="seg l2" href="#noopz--commonplace--commonplace" title="commonplace: L2 runs processes, drives Claude, persists state, draws" data-level="2"></a><a class="seg l2" href="#TransmuteLabs--Catalyst--catalyst-probes" title="catalyst-probes: L2 writes files, drives Claude, reads files, reads env vars, reads the transcript, persists state, draws" data-level="2"></a><a class="seg l2" href="#ray-manaloto--dotfiles--claude-doctor" title="claude-doctor: L2 runs processes, reads env vars" data-level="2"></a><a class="seg l2" href="#ray-manaloto--dotfiles--plugin-health" title="plugin-health: L2 runs processes, reads env vars" data-level="2"></a><a class="seg l2" href="#sezaakgun--cc-pr-tracker--cc-pr-tracker" title="cc-pr-tracker: L2 runs processes, reads files, reads env vars, draws" data-level="2"></a><a class="seg l2" href="#ray-amjad--awesome-claude-code-function-hooks--vercel-deploy-status" title="vercel-deploy-status: L2 runs processes, reads files, draws" data-level="2"></a><a class="seg l2" href="#bsamiee--Rasm--function-hooks" title="function-hooks: L2 runs processes, writes files, drives Claude, reads files, reads env vars, draws" data-level="2"></a><a class="seg l2" href="#diegorv--claude-functions-hook--gh-ci-status" title="gh-ci-status: L2 runs processes, draws" data-level="2"></a><a class="seg l2" href="#JayDoubleu--aside--aside" title="aside: L2 drives Claude, reads the transcript, draws" data-level="2"></a><a class="seg l2" href="#mahuebel--segmem--segmem" title="segmem: L2 runs processes, drives Claude, draws" data-level="2"></a><a class="seg l2" href="#tomstagl--cctop--cctop" title="cctop: L2 runs processes, writes files, writes the prompt box, reads files, reads env vars, persists state, draws" data-level="2"></a><a class="seg l1" href="#djnsty23--claude-auto-dev--autodev-core" title="autodev-core: L1 reads files, draws" data-level="1"></a><a class="seg l1" href="#ray-manaloto--knowledge-base--kb-settings-guard" title="kb-settings-guard: L1 reads files, draws" data-level="1"></a><a class="seg l0" href="#halluton--Mindful-Claude--mindful-claude" title="mindful-claude: L0 persists state, draws" data-level="0"></a><a class="seg l0" href="#sezaakgun--cc-arcade--cc-arcade" title="cc-arcade: L0 persists state, draws" data-level="0"></a><a class="seg l0" href="#Charlie0113-T--claude-agent-flow--agent-flow" title="agent-flow: L0 persists state, draws" data-level="0"></a><a class="seg l0" href="#wandercom--signet-eval--signet-eval-functions" title="signet-eval-functions: L0 draws only" data-level="0"></a><a class="seg l0" href="#ray-amjad--awesome-claude-code-function-hooks--secret-redactor" title="secret-redactor: L0 draws" data-level="0"></a><a class="seg l0" href="#Arunjay4213--claude-mods--context-lens" title="context-lens: L0 draws" data-level="0"></a><a class="seg l0" href="#Arunjay4213--claude-mods--quota-meter" title="quota-meter: L0 persists state, draws" data-level="0"></a><a class="seg l0" href="#Arunjay4213--claude-mods--token-ledger" title="token-ledger: L0 persists state, draws" data-level="0"></a><a class="seg l0" href="#deonmenezes--claude-mods-pokedex--cc-pokedex" title="cc-pokedex: L0 persists state, draws" data-level="0"></a><a class="seg l0" href="#diegorv--claude-functions-hook--time" title="time: L0 draws" data-level="0"></a><a class="seg l0" href="#galElmalah--claude-mermaid--claude-mermaid" title="claude-mermaid: L0 persists state, draws" data-level="0"></a><a class="seg l0" href="#mohi-devhub--claude-games--claude-games" title="claude-games: L0 persists state, draws" data-level="0"></a></div>
+<div class="legend" role="group" aria-label="Filter by reach level"><button type="button" class="lv" data-level="0" aria-pressed="false"><i class="l0"></i>L0 draws and remembers<b>12</b></button><button type="button" class="lv" data-level="1" aria-pressed="false"><i class="l1"></i>L1 reads<b>2</b></button><button type="button" class="lv" data-level="2" aria-pressed="false"><i class="l2"></i>L2 writes or runs<b>13</b></button><button type="button" class="lv" data-level="3" aria-pressed="false"><i class="l3"></i>L3 reaches the network<b>4</b></button></div>
+<p>Reach is the widest thing a mod's <code>$</code> calls can touch. It is a footprint, not a verdict. A PR tracker has to run <code>gh</code>, and a breathing band only draws. Sees lists what a mod observes without a matcher, such as every prompt or every tool call.</p>
+<div class="tools"><input id="q" type="search" placeholder="Filter by name, repo or description" aria-label="Filter mods"><span class="count" id="n"></span></div>
+<div class="wrap"><table id="t"><thead><tr><th><button type="button" data-k="name">Mod</button></th><th>What it does</th><th><button type="button" data-k="level">Reach</button></th><th class="sees">Sees</th><th class="ver">Validates on</th><th class="num"><button type="button" data-k="stars">Stars</button></th></tr></thead><tbody>
+<tr id="halluton--Mindful-Claude--mindful-claude" data-level="0" data-name="mindful-claude halluton/Mindful-Claude Guided breathing exercises above the prompt while Claude works: coherent, box, 4-7-8 and the physiological sigh, four animation styles, and the spinner reads the breath. Appears when Claude starts, disappears when Claude answers. Needs function hooks (early access) and an interactive terminal." data-stars="56">
+<td><a href="https://github.com/halluton/Mindful-Claude">mindful-claude</a><span class="repo">halluton/Mindful-Claude</span></td>
+<td>Guided breathing exercises above the prompt while Claude works: coherent, box, 4-7-8 and the physiological sigh, four animation styles, and the spinn…<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>session.start, command.run{command=breathe}, turn.start, turn.complete, ui.message, ui.render{component=AbovePrompt}, ui.render{component=Spinner}</code></dd><dt>calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.store.get, $.store.set, $.ui.invalidate, $.ui.log, $.ui.resolve</code></dd><dt>surface modules</dt><dd><code>hooks/breathe.tsx</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 0, draws and remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">persists state, draws</span></td>
+<td class="sees">only what it hooks</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">56</td></tr>
+<tr id="wandercom--kindex--kindex-modern" data-level="2" data-name="kindex-modern wandercom/kindex Repo-local Kindex memory and durable tasks for Claude function hooks (qualified on 2.1.263)" data-stars="30">
+<td><a href="https://github.com/wandercom/kindex/tree/main/src/kindex/claude_modern">kindex-modern</a><span class="repo">wandercom/kindex</span></td>
+<td>Repo-local Kindex memory and durable tasks for Claude function hooks (qualified on 2.1.263)<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>session.start, prompt.context, prompt.submit, tool.describe, tool.call, turn.complete</code></dd><dt>calls</dt><dd><code>$.process.run, $.session.cwd, $.session.id, $.tool.register, $.ui.invalidate, $.ui.status</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 2, writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, draws</span></td>
+<td class="sees">the system prompt, every prompt, every tool call</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">30</td></tr>
+<tr id="lossless-claude--lcm--lcm" data-level="3" data-name="lcm lossless-claude/lcm Lossless context management: DAG-based summarization that preserves every message" data-stars="27">
+<td><a href="https://github.com/lossless-claude/lcm">lcm</a><span class="repo">lossless-claude/lcm</span></td>
+<td>Lossless context management: DAG-based summarization that preserves every message<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>session.start, prompt.context, prompt.section{name=memory}, prompt.submit, turn.complete, tool.call</code></dd><dt>calls</dt><dd><code>$.clock.after, $.fs.write, $.http.fetch, $.model.complete, $.model.fork, $.process.run, $.session.cwd, $.session.id, $.ui.log</code></dd><dt>validator said</dt><dd>root: CLAUDE.md at the plugin root is not loaded as project context. To ship context with your plugin, use a skill (skills/&lt;name&gt;/SKILL.md) instead.</dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 3, reaches the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, writes files, drives Claude, draws</span></td>
+<td class="sees">the system prompt, every prompt, every tool call</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">27</td></tr>
+<tr id="TheSmokeDev--taskchad-os--homie-persona-cognition" data-level="2" data-name="homie-persona-cognition TheSmokeDev/taskchad-os Host-bound cognitive lifecycle events for The Homie." data-stars="24">
+<td><a href="https://github.com/TheSmokeDev/taskchad-os/tree/master/.claude/plugins/persona-cognition">homie-persona-cognition</a><span class="repo">TheSmokeDev/taskchad-os</span></td>
+<td>Host-bound cognitive lifecycle events for The Homie.<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>session.start, tool.call, turn.complete, prompt.submit</code></dd><dt>calls</dt><dd><code>$.env.get, $.process.run</code></dd><dt>validator said</dt><dd>./register.ts env writes: nothing; ./register.ts env reads: HOMIE_COGNITION_HOOK_COMMAND, HOMIE_COGNITION_HOOK_PYTHON</dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 2, writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads env vars</span></td>
+<td class="sees">every tool call, every prompt</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">24</td></tr>
+<tr id="sezaakgun--cc-arcade--cc-arcade" data-level="0" data-name="cc-arcade sezaakgun/cc-arcade Games above the Claude Code prompt (snake, Tetris, 2048, Minesweeper, Flappy, Pong, typing test, Space Invaders, Doom) plus a pet that grows as Claude tests, commits and edits. Clones of the genre, not affiliated with or endorsed by Tetris Holding, Taito, Atari or id Software. Needs function hooks (early access) and an interactive terminal." data-stars="17">
+<td><a href="https://github.com/sezaakgun/cc-arcade">cc-arcade</a><span class="repo">sezaakgun/cc-arcade</span></td>
+<td>Games above the Claude Code prompt (snake, Tetris, 2048, Minesweeper, Flappy, Pong, typing test, Space Invaders, Doom) plus a pet that grows as Claud…<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>session.start, command.run{command=arcade}, turn.start, turn.complete, tool.call, ui.message, ui.render{component=AbovePrompt}</code></dd><dt>calls</dt><dd><code>$.clock.now, $.command.register, $.store.get, $.store.set, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.toast</code></dd><dt>surface modules</dt><dd><code>hooks/boards/doom.tsx, hooks/boards/flappy.tsx, hooks/boards/invaders.tsx, hooks/boards/minesweeper.tsx, hooks/boards/pet.tsx, hooks/boards/pong.tsx, hooks/boards/snake.tsx, hooks/boards/tetris.tsx, hooks/boards/twenty48.tsx, hooks/boards/typing.tsx</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 0, draws and remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">persists state, draws</span></td>
+<td class="sees">every tool call</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">17</td></tr>
+<tr id="jagreehal--autotel--autotel" data-level="3" data-name="autotel jagreehal/autotel OpenTelemetry for Claude Code plugins: adds $.autotel in the engine.create fold so a plugin records spans, traces every hook dispatch with the chain beneath it, and shows each tool call's settled duration on its row. Exports OTLP/HTTP to OTEL_EXPORTER_OTLP_ENDPOINT (autotel-devtools claude sets it)." data-stars="8">
+<td><a href="https://github.com/jagreehal/autotel/tree/main/packages/autotel-claude-code">autotel</a><span class="repo">jagreehal/autotel</span></td>
+<td>OpenTelemetry for Claude Code plugins: adds $.autotel in the engine.create fold so a plugin records spans, traces every hook dispatch with the chain…<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>engine.create, session.start, *, ui.render{component=ToolUse}</code></dd><dt>calls</dt><dd><code>$.clock.after, $.env.get, $.http.fetch, $.session.id, $.ui.resolve</code></dd><dt>validator said</dt><dd>./register.ts env writes: nothing; ./register.ts env reads: OTEL_EXPORTER_OTLP_ENDPOINT, OTEL_EXPORTER_OTLP_HEADERS, OTEL_SERVICE_NAME</dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 3, reaches the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, reads env vars, draws</span></td>
+<td class="sees">everything</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">8</td></tr>
+<tr id="Charlie0113-T--claude-agent-flow--agent-flow" data-level="0" data-name="agent-flow Charlie0113-T/claude-agent-flow The agent flow pane: /flow opens a live tree of the session's subagents and teammates beside the transcript, fed by engine events, with a text fallback where no pane can be drawn." data-stars="4">
+<td><a href="https://github.com/Charlie0113-T/claude-agent-flow">agent-flow</a><span class="repo">Charlie0113-T/claude-agent-flow</span></td>
+<td>The agent flow pane: /flow opens a live tree of the session's subagents and teammates beside the transcript, fed by engine events, with a text fallba…<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>session.start, ui.render{component=PromptHint}, ui.render{component=Pane}, command.run{command=Names.COMMAND_NAME}, command.run{command=clear|resume}, ui.close, agent.spawn, tool.call, turn.start, turn.complete, classic.PermissionRequest, classic.Notification{notification_type=permission_prompt}</code></dd><dt>calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 0, draws and remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">persists state, draws</span></td>
+<td class="sees">subagent spawns, every tool call, classic hooks</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">4</td></tr>
+<tr id="pleaseai--honmoon--honmoon-redact" data-level="3" data-name="honmoon-redact pleaseai/honmoon Client-side secret/PII redaction hooks: keep API keys and sensitive identifiers out of Claude Code's model context by redacting Read/Bash/Grep tool output, blocking prompts that carry secrets, and denying reads of known credential files. Session-transcript scrubbing verified on Claude Code 2.1.263 (updatedToolOutput is what gets persisted); re-verify on other versions." data-stars="4">
+<td><a href="https://github.com/pleaseai/honmoon/tree/main/packages/claude-plugin">honmoon-redact</a><span class="repo">pleaseai/honmoon</span></td>
+<td>Client-side secret/PII redaction hooks: keep API keys and sensitive identifiers out of Claude Code's model context by redacting Read/Bash/Grep tool o…<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>tool.call{tool=Read|Bash|Grep|WebFetch}, prompt.submit</code></dd><dt>calls</dt><dd><code>$.clock.sleep, $.http.fetch, $.process.run, $.session.cwd, $.session.id, $.ui.log</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 3, reaches the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, draws</span></td>
+<td class="sees">Read|Bash|Grep|WebFetch calls, every prompt</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">4</td></tr>
+<tr id="djnsty23--claude-auto-dev--autodev-core" data-level="1" data-name="autodev-core djnsty23/claude-auto-dev Autonomous development workflow: brainstorm, auto, iterate, audit, review, ship, plus the prd.json sprint system." data-stars="3">
+<td><a href="https://github.com/djnsty23/claude-auto-dev/tree/main/plugins/autodev-core">autodev-core</a><span class="repo">djnsty23/claude-auto-dev</span></td>
+<td>Autonomous development workflow: brainstorm, auto, iterate, audit, review, ship, plus the prd.json sprint system.<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>session.start, prompt.submit, tool.call{tool=Bash}, attribution.text{kind=commit}, turn.complete</code></dd><dt>calls</dt><dd><code>$.fs.exists, $.fs.readFile, $.session.cwd, $.session.repo, $.ui.log, $.ui.status</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 1, reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads files, draws</span></td>
+<td class="sees">every prompt, Bash calls</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">3</td></tr>
+<tr id="noopz--commonplace--commonplace" data-level="2" data-name="commonplace noopz/commonplace LLM-maintained knowledge base for Obsidian vaults. Auto-triggers on paper sharing, vault health queries, concept compilation, research questions, and domain management." data-stars="3">
+<td><a href="https://github.com/noopz/commonplace">commonplace</a><span class="repo">noopz/commonplace</span></td>
+<td>LLM-maintained knowledge base for Obsidian vaults. Auto-triggers on paper sharing, vault health queries, concept compilation, research questions, and…<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>session.start, tool.call{tool=Bash}, tool.call{tool=Write|Edit}, tool.call, agent.spawn, tool.describe{tool=Agent}, skill.prompt, prompt.context, prompt.submit, ui.render{component=AbovePrompt}, turn.complete</code></dd><dt>calls</dt><dd><code>$.clock.now, $.model.classify, $.model.complete, $.process.run, $.session.cwd, $.session.id, $.session.repo, $.session.turnCount, $.store.get, $.store.set, $.tool.register, $.ui.invalidate, $.ui.status</code></dd><dt>validator said</dt><dd>root: CLAUDE.md at the plugin root is not loaded as project context. To ship context with your plugin, use a skill (skills/&lt;name&gt;/SKILL.md) instead.</dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 2, writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, persists state, draws</span></td>
+<td class="sees">Bash calls, Write|Edit calls, every tool call, subagent spawns, every skill, the system prompt, every prompt</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">3</td></tr>
+<tr id="TransmuteLabs--Catalyst--catalyst-probes" data-level="2" data-name="catalyst-probes TransmuteLabs/Catalyst Consultation and prompt engine for Claude Mods. The module is the core; [probe.&lt;id&gt;] tables in probes.toml are the consultants and [prompt.&lt;id&gt;] tables author a system-prompt section, a tool description or a command description. Pair splice-backed probes with CLAUDE_*_CARRIER=mod." data-stars="3">
+<td><a href="https://github.com/TransmuteLabs/Catalyst/tree/main/plugins/catalyst-probes">catalyst-probes</a><span class="repo">TransmuteLabs/Catalyst</span></td>
+<td>Consultation and prompt engine for Claude Mods. The module is the core; [probe.&lt;id&gt;] tables in probes.toml are the consultants and [prompt.&lt;id&gt;] tabl…<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>session.start, prompt.section, tool.describe, command.describe, tool.call</code></dd><dt>calls</dt><dd><code>$.agent.list, $.clock.now, $.env.get, $.fs.read, $.fs.write, $.model.complete, $.session.messages, $.store.get, $.store.set, $.ui.toast</code></dd><dt>validator said</dt><dd>./register.ts env writes: nothing; ./register.ts env reads: CLAUDE_CONFIG_DIR, CLAUDE_FORM, CLAUDE_FORM_CARRIER, CLAUDE_IDLE, CLAUDE_IDLE_CARRIER, CLAUDE_JUDGE, CLAUDE_JUDGE_CARRIER, CLAUDE_JUDGE_MODEL, CLAUDE_JUDGE_PROMPT, CLAUDE_JUDGE_TIMEOUT_MS, CLAUDE_PROBES, CLAUDE_PROBES_DIR, CLAUDE_PROMPTS, HOME, PWD</dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 2, writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">writes files, drives Claude, reads files, reads env vars, reads the transcript, persists state, draws</span></td>
+<td class="sees">the system prompt, every tool call</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">3</td></tr>
+<tr id="wandercom--signet-eval--signet-eval-functions" data-level="0" data-name="signet-eval-functions wandercom/signet-eval Optional Claude Code 2.1.263 function hooks for Signet-eval policy and output redaction" data-stars="3">
+<td><a href="https://github.com/wandercom/signet-eval/tree/main/adapters/claude-function">signet-eval-functions</a><span class="repo">wandercom/signet-eval</span></td>
+<td>Optional Claude Code 2.1.263 function hooks for Signet-eval policy and output redaction<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>none</code></dd><dt>calls</dt><dd><code>nothing on $</code></dd><dt>validator said</dt><dd>modules../signet.ts: claude-function: /tmp/acm-clones/wandercom__signet-eval/adapters/claude-function/hooks/signet.ts, compiled line 41 `on(&quot;PreToolUse&quot;, async ($, e, next) =&gt; {`: &quot;PreToolUse&quot; is not an event; $ is always spelled $.noun.event(...) at the call site, on is always on(&quot;&lt;event&gt;&quot;, hook), and next.to always next.to(e, &quot;&lt;tier&gt;&quot;)</dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 0, draws and remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">draws only</span></td>
+<td class="sees">only what it hooks</td>
+<td class="ver bad"><code>fails on 2.1.272</code></td>
+<td class="num">3</td></tr>
+<tr id="ray-manaloto--dotfiles--claude-doctor" data-level="2" data-name="claude-doctor ray-manaloto/dotfiles Reports the claude-doctor verdict at session start and refuses tool calls while the install is provably broken" data-stars="2">
+<td><a href="https://github.com/ray-manaloto/dotfiles/tree/main/.agents/skills/claude-doctor">claude-doctor</a><span class="repo">ray-manaloto/dotfiles</span></td>
+<td>Reports the claude-doctor verdict at session start and refuses tool calls while the install is provably broken<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>classic.SessionStart, classic.PreToolUse</code></dd><dt>calls</dt><dd><code>$.env.get, $.process.run</code></dd><dt>validator said</dt><dd>./register.ts env writes: nothing; ./register.ts env reads: CLAUDE_PROJECT_DIR, PATH</dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 2, writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads env vars</span></td>
+<td class="sees">classic hooks</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">2</td></tr>
+<tr id="ray-manaloto--dotfiles--plugin-health" data-level="2" data-name="plugin-health ray-manaloto/dotfiles Reports at session start when plugins declared in settings are not actually installed or are disabled for this project" data-stars="2">
+<td><a href="https://github.com/ray-manaloto/dotfiles/tree/main/.claude/skills/plugin-health">plugin-health</a><span class="repo">ray-manaloto/dotfiles</span></td>
+<td>Reports at session start when plugins declared in settings are not actually installed or are disabled for this project<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>classic.SessionStart</code></dd><dt>calls</dt><dd><code>$.env.get, $.process.run</code></dd><dt>validator said</dt><dd>./plugin-health.ts env writes: nothing; ./plugin-health.ts env reads: CLAUDE_PROJECT_DIR, PATH</dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 2, writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads env vars</span></td>
+<td class="sees">classic hooks</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">2</td></tr>
+<tr id="sezaakgun--cc-pr-tracker--cc-pr-tracker" data-level="2" data-name="cc-pr-tracker sezaakgun/cc-pr-tracker Watch GitHub PRs from a Claude Code session: merge state, review and required checks above the prompt, with alerts when they change" data-stars="2">
+<td><a href="https://github.com/sezaakgun/cc-pr-tracker">cc-pr-tracker</a><span class="repo">sezaakgun/cc-pr-tracker</span></td>
+<td>Watch GitHub PRs from a Claude Code session: merge state, review and required checks above the prompt, with alerts when they change<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>session.start, prompt.submit, tool.call{tool=Bash}, turn.complete, ui.render{component=AbovePrompt}, ui.render{component=Pane}</code></dd><dt>calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.env.get, $.fs.exists, $.process.run, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd><dt>validator said</dt><dd>./register.tsx env writes: nothing; ./register.tsx env reads: CMUX_BUNDLED_CLI_PATH, CMUX_SURFACE_ID</dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 2, writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, reads env vars, draws</span></td>
+<td class="sees">every prompt, Bash calls</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">2</td></tr>
+<tr id="ray-amjad--awesome-claude-code-function-hooks--secret-redactor" data-level="0" data-name="secret-redactor ray-amjad/awesome-claude-code-function-hooks Keeps secrets, email addresses and IP addresses out of the session transcript: swaps each one for a stable placeholder on the way in, and puts the real value back on the way into a tool call" data-stars="1">
+<td><a href="https://github.com/ray-amjad/awesome-claude-code-function-hooks/tree/main/plugins/secret-redactor">secret-redactor</a><span class="repo">ray-amjad/awesome-claude-code-function-hooks</span></td>
+<td>Keeps secrets, email addresses and IP addresses out of the session transcript: swaps each one for a stable placeholder on the way in, and puts the re…<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>prompt.submit, tool.call, prompt.context</code></dd><dt>calls</dt><dd><code>$.ui.notice, $.ui.toast</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 0, draws and remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">draws</span></td>
+<td class="sees">every prompt, every tool call, the system prompt</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">1</td></tr>
+<tr id="ray-amjad--awesome-claude-code-function-hooks--vercel-deploy-status" data-level="2" data-name="vercel-deploy-status ray-amjad/awesome-claude-code-function-hooks Pins the Vercel deploy queue of the linked project under the prompt: every deploy queued, building or just finished, with its phase and elapsed time" data-stars="1">
+<td><a href="https://github.com/ray-amjad/awesome-claude-code-function-hooks/tree/main/plugins/vercel-deploy-status">vercel-deploy-status</a><span class="repo">ray-amjad/awesome-claude-code-function-hooks</span></td>
+<td>Pins the Vercel deploy queue of the linked project under the prompt: every deploy queued, building or just finished, with its phase and elapsed time<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>ui.render{component=AbovePrompt, surface=terminal}, tool.call{tool=Bash}, session.start</code></dd><dt>calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.fs.exists, $.fs.readFile, $.process.run, $.session.repo, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.toast</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 2, writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, draws</span></td>
+<td class="sees">Bash calls</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">1</td></tr>
+<tr id="Arunjay4213--claude-mods--context-lens" data-level="0" data-name="context-lens Arunjay4213/claude-mods A live /context: a pinned line under the prompt with the window fill and the growth per turn, and /context-lens for a pane with the per-category bars and how many turns are left before auto-compaction." data-stars="0">
+<td><a href="https://github.com/Arunjay4213/claude-mods/tree/main/plugins/context-lens">context-lens</a><span class="repo">Arunjay4213/claude-mods</span></td>
+<td>A live /context: a pinned line under the prompt with the window fill and the growth per turn, and /context-lens for a pane with the per-category bars…<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>session.start, turn.complete, session.compact, command.run{command=clear}, command.run{command=context-lens}, ui.close{id=context-lens}, ui.render{component=Pane}</code></dd><dt>calls</dt><dd><code>$.command.register, $.session.usage, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 0, draws and remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">draws</span></td>
+<td class="sees">compaction</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">0</td></tr>
+<tr id="Arunjay4213--claude-mods--quota-meter" data-level="0" data-name="quota-meter Arunjay4213/claude-mods Shows the subscription plan limits - the 5-hour window, the 7-day window and a gateway spend limit - as a pinned status line under the prompt, with a reset countdown and a projection of when you would hit 100% at the pace of the last few samples. /quota opens a pane with a bar, the reset clock time and the burn rate for each window." data-stars="0">
+<td><a href="https://github.com/Arunjay4213/claude-mods/tree/main/plugins/quota-meter">quota-meter</a><span class="repo">Arunjay4213/claude-mods</span></td>
+<td>Shows the subscription plan limits - the 5-hour window, the 7-day window and a gateway spend limit - as a pinned status line under the prompt, with a…<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>session.start, turn.complete, command.run{command=quota}, ui.close{id=quota}, ui.render{component=Pane}</code></dd><dt>calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.session.usage, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.status</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 0, draws and remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">persists state, draws</span></td>
+<td class="sees">only what it hooks</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">0</td></tr>
+<tr id="Arunjay4213--claude-mods--token-ledger" data-level="0" data-name="token-ledger Arunjay4213/claude-mods A per-turn cost and token ledger: a pinned status line with the session cost, the last turn's tokens and the cache hit ratio, and /ledger for a table of the recent turns with their model, tokens, cache reads and writes, duration and cost." data-stars="0">
+<td><a href="https://github.com/Arunjay4213/claude-mods/tree/main/plugins/token-ledger">token-ledger</a><span class="repo">Arunjay4213/claude-mods</span></td>
+<td>A per-turn cost and token ledger: a pinned status line with the session cost, the last turn's tokens and the cache hit ratio, and /ledger for a table…<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>session.start, turn.complete, command.run{command=clear}, command.run{command=resume}, command.run{command=ledger}, ui.close{id=ledger}, ui.render{component=Pane}</code></dd><dt>calls</dt><dd><code>$.command.register, $.session.id, $.session.usage, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 0, draws and remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">persists state, draws</span></td>
+<td class="sees">only what it hooks</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">0</td></tr>
+<tr id="bsamiee--Rasm--function-hooks" data-level="2" data-name="function-hooks bsamiee/Rasm Denies policy-refused tool calls, records hook events as observation rows, delivers findings per lineage" data-stars="0">
+<td><a href="https://github.com/bsamiee/Rasm/tree/main/.claude/plugins/function-hooks">function-hooks</a><span class="repo">bsamiee/Rasm</span></td>
+<td>Denies policy-refused tool calls, records hook events as observation rows, delivers findings per lineage<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>tool.call, classic.*, turn.*, ui.render{component=SessionMode}</code></dd><dt>calls</dt><dd><code>$.agent.spawn, $.clock.now, $.env.get, $.fs.exists, $.fs.write, $.process.run, $.session.cwd, $.session.id, $.session.repo, $.session.usage, $.ui.invalidate, $.ui.log</code></dd><dt>validator said</dt><dd>version: No version specified. Consider adding a version following semver (e.g., &quot;1.0.0&quot;); root: CLAUDE.md at the plugin root is not loaded as project context. To ship context with your plugin, use a skill (skills/&lt;name&gt;/SKILL.md) instead.; ./register.ts env writes: nothing; ./register.ts env reads: HOME</dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 2, writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, drives Claude, reads files, reads env vars, draws</span></td>
+<td class="sees">every tool call, classic hooks</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">0</td></tr>
+<tr id="deonmenezes--claude-mods-pokedex--cc-pokedex" data-level="0" data-name="cc-pokedex deonmenezes/claude-mods-pokedex Catch wild creatures above the Claude Code prompt: where your prompt leads (water, grass, fire, bugs, plans, builds) decides what appears. Pick a partner that draws under the logo, beside the spinner and above the prompt, and levels up and evolves as Claude works. Needs function hooks (early access) and an interactive terminal." data-stars="0">
+<td><a href="https://github.com/deonmenezes/claude-mods-pokedex">cc-pokedex</a><span class="repo">deonmenezes/claude-mods-pokedex</span></td>
+<td>Catch wild creatures above the Claude Code prompt: where your prompt leads (water, grass, fire, bugs, plans, builds) decides what appears. Pick a par…<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>session.start, prompt.submit, command.run{command=dex}, turn.complete, tool.call, ui.message, ui.render{component=AbovePrompt}, ui.render{component=Spinner}, ui.render{component=TurnDuration}, ui.render{component=InfoNotice}</code></dd><dt>calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.store.get, $.store.set, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.toast</code></dd><dt>surface modules</dt><dd><code>hooks/boards/encounter.tsx, hooks/boards/partner.tsx</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 0, draws and remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">persists state, draws</span></td>
+<td class="sees">every prompt, every tool call</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">0</td></tr>
+<tr id="diegorv--claude-functions-hook--gh-ci-status" data-level="2" data-name="gh-ci-status diegorv/claude-functions-hook GitHub Actions runs of the session's repo, pinned above the prompt, with links to the PR and the run" data-stars="0">
+<td><a href="https://github.com/diegorv/claude-functions-hook/tree/main/plugins/gh-ci-status">gh-ci-status</a><span class="repo">diegorv/claude-functions-hook</span></td>
+<td>GitHub Actions runs of the session's repo, pinned above the prompt, with links to the PR and the run<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>session.start, classic.PostToolUse{tool_name=Bash}, ui.render{component=AbovePrompt, surface=terminal}</code></dd><dt>calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.process.run, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.toast</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 2, writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, draws</span></td>
+<td class="sees">classic hooks</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">0</td></tr>
+<tr id="diegorv--claude-functions-hook--time" data-level="0" data-name="time diegorv/claude-functions-hook The time you sent each message, drawn above it" data-stars="0">
+<td><a href="https://github.com/diegorv/claude-functions-hook/tree/main/plugins/time">time</a><span class="repo">diegorv/claude-functions-hook</span></td>
+<td>The time you sent each message, drawn above it<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>ui.render{component=UserMessage}</code></dd><dt>calls</dt><dd><code>$.clock.now, $.ui.resolve</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 0, draws and remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">draws</span></td>
+<td class="sees">only what it hooks</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">0</td></tr>
+<tr id="galElmalah--claude-mermaid--claude-mermaid" data-level="0" data-name="claude-mermaid galElmalah/claude-mermaid Mermaid diagrams in Claude Code: every ```mermaid block Claude writes is drawn as box art, in colour, right where the fence was in the transcript. Needs function hooks (early access) and an interactive terminal." data-stars="0">
+<td><a href="https://github.com/galElmalah/claude-mermaid">claude-mermaid</a><span class="repo">galElmalah/claude-mermaid</span></td>
+<td>Mermaid diagrams in Claude Code: every ```mermaid block Claude writes is drawn as box art, in colour, right where the fence was in the transcript. Ne…<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>session.start, ui.render{component=AssistantMessage}, command.run{command=mermaid}</code></dd><dt>calls</dt><dd><code>$.command.register, $.store.get, $.store.set, $.ui.invalidate, $.ui.log</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 0, draws and remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">persists state, draws</span></td>
+<td class="sees">only what it hooks</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">0</td></tr>
+<tr id="ippoan--gh-actions-live--pr-bridge-watch" data-level="3" data-name="pr-bridge-watch ippoan/gh-actions-live gh pr create / pr-push.sh で PR ができたら、その branch の CI を gh-actions-bridge の ws /watch に Monitor で繋ぐ Claude Mod (function hooks)" data-stars="0">
+<td><a href="https://github.com/ippoan/gh-actions-live/tree/main/mods/pr-bridge-watch">pr-bridge-watch</a><span class="repo">ippoan/gh-actions-live</span></td>
+<td>gh pr create / pr-push.sh で PR ができたら、その branch の CI を gh-actions-bridge の ws /watch に Monitor で繋ぐ Claude Mod (function hooks)<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>prompt.submit, session.receive, tool.call, tool.call{tool=Bash}</code></dd><dt>calls</dt><dd><code>$.clock.sleep, $.http.fetch, $.process.run, $.tool.call, $.ui.log</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 3, reaches the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, drives Claude, draws</span></td>
+<td class="sees">every prompt, every tool call, Bash calls</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">0</td></tr>
+<tr id="JayDoubleu--aside--aside" data-level="2" data-name="aside JayDoubleu/aside Read-only side chat: /aside opens a pane beside the transcript where you ask about the session so far; answers come from a tool-less fork of the session's own transcript and nothing is written back into the main thread." data-stars="0">
+<td><a href="https://github.com/JayDoubleu/aside">aside</a><span class="repo">JayDoubleu/aside</span></td>
+<td>Read-only side chat: /aside opens a pane beside the transcript where you ask about the session so far; answers come from a tool-less fork of the sess…<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>session.start, command.run{command=aside}, turn.complete, ui.render{component=Pane}, ui.input{plugin=aside, element=q}, ui.press{plugin=aside}</code></dd><dt>calls</dt><dd><code>$.clock.now, $.command.register, $.model.complete, $.model.fork, $.session.messages, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 2, writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads the transcript, draws</span></td>
+<td class="sees">only what it hooks</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">0</td></tr>
+<tr id="mahuebel--segmem--segmem" data-level="2" data-name="segmem mahuebel/segmem Segmented, scoped memory for agents: one file, SQLite, no daemon. Wake at session start, recall on every prompt, staleness nag at stop." data-stars="0">
+<td><a href="https://github.com/mahuebel/segmem">segmem</a><span class="repo">mahuebel/segmem</span></td>
+<td>Segmented, scoped memory for agents: one file, SQLite, no daemon. Wake at session start, recall on every prompt, staleness nag at stop.<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>prompt.context, prompt.submit, agent.spawn, tool.call{tool=Bash}, tool.call{tool=Bash}, session.start, tool.call{tool=mcp__segmem__recall}</code></dd><dt>calls</dt><dd><code>$.process.run, $.session.cwd, $.session.id, $.tool.register, $.ui.log, $.ui.status, $.ui.toast</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 2, writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, draws</span></td>
+<td class="sees">the system prompt, every prompt, subagent spawns, Bash calls, mcp__segmem__recall calls</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">0</td></tr>
+<tr id="mohi-devhub--claude-games--claude-games" data-level="0" data-name="claude-games mohi-devhub/claude-games Arcade games above the Claude Code prompt (a dodge race, Breakout, a dino runner and a side-scrolling shooter) that pause when Claude finishes a turn and react to the edits, tests and commits Claude makes. Needs function hooks (early access) and an interactive terminal." data-stars="0">
+<td><a href="https://github.com/mohi-devhub/claude-games">claude-games</a><span class="repo">mohi-devhub/claude-games</span></td>
+<td>Arcade games above the Claude Code prompt (a dodge race, Breakout, a dino runner and a side-scrolling shooter) that pause when Claude finishes a turn…<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>session.start, command.run{command=racer}, command.run{command=breakout}, command.run{command=dino}, command.run{command=shooter}, turn.complete, tool.call, ui.message, ui.render{component=AbovePrompt}</code></dd><dt>calls</dt><dd><code>$.command.register, $.store.get, $.store.set, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.toast</code></dd><dt>surface modules</dt><dd><code>hooks/boards/breakout.tsx, hooks/boards/dino.tsx, hooks/boards/racer.tsx, hooks/boards/shooter.tsx</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 0, draws and remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">persists state, draws</span></td>
+<td class="sees">every tool call</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">0</td></tr>
+<tr id="ray-manaloto--knowledge-base--kb-settings-guard" data-level="1" data-name="kb-settings-guard ray-manaloto/knowledge-base Denies a delegated agent lane any write to this repo's Claude settings files." data-stars="0">
+<td><a href="https://github.com/ray-manaloto/knowledge-base/tree/main/.claude/mods/kb-settings-guard">kb-settings-guard</a><span class="repo">ray-manaloto/knowledge-base</span></td>
+<td>Denies a delegated agent lane any write to this repo's Claude settings files.<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>tool.call{tool=tool}</code></dd><dt>calls</dt><dd><code>$.fs.list, $.ui.log</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 1, reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads files, draws</span></td>
+<td class="sees">tool calls</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">0</td></tr>
+<tr id="tomstagl--cctop--cctop" data-level="2" data-name="cctop tomstagl/cctop btop-style live dashboard for Claude Code internals: /cctop opens it in a side pane, cctop-insights lets the session answer questions from its numbers" data-stars="0">
+<td><a href="https://github.com/tomstagl/cctop/tree/main/plugin">cctop</a><span class="repo">tomstagl/cctop</span></td>
+<td>btop-style live dashboard for Claude Code internals: /cctop opens it in a side pane, cctop-insights lets the session answer questions from its numbers<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>session.start, turn.start, turn.complete, session.compact, tool.call, command.run{command=cctop-pane}, skill.prompt{skill=cctop}, ui.close{id=cctop}, ui.render{component=Pane}</code></dd><dt>calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.read, $.fs.write, $.process.run, $.prompt.fill, $.session.id, $.session.model, $.session.usage, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd><dt>validator said</dt><dd>./pane.tsx env writes: nothing; ./pane.tsx env reads: HOME</dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 2, writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, writes the prompt box, reads files, reads env vars, persists state, draws</span></td>
+<td class="sees">compaction, every tool call, the cctop skill</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">0</td></tr>
+</tbody></table></div>
+<h2>Built into Claude Code</h2>
+<p class="lead">These ship inside the binary. sec-default seats outermost only on managed machines and Team or Enterprise plans.</p>
+<div class="wrap quiet"><table><thead><tr><th>Mod</th><th>What it does</th><th>Reach</th><th class="sees">Sees</th><th class="ver">Validates on</th><th class="num">Stars</th></tr></thead><tbody>
+<tr id="anthropics--claude-code--diff" data-level="2" data-name="diff anthropics/claude-code The diff pane as a plugin: /diff opens the session's uncommitted changes beside the transcript, file by file with their hunks, refreshed as Claude edits and runs commands; the first edit opens it where the terminal is wide enough, and a file's ask button rides its hunks on the next prompt." data-stars="145097">
+<td><a href="https://github.com/anthropics/claude-code/tree/main/mods/diff">diff</a><span class="repo">anthropics/claude-code</span></td>
+<td>The diff pane as a plugin: /diff opens the session's uncommitted changes beside the transcript, file by file with their hunks, refreshed as Claude ed…<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>session.start, ui.render{component=PromptHint}, ui.render{component=Pane}, command.run{command=Names.COMMAND_NAME}, ui.close{id=Names.PANE_ID}, ui.focus{plugin=Names.PLUGIN_NAME}, ui.scroll{requestId=Names.PANE_ID}, command.run{command=clear|resume}, tool.call{tool=...Tools.EDITING_TOOLS}, tool.call{tool=...Tools.SHELL_TOOLS}, turn.complete, prompt.submit</code></dd><dt>calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.fs.list, $.fs.read, $.fs.stat, $.process.run, $.session.id, $.session.messages, $.store.get, $.store.set, $.telemetry.log, $.telemetry.mark, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 2, writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, reads the transcript, telemetry, persists state, draws</span></td>
+<td class="sees">...Tools.EDITING_TOOLS calls, ...Tools.SHELL_TOOLS calls, every prompt</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">145097</td></tr>
+<tr id="anthropics--claude-code--sec-default" data-level="1" data-name="sec-default anthropics/claude-code Security default for organizations: seated outermost, it keeps the organization's classic hooks, prompt content, settings and tool policy out of reach of the plugins a person installs, and adds no policy of its own." data-stars="145097">
+<td><a href="https://github.com/anthropics/claude-code/tree/main/mods/sec-default">sec-default</a><span class="repo">anthropics/claude-code</span></td>
+<td>Security default for organizations: seated outermost, it keeps the organization's classic hooks, prompt content, settings and tool policy out of reac…<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>classic.*, prompt.section, prompt.context, skill.prompt, attribution.text, settings.read, tool.describe, command.describe, agent.offer, agent.spawn, tool.register, tool.list</code></dd><dt>calls</dt><dd><code>$.settings.read</code></dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 1, reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads settings</span></td>
+<td class="sees">classic hooks, the system prompt, every skill, subagent spawns</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">145097</td></tr>
+<tr id="anthropics--claude-code--telemetry" data-level="3" data-name="telemetry anthropics/claude-code Plugin analytics: adds $.telemetry in the engine.create fold, so a plugin logs an event or marks a feature's use as one first-party row per call, sent with the session's own credential." data-stars="145097">
+<td><a href="https://github.com/anthropics/claude-code/tree/main/mods/telemetry">telemetry</a><span class="repo">anthropics/claude-code</span></td>
+<td>Plugin analytics: adds $.telemetry in the engine.create fold, so a plugin logs an event or marks a feature's use as one first-party row per call, sen…<details><summary>hooks and calls</summary><dl><dt>hooks</dt><dd><code>engine.create</code></dd><dt>calls</dt><dd><code>$.env.get, $.http.fetch, $.session.authorize, $.session.id, $.session.model</code></dd><dt>validator said</dt><dd>types ./types/index.d.ts declares on $: $.telemetry; ./register.ts env writes: nothing; ./register.ts env reads: CLAUDE_CODE_CUSTOM_OAUTH_URL, CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC, CLAUDE_CODE_USE_ANTHROPIC_AWS, CLAUDE_CODE_USE_ANTHROPIC_GOOGLE_CLOUD, CLAUDE_CODE_USE_BEDROCK, CLAUDE_CODE_USE_FOUNDRY, CLAUDE_CODE_USE_MANTLE, CLAUDE_CODE_USE_VERTEX, DISABLE_TELEMETRY, DO_NOT_TRACK, USER_TYPE</dd></dl></details></td>
+<td class="reach"><span class="track" aria-label="reach level 3, reaches the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, reads env vars, reads the transcript</span></td>
+<td class="sees">only what it hooks</td>
+<td class="ver "><code>2.1.272</code></td>
+<td class="num">145097</td></tr>
+</tbody></table></div>
+<footer><p>Every row is the validator's output for that mod's <code>plugin.json</code>, recorded in <a href="https://github.com/karanb192/awesome-claude-code-mods/blob/main/data/mods.json">data/mods.json</a>. Mod authors get a reach badge and a validates-on badge for their README; the <a href="https://github.com/karanb192/awesome-claude-code-mods/blob/main/contributing.md">contributing notes</a> have the one-line snippet. Missing a mod, or think a footprint is wrong? Open a pull request with your validator output.</p></footer>
+<script>
+(function(){
+var q=document.getElementById('q'),n=document.getElementById('n'),tb=document.querySelector('#t tbody');
+var rows=[].slice.call(tb.querySelectorAll('tr')),lv=[].slice.call(document.querySelectorAll('.lv')),level='';
+function apply(){var s=q.value.toLowerCase(),c=0;rows.forEach(function(r){var ok=(level===''||r.dataset.level===level)&&(!s||r.dataset.name.toLowerCase().indexOf(s)>=0);r.hidden=!ok;if(ok)c++});n.textContent=c===rows.length?rows.length+' mods':c+' of '+rows.length+' mods';lv.forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.level===level))})}
+lv.forEach(function(b){b.addEventListener('click',function(){level=level===b.dataset.level?'':b.dataset.level;apply()})});
+document.querySelectorAll('.seg').forEach(function(s){s.addEventListener('click',function(e){e.preventDefault();level=level===s.dataset.level?'':s.dataset.level;apply();var t=document.getElementById(s.getAttribute('href').slice(1));if(t){t.hidden=false;t.scrollIntoView({block:'center'});history.replaceState(null,'',s.getAttribute('href'))}})});
+q.addEventListener('input',apply);
+document.querySelectorAll('#t th button').forEach(function(b){b.addEventListener('click',function(){var k=b.dataset.k,dir=b.dataset.dir==='asc'?'desc':'asc';b.dataset.dir=dir;rows.sort(function(x,y){var c;if(k==='stars')c=(+x.dataset.stars)-(+y.dataset.stars);else if(k==='level')c=(+x.dataset.level)-(+y.dataset.level)||(+y.dataset.stars)-(+x.dataset.stars);else c=x.dataset.name.localeCompare(y.dataset.name);return dir==='asc'?c:-c});rows.forEach(function(r){tb.appendChild(r)})})});
+apply();
+})();
+</script></body></html>

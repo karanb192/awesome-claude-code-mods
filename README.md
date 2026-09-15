@@ -4,7 +4,7 @@
 
 A Claude Mod is a Claude Code plugin whose hooks are TypeScript functions that run inside Claude Code's own process. They draw above the prompt, open panes beside the transcript, rewrite tool calls, spawn agents and touch the host, all with zero tokens. Anthropic proposed them as function hooks on 2026-09-03 and committed to shipping them on 2026-09-09; the design thread is listed under Building mods below. They are early access: set `CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1` or nothing loads, and the API can change between releases.
 
-This list is different from a plain index in one way. Every row carries the mod's **footprint**: the events it hooks and the `$` calls it makes, printed by Claude's own `claude plugin validate` before any mod code runs. A nightly scan clones every candidate repo on GitHub and refreshes the table, the badges and the [scoreboard page](site/index.html). The method is described below the tables.
+This list is different from a plain index in one way. Every row carries the mod's **footprint**: the events it hooks and the `$` calls it makes, printed by Claude's own `claude plugin validate` before any mod code runs. A nightly scan clones every candidate repo on GitHub and refreshes the table, the badges and the [scoreboard page](https://mods.karanbansal.in/), which is generated from the same data. The method is described below the tables.
 
 <!-- stats:start -->
 As of 2026-09-15, scanned against Claude Code 2.1.272: **31 mods** in **92 candidate repos**. 14 run host processes, 4 write files, 7 read files, 4 reach the network, 13 see every tool call, 11 see every prompt, 1 fail to validate on this version. Reach levels: L0 draws and remembers: 12 · L1 reads: 2 · L2 writes or runs: 13 · L3 network: 4.
@@ -137,7 +137,7 @@ These ship inside the binary and load on every machine where function hooks are 
 
 ## How the scan works
 
-Discovery searches GitHub code for `CLAUDE_CODE_ENABLE_FUNCTION_HOOKS` and for a `hooks/hooks.json` with a `modules` key, and adds the repos in `data/seeds.txt`. The scanner clones each repo shallow, finds every plugin with a hooks module, and runs `claude plugin validate` on its `plugin.json`. The validator inventories the source and prints the events hooked and the `$` calls made; no mod code runs. The grader turns the calls into a reach level and the hooks into a visibility list; its rules are in `tools/grade.mjs` and tested. The renderer writes the tables above, one badge pair per mod under `badges/`, and the scoreboard page under `site/`.
+Discovery searches GitHub code for `CLAUDE_CODE_ENABLE_FUNCTION_HOOKS` and for a `hooks/hooks.json` with a `modules` key, and adds the repos in `data/seeds.txt`. The scanner clones each repo shallow, finds every plugin with a hooks module, and runs `claude plugin validate` on its `plugin.json`. The validator inventories the source and prints the events hooked and the `$` calls made; no mod code runs. The grader turns the calls into a reach level and the hooks into a visibility list; its rules are in `tools/grade.mjs` and tested. The renderer writes the tables above, one badge pair per mod under `badges/`, and the scoreboard page under `docs/`, which GitHub Pages serves as mods.karanbansal.in.
 
 The raw result is `data/mods.json`. Every row can be reproduced on your machine with the commands in `contributing.md`, which also has the one-line badge for your own mod.
 
