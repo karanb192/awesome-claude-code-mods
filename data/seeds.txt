@@ -1,0 +1,3 @@
+# Repos the GitHub code search has not indexed yet. One owner/repo per line.
+halluton/Mindful-Claude
+anthropics/claude-code

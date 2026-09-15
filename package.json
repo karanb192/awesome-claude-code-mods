@@ -1,0 +1,21 @@
+{
+  "name": "awesome-claude-code-mods",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Every Claude Code mod on GitHub, with what each one can reach",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tools/parse.test.mjs",
+    "lint": "awesome-lint",
+    "discover": "node tools/discover.mjs",
+    "scan": "node tools/scan.mjs",
+    "render": "node tools/render.mjs",
+    "refresh": "npm run discover && npm run scan && npm run render"
+  },
+  "devDependencies": {
+    "awesome-lint": "^2.3.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

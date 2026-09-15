@@ -1,0 +1,45 @@
+name: nightly scan
+
+on:
+  schedule:
+    - cron: "30 22 * * *"
+  workflow_dispatch:
+  pull_request:
+    paths: ["tools/**", "data/seeds.txt", ".github/workflows/nightly.yml"]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Claude Code
+        run: |
+          curl -fsSL https://claude.ai/install.sh | bash
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - run: claude --version
+      - run: npm ci
+      - run: npm test
+      - run: npm run discover
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - run: npm run scan
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - run: npm run render
+      - run: npm run lint
+      - name: Open or update the scan pull request
+        if: github.event_name != 'pull_request'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: nightly-scan
+          title: "Nightly scan: refresh footprints and badges"
+          commit-message: "Nightly scan: refresh footprints and badges"
+          body: "Automated rescan of every candidate repo against the current Claude Code release. Review the diff in README.md and data/mods.json, then merge."
+          labels: scan
