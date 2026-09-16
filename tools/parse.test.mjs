@@ -60,6 +60,7 @@ test('visibility names what a hook can observe', () => {
 })
 
 import { fingerprint, describeChange, looksPartial } from './changed.mjs'
+import { collapseDuplicates } from './dedupe.mjs'
 import { search, shrunk } from './discover.mjs'
 
 const base = { claudeVersion: '2.1.272', mods: [
@@ -83,6 +84,25 @@ test('a new mod, a footprint change, a validate flip and a version bump are chan
   assert.deepEqual(describeChange(base, after), ['Claude Code 2.1.272 to 2.1.280', 'new: e/f:.', 'a/b:.: reach L0 to L3'])
   const broken = clone(); broken.mods[0].validate.status = 'failed'
   assert.deepEqual(describeChange(base, broken), ['a/b:.: validate passed to failed'])
+})
+
+test('one author shipping the same mod from two repos counts once, on the copy pushed last', () => {
+  const mods = [
+    { id: 'o/mono:queue', repo: 'o/mono', name: 'queue', kind: 'mod', pushedAt: '2026-09-15T19:47:38Z', stars: 0 },
+    { id: 'o/queue-plugin:.', repo: 'o/queue-plugin', name: 'queue', kind: 'mod', pushedAt: '2026-09-15T14:02:06Z', stars: 3 },
+    { id: 'p/queue:.', repo: 'p/queue', name: 'queue', kind: 'mod', pushedAt: '2026-09-16T00:00:00Z', stars: 0 },
+    { id: 'o/x:tests/queue', repo: 'o/x', name: 'queue', kind: 'fixture', pushedAt: '2026-09-16T00:00:00Z', stars: 0 },
+  ]
+  collapseDuplicates(mods)
+  assert.deepEqual(mods.map(m => [m.id, m.kind, m.duplicateOf]), [
+    ['o/mono:queue', 'mod', undefined], ['o/queue-plugin:.', 'duplicate', 'o/mono:queue'],
+    ['p/queue:.', 'mod', undefined], ['o/x:tests/queue', 'fixture', undefined]])
+  const after = clone()
+  after.mods.push({ ...clone().mods[0], id: 'a/b-plugin:.', kind: 'duplicate', duplicateOf: 'a/b:.' })
+  assert.deepEqual(describeChange(base, after), ['new: a/b-plugin:. (duplicate of a/b:.)'])
+  const flipped = clone(); flipped.mods[0].kind = 'duplicate'; flipped.mods[0].duplicateOf = 'a/mono:x'
+  assert.deepEqual(describeChange(base, flipped), ['a/b:.: mod to duplicate (duplicate of a/mono:x)'])
+  assert.notEqual(fingerprint(base), fingerprint(flipped))
 })
 
 test('fixtures never count', () => {

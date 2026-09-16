@@ -11,6 +11,7 @@ import { join, relative, dirname } from 'node:path'
 import { tmpdir } from 'node:os'
 import { parseValidateOutput } from './parse.mjs'
 import { grade, visibility, drawsOn } from './grade.mjs'
+import { collapseDuplicates } from './dedupe.mjs'
 
 const args = Object.fromEntries(process.argv.slice(2).map((a, i, all) => a.startsWith('--') ? [a.slice(2), all[i + 1]] : []).filter(Boolean))
 const CLONES = args.clones ?? join(tmpdir(), 'acm-clones')
@@ -113,8 +114,9 @@ for (const repo of repos) {
   }
 }
 
+collapseDuplicates(mods)
 mods.sort((a, b) => (b.stars ?? -1) - (a.stars ?? -1) || a.id.localeCompare(b.id))
 mkdirSync(dirname(OUT), { recursive: true })
 writeFileSync(OUT, JSON.stringify({ generated: new Date().toISOString(), claudeVersion, repos: repos.length, mods }, null, 2) + '\n')
 const real = mods.filter(x => x.kind === 'mod')
-console.log(`\n${mods.length} plugins with hook modules in ${repos.length} repos; ${real.length} are mods (rest: builtin, mirror, fixture). Written to ${OUT}`)
+console.log(`\n${mods.length} plugins with hook modules in ${repos.length} repos; ${real.length} are mods (rest: builtin, mirror, fixture, duplicate). Written to ${OUT}`)

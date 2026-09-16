@@ -41,10 +41,12 @@ export function describeChange(before, after) {
   const b = new Map(after.mods.filter(m => m.kind !== 'fixture').map(m => [m.id, m]))
   const lines = []
   if (before.claudeVersion !== after.claudeVersion) lines.push(`Claude Code ${before.claudeVersion} to ${after.claudeVersion}`)
-  for (const id of b.keys()) if (!a.has(id)) lines.push(`new: ${id}`)
+  const dup = m => m.kind === 'duplicate' ? ` (duplicate of ${m.duplicateOf})` : ''
+  for (const [id, m] of b) if (!a.has(id)) lines.push(`new: ${id}${dup(m)}`)
   for (const id of a.keys()) if (!b.has(id)) lines.push(`gone: ${id}`)
   for (const [id, m] of b) {
     const o = a.get(id); if (!o) continue
+    if (o.kind !== m.kind) lines.push(`${id}: ${o.kind} to ${m.kind}${dup(m)}`)
     if (o.validate.status !== m.validate.status) lines.push(`${id}: validate ${o.validate.status} to ${m.validate.status}`)
     if (o.reach.level !== m.reach.level) lines.push(`${id}: reach L${o.reach.level} to L${m.reach.level}`)
     else if (JSON.stringify(o.calls) !== JSON.stringify(m.calls) || JSON.stringify(o.hooks) !== JSON.stringify(m.hooks)) lines.push(`${id}: footprint changed`)

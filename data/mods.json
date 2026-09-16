@@ -4026,7 +4026,7 @@
       "author": "Gal Elmalah",
       "homepage": "https://github.com/galElmalah/claude-queue-plugin",
       "url": "https://github.com/galElmalah/claude-queue-plugin",
-      "kind": "mod",
+      "kind": "duplicate",
       "hasManifest": true,
       "modules": [
         "./register.ts"
@@ -4108,7 +4108,8 @@
       "createdAt": "2026-09-15T13:14:39Z",
       "license": "MIT",
       "archived": false,
-      "defaultBranch": "main"
+      "defaultBranch": "main",
+      "duplicateOf": "galElmalah/claude-mods:claude-queue"
     },
     {
       "id": "ippoan/gh-actions-live:mods/pr-bridge-watch",
