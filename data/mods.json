@@ -1,7 +1,7 @@
 {
-  "generated": "2026-09-15T07:04:59.633Z",
-  "claudeVersion": "2.1.272",
-  "repos": 92,
+  "generated": "2026-09-16T04:54:18.784Z",
+  "claudeVersion": "2.1.273",
+  "repos": 121,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/diff",
@@ -67,18 +67,8 @@
         {
           "event": "tool.call",
           "matcher": {
-            "tool": "...Tools.EDITING_TOOLS"
+            "tool": "...Tools.EDITING_TOOLS|...Tools.SHELL_TOOLS"
           }
-        },
-        {
-          "event": "tool.call",
-          "matcher": {
-            "tool": "...Tools.SHELL_TOOLS"
-          }
-        },
-        {
-          "event": "turn.complete",
-          "matcher": {}
         },
         {
           "event": "prompt.submit",
@@ -110,7 +100,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -126,16 +116,15 @@
         ]
       },
       "sees": [
-        "...Tools.EDITING_TOOLS calls",
-        "...Tools.SHELL_TOOLS calls",
+        "...Tools.EDITING_TOOLS|...Tools.SHELL_TOOLS calls",
         "every prompt"
       ],
       "draws": [
         "PromptHint",
         "Pane"
       ],
-      "stars": 145097,
-      "pushedAt": "2026-09-15T00:42:25Z",
+      "stars": 145215,
+      "pushedAt": "2026-09-16T04:36:04Z",
       "createdAt": "2025-02-22T17:41:21Z",
       "license": null,
       "archived": false,
@@ -211,7 +200,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -228,8 +217,8 @@
         "subagent spawns"
       ],
       "draws": [],
-      "stars": 145097,
-      "pushedAt": "2026-09-15T00:42:25Z",
+      "stars": 145215,
+      "pushedAt": "2026-09-16T04:36:04Z",
       "createdAt": "2025-02-22T17:41:21Z",
       "license": null,
       "archived": false,
@@ -265,7 +254,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": [
           "types ./types/index.d.ts declares on $: $.telemetry",
           "./register.ts env writes: nothing",
@@ -283,10 +272,266 @@
       },
       "sees": [],
       "draws": [],
-      "stars": 145097,
-      "pushedAt": "2026-09-15T00:42:25Z",
+      "stars": 145215,
+      "pushedAt": "2026-09-16T04:36:04Z",
       "createdAt": "2025-02-22T17:41:21Z",
       "license": null,
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "kunchenguid/firstmate:.agents/skills/firstmate-calm",
+      "repo": "kunchenguid/firstmate",
+      "path": ".agents/skills/firstmate-calm",
+      "name": "firstmate-calm",
+      "description": "Firstmate Calm for Claude Code: the sailboat working animation and conversation-only transcript presentation, sharing the per-home config/calm preference with the Pi Calm extension. Its hooks module may load through CLAUDE_CODE_ENABLE_FUNCTION_HOOKS or Claude Code's tengu_plugin_hooks_modules rollout flag, but the mod activates only when CLAUDE_CODE_ENABLE_FUNCTION_HOOKS is exactly 1 and is otherwise a complete no-op.",
+      "author": "Firstmate",
+      "homepage": "https://github.com/kunchenguid/firstmate",
+      "url": "https://github.com/kunchenguid/firstmate/tree/main/.agents/skills/firstmate-calm",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "calm"
+          }
+        },
+        {
+          "event": "config.set",
+          "matcher": {
+            "key": "theme"
+          }
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Spinner"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolUse"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolResult"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolGroup"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "UserMessage"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AssistantMessage"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.command.register",
+        "$.config.list",
+        "$.env.get",
+        "$.fs.read",
+        "$.fs.write",
+        "$.session.messages",
+        "$.ui.blit",
+        "$.ui.invalidate",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": [
+          "./register.ts env writes: nothing",
+          "./register.ts env reads: CLAUDE_CODE_ENABLE_FUNCTION_HOOKS, FM_CONFIG_OVERRIDE, FM_HOME, FM_ROOT_OVERRIDE"
+        ]
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "writes files",
+          "reads files",
+          "reads env vars",
+          "reads the transcript",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Spinner",
+        "ToolUse",
+        "ToolResult",
+        "ToolGroup",
+        "UserMessage",
+        "AssistantMessage"
+      ],
+      "stars": 6082,
+      "pushedAt": "2026-09-16T02:21:22Z",
+      "createdAt": "2026-06-12T03:21:10Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "Storybloq/storybloq:plugins/storybloq",
+      "repo": "Storybloq/storybloq",
+      "path": "plugins/storybloq",
+      "name": "storybloq",
+      "description": "Project memory for Claude Code and Codex. Storybloq stores tickets, issues, handovers, and lessons in a .story/ folder inside your repo.",
+      "author": "Amir Shayegh",
+      "homepage": "https://storybloq.com",
+      "url": "https://github.com/Storybloq/storybloq/tree/main/plugins/storybloq",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "../hooks/mod.ts"
+      ],
+      "hooks": [
+        {
+          "event": "ui.render",
+          "matcher": {}
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "session.compact",
+          "matcher": {}
+        },
+        {
+          "event": "ui.close",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.session.usage",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads files",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call",
+        "compaction"
+      ],
+      "draws": [
+        "any component"
+      ],
+      "stars": 737,
+      "pushedAt": "2026-09-16T04:48:50Z",
+      "createdAt": "2026-04-17T00:51:21Z",
+      "license": "NOASSERTION",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "DannyMac180/skills:claude-mod-builder/templates/minimal",
+      "repo": "DannyMac180/skills",
+      "path": "claude-mod-builder/templates/minimal",
+      "name": "my-mod",
+      "description": "One sentence on what this mod does and what it hooks. Needs function hooks (early access) and an interactive terminal.",
+      "author": "Your Name",
+      "homepage": "https://github.com/DannyMac180/skills",
+      "url": "https://github.com/DannyMac180/skills/tree/main/claude-mod-builder/templates/minimal",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "my-command"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.ui.log"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 531,
+      "pushedAt": "2026-09-15T13:12:31Z",
+      "createdAt": "2026-05-29T14:54:55Z",
+      "license": "MIT",
       "archived": false,
       "defaultBranch": "main"
     },
@@ -334,7 +579,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -351,9 +596,117 @@
       ],
       "draws": [],
       "stars": 277,
-      "pushedAt": "2026-09-15T06:15:17Z",
+      "pushedAt": "2026-09-15T21:20:08Z",
       "createdAt": "2025-12-31T05:58:52Z",
       "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "danyuchn/pii-guard:examples/claude-code-mod",
+      "repo": "danyuchn/pii-guard",
+      "path": "examples/claude-code-mod",
+      "name": "pii-guard",
+      "description": "De-identifies personal data before it reaches the model and restores it on the way back out, by asking the resident pii-guard hookd service on loopback. Tool results are redacted, writes and shell commands are restored, a prompt's @ references become guarded reads, and the commands that would carry content off the machine are refused.",
+      "author": "pii-guard-tw",
+      "homepage": "https://github.com/danyuchn/pii-guard",
+      "url": "https://github.com/danyuchn/pii-guard/tree/main/examples/claude-code-mod",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "session.compact",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.env.get",
+        "$.fs.read",
+        "$.http.fetch",
+        "$.process.run",
+        "$.session.cwd",
+        "$.session.id"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": [
+          "./register.ts env writes: nothing",
+          "./register.ts env reads: EVAL_PII_GUARD_HOOKD_HOME, HOME, PII_GUARD_HOOKD_HOME"
+        ]
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "network",
+          "runs processes",
+          "reads files",
+          "reads env vars"
+        ]
+      },
+      "sees": [
+        "every prompt",
+        "every tool call",
+        "compaction"
+      ],
+      "draws": [],
+      "stars": 138,
+      "pushedAt": "2026-09-15T17:59:22Z",
+      "createdAt": "2026-03-30T08:35:00Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "greenpolo/cc-multi-cli-plugin:plugins/multi-core",
+      "repo": "greenpolo/cc-multi-cli-plugin",
+      "path": "plugins/multi-core",
+      "name": "multi-core",
+      "description": "Claude Code plugin: delegate to Codex, Gemini, Cursor, GitHub Copilot, and Qwen CLIs via their native protocols (ACP, ASP). Use /gemini:research, /cursor:debug, /codex:execute, /copilot:review and more — Claude can also auto-dispatch.",
+      "author": null,
+      "homepage": "https://github.com/greenpolo/cc-multi-cli-plugin",
+      "url": "https://github.com/greenpolo/cc-multi-cli-plugin/tree/main/plugins/multi-core",
+      "kind": "mod",
+      "hasManifest": false,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [],
+      "calls": [],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": []
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 91,
+      "pushedAt": "2026-09-16T04:48:36Z",
+      "createdAt": "2026-04-05T00:00:05Z",
+      "license": "Apache-2.0",
       "archived": false,
       "defaultBranch": "main"
     },
@@ -422,7 +775,7 @@
       ],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -438,9 +791,77 @@
         "AbovePrompt",
         "Spinner"
       ],
-      "stars": 56,
+      "stars": 68,
       "pushedAt": "2026-09-14T23:01:33Z",
       "createdAt": "2026-03-02T10:41:44Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "hex/claude-sessions:mods/cs-rotate",
+      "repo": "hex/claude-sessions",
+      "path": "mods/cs-rotate",
+      "name": "cs-rotate",
+      "description": "One-key rotation for cs: a rotate button above the prompt once the context window passes the crit band",
+      "author": "cs",
+      "homepage": "https://github.com/hex/claude-sessions",
+      "url": "https://github.com/hex/claude-sessions/tree/main/mods/cs-rotate",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.fs.write",
+        "$.prompt.fill",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.usage",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": [
+          "./register.tsx env writes: nothing",
+          "./register.tsx env reads: CS_ROTATE_BUTTON_CTX"
+        ]
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "writes files",
+          "writes the prompt box",
+          "reads files",
+          "reads env vars",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 41,
+      "pushedAt": "2026-09-15T08:55:39Z",
+      "createdAt": "2025-11-24T08:19:11Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main"
@@ -496,7 +917,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -577,7 +998,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "warnings",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": [
           "root: CLAUDE.md at the plugin root is not loaded as project context. To ship context with your plugin, use a skill (skills/<name>/SKILL.md) instead."
         ]
@@ -599,77 +1020,12 @@
         "every tool call"
       ],
       "draws": [],
-      "stars": 27,
-      "pushedAt": "2026-09-15T00:52:37Z",
+      "stars": 28,
+      "pushedAt": "2026-09-16T00:19:50Z",
       "createdAt": "2026-03-22T12:42:59Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main"
-    },
-    {
-      "id": "TheSmokeDev/taskchad-os:.claude/plugins/persona-cognition",
-      "repo": "TheSmokeDev/taskchad-os",
-      "path": ".claude/plugins/persona-cognition",
-      "name": "homie-persona-cognition",
-      "description": "Host-bound cognitive lifecycle events for The Homie.",
-      "author": null,
-      "homepage": "https://github.com/TheSmokeDev/taskchad-os",
-      "url": "https://github.com/TheSmokeDev/taskchad-os/tree/master/.claude/plugins/persona-cognition",
-      "kind": "mod",
-      "hasManifest": true,
-      "modules": [
-        "./register.ts"
-      ],
-      "hooks": [
-        {
-          "event": "session.start",
-          "matcher": {}
-        },
-        {
-          "event": "tool.call",
-          "matcher": {}
-        },
-        {
-          "event": "turn.complete",
-          "matcher": {}
-        },
-        {
-          "event": "prompt.submit",
-          "matcher": {}
-        }
-      ],
-      "calls": [
-        "$.env.get",
-        "$.process.run"
-      ],
-      "surfaceModules": [],
-      "validate": {
-        "status": "warnings",
-        "claudeVersion": "2.1.272",
-        "errors": [
-          "./register.ts env writes: nothing",
-          "./register.ts env reads: HOMIE_COGNITION_HOOK_COMMAND, HOMIE_COGNITION_HOOK_PYTHON"
-        ]
-      },
-      "reach": {
-        "level": 2,
-        "name": "writes or runs",
-        "labels": [
-          "runs processes",
-          "reads env vars"
-        ]
-      },
-      "sees": [
-        "every tool call",
-        "every prompt"
-      ],
-      "draws": [],
-      "stars": 24,
-      "pushedAt": "2026-09-12T03:01:04Z",
-      "createdAt": "2026-04-08T08:15:22Z",
-      "license": "MIT",
-      "archived": false,
-      "defaultBranch": "master"
     },
     {
       "id": "sezaakgun/cc-arcade:.",
@@ -743,7 +1099,7 @@
       ],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -760,10 +1116,128 @@
       "draws": [
         "AbovePrompt"
       ],
-      "stars": 17,
+      "stars": 27,
       "pushedAt": "2026-09-15T00:19:51Z",
       "createdAt": "2026-09-13T14:36:00Z",
       "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "TheSmokeDev/taskchad-os:.claude/plugins/persona-cognition",
+      "repo": "TheSmokeDev/taskchad-os",
+      "path": ".claude/plugins/persona-cognition",
+      "name": "homie-persona-cognition",
+      "description": "Host-bound cognitive lifecycle events for The Homie.",
+      "author": null,
+      "homepage": "https://github.com/TheSmokeDev/taskchad-os",
+      "url": "https://github.com/TheSmokeDev/taskchad-os/tree/master/.claude/plugins/persona-cognition",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.env.get",
+        "$.process.run"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.273",
+        "errors": [
+          "./register.ts env writes: nothing",
+          "./register.ts env reads: HOMIE_COGNITION_HOOK_COMMAND, HOMIE_COGNITION_HOOK_PYTHON"
+        ]
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "reads env vars"
+        ]
+      },
+      "sees": [
+        "every tool call",
+        "every prompt"
+      ],
+      "draws": [],
+      "stars": 25,
+      "pushedAt": "2026-09-12T03:01:04Z",
+      "createdAt": "2026-04-08T08:15:22Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "master"
+    },
+    {
+      "id": "karanb192/awesome-claude-code-mods:examples/hello-mod",
+      "repo": "karanb192/awesome-claude-code-mods",
+      "path": "examples/hello-mod",
+      "name": "hello-mod",
+      "description": "The smallest Claude Mod: logs one line when the session starts and refuses one Bash command. Three files, no dependencies, exists so you can see the validator print a footprint.",
+      "author": "Karan Bansal",
+      "homepage": "https://github.com/karanb192/awesome-claude-code-mods",
+      "url": "https://github.com/karanb192/awesome-claude-code-mods/tree/main/examples/hello-mod",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash"
+          }
+        }
+      ],
+      "calls": [
+        "$.ui.log"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "draws"
+        ]
+      },
+      "sees": [
+        "Bash calls"
+      ],
+      "draws": [],
+      "stars": 11,
+      "pushedAt": "2026-09-16T04:47:37Z",
+      "createdAt": "2026-09-15T05:56:55Z",
+      "license": "CC0-1.0",
       "archived": false,
       "defaultBranch": "main"
     },
@@ -811,7 +1285,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": [
           "./register.ts env writes: nothing",
           "./register.ts env reads: OTEL_EXPORTER_OTLP_ENDPOINT, OTEL_EXPORTER_OTLP_HEADERS, OTEL_SERVICE_NAME"
@@ -836,6 +1310,81 @@
       "pushedAt": "2026-09-13T17:58:52Z",
       "createdAt": "2025-11-26T06:43:32Z",
       "license": "Apache-2.0",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "gabfssilva/skyward:plugins/skyward",
+      "repo": "gabfssilva/skyward",
+      "path": "plugins/skyward",
+      "name": "skyward",
+      "description": "Skyward for Claude Code: the `/sky` panel over the daemon's computes, plus skills for the Python SDK and the `sky` CLI.",
+      "author": "Gabriel Francisco",
+      "homepage": "https://github.com/gabfssilva/skyward",
+      "url": "https://github.com/gabfssilva/skyward/tree/main/plugins/skyward",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "sky"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "skyward"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "skyward"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.command.register",
+        "$.http.fetch",
+        "$.ui.close",
+        "$.ui.focus",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "network",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 6,
+      "pushedAt": "2026-09-16T03:37:28Z",
+      "createdAt": "2025-12-28T18:56:15Z",
+      "license": "MIT",
       "archived": false,
       "defaultBranch": "main"
     },
@@ -932,7 +1481,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -952,70 +1501,9 @@
         "PromptHint",
         "Pane"
       ],
-      "stars": 4,
+      "stars": 5,
       "pushedAt": "2026-09-14T18:40:11Z",
       "createdAt": "2026-09-14T18:39:49Z",
-      "license": "Apache-2.0",
-      "archived": false,
-      "defaultBranch": "main"
-    },
-    {
-      "id": "pleaseai/honmoon:packages/claude-plugin",
-      "repo": "pleaseai/honmoon",
-      "path": "packages/claude-plugin",
-      "name": "honmoon-redact",
-      "description": "Client-side secret/PII redaction hooks: keep API keys and sensitive identifiers out of Claude Code's model context by redacting Read/Bash/Grep tool output, blocking prompts that carry secrets, and denying reads of known credential files. Session-transcript scrubbing verified on Claude Code 2.1.263 (updatedToolOutput is what gets persisted); re-verify on other versions.",
-      "author": "Honmoon",
-      "homepage": "https://github.com/pleaseai/honmoon",
-      "url": "https://github.com/pleaseai/honmoon/tree/main/packages/claude-plugin",
-      "kind": "mod",
-      "hasManifest": true,
-      "modules": [
-        "./honmoon.ts"
-      ],
-      "hooks": [
-        {
-          "event": "tool.call",
-          "matcher": {
-            "tool": "Read|Bash|Grep|WebFetch"
-          }
-        },
-        {
-          "event": "prompt.submit",
-          "matcher": {}
-        }
-      ],
-      "calls": [
-        "$.clock.sleep",
-        "$.http.fetch",
-        "$.process.run",
-        "$.session.cwd",
-        "$.session.id",
-        "$.ui.log"
-      ],
-      "surfaceModules": [],
-      "validate": {
-        "status": "passed",
-        "claudeVersion": "2.1.272",
-        "errors": []
-      },
-      "reach": {
-        "level": 3,
-        "name": "network",
-        "labels": [
-          "network",
-          "runs processes",
-          "draws"
-        ]
-      },
-      "sees": [
-        "Read|Bash|Grep|WebFetch calls",
-        "every prompt"
-      ],
-      "draws": [],
-      "stars": 4,
-      "pushedAt": "2026-09-15T07:00:10Z",
-      "createdAt": "2026-06-17T15:42:44Z",
       "license": "Apache-2.0",
       "archived": false,
       "defaultBranch": "main"
@@ -1071,7 +1559,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -1087,9 +1575,528 @@
         "Bash calls"
       ],
       "draws": [],
-      "stars": 3,
-      "pushedAt": "2026-09-14T17:19:24Z",
+      "stars": 4,
+      "pushedAt": "2026-09-15T23:42:51Z",
       "createdAt": "2026-01-12T01:04:54Z",
+      "license": null,
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "mpolatcan/flowpane:.",
+      "repo": "mpolatcan/flowpane",
+      "path": ".",
+      "name": "flowpane",
+      "description": "A live workflow pane: replaces the default Workflow progress list with a phase-by-phase graph or a timeline beside the transcript, showing each agent's state, timing, live token spend, tool calls, what it is saying, and prompt.",
+      "author": "Mutlu Polatcan",
+      "homepage": "https://github.com/mpolatcan/flowpane",
+      "url": "https://github.com/mpolatcan/flowpane",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Workflow"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane"
+          }
+        },
+        {
+          "event": "ui.press",
+          "matcher": {
+            "plugin": "flowpane"
+          }
+        },
+        {
+          "event": "ui.select",
+          "matcher": {
+            "plugin": "flowpane"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "flowpane"
+          }
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "flowpane"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.session.id",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.blit",
+        "$.ui.close",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.273",
+        "errors": [
+          "root: CLAUDE.md at the plugin root is not loaded as project context. To ship context with your plugin, use a skill (skills/<name>/SKILL.md) instead.",
+          "./register.ts env writes: nothing",
+          "./register.ts env reads: HOME"
+        ]
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads files",
+          "reads env vars",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "Workflow calls",
+        "every tool call"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 4,
+      "pushedAt": "2026-09-15T18:35:47Z",
+      "createdAt": "2026-09-15T16:59:26Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "pleaseai/honmoon:packages/claude-plugin",
+      "repo": "pleaseai/honmoon",
+      "path": "packages/claude-plugin",
+      "name": "honmoon-redact",
+      "description": "Client-side secret/PII redaction hooks: keep API keys and sensitive identifiers out of Claude Code's model context by redacting Read/Bash/Grep tool output, blocking prompts that carry secrets, and denying reads of known credential files. Session-transcript scrubbing verified on Claude Code 2.1.263 (updatedToolOutput is what gets persisted); re-verify on other versions.",
+      "author": "Honmoon",
+      "homepage": "https://github.com/pleaseai/honmoon",
+      "url": "https://github.com/pleaseai/honmoon/tree/main/packages/claude-plugin",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./honmoon.ts"
+      ],
+      "hooks": [
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Read|Bash|Grep|WebFetch"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.sleep",
+        "$.http.fetch",
+        "$.process.run",
+        "$.session.cwd",
+        "$.session.id",
+        "$.ui.log"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "network",
+          "runs processes",
+          "draws"
+        ]
+      },
+      "sees": [
+        "Read|Bash|Grep|WebFetch calls",
+        "every prompt"
+      ],
+      "draws": [],
+      "stars": 4,
+      "pushedAt": "2026-09-16T03:48:46Z",
+      "createdAt": "2026-06-17T15:42:44Z",
+      "license": "Apache-2.0",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "Arunjay4213/claude-mods:plugins/budget-guard",
+      "repo": "Arunjay4213/claude-mods",
+      "path": "plugins/budget-guard",
+      "name": "budget-guard",
+      "description": "Stops a session before it runs past a budget. Three figures are guarded, each with a limit you set: the session cost in dollars, the 5-hour plan window and the 7-day plan window. It says nothing until a figure nears its limit, then pins a status line and warns once; past the limit it refuses tool calls and asks before sending another prompt. /guard shows the state and changes the limits.",
+      "author": "Arunjay",
+      "homepage": "https://github.com/Arunjay4213/claude-mods",
+      "url": "https://github.com/Arunjay4213/claude-mods/tree/main/plugins/budget-guard",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "guard"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.command.register",
+        "$.config.set",
+        "$.session.usage",
+        "$.store.get",
+        "$.store.set",
+        "$.turn.abort",
+        "$.ui.ask",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "changes config",
+          "drives Claude",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call",
+        "every prompt"
+      ],
+      "draws": [],
+      "stars": 3,
+      "pushedAt": "2026-09-15T19:01:52Z",
+      "createdAt": "2026-09-14T19:20:11Z",
+      "license": null,
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "Arunjay4213/claude-mods:plugins/context-lens",
+      "repo": "Arunjay4213/claude-mods",
+      "path": "plugins/context-lens",
+      "name": "context-lens",
+      "description": "A live /context: a pinned line under the prompt with the window fill and the growth per turn, and /context-lens for a pane with the per-category bars and how many turns are left before auto-compaction.",
+      "author": "Arunjay",
+      "homepage": "https://github.com/Arunjay4213/claude-mods",
+      "url": "https://github.com/Arunjay4213/claude-mods/tree/main/plugins/context-lens",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "session.compact",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "clear"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "context-lens"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "context-lens"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.session.usage",
+        "$.ui.close",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "draws"
+        ]
+      },
+      "sees": [
+        "compaction"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 3,
+      "pushedAt": "2026-09-15T19:01:52Z",
+      "createdAt": "2026-09-14T19:20:11Z",
+      "license": null,
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "Arunjay4213/claude-mods:plugins/quota-meter",
+      "repo": "Arunjay4213/claude-mods",
+      "path": "plugins/quota-meter",
+      "name": "quota-meter",
+      "description": "Shows the subscription plan limits - the 5-hour window, the 7-day window and a gateway spend limit - as a pinned status line under the prompt, with a reset countdown and a projection of when you would hit 100% at the pace of the last few samples. /quota opens a pane with a bar, the reset clock time and the burn rate for each window.",
+      "author": "Arunjay",
+      "homepage": "https://github.com/Arunjay4213/claude-mods",
+      "url": "https://github.com/Arunjay4213/claude-mods/tree/main/plugins/quota-meter",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "quota"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "quota"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.session.usage",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.close",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 3,
+      "pushedAt": "2026-09-15T19:01:52Z",
+      "createdAt": "2026-09-14T19:20:11Z",
+      "license": null,
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "Arunjay4213/claude-mods:plugins/token-ledger",
+      "repo": "Arunjay4213/claude-mods",
+      "path": "plugins/token-ledger",
+      "name": "token-ledger",
+      "description": "A per-turn cost and token ledger: a pinned status line with the session cost, the last turn's tokens and the cache hit ratio, and /ledger for a table of the recent turns with their model, tokens, cache reads and writes, duration and cost.",
+      "author": "Arunjay",
+      "homepage": "https://github.com/Arunjay4213/claude-mods",
+      "url": "https://github.com/Arunjay4213/claude-mods/tree/main/plugins/token-ledger",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "clear"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "resume"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "ledger"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "ledger"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.session.id",
+        "$.session.usage",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.close",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 3,
+      "pushedAt": "2026-09-15T19:01:52Z",
+      "createdAt": "2026-09-14T19:20:11Z",
       "license": null,
       "archived": false,
       "defaultBranch": "main"
@@ -1180,7 +2187,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "warnings",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": [
           "root: CLAUDE.md at the plugin root is not loaded as project context. To ship context with your plugin, use a skill (skills/<name>/SKILL.md) instead."
         ]
@@ -1220,7 +2227,7 @@
       "path": "plugins/catalyst-probes",
       "name": "catalyst-probes",
       "description": "Consultation and prompt engine for Claude Mods. The module is the core; [probe.<id>] tables in probes.toml are the consultants and [prompt.<id>] tables author a system-prompt section, a tool description or a command description. Pair splice-backed probes with CLAUDE_*_CARRIER=mod.",
-      "author": null,
+      "author": "Marat Karimov",
       "homepage": "https://github.com/TransmuteLabs/Catalyst",
       "url": "https://github.com/TransmuteLabs/Catalyst/tree/main/plugins/catalyst-probes",
       "kind": "mod",
@@ -1232,6 +2239,12 @@
         {
           "event": "session.start",
           "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "clear|resume"
+          }
         },
         {
           "event": "prompt.section",
@@ -1257,15 +2270,18 @@
         "$.fs.read",
         "$.fs.write",
         "$.model.complete",
+        "$.session.id",
         "$.session.messages",
+        "$.store.delete",
         "$.store.get",
+        "$.store.keys",
         "$.store.set",
         "$.ui.toast"
       ],
       "surfaceModules": [],
       "validate": {
-        "status": "warnings",
-        "claudeVersion": "2.1.272",
+        "status": "passed",
+        "claudeVersion": "2.1.273",
         "errors": [
           "./register.ts env writes: nothing",
           "./register.ts env reads: CLAUDE_CONFIG_DIR, CLAUDE_FORM, CLAUDE_FORM_CARRIER, CLAUDE_IDLE, CLAUDE_IDLE_CARRIER, CLAUDE_JUDGE, CLAUDE_JUDGE_CARRIER, CLAUDE_JUDGE_MODEL, CLAUDE_JUDGE_PROMPT, CLAUDE_JUDGE_TIMEOUT_MS, CLAUDE_PROBES, CLAUDE_PROBES_DIR, CLAUDE_PROMPTS, HOME, PWD"
@@ -1290,7 +2306,7 @@
       ],
       "draws": [],
       "stars": 3,
-      "pushedAt": "2026-09-14T14:02:40Z",
+      "pushedAt": "2026-09-16T04:26:15Z",
       "createdAt": "2026-07-16T07:39:05Z",
       "license": "NOASSERTION",
       "archived": false,
@@ -1315,7 +2331,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "failed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": [
           "modules../signet.ts: claude-function: /tmp/acm-clones/wandercom__signet-eval/adapters/claude-function/hooks/signet.ts, compiled line 41 `on(\"PreToolUse\", async ($, e, next) => {`: \"PreToolUse\" is not an event; $ is always spelled $.noun.event(...) at the call site, on is always on(\"<event>\", hook), and next.to always next.to(e, \"<tier>\")"
         ]
@@ -1365,7 +2381,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": [
           "./register.ts env writes: nothing",
           "./register.ts env reads: CLAUDE_PROJECT_DIR, PATH"
@@ -1384,7 +2400,7 @@
       ],
       "draws": [],
       "stars": 2,
-      "pushedAt": "2026-09-14T22:55:58Z",
+      "pushedAt": "2026-09-16T04:49:32Z",
       "createdAt": "2026-03-23T07:39:46Z",
       "license": null,
       "archived": false,
@@ -1417,7 +2433,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": [
           "./plugin-health.ts env writes: nothing",
           "./plugin-health.ts env reads: CLAUDE_PROJECT_DIR, PATH"
@@ -1436,7 +2452,7 @@
       ],
       "draws": [],
       "stars": 2,
-      "pushedAt": "2026-09-14T22:55:58Z",
+      "pushedAt": "2026-09-16T04:49:32Z",
       "createdAt": "2026-03-23T07:39:46Z",
       "license": null,
       "archived": false,
@@ -1461,7 +2477,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "failed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": [
           "modules../register.ts: bad-event: /tmp/acm-clones/ray-manaloto__dotfiles/tests/fixtures/fnhook/bad-event/hooks/register.ts, compiled line 2 `on(\"classic.SessionStartt\", async (_$, e, next) => next(e));`: \"classic.SessionStartt\" is not an event; $ is always spelled $.noun.event(...) at the call site, on is always on(\"<event>\", hook), and next.to always next.to(e, \"<tier>\")"
         ]
@@ -1474,7 +2490,7 @@
       "sees": [],
       "draws": [],
       "stars": 2,
-      "pushedAt": "2026-09-14T22:55:58Z",
+      "pushedAt": "2026-09-16T04:49:32Z",
       "createdAt": "2026-03-23T07:39:46Z",
       "license": null,
       "archived": false,
@@ -1506,7 +2522,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -1519,7 +2535,7 @@
       ],
       "draws": [],
       "stars": 2,
-      "pushedAt": "2026-09-14T22:55:58Z",
+      "pushedAt": "2026-09-16T04:49:32Z",
       "createdAt": "2026-03-23T07:39:46Z",
       "license": null,
       "archived": false,
@@ -1549,7 +2565,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -1562,7 +2578,7 @@
       ],
       "draws": [],
       "stars": 2,
-      "pushedAt": "2026-09-14T22:55:58Z",
+      "pushedAt": "2026-09-16T04:49:32Z",
       "createdAt": "2026-03-23T07:39:46Z",
       "license": null,
       "archived": false,
@@ -1592,7 +2608,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -1605,7 +2621,7 @@
       ],
       "draws": [],
       "stars": 2,
-      "pushedAt": "2026-09-14T22:55:58Z",
+      "pushedAt": "2026-09-16T04:49:32Z",
       "createdAt": "2026-03-23T07:39:46Z",
       "license": null,
       "archived": false,
@@ -1630,7 +2646,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "failed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": [
           "modules../register.ts: parse-error: /tmp/acm-clones/ray-manaloto__dotfiles/tests/fixtures/fnhook/parse-error/hooks/register.ts does not parse: Unexpected end of file (line 3, column 36)"
         ]
@@ -1643,7 +2659,7 @@
       "sees": [],
       "draws": [],
       "stars": 2,
-      "pushedAt": "2026-09-14T22:55:58Z",
+      "pushedAt": "2026-09-16T04:49:32Z",
       "createdAt": "2026-03-23T07:39:46Z",
       "license": null,
       "archived": false,
@@ -1675,7 +2691,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -1688,7 +2704,7 @@
       ],
       "draws": [],
       "stars": 2,
-      "pushedAt": "2026-09-14T22:55:58Z",
+      "pushedAt": "2026-09-16T04:49:32Z",
       "createdAt": "2026-03-23T07:39:46Z",
       "license": null,
       "archived": false,
@@ -1720,7 +2736,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -1733,8 +2749,163 @@
       ],
       "draws": [],
       "stars": 2,
-      "pushedAt": "2026-09-14T22:55:58Z",
+      "pushedAt": "2026-09-16T04:49:32Z",
       "createdAt": "2026-03-23T07:39:46Z",
+      "license": null,
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "rjwittams/katzensteg:tools/claude-code-plugin",
+      "repo": "rjwittams/katzensteg",
+      "path": "tools/claude-code-plugin",
+      "name": "katzensteg",
+      "description": "Game and HTML panels backed by the headless Katzensteg WM. Needs CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1.",
+      "author": null,
+      "homepage": "https://github.com/rjwittams/katzensteg",
+      "url": "https://github.com/rjwittams/katzensteg/tree/main/tools/claude-code-plugin",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "katzensteg"
+          }
+        },
+        {
+          "event": "prompt.section",
+          "matcher": {
+            "name": "env_info_simple"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "`${TOOL_PREFIX"
+          }
+        },
+        {
+          "event": "open",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "`${TOOL_PREFIX"
+          }
+        },
+        {
+          "event": "show",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "`${TOOL_PREFIX"
+          }
+        },
+        {
+          "event": "panels",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "`${TOOL_PREFIX"
+          }
+        },
+        {
+          "event": "act",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "`${TOOL_PREFIX"
+          }
+        },
+        {
+          "event": "observe",
+          "matcher": {}
+        },
+        {
+          "event": "ui.scroll",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.sleep",
+        "$.command.register",
+        "$.env.get",
+        "$.env.set",
+        "$.fs.exists",
+        "$.fs.write",
+        "$.http.fetch",
+        "$.process.run",
+        "$.store.get",
+        "$.store.set",
+        "$.tool.register",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [
+        "hooks/panel.tsx"
+      ],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.273",
+        "errors": [
+          "./register.tsx env writes: KATZENSTEG_OBSERVE, KATZENSTEG_TARGET",
+          "./register.tsx env reads: CLAUDE_PID, HOME, KATZENSTEG_HOST_BIN, KATZENSTEG_REPO, TMPDIR"
+        ]
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "network",
+          "runs processes",
+          "writes files",
+          "sets env vars",
+          "drives Claude",
+          "reads files",
+          "reads env vars",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "the system prompt",
+        "`${TOOL_PREFIX calls"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 2,
+      "pushedAt": "2026-09-15T17:21:15Z",
+      "createdAt": "2026-04-27T14:15:57Z",
       "license": null,
       "archived": false,
       "defaultBranch": "main"
@@ -1802,7 +2973,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": [
           "./register.tsx env writes: nothing",
           "./register.tsx env reads: CMUX_BUNDLED_CLI_PATH, CMUX_SURFACE_ID"
@@ -1829,6 +3000,305 @@
       "stars": 2,
       "pushedAt": "2026-09-13T15:11:19Z",
       "createdAt": "2026-09-13T14:29:52Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "GGGODLIN/cc-mod-waitwhat:.",
+      "repo": "GGGODLIN/cc-mod-waitwhat",
+      "path": ".",
+      "name": "cc-mod-waitwhat",
+      "description": "Retell what Claude just said, in plain words, in the band above the prompt. Nothing enters the transcript or the model's context.",
+      "author": "gggodlin",
+      "homepage": "https://github.com/GGGODLIN/cc-mod-waitwhat",
+      "url": "https://github.com/GGGODLIN/cc-mod-waitwhat",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.fs.write",
+        "$.http.fetch",
+        "$.model.complete",
+        "$.process.run",
+        "$.session.messages",
+        "$.ui.invalidate",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": [
+          "./register.tsx env writes: nothing",
+          "./register.tsx env reads: HOME, SIDECAR_API_KEY, SIDECAR_CMD, SIDECAR_MODEL, SIDECAR_PROXY, SIDECAR_SOURCE, WW_MODEL"
+        ]
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "network",
+          "runs processes",
+          "writes files",
+          "drives Claude",
+          "reads files",
+          "reads env vars",
+          "reads the transcript",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-09-15T07:50:27Z",
+      "createdAt": "2026-09-15T07:44:34Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "giovaborgogno/cc-dino:.",
+      "repo": "giovaborgogno/cc-dino",
+      "path": ".",
+      "name": "cc-dino",
+      "description": "The T-rex from the browser's offline page, above the Claude Code prompt: jump cacti and duck birds while Claude works. Needs function hooks (early access) and an interactive terminal.",
+      "author": "Giovanni Borgogno",
+      "homepage": "https://giovaborgogno.com",
+      "url": "https://github.com/giovaborgogno/cc-dino",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "dino"
+          }
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.message",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.now",
+        "$.command.register",
+        "$.http.fetch",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [
+        "hooks/boards/dino.tsx"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "network",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-09-15T19:43:16Z",
+      "createdAt": "2026-09-15T18:24:32Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "manfye/cc-dino:.",
+      "repo": "manfye/cc-dino",
+      "path": ".",
+      "name": "cc-dino",
+      "description": "The Chrome offline dinosaur, above the Claude Code prompt. Jump the cacti and duck the pterodactyls while Claude works. Needs function hooks (early access) and an interactive terminal.",
+      "author": "manfye",
+      "homepage": "https://github.com/manfye/cc-dino",
+      "url": "https://github.com/manfye/cc-dino",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "dino"
+          }
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.message",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [
+        "hooks/boards/dino.tsx"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-09-15T16:41:00Z",
+      "createdAt": "2026-09-15T16:37:18Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "minipai/claudecafe:mods/cc-maid",
+      "repo": "minipai/claudecafe",
+      "path": "mods/cc-maid",
+      "name": "cc-maid",
+      "description": "Experimental Kotone pixel maid panel with agent-controlled expressions for Claude Code.",
+      "author": "minipai",
+      "homepage": "https://github.com/minipai/claudecafe",
+      "url": "https://github.com/minipai/claudecafe/tree/main/mods/cc-maid",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.context",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__cc-maid__set_expression"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane"
+          }
+        }
+      ],
+      "calls": [
+        "$.tool.register",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "drives Claude",
+          "draws"
+        ]
+      },
+      "sees": [
+        "the system prompt",
+        "mcp__cc-maid__set_expression calls"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-09-15T22:52:31Z",
+      "createdAt": "2026-08-21T09:28:46Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main"
@@ -1868,7 +3338,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -1940,7 +3410,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -1995,7 +3465,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": [
           "./register.ts env writes: nothing",
           "./register.ts env reads: CLAUDE_SPAWNPROBE, CLAUDE_SPAWNPROBE_OUT"
@@ -2015,269 +3485,9 @@
       ],
       "draws": [],
       "stars": 1,
-      "pushedAt": "2026-09-14T20:08:03Z",
+      "pushedAt": "2026-09-16T02:31:56Z",
       "createdAt": "2026-08-24T21:15:50Z",
       "license": "NOASSERTION",
-      "archived": false,
-      "defaultBranch": "main"
-    },
-    {
-      "id": "Arunjay4213/claude-mods:plugins/context-lens",
-      "repo": "Arunjay4213/claude-mods",
-      "path": "plugins/context-lens",
-      "name": "context-lens",
-      "description": "A live /context: a pinned line under the prompt with the window fill and the growth per turn, and /context-lens for a pane with the per-category bars and how many turns are left before auto-compaction.",
-      "author": "Arunjay",
-      "homepage": "https://github.com/Arunjay4213/claude-mods",
-      "url": "https://github.com/Arunjay4213/claude-mods/tree/main/plugins/context-lens",
-      "kind": "mod",
-      "hasManifest": true,
-      "modules": [
-        "./register.tsx"
-      ],
-      "hooks": [
-        {
-          "event": "session.start",
-          "matcher": {}
-        },
-        {
-          "event": "turn.complete",
-          "matcher": {}
-        },
-        {
-          "event": "session.compact",
-          "matcher": {}
-        },
-        {
-          "event": "command.run",
-          "matcher": {
-            "command": "clear"
-          }
-        },
-        {
-          "event": "command.run",
-          "matcher": {
-            "command": "context-lens"
-          }
-        },
-        {
-          "event": "ui.close",
-          "matcher": {
-            "id": "context-lens"
-          }
-        },
-        {
-          "event": "ui.render",
-          "matcher": {
-            "component": "Pane"
-          }
-        }
-      ],
-      "calls": [
-        "$.command.register",
-        "$.session.usage",
-        "$.ui.close",
-        "$.ui.invalidate",
-        "$.ui.log",
-        "$.ui.open",
-        "$.ui.resolve",
-        "$.ui.status"
-      ],
-      "surfaceModules": [],
-      "validate": {
-        "status": "passed",
-        "claudeVersion": "2.1.272",
-        "errors": []
-      },
-      "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": [
-          "draws"
-        ]
-      },
-      "sees": [
-        "compaction"
-      ],
-      "draws": [
-        "Pane"
-      ],
-      "stars": 0,
-      "pushedAt": "2026-09-15T03:30:15Z",
-      "createdAt": "2026-09-14T19:20:11Z",
-      "license": null,
-      "archived": false,
-      "defaultBranch": "main"
-    },
-    {
-      "id": "Arunjay4213/claude-mods:plugins/quota-meter",
-      "repo": "Arunjay4213/claude-mods",
-      "path": "plugins/quota-meter",
-      "name": "quota-meter",
-      "description": "Shows the subscription plan limits - the 5-hour window, the 7-day window and a gateway spend limit - as a pinned status line under the prompt, with a reset countdown and a projection of when you would hit 100% at the pace of the last few samples. /quota opens a pane with a bar, the reset clock time and the burn rate for each window.",
-      "author": "Arunjay",
-      "homepage": "https://github.com/Arunjay4213/claude-mods",
-      "url": "https://github.com/Arunjay4213/claude-mods/tree/main/plugins/quota-meter",
-      "kind": "mod",
-      "hasManifest": true,
-      "modules": [
-        "./register.tsx"
-      ],
-      "hooks": [
-        {
-          "event": "session.start",
-          "matcher": {}
-        },
-        {
-          "event": "turn.complete",
-          "matcher": {}
-        },
-        {
-          "event": "command.run",
-          "matcher": {
-            "command": "quota"
-          }
-        },
-        {
-          "event": "ui.close",
-          "matcher": {
-            "id": "quota"
-          }
-        },
-        {
-          "event": "ui.render",
-          "matcher": {
-            "component": "Pane"
-          }
-        }
-      ],
-      "calls": [
-        "$.clock.every",
-        "$.clock.now",
-        "$.command.register",
-        "$.session.usage",
-        "$.store.get",
-        "$.store.set",
-        "$.ui.close",
-        "$.ui.invalidate",
-        "$.ui.open",
-        "$.ui.resolve",
-        "$.ui.status"
-      ],
-      "surfaceModules": [],
-      "validate": {
-        "status": "passed",
-        "claudeVersion": "2.1.272",
-        "errors": []
-      },
-      "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": [
-          "persists state",
-          "draws"
-        ]
-      },
-      "sees": [],
-      "draws": [
-        "Pane"
-      ],
-      "stars": 0,
-      "pushedAt": "2026-09-15T03:30:15Z",
-      "createdAt": "2026-09-14T19:20:11Z",
-      "license": null,
-      "archived": false,
-      "defaultBranch": "main"
-    },
-    {
-      "id": "Arunjay4213/claude-mods:plugins/token-ledger",
-      "repo": "Arunjay4213/claude-mods",
-      "path": "plugins/token-ledger",
-      "name": "token-ledger",
-      "description": "A per-turn cost and token ledger: a pinned status line with the session cost, the last turn's tokens and the cache hit ratio, and /ledger for a table of the recent turns with their model, tokens, cache reads and writes, duration and cost.",
-      "author": "Arunjay",
-      "homepage": "https://github.com/Arunjay4213/claude-mods",
-      "url": "https://github.com/Arunjay4213/claude-mods/tree/main/plugins/token-ledger",
-      "kind": "mod",
-      "hasManifest": true,
-      "modules": [
-        "./register.tsx"
-      ],
-      "hooks": [
-        {
-          "event": "session.start",
-          "matcher": {}
-        },
-        {
-          "event": "turn.complete",
-          "matcher": {}
-        },
-        {
-          "event": "command.run",
-          "matcher": {
-            "command": "clear"
-          }
-        },
-        {
-          "event": "command.run",
-          "matcher": {
-            "command": "resume"
-          }
-        },
-        {
-          "event": "command.run",
-          "matcher": {
-            "command": "ledger"
-          }
-        },
-        {
-          "event": "ui.close",
-          "matcher": {
-            "id": "ledger"
-          }
-        },
-        {
-          "event": "ui.render",
-          "matcher": {
-            "component": "Pane"
-          }
-        }
-      ],
-      "calls": [
-        "$.command.register",
-        "$.session.id",
-        "$.session.usage",
-        "$.store.get",
-        "$.store.set",
-        "$.ui.close",
-        "$.ui.invalidate",
-        "$.ui.log",
-        "$.ui.open",
-        "$.ui.resolve",
-        "$.ui.status"
-      ],
-      "surfaceModules": [],
-      "validate": {
-        "status": "passed",
-        "claudeVersion": "2.1.272",
-        "errors": []
-      },
-      "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": [
-          "persists state",
-          "draws"
-        ]
-      },
-      "sees": [],
-      "draws": [
-        "Pane"
-      ],
-      "stars": 0,
-      "pushedAt": "2026-09-15T03:30:15Z",
-      "createdAt": "2026-09-14T19:20:11Z",
-      "license": null,
       "archived": false,
       "defaultBranch": "main"
     },
@@ -2307,7 +3517,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -2379,7 +3589,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "warnings",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": [
           "version: No version specified. Consider adding a version following semver (e.g., \"1.0.0\")",
           "root: CLAUDE.md at the plugin root is not loaded as project context. To ship context with your plugin, use a skill (skills/<name>/SKILL.md) instead.",
@@ -2407,7 +3617,7 @@
         "SessionMode"
       ],
       "stars": 0,
-      "pushedAt": "2026-09-15T00:18:27Z",
+      "pushedAt": "2026-09-16T01:32:27Z",
       "createdAt": "2026-06-30T01:47:37Z",
       "license": "MIT",
       "archived": false,
@@ -2496,7 +3706,7 @@
       ],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -2570,7 +3780,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -2623,7 +3833,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -2645,14 +3855,14 @@
       "defaultBranch": "main"
     },
     {
-      "id": "galElmalah/claude-mermaid:.",
-      "repo": "galElmalah/claude-mermaid",
-      "path": ".",
+      "id": "galElmalah/claude-mods:claude-mermaid",
+      "repo": "galElmalah/claude-mods",
+      "path": "claude-mermaid",
       "name": "claude-mermaid",
       "description": "Mermaid diagrams in Claude Code: every ```mermaid block Claude writes is drawn as box art, in colour, right where the fence was in the transcript. Needs function hooks (early access) and an interactive terminal.",
       "author": "Gal Elmalah",
-      "homepage": "https://github.com/galElmalah/claude-mermaid",
-      "url": "https://github.com/galElmalah/claude-mermaid",
+      "homepage": "https://github.com/galElmalah/claude-mods",
+      "url": "https://github.com/galElmalah/claude-mods/tree/main/claude-mermaid",
       "kind": "mod",
       "hasManifest": true,
       "modules": [
@@ -2686,7 +3896,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -2702,22 +3912,22 @@
         "AssistantMessage"
       ],
       "stars": 0,
-      "pushedAt": "2026-09-14T21:13:58Z",
+      "pushedAt": "2026-09-15T19:47:38Z",
       "createdAt": "2026-09-14T21:01:27Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main"
     },
     {
-      "id": "hatan4ik/prompts-and-agents:upstreams/claude-code/mods/diff",
-      "repo": "hatan4ik/prompts-and-agents",
-      "path": "upstreams/claude-code/mods/diff",
-      "name": "diff",
-      "description": "The diff pane as a plugin: /diff opens the session's uncommitted changes beside the transcript, file by file with their hunks, refreshed as Claude edits and runs commands; the first edit opens it where the terminal is wide enough, and a file's ask button rides its hunks on the next prompt.",
-      "author": "Anthropic",
-      "homepage": "https://github.com/hatan4ik/prompts-and-agents",
-      "url": "https://github.com/hatan4ik/prompts-and-agents/tree/main/upstreams/claude-code/mods/diff",
-      "kind": "fixture",
+      "id": "galElmalah/claude-mods:claude-queue",
+      "repo": "galElmalah/claude-mods",
+      "path": "claude-queue",
+      "name": "claude-queue",
+      "description": "A prompt typed while Claude is working is held in a stack above the prompt instead of landing in the running turn, and sent once the turn ends. Reorder the stack, edit a row in place, send one first, remove one, flush the lot. Needs function hooks (early access) and an interactive terminal.",
+      "author": "Gal Elmalah",
+      "homepage": "https://github.com/galElmalah/claude-mods/tree/main/claude-queue",
+      "url": "https://github.com/galElmalah/claude-mods/tree/main/claude-queue",
+      "kind": "mod",
       "hasManifest": true,
       "modules": [
         "./register.ts"
@@ -2728,253 +3938,175 @@
           "matcher": {}
         },
         {
-          "event": "ui.render",
-          "matcher": {
-            "component": "PromptHint"
-          }
-        },
-        {
-          "event": "ui.render",
-          "matcher": {
-            "component": "Pane"
-          }
-        },
-        {
-          "event": "command.run",
-          "matcher": {
-            "command": "Names.COMMAND_NAME"
-          }
-        },
-        {
-          "event": "command.run",
-          "matcher": {
-            "command": "clear|resume"
-          }
-        },
-        {
-          "event": "tool.call",
-          "matcher": {
-            "tool": "...Tools.EDITING_TOOLS"
-          }
-        },
-        {
-          "event": "tool.call",
-          "matcher": {
-            "tool": "...Tools.SHELL_TOOLS"
-          }
+          "event": "turn.start",
+          "matcher": {}
         },
         {
           "event": "turn.complete",
           "matcher": {}
         },
         {
+          "event": "classic.Stop",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
           "event": "prompt.submit",
           "matcher": {}
+        },
+        {
+          "event": "ui.focus",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "q"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
         }
       ],
       "calls": [
         "$.clock.after",
-        "$.clock.every",
-        "$.clock.now",
-        "$.clock.sleep",
         "$.command.register",
-        "$.fs.list",
-        "$.fs.read",
-        "$.fs.stat",
-        "$.process.run",
-        "$.session.id",
-        "$.session.messages",
-        "$.store.get",
-        "$.store.set",
-        "$.telemetry.log",
-        "$.telemetry.mark",
-        "$.ui.close",
+        "$.command.run",
+        "$.prompt.fill",
+        "$.prompt.submit",
+        "$.ui.focus",
         "$.ui.invalidate",
         "$.ui.log",
-        "$.ui.open",
-        "$.ui.resolve",
-        "$.ui.status"
+        "$.ui.resolve"
       ],
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
         "level": 2,
         "name": "writes or runs",
         "labels": [
-          "runs processes",
-          "reads files",
-          "reads the transcript",
-          "telemetry",
-          "persists state",
+          "drives Claude",
+          "writes the prompt box",
           "draws"
         ]
       },
       "sees": [
-        "...Tools.EDITING_TOOLS calls",
-        "...Tools.SHELL_TOOLS calls",
+        "classic hooks",
+        "every tool call",
         "every prompt"
       ],
       "draws": [
-        "PromptHint",
-        "Pane"
+        "AbovePrompt"
       ],
       "stars": 0,
-      "pushedAt": "2026-09-13T14:27:33Z",
-      "createdAt": "2026-09-13T10:25:40Z",
-      "license": null,
+      "pushedAt": "2026-09-15T19:47:38Z",
+      "createdAt": "2026-09-14T21:01:27Z",
+      "license": "MIT",
       "archived": false,
       "defaultBranch": "main"
     },
     {
-      "id": "hatan4ik/prompts-and-agents:upstreams/claude-code/mods/sec-default",
-      "repo": "hatan4ik/prompts-and-agents",
-      "path": "upstreams/claude-code/mods/sec-default",
-      "name": "sec-default",
-      "description": "Security default for organizations: seated outermost, it keeps the organization's classic hooks, prompt content, settings and tool policy out of reach of the plugins a person installs, and adds no policy of its own.",
-      "author": "Anthropic",
-      "homepage": "https://github.com/hatan4ik/prompts-and-agents",
-      "url": "https://github.com/hatan4ik/prompts-and-agents/tree/main/upstreams/claude-code/mods/sec-default",
-      "kind": "fixture",
+      "id": "galElmalah/claude-queue-plugin:.",
+      "repo": "galElmalah/claude-queue-plugin",
+      "path": ".",
+      "name": "claude-queue",
+      "description": "A prompt typed while Claude is working is held in a stack above the prompt instead of landing in the running turn, and sent once the turn ends. Reorder the stack, edit a row in place, send one first, remove one, flush the lot. Needs function hooks (early access) and an interactive terminal.",
+      "author": "Gal Elmalah",
+      "homepage": "https://github.com/galElmalah/claude-queue-plugin",
+      "url": "https://github.com/galElmalah/claude-queue-plugin",
+      "kind": "mod",
       "hasManifest": true,
       "modules": [
         "./register.ts"
       ],
       "hooks": [
         {
-          "event": "classic.*",
+          "event": "session.start",
           "matcher": {}
         },
         {
-          "event": "prompt.section",
+          "event": "turn.start",
           "matcher": {}
         },
         {
-          "event": "prompt.context",
+          "event": "turn.complete",
           "matcher": {}
         },
         {
-          "event": "skill.prompt",
+          "event": "tool.call",
           "matcher": {}
         },
         {
-          "event": "attribution.text",
+          "event": "prompt.submit",
           "matcher": {}
         },
         {
-          "event": "settings.read",
-          "matcher": {}
+          "event": "ui.focus",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
         },
         {
-          "event": "tool.describe",
-          "matcher": {}
+          "event": "command.run",
+          "matcher": {
+            "command": "q"
+          }
         },
         {
-          "event": "command.describe",
-          "matcher": {}
-        },
-        {
-          "event": "agent.offer",
-          "matcher": {}
-        },
-        {
-          "event": "agent.spawn",
-          "matcher": {}
-        },
-        {
-          "event": "tool.register",
-          "matcher": {}
-        },
-        {
-          "event": "tool.list",
-          "matcher": {}
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
         }
       ],
       "calls": [
-        "$.settings.read"
+        "$.clock.after",
+        "$.command.register",
+        "$.prompt.fill",
+        "$.prompt.submit",
+        "$.ui.focus",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.resolve"
       ],
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
-        "level": 1,
-        "name": "reads",
+        "level": 2,
+        "name": "writes or runs",
         "labels": [
-          "reads settings"
+          "drives Claude",
+          "writes the prompt box",
+          "draws"
         ]
       },
       "sees": [
-        "classic hooks",
-        "the system prompt",
-        "every skill",
-        "subagent spawns"
+        "every tool call",
+        "every prompt"
       ],
-      "draws": [],
+      "draws": [
+        "AbovePrompt"
+      ],
       "stars": 0,
-      "pushedAt": "2026-09-13T14:27:33Z",
-      "createdAt": "2026-09-13T10:25:40Z",
-      "license": null,
-      "archived": false,
-      "defaultBranch": "main"
-    },
-    {
-      "id": "hatan4ik/prompts-and-agents:upstreams/claude-code/mods/telemetry",
-      "repo": "hatan4ik/prompts-and-agents",
-      "path": "upstreams/claude-code/mods/telemetry",
-      "name": "telemetry",
-      "description": "Plugin analytics: adds $.telemetry in the engine.create fold, so a plugin logs an event or marks a feature's use as one first-party row per call, sent with the session's own credential.",
-      "author": "Anthropic",
-      "homepage": "https://github.com/hatan4ik/prompts-and-agents",
-      "url": "https://github.com/hatan4ik/prompts-and-agents/tree/main/upstreams/claude-code/mods/telemetry",
-      "kind": "fixture",
-      "hasManifest": true,
-      "modules": [
-        "./register.ts"
-      ],
-      "hooks": [
-        {
-          "event": "engine.create",
-          "matcher": {}
-        }
-      ],
-      "calls": [
-        "$.env.get",
-        "$.http.fetch",
-        "$.session.authorize",
-        "$.session.id",
-        "$.session.model"
-      ],
-      "surfaceModules": [],
-      "validate": {
-        "status": "passed",
-        "claudeVersion": "2.1.272",
-        "errors": [
-          "types ./types/index.d.ts declares on $: $.telemetry",
-          "./register.ts env writes: nothing",
-          "./register.ts env reads: CLAUDE_CODE_CUSTOM_OAUTH_URL, CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC, CLAUDE_CODE_USE_ANTHROPIC_AWS, CLAUDE_CODE_USE_ANTHROPIC_GOOGLE_CLOUD, CLAUDE_CODE_USE_BEDROCK, CLAUDE_CODE_USE_FOUNDRY, CLAUDE_CODE_USE_MANTLE, CLAUDE_CODE_USE_VERTEX, DISABLE_TELEMETRY, DO_NOT_TRACK, USER_TYPE"
-        ]
-      },
-      "reach": {
-        "level": 3,
-        "name": "network",
-        "labels": [
-          "network",
-          "reads env vars",
-          "reads the transcript"
-        ]
-      },
-      "sees": [],
-      "draws": [],
-      "stars": 0,
-      "pushedAt": "2026-09-13T14:27:33Z",
-      "createdAt": "2026-09-13T10:25:40Z",
-      "license": null,
+      "pushedAt": "2026-09-15T14:02:06Z",
+      "createdAt": "2026-09-15T13:14:39Z",
+      "license": "MIT",
       "archived": false,
       "defaultBranch": "main"
     },
@@ -3022,7 +4154,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -3111,7 +4243,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -3180,7 +4312,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "warnings",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -3291,7 +4423,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "warnings",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -3358,7 +4490,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "warnings",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -3418,7 +4550,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "warnings",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -3480,7 +4612,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "warnings",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -3566,7 +4698,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -3590,6 +4722,111 @@
       "pushedAt": "2026-09-11T17:34:59Z",
       "createdAt": "2026-08-21T22:09:08Z",
       "license": null,
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "meganemura/pull-request-pane:plugin",
+      "repo": "meganemura/pull-request-pane",
+      "path": "plugin",
+      "name": "pull-request-pane",
+      "description": "A pane beside the transcript with the GitHub pull requests and issues related to the current session: drag a title or description to attach it to your next prompt, and watch each pull request's checks, review decision and mergeability update on a timer.",
+      "author": "meganemura",
+      "homepage": "https://github.com/meganemura/pull-request-pane",
+      "url": "https://github.com/meganemura/pull-request-pane/tree/main/plugin",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./mod.ts"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "pull-request-pane"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "pull-request-pane"
+          }
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {
+            "requestId": "pull-request-pane"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.command.register",
+        "$.process.run",
+        "$.session.cwd",
+        "$.session.messages",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.close",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status"
+      ],
+      "surfaceModules": [
+        "hooks/description-selection.ts"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "reads the transcript",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "Bash calls",
+        "every prompt"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-09-16T00:51:26Z",
+      "createdAt": "2026-09-15T14:06:44Z",
+      "license": "MIT",
       "archived": false,
       "defaultBranch": "main"
     },
@@ -3672,7 +4909,7 @@
       ],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -3725,7 +4962,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": []
       },
       "reach": {
@@ -3741,9 +4978,370 @@
       ],
       "draws": [],
       "stars": 0,
-      "pushedAt": "2026-09-13T20:24:15Z",
+      "pushedAt": "2026-09-15T15:15:05Z",
       "createdAt": "2026-07-22T21:41:06Z",
       "license": null,
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "RedesignedRobot/cdx:.",
+      "repo": "RedesignedRobot/cdx",
+      "path": ".",
+      "name": "cdx",
+      "description": "Run OpenAI Codex and Google Antigravity execution lanes from Claude Code with background event delivery, status tracking, and raw command protection.",
+      "author": "RedesignedRobot",
+      "homepage": "https://github.com/RedesignedRobot/cdx",
+      "url": "https://github.com/RedesignedRobot/cdx",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "lanes"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "clear|resume"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__cdx__spawn|mcp__cdx__resume|mcp__cdx__consult|mcp__cdx__review|mcp__cdx__fork|mcp__cdx__events|mcp__cdx__send|mcp__cdx__reply|mcp__cdx__questions|mcp__cdx__status|mcp__cdx__report|mcp__cdx__tail|mcp__cdx__close|mcp__cdx__kill|mcp__cdx__gate|mcp__cdx__job|mcp__cdx__msg|mcp__cdx__inbox|mcp__cdx__usage|mcp__cdx__takeover|mcp__cdx__doctor"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.command.register",
+        "$.process.run",
+        "$.prompt.submit",
+        "$.prompt.suggest",
+        "$.session.id",
+        "$.tool.register",
+        "$.ui.log",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "drives Claude",
+          "writes the prompt box",
+          "draws"
+        ]
+      },
+      "sees": [
+        "Bash calls",
+        "every tool call",
+        "mcp__cdx__spawn|mcp__cdx__resume|mcp__cdx__consult|mcp__cdx__review|mcp__cdx__fork|mcp__cdx__events|mcp__cdx__send|mcp__cdx__reply|mcp__cdx__questions|mcp__cdx__status|mcp__cdx__report|mcp__cdx__tail|mcp__cdx__close|mcp__cdx__kill|mcp__cdx__gate|mcp__cdx__job|mcp__cdx__msg|mcp__cdx__inbox|mcp__cdx__usage|mcp__cdx__takeover|mcp__cdx__doctor calls",
+        "every prompt"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-09-15T19:09:11Z",
+      "createdAt": "2026-08-27T11:37:09Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "SaharCarmel/claude-who:claude-who",
+      "repo": "SaharCarmel/claude-who",
+      "path": "claude-who",
+      "name": "claude-who",
+      "description": "Friends' Claude Code presence and usage leaderboards via /who.",
+      "author": "Claude Who contributors",
+      "homepage": "https://github.com/SaharCarmel/claude-who",
+      "url": "https://github.com/SaharCarmel/claude-who/tree/main/claude-who",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./index.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "who"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "who-leaderboard"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.http.fetch",
+        "$.process.run",
+        "$.session.id",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.keys",
+        "$.store.set",
+        "$.ui.close",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "network",
+          "runs processes",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-09-15T19:41:55Z",
+      "createdAt": "2026-09-15T19:04:18Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "tldev/claude-roulette:plugin",
+      "repo": "tldev/claude-roulette",
+      "path": "plugin",
+      "name": "claude-roulette",
+      "description": "A private text chat with another human while Claude works, with random matching, interests, next, block, report, and automatic task completion handling.",
+      "author": "Claude Roulette contributors",
+      "homepage": "https://github.com/tldev/claude-roulette",
+      "url": "https://github.com/tldev/claude-roulette/tree/main/plugin",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "roulette"
+          }
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "claude-roulette"
+          }
+        },
+        {
+          "event": "classic.SessionEnd",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.http.fetch",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.close",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": [
+          "./register.ts env writes: nothing",
+          "./register.ts env reads: ROULETTE_URL"
+        ]
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "network",
+          "reads env vars",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-09-15T20:45:59Z",
+      "createdAt": "2026-09-15T20:08:34Z",
+      "license": null,
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "tomada1114/clawd-band:plugins/clawd-band",
+      "repo": "tomada1114/clawd-band",
+      "path": "plugins/clawd-band",
+      "name": "clawd-band",
+      "description": "An unofficial fan-made pixel cat that lives in the band above the prompt and reacts to what Claude is doing: thinking, editing, craning after a search, yowling in a shell, squeezing its eyes shut at a tool error, and folding its ears down to sleep between turns.",
+      "author": "tomada1114",
+      "homepage": "https://github.com/tomada1114/clawd-band",
+      "url": "https://github.com/tomada1114/clawd-band/tree/main/plugins/clawd-band",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.ui.blit",
+        "$.ui.invalidate",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.273",
+        "errors": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-09-16T02:39:22Z",
+      "createdAt": "2026-09-16T02:13:12Z",
+      "license": "MIT",
       "archived": false,
       "defaultBranch": "main"
     },
@@ -3833,7 +5431,7 @@
       "surfaceModules": [],
       "validate": {
         "status": "passed",
-        "claudeVersion": "2.1.272",
+        "claudeVersion": "2.1.273",
         "errors": [
           "./pane.tsx env writes: nothing",
           "./pane.tsx env reads: HOME"
@@ -3861,8 +5459,46 @@
         "Pane"
       ],
       "stars": 0,
-      "pushedAt": "2026-09-15T06:47:36Z",
+      "pushedAt": "2026-09-15T19:09:20Z",
       "createdAt": "2026-09-11T19:26:30Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "WorldInnovationsDepartment/claude_slots:.",
+      "repo": "WorldInnovationsDepartment/claude_slots",
+      "path": ".",
+      "name": "claude-slots",
+      "description": "Replaces the spinner with an animated ASCII slot machine: pull the lever on every prompt, watch the reels spin while Claude works, cash in when the turn completes.",
+      "author": "Danylo Vorvul",
+      "homepage": "https://github.com/WorldInnovationsDepartment/claude_slots",
+      "url": "https://github.com/WorldInnovationsDepartment/claude_slots",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./slots.js"
+      ],
+      "hooks": [],
+      "calls": [],
+      "surfaceModules": [],
+      "validate": {
+        "status": "failed",
+        "claudeVersion": "2.1.273",
+        "errors": [
+          "modules../slots.js: WorldInnovationsDepartment__claude_slots: /tmp/acm-clones/WorldInnovationsDepartment__claude_slots/hooks/slots.js:407: the hook on \"turn.step\" is not an async generator: turn.step streams, so it takes async function* ($, e, next) { ... }, which yields the chunks and returns the result; $ is always spelled $.noun.event(...) at the call site, on is always on(\"<event>\", hook), and next.to always next… [+16 chars]"
+        ]
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": []
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-09-15T16:47:49Z",
+      "createdAt": "2026-09-15T10:47:16Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main"
