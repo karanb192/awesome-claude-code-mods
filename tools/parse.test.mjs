@@ -59,7 +59,8 @@ test('visibility names what a hook can observe', () => {
   assert.deepEqual(drawsOn([{ event: 'ui.render', matcher: { component: 'Pane' } }, { event: 'turn.start', matcher: {} }]), ['Pane'])
 })
 
-import { fingerprint, describeChange } from './changed.mjs'
+import { fingerprint, describeChange, looksPartial } from './changed.mjs'
+import { search, shrunk } from './discover.mjs'
 
 const base = { claudeVersion: '2.1.272', mods: [
   { id: 'a/b:.', kind: 'mod', name: 'x', description: 'd', hooks: [], calls: ['$.ui.log'], reach: { level: 0 }, sees: [], validate: { status: 'passed' }, archived: false, stars: 5 },
@@ -87,4 +88,31 @@ test('a new mod, a footprint change, a validate flip and a version bump are chan
 test('fixtures never count', () => {
   const after = clone(); after.mods[1].calls = ['$.http.fetch']
   assert.equal(fingerprint(base), fingerprint(after))
+})
+
+test('a scan that lost most of its mods or repos is partial, a small dip is not', () => {
+  const many = { repos: 90, mods: Array.from({ length: 30 }, (_, i) => ({ id: `r/${i}:.`, kind: 'mod' })) }
+  const few = { repos: 2, mods: many.mods.slice(0, 1) }
+  assert.match(looksPartial(many, few), /1 mods where the committed scan has 30/)
+  assert.equal(looksPartial(many, { repos: 88, mods: many.mods.slice(0, 27) }), null)
+  assert.match(looksPartial(many, { repos: 30, mods: many.mods }), /30 candidate repos where the committed scan has 90/)
+  assert.equal(looksPartial({ repos: 0, mods: [] }, few), null)
+})
+
+test('a candidate list that halves is refused, a first run is not', () => {
+  assert.equal(shrunk(92, 2), true)
+  assert.equal(shrunk(92, 60), false)
+  assert.equal(shrunk(0, 2), false)
+})
+
+test('search retries a rate limit with the hinted wait and throws when it never clears', () => {
+  let calls = 0
+  const limited = () => { calls++; const e = new Error('gh: try again in 0.01s (HTTP 429)'); e.stderr = Buffer.from(e.message); throw e }
+  assert.throws(() => search('q', limited, 3, () => {}), /code search failed/)
+  assert.equal(calls, 3)
+  let n = 0
+  const flaky = () => { n++; if (n < 2) { const e = new Error('HTTP 429'); e.stderr = Buffer.from('gh: try again in 0.01s (HTTP 429)'); throw e }; return ['a/b'] }
+  assert.deepEqual(search('q', flaky, 3, () => {}), ['a/b'])
+  const broken = () => { const e = new Error('gh: HTTP 401 bad credentials'); e.stderr = Buffer.from(e.message); throw e }
+  assert.throws(() => search('q', broken, 3, () => {}), /code search failed/)
 })

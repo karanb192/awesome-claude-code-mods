@@ -43,7 +43,15 @@ jobs:
         id: worth
         if: github.event_name != 'pull_request'
         run: |
-          if node tools/changed.mjs > change.txt; then
+          set +e
+          node tools/changed.mjs > change.txt
+          rc=$?
+          set -e
+          if [ "$rc" = "2" ]; then
+            cat change.txt || true
+            echo "The scan looks partial; failing instead of opening a pull request." >&2
+            exit 1
+          elif [ "$rc" = "0" ]; then
             echo "open=true" >> "$GITHUB_OUTPUT"
           elif [ "${{ inputs.force }}" = "true" ] || [ "$(date -u +%u)" = "7" ]; then
             echo "weekly refresh: stars and timestamps only" > change.txt
