@@ -60,11 +60,12 @@ test('visibility names what a hook can observe', () => {
 })
 
 import { fingerprint, describeChange, looksPartial } from './changed.mjs'
+import { applyDuplicates, suspectDuplicates, readDuplicates } from './dedupe.mjs'
 import { search, shrunk } from './discover.mjs'
 
 const base = { claudeVersion: '2.1.272', mods: [
-  { id: 'a/b:.', kind: 'mod', name: 'x', description: 'd', hooks: [], calls: ['$.ui.log'], reach: { level: 0 }, sees: [], validate: { status: 'passed' }, archived: false, stars: 5 },
-  { id: 'c/d:tests/f', kind: 'fixture', name: 'f', description: '', hooks: [], calls: [], reach: { level: 0 }, sees: [], validate: { status: 'passed' }, archived: false, stars: 0 },
+  { id: 'a/b:.', repo: 'a/b', kind: 'mod', name: 'x', description: 'd', hooks: [], calls: ['$.ui.log'], reach: { level: 0 }, sees: [], validate: { status: 'passed' }, archived: false, stars: 5 },
+  { id: 'c/d:tests/f', repo: 'c/d', kind: 'fixture', name: 'f', description: '', hooks: [], calls: [], reach: { level: 0 }, sees: [], validate: { status: 'passed' }, archived: false, stars: 0 },
 ] }
 const clone = () => JSON.parse(JSON.stringify(base))
 
@@ -83,6 +84,36 @@ test('a new mod, a footprint change, a validate flip and a version bump are chan
   assert.deepEqual(describeChange(base, after), ['Claude Code 2.1.272 to 2.1.280', 'new: e/f:.', 'a/b:.: reach L0 to L3'])
   const broken = clone(); broken.mods[0].validate.status = 'failed'
   assert.deepEqual(describeChange(base, broken), ['a/b:.: validate passed to failed'])
+})
+
+test('a listed duplicate collapses onto its successor; an unlisted same-owner same-name pair is only flagged', () => {
+  const mods = () => [
+    { id: 'o/mono:queue', repo: 'o/mono', name: 'queue', kind: 'mod' },
+    { id: 'o/queue-plugin:.', repo: 'o/queue-plugin', name: 'queue', kind: 'mod' },
+    { id: 'o/lint:.', repo: 'o/lint', name: 'lint', kind: 'mod' },
+    { id: 'o/tools:lint', repo: 'o/tools', name: 'lint', kind: 'mod' },
+    { id: 'p/queue:.', repo: 'p/queue', name: 'queue', kind: 'mod' },
+    { id: 'o/x:tests/queue', repo: 'o/x', name: 'queue', kind: 'fixture' },
+  ]
+  const list = new Map([['o/queue-plugin:.', 'o/mono:queue']])
+  const applied = applyDuplicates(mods(), list)
+  assert.deepEqual(applied.filter(m => m.kind === 'duplicate').map(m => [m.id, m.duplicateOf]), [['o/queue-plugin:.', 'o/mono:queue']])
+  assert.deepEqual(suspectDuplicates(applied), [['o/lint:.', 'o/tools:lint']])
+  const orphaned = applyDuplicates(mods().filter(m => m.id !== 'o/mono:queue'), list)
+  assert.equal(orphaned.find(m => m.id === 'o/queue-plugin:.').kind, 'mod')
+  assert.deepEqual([...readDuplicates('data/duplicates.txt')], [['galElmalah/claude-queue-plugin:.', 'galElmalah/claude-mods:claude-queue']])
+  assert.deepEqual([...readDuplicates('data/no-such-file.txt')], [])
+})
+
+test('the change list names a collapse and a suspected pair', () => {
+  const after = clone()
+  after.mods.push({ ...clone().mods[0], id: 'a/b-plugin:.', kind: 'duplicate', duplicateOf: 'a/b:.' })
+  assert.deepEqual(describeChange(base, after), ['new: a/b-plugin:. (duplicate of a/b:.)'])
+  const flipped = clone(); flipped.mods[0].kind = 'duplicate'; flipped.mods[0].duplicateOf = 'a/mono:x'
+  assert.deepEqual(describeChange(base, flipped), ['a/b:.: mod to duplicate (duplicate of a/mono:x)'])
+  assert.notEqual(fingerprint(base), fingerprint(flipped))
+  const twins = clone(); twins.mods.push({ ...clone().mods[0], id: 'a/c:.', repo: 'a/c' })
+  assert.deepEqual(describeChange(base, twins), ['new: a/c:.', 'possible duplicate: a/b:. and a/c:. share an owner and a name; if they are one mod, add the pair to data/duplicates.txt'])
 })
 
 test('fixtures never count', () => {
