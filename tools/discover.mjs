@@ -17,7 +17,10 @@ function sleep(seconds) {
 }
 
 // The code search API rate-limits hard (10 requests a minute, plus a secondary
-// limit) and says how long to wait. A search that still fails after the retries
+// limit) and says how long to wait, but the hint is often a few seconds while the
+// window itself is a minute or more: two scans six minutes apart burned all four
+// retries in forty seconds. So each retry waits at least a minute per attempt, or
+// the hint when that is longer. A search that still fails after the retries
 // throws: an empty result here is not "no mods", it is "no answer".
 export function search(q, run = ghSearch, attempts = 4, wait = sleep) {
   let last
@@ -31,7 +34,7 @@ export function search(q, run = ghSearch, attempts = 4, wait = sleep) {
       const limited = hinted || /HTTP (403|429)/.test(msg)
       console.error(`search failed for ${q} (attempt ${i} of ${attempts}): ${msg}`)
       if (!limited || i === attempts) break
-      wait(hinted ? Number(hinted[1]) + 2 : 30 * i)
+      wait(Math.max(hinted ? Number(hinted[1]) + 2 : 0, 60 * i))
     }
   }
   throw new Error(`code search failed for ${q}: ${last?.stderr?.toString().trim() || last?.message}`)
