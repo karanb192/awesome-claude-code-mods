@@ -1,0 +1,5 @@
+# A mod its author has moved or copied to another repo, so the scan found it twice.
+# One pair per line: the superseded copy's id, then the id of the copy that counts.
+# Ids are owner/repo:path as in data/mods.json. The scanner never infers a pair; it
+# only flags same-owner same-name candidates in the nightly log for someone to confirm here.
+galElmalah/claude-queue-plugin:. galElmalah/claude-mods:claude-queue

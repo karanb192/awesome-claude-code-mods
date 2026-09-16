@@ -11,6 +11,7 @@
 
 import { execFileSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
+import { suspectDuplicates } from './dedupe.mjs'
 
 export function fingerprint(data) {
   const mods = [...data.mods]
@@ -51,6 +52,7 @@ export function describeChange(before, after) {
     if (o.reach.level !== m.reach.level) lines.push(`${id}: reach L${o.reach.level} to L${m.reach.level}`)
     else if (JSON.stringify(o.calls) !== JSON.stringify(m.calls) || JSON.stringify(o.hooks) !== JSON.stringify(m.hooks)) lines.push(`${id}: footprint changed`)
   }
+  for (const pair of suspectDuplicates(after.mods)) lines.push(`possible duplicate: ${pair.join(' and ')} share an owner and a name; if they are one mod, add the pair to data/duplicates.txt`)
   return lines
 }
 

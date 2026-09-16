@@ -9,6 +9,7 @@ The nightly scan searches GitHub for repositories that mention `CLAUDE_CODE_ENAB
 ## Open a pull request
 
 1. Add your `owner/repo` to `data/seeds.txt`, one per line.
+   If you moved a mod to a new repo and the table lists both, add the pair to `data/duplicates.txt` so the old copy stops counting.
 2. If you want a curated entry (not only a row in the generated table), add one line under the matching section of `README.md` in this exact shape:
 
    `- [name](https://github.com/owner/repo) - What it does, one sentence, ending with a period.`
