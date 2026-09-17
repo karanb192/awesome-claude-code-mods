@@ -6,22 +6,23 @@
 //   node tools/scan.mjs [--clones DIR] [--repos FILE] [--out FILE]
 
 import { execFileSync, spawnSync } from 'node:child_process'
-import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs'
+import { existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { join, relative, dirname } from 'node:path'
 import { tmpdir } from 'node:os'
 import { parseValidateOutput } from './parse.mjs'
 import { grade, visibility, drawsOn } from './grade.mjs'
 import { readDuplicates, applyDuplicates, suspectDuplicates } from './dedupe.mjs'
+import { kindOf, readCatalogs } from './kind.mjs'
 
 const args = Object.fromEntries(process.argv.slice(2).map((a, i, all) => a.startsWith('--') ? [a.slice(2), all[i + 1]] : []).filter(Boolean))
 const CLONES = args.clones ?? join(tmpdir(), 'acm-clones')
 const REPOS = args.repos ?? 'data/repos.txt'
 const OUT = args.out ?? 'data/mods.json'
 const SKIP_DIRS = new Set(['node_modules', '.git'])
-const NOT_A_MOD = [/\/tests?\//, /\/fixtures?\//, /\/probes?\//, /\/examples?\//, /\/upstreams?\//, /\/docs?\//, /\/templates?\//, /\/canary\//]
 
 const claudeVersion = execFileSync('claude', ['--version'], { encoding: 'utf8' }).trim().split(' ')[0]
 const repos = readFileSync(REPOS, 'utf8').split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('#'))
+const catalogs = readCatalogs()
 mkdirSync(CLONES, { recursive: true })
 
 function clone(repo) {
@@ -36,7 +37,10 @@ function* hooksFiles(dir) {
   for (const name of readdirSync(dir)) {
     if (SKIP_DIRS.has(name)) continue
     const p = join(dir, name)
-    let st; try { st = statSync(p) } catch { continue }
+    // lstat, not stat: a repo that symlinks a plugin folder back to its own root would
+    // otherwise be walked until the path length runs out.
+    let st; try { st = lstatSync(p) } catch { continue }
+    if (st.isSymbolicLink()) continue
     if (st.isDirectory()) yield* hooksFiles(p)
     else if (name === 'hooks.json' && dirname(p).endsWith('/hooks')) yield p
   }
@@ -52,14 +56,6 @@ function meta(repo) {
 }
 
 function readJson(p) { try { return JSON.parse(readFileSync(p, 'utf8')) } catch { return null } }
-
-function kindOf(repo, rel, manifest) {
-  if (repo === 'anthropics/claude-code') return 'builtin'
-  if (NOT_A_MOD.some(re => re.test('/' + rel + '/'))) return 'fixture'
-  if (/not a product mod|measurement instrument|test fixture/i.test(manifest?.description ?? '')) return 'fixture'
-  if (/\/mods\/(diff|sec-default|telemetry)$/.test('/' + rel) || ['diff', 'sec-default', 'telemetry'].includes(manifest?.name) && rel.includes('mods/')) return 'mirror'
-  return 'mod'
-}
 
 const mods = []
 const seen = new Set()
@@ -93,7 +89,7 @@ for (const repo of repos) {
       author: manifest?.author?.name ?? null,
       homepage: manifest?.homepage ?? `https://github.com/${repo}`,
       url: rel === '.' ? `https://github.com/${repo}` : `https://github.com/${repo}/tree/${m.defaultBranch ?? 'main'}/${rel}`,
-      kind: kindOf(repo, rel, manifest),
+      kind: kindOf(repo, rel, manifest, catalogs),
       hasManifest: existsSync(manifestPath),
       modules: hooks.modules,
       hooks: allHooks,
@@ -120,4 +116,4 @@ mods.sort((a, b) => (b.stars ?? -1) - (a.stars ?? -1) || a.id.localeCompare(b.id
 mkdirSync(dirname(OUT), { recursive: true })
 writeFileSync(OUT, JSON.stringify({ generated: new Date().toISOString(), claudeVersion, repos: repos.length, mods }, null, 2) + '\n')
 const real = mods.filter(x => x.kind === 'mod')
-console.log(`\n${mods.length} plugins with hook modules in ${repos.length} repos; ${real.length} are mods (rest: builtin, mirror, fixture, duplicate). Written to ${OUT}`)
+console.log(`\n${mods.length} plugins with hook modules in ${repos.length} repos; ${real.length} are mods (rest: builtin, mirror, fixture, duplicate, catalog). Written to ${OUT}`)

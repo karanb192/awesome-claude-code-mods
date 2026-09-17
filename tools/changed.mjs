@@ -42,7 +42,7 @@ export function describeChange(before, after) {
   const b = new Map(after.mods.filter(m => m.kind !== 'fixture').map(m => [m.id, m]))
   const lines = []
   if (before.claudeVersion !== after.claudeVersion) lines.push(`Claude Code ${before.claudeVersion} to ${after.claudeVersion}`)
-  const dup = m => m.kind === 'duplicate' ? ` (duplicate of ${m.duplicateOf})` : ''
+  const dup = m => m.kind === 'duplicate' ? ` (duplicate of ${m.duplicateOf})` : m.kind === 'catalog' ? ' (catalog, not counted)' : ''
   for (const [id, m] of b) if (!a.has(id)) lines.push(`new: ${id}${dup(m)}`)
   for (const id of a.keys()) if (!b.has(id)) lines.push(`gone: ${id}`)
   for (const [id, m] of b) {
