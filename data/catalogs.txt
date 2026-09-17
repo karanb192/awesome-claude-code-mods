@@ -1,0 +1,5 @@
+# Repos that repackage other authors' mods as a component catalogue. Their plugins are
+# scanned and recorded, but a catalogue is named once with its count instead of taking one
+# row per copy, so repo stars never rank a copy above the author's own repo.
+# One owner/repo per line.
+davila7/claude-code-templates

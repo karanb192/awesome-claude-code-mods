@@ -10,6 +10,7 @@ const data = JSON.parse(readFileSync('data/mods.json', 'utf8'))
 for (const m of data.mods) m.description = String(m.description ?? '').replace(/\s*[\u2014\u2013]\s*/g, ': ')
 const mods = data.mods.filter(m => m.kind === 'mod')
 const builtins = data.mods.filter(m => m.kind === 'builtin')
+const catalogs = [...new Set(data.mods.filter(m => m.kind === 'catalog').map(m => m.repo))].map(repo => ({ repo, n: data.mods.filter(m => m.kind === 'catalog' && m.repo === repo).length }))
 const asOf = data.generated.slice(0, 10)
 
 const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
@@ -51,6 +52,7 @@ const stats = `As of ${asOf}, scanned against Claude Code ${data.claudeVersion}:
   + `${count(has('network'))} reach the network, ${count(m => m.sees.includes('every tool call'))} see every tool call, `
   + `${count(m => m.sees.includes('every prompt'))} see every prompt, ${count(m => m.validate.status === 'failed')} fail to validate on this version. `
   + `Reach levels: ${[0, 1, 2, 3].map(l => `L${l} ${LEVEL_NAMES[l]}: ${count(m => m.reach.level === l)}`).join(' · ')}.`
+  + (catalogs.length ? ` Not counted: ${catalogs.map(c => `[${c.repo}](https://github.com/${c.repo}) repackages ${c.n} mods`).join(', ')}, a catalogue named here once instead of once per copy.` : '')
 
 const row = m => [`[${cell(m.name)}](${manifestUrl(m)})`, cell(short(m.description)), `![reach](badges/${slug(m)}-reach.svg)`, cell(m.sees.join(', ') || 'only what it hooks'), m.validate.status === 'failed' ? 'fails' : data.claudeVersion, String(m.stars ?? '?')]
 // awesome-lint wants aligned pipes and padded cells, so every column is padded to its widest cell.
@@ -147,6 +149,7 @@ footer{margin-top:64px;color:var(--muted);font-size:13px;max-width:66ch}
 <p class="lead">Read straight off Claude Code's own plugin validator, which lists a mod's hooks and <code>$</code> calls before any of its code runs. Scanned against Claude Code ${esc(data.claudeVersion)} on ${asOf}, rescanned nightly. Source, method and the curated list: <a href="https://github.com/karanb192/awesome-claude-code-mods">awesome-claude-code-mods</a>.</p>
 <div class="strip" role="img" aria-label="One segment per mod, coloured by reach level, deepest first">${strip}</div>
 <div class="legend" role="group" aria-label="Filter by reach level">${legend}</div>
+${catalogs.length ? `<p>Not counted: ${catalogs.map(c => `<a href="https://github.com/${c.repo}">${esc(c.repo)}</a> repackages ${c.n} mods`).join(', ')}, a catalogue named here once instead of once per copy.</p>` : ''}
 <p>Reach is the widest thing a mod's <code>$</code> calls can touch. It is a footprint, not a verdict. A PR tracker has to run <code>gh</code>, and a breathing band only draws. Sees lists what a mod observes without a matcher, such as every prompt or every tool call.</p>
 <div class="tools"><input id="q" type="search" placeholder="Filter by name, repo or description" aria-label="Filter mods"><span class="count" id="n"></span></div>
 <div class="wrap"><table id="t">${thead}<tbody>

@@ -61,6 +61,7 @@ test('visibility names what a hook can observe', () => {
 
 import { fingerprint, describeChange, looksPartial } from './changed.mjs'
 import { applyDuplicates, suspectDuplicates, readDuplicates } from './dedupe.mjs'
+import { kindOf, readCatalogs } from './kind.mjs'
 import { search, shrunk } from './discover.mjs'
 
 const base = { claudeVersion: '2.1.272', mods: [
@@ -114,6 +115,23 @@ test('the change list names a collapse and a suspected pair', () => {
   assert.notEqual(fingerprint(base), fingerprint(flipped))
   const twins = clone(); twins.mods.push({ ...clone().mods[0], id: 'a/c:.', repo: 'a/c' })
   assert.deepEqual(describeChange(base, twins), ['new: a/c:.', 'possible duplicate: a/b:. and a/c:. share an owner and a name; if they are one mod, add the pair to data/duplicates.txt'])
+})
+
+test('kindOf files built-ins, fixtures, mirrors and catalogue copies, and counts the rest', () => {
+  const catalogs = new Set(['cat/templates'])
+  assert.equal(kindOf('anthropics/claude-code', 'mods/diff', { name: 'diff' }), 'builtin')
+  assert.equal(kindOf('a/b', 'tests/fixtures/x', { name: 'x' }), 'fixture')
+  assert.equal(kindOf('a/b', '.', { name: 'x', description: 'A test fixture, not a product mod' }), 'fixture')
+  assert.equal(kindOf('a/b', 'upstreams/claude-code/mods/telemetry', { name: 'telemetry' }), 'fixture')
+  assert.equal(kindOf('a/b', 'vendor/mods/telemetry', { name: 'telemetry' }), 'mirror')
+  assert.equal(kindOf('cat/templates', 'components/mods/games/tetris', { name: 'tetris' }, catalogs), 'catalog')
+  assert.equal(kindOf('cat/templates', 'tests/fixtures/x', { name: 'x' }, catalogs), 'fixture')
+  assert.equal(kindOf('a/b', 'plugins/x', { name: 'x' }, catalogs), 'mod')
+  assert.deepEqual([...readCatalogs('data/catalogs.txt')], ['davila7/claude-code-templates'])
+  assert.deepEqual([...readCatalogs('data/no-such-file.txt')], [])
+  const after = clone()
+  after.mods.push({ ...clone().mods[0], id: 'cat/templates:mods/x', repo: 'cat/templates', kind: 'catalog' })
+  assert.deepEqual(describeChange(base, after), ['new: cat/templates:mods/x (catalog, not counted)'])
 })
 
 test('fixtures never count', () => {
