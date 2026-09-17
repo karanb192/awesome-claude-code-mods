@@ -136,11 +136,12 @@ test('a candidate list that halves is refused, a first run is not', () => {
   assert.equal(shrunk(0, 2), false)
 })
 
-test('search retries a rate limit with the hinted wait and throws when it never clears', () => {
-  let calls = 0
-  const limited = () => { calls++; const e = new Error('gh: try again in 0.01s (HTTP 429)'); e.stderr = Buffer.from(e.message); throw e }
-  assert.throws(() => search('q', limited, 3, () => {}), /code search failed/)
+test('search retries a rate limit, waiting a minute per attempt or the hint when longer, and throws when it never clears', () => {
+  let calls = 0, waits = []
+  const limited = () => { calls++; const e = new Error(`gh: try again in ${calls === 1 ? 243 : 0.01}s (HTTP 429)`); e.stderr = Buffer.from(e.message); throw e }
+  assert.throws(() => search('q', limited, 3, s => waits.push(s)), /code search failed/)
   assert.equal(calls, 3)
+  assert.deepEqual(waits, [245, 120])
   let n = 0
   const flaky = () => { n++; if (n < 2) { const e = new Error('HTTP 429'); e.stderr = Buffer.from('gh: try again in 0.01s (HTTP 429)'); throw e }; return ['a/b'] }
   assert.deepEqual(search('q', flaky, 3, () => {}), ['a/b'])
