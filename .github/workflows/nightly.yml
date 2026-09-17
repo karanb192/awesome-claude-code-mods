@@ -16,6 +16,12 @@ permissions:
   contents: write
   pull-requests: write
 
+# One scan at a time: every run searches GitHub code with the same token, and two runs in the
+# same minute rate-limit each other into hints of ten minutes and more.
+concurrency:
+  group: scan
+  cancel-in-progress: false
+
 jobs:
   scan:
     runs-on: ubuntu-latest
@@ -31,7 +37,11 @@ jobs:
       - run: claude --version
       - run: npm ci
       - run: npm test
+      # A pull request run scans the committed candidate list instead of searching GitHub code:
+      # the search is the one step that rate-limits, and the tooling under review is exercised
+      # by scan, render and lint either way. Discovery runs nightly and on dispatch.
       - run: npm run discover
+        if: github.event_name != 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}
       - run: npm run scan

@@ -16,17 +16,32 @@ function sleep(seconds) {
   Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, Math.ceil(seconds * 1000))
 }
 
-// The code search API rate-limits hard (10 requests a minute, plus a secondary
-// limit) and says how long to wait, but the hint is often a few seconds while the
-// window itself is a minute or more: two scans six minutes apart burned all four
-// retries in forty seconds. So each retry waits at least a minute per attempt, or
-// the hint when that is longer. A search that still fails after the retries
-// throws: an empty result here is not "no mods", it is "no answer".
-export function search(q, run = ghSearch, attempts = 4, wait = sleep) {
+const PER_PAGE = 100
+const MAX_PAGES = 10
+
+// Code search returns at most 1000 results, 100 a page. The pages are fetched one at a
+// time with a pause between them: a burst of page requests trips the secondary limit
+// even when the ten-a-minute budget has room (438 results, five pages, and a fresh run
+// still got a 429 on its first attempt). A page that is rate-limited is retried after at
+// least a minute per attempt, or the hint when that is longer, since the hint is often
+// a few seconds while the window lasts a minute or more. A search that still fails
+// after the retries throws: an empty result here is not "no mods", it is "no answer".
+export function search(q, run = ghSearchPage, attempts = 4, wait = sleep, pause = 10) {
+  const found = []
+  for (let page = 1; page <= MAX_PAGES; page++) {
+    if (page > 1) wait(pause)
+    const items = retry(() => run(q, page), q, attempts, wait)
+    found.push(...items)
+    if (items.length < PER_PAGE) break
+  }
+  return found
+}
+
+function retry(fn, q, attempts, wait) {
   let last
   for (let i = 1; i <= attempts; i++) {
     try {
-      return run(q)
+      return fn()
     } catch (e) {
       last = e
       const msg = e.stderr?.toString().trim() || e.message
@@ -40,8 +55,8 @@ export function search(q, run = ghSearch, attempts = 4, wait = sleep) {
   throw new Error(`code search failed for ${q}: ${last?.stderr?.toString().trim() || last?.message}`)
 }
 
-function ghSearch(q) {
-  const out = execFileSync('gh', ['api', '-X', 'GET', 'search/code', '-f', `q=${q}`, '-f', 'per_page=100', '--paginate',
+function ghSearchPage(q, page) {
+  const out = execFileSync('gh', ['api', '-X', 'GET', 'search/code', '-f', `q=${q}`, '-f', `per_page=${PER_PAGE}`, '-f', `page=${page}`,
     '--jq', '.items[].repository.full_name'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] })
   return out.split('\n').filter(Boolean)
 }

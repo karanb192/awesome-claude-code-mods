@@ -136,6 +136,16 @@ test('a candidate list that halves is refused, a first run is not', () => {
   assert.equal(shrunk(0, 2), false)
 })
 
+test('search fetches a page at a time with a pause between pages and stops at a short page or the cap', () => {
+  const waits = [], pages = []
+  const three = (q, page) => { pages.push(page); return Array.from({ length: page < 3 ? 100 : 3 }, (_, i) => `r/${page}-${i}`) }
+  assert.equal(search('q', three, 3, s => waits.push(s)).length, 203)
+  assert.deepEqual(pages, [1, 2, 3])
+  assert.deepEqual(waits, [10, 10])
+  const endless = () => Array.from({ length: 100 }, (_, i) => `r/${i}`)
+  assert.equal(search('q', endless, 3, () => {}).length, 1000)
+})
+
 test('search retries a rate limit, waiting a minute per attempt or the hint when longer, and throws when it never clears', () => {
   let calls = 0, waits = []
   const limited = () => { calls++; const e = new Error(`gh: try again in ${calls === 1 ? 243 : 0.01}s (HTTP 429)`); e.stderr = Buffer.from(e.message); throw e }
