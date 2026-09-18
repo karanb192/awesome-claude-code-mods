@@ -2,3 +2,4 @@
 halluton/Mindful-Claude
 anthropics/claude-code
 karanb192/claude-code-mods
+karanb192/cache-tax
