@@ -59,6 +59,7 @@ As of 2026-09-17, scanned against Claude Code 2.1.274: **72 mods** in **142 cand
 - [plugin-health](https://github.com/ray-manaloto/dotfiles/tree/main/.claude/skills/plugin-health) - Reports at session start when plugins declared in settings are not installed or are disabled for the project.
 - [scope-guard](https://github.com/yash-gadodia/claude-mods/tree/main/scope-guard) - Counts the distinct files a turn edits, including Bash write targets, and stops at a threshold until the goal is restated.
 - [merge-gate](https://github.com/yash-gadodia/claude-mods/tree/main/merge-gate) - Denies gh pr merge, a merge on trunk or a push to main unless the latest human message says merge.
+- [receipt](https://github.com/yash-gadodia/claude-mods/tree/main/receipt) - Turns the turn footer into a receipt of edits, runs and curls, never folds a destructive command into a tool group, and names an unverified claim in the spinner.
 
 ## Memory and context
 
