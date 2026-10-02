@@ -48,7 +48,7 @@ As of 2026-09-17, scanned against Claude Code 2.1.274: **72 mods** in **142 cand
 - [gh-ci-status](https://github.com/diegorv/claude-functions-hook/tree/main/plugins/gh-ci-status) - GitHub Actions runs of the session's repo pinned above the prompt, with links to the PR and the run.
 - [vercel-deploy-status](https://github.com/ray-amjad/awesome-claude-code-function-hooks/tree/main/plugins/vercel-deploy-status) - The Vercel deploy queue of the linked project under the prompt, woken by a push or a merge.
 - [pr-bridge-watch](https://github.com/ippoan/gh-actions-live/tree/main/mods/pr-bridge-watch) - Connects a new PR's CI to a live watch over a WebSocket bridge.
-- [deploy-verify](https://github.com/yash-gadodia/claude-mods/tree/main/deploy-verify) - After a deploy command, waits for the Actions run it started, curls the live URL with cache-busting and writes the verdict into the model's context so a deploy cannot be claimed without evidence.
+- [deploy-verify](https://github.com/yash-gadodia/claude-mods/tree/main/deploy-verify) - Checks configured live URLs after recognized deploy commands, waits for relevant GitHub Actions runs when present, and adds the verification result to model context.
 
 ## Safety and privacy
 
@@ -57,8 +57,8 @@ As of 2026-09-17, scanned against Claude Code 2.1.274: **72 mods** in **142 cand
 - [kb-settings-guard](https://github.com/ray-manaloto/knowledge-base/tree/main/.claude/mods/kb-settings-guard) - Denies a delegated agent lane any write to the repo's Claude settings files.
 - [claude-doctor](https://github.com/ray-manaloto/dotfiles/tree/main/.claude/skills/claude-doctor) - Reports an install health verdict at session start and refuses tool calls while the install is provably broken.
 - [plugin-health](https://github.com/ray-manaloto/dotfiles/tree/main/.claude/skills/plugin-health) - Reports at session start when plugins declared in settings are not installed or are disabled for the project.
-- [scope-guard](https://github.com/yash-gadodia/claude-mods/tree/main/scope-guard) - Counts the distinct files a turn edits, including Bash write targets, and stops at a threshold until the goal is restated.
-- [merge-gate](https://github.com/yash-gadodia/claude-mods/tree/main/merge-gate) - Denies gh pr merge, a merge on trunk or a push to main unless the latest human message says merge.
+- [scope-guard](https://github.com/yash-gadodia/claude-mods/tree/main/scope-guard) - Tracks recognized file edits against a configurable threshold, with a model judge and user overrides that can permit further edits.
+- [merge-gate](https://github.com/yash-gadodia/claude-mods/tree/main/merge-gate) - Checks merge permission for recognized Bash merge commands and selected pushes from feature branches to trunk.
 - [receipt](https://github.com/yash-gadodia/claude-mods/tree/main/receipt) - Turns the turn footer into a receipt of edits, runs and curls, never folds a destructive command into a tool group, and names an unverified claim in the spinner.
 
 ## Memory and context
