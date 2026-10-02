@@ -36,6 +36,7 @@ As of 2026-10-02, scanned against Claude Code 2.1.287: **359 mods** in **373 can
 - [effort-cycle](https://github.com/Anerco/effort-cycle-mod) - Alt+E and Alt+Shift+E step the effort level without a transcript row, and the footer shows the model and level as a colored meter.
 - [burn-meter](https://github.com/OneWave-AI/claude-code-mods/tree/main/burn-meter) - Session spend as a growing fire bar above the prompt, with 5-hour and weekly plan limits and a `/burn` pane with per-turn cost.
 - [session-wrapped](https://github.com/OneWave-AI/claude-code-mods/tree/main/session-wrapped) - `/wrapped` plays an animated recap of the session and writes a shareable PNG card, with week and month totals read from local transcripts.
+- [context-view](https://github.com/kongyo2/context-view) - The context window as one row above the prompt, drawn like Claude Code's own meters, with the percentage used, tokens over the window and tokens left before auto-compact, plus `/context-view` to hide or show it.
 
 ## While you wait
 

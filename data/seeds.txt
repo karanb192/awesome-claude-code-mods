@@ -6,3 +6,4 @@ karanb192/cache-tax
 Anerco/effort-cycle-mod
 OneWave-AI/claude-code-mods
 yash-gadodia/claude-mods
+kongyo2/context-view
