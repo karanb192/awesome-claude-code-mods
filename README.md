@@ -37,7 +37,7 @@ As of 2026-10-02, scanned against Claude Code 2.1.287: **359 mods** in **373 can
 - [burn-meter](https://github.com/OneWave-AI/claude-code-mods/tree/main/burn-meter) - Session spend as a growing fire bar above the prompt, with 5-hour and weekly plan limits and a `/burn` pane with per-turn cost.
 - [session-wrapped](https://github.com/OneWave-AI/claude-code-mods/tree/main/session-wrapped) - `/wrapped` plays an animated recap of the session and writes a shareable PNG card, with week and month totals read from local transcripts.
 - [context-view](https://github.com/kongyo2/context-view) - The context window as one row above the prompt, drawn like Claude Code's own meters, with the percentage used, tokens over the window and tokens left before auto-compact, plus `/context-view` to hide or show it.
-- [wavy-usage](https://github.com/BatuhanCakmakk/wavy-usage) - Liquid-filled rings above the prompt for the 5-hour and 7-day windows, context fill and prompt-cache lifetime, a fighter jet that flies faster at lower effort, and a pane with each recent turn's cost and 5-hour share and what filled the window.
+- [wavy-usage](https://github.com/BatuhanCakmakk/wavy-usage) - Desktop usage rings and an effort-level jet, with estimated cache lifetime, recent turn costs, observed 5-hour window growth and a breakdown of locally recorded sessions; the terminal gets a text band.
 
 ## While you wait
 
