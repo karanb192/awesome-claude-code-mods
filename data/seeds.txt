@@ -3,4 +3,6 @@ halluton/Mindful-Claude
 anthropics/claude-code
 karanb192/claude-code-mods
 karanb192/cache-tax
+Anerco/effort-cycle-mod
+OneWave-AI/claude-code-mods
 yash-gadodia/claude-mods
