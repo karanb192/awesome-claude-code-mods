@@ -9,3 +9,4 @@ yash-gadodia/claude-mods
 kongyo2/context-view
 BatuhanCakmakk/wavy-usage
 jarrodwatts/intermission
+hellosverre/claude-skins
