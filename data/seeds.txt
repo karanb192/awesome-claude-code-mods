@@ -24,3 +24,4 @@ helenkwok/gsd-status-mod
 xuanji86/claude-mdview
 adamholter/claude-subway-surfers
 agentic-workbench/agent-quick-menu
+reporails/arcade
