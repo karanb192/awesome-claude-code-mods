@@ -153,3 +153,35 @@ test('scanner CLI retains unavailable entries and rejects an invalid newly submi
   assert.equal(retired.repos[0].repo, 'old/mod')
   assert.equal(readFileSync(join(root, 'data/repos.txt'), 'utf8'), '\n')
 })
+
+test('scanner CLI skips a repository with no commits instead of crashing', t => {
+  const root = mkdtempSync(join(tmpdir(), 'discovery-test-'))
+  t.after(() => rmSync(root, { recursive: true, force: true }))
+  mkdirSync(join(root, 'data'))
+  mkdirSync(join(root, 'bin'))
+  writeFileSync(join(root, 'data/repos.txt'), 'old/mod\nempty/repo\n')
+  writeFileSync(join(root, 'data/mods.json'), JSON.stringify({ mods: [prior] }))
+  const script = fileURLToPath(new URL('./scan.mjs', import.meta.url))
+  const binary = (name, code) => {
+    const path = join(root, 'bin', name)
+    writeFileSync(path, '#!' + process.execPath + '\n' + code)
+    chmodSync(path, 0o755)
+  }
+  binary('claude', 'console.log("2.1.287")')
+  binary('gh', 'console.log(JSON.stringify({stars:0,defaultBranch:"main"}))')
+  // Both clones succeed; only the empty one has no HEAD to resolve.
+  binary('git', `
+    const fs = require('node:fs');
+    const args = process.argv.slice(2);
+    if (args[0] === 'clone') { fs.mkdirSync(args.at(-1), {recursive:true}); process.exit(0) }
+    if (args.includes('rev-parse') && args.some(a => a.endsWith('empty__repo'))) process.exit(128);
+    console.log('a'.repeat(40));
+  `)
+  const env = { ...process.env, PATH: join(root, 'bin') + ':' + process.env.PATH }
+  const result = spawnSync(process.execPath, [script, '--retire'], { cwd: root, env, encoding: 'utf8' })
+  assert.equal(result.status, 0, result.stderr)
+  assert.match(result.stderr, /clone is empty: empty\/repo/)
+  const retired = JSON.parse(readFileSync(join(root, 'data/retirements.json')))
+  assert.deepEqual(retired.repos.map(entry => entry.repo), ['old/mod'], 'the empty repository is not retired, only the checked one')
+  assert.equal(readFileSync(join(root, 'data/repos.txt'), 'utf8'), 'empty/repo\n')
+})

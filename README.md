@@ -83,6 +83,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [intermission](https://github.com/jarrodwatts/intermission) - Doom deathmatch in a Ghostty or kitty pane on macOS 15+, returning you to Claude when it finishes or needs input; downloads and runs Odamex and connects to a shared game server.
 - [spinner](https://github.com/hoobnn/hoobnn-agent-mods/tree/main/claude-code/spinner) - Pixel-art scenes above the prompt while a turn runs, in fourteen themes, with a pet that follows the running tool, levels up and gets a confetti finale.
 - [hitokoto](https://github.com/hoobnn/hoobnn-agent-mods/tree/main/claude-code/hitokoto) - A quote fetched from the Hitokoto (一言) API above the prompt with its source, refreshed on a timer, once a day, per session or per prompt.
+- [minefield](https://github.com/reporails/arcade/tree/main/minefield) - Minesweeper in a pane beside the transcript, with big square tiles when docked, a best time and a face that follows your cursor, hooking no prompt or tool call and making no network calls.
 - [meanwhile](https://github.com/njp-coder/meanwhile) - One question a day above the prompt, written by a daily Haiku call from the Hacker News front page and new GitHub repos, with the answer after 40 seconds of Claude working or on Show answer, and `/wrapped` for a share card of the day.
 
 ## Git, pull requests and CI
@@ -120,6 +121,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [claude-mermaid](https://github.com/galElmalah/claude-mermaid) - Every mermaid block Claude writes is drawn as box art, in colour, where the fence was in the transcript.
 - [skins](https://github.com/hellosverre/claude-skins) - Restyles the transcript with themed tool rows, reply gutters and spinner words, and draws tables, code, diffs and shell output as animated cards on the desktop.
 - [mdview](https://github.com/xuanji86/claude-mdview) - Click a markdown path in the conversation to read the file rendered in a side pane with contents, find and pictures, or in Warp's own viewer, and point at any block to have Claude edit it.
+- [gfm-render](https://github.com/briangtn/claude-gfm-render) - Draws GitHub alerts, task lists, strikethrough and Mermaid diagrams in Claude's replies, as box art in the terminal and SVG on the desktop.
 
 ## Agents and workflows
 

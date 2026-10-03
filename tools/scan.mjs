@@ -43,6 +43,8 @@ function clone(repo) {
   if (existsSync(dir)) throw new Error(`refusing cached checkout ${dir}; use a fresh clones directory`)
   const r = spawnSync('git', ['clone', '-q', '--depth', '1', `https://github.com/${repo}`, dir], { encoding: 'utf8' })
   if (r.status !== 0) { console.error(`clone failed: ${repo}: ${r.stderr.trim()}`); return null }
+  // A repository with no commits yet clones fine but has no HEAD; treat it like a failed clone, not evidence of removal.
+  if (spawnSync('git', ['-C', dir, 'rev-parse', '--verify', '-q', 'HEAD'], { stdio: 'ignore' }).status !== 0) { console.error(`clone is empty: ${repo}`); return null }
   return realpathSync(dir)
 }
 
