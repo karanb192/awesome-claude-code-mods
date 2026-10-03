@@ -55,6 +55,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [context-view](https://github.com/kongyo2/context-view) - The context window as one row above the prompt, drawn like Claude Code's own meters, with the percentage used, tokens over the window and tokens left before auto-compact, plus `/context-view` to hide or show it.
 - [wavy-usage](https://github.com/BatuhanCakmakk/wavy-usage) - Desktop usage rings and an effort-level jet, with estimated cache lifetime, recent turn costs, observed 5-hour window growth and a breakdown of locally recorded sessions; the terminal gets a text band.
 - [token-weather-usage](https://github.com/augiefra/claude-mods/tree/main/plugins/token-weather-usage) - One line above the prompt with context weather, a bar per prompt sized by the tokens it added, and 5-hour and 7-day limit gauges that hatch the gap with elapsed time.
+- [flightdeck](https://github.com/scasella/claude-flightdeck) - A live agent dashboard pane with context and cost, an advisor timeline, every permission verdict, subagent cards and swimlanes, a turn receipt and a session log, watching without changing anything.
 
 ## While you wait
 
