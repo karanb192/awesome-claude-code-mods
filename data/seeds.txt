@@ -14,3 +14,4 @@ augiefra/claude-mods
 nuromirzak/nibbl
 augbastos/afkswitch
 scasella/claude-flightdeck
+pawandeepdhall/claude-mods

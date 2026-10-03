@@ -56,6 +56,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [wavy-usage](https://github.com/BatuhanCakmakk/wavy-usage) - Desktop usage rings and an effort-level jet, with estimated cache lifetime, recent turn costs, observed 5-hour window growth and a breakdown of locally recorded sessions; the terminal gets a text band.
 - [token-weather-usage](https://github.com/augiefra/claude-mods/tree/main/plugins/token-weather-usage) - One line above the prompt with context weather, a bar per prompt sized by the tokens it added, and 5-hour and 7-day limit gauges that hatch the gap with elapsed time.
 - [flightdeck](https://github.com/scasella/claude-flightdeck) - A live agent dashboard pane with context and cost, an advisor timeline, every permission verdict, subagent cards and swimlanes, a turn receipt and a session log, watching without changing anything.
+- [usage-band](https://github.com/pawandeepdhall/claude-mods/tree/main/plugins/usage-band) - The 5-hour and weekly limits as percentages with reset countdowns above the prompt, amber or red when on pace to run out, plus buttons for a new chat and for asking Claude to commit and push.
 
 ## While you wait
 
@@ -110,6 +111,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [homie-persona-cognition](https://github.com/TheSmokeDev/taskchad-os/tree/main/.claude/plugins/persona-cognition) - Host-bound cognitive lifecycle events for a persona system.
 - [agent-race](https://github.com/OneWave-AI/claude-code-mods/tree/main/agent-race) - Puts several sessions on one track for the same task and scores tools, edits, tests and cost per lane.
 - [AFKSwitch](https://github.com/augbastos/afkswitch) - A one-click presence switch above the terminal prompt that tells live sessions when you leave and collects their status when you return.
+- [next-steps](https://github.com/pawandeepdhall/claude-mods/tree/main/plugins/next-steps) - After each reply, up to six Haiku-generated next steps appear above the prompt; select one or more and press Send to have Haiku compose and submit a combined prompt.
 
 ## Building mods
 
