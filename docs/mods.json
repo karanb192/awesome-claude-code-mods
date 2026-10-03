@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-03T06:11:02.259Z",
   "claudeVersion": "2.1.288",
-  "repos": 871,
+  "repos": 872,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -114421,6 +114421,156 @@
       "pushedAt": "2026-10-02T14:16:58Z",
       "createdAt": "2026-10-02T14:16:08Z",
       "license": null,
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "xuanji86/claude-mdview:.",
+      "repo": "xuanji86/claude-mdview",
+      "path": ".",
+      "sourceCommit": "da646556714507acf5d41610605b9911eb9aa42a",
+      "name": "mdview",
+      "description": "Click a .md path in the Claude Code conversation to read it rendered as markdown beside the session, pictures included, and point at any block to have Claude edit it.",
+      "author": "Anji Xu",
+      "homepage": "https://github.com/xuanji86/claude-mdview",
+      "url": "https://github.com/xuanji86/claude-mdview",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "classic.CwdChanged",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__mdview__show"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "md"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AssistantMessage"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolUse"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "UserMessage"
+          }
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "mdview"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.clock.sleep",
+        "$.command.register",
+        "$.config.set",
+        "$.env.get",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.process.run",
+        "$.prompt.submit",
+        "$.session.cwd",
+        "$.state.get",
+        "$.state.set",
+        "$.tool.register",
+        "$.ui.close",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.scroll",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.288",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-mdview",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "runs processes",
+          "changes config",
+          "drives Claude",
+          "reads files",
+          "reads env vars",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks",
+        "every tool call",
+        "mcp__mdview__show calls"
+      ],
+      "draws": [
+        "AssistantMessage",
+        "ToolUse",
+        "UserMessage",
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-03T08:16:15Z",
+      "createdAt": "2026-10-03T08:16:05Z",
+      "license": "MIT",
       "archived": false,
       "defaultBranch": "main"
     }

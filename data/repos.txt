@@ -838,6 +838,7 @@ xsyetopz/dotclaude
 XTraceAI/agent-plugins
 xtrm-dev/specialists
 xuanji86/claude-agentpane
+xuanji86/claude-mdview
 xuanji86/claude-statuspane
 xyc/plushie
 xzwache/claude-time-machine
