@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-03T06:11:02.259Z",
   "claudeVersion": "2.1.288",
-  "repos": 873,
+  "repos": 874,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -114674,6 +114674,94 @@
       "stars": 1,
       "pushedAt": "2026-10-03T13:45:43Z",
       "createdAt": "2026-10-03T09:40:41Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "reporails/arcade:minefield",
+      "repo": "reporails/arcade",
+      "path": "minefield",
+      "sourceCommit": "e42e16382e157b057c23bd1b775d1ca22388fb3d",
+      "name": "minefield",
+      "description": "The classic mine-clearing puzzle in a Claude Code pane: click or use the keys to clear the board while Claude works. A timer, a best time, and a face that watches the board and glances over at Claude's work.",
+      "author": "Reporails",
+      "homepage": "https://github.com/reporails/arcade/tree/main/minefield",
+      "url": "https://github.com/reporails/arcade/tree/main/minefield",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "mines"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.now",
+        "$.command.register",
+        "$.session.surfaces",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [
+        "hooks/board.ts"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.288",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "reporails-arcade",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-03T14:13:25Z",
+      "createdAt": "2026-10-02T22:55:21Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main"

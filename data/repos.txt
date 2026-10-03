@@ -621,6 +621,7 @@ RedesignedRobot/cdx
 refact0r/claude-surf
 renchris/claude-infrastructure
 rennerdo30/agent-bridge
+reporails/arcade
 retrocodes12/context-relay
 retzion/daily-briefs
 Revono/clawd-pet
