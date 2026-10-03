@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-03T06:11:02.259Z",
   "claudeVersion": "2.1.288",
-  "repos": 874,
+  "repos": 875,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -114762,6 +114762,131 @@
       "stars": 0,
       "pushedAt": "2026-10-03T14:13:25Z",
       "createdAt": "2026-10-02T22:55:21Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "njp-coder/meanwhile:.",
+      "repo": "njp-coder/meanwhile",
+      "path": ".",
+      "sourceCommit": "e5f667070aac5d562daca83927601b66bce7bbb0",
+      "name": "meanwhile",
+      "description": "A small card above the prompt teaches you one thing while Claude works, and turns your day into something worth sharing",
+      "author": "Naga Jyothi Prakash",
+      "homepage": "https://github.com/njp-coder/meanwhile",
+      "url": "https://github.com/njp-coder/meanwhile",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.js"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "meanwhile"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "wrapped"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.http.fetch",
+        "$.model.complete",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.close",
+        "$.ui.copy",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.288",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "meanwhile",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "network",
+          "drives Claude",
+          "reads files",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call"
+      ],
+      "draws": [
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-03T17:10:54Z",
+      "createdAt": "2026-10-03T16:59:21Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main"

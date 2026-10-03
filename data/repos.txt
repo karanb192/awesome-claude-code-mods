@@ -542,6 +542,7 @@ neolitec/code-buddy
 nexaedge/claude-permissions-hook
 nguyenduythuc/test-guard
 nickdemari/ember
+njp-coder/meanwhile
 nogu66/claude-code
 nogu66/md-prompt
 nogu66/noguchy.me
