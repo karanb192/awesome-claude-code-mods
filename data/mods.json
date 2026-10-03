@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-03T06:11:02.259Z",
   "claudeVersion": "2.1.288",
-  "repos": 869,
+  "repos": 870,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -114255,6 +114255,89 @@
       "stars": 0,
       "pushedAt": "2026-09-30T11:50:10Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "helenkwok/gsd-status-mod:.",
+      "repo": "helenkwok/gsd-status-mod",
+      "path": ".",
+      "sourceCommit": "4ef304f0fcb7ce41ed9b1ade2387ff037393c2ce",
+      "name": "gsd-status-mod",
+      "description": "A Claude Code mod that shows GSD phase, status and plan progress above the prompt, read from .planning/STATE.md.",
+      "author": "Helen Kwok",
+      "homepage": "https://github.com/helenkwok/gsd-status-mod",
+      "url": "https://github.com/helenkwok/gsd-status-mod",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./gsd-status.mjs"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "PromptHint"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.fs.read",
+        "$.prompt.suggest",
+        "$.ui.invalidate",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.288",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "helenkwok-mods",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "writes the prompt box",
+          "reads files",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AbovePrompt",
+        "PromptHint"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-03T05:37:50Z",
+      "createdAt": "2026-10-03T04:45:41Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main"

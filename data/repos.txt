@@ -311,6 +311,7 @@ haroarthur/dotfiles
 hatan4ik/prompts-and-agents
 hathcox/claudomon
 hedingerm/image-preview
+helenkwok/gsd-status-mod
 hellosverre/claude-skins
 henrik-thevibe/Claude-Fables
 hex/claude-council
