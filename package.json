@@ -2,7 +2,7 @@
   "name": "awesome-claude-code-mods",
   "version": "0.1.0",
   "private": true,
-  "description": "Every Claude Code mod on GitHub, with what each one can reach",
+  "description": "Claude Code mods from across GitHub, with what each one can read, write, run or send over the network. Usage meters, PR trackers, browsers, games and safety guards, scanned nightly.",
   "type": "module",
   "scripts": {
     "test": "node --test tools/parse.test.mjs tools/discovery.test.mjs tools/github-search.test.mjs tools/compatibility.test.mjs",
