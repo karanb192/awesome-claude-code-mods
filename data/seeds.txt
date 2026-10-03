@@ -21,3 +21,4 @@ xuanji86/claude-statuspane
 xuanji86/claude-agentpane
 shimo4228/harness-scope
 helenkwok/gsd-status-mod
+xuanji86/claude-mdview
