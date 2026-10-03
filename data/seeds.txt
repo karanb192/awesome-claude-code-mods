@@ -17,3 +17,5 @@ scasella/claude-flightdeck
 pawandeepdhall/claude-mods
 saiharsha03/clawd-spinner
 hoobnn/hoobnn-agent-mods
+xuanji86/claude-statuspane
+xuanji86/claude-agentpane
