@@ -59,10 +59,12 @@ export function describeChange(before, after) {
   return lines
 }
 
+// Exit 1 means "nothing changed" to the workflow, so a crash must not end with it.
 if (import.meta.url === `file://${process.argv[1]}`) {
+  process.on('uncaughtException', error => { console.error(error); process.exit(2) })
   const [oldPath, newPath] = process.argv.slice(2)
   const after = JSON.parse(readFileSync(newPath ?? 'data/mods.json', 'utf8'))
-  const before = JSON.parse(oldPath ? readFileSync(oldPath, 'utf8') : execFileSync('git', ['show', 'HEAD:data/mods.json'], { encoding: 'utf8' }))
+  const before = JSON.parse(oldPath ? readFileSync(oldPath, 'utf8') : execFileSync('git', ['show', 'HEAD:data/mods.json'], { encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 }))
   const partial = looksPartial(before, after)
   if (partial) {
     console.error(`refusing: ${partial}. Not a change worth a pull request; check the discover and scan logs.`)

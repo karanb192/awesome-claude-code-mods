@@ -3,3 +3,30 @@
 # Ids are owner/repo:path as in data/mods.json. The scanner never infers a pair; it
 # only flags same-owner same-name candidates in the nightly log for someone to confirm here.
 galElmalah/claude-queue-plugin:. galElmalah/claude-mods:claude-queue
+ucsandman/claude-harness:engine/mods/claude-runtime ucsandman/Agnostic-AI:engine/mods/claude-runtime
+ucsandman/claude-harness:engine/mods/harness-mods ucsandman/Agnostic-AI:engine/mods/harness-mods
+ucsandman/claude-harness:labs/claude-mods/lab/demos/bender ucsandman/Agnostic-AI:labs/claude-mods/lab/demos/bender
+ucsandman/claude-harness:labs/claude-mods/lab/demos/blackbox ucsandman/Agnostic-AI:labs/claude-mods/lab/demos/blackbox
+ucsandman/claude-harness:labs/claude-mods/lab/demos/guardian ucsandman/Agnostic-AI:labs/claude-mods/lab/demos/guardian
+ucsandman/claude-harness:labs/claude-mods/lab/demos/matrix ucsandman/Agnostic-AI:labs/claude-mods/lab/demos/matrix
+ucsandman/claude-harness:labs/claude-mods/lab/demos/tunnel/cost ucsandman/Agnostic-AI:labs/claude-mods/lab/demos/tunnel/cost
+ucsandman/claude-harness:labs/claude-mods/lab/demos/tunnel/observer ucsandman/Agnostic-AI:labs/claude-mods/lab/demos/tunnel/observer
+ucsandman/claude-harness:labs/claude-mods/lab/demos/tunnel/policy ucsandman/Agnostic-AI:labs/claude-mods/lab/demos/tunnel/policy
+ucsandman/claude-harness:labs/claude-mods/lab/demos/tunnel/telemetry ucsandman/Agnostic-AI:labs/claude-mods/lab/demos/tunnel/telemetry
+ucsandman/claude-harness:labs/claude-mods/lab/probe-ui ucsandman/Agnostic-AI:labs/claude-mods/lab/probe-ui
+ucsandman/claude-harness:labs/claude-mods/lab/probe2 ucsandman/Agnostic-AI:labs/claude-mods/lab/probe2
+ucsandman/claude-harness:labs/claude-mods/lab/probe3 ucsandman/Agnostic-AI:labs/claude-mods/lab/probe3
+ucsandman/claude-harness:labs/claude-mods/lab/spike-compact ucsandman/Agnostic-AI:labs/claude-mods/lab/spike-compact
+ucsandman/claude-harness:labs/claude-mods/lab/spike-describe ucsandman/Agnostic-AI:labs/claude-mods/lab/spike-describe
+ucsandman/claude-harness:labs/claude-mods/lab/spike-handoff ucsandman/Agnostic-AI:labs/claude-mods/lab/spike-handoff
+ucsandman/claude-harness:labs/claude-mods/lab/xray ucsandman/Agnostic-AI:labs/claude-mods/lab/xray
+ucsandman/claude-harness:labs/claude-mods/prototypes/costclaw-live ucsandman/Agnostic-AI:labs/claude-mods/prototypes/costclaw-live
+ucsandman/claude-harness:labs/claude-mods/prototypes/prodguard ucsandman/Agnostic-AI:labs/claude-mods/prototypes/prodguard
+ucsandman/claude-harness:labs/claude-mods/prototypes/supervisor ucsandman/Agnostic-AI:labs/claude-mods/prototypes/supervisor
+leeovery/tick:.claude/skills/workflow-gates leeovery/portal:.claude/skills/workflow-gates
+leeovery/tick:.claude/skills/workflow-gates-rows leeovery/portal:.claude/skills/workflow-gates-rows
+0xGondarxyz/claudeMods:dashless 0xGondarxyz/claude-code-mods:dashless
+0xGondarxyz/output-ladder:. 0xGondarxyz/claude-code-mods:output-ladder
+0xGondarxyz/secret-guard:. 0xGondarxyz/claude-code-mods:secret-guard
+0xGondarxyz/slopless:. 0xGondarxyz/claude-code-mods:slopless
+0xGondarxyz/spiral-stop:. 0xGondarxyz/claude-code-mods:spiral-stop

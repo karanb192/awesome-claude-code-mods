@@ -27,6 +27,22 @@ function fixture(t, mods) {
 
 const render = dir => execFileSync(process.execPath, [renderer], { cwd: dir, stdio: 'pipe' })
 
+test('two plugins with one name in one repo get separate badges and anchors', t => {
+  const near = { ...mod(2), path: 'clip', name: 'clip' }
+  const deep = { ...mod(0), path: 'plugins/more/clip', name: 'clip' }
+  const dir = fixture(t, [deep, near])
+  render(dir)
+  const catalogue = readFileSync(join(dir, 'catalogue.md'), 'utf8')
+  const page = readFileSync(join(dir, 'docs/index.html'), 'utf8')
+  assert.match(readFileSync(join(dir, 'badges/example--mods--clip-reach.svg'), 'utf8'), /L2/)
+  assert.match(readFileSync(join(dir, 'badges/example--mods--clip--plugins-more-clip-reach.svg'), 'utf8'), /L0/)
+  assert.match(catalogue, /badges\/example--mods--clip-reach\.svg/)
+  assert.match(catalogue, /badges\/example--mods--clip--plugins-more-clip-reach\.svg/)
+  const ids = [...page.matchAll(/<tr id="([^"]+)"/g)].map(m => m[1])
+  assert.equal(new Set(ids).size, ids.length)
+  assert.ok(ids.includes('example--mods--clip') && ids.includes('example--mods--clip--plugins-more-clip'))
+})
+
 test('generated descriptions preserve literal replacement tokens', t => {
   const description = "Literal $& and $` and $' and $$ stay in the description."
   const dir = fixture(t, [{ ...mod(0), description }])

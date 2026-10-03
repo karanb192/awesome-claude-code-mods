@@ -1,10 +1,10 @@
 import { readFileSync } from 'node:fs'
+import { slugs } from './slug.mjs'
 
 const css = readFileSync(new URL('./site.css', import.meta.url), 'utf8')
 const script = readFileSync(new URL('./site-client.js', import.meta.url), 'utf8')
 const repo = 'https://github.com/karanb192/awesome-claude-code-mods'
 const esc = value => String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
-const slug = mod => `${mod.repo.replace('/', '--')}--${mod.name}`.replace(/[^A-Za-z0-9._-]/g, '-')
 const url = value => /^https?:\/\//i.test(String(value)) ? esc(value) : '#directory'
 const arrow = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg>'
 const mark = '<svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11 5H5v22h6M21 5h6v22h-6M16 10v12M10 16h12"/></svg>'
@@ -21,6 +21,8 @@ export const reviewNotes = mod => [
 export function renderSite(data) {
   const mods = data.mods.filter(mod => mod.kind === 'mod')
   const builtins = data.mods.filter(mod => mod.kind === 'builtin')
+  const keys = slugs([...mods, ...builtins])
+  const slug = mod => keys.get(mod)
   const catalogs = [...new Set(data.mods.filter(mod => mod.kind === 'catalog').map(mod => mod.repo))]
   const date = data.generated.slice(0, 10)
   const dateLabel = new Intl.DateTimeFormat('en', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(new Date(data.generated))

@@ -5,7 +5,7 @@
 
 import { readFileSync } from 'node:fs'
 
-const NOT_A_MOD = [/\/tests?\//, /\/fixtures?\//, /\/probes?\//, /\/examples?\//, /\/upstreams?\//, /\/docs?\//, /\/templates?\//, /\/canary\//, /\/bench(?:marks?)?\//]
+const NOT_A_MOD = [/\/tests?\//, /\/fixtures?\//, /\/probes?\//, /\/examples?\//, /\/upstreams?\//, /\/docs?\//, /\/templates?\//, /\/canary\//, /\/bench(?:marks?)?\//, /\/stubs?\//]
 
 export function readCatalogs(path = 'data/catalogs.txt') {
   let text; try { text = readFileSync(path, 'utf8') } catch { return new Set() }

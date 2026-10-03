@@ -1,12 +1,23 @@
 name: nightly scan
 
+# The 22:30 run is the full GitHub code search. The three-hourly runs and pushes that change
+# seeds skip it. They rescan known candidates and seeds, plus repositories pushed since the
+# last scan that repository search finds, so a new mod does not wait for the crawl.
 on:
   schedule:
     - cron: "30 22 * * *"
+    - cron: "0 1-19/3 * * *"
+  push:
+    branches: [main]
+    paths: ["data/seeds.txt"]
   workflow_dispatch:
     inputs:
       force:
         description: "Open a pull request even when only stars and timestamps moved"
+        type: boolean
+        default: false
+      crawl:
+        description: "Run the full GitHub code search"
         type: boolean
         default: false
   pull_request:
@@ -16,7 +27,7 @@ permissions:
   contents: write
   pull-requests: write
 
-# One scan at a time: every run searches GitHub code with the same token, and two runs in the
+# One scan at a time: runs share the search token and the scan branch, and two searches in the
 # same minute rate-limit each other into hints of ten minutes and more.
 concurrency:
   group: scan
@@ -41,11 +52,44 @@ jobs:
       - run: npm test
       - run: npx playwright install --with-deps chromium
       - run: npm run test:render
-      # PRs include submitted seeds without spending the global search rate limit.
-      - run: npm run discover
+      - name: Choose the discovery mode
+        id: mode
         if: github.event_name != 'pull_request'
         env:
+          SCHEDULE: ${{ github.event.schedule }}
+          CRAWL: ${{ inputs.crawl }}
+        run: |
+          if [ "$SCHEDULE" = "30 22 * * *" ] || [ "$CRAWL" = "true" ]; then
+            echo "mode=full" >> "$GITHUB_OUTPUT"
+            echo "args=--recent --keep-on-failure" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=fast" >> "$GITHUB_OUTPUT"
+            echo "args=--recent --skip-code-search" >> "$GITHUB_OUTPUT"
+          fi
+      # Discovery progress waits in the open scan PR until it is merged; the cache hands it to the next run.
+      - name: Restore discovery progress from the last run
+        if: github.event_name != 'pull_request'
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/discovery
+          key: discovery-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: discovery-
+      # PRs include submitted seeds without spending the global search rate limit.
+      - name: Discover candidates
+        id: discover
+        if: github.event_name != 'pull_request'
+        run: node tools/discover.mjs ${{ steps.mode.outputs.args }} --restore "$RUNNER_TEMP/discovery/discovery.json" --note "$RUNNER_TEMP/discovery.txt"
+        env:
           GH_TOKEN: ${{ github.token }}
+      - name: Stage discovery progress for the next run
+        if: steps.discover.outcome == 'success'
+        run: mkdir -p "$RUNNER_TEMP/discovery" && cp data/discovery.json "$RUNNER_TEMP/discovery/discovery.json"
+      - name: Save discovery progress for the next run
+        if: steps.discover.outcome == 'success'
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/discovery
+          key: discovery-${{ github.run_id }}-${{ github.run_attempt }}
       - run: node tools/candidates.mjs --base "$PR_BASE"
         if: github.event_name == 'pull_request'
         env:
@@ -74,7 +118,7 @@ jobs:
             exit 1
           elif [ "$rc" = "0" ]; then
             echo "open=true" >> "$GITHUB_OUTPUT"
-          elif [ "${{ inputs.force }}" = "true" ] || [ "$(date -u +%u)" = "7" ]; then
+          elif [ "${{ inputs.force }}" = "true" ] || { [ "${{ steps.mode.outputs.mode }}" = "full" ] && [ "$(date -u +%u)" = "7" ]; }; then
             echo "weekly refresh: stars and timestamps only" > change.txt
             echo "open=true" >> "$GITHUB_OUTPUT"
           else
@@ -82,13 +126,25 @@ jobs:
             git checkout -- .
           fi
           cat change.txt || true
+          {
+            echo "Automated discovery and rescan against the current Claude Code release. Known candidates are retained; missing plugins remain unverified until the weekly retirement review. Review catalogue.md and data/mods.json before merging."
+            echo
+            echo "## Discovery"
+            echo
+            cat "$RUNNER_TEMP/discovery.txt" 2>/dev/null || true
+            echo
+            echo "## Changes"
+            echo
+            head -n 300 change.txt | sed 's/^/- /'
+            if [ "$(wc -l < change.txt)" -gt 300 ]; then echo; echo "The full list is in the workflow log."; fi
+          } > "$RUNNER_TEMP/pr-body.md"
           rm -f change.txt
       - name: Open or update the scan pull request
         if: github.event_name != 'pull_request' && steps.worth.outputs.open == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
           branch: nightly-scan
-          title: "Nightly scan: refresh footprints and badges"
-          commit-message: "Nightly scan: refresh footprints and badges"
-          body: "Automated discovery and rescan against the current Claude Code release. Known candidates are retained; missing plugins remain unverified until the weekly retirement review. Opened when inventory or validation changes; Sundays also refresh stars. Review catalogue.md and data/mods.json before merging."
+          title: "Scan: refresh footprints and badges"
+          commit-message: "Scan: refresh footprints and badges"
+          body-path: ${{ runner.temp }}/pr-body.md
           labels: scan

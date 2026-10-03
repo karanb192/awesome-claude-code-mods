@@ -23,10 +23,10 @@ export function parseResponse(text) {
   return { ...response, body: JSON.parse(rest) }
 }
 
-export function ghSearchPage(q, page, exec = execFileSync) {
+export function ghSearchPage(q, page, exec = execFileSync, { endpoint = 'search/code' } = {}) {
   let out, failure
   try {
-    out = exec('gh', ['api', '--include', '-X', 'GET', 'search/code', '-f', `q=${q}`, '-f', 'per_page=100', '-f', `page=${page}`],
+    out = exec('gh', ['api', '--include', '-X', 'GET', endpoint, '-f', `q=${q}`, '-f', 'per_page=100', '-f', `page=${page}`],
       { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], timeout: 60000, maxBuffer: 16 * 1024 * 1024 })
   } catch (error) {
     failure = error
@@ -43,7 +43,7 @@ export function ghSearchPage(q, page, exec = execFileSync) {
 
 const seconds = value => value != null && value !== '' && Number.isFinite(Number(value)) && Number(value) >= 0 ? Number(value) : null
 
-export function createSearchRequest({ run = ghSearchPage, wait = sleep, now = Date.now, random = Math.random, log = console.error, attempts = 7, pause = 10, maxWait = 1800 } = {}) {
+export function createSearchRequest({ run = ghSearchPage, wait = sleep, now = Date.now, random = Math.random, log = console.error, attempts = 7, pause = 10, maxWait = 1800, label = 'code search' } = {}) {
   let requests = 0, waited = 0
   return (query, page) => {
     for (let attempt = 1; attempt <= attempts; attempt++) {
@@ -62,7 +62,7 @@ export function createSearchRequest({ run = ghSearchPage, wait = sleep, now = Da
         const retryable = error.retryable || limited
         const diagnostic = Object.entries(headers).filter(([key]) => ['retry-after', 'x-ratelimit-remaining', 'x-ratelimit-reset', 'x-ratelimit-resource', 'x-github-request-id'].includes(key)).map(([key, value]) => `${key}=${value}`).join(' ')
         log(`search failed for ${query} page ${page} (attempt ${attempt}/${attempts}, HTTP ${error.status ?? 'n/a'}): ${error.message}${diagnostic ? '; ' + diagnostic : ''}`)
-        const fail = reason => new Error(`code search failed for ${query}: ${reason}; ${error.message}`, { cause: error })
+        const fail = reason => new Error(`${label} failed for ${query}: ${reason}; ${error.message}`, { cause: error })
         if (!retryable) throw fail('not retryable')
         if (attempt === attempts) throw fail('retry attempts exhausted')
         const delay = Math.ceil(Math.max(

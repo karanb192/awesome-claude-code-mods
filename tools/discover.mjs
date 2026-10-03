@@ -3,10 +3,22 @@
 // searches plus data/seeds.txt (repos the search index has not caught up with).
 // Writes data/repos.txt, one owner/repo per line. Needs `gh` logged in, or
 // GH_TOKEN in the environment.
+//
+//   node tools/discover.mjs                         # code search; fails without writing when it cannot finish
+//   node tools/discover.mjs --recent                # also repository search; reads and updates data/discovery.json
+//   node tools/discover.mjs --recent --restore <file>  # also merge progress saved by an earlier run
+//   node tools/discover.mjs --skip-code-search      # known candidates and seeds only
+//   node tools/discover.mjs --keep-on-failure       # a failed code search keeps the known candidates instead of failing
+//   node tools/discover.mjs --recent --check-limit 2000  # check more new repos than the default 200
+//   node tools/discover.mjs --recent --search-pause 0     # no pause between search requests (defaults 10 s for code, 3 s for repositories)
+//   node tools/discover.mjs --note <file>           # write what discovery did, for the scan pull request
 
-import { writeFileSync, mkdirSync } from 'node:fs'
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
+import { execFileSync } from 'node:child_process'
+import { parseArgs } from 'node:util'
 import { readRepos, mergeRepos } from './candidates.mjs'
 import { createSearchRequest } from './github-search.mjs'
+import { findRecent, recentSince, readState, writeState, mergeState, describeRecent } from './recent.mjs'
 
 const QUERIES = [
   'CLAUDE_CODE_ENABLE_FUNCTION_HOOKS',
@@ -77,13 +89,67 @@ export function search(q, request = createSearchRequest()) {
   return items.map(item => item.repository.full_name)
 }
 
+function lastScan() {
+  try { return JSON.parse(readFileSync('data/mods.json', 'utf8')).generated } catch { return null }
+}
+
+// The scanner fetches metadata in GraphQL batches; keep some REST calls back for its per-repo fallback.
+const SCAN_RESERVE = 100
+function apiBudget() {
+  try {
+    const remaining = Number(execFileSync('gh', ['api', 'rate_limit', '--jq', '.resources.core.remaining'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }))
+    return Number.isFinite(remaining) ? Math.max(0, remaining - SCAN_RESERVE) : Infinity
+  } catch { return Infinity }
+}
+
 if (import.meta.url === `file://${process.argv[1]}`) {
+  const { values: args } = parseArgs({ options: {
+    'skip-code-search': { type: 'boolean', default: false },
+    'keep-on-failure': { type: 'boolean', default: false },
+    recent: { type: 'boolean', default: false },
+    since: { type: 'string' },
+    restore: { type: 'string' },
+    'check-limit': { type: 'string', default: '200' },
+    'search-pause': { type: 'string' },
+    note: { type: 'string' },
+  } })
+  const limit = Number(args['check-limit'])
+  if (!Number.isInteger(limit) || limit < 0) throw new Error(`--check-limit must be a whole number, got ${args['check-limit']}`)
+  const pause = args['search-pause'] === undefined ? undefined : Number(args['search-pause'])
+  if (pause !== undefined && !(pause >= 0)) throw new Error(`--search-pause must be a number of seconds, got ${args['search-pause']}`)
   const seeds = readRepos('data/seeds.txt')
   const previous = readRepos('data/repos.txt')
-  const request = createSearchRequest()
-  const discovered = QUERIES.flatMap(q => search(q, request))
+  const notes = []
+  const firstLine = error => String(error.message).split('\n')[0]
+  let discovered = []
+  if (args['skip-code-search']) notes.push('Code search was skipped; this run covers known candidates and seeds.')
+  else {
+    try {
+      const request = createSearchRequest(pause === undefined ? {} : { pause })
+      discovered = QUERIES.flatMap(q => search(q, request))
+    } catch (error) {
+      if (!args['keep-on-failure']) throw error
+      console.error(`${error.message}\nkeeping the known candidates and seeds`)
+      notes.push(`Code search did not finish, so discovery kept the known candidates and seeds. ${firstLine(error)}`)
+    }
+  }
+  if (args.recent) {
+    const state = args.restore ? mergeState(readState(), readState(args.restore)) : readState()
+    // Repos an earlier run found, by either search, stay candidates until a scan PR puts them on main.
+    const onMain = new Set(mergeRepos(previous, seeds).map(repo => repo.toLowerCase()))
+    const carried = state.pending.filter(repo => !onMain.has(repo.toLowerCase()))
+    discovered.push(...carried)
+    const since = args.since ?? recentSince(state.searchedThrough ?? lastScan())
+    const result = findRecent(since, mergeRepos(previous, seeds, discovered), { state, limit, pause, budget: apiBudget(), advance: !args.since })
+    discovered.push(...result.found)
+    writeState({ ...result.state, pending: mergeRepos(discovered).filter(repo => !onMain.has(repo.toLowerCase())) })
+    notes.push(...describeRecent(since, result))
+    if (carried.length) notes.push(`Carried over from earlier runs: ${carried.join(', ')}.`)
+  }
   mkdirSync('data', { recursive: true })
   const repos = mergeRepos(previous, seeds, discovered)
   writeFileSync('data/repos.txt', repos.join('\n') + '\n')
+  if (args.note) writeFileSync(args.note, notes.map(line => line + '\n').join(''))
   console.log(`${repos.length} candidate repos (${seeds.length} seeds)`)
+  for (const line of notes) console.log(line)
 }
