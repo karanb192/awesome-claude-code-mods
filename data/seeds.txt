@@ -11,3 +11,4 @@ BatuhanCakmakk/wavy-usage
 jarrodwatts/intermission
 hellosverre/claude-skins
 augiefra/claude-mods
+nuromirzak/nibbl
