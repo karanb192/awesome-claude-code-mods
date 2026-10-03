@@ -19,6 +19,7 @@ abhibansal60/claude-mods
 AbysmalBiscuit/dotfiles
 achimala/claude-toons
 adamholter/claude-subway-surfers
+agentic-workbench/agent-quick-menu
 agentopology/agentopology
 ahastudio/til
 ahbanavi/claude-mods

@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-03T06:11:02.259Z",
   "claudeVersion": "2.1.288",
-  "repos": 872,
+  "repos": 873,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -114570,6 +114570,110 @@
       "stars": 0,
       "pushedAt": "2026-10-03T08:16:15Z",
       "createdAt": "2026-10-03T08:16:05Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "agentic-workbench/agent-quick-menu:.",
+      "repo": "agentic-workbench/agent-quick-menu",
+      "path": ".",
+      "sourceCommit": "c3b024f5b9043db06a3813d2e8dba7e28af9b41d",
+      "name": "agent-quick-menu",
+      "description": "A pane and prompt band for plugin commands declared in quick-menu.json, plus plugin and Claude Code settings exposed through /config.",
+      "author": "dasganni",
+      "homepage": "https://github.com/agentic-workbench/agent-quick-menu",
+      "url": "https://github.com/agentic-workbench/agent-quick-menu",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./quick-menu.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "plugin.register",
+          "matcher": {}
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "menu"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "quick-menu"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.now",
+        "$.command.list",
+        "$.command.register",
+        "$.command.run",
+        "$.config.list",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.settings.read",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.close",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.288",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "drives Claude",
+          "reads files",
+          "reads env vars",
+          "reads settings",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Pane",
+        "AbovePrompt"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-03T13:45:43Z",
+      "createdAt": "2026-10-03T09:40:41Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main"

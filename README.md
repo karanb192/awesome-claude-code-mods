@@ -15,7 +15,7 @@ This collection automatically discovers public mod repositories and shows what C
 [![Browse all mods](assets/browse-mods.svg)](https://mods.aidojo.si/)
 
 <!-- stats:start -->
-**1017 mods** · Last scanned 2026-10-03.
+**1018 mods** · Last scanned 2026-10-03.
 <!-- stats:end -->
 
 ![Browsing a GitHub pull request beside a Claude Code conversation using terminal-browser](assets/terminal-browser-demo.gif)
