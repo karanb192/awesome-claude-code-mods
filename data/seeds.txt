@@ -15,3 +15,4 @@ nuromirzak/nibbl
 augbastos/afkswitch
 scasella/claude-flightdeck
 pawandeepdhall/claude-mods
+saiharsha03/clawd-spinner

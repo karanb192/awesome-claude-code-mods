@@ -63,6 +63,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [Mindful-Claude](https://github.com/halluton/Mindful-Claude) - A guided breathing band above the prompt while a turn runs; the spinner counts the breath with you.
 - [cc-arcade](https://github.com/sezaakgun/cc-arcade) - Nine games above the prompt, paused when Claude finishes, plus a pet fed by the tests, commits and edits Claude makes.
 - [claude-games](https://github.com/mohi-devhub/claude-games) - A dodge race, Breakout, a dino runner and a side-scrolling shooter that react to Claude's real edits and commits.
+- [clawd-spinner](https://github.com/saiharsha03/clawd-spinner) - Clawd acts out the spinner word above the terminal spinner line while Claude works, with its own scene for each of the 189 words, drawn locally with no model calls or network.
 - [cc-pokedex](https://github.com/deonmenezes/claude-mods-pokedex) - Wild creatures appear above the prompt based on where your prompt leads.
 - [nibbl](https://github.com/nuromirzak/nibbl) - A pixel pet above the prompt that drops a bug when a tool fails and eats it when a test, lint or build passes; syncs event types and times to its own server.
 - [time](https://github.com/diegorv/claude-functions-hook/tree/main/plugins/time) - The time you sent each message, drawn above it.
