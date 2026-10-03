@@ -17,7 +17,13 @@ A daily scan searches GitHub code for repositories that mention `CLAUDE_CODE_ENA
 
 3. Run `npm test` and `npm run lint`. Both must pass.
 
-PR checks scan submitted seeds alongside the committed candidates. A newly added seed must clone successfully and contain mod plugins that validate; warnings are allowed. Global search runs in scheduled scans, not in PR checks. Merging a seed starts a scan that includes it.
+PR checks scan newly added seeds. A new seed must clone successfully and contain mod plugins that validate; warnings are allowed. A pull request that changes `tools/`, the package files or the workflows rescans every committed candidate alongside the seeds, so tooling changes are checked against the whole collection. Global search runs in scheduled scans, not in PR checks.
+
+After a seed PR is merged, the `publish approved seeds` workflow scans approved repositories that have no published inventory entries. It adds all their mod entries, regenerates the catalogue and website, checks the result, then opens and squash-merges a dedicated publication PR automatically. It requests a GitHub Pages build explicitly. No second maintainer merge is needed for successful additions. A repository already represented in the inventory follows the normal refresh workflow.
+
+This path preserves existing entries and the last full-scan date. It uses the published validator version, so adding a seed does not imply that the whole catalogue was revalidated. A seed whose repository fails to clone, cannot be fully inspected, fails validation, has a failing marketplace, carries a UI compatibility warning, looks like a duplicate of a listed mod or would change an existing duplicate decision is left out of that publication; the other seeds still publish. Left-out seeds are listed in the run summary and in the publication PR, and they stay pending: a scheduled retry runs every three hours at minute 23, and a later main push also retries them. Fix the repository or remove the seed to clear them. The workflow reads current main, so coalesced pushes do not lose earlier unpublished seeds.
+
+Publication runs share a separate queue and never scan in parallel with each other. When several contributor PRs merge, the active run reuses its completed scan on the latest main and repeats generation and checks if needed. The next queued run reads current main and scans all remaining unpublished seeds together. Already published seeds are skipped. A full scan can still run independently; its newer records are preserved. Eight consecutive main changes during publication stop that run for a later retry.
 
 Missing plugins stay listed as unverified during scheduled scans. Weekly retirement proposals require a fresh successful checkout and record the revision used to establish that a hook module is gone. Clone failures and failed validation are not removal evidence. Curated descriptions need a separate human review when an upstream project changes.
 
@@ -65,6 +71,8 @@ node tools/changed.mjs   # exit 0 if the scan differs from HEAD on anything but 
 The landing page is generated from `data/mods.json`. Edit `tools/site.mjs`, `tools/site.css` or `tools/site-client.js`, then run `npm run render`. Do not edit `docs/index.html` directly.
 
 Each scheduled scan runs this renderer and includes the updated README count, catalogue, landing page and public JSON in the same automated scan pull request. Merging that pull request publishes the collection through GitHub Pages. No separate website edit or pull request is needed for new scanned mods.
+
+Approved seed additions use the separate automatic publication path above. Broader discovery, updates to existing mods and retirement proposals still require review of their generated PRs.
 
 Search, filtering and sorting run in the browser; the full collection remains readable without JavaScript. Search stays above the results while browsing. The page follows the system's light or dark appearance through `prefers-color-scheme`.
 

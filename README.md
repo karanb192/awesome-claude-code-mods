@@ -15,7 +15,7 @@ This collection automatically discovers public mod repositories and shows what C
 [![Browse all mods](assets/browse-mods.svg)](https://mods.aidojo.si/)
 
 <!-- stats:start -->
-**1014 mods** · Last scanned 2026-10-03.
+**1016 mods** · Last scanned 2026-10-03.
 <!-- stats:end -->
 
 ![Browsing a GitHub pull request beside a Claude Code conversation using terminal-browser](assets/terminal-browser-demo.gif)
@@ -147,6 +147,8 @@ The **[full catalogue](catalogue.md#every-mod-the-scanner-found)** includes each
 ## How the scan works
 
 A scheduled scan searches GitHub for mod repositories, checks their plugin source with `claude plugin validate`, and proposes updates for review. The website and catalogue use the same scan data. Published results change when the update PR is merged.
+
+Merging a seed submission also starts a separate publication check. New repositories with passing checks appear automatically after their generated update is merged by the workflow and the website deploys. Existing listings stay unchanged. A seed with validation failures or new review warnings stays unpublished and is reported in the workflow run; other seeds still publish. [Seed publication details](contributing.md#open-a-pull-request).
 
 Discovery depends on GitHub's index and our search patterns, so a new mod may not appear immediately. A scan usually picks up a repository with the `claude-code-mod` topic within a few hours of its next push, and the mod appears once that scan's pull request is merged. [How discovery and validation work](catalogue.md#how-the-scan-works) covers access levels, warnings, retry handling and removal reviews.
 

@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-03T06:11:02.259Z",
   "claudeVersion": "2.1.288",
-  "repos": 869,
+  "repos": 871,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -114256,6 +114256,171 @@
       "pushedAt": "2026-09-30T11:50:10Z",
       "createdAt": "2026-09-21T03:30:37Z",
       "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "helenkwok/gsd-status-mod:.",
+      "repo": "helenkwok/gsd-status-mod",
+      "path": ".",
+      "sourceCommit": "4ef304f0fcb7ce41ed9b1ade2387ff037393c2ce",
+      "name": "gsd-status-mod",
+      "description": "A Claude Code mod that shows GSD phase, status and plan progress above the prompt, read from .planning/STATE.md.",
+      "author": "Helen Kwok",
+      "homepage": "https://github.com/helenkwok/gsd-status-mod",
+      "url": "https://github.com/helenkwok/gsd-status-mod",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./gsd-status.mjs"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "PromptHint"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.fs.read",
+        "$.prompt.suggest",
+        "$.ui.invalidate",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.288",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "helenkwok-mods",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "writes the prompt box",
+          "reads files",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AbovePrompt",
+        "PromptHint"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-03T05:37:50Z",
+      "createdAt": "2026-10-03T04:45:41Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "adamholter/claude-subway-surfers:.",
+      "repo": "adamholter/claude-subway-surfers",
+      "path": ".",
+      "sourceCommit": "7c6002bd64589f683144a9f3969c0c8a53ededf9",
+      "name": "subway-video",
+      "description": "Loop Subway Surfers gameplay in a Claude side pane while Claude works.",
+      "author": "Adam Holter",
+      "homepage": "https://github.com/adamholter/claude-subway-surfers",
+      "url": "https://github.com/adamholter/claude-subway-surfers",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "subway"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "subway-video"
+          }
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.command.register",
+        "$.fs.read",
+        "$.ui.close",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.288",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads files",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-02T14:16:58Z",
+      "createdAt": "2026-10-02T14:16:08Z",
+      "license": null,
       "archived": false,
       "defaultBranch": "main"
     }

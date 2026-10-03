@@ -22,6 +22,7 @@ import { metaBatch } from './meta.mjs'
 const { values: args } = parseArgs({ options: {
   clones: { type: 'string' }, repos: { type: 'string' }, out: { type: 'string' },
   required: { type: 'string' }, retire: { type: 'boolean', default: false },
+  'include-checked': { type: 'boolean', default: false },
 } })
 const CLONES = args.clones ?? mkdtempSync(join(tmpdir(), 'acm-clones-'))
 const REPOS = args.repos ?? 'data/repos.txt'
@@ -158,6 +159,8 @@ applyDuplicates(mods, readDuplicates())
 for (const pair of suspectDuplicates(mods)) console.log(`possible duplicate: ${pair.join(' and ')} share an owner and a name; if they are one mod, add the pair to data/duplicates.txt`)
 mods.sort((a, b) => (b.stars ?? -1) - (a.stars ?? -1) || a.id.localeCompare(b.id))
 mkdirSync(dirname(OUT), { recursive: true })
-writeFileSync(OUT, JSON.stringify({ generated: new Date().toISOString(), claudeVersion, repos: readRepos(REPOS).length, mods }, null, 2) + '\n')
+writeFileSync(OUT, JSON.stringify({ generated: new Date().toISOString(), claudeVersion, repos: readRepos(REPOS).length, mods,
+  ...(args['include-checked'] ? { checkedRepos: [...checkedRepos.keys()] } : {}),
+}, null, 2) + '\n')
 const real = mods.filter(x => x.kind === 'mod')
 console.log(`\n${mods.length} plugins with hook modules in ${repos.length} repos; ${real.length} are mods (rest: builtin, mirror, fixture, duplicate, catalog). Written to ${OUT}`)

@@ -1,0 +1,66 @@
+name: publish approved seeds
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "23 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  pages: write
+
+concurrency:
+  group: publish-approved-seeds
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Find approved seeds missing from the published inventory
+        id: seeds
+        run: |
+          node tools/seed-publication.mjs --prepare --repos "$RUNNER_TEMP/seeds.txt"
+      - name: Install the published validator version
+        if: steps.seeds.outputs.pending == 'true'
+        env:
+          VERSION: ${{ steps.seeds.outputs.version }}
+        run: |
+          curl -fsSL https://claude.ai/install.sh | bash -s -- "$VERSION"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - run: npm ci
+        if: steps.seeds.outputs.pending == 'true'
+      - name: Scan only unpublished seeds
+        if: steps.seeds.outputs.pending == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node tools/scan.mjs --repos "$RUNNER_TEMP/seeds.txt" --include-checked --out "$RUNNER_TEMP/seed-scan.json"
+      - name: Install browser checks
+        if: steps.seeds.outputs.pending == 'true'
+        run: npx playwright install --with-deps chromium
+      - name: Publish against current main, reusing the scan if main advances
+        if: steps.seeds.outputs.pending == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash tools/publish-seeds.sh
+      - name: Request publication when Pages is behind main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          main_sha=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)
+          build=$(gh api "repos/$GITHUB_REPOSITORY/pages/builds/latest")
+          if [ "$(jq -r .commit <<< "$build")" != "$main_sha" ] || [ "$(jq -r .status <<< "$build")" = "errored" ]; then
+            gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"
+          fi

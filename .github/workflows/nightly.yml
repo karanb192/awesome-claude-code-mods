@@ -1,15 +1,12 @@
 name: nightly scan
 
-# The 22:30 run is the full GitHub code search. The three-hourly runs and pushes that change
-# seeds skip it. They rescan known candidates and seeds, plus repositories pushed since the
-# last scan that repository search finds, so a new mod does not wait for the crawl.
+# The 22:30 run is the full GitHub code search. The three-hourly runs rescan known candidates
+# and seeds, plus repositories pushed since the last scan that repository search finds. Seed
+# additions publish separately (publish-seeds.yml) without waiting for either.
 on:
   schedule:
     - cron: "30 22 * * *"
     - cron: "0 1-19/3 * * *"
-  push:
-    branches: [main]
-    paths: ["data/seeds.txt"]
   workflow_dispatch:
     inputs:
       force:
@@ -21,17 +18,18 @@ on:
         type: boolean
         default: false
   pull_request:
-    paths: ["tools/**", "data/seeds.txt", "package.json", "package-lock.json", ".github/workflows/nightly.yml", ".github/workflows/weekly-retirement.yml"]
+    paths: ["tools/**", "data/seeds.txt", "package.json", "package-lock.json", ".github/workflows/nightly.yml", ".github/workflows/weekly-retirement.yml", ".github/workflows/publish-seeds.yml"]
 
 permissions:
   contents: write
   pull-requests: write
 
-# One scan at a time: runs share the search token and the scan branch, and two searches in the
-# same minute rate-limit each other into hints of ten minutes and more.
+# One scan at a time: scheduled and manual runs share the search token and the scan branch, and
+# two searches in the same minute rate-limit each other into hints of ten minutes and more. Pull
+# request checks get a group per PR, so a queued check is not cancelled by the next scan.
 concurrency:
-  group: scan
-  cancel-in-progress: false
+  group: ${{ github.event_name == 'pull_request' && format('scan-pr-{0}', github.event.pull_request.number) || 'scan' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   scan:
@@ -90,7 +88,20 @@ jobs:
         with:
           path: ${{ runner.temp }}/discovery
           key: discovery-${{ github.run_id }}-${{ github.run_attempt }}
-      - run: node tools/candidates.mjs --base "$PR_BASE"
+      # A pull request that only adds seeds scans those seeds; publication validates them again
+      # after the merge. Tooling changes still rescan every committed candidate.
+      - name: Choose the pull request scan scope
+        id: scope
+        if: github.event_name == 'pull_request'
+        env:
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          if git diff --name-only "$PR_BASE" HEAD | grep -qE '^(tools/|package\.json|package-lock\.json|\.github/)'; then
+            echo "args=" >> "$GITHUB_OUTPUT"
+          else
+            echo "args=--seeds-only" >> "$GITHUB_OUTPUT"
+          fi
+      - run: node tools/candidates.mjs --base "$PR_BASE" ${{ steps.scope.outputs.args }}
         if: github.event_name == 'pull_request'
         env:
           PR_BASE: ${{ github.event.pull_request.base.sha }}

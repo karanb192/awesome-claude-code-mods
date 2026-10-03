@@ -2,7 +2,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { search as discover } from './discover.mjs'
 import { createSearchRequest } from './github-search.mjs'
-import { mergeRepos, newSeeds } from './candidates.mjs'
+import { mergeRepos, newSeeds, prScanRepos } from './candidates.mjs'
 import { reconcile, checkRequired } from './inventory.mjs'
 import { execFileSync, spawnSync } from 'node:child_process'
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, chmodSync } from 'node:fs'
@@ -81,6 +81,9 @@ test('rate limits respect server hints, retry exhaustion fails and auth errors s
 test('candidate history survives a search omission and PR seeds are case-insensitive', () => {
   assert.deepEqual(mergeRepos(['old/mod'], ['New/Mod'], ['new/mod']), ['New/Mod', 'old/mod'])
   assert.deepEqual(newSeeds(['old/mod'], ['OLD/mod', 'new/mod']), ['new/mod'])
+  assert.deepEqual(prScanRepos(['old/mod'], ['old/mod', 'new/mod'], ['new/mod'], true), ['new/mod'])
+  assert.deepEqual(prScanRepos(['old/mod'], ['old/mod', 'new/mod'], ['new/mod'], false), ['new/mod', 'old/mod'])
+  assert.deepEqual(prScanRepos(['old/mod'], ['old/mod'], [], true), ['old/mod'])
 })
 
 const prior = { id: 'old/mod:.', repo: 'old/mod', kind: 'mod', validate: { status: 'passed', claudeVersion: 'old' }, calls: ['$.fs.read'] }

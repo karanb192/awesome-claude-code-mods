@@ -27,11 +27,17 @@ export function newSeeds(before, after) {
   return mergeRepos(after).filter(repo => !known.has(repo.toLowerCase()))
 }
 
+// A seeds-only pull request scans just its new seeds; anything else rescans every candidate.
+export function prScanRepos(candidates, seeds, added, seedsOnly) {
+  return seedsOnly && added.length ? added : mergeRepos(candidates, seeds)
+}
+
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const { values } = parseArgs({ options: { base: { type: 'string' } } })
+  const { values } = parseArgs({ options: { base: { type: 'string' }, 'seeds-only': { type: 'boolean', default: false } } })
   if (!values.base || !/^[a-f0-9]{40}$/.test(values.base)) throw new Error('a full PR base commit is required')
   const seeds = readRepos('data/seeds.txt')
   const before = parseRepos(execFileSync('git', ['show', `${values.base}:data/seeds.txt`], { encoding: 'utf8' }))
-  writeFileSync('data/pr-repos.txt', mergeRepos(readRepos('data/repos.txt'), seeds).join('\n') + '\n')
-  writeFileSync('data/pr-required.txt', newSeeds(before, seeds).join('\n') + '\n')
+  const added = newSeeds(before, seeds)
+  writeFileSync('data/pr-repos.txt', prScanRepos(readRepos('data/repos.txt'), seeds, added, values['seeds-only']).join('\n') + '\n')
+  writeFileSync('data/pr-required.txt', added.join('\n') + '\n')
 }
