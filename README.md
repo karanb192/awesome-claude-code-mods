@@ -83,6 +83,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [intermission](https://github.com/jarrodwatts/intermission) - Doom deathmatch in a Ghostty or kitty pane on macOS 15+, returning you to Claude when it finishes or needs input; downloads and runs Odamex and connects to a shared game server.
 - [spinner](https://github.com/hoobnn/hoobnn-agent-mods/tree/main/claude-code/spinner) - Pixel-art scenes above the prompt while a turn runs, in fourteen themes, with a pet that follows the running tool, levels up and gets a confetti finale.
 - [hitokoto](https://github.com/hoobnn/hoobnn-agent-mods/tree/main/claude-code/hitokoto) - A quote fetched from the Hitokoto (一言) API above the prompt with its source, refreshed on a timer, once a day, per session or per prompt.
+- [meanwhile](https://github.com/njp-coder/meanwhile) - One question a day above the prompt, written by a daily Haiku call from the Hacker News front page and new GitHub repos, with the answer after 40 seconds of Claude working or on Show answer, and `/wrapped` for a share card of the day.
 
 ## Git, pull requests and CI
 
