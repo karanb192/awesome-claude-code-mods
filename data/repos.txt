@@ -18,6 +18,7 @@ a252937166/cc-mod
 abhibansal60/claude-mods
 AbysmalBiscuit/dotfiles
 achimala/claude-toons
+adamholter/claude-subway-surfers
 agentopology/agentopology
 ahastudio/til
 ahbanavi/claude-mods
