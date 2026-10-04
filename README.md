@@ -116,6 +116,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [skins](https://github.com/hellosverre/claude-skins) - Restyles the transcript with themed tool rows, reply gutters and spinner words, and draws tables, code, diffs and shell output as animated cards on the desktop.
 - [mdview](https://github.com/xuanji86/claude-mdview) - Click a markdown path in the conversation to read the file rendered in a side pane with contents, find and pictures, or in Warp's own viewer, and point at any block to have Claude edit it.
 - [gfm-render](https://github.com/briangtn/claude-gfm-render) - Draws GitHub alerts, task lists, strikethrough and Mermaid diagrams in Claude's replies, as box art in the terminal and SVG on the desktop.
+- [ko-ui](https://github.com/moduvoice/claude-code-ko-ui) - Shows slash-command descriptions, `/config` rows, spinner words, tool-call summaries and some transcript lines in Korean from a static dictionary, with no model calls or network.
 
 ## Agents and workflows
 
