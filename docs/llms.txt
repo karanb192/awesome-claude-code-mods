@@ -1,8 +1,8 @@
 # Awesome Claude Code Mods
 
-> A community list of 1024 Claude Code mods (function hooks), scanned from public GitHub repositories with what each mod can read, write, run or send over the network. An independent scan, not an official Anthropic directory. Last scanned 2026-10-03 on Claude Code 2.1.288.
+> A community list of 1740 Claude Code mods (function hooks), scanned from public GitHub repositories with what each mod can read, write, run or send over the network. An independent scan, not an official Anthropic directory. Last scanned 2026-10-04 on Claude Code 2.1.289.
 
-Mods are Claude Code plugins whose JavaScript or TypeScript hooks run inside a session. They need Claude Code 2.1.287 or later and are on by default. Each entry records the hooks and API calls reported by `claude plugin validate`. Access levels describe the widest reach of those calls and are not safety ratings. Mods per level: L0 Draws & remembers: 113, L1 Reads files: 223, L2 Writes or runs: 520, L3 Uses the network: 168.
+Mods are Claude Code plugins whose JavaScript or TypeScript hooks run inside a session. They need Claude Code 2.1.287 or later and are on by default. Each entry records the hooks and API calls reported by `claude plugin validate`. Access levels describe the widest reach of those calls and are not safety ratings. Mods per level: L0 Draws & remembers: 215, L1 Reads files: 377, L2 Writes or runs: 909, L3 Uses the network: 239.
 
 ## Catalogue
 
@@ -30,14 +30,14 @@ Mods are Claude Code plugins whose JavaScript or TypeScript hooks run inside a s
 - [memory-lens](https://github.com/yonatangross/orchestkit/tree/main/mods/memory-lens): Recalls the few memories related to each prompt: one line for the human, one context entry for the model. Local files only, no network on the hot path.
 - [promote-lights](https://github.com/yonatangross/orchestkit/tree/main/mods/promote-lights): Shows CI status lights above the prompt while a promote PR (base main) is open. One REST page per minute, PR-open only. Cancelled is not-pass.
 - [secrets-veil](https://github.com/yonatangross/orchestkit/tree/main/mods/secrets-veil): Masks secret values in tool results before the model reads them: named vendor variables, value-shape patterns, and high-entropy tokens. No reveal path.
+- [shunt](https://github.com/pleaseai/shunt/tree/main/plugins/shunt): A Claude Mod for the shunt gateway: /shunt:usage reads the shared account pool's remaining headroom and reset times from shunt's GET /usage, so you can see how…
 - [compact-adviser](https://github.com/kunchenguid/compact-adviser/tree/main/packages/claude-mod): Suggests (or, opt-in, runs) /compact at a completed checkpoint, judged by TypeSafe Jev. Its hooks module activates only when CLAUDE_CODE_ENABLE_FUNCTION_HOOKS…
 - [multi-core](https://github.com/greenpolo/cc-multi-cli-plugin/tree/main/plugins/multi-core): Claude Code plugin: use ChatGPT (Codex), Cursor, OpenCode Zen, and Antigravity models inside one Claude Code session. Switch with /model, delegate to named nat…
-- [shunt](https://github.com/pleaseai/shunt/tree/main/plugins/shunt): A Claude Mod for the shunt gateway: /shunt:usage reads the shared account pool's remaining headroom and reset times from shunt's GET /usage, so you can see how…
 - [fast-jev-output](https://github.com/tamaratran/jev-pruner): Trim long Bash output with Jev before the model sees it (Claude Code plugin)
 - [jev-eval-observer](https://github.com/tamaratran/jev-pruner/tree/main/evals/observer): Pass-through evaluation instrumentation; never changes tool results.
+- [hal-grammar-check](https://github.com/vinta/hal-9000/tree/main/plugins/hal-grammar-check): Grammar-check your prompt as you type, shown above the prompt box
+- [operator](https://github.com/aerovato/operator-memory/tree/main/packages/claude-code): Durable project and user memory for agent-driven development in Claude Code.
 - [lane-stack](https://github.com/VKirill/claude-lane-stack/tree/main/plugins/lane-stack): Solo PM conveyor for Claude Code: orchestrator agents, lane playbooks, onboard and resume commands.
-- [winnow](https://github.com/GhalebDweikat/winnow): A calibrated context sieve for Claude Code. Every large tool result is judged by a System One model before it enters context; irrelevant blocks are replaced wi…
-- [genesis-web-override](https://github.com/WingedGuardian/GENesis-AGI/tree/main/plugins/genesis-web-override): Answers Claude Code's built-in WebSearch with Genesis's web_search chain, falling back to the built-in on any failure. Needs CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=…
 
 ## Official documentation
 

@@ -1,6 +1,899 @@
 {
-  "searchedThrough": "2026-10-03T04:32:47Z",
-  "checked": {},
-  "deferred": [],
-  "pending": []
+  "searchedThrough": "2026-10-04T07:53:44.084Z",
+  "checked": {
+    "3dcom2711/thrunt-god": "2026-10-04T07:12:19Z",
+    "alaas4989/cc-update-all": "2026-10-04T07:10:27Z",
+    "amber-notes/amber-notes": "2026-10-04T06:06:50Z",
+    "angouanga/modellar-plugins": "2026-10-04T06:13:08Z",
+    "ardellashuddery616/modularity": "2026-10-04T07:12:59Z",
+    "aymannaim822-create/claude-code-source": "2026-10-04T07:14:18Z",
+    "baber002/mortgage-pricing-plugin-blueprint": "2026-10-04T07:26:32Z",
+    "bbk-man/claude-code-owasp": "2026-10-04T07:01:45Z",
+    "bbsbs7617-png/claude-usage-report": "2026-10-04T07:14:31Z",
+    "bharathnunni/pdf-quality-inspector": "2026-10-04T05:35:53Z",
+    "blauwtje/exo": "2026-10-04T06:13:29Z",
+    "boykiniaelaeisguineensis941/sync-agents-settings": "2026-10-04T07:11:08Z",
+    "bridgepartnershoe860/harness-engineering-from-cc-to-ai-coding": "2026-10-04T07:13:48Z",
+    "briefless-orgasm922/claude-code-t8": "2026-10-04T07:14:16Z",
+    "bryceewatson/honestweek": "2026-10-04T06:23:18Z",
+    "capsulate-want802/macbroom": "2026-10-04T07:16:59Z",
+    "carlitanonenzymatic493/claude-code-recap": "2026-10-04T07:20:39Z",
+    "carrick-tools/carrick": "2026-10-04T05:48:28Z",
+    "combinatrix-ai/claude-models-list": "2026-10-04T06:00:40Z",
+    "cristyillusional179/autoresearch-claude-code": "2026-10-04T07:09:17Z",
+    "curie-eng/curie": "2026-10-04T07:44:58Z",
+    "derio-net/super-fr": "2026-10-04T06:29:09Z",
+    "drexthealpha/knos": "2026-10-04T06:04:48Z",
+    "edmonds-commerce-limited/claude-code-hooks-daemon": "2026-10-04T07:33:25Z",
+    "educationinsightofficial/claude-warmup": "2026-10-04T07:13:47Z",
+    "el-hamdaoui-othmane/agent-reachout": "2026-10-04T06:58:46Z",
+    "emeraldleaf/okl": "2026-10-04T06:24:45Z",
+    "expect8iondev/claude-pi": "2026-10-04T07:06:54Z",
+    "factorixsooth118/claude-code-analysis": "2026-10-04T07:13:43Z",
+    "fasfg5t5/agent-orchestration": "2026-10-04T06:57:55Z",
+    "frenyermmlmmk/claude-cognitive": "2026-10-04T06:57:25Z",
+    "fstandhartinger/auto-model-router": "2026-10-04T06:10:21Z",
+    "haabe/mycelium": "2026-10-04T07:48:05Z",
+    "halftime-apricotsauce647/claude-research": "2026-10-04T07:11:44Z",
+    "hewieextracellular787/humanize-ai-writing": "2026-10-04T07:19:40Z",
+    "idean3885/claude-ops-agent": "2026-10-04T05:34:07Z",
+    "ifrit98/explainer": "2026-10-04T07:23:38Z",
+    "incorrect-limp303/get-shit-done": "2026-10-04T07:10:53Z",
+    "itmakshi-del/banana-claude": "2026-10-04T07:09:46Z",
+    "jakeselby/model-citizen": "2026-10-04T06:42:03Z",
+    "javimoh1989/modelo-empresa-claude": "2026-10-04T06:11:10Z",
+    "johncli7941/claude-skill-video-transcribe": "2026-10-04T07:13:00Z",
+    "juscribe/jus-skills": "2026-10-04T06:55:24Z",
+    "kitfunso/hippo-memory": "2026-10-04T06:31:54Z",
+    "ksx9797/security-sweep-plugin": "2026-10-04T07:14:40Z",
+    "liendeadline/skills": "2026-10-04T07:16:04Z",
+    "lithometric/collide-plugin": "2026-10-04T07:37:27Z",
+    "lk462457-cyber/pythonic-design-auditor": "2026-10-04T05:34:27Z",
+    "loveless-cartographer/lsp-flake": "2026-10-04T07:25:07Z",
+    "mathisk2095/jko-claude-plugins": "2026-10-04T07:10:09Z",
+    "millerlai/claude-all-in-one": "2026-10-04T06:38:42Z",
+    "muaksook17/ultracodex": "2026-10-04T07:19:49Z",
+    "nyatakuibnurosada/glm-switch": "2026-10-04T06:59:17Z",
+    "odessaspecial486/claude-planning-tool": "2026-10-04T07:21:45Z",
+    "othmane55/claude-collective-intelligence": "2026-10-04T06:54:12Z",
+    "pitimon/8-habit-ai-dev": "2026-10-04T05:57:07Z",
+    "plrlr/mc-autopilot": "2026-10-04T06:59:49Z",
+    "popeye46/pwp-plugin": "2026-10-04T07:06:47Z",
+    "pragmatical-transshipment598/claude-code-workflows": "2026-10-04T07:12:11Z",
+    "prem23247/spec-forge": "2026-10-04T06:29:25Z",
+    "psychological-ruble517/homeassistant-claude-kit": "2026-10-04T07:12:41Z",
+    "ptd1012/jamdesk-doc-weaver": "2026-10-04T05:43:43Z",
+    "rainflymadrilene370/deepseek-harness-eac": "2026-10-04T07:24:12Z",
+    "randravishing966/claw-code": "2026-10-04T07:13:49Z",
+    "renalpelvisdeinocheirus70/ozor-skills": "2026-10-04T07:11:52Z",
+    "renezander030/capcut-cli": "2026-10-04T06:19:48Z",
+    "ripsawjp/shell-team": "2026-10-04T06:13:16Z",
+    "ronnieiscoo/bootstrap-expert": "2026-10-04T06:55:11Z",
+    "rvenutolo/claude-pgrep-pkill-guard": "2026-10-04T07:29:13Z",
+    "shalintripathi/saas-marketing-agents": "2026-10-04T06:37:21Z",
+    "sleeknessbounder869/miniclaudecode": "2026-10-04T07:14:03Z",
+    "spirounkempt95/snifftest": "2026-10-04T07:27:19Z",
+    "summitifms/structify-dev-flow": "2026-10-04T06:32:23Z",
+    "tbee6061-ctrl/studio-live-window-capture": "2026-10-04T06:31:44Z",
+    "tech-guru254/spec-weaver": "2026-10-04T06:33:07Z",
+    "temucopetronius228/collection-claude-code-source-code": "2026-10-04T07:13:44Z",
+    "thedotmack/claude-mem": "2026-10-04T06:07:13Z",
+    "tiffanygrand729/claude-code-sound-notification": "2026-10-04T07:10:46Z",
+    "transcultural-papering633/codex-pets": "2026-10-04T07:16:18Z",
+    "tsikounet/claude-dnd": "2026-10-04T07:07:37Z",
+    "twelfth-ai/twelfth-mcp": "2026-10-04T05:31:57Z",
+    "vorski-imagineering/gogogo": "2026-10-04T06:29:08Z",
+    "wewpellex21/code-sensei": "2026-10-04T07:03:04Z",
+    "yikaiwang1/claude-compact-archive": "2026-10-04T05:51:16Z",
+    "youneszt/agentic-coding-standards": "2026-10-04T07:01:33Z"
+  },
+  "deferred": [
+    {
+      "repo": "aarontzeng/dev-lead",
+      "branch": "master",
+      "pushedAt": "2026-10-04T05:58:33Z"
+    },
+    {
+      "repo": "kgaidev/kgai",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:25:37Z"
+    },
+    {
+      "repo": "SkYn3t-Lab/skinflint",
+      "branch": "main",
+      "pushedAt": "2026-10-04T05:31:54Z"
+    },
+    {
+      "repo": "s977043/PlanGate",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:53:39Z"
+    },
+    {
+      "repo": "kenspc/kenspc-claude-plugin",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:16:09Z"
+    },
+    {
+      "repo": "vineetu/simple-host",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:08:35Z"
+    },
+    {
+      "repo": "shmulikdav/adlc-skills",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:12:45Z"
+    },
+    {
+      "repo": "CalmNavigator/Chief-Architect-2026",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:27:14Z"
+    },
+    {
+      "repo": "estevanhernandez-stack-ed/vibe-plugins",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:07:35Z"
+    },
+    {
+      "repo": "dariorapisardi/parlor.sh",
+      "branch": "main",
+      "pushedAt": "2026-10-04T05:12:46Z"
+    },
+    {
+      "repo": "hiendang7613/ihav-asd-ste100",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:16:36Z"
+    },
+    {
+      "repo": "sksizer/marketplace-sdlc",
+      "branch": "main",
+      "pushedAt": "2026-10-04T05:26:05Z"
+    },
+    {
+      "repo": "ShousenZHANG/oss-pr-workflow",
+      "branch": "main",
+      "pushedAt": "2026-10-04T05:52:38Z"
+    },
+    {
+      "repo": "developer-duno/claude-code-refactor",
+      "branch": "main",
+      "pushedAt": "2026-10-04T05:35:51Z"
+    },
+    {
+      "repo": "trayoai/trayo-plugin",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:03:17Z"
+    },
+    {
+      "repo": "seanjr2847/seo-miner",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:36:34Z"
+    },
+    {
+      "repo": "allianceoptima/claude-theme-studio",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:10:04Z"
+    },
+    {
+      "repo": "kamenkurtev/ui-consistency",
+      "branch": "main",
+      "pushedAt": "2026-10-04T05:15:31Z"
+    },
+    {
+      "repo": "augusto-romero-arango/eda-evsourcing-azure-harness",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:47:19Z"
+    },
+    {
+      "repo": "yodakeisuke/claudelingo",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:17:35Z"
+    },
+    {
+      "repo": "DustinVerzal/magic-router",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:58:02Z"
+    },
+    {
+      "repo": "PriceDotWin/pricewin-agent-plugin",
+      "branch": "main",
+      "pushedAt": "2026-10-04T05:52:28Z"
+    },
+    {
+      "repo": "mepotts/agent-operating-kit",
+      "branch": "main",
+      "pushedAt": "2026-10-04T05:35:25Z"
+    },
+    {
+      "repo": "himazintom/claude-code-sea",
+      "branch": "main",
+      "pushedAt": "2026-10-04T05:12:27Z"
+    },
+    {
+      "repo": "lucas-moont/batcave",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:48:21Z"
+    },
+    {
+      "repo": "gilebehnam/whalory",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:25:28Z"
+    },
+    {
+      "repo": "Daeguk-Sun/dcNess",
+      "branch": "main",
+      "pushedAt": "2026-10-04T05:59:12Z"
+    },
+    {
+      "repo": "9uiLe/plugins",
+      "branch": "master",
+      "pushedAt": "2026-10-04T05:20:51Z"
+    },
+    {
+      "repo": "xmejkal/spark",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:26:04Z"
+    },
+    {
+      "repo": "cassc/claude-skills",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:10:11Z"
+    },
+    {
+      "repo": "nemke82/claude-code-burnrate",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:27:26Z"
+    },
+    {
+      "repo": "Sanexxxx777/claude-cache-timer",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:25:03Z"
+    },
+    {
+      "repo": "apolenkov/claude-mods",
+      "branch": "master",
+      "pushedAt": "2026-10-04T07:47:40Z"
+    },
+    {
+      "repo": "theafh/ai-modules",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:43:48Z"
+    },
+    {
+      "repo": "wmkeza/claude-plugins",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:44:21Z"
+    },
+    {
+      "repo": "bodypas/claude-mods",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:17:50Z"
+    },
+    {
+      "repo": "soonavi/claude-mods",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:07:05Z"
+    },
+    {
+      "repo": "simplecore-inc/claude-mods",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:46:39Z"
+    },
+    {
+      "repo": "roy651/cc-plugins",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:19:48Z"
+    },
+    {
+      "repo": "gpr/claude-code-mods",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:53:15Z"
+    },
+    {
+      "repo": "Boom-Vitt/claude-mods-boombignose",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:51:22Z"
+    },
+    {
+      "repo": "Javimoh1989/modelo-empresa-claude",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:41:36Z"
+    },
+    {
+      "repo": "subashraja069-cmd/claude-code-boss-mode",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:13:37Z"
+    },
+    {
+      "repo": "KytioisaCat/playpen",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:39:17Z"
+    },
+    {
+      "repo": "Biggles10-claude/ai-game-mods",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:51:05Z"
+    },
+    {
+      "repo": "BoDUD/TFM2-League-Heroes",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:52:40Z"
+    },
+    {
+      "repo": "Prokopiy8247/Voxel-Village-3D-Model",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:41:57Z"
+    },
+    {
+      "repo": "griches/xcpane",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:44:41Z"
+    },
+    {
+      "repo": "hissain/FreeModelsForCline",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:38:44Z"
+    },
+    {
+      "repo": "IndustriAgents/MODBUS-MCP",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:09:32Z"
+    },
+    {
+      "repo": "sTomerG/agent-kit",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:13:07Z"
+    },
+    {
+      "repo": "zenstory-ai/video-recap-skills",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:42:40Z"
+    },
+    {
+      "repo": "JasonColapietro/suede-creator-skills",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:41:46Z"
+    },
+    {
+      "repo": "MIKOTOKAWAII25/local-ai-code-assistant",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:31:41Z"
+    },
+    {
+      "repo": "yotambraun/promptbeacon",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:34:17Z"
+    },
+    {
+      "repo": "emeraldleaf/okl",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:42:11Z"
+    },
+    {
+      "repo": "iroha924/sphica",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:52:24Z"
+    },
+    {
+      "repo": "beepboop2025/financial-evidence-skills",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:35:41Z"
+    },
+    {
+      "repo": "maximus0411/BorisChernyClaudeMarkdown",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:05:47Z"
+    },
+    {
+      "repo": "nbplugins/NetbeansPluginClaudeCodeGui",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:52:33Z"
+    },
+    {
+      "repo": "CorvinLabs/CorvinOS",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:08:34Z"
+    },
+    {
+      "repo": "Frihet-io/frihet-mcp",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:01:51Z"
+    },
+    {
+      "repo": "Mirannonarbitrable290/agentic-kaggle-skill",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:16:01Z"
+    },
+    {
+      "repo": "Ashikparvez89/larouex-fullstack-plugin",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:47:25Z"
+    },
+    {
+      "repo": "nirajkyros-Editor/flow-gated-planning",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:00:11Z"
+    },
+    {
+      "repo": "Fiskopoi/outline-driven-toolkit",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:44:51Z"
+    },
+    {
+      "repo": "socialbu/socialbu-agent",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:06:40Z"
+    },
+    {
+      "repo": "tomstagl/thunderstruck",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:53:35Z"
+    },
+    {
+      "repo": "Ed3Design/ed3design-skill-bundles",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:16:32Z"
+    },
+    {
+      "repo": "ubaidillahhsn-cyber/claude-deck-injector",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:01:00Z"
+    },
+    {
+      "repo": "lijingwu2026/claude-code-plan-orchestrator",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:59:14Z"
+    },
+    {
+      "repo": "ssjrocks/claude-cam",
+      "branch": "main",
+      "pushedAt": "2026-10-04T06:54:39Z"
+    },
+    {
+      "repo": "BryceEWatson/honestweek",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:00:28Z"
+    },
+    {
+      "repo": "kitfunso/hippo-memory",
+      "branch": "master",
+      "pushedAt": "2026-10-04T07:49:54Z"
+    },
+    {
+      "repo": "gmickel/flow-next",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:50:24Z"
+    },
+    {
+      "repo": "Raven-Scout/scout-plugin",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:28:43Z"
+    },
+    {
+      "repo": "s977043/river-review",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:52:02Z"
+    },
+    {
+      "repo": "carrick-tools/carrick",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:49:35Z"
+    },
+    {
+      "repo": "PramodTKodag/claude-code-skills",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:24:53Z"
+    },
+    {
+      "repo": "devantler-tech/agent-plugins",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:24:29Z"
+    },
+    {
+      "repo": "clever-cc-plugins/cc-config",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:37:55Z"
+    },
+    {
+      "repo": "itsOmidKarami/kraft",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:45:42Z"
+    },
+    {
+      "repo": "cyberinecore/cc-dev-guard",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:38:05Z"
+    },
+    {
+      "repo": "spacegrowth/claude-relay",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:19:56Z"
+    },
+    {
+      "repo": "clever-cc-plugins/cc-content",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:50:44Z"
+    },
+    {
+      "repo": "blauwtje/exo",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:51:49Z"
+    },
+    {
+      "repo": "Zigzag968/claude-code-lgtmgate",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:41:43Z"
+    },
+    {
+      "repo": "clever-cc-plugins/cc-chime",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:39:35Z"
+    },
+    {
+      "repo": "basitalisandhu/claude-dev-skills",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:22:51Z"
+    },
+    {
+      "repo": "bgutschke/skills",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:30:13Z"
+    },
+    {
+      "repo": "Anri-Lombard/sleeptrain",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:39:00Z"
+    },
+    {
+      "repo": "drleahzou/MetricBraid",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:18:54Z"
+    },
+    {
+      "repo": "pairbrowse/pairbrowse",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:42:15Z"
+    },
+    {
+      "repo": "minjun0219/rocky",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:44:31Z"
+    },
+    {
+      "repo": "openskillsapp/skills",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:49:14Z"
+    },
+    {
+      "repo": "clever-cc-plugins/cc-concept",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:46:53Z"
+    },
+    {
+      "repo": "hiendang7613/ihav-web-visit-counter",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:19:41Z"
+    },
+    {
+      "repo": "liuchangchxy/zhanghui",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:20:16Z"
+    },
+    {
+      "repo": "logospell/logospell-mcp-server",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:19:59Z"
+    },
+    {
+      "repo": "jaeleeps/gof-patterns",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:51:44Z"
+    },
+    {
+      "repo": "Dimen2608/Projekt-Foundation",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:44:03Z"
+    },
+    {
+      "repo": "Vorski-Imagineering/gogogo",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:50:03Z"
+    },
+    {
+      "repo": "XavierYounan/claude-code-tmux-status",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:29:14Z"
+    },
+    {
+      "repo": "clever-cc-plugins/cc-handoff",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:48:09Z"
+    },
+    {
+      "repo": "basitalisandhu/agent-security-skills",
+      "branch": "main",
+      "pushedAt": "2026-10-04T07:19:38Z"
+    }
+  ],
+  "pending": [
+    "0xBADC0FFEE/claude-code-mods",
+    "0xR4vens/clawd-mods",
+    "2bo/pr-inbox",
+    "3DMolier/3D-Models",
+    "416rehman/spinlings",
+    "ABDUAZIZX/env-guard",
+    "ABDUAZIZX/script-gate",
+    "AbhiramDwivedi/claude-mods",
+    "adamholter/claude-minecraft",
+    "AdityaUmale/claude-commit-nag",
+    "adriancoman/claude-code-mods",
+    "aerovato/operator-memory",
+    "afterever/claude-mods",
+    "AgriciDaniel/claude-mods-brain",
+    "ahl-gram/IssueDial",
+    "aholbreich/claude-mods",
+    "aieo-product/claude_qamods",
+    "Akagamisora/session-memo",
+    "Akash001uts/claude-mods",
+    "alamine42/claude-mods",
+    "alexknowshtml/claude-auto-handoff",
+    "Allan-Nava/qrspi",
+    "Amnesiac9/claude-mods",
+    "Amorfx/claude-paste-view",
+    "andras-gyarmati/claude-quota-band",
+    "AndreasOA/claude-code-mods",
+    "andrewstephenson-v1/mod-claude-tasks",
+    "angusmaul/claude-code-vikunja-tasks",
+    "Ariiima/claude-code-persian-to-english-voice",
+    "ashafizullah/cmdc-worker",
+    "AskTinNguyen/ather-mods",
+    "AyeJK/phase-runner",
+    "ayush-905/claude-code-mods",
+    "az9713/claude-mod-pack",
+    "bai-collab/claude_code_mod",
+    "bajzaa975/claude-alapcsomag",
+    "Bearisbug/cc-mods",
+    "benjaminr/nowplaying",
+    "borabiricik/claude-mods",
+    "BorjaGM1/token-printer",
+    "brooklyn96/claude-usage-band",
+    "BuddyLim/claude-code-mod-parked",
+    "buildwithpulkit/plug-into-claude",
+    "buildwithpulkit/tangents",
+    "builtbyjia/claude-code-mods",
+    "calm-logic/visualize-claude-mod",
+    "carlvellotti/mods-starter",
+    "cbruyndoncx/claude-diagrams-renderer-mod",
+    "cbruyndoncx/claude-tasknotes-renderer-mod",
+    "ccckfg/claude-crush",
+    "centminmod/claude-plugins",
+    "cglremrcn/pixlings",
+    "chandan84/cache-time-pending-usage-limit-mod",
+    "chang-07/cc-latex",
+    "charimsma/dopa-mode",
+    "charlie947/mod-maker",
+    "chenmochaos/naiwa_cc_mod",
+    "choaticpixels/HauntedClaudeMod",
+    "claudemodz/mods",
+    "cmyanar-max/claude-code-kedi-modu",
+    "CocoSgt/yujie-mod",
+    "codejunkie99/claude-code-file-explorer",
+    "codywilliamson/claude-mods",
+    "Conte777/claude-mermaid",
+    "craigmcampbell/claude-plugins",
+    "CtrlAltFocus/claude-mods",
+    "danyuchn/claude-cache-panel",
+    "DarioFontanel/claude-code-mods",
+    "davekiss/md",
+    "dcglanton-stack/claude-clubhouse",
+    "deepskyblue86/claude-markdown-mod",
+    "Demo-0416/claude-code-mods",
+    "Designibl/claude-pr-bar",
+    "desuqcafe/cc-mascot",
+    "devbrother2024/devbrothers-mods",
+    "dgokcin/claude-pokemon-mod",
+    "diegocamara89/claude-mods",
+    "dikeckaan/claude-system-promt",
+    "domain-centric-development/dca-marketplace",
+    "DrumAndCode/terminal-gym",
+    "dtinth/claude-code-mods",
+    "dukechain2333/cc-status-band",
+    "Eason412/codex-flow",
+    "Egor062020/claude-code-pult",
+    "ekinertac/claude-code-mods",
+    "EricJamie/claude-code-mods",
+    "eshin087/claude-code-mods",
+    "falkoro/clawd-cartoons",
+    "fj/mod-jxf-fancy",
+    "freakinfrick/xray",
+    "g-campillo/claude-mods",
+    "gabedeluna/claude-mods",
+    "gergesh/claude-queue-mod",
+    "Gharib89/claude-mods",
+    "GLEAM-Lab/intact-bash-mod",
+    "gmorubio/claude-mods",
+    "Gorossy/task-planner",
+    "Grandullon/diariovida-mods",
+    "graugart/flingo",
+    "griches/claude-xcode-mod",
+    "GrzeskoByte/claude-work-visualized",
+    "gsluthra/claude-mod-last-prompt",
+    "guasam/cc-paste-thumbnails",
+    "h1048576/claude-mods",
+    "HaiNNT/c-hottag",
+    "Hangghost/learning-hacker-claude-mod",
+    "harshitmywork17/claude-mods",
+    "hasuwini77/agentille",
+    "hicrandn/claude-mods",
+    "homieyangg/claude-code-mods",
+    "hugo88/claude-code-recording-mode",
+    "Hugopvigo/claude-statusline-mod",
+    "Huuuuung/think-meter",
+    "IAmAStealer/Claudou",
+    "icpmacdo/claude-mod-tldr-window",
+    "Iliesseu28/claude-autocommit",
+    "iluolSNS/claude-code-usage-band",
+    "iosifnicolae2/better-tasks",
+    "IT-BAER/claude-forge",
+    "itsArnavPrasad/call-it",
+    "IvanPavlak/NeonMeter",
+    "jack21/claude-mod-usage",
+    "jesselei1102-hue/agentzero-claude-mod",
+    "JetsonChan/CC-Usage-Band",
+    "JetsonChan/claude-code-mods",
+    "jewdev/claude-spotify-mod",
+    "jimmyeao/claude-code-bars",
+    "jpoucabanillas-lang/claude-mods",
+    "JrCx7scC/claude-code-fanyi",
+    "Justmalhar/awesome-claude-mods",
+    "juulsverne/claude-code-mods",
+    "karanb192/claude-code-redact",
+    "karimdjaafar/jc-hud-mod",
+    "kcsujeet/kc-claude-kit",
+    "kesavreddy-commits/repo-viewer",
+    "kesavreddy-commits/repoviewer",
+    "kevinbadi/creatoros-claude-plugin",
+    "KeygripGit/claude-mods",
+    "kgrvGRECO/woo-mods",
+    "kirishimarisano-rgb/Mods-Claude-code-0-powerd-by-claude",
+    "KiwiNz324/rooms-hud",
+    "koenvdheide/prep-compact",
+    "koslowskyj/tdd-mod",
+    "KTCrisis/flux7-mods",
+    "ktripathi2281/LoopDetector",
+    "Kyubey64/claude-code-mods",
+    "kzarzycki/claude-mods",
+    "Land-o-Clusters/sleight",
+    "lemomo-ai/lemo-mod",
+    "liawzishen/claude-code-mods",
+    "liawzishen/git-diff-timeline",
+    "lmdrew96/codynd",
+    "localailab/mod-db-conversation",
+    "LorcanChinnock/claude-desk-neighbours",
+    "lperezmo/session-relaunch",
+    "Lunik/gmz-claude-marketplace",
+    "m4cd4r4/clear-resume",
+    "Maduki-tech/skillmonitor",
+    "MaeharaTakumi/claude-usage-band",
+    "mako-code/gobworks",
+    "manuel-will/cc-source-control",
+    "mareksulik/appshot",
+    "MarkMerk/markmerk-mods",
+    "michael-berardi/ultracompress",
+    "michelr/query-table",
+    "mishgoldenberg/claude-mods",
+    "mkpvishnu/claude-mods",
+    "mlab-sh/mlab-claude-mod",
+    "moaazhomaid/claude-plugins",
+    "MohammadMD1383/claude-plugins",
+    "muratkaragozgil/claude-code-usage-bar",
+    "mustafa89/my-claude-code-mods",
+    "muxia23/ricky-pixel-mod",
+    "myUdav4iik/claude-mods",
+    "Naazimsnh02/claude-image-viewer",
+    "natsume-777/claude-mods",
+    "NeelAPatel/Claude-Mod-ConversationAtlas",
+    "nemokoala/claude-mods",
+    "neonelemental/claude-code-board-mods",
+    "netgfx/claude-session-dashboard-mod",
+    "niijoey/prompter-mod",
+    "ninondev/claude-sama",
+    "nison/claude-invaders",
+    "nmorton13/sidecast",
+    "no1cromo/claude-code-mod-for-github-issues",
+    "Nooralwachi/context-bar",
+    "NovusEdge/a2a-mod",
+    "nrzz/claude-code-glow",
+    "ntkode/notkode-mods",
+    "nuko-nova-dynamics/lightbox",
+    "nvergez/claude-code-mods",
+    "oaustegard/claude-code-mods",
+    "ofeklevy11/claude-code-hud",
+    "oliverow/catch-me-up",
+    "Olympus-Work/context-bar",
+    "OrihuelaConde/cozy-clawd",
+    "oshnilia/claude-plugins",
+    "Oualid0/claude-mods",
+    "pacomarques71/claude-mods",
+    "Paradox07127/claude-utopia",
+    "Parais4/parais-mods",
+    "patheonsceo/claudinator",
+    "paweechinagarn/claude-code-mods",
+    "petershk/explain-permission",
+    "philsimon/orange-prompt",
+    "PickleBoxer/peek",
+    "polus-1/buddy-mod",
+    "potto007/ottomation",
+    "pourya7/claude-code-mods",
+    "PromptSign/promptsign-plugin",
+    "qingyashizi/claude-usage-mod",
+    "RanaRauff/claude-dev-dashboard",
+    "ravipatel7/claude-mods",
+    "reecelikesramen/claude-task-list",
+    "rezzminator/buddy",
+    "richardcsuwandi/claude-mods",
+    "rightlabs/claude-open-points",
+    "robertgregorywest/claude-mods",
+    "rodbegbie/rod-claude-mods",
+    "roy651/cc-bearings",
+    "ruihe774/cc-bash-guardrails",
+    "ryanbozsan/lucy-claude-mod",
+    "RyanEmslie/prompt-posse",
+    "sameeeeeeep/ask-notch",
+    "scodge-24/workface",
+    "ShadowDog007/claude-mods",
+    "shengyy/ccoverhead",
+    "shihchengwei-lab/cc-mod-shouldnt-you-know",
+    "shijieli708-ship-it/claude-mods",
+    "shissncg/claude-mods",
+    "shoujiki-panman/claude-code-mods",
+    "sirkitree/pinboard",
+    "sivori/claude-mods",
+    "SorcererAres/CC-Usage-Band",
+    "sreshtalluri/claude-mods",
+    "starlabs007/claude-mod-usage-tracker",
+    "stillgbx/still-mods",
+    "surendranb/cc-radio",
+    "sverma24/claude-code-mods",
+    "tak-kam/claude-mods",
+    "takosasi-dev/reply-frame",
+    "Tatendaz/T-mods",
+    "thickiran/claude-live-scores",
+    "tjwds/better-spellcheck",
+    "tksunw/usage-reporter",
+    "treestar84/vibemud",
+    "Triyambak-CA/claude-mods",
+    "Troepster/overalls",
+    "trsdn/sieve",
+    "trytofly94/handoff-compact",
+    "tsurutanmen/homedot-panel",
+    "tsurutanmen/session-bridge",
+    "tsurutanmen/session-dash",
+    "tylergraydev/cc-mods",
+    "tzafrir/human-in-the-loop",
+    "tzafrir/whats-agent-doing",
+    "Unayung/cc-mods-youtube",
+    "UtakataKyosui/utakata-cc-mod",
+    "varunmoka7/side-chat",
+    "VedantAndhale/claude-pro-kit",
+    "vinta/hal-9000",
+    "Vortitron/home-assistant-mcp",
+    "vutran-tvg/grammar-police",
+    "wellbrained/status-deck",
+    "wellbrained/usage-meter-mod",
+    "whoisclebs/openspec-governance",
+    "whyashthakker/awesome-claude-code-mods",
+    "xyzbuilds/while-you-wait",
+    "y-hirakaw/claude-code-mods",
+    "y20061018y-collab/Claude-Mods",
+    "YanZiBin/knowledge-card",
+    "yashverma2110/maxlearn",
+    "yedidyakfir/heavens-feel",
+    "yuk7392/prompt-coach",
+    "YuvalSarel1/claude-plugins",
+    "yuyongyan29-dev/claude-pet",
+    "zhuoxingzhang/pixel-at-work",
+    "zulfikar-ditya/claude-mods-agent-tasks",
+    "zulfikar-ditya/claude-mods-oyen",
+    "zviryatko/claude-spx"
+  ]
 }
