@@ -13,6 +13,7 @@ hellosverre/claude-skins
 augiefra/claude-mods
 nuromirzak/nibbl
 augbastos/afkswitch
+ljmerza/prompt-spellcheck
 scasella/claude-flightdeck
 pawandeepdhall/claude-mods
 saiharsha03/clawd-spinner
@@ -31,4 +32,4 @@ ugglr/claude-token-monster
 ben-rogerson/claude-counter-strike
 muellerei/task-line
 muellerei/enable-todo-tools
-ljmerza/prompt-spellcheck
+Sumit189/explain-claude-mod

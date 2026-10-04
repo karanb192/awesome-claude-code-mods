@@ -108,6 +108,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [aside](https://github.com/JayDoubleu/aside) - A read-only side chat in a pane: ask about the session so far and a tool-less fork of the transcript answers.
 - [harness-scope](https://github.com/shimo4228/harness-scope) - Per-repo profiles for global skills, agents, rules files and tools: a repo picks a named profile from ~/.claude and Claude sees only what it allows, with no network or model calls.
 - [micro-compaction](https://github.com/ruihe774/cc-micro-compaction) - Adds `/compact micro`, which replaces Read results with placeholders and drops thinking without a model call, leaving every other message as it was.
+- [pinboard](https://github.com/sirkitree/pinboard) - A pane that keeps open decisions, the task list and links Claude creates in view while the transcript scrolls, updated through its own tool.
 
 ## Rendering
 
@@ -116,6 +117,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [skins](https://github.com/hellosverre/claude-skins) - Restyles the transcript with themed tool rows, reply gutters and spinner words, and draws tables, code, diffs and shell output as animated cards on the desktop.
 - [mdview](https://github.com/xuanji86/claude-mdview) - Click a markdown path in the conversation to read the file rendered in a side pane with contents, find and pictures, or in Warp's own viewer, and point at any block to have Claude edit it.
 - [gfm-render](https://github.com/briangtn/claude-gfm-render) - Draws GitHub alerts, task lists, strikethrough and Mermaid diagrams in Claude's replies, as box art in the terminal and SVG on the desktop.
+- [explain-as](https://github.com/Sumit189/explain-claude-mod) - `/explain` turns answers into plain ASD-STE100 prose, a Mermaid diagram or an HTML page shown as a zoomable picture in a pane (screenshot by a local headless Chrome), or a narrated canvas explainer video that plays in Chrome.
 
 ## Agents and workflows
 
@@ -125,10 +127,10 @@ Read the mod's source and access details before installing. Validation checks th
 - [homie-persona-cognition](https://github.com/TheSmokeDev/taskchad-os/tree/main/.claude/plugins/persona-cognition) - Host-bound cognitive lifecycle events for a persona system.
 - [agent-race](https://github.com/OneWave-AI/claude-code-mods/tree/main/agent-race) - Puts several sessions on one track for the same task and scores tools, edits, tests and cost per lane.
 - [AFKSwitch](https://github.com/augbastos/afkswitch) - A one-click presence switch above the terminal prompt that tells live sessions when you leave and collects their status when you return.
+- [prompt-spellcheck](https://github.com/ljmerza/prompt-spellcheck/tree/main/plugins/prompt-spellcheck) - Uses an extra Haiku call to correct typos before a submitted prompt reaches the model, skips fenced code, and shows changes in a toast, with a `/spellcheck` toggle.
 - [next-steps](https://github.com/pawandeepdhall/claude-mods/tree/main/plugins/next-steps) - After each reply, up to six Haiku-generated next steps appear above the prompt; select one or more and press Send to have Haiku compose and submit a combined prompt.
 - [agentpane](https://github.com/xuanji86/claude-agentpane) - A side pane of the session's subagents with each one's current tool call and tokens, its conversation drawn in place on a click, and Stop; it opens when an agent starts and folds to a tab when they finish.
 - [gsd-status-mod](https://github.com/helenkwok/gsd-status-mod) - For GSD projects: shows where work stopped and a STATE.md drift warning above the prompt, adds the handoff's next action to the hint line, and offers the command it names as a Tab suggestion.
-- [prompt-spellcheck](https://github.com/ljmerza/prompt-spellcheck/tree/main/plugins/prompt-spellcheck) - Uses an extra Haiku call to correct typos before a submitted prompt reaches the model, skips fenced code, and shows changes in a toast, with a `/spellcheck` toggle.
 
 ## Building mods
 
