@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-03T06:11:02.259Z",
   "claudeVersion": "2.1.288",
-  "repos": 875,
+  "repos": 876,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -114887,6 +114887,230 @@
       "stars": 0,
       "pushedAt": "2026-10-03T17:10:54Z",
       "createdAt": "2026-10-03T16:59:21Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "ugglr/claude-token-monster:.",
+      "repo": "ugglr/claude-token-monster",
+      "path": ".",
+      "sourceCommit": "f853336c7cedc36c30f720b6ed8e3bd2f3ddbd3b",
+      "name": "token-monster",
+      "description": "A pixel-art monster in a side pane that eats tokens and shows context, limits and activity at a glance",
+      "author": "Carl Igelström",
+      "homepage": "https://github.com/ugglr/claude-token-monster",
+      "url": "https://github.com/ugglr/claude-token-monster",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "token-monster"
+          }
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "session.compact",
+          "matcher": {}
+        },
+        {
+          "event": "session.compact",
+          "matcher": {
+            "trigger": "manual"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "token-monster"
+          }
+        },
+        {
+          "event": "ui.press",
+          "matcher": {
+            "plugin": "token-monster",
+            "element": "diet"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "?"
+          }
+        },
+        {
+          "event": "session.start",
+          "matcher": {
+            "isInteractive": "true"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "token-monster"
+          }
+        },
+        {
+          "event": "ui.press",
+          "matcher": {
+            "plugin": "token-monster",
+            "element": "sound"
+          }
+        },
+        {
+          "event": "state.set",
+          "matcher": {
+            "plugin": "token-monster",
+            "key": "waiting"
+          }
+        },
+        {
+          "event": "prompt.edit",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "classic.PermissionRequest",
+          "matcher": {}
+        },
+        {
+          "event": "classic.PermissionDenied",
+          "matcher": {}
+        },
+        {
+          "event": "agent.spawn",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolProgress"
+          }
+        },
+        {
+          "event": "classic.SessionStart",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "ui.close",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "?"
+          }
+        }
+      ],
+      "calls": [
+        "$.agent.list",
+        "$.audio.play",
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.prompt.fill",
+        "$.session.messages",
+        "$.session.usage",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.blit",
+        "$.ui.close",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.288",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "token-monster",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "writes the prompt box",
+          "reads env vars",
+          "reads the transcript",
+          "plays audio",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "compaction",
+        "every prompt",
+        "classic hooks",
+        "subagent spawns",
+        "every tool call"
+      ],
+      "draws": [
+        "Pane",
+        "ToolProgress",
+        "AbovePrompt"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-04T07:23:22Z",
+      "createdAt": "2026-10-03T10:42:21Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main"
