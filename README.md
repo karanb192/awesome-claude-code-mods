@@ -78,8 +78,6 @@ Read the mod's source and access details before installing. Validation checks th
 - [minefield](https://github.com/reporails/arcade/tree/main/minefield) - Minesweeper in a pane beside the transcript, with big square tiles when docked, a best time and a face that follows your cursor, hooking no prompt or tool call and making no network calls.
 - [meanwhile](https://github.com/njp-coder/meanwhile) - One question a day above the prompt, written by a daily Haiku call from the Hacker News front page and new GitHub repos, with the answer after 40 seconds of Claude working or on Show answer, and `/wrapped` for a share card of the day.
 - [cs-radio](https://github.com/ben-rogerson/claude-counter-strike) - Counter-Strike 1.6 radio calls on Claude Code events, from "Fire in the hole" when a deploy starts to "Bomb has been defused" when a long turn lands, played from your own CS install or bundled soundalikes.
-- [agent-shell-watch](https://github.com/apolenkov/agent-shell-watch) - A status line and a `/shell-watch` pane for every Bash call, background task and delegated agent run of the session (Codex, Pi, Devin), with elapsed time, output freshness, the current output line and errors.
-- [agent-council](https://github.com/apolenkov/agent-council) - `/council` runs the Codex, Pi, Devin and OpenCodeReview CLIs on the working diff in parallel, which sends the diff to their providers, and merges their findings into agreements, disagreements and unique findings.
 
 ## Git, pull requests and CI
 
@@ -121,6 +119,8 @@ Read the mod's source and access details before installing. Validation checks th
 
 ## Agents and workflows
 
+- [agent-shell-watch](https://github.com/apolenkov/agent-shell-watch) - A status line and a `/shell-watch` pane for every Bash call, background task and delegated agent run of the session (Codex, Pi, Devin), with elapsed time, output freshness, the current output line and errors.
+- [agent-council](https://github.com/apolenkov/agent-council) - `/council` runs the Codex, Pi, Devin and OpenCodeReview CLIs on the working diff in parallel, which sends the diff to their providers, and merges their findings into agreements, disagreements and unique findings.
 - [autodev-core](https://github.com/djnsty23/claude-auto-dev/tree/main/plugins/autodev-core) - Brainstorm, auto, iterate, audit, review and ship commands with a prd.json sprint system.
 - [catalyst-probes](https://github.com/TransmuteLabs/Catalyst/tree/main/plugins/catalyst-probes) - A consultation and prompt engine configured by TOML tables of probes and prompts.
 - [autotel](https://github.com/jagreehal/autotel/tree/main/packages/autotel-claude-code) - OpenTelemetry for mods: adds `$.autotel` in the engine.create fold and traces every hook dispatch.
