@@ -128,7 +128,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [next-steps](https://github.com/pawandeepdhall/claude-mods/tree/main/plugins/next-steps) - After each reply, up to six Haiku-generated next steps appear above the prompt; select one or more and press Send to have Haiku compose and submit a combined prompt.
 - [agentpane](https://github.com/xuanji86/claude-agentpane) - A side pane of the session's subagents with each one's current tool call and tokens, its conversation drawn in place on a click, and Stop; it opens when an agent starts and folds to a tab when they finish.
 - [gsd-status-mod](https://github.com/helenkwok/gsd-status-mod) - For GSD projects: shows where work stopped and a STATE.md drift warning above the prompt, adds the handoff's next action to the hint line, and offers the command it names as a Tab suggestion.
-- [prompt-spellcheck](https://github.com/ljmerza/prompt-spellcheck/tree/main/plugins/prompt-spellcheck) - Fixes typos in each prompt you submit with a fast Haiku call before the model reads it, leaving code, paths and URLs alone, with a toast listing the changes and a `/spellcheck` toggle.
+- [prompt-spellcheck](https://github.com/ljmerza/prompt-spellcheck/tree/main/plugins/prompt-spellcheck) - Uses an extra Haiku call to correct typos before a submitted prompt reaches the model, skips fenced code, and shows changes in a toast, with a `/spellcheck` toggle.
 
 ## Building mods
 
