@@ -518,6 +518,8 @@ mrzzmrzz/claude-code-mods
 mssaleh/docs
 mthli/cc-shorts
 mtmtian/cc-mods
+muellerei/enable-todo-tools
+muellerei/task-line
 mukiwu/jev-search-mcp
 mukiwu/muki-ai-plugins
 muratcakmak/jev-guard

@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-03T06:11:02.259Z",
   "claudeVersion": "2.1.288",
-  "repos": 877,
+  "repos": 879,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -115203,6 +115203,203 @@
       "stars": 0,
       "pushedAt": "2026-10-04T02:41:32Z",
       "createdAt": "2026-10-04T00:45:30Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "muellerei/enable-todo-tools:.",
+      "repo": "muellerei/enable-todo-tools",
+      "path": ".",
+      "sourceCommit": "0f02060b07b593ba4de3b17142928157d3af30eb",
+      "name": "enable-todo-tools",
+      "description": "Switches Claude Code's todo tools on for models that have them left out",
+      "author": "Patrick Müller",
+      "homepage": "https://github.com/muellerei/enable-todo-tools",
+      "url": "https://github.com/muellerei/enable-todo-tools",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.env.get",
+        "$.env.set"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.288",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "muellerei-enable-todo-tools",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "sets env vars",
+          "reads env vars"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-10-04T01:36:49Z",
+      "createdAt": "2026-10-04T01:36:42Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "muellerei/task-line:.",
+      "repo": "muellerei/task-line",
+      "path": ".",
+      "sourceCommit": "e3f6748dea340caa668dff80b45921454a5b441c",
+      "name": "task-line",
+      "description": "One clean line per task list above the prompt, filled from Claude's own todo tools, same look in the terminal and the desktop app",
+      "author": "Patrick Müller",
+      "homepage": "https://github.com/muellerei/task-line",
+      "url": "https://github.com/muellerei/task-line",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "TodoWrite"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "TaskCreate"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "TaskUpdate"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "/\"^mcp__.+__work_state_write$\"/"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "AskUserQuestion"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "ExitPlanMode"
+          }
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "task-line"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AskUserQuestion"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.now",
+        "$.command.register",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.log",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.288",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "muellerei-mods",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "draws"
+        ]
+      },
+      "sees": [
+        "TodoWrite calls",
+        "TaskCreate calls",
+        "TaskUpdate calls",
+        "/\"^mcp__.+__work_state_write$\"/ calls",
+        "Bash calls",
+        "AskUserQuestion calls",
+        "ExitPlanMode calls"
+      ],
+      "draws": [
+        "AbovePrompt",
+        "AskUserQuestion"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-04T01:36:37Z",
+      "createdAt": "2026-10-04T01:36:25Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main"
