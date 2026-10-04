@@ -109,6 +109,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [harness-scope](https://github.com/shimo4228/harness-scope) - Per-repo profiles for global skills, agents, rules files and tools: a repo picks a named profile from ~/.claude and Claude sees only what it allows, with no network or model calls.
 - [micro-compaction](https://github.com/ruihe774/cc-micro-compaction) - Adds `/compact micro`, which replaces Read results with placeholders and drops thinking without a model call, leaving every other message as it was.
 - [pinboard](https://github.com/sirkitree/pinboard) - A pane that keeps open decisions, the task list and links Claude creates in view while the transcript scrolls, updated through its own tool.
+- [mokkan](https://github.com/vicmpen/mokkan/tree/main/claude-plugin) - `/mokkan` docks a pane of todos and timed reminders beside the transcript, shared with every Claude Code, Codex and terminal session through the mokkan server (api.mokkan.dev), which emails a due reminder nobody acknowledges.
 
 ## Rendering
 

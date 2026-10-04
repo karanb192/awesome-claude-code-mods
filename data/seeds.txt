@@ -37,3 +37,4 @@ ben-rogerson/claude-counter-strike
 muellerei/task-line
 muellerei/enable-todo-tools
 Sumit189/explain-claude-mod
+vicmpen/mokkan
