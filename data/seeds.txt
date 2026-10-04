@@ -31,3 +31,5 @@ ugglr/claude-token-monster
 ben-rogerson/claude-counter-strike
 muellerei/task-line
 muellerei/enable-todo-tools
+apolenkov/agent-shell-watch
+apolenkov/agent-council
