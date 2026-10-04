@@ -108,6 +108,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [aside](https://github.com/JayDoubleu/aside) - A read-only side chat in a pane: ask about the session so far and a tool-less fork of the transcript answers.
 - [harness-scope](https://github.com/shimo4228/harness-scope) - Per-repo profiles for global skills, agents, rules files and tools: a repo picks a named profile from ~/.claude and Claude sees only what it allows, with no network or model calls.
 - [micro-compaction](https://github.com/ruihe774/cc-micro-compaction) - Adds `/compact micro`, which replaces Read results with placeholders and drops thinking without a model call, leaving every other message as it was.
+- [pinboard](https://github.com/sirkitree/pinboard) - A pane that keeps open decisions, the task list and links Claude creates in view while the transcript scrolls, updated through its own tool.
 
 ## Rendering
 
