@@ -91,6 +91,7 @@ Bcengi/veldo
 beijaflor/gen-ai-journal
 BeLazy167/claude-mods-skill
 BeLazy167/typesafe-mod
+ben-rogerson/claude-counter-strike
 bendrucker/claude
 bengous/claude-code-plugins
 BenjaminG/ai-skills

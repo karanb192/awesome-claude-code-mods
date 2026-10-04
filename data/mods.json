@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-03T06:11:02.259Z",
   "claudeVersion": "2.1.288",
-  "repos": 876,
+  "repos": 877,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -115111,6 +115111,98 @@
       "stars": 1,
       "pushedAt": "2026-10-04T07:23:22Z",
       "createdAt": "2026-10-03T10:42:21Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "ben-rogerson/claude-counter-strike:.",
+      "repo": "ben-rogerson/claude-counter-strike",
+      "path": ".",
+      "sourceCommit": "3d1cd55f0cbeac9aefef25d0fdb0ae8fd93b83f6",
+      "name": "cs-radio",
+      "description": "Counter-Strike 1.6 radio calls for Claude Code: 'Fire in the hole' on deploys, 'Bomb has been defused' when a long turn lands. /radio to toggle.",
+      "author": "Ben Rogerson",
+      "homepage": "https://github.com/ben-rogerson/claude-counter-strike",
+      "url": "https://github.com/ben-rogerson/claude-counter-strike",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "radio"
+          }
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash"
+          }
+        },
+        {
+          "event": "process.spawn",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.audio.play",
+        "$.audio.speak",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.log"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.288",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "cs-radio",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads files",
+          "reads env vars",
+          "plays audio",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "Bash calls"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-10-04T02:41:32Z",
+      "createdAt": "2026-10-04T00:45:30Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main"

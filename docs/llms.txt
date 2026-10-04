@@ -1,8 +1,8 @@
 # Awesome Claude Code Mods
 
-> A community list of 1021 Claude Code mods (function hooks), scanned from public GitHub repositories with what each mod can read, write, run or send over the network. An independent scan, not an official Anthropic directory. Last scanned 2026-10-03 on Claude Code 2.1.288.
+> A community list of 1022 Claude Code mods (function hooks), scanned from public GitHub repositories with what each mod can read, write, run or send over the network. An independent scan, not an official Anthropic directory. Last scanned 2026-10-03 on Claude Code 2.1.288.
 
-Mods are Claude Code plugins whose JavaScript or TypeScript hooks run inside a session. They need Claude Code 2.1.287 or later and are on by default. Each entry records the hooks and API calls reported by `claude plugin validate`. Access levels describe the widest reach of those calls and are not safety ratings. Mods per level: L0 Draws & remembers: 113, L1 Reads files: 221, L2 Writes or runs: 519, L3 Uses the network: 168.
+Mods are Claude Code plugins whose JavaScript or TypeScript hooks run inside a session. They need Claude Code 2.1.287 or later and are on by default. Each entry records the hooks and API calls reported by `claude plugin validate`. Access levels describe the widest reach of those calls and are not safety ratings. Mods per level: L0 Draws & remembers: 113, L1 Reads files: 222, L2 Writes or runs: 519, L3 Uses the network: 168.
 
 ## Catalogue
 
