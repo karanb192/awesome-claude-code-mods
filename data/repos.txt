@@ -796,6 +796,7 @@ ucsandman/claude-harness
 udaaff/claude-code-session-monitor
 udaaff/claude-code-session-notes
 UfozDelta/ufoz-harness
+ugglr/claude-token-monster
 ukwhatn/.claude
 unclecode/jevshift
 unpaged/plugins
