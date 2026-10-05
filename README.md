@@ -121,6 +121,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [gfm-render](https://github.com/briangtn/claude-gfm-render) - Draws GitHub alerts, task lists, strikethrough and Mermaid diagrams in Claude's replies, as box art in the terminal and SVG on the desktop.
 - [ko-ui](https://github.com/moduvoice/claude-code-ko-ui) - Shows slash-command descriptions, `/config` rows, spinner words, tool-call summaries and some transcript lines in Korean from a static dictionary, with no model calls or network.
 - [explain-as](https://github.com/Sumit189/explain-claude-mod) - `/explain` turns answers into plain ASD-STE100 prose, a Mermaid diagram or an HTML page shown as a zoomable picture in a pane (screenshot by a local headless Chrome), or a narrated canvas explainer video that plays in Chrome.
+- [prismantis](https://github.com/NahumLitvin/prismantis) - Redraws Claude's replies in a chosen colour theme, with tables, highlighted code, numbers and paths, GitHub alerts, mermaid diagrams and charts as box art, and right-to-left Hebrew and Arabic.
 
 ## Agents and workflows
 
