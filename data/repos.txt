@@ -83,6 +83,8 @@ anthropics/claude-code
 anthropics/claude-plugins-official
 anzal1/hush
 aovestdipaperino/plank
+apolenkov/agent-compact-advisor
+apolenkov/agent-council
 apolenkov/agent-shell-watch
 AppitStudio/awesome-jev
 aqaurius6666/claude-blast-radius

@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-04T08:26:12.224Z",
   "claudeVersion": "2.1.289",
-  "repos": 1164,
+  "repos": 1166,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -194440,6 +194440,214 @@
       "stars": 2,
       "pushedAt": "2026-10-04T21:26:45Z",
       "createdAt": "2026-09-29T21:09:20Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "apolenkov/agent-compact-advisor:.",
+      "repo": "apolenkov/agent-compact-advisor",
+      "path": ".",
+      "sourceCommit": "3b3061a38de4179822cf076bc9d7f21ac5c17732",
+      "name": "agent-compact-advisor",
+      "description": "Status line score 0-100 for how good a moment it is to /compact now, with reasons; offers a ready /compact that keeps goal, decisions, leftovers and paths, and adds that template to every compaction. Never compacts by itself.",
+      "author": "apolenkov",
+      "homepage": "https://github.com/apolenkov/agent-compact-advisor",
+      "url": "https://github.com/apolenkov/agent-compact-advisor",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "session.compact",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "compact-advisor"
+          }
+        }
+      ],
+      "calls": [
+        "$.agent.list",
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.clock.sleep",
+        "$.command.register",
+        "$.http.fetch",
+        "$.prompt.suggest",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.289",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "agent-compact-advisor",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "network",
+          "writes the prompt box",
+          "draws"
+        ]
+      },
+      "sees": [
+        "compaction"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-10-05T13:24:53Z",
+      "createdAt": "2026-10-04T21:01:16Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "apolenkov/agent-council:.",
+      "repo": "apolenkov/agent-council",
+      "path": ".",
+      "sourceCommit": "0107ea49b958861ca3d1a3c239e73bce005ff0a1",
+      "name": "agent-council",
+      "description": "A council of independent code reviewers (Codex, Pi, Devin, OpenCodeReview) runs over your working diff in parallel; one summary of agreements, disagreements and unique findings. /council, plus an auto-review that only notifies.",
+      "author": "apolenkov",
+      "homepage": "https://github.com/apolenkov/agent-council",
+      "url": "https://github.com/apolenkov/agent-council",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "council"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "council"
+          }
+        }
+      ],
+      "calls": [
+        "$.agent.list",
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.fs.write",
+        "$.http.fetch",
+        "$.model.complete",
+        "$.process.run",
+        "$.process.spawn",
+        "$.prompt.submit",
+        "$.session.cwd",
+        "$.session.messages",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.close",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.289",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "agent-council",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "other: $.process.spawn",
+          "other: $.state.get",
+          "other: $.state.set",
+          "network",
+          "runs processes",
+          "writes files",
+          "drives Claude",
+          "reads files",
+          "reads env vars",
+          "reads the transcript",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-05T13:26:27Z",
+      "createdAt": "2026-10-04T10:58:36Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main"
