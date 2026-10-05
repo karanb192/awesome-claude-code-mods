@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-04T08:26:12.224Z",
   "claudeVersion": "2.1.289",
-  "repos": 1163,
+  "repos": 1164,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -194322,6 +194322,124 @@
       "stars": 0,
       "pushedAt": "2026-10-04T16:26:36Z",
       "createdAt": "2026-10-04T15:51:58Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "vicmpen/mokkan:claude-plugin",
+      "repo": "vicmpen/mokkan",
+      "path": "claude-plugin",
+      "sourceCommit": "2e6914fc76be3bc1d79b8ed478001b8b300d23e1",
+      "name": "mokkan",
+      "description": "Cross-session reminders: /mokkan toggles a live pane with your TODOs, Reminders and Archived tabs, /mokkan <command> runs push, in, edit, ack, done and the rest at once, and the /mokkan:mokkan skill lets Claude do it for you.",
+      "author": "Victor Benetatos",
+      "homepage": "https://github.com/vicmpen/mokkan#readme",
+      "url": "https://github.com/vicmpen/mokkan/tree/main/claude-plugin",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./pane.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "mokkan"
+          }
+        },
+        {
+          "event": "classic.SessionStart",
+          "matcher": {
+            "source": "clear|resume|fork"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "mokkan:mokkan|mokkan"
+          }
+        },
+        {
+          "event": "ui.focus",
+          "matcher": {
+            "requestId": "mokkan"
+          }
+        },
+        {
+          "event": "prompt.edit",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "mokkan"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.fs.stat",
+        "$.process.run",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.close",
+        "$.ui.focus",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.scroll",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.289",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "mokkan",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "runs processes",
+          "reads files",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 2,
+      "pushedAt": "2026-10-04T21:26:45Z",
+      "createdAt": "2026-09-29T21:09:20Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main"

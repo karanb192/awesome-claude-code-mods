@@ -1076,6 +1076,7 @@ VedantAndhale/claude-pro-kit
 Vedmeena21/understanding-jev
 vgnshiyer/nowloading
 vgnshiyer/tps-report
+vicmpen/mokkan
 viik2k/clawdify
 vinta/hal-9000
 vitoliu93/harness-dev-plugins
