@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-04T08:26:12.224Z",
   "claudeVersion": "2.1.289",
-  "repos": 1159,
+  "repos": 1163,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -193867,6 +193867,461 @@
       "stars": 0,
       "pushedAt": "2026-09-30T11:50:10Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "Sumit189/explain-claude-mod:.",
+      "repo": "Sumit189/explain-claude-mod",
+      "path": ".",
+      "sourceCommit": "0620e8650d19993930f658cb4b354b33cd06f8a8",
+      "name": "explain-as",
+      "description": "/explain: get answers as ASD-STE100 prose, a diagram, an HTML page, or a 3b1b-style video",
+      "author": "Sumit Paul",
+      "homepage": "https://github.com/Sumit189/explain-claude-mod",
+      "url": "https://github.com/Sumit189/explain-claude-mod",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "explain"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Write"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__explain-as__show"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Edit"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "explain-preview"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.fs.read",
+        "$.fs.write",
+        "$.process.run",
+        "$.prompt.submit",
+        "$.session.cwd",
+        "$.state.get",
+        "$.state.set",
+        "$.tool.register",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.289",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "explain-as",
+          "status": "warnings",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "runs processes",
+          "writes files",
+          "drives Claude",
+          "reads files",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt",
+        "Write calls",
+        "mcp__explain-as__show calls",
+        "Edit calls"
+      ],
+      "draws": [
+        "Pane",
+        "AbovePrompt"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-04T16:06:05Z",
+      "createdAt": "2026-10-04T15:21:02Z",
+      "license": null,
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "apolenkov/agent-shell-watch:.",
+      "repo": "apolenkov/agent-shell-watch",
+      "path": ".",
+      "sourceCommit": "a76af13c017a8fb21684e5924743f5b3ba520aa3",
+      "name": "agent-shell-watch",
+      "description": "Always-on status line and a pane for this session's Bash calls, background tasks and Codex/Pi/Devin/OpenCodeReview runs: elapsed time, output freshness, verdicts and errors.",
+      "author": "apolenkov",
+      "homepage": "https://github.com/apolenkov/agent-shell-watch",
+      "url": "https://github.com/apolenkov/agent-shell-watch",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "session.append",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "shell-watch"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {}
+        },
+        {
+          "event": "ui.open",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "shell-watch"
+          }
+        }
+      ],
+      "calls": [
+        "$.agent.list",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.fs.stat",
+        "$.process.run",
+        "$.session.messages",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.tool.call",
+        "$.ui.close",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.289",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "agent-shell-watch",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "runs processes",
+          "drives Claude",
+          "reads files",
+          "reads the transcript",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-04T21:11:34Z",
+      "createdAt": "2026-10-04T10:58:18Z",
+      "license": "NOASSERTION",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "ljmerza/prompt-spellcheck:plugins/prompt-spellcheck",
+      "repo": "ljmerza/prompt-spellcheck",
+      "path": "plugins/prompt-spellcheck",
+      "sourceCommit": "5dc0148d0398d81cc1189d47c4ae7c6fc7a345da",
+      "name": "prompt-spellcheck",
+      "description": "Fixes spelling and typos in each typed prompt with a fast model before the main model reads it",
+      "author": "Leonardo Merza",
+      "homepage": "https://github.com/ljmerza/prompt-spellcheck",
+      "url": "https://github.com/ljmerza/prompt-spellcheck/tree/main/plugins/prompt-spellcheck",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "spellcheck"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.model.complete",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.289",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "prompt-spellcheck",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "drives Claude",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-10-02T02:24:01Z",
+      "createdAt": "2026-10-02T01:56:08Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "moduvoice/claude-code-ko-ui:.",
+      "repo": "moduvoice/claude-code-ko-ui",
+      "path": ".",
+      "sourceCommit": "7a192004e6e13b40e83221c111102991b8aa9203",
+      "name": "ko-ui",
+      "description": "Claude Code 의 슬래시 커맨드 설명, /config 항목, 일부 화면 문구를 한국어로 보여주는 번역 사전 mod (Korean UI translation dictionary mod)",
+      "author": "moduvoice",
+      "homepage": "https://github.com/moduvoice/claude-code-ko-ui",
+      "url": "https://github.com/moduvoice/claude-code-ko-ui",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "ko-dump"
+          }
+        },
+        {
+          "event": "command.describe",
+          "matcher": {}
+        },
+        {
+          "event": "config.describe",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "CommandOutput"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "InfoNotice"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "PromptHint"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "SessionMode"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Spinner"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolProgress"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "UserMessage",
+            "props.origin has {kind": "task-notification"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolGroup"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "TurnDuration"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.command.list",
+        "$.command.register",
+        "$.config.list",
+        "$.fs.read",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.invalidate",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.289",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads files",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "CommandOutput",
+        "InfoNotice",
+        "PromptHint",
+        "SessionMode",
+        "Spinner",
+        "ToolProgress",
+        "UserMessage",
+        "ToolGroup",
+        "TurnDuration"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-04T16:26:36Z",
+      "createdAt": "2026-10-04T15:51:58Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main"

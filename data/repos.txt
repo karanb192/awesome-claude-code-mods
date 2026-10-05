@@ -83,6 +83,7 @@ anthropics/claude-code
 anthropics/claude-plugins-official
 anzal1/hush
 aovestdipaperino/plank
+apolenkov/agent-shell-watch
 AppitStudio/awesome-jev
 aqaurius6666/claude-blast-radius
 aqaurius6666/claude-env-badge
@@ -601,6 +602,7 @@ likephp-github/likephp-mods
 linder3hs/setup-ai
 link-assistant/hive-mind
 liquid1982/claude-plugins
+ljmerza/prompt-spellcheck
 lkzppm/adam
 lmdrew96/codynd
 lmuehleisen/xo
@@ -672,6 +674,7 @@ mlab-sh/mlab-claude-mod
 mmorearty/sticky-suggestion
 mmurakaru/cueloop
 moaazhomaid/claude-plugins
+moduvoice/claude-code-ko-ui
 mofocm/scope-creep-receipt
 MohammadMD1383/claude-plugins
 mohammed-alsalhi/usage-band
@@ -972,6 +975,7 @@ Storybloq/storybloq
 stromy-org/duke-strategies-plugin
 subbeh/dotfiles
 sudakshsoti/agent-config
+Sumit189/explain-claude-mod
 Suntory-N-Water/sui-blog
 Suntory-N-Water/suntory-n-water-marketplace
 superfly/sprites-claude-plugin
