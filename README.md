@@ -143,6 +143,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [Function Hooks: the issue](https://github.com/anthropics/claude-code/issues/91870) - The design thread: architecture PDF, nine demo videos, the cheat sheet and the community updates.
 - [Anthropic's built-in mods](https://github.com/anthropics/claude-code/tree/main/mods) - Source of diff, sec-default and telemetry, with the test kit and the noun-contract convention.
 - [claude-mods-skill](https://github.com/BeLazy167/claude-mods-skill) - A skill that teaches Claude to build a mod, with a working hello-mod to copy.
+- [mod-builder](https://github.com/noeltock/mod-builder) - A skill that mocks up, builds and tests a mod so it looks native in the terminal and the desktop app.
 - [awesome-claude-code-function-hooks](https://github.com/ray-amjad/awesome-claude-code-function-hooks) - The first list, from before the rename, with two plugins and a clean tsconfig recipe.
 
 ## Every mod the scanner found
