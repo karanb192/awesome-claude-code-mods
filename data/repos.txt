@@ -644,6 +644,7 @@ manuel-will/cc-source-control
 manueldelgado/manueldelgado-mods
 Mar5929/claude-toolkit
 marco-kretz/dotfiles
+MarcoCarnevali/claude-code-mods
 mareksulik/appshot
 mark-liu/cc-mods
 MarkMerk/markmerk-mods

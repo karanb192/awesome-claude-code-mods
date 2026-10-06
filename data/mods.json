@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-04T08:26:12.224Z",
   "claudeVersion": "2.1.289",
-  "repos": 1171,
+  "repos": 1172,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -195240,6 +195240,109 @@
       "stars": 0,
       "pushedAt": "2026-10-05T21:40:34Z",
       "createdAt": "2026-10-05T20:18:48Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "MarcoCarnevali/claude-code-mods:github-issues",
+      "repo": "MarcoCarnevali/claude-code-mods",
+      "path": "github-issues",
+      "sourceCommit": "6ca5bd373602b6437b5710035899cb48b41961de",
+      "name": "github-issues",
+      "description": "A side pane listing the repository's GitHub issues, with one click to have Claude work on one",
+      "author": "Marco Carnevali",
+      "homepage": "https://github.com/MarcoCarnevali/claude-code-mods",
+      "url": "https://github.com/MarcoCarnevali/claude-code-mods/tree/main/github-issues",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "issues"
+          }
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.close",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "github-issues"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.clock.sleep",
+        "$.command.register",
+        "$.process.run",
+        "$.prompt.submit",
+        "$.session.repo",
+        "$.session.surfaces",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.289",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "marco-mods",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "runs processes",
+          "drives Claude",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-06T09:34:50Z",
+      "createdAt": "2026-10-06T09:13:10Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main"
