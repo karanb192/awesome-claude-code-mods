@@ -44,3 +44,4 @@ muellerei/enable-todo-tools
 Sumit189/explain-claude-mod
 vicmpen/mokkan
 chrisluo5311/Pixel-Play
+samox73/claude-code-latex
