@@ -223,6 +223,7 @@ choas/claude-mods
 choaticpixels/HauntedClaudeMod
 choidevhi/choitree
 chrishan17/claude-mod-context-window
+chrisluo5311/Pixel-Play
 chrisns/spare10-mod
 ChristianBuzzetti/ClaudeMods
 chronista-club/vantage-point
