@@ -62,6 +62,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [statuspane](https://github.com/xuanji86/claude-statuspane) - A floating status card above the prompt with model, effort, context, 5-hour and weekly limits, cost and branch, plus GitHub CI rows and progress bars any script or mod can feed.
 - [agent-quick-menu](https://github.com/agentic-workbench/agent-quick-menu) - A pane and prompt band for plugin commands declared in `quick-menu.json`, plus plugin and Claude Code settings exposed through `/config`.
 - [weektoken](https://github.com/3dnow/claude-mods/tree/main/weektoken) - Pace for the 5-hour, 7-day and per-model weekly limits such as Fable, shown as usage against elapsed time above the prompt, plus a `/weektoken` pane with a run-out forecast and a burn-up chart of past windows.
+- [clawd-dash](https://github.com/pinkpixel-dev/clawd-dash) - A three-column dashboard under the prompt with 5-hour, 7-day and context gauges, model, effort, cost, session stats, git status and file changes, plus an animated pixel Clawd that works, celebrates and relaxes along with the session.
 
 ## While you wait
 
