@@ -24,6 +24,7 @@ xuanji86/claude-statuspane
 xuanji86/claude-agentpane
 shimo4228/harness-scope
 helenkwok/gsd-status-mod
+gerricchaplin/pr-pulse
 xuanji86/claude-mdview
 adamholter/claude-subway-surfers
 agentic-workbench/agent-quick-menu
@@ -39,4 +40,4 @@ muellerei/task-line
 muellerei/enable-todo-tools
 Sumit189/explain-claude-mod
 vicmpen/mokkan
-gerricchaplin/pr-pulse
+chrisluo5311/Pixel-Play
