@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-04T08:26:12.224Z",
   "claudeVersion": "2.1.289",
-  "repos": 1167,
+  "repos": 1169,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -194748,6 +194748,272 @@
       "stars": 0,
       "pushedAt": "2026-10-06T03:22:25Z",
       "createdAt": "2026-10-04T17:24:30Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "3dnow/claude-mods:weektoken",
+      "repo": "3dnow/claude-mods",
+      "path": "weektoken",
+      "sourceCommit": "e424db927c1f79003eaef9c6ef8f8cc1466bed34",
+      "name": "weektoken",
+      "description": "Rate-limit pace for Claude Code's 5-hour and weekly windows: usage against elapsed time, plain-language forecast, per-model quotas and burn-up history. A band above the prompt and a full /weektoken pane, in English or Chinese.",
+      "author": "mj0111",
+      "homepage": "https://github.com/3dnow/claude-mods/tree/main/weektoken",
+      "url": "https://github.com/3dnow/claude-mods/tree/main/weektoken",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "weektoken"
+          }
+        },
+        {
+          "event": "ui.press",
+          "matcher": {}
+        },
+        {
+          "event": "ui.focus",
+          "matcher": {}
+        },
+        {
+          "event": "config.set",
+          "matcher": {
+            "key": "language"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "weektoken"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "weektoken"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.config.list",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.process.run",
+        "$.session.usage",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.close",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.289",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "mj0111-mods",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "runs processes",
+          "reads files",
+          "reads env vars",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-06T03:28:31Z",
+      "createdAt": "2026-10-04T18:15:13Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "plaxagoras/clawd-tales:.",
+      "repo": "plaxagoras/clawd-tales",
+      "path": ".",
+      "sourceCommit": "89c7f95b4d4faf480a6ee200e92c3e6df34d1432",
+      "name": "clawd-tales",
+      "description": "A pixel Clawd acts out every tool call above the prompt; helpers wander in by model color. Terminal-first, no model calls.",
+      "author": "plaxagoras",
+      "homepage": "https://github.com/plaxagoras/clawd-tales",
+      "url": "https://github.com/plaxagoras/clawd-tales",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "tales"
+          }
+        },
+        {
+          "event": "classic.UserPromptSubmit",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "classic.PermissionRequest",
+          "matcher": {}
+        },
+        {
+          "event": "agent.spawn",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "session.compact",
+          "matcher": {}
+        },
+        {
+          "event": "classic.SessionStart",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.agent.list",
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.session.root",
+        "$.session.usage",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.289",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "clawd-tales",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks",
+        "every prompt",
+        "subagent spawns",
+        "every tool call",
+        "compaction"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-06T02:16:11Z",
+      "createdAt": "2026-10-05T18:15:44Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main"

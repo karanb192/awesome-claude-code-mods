@@ -14,6 +14,7 @@
 24601/Augustus
 2bo/pr-inbox
 3DMolier/3D-Models
+3dnow/claude-mods
 416rehman/spinlings
 5dive-ai/5dive
 5dive-ai/5dive-plugins
@@ -808,6 +809,7 @@ PickleBoxer/peek
 pierreboissinot/openspec-status
 pierregoutheraud/claude-mods
 piratchai/jev-integration-report
+plaxagoras/clawd-tales
 pleaseai/claude-code-docs
 pleaseai/honmoon
 pleaseai/shunt
