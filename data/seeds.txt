@@ -8,6 +8,7 @@ Anerco/effort-cycle-mod
 moduvoice/claude-code-ko-ui
 OneWave-AI/claude-code-mods
 yash-gadodia/claude-mods
+plaxagoras/clawd-tales
 kongyo2/context-view
 BatuhanCakmakk/wavy-usage
 jarrodwatts/intermission
@@ -39,4 +40,4 @@ muellerei/task-line
 muellerei/enable-todo-tools
 Sumit189/explain-claude-mod
 vicmpen/mokkan
-plaxagoras/clawd-tales
+chrisluo5311/Pixel-Play
