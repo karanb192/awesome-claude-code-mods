@@ -377,6 +377,7 @@ GastonGelhorn/jevmate
 gblacher2/repo-sessions
 genail/genail-mods
 gergesh/claude-queue-mod
+gerricchaplin/pr-pulse
 getexcited/claude-plugins
 getexcited/stepwarden
 GGGODLIN/cc-mod-waitwhat
@@ -906,6 +907,7 @@ sanand0/blog
 sanojimaru/dotfiles
 SApplefeld/agent_persona
 SApplefeld/claude-kit
+SARTHAK2511/claude-combo
 satiricalguru/Fast-Jev-Agents
 satviksinha/jev-model-router
 savinofiore/lexi
