@@ -90,6 +90,7 @@ As of 2026-10-02, scanned against Claude Code 2.1.287: **359 mods** in **373 can
 - [autotel](https://github.com/jagreehal/autotel/tree/main/packages/autotel-claude-code) - OpenTelemetry for mods: adds `$.autotel` in the engine.create fold and traces every hook dispatch.
 - [homie-persona-cognition](https://github.com/TheSmokeDev/taskchad-os/tree/main/.claude/plugins/persona-cognition) - Host-bound cognitive lifecycle events for a persona system.
 - [agent-race](https://github.com/OneWave-AI/claude-code-mods/tree/main/agent-race) - Puts several sessions on one track for the same task and scores tools, edits, tests and cost per lane.
+- [mod-store](https://github.com/hellosverre/mod-store) - `/mods` opens a pane to browse, search and install mods from this catalogue, sorted by stars with each mod's access level shown, plus tools so Claude can find a mod for you.
 
 ## Building mods
 
