@@ -8,9 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
-  pull-requests: write
-  pages: write
+  contents: read
 
 concurrency:
   group: publish-approved-seeds
@@ -19,6 +17,10 @@ concurrency:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      pages: write
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
