@@ -107,6 +107,7 @@ Read the mod's source and access details before installing. Validation checks th
 
 ## Safety and privacy
 
+- [ultramod](https://github.com/mertkayacs/ultramod) - Ten mods in one plugin: a limits HUD, receipts that flag unverified test claims, a guard that snapshots work before destructive Git and rm commands with `/ultra undo`, secret redaction and switchable sets.
 - [secret-redactor](https://github.com/ray-amjad/awesome-claude-code-function-hooks/tree/main/plugins/secret-redactor) - Swaps secrets, email addresses and IPs for stable placeholders before the model reads them, and restores them on the way into a tool call.
 - [honmoon-redact](https://github.com/pleaseai/honmoon/tree/main/packages/claude-plugin) - Redacts API keys and sensitive identifiers from Read, Bash and Grep output before it reaches the model.
 - [kb-settings-guard](https://github.com/ray-manaloto/knowledge-base/tree/main/.claude/mods/kb-settings-guard) - Denies a delegated agent lane any write to the repo's Claude settings files.

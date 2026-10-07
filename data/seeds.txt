@@ -58,3 +58,4 @@ alexjacobs08/guided-mr
 SummerRiversound/review-inbox
 danilpavlov/telescope-claude-code
 valeryia-piatrova/token-hamster
+mertkayacs/ultramod
