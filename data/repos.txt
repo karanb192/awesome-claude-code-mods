@@ -1231,6 +1231,7 @@ void2610/dotfiles
 Vortitron/home-assistant-mcp
 Vosssa/claude-usage-band
 vutran-tvg/grammar-police
+vynnlee/mods
 wandercom/kindex
 wandercom/signet-eval
 wasd96040501/taskcut

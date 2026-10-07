@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-06T12:27:08.993Z",
   "claudeVersion": "2.1.291",
-  "repos": 1315,
+  "repos": 1316,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -292514,6 +292514,186 @@
       "stars": 0,
       "pushedAt": "2026-10-06T10:58:53Z",
       "createdAt": "2026-10-05T17:25:28Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "vynnlee/mods:.template",
+      "repo": "vynnlee/mods",
+      "path": ".template",
+      "sourceCommit": "5537ce3f46f8312898a86fd2dc3afc10d500e023",
+      "name": "my-mod",
+      "description": "One sentence: what the mod does and how you use it.",
+      "author": "Seongbeen Lee",
+      "homepage": "https://github.com/vynnlee/mods/tree/main/my-mod",
+      "url": "https://github.com/vynnlee/mods/tree/main/.template",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "my-mod"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.state.get",
+        "$.state.set"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.291",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-10-07T06:01:10Z",
+      "createdAt": "2026-10-07T05:02:14Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "vynnlee/mods:prompt-drafts",
+      "repo": "vynnlee/mods",
+      "path": "prompt-drafts",
+      "sourceCommit": "5537ce3f46f8312898a86fd2dc3afc10d500e023",
+      "name": "prompt-drafts",
+      "description": "Keep prompts aside as drafts of the session. End a prompt with ;; to save it instead of sending it, then /drafts to put one back in the prompt box.",
+      "author": "Seongbeen Lee",
+      "homepage": "https://github.com/vynnlee/mods/tree/main/prompt-drafts",
+      "url": "https://github.com/vynnlee/mods/tree/main/prompt-drafts",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "draft"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "drafts"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "prompt-drafts"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "prompt-drafts"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.command.register",
+        "$.prompt.fill",
+        "$.prompt.read",
+        "$.session.id",
+        "$.session.surface",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.keys",
+        "$.store.set",
+        "$.ui.ask",
+        "$.ui.close",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.291",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "vynnlee",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "other: $.prompt.read",
+          "other: $.state.get",
+          "other: $.state.set",
+          "writes the prompt box",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt"
+      ],
+      "draws": [
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-07T06:01:10Z",
+      "createdAt": "2026-10-07T05:02:14Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main"
