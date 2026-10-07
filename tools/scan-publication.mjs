@@ -53,7 +53,7 @@ export function reconcileScan(before, scanned, latest, beforeRepos, scannedRepos
 }
 
 export function assertReusable(base, latest) {
-  const inputs = ['tools/scan.mjs', 'tools/parse.mjs', 'tools/validate.mjs', 'tools/compatibility.mjs', 'tools/grade.mjs', 'tools/dedupe.mjs', 'tools/kind.mjs', 'tools/inventory.mjs', 'tools/meta.mjs', 'tools/candidates.mjs', 'tools/discover.mjs', 'tools/recent.mjs', 'tools/github-search.mjs', 'tools/revalidate-publication.mjs', 'package.json', 'package-lock.json', 'data/duplicates.txt', 'data/catalogs.txt', 'data/fixture-exceptions.txt']
+  const inputs = ['tools/scan.mjs', 'tools/parse.mjs', 'tools/validate.mjs', 'tools/compatibility.mjs', 'tools/grade.mjs', 'tools/dedupe.mjs', 'tools/kind.mjs', 'tools/inventory.mjs', 'tools/meta.mjs', 'tools/directory.mjs', 'tools/candidates.mjs', 'tools/discover.mjs', 'tools/recent.mjs', 'tools/github-search.mjs', 'tools/revalidate-publication.mjs', 'package.json', 'package-lock.json', 'data/duplicates.txt', 'data/catalogs.txt', 'data/fixture-exceptions.txt']
   if (git('diff', '--name-only', base, latest, '--', ...inputs)) throw new Error('Scanner inputs changed since this scan; run a fresh scan')
 }
 
