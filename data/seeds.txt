@@ -46,3 +46,4 @@ vicmpen/mokkan
 chrisluo5311/Pixel-Play
 samox73/claude-code-latex
 MarcoCarnevali/claude-code-mods
+joshuatonga/mini-claude-mods
