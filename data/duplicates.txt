@@ -52,3 +52,10 @@ SApplefeld/agent_persona:. SApplefeld/claude-kit:plugins/personas
 Zaho92/claude-arcade:. Zaho92/claude-arcade:plugin
 bsamiee/Rasm:.claude/plugins/function-hooks bsamiee/Rasm:plugins/function-hooks
 xsyetopz/dotclaude:. xsyetopz/dotclaude:plugins/dotclaude
+jessetsai1024/claude-mods:ctx-panel jessetsai1024/claude-ctx-panel:.
+jessetsai1024/claude-mods:files jessetsai1024/claude-files:.
+jessetsai1024/claude-mods:maomao jessetsai1024/claude-maomao:.
+jessetsai1024/claude-mods:prompts jessetsai1024/claude-prompts:.
+jessetsai1024/claude-mods:timeline jessetsai1024/claude-timeline:.
+jessetsai1024/claude-mods:tokens jessetsai1024/claude-tokens:.
+tommy5dollar/claude-mods:effort-router tommy5dollar/claude-plugins:effort-router

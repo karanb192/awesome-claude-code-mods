@@ -64,6 +64,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [agent-quick-menu](https://github.com/agentic-workbench/agent-quick-menu) - A pane and prompt band for plugin commands declared in `quick-menu.json`, plus plugin and Claude Code settings exposed through `/config`.
 - [weektoken](https://github.com/3dnow/claude-mods/tree/main/weektoken) - Pace for the 5-hour, 7-day and per-model weekly limits such as Fable, shown as usage against elapsed time above the prompt, plus a `/weektoken` pane with a run-out forecast and a burn-up chart of past windows.
 - [clawd-dash](https://github.com/pinkpixel-dev/clawd-dash) - A three-column dashboard under the prompt with 5-hour, 7-day and context gauges, model, effort, cost, session stats, git status and file changes, plus an animated pixel Clawd that works, celebrates and relaxes along with the session.
+- [context-bar](https://github.com/hamzafer/claude-code-mods/tree/main/mods/context-bar) - The context window as one stacked bar above the prompt, a color per category like `/context`, with token counts and the compaction point.
 
 ## While you wait
 
@@ -98,6 +99,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [deploy-verify](https://github.com/yash-gadodia/claude-mods/tree/main/deploy-verify) - Checks configured live URLs after recognized deploy commands, waits for relevant GitHub Actions runs when present, and adds the verification result to model context.
 - [pr-pulse](https://github.com/gerricchaplin/pr-pulse) - Live status, merge readiness, failed-check drill-down, review threads and change alerts for your GitHub pull requests, in a pane that collapses to a band above the prompt.
 - [github-issues](https://github.com/MarcoCarnevali/claude-code-mods/tree/main/github-issues) - A pane of a repository's GitHub issues as cards, with tabs, search, a label filter, linked pull requests and a picker of your repositories, plus a button that hands an issue to Claude, all read through the GitHub CLI.
+- [review-watch](https://github.com/hamzafer/claude-code-mods/tree/main/mods/review-watch) - A live line for each running Codex review or review subagent, with its model and elapsed time, and a toast when it ends, with the findings when Codex's output has them.
 
 ## Safety and privacy
 
@@ -110,6 +112,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [scope-guard](https://github.com/yash-gadodia/claude-mods/tree/main/scope-guard) - Tracks recognized file edits against a configurable threshold, with a model judge and user overrides that can permit further edits.
 - [merge-gate](https://github.com/yash-gadodia/claude-mods/tree/main/merge-gate) - Checks merge permission for recognized Bash merge commands and selected pushes from feature branches to trunk.
 - [receipt](https://github.com/yash-gadodia/claude-mods/tree/main/receipt) - Turns the turn footer into a receipt of edits, runs and curls, never folds a destructive command into a tool group, and names an unverified claim in the spinner.
+- [blast-radius](https://github.com/hamzafer/claude-code-mods/tree/main/mods/blast-radius) - Holds recognized recursive deletes, force pushes and migrations for confirmation, previews file deletions and branch changes, and cancels if nobody answers in time.
 
 ## Memory and context
 
@@ -135,6 +138,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [explain-as](https://github.com/Sumit189/explain-claude-mod) - `/explain` turns answers into plain ASD-STE100 prose, a Mermaid diagram or an HTML page shown as a zoomable picture in a pane (screenshot by a local headless Chrome), or a narrated canvas explainer video that plays in Chrome.
 - [prismantis](https://github.com/NahumLitvin/prismantis) - Redraws Claude's replies in a chosen colour theme, with tables, highlighted code, numbers and paths, GitHub alerts, mermaid diagrams and charts as box art, and right-to-left Hebrew and Arabic.
 - [tex-display](https://github.com/samox73/claude-code-latex) - Draws LaTeX display math in Claude's replies as typeset pictures in kitty and Ghostty and as Unicode text elsewhere, with MathJax bundled, so it runs no processes and writes no files.
+- [md-preview](https://github.com/hamzafer/claude-code-mods/tree/main/mods/md-preview) - Renders the Markdown files Claude edits like GitHub does in a pane, with before and after side by side.
 
 ## Agents and workflows
 
@@ -153,6 +157,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [gsd-status-mod](https://github.com/helenkwok/gsd-status-mod) - For GSD projects: shows where work stopped and a STATE.md drift warning above the prompt, adds the handoff's next action to the hint line, and offers the command it names as a Tab suggestion.
 - [claude-council](https://github.com/danzerzine/claude-council) - A band above the prompt that brings GPT in as fresh eyes on a stuck question, with its answer, Claude's take and GPT's reply pasted into the chat, and can have Codex check every handover against the chat's spec and send gross violations back before the agent answers.
 - [prompt-drafts](https://github.com/vynnlee/mods/tree/main/prompt-drafts) - End a prompt with `;;` to keep it as a draft of the session instead of sending it, then `/drafts` puts it back in the prompt box from a sidebar with number keys, or from Claude Code's question dialog in a narrow terminal.
+- [mission-control](https://github.com/hamzafer/claude-code-mods/tree/main/mods/mission-control) - A pane with every subagent and tool call live, plus a code map of the files they read and write, with a Haiku call that describes each file's changes.
 
 ## Building mods
 
