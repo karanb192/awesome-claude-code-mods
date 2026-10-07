@@ -50,3 +50,4 @@ MarcoCarnevali/claude-code-mods
 joshuatonga/mini-claude-mods
 twjackysu/claude-code-stock-ticker
 vynnlee/mods
+Nachx639/context-canary
