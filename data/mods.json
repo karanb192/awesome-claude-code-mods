@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-06T12:27:08.993Z",
   "claudeVersion": "2.1.291",
-  "repos": 1312,
+  "repos": 1313,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -292219,6 +292219,110 @@
       "pushedAt": "2026-09-30T11:50:10Z",
       "createdAt": "2026-09-21T03:30:37Z",
       "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "joshuatonga/mini-claude-mods:model-pick",
+      "repo": "joshuatonga/mini-claude-mods",
+      "path": "model-pick",
+      "sourceCommit": "062b11ee295454ff5c713d14c1fd8d22fcae9e99",
+      "name": "model-pick",
+      "description": "Fuzzy-pick a model + effort combo, with favorites, aliases and recents: /pick",
+      "author": "Joshua Tonga",
+      "homepage": "https://github.com/joshuatonga/mini-claude-mods",
+      "url": "https://github.com/joshuatonga/mini-claude-mods/tree/main/model-pick",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "classic.SessionStart",
+          "matcher": {
+            "source": "clear|resume|fork"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "pick"
+          }
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "model-pick"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.now",
+        "$.clock.sleep",
+        "$.command.register",
+        "$.command.run",
+        "$.session.model",
+        "$.settings.read",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.close",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.291",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "mini-claude-mods",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "drives Claude",
+          "reads settings",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-07T02:37:35Z",
+      "createdAt": "2026-10-07T02:10:10Z",
+      "license": null,
       "archived": false,
       "defaultBranch": "main"
     }

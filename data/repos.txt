@@ -573,6 +573,7 @@ jonathan-fielding/dotclaude
 jonpojonpo/cc-crayon
 JoosepHint/flappy-code
 joshhornby/dotfiles
+joshuatonga/mini-claude-mods
 Jovan1666/claude-code-runway
 joydeep-pm/agent-theater
 joydeep-pm/usage-band
