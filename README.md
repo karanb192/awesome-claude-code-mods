@@ -100,6 +100,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [pr-pulse](https://github.com/gerricchaplin/pr-pulse) - Live status, merge readiness, failed-check drill-down, review threads and change alerts for your GitHub pull requests, in a pane that collapses to a band above the prompt.
 - [github-issues](https://github.com/MarcoCarnevali/claude-code-mods/tree/main/github-issues) - A pane of a repository's GitHub issues as cards, with tabs, search, a label filter, linked pull requests and a picker of your repositories, plus a button that hands an issue to Claude, all read through the GitHub CLI.
 - [review-watch](https://github.com/hamzafer/claude-code-mods/tree/main/mods/review-watch) - A live line for each running Codex review or review subagent, with its model and elapsed time, and a toast when it ends, with the findings when Codex's output has them.
+- [guided-mr](https://github.com/alexjacobs08/guided-mr) - Groups a GitHub PR, GitLab MR or branch diff into ordered review steps with summaries and check notes, paged through in a pane or a browser page with side-by-side diffs and a diagram.
 
 ## Safety and privacy
 
