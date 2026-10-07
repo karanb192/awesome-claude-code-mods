@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-06T12:27:08.993Z",
   "claudeVersion": "2.1.291",
-  "repos": 1313,
+  "repos": 1314,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -292323,6 +292323,92 @@
       "pushedAt": "2026-10-07T02:37:35Z",
       "createdAt": "2026-10-07T02:10:10Z",
       "license": null,
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "twjackysu/claude-code-stock-ticker:plugins/stock-ticker",
+      "repo": "twjackysu/claude-code-stock-ticker",
+      "path": "plugins/stock-ticker",
+      "sourceCommit": "4fed4f53135fa55d5a162ded645f2ad03887767b",
+      "name": "stock-ticker",
+      "description": "Live stock ticker band above the Claude Code prompt: watch Taiwan and US quotes while Claude works.",
+      "author": "twjackysu",
+      "homepage": "https://github.com/twjackysu/claude-code-stock-ticker",
+      "url": "https://github.com/twjackysu/claude-code-stock-ticker/tree/main/plugins/stock-ticker",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "stock"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.http.fetch",
+        "$.session.surfaces",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.291",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-code-stock-ticker",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "network",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-07T00:08:43Z",
+      "createdAt": "2026-10-06T12:45:08Z",
+      "license": "MIT",
       "archived": false,
       "defaultBranch": "main"
     }

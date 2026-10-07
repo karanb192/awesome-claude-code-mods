@@ -1180,6 +1180,7 @@ tsurutanmen/session-dash
 tunglt1810/claude-gadgets
 tungnt1203/cmusic
 Turbo-Thorschten/shell-highlight
+twjackysu/claude-code-stock-ticker
 tylergraydev/cc-mods
 tylergraydev/rail-runner
 tzafrir/human-in-the-loop
