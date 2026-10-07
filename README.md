@@ -152,6 +152,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [codex-pane](https://github.com/ManuelWarland/claude-codex-pane) - A `/codex` pane that follows the Codex CLI session you run in another terminal, sends the current exchange to Claude on request, or queues Claude's answer in Codex through `codex queue` after confirmation.
 - [gsd-status-mod](https://github.com/helenkwok/gsd-status-mod) - For GSD projects: shows where work stopped and a STATE.md drift warning above the prompt, adds the handoff's next action to the hint line, and offers the command it names as a Tab suggestion.
 - [claude-council](https://github.com/danzerzine/claude-council) - A band above the prompt that brings GPT in as fresh eyes on a stuck question, with its answer, Claude's take and GPT's reply pasted into the chat, and can have Codex check every handover against the chat's spec and send gross violations back before the agent answers.
+- [prompt-drafts](https://github.com/vynnlee/mods/tree/main/prompt-drafts) - End a prompt with `;;` to keep it as a draft of the session instead of sending it, then `/drafts` puts it back in the prompt box from a sidebar with number keys, or from Claude Code's question dialog in a narrow terminal.
 
 ## Building mods
 
