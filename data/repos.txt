@@ -708,6 +708,7 @@ manson341349-beep/claude-desktop-mods
 manuacl/claude-mods
 manuel-will/cc-source-control
 manueldelgado/manueldelgado-mods
+ManuelWarland/claude-codex-pane
 Mar5929/claude-toolkit
 MarcoCarnevali/claude-code-mods
 marcsstevenson/claude-mods

@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-06T12:27:08.993Z",
   "claudeVersion": "2.1.291",
-  "repos": 1314,
+  "repos": 1315,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -292408,6 +292408,112 @@
       "stars": 1,
       "pushedAt": "2026-10-07T00:08:43Z",
       "createdAt": "2026-10-06T12:45:08Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "ManuelWarland/claude-codex-pane:plugin",
+      "repo": "ManuelWarland/claude-codex-pane",
+      "path": "plugin",
+      "sourceCommit": "9e9bd622d8f02a4232e925a62b113715874b6439",
+      "name": "codex-pane",
+      "description": "Follow your Codex CLI session live in a Claude Code pane; relay the current exchange to Claude, or Claude's answer to Codex, one keypress and one confirmation at a time.",
+      "author": "Manuel Warland",
+      "homepage": "https://github.com/ManuelWarland/claude-codex-pane",
+      "url": "https://github.com/ManuelWarland/claude-codex-pane/tree/main/plugin",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./codex-pane.mjs"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "codex"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "codex-to-claude"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.scroll",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.process.run",
+        "$.prompt.submit",
+        "$.settings.read",
+        "$.ui.ask",
+        "$.ui.close",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.291",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "codex-pane",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "drives Claude",
+          "reads settings",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-06T10:58:53Z",
+      "createdAt": "2026-10-05T17:25:28Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main"
