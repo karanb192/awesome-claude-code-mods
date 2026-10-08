@@ -113,6 +113,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [merge-gate](https://github.com/yash-gadodia/claude-mods/tree/main/merge-gate) - Checks merge permission for recognized Bash merge commands and selected pushes from feature branches to trunk.
 - [receipt](https://github.com/yash-gadodia/claude-mods/tree/main/receipt) - Turns the turn footer into a receipt of edits, runs and curls, never folds a destructive command into a tool group, and names an unverified claim in the spinner.
 - [blast-radius](https://github.com/hamzafer/claude-code-mods/tree/main/mods/blast-radius) - Holds recognized recursive deletes, force pushes and migrations for confirmation, previews file deletions and branch changes, and cancels if nobody answers in time.
+- [modwall](https://github.com/RadTech-Solutions/modwall) - Reads each mod's scanned footprint as it loads, labels its reach and risk, and audits, holds or refuses it by an audit, ask or allowlist policy with a blocklist.
 
 ## Memory and context
 
@@ -139,7 +140,6 @@ Read the mod's source and access details before installing. Validation checks th
 - [prismantis](https://github.com/NahumLitvin/prismantis) - Redraws Claude's replies in a chosen colour theme, with tables, highlighted code, numbers and paths, GitHub alerts, mermaid diagrams and charts as box art, and right-to-left Hebrew and Arabic.
 - [tex-display](https://github.com/samox73/claude-code-latex) - Draws LaTeX display math in Claude's replies as typeset pictures in kitty and Ghostty and as Unicode text elsewhere, with MathJax bundled, so it runs no processes and writes no files.
 - [md-preview](https://github.com/hamzafer/claude-code-mods/tree/main/mods/md-preview) - Renders the Markdown files Claude edits like GitHub does in a pane, with before and after side by side.
-- [modwall](https://github.com/RadTech-Solutions/modwall) - Reads each mod's scanned footprint as it loads, labels its reach and risk, and audits, holds or refuses it by an audit, ask or allowlist policy with a blocklist.
 
 ## Agents and workflows
 
