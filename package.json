@@ -5,7 +5,7 @@
   "description": "Claude Code mods from across GitHub, with what each one can read, write, run or send over the network. Usage meters, PR trackers, browsers, games and safety guards, scanned nightly.",
   "type": "module",
   "scripts": {
-    "test": "node --test tools/parse.test.mjs tools/discovery.test.mjs tools/github-search.test.mjs tools/compatibility.test.mjs tools/recent.test.mjs tools/seed-publication.test.mjs tools/scan-publication.test.mjs",
+    "test": "node --test tools/parse.test.mjs tools/discovery.test.mjs tools/github-search.test.mjs tools/compatibility.test.mjs tools/directory.test.mjs tools/recent.test.mjs tools/seed-publication.test.mjs tools/scan-publication.test.mjs",
     "test:render": "node --test tools/render.test.mjs",
     "lint": "awesome-lint",
     "discover": "node tools/discover.mjs",
