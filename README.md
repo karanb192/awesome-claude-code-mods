@@ -101,6 +101,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [github-issues](https://github.com/MarcoCarnevali/claude-code-mods/tree/main/github-issues) - A pane of a repository's GitHub issues as cards, with tabs, search, a label filter, linked pull requests and a picker of your repositories, plus a button that hands an issue to Claude, all read through the GitHub CLI.
 - [review-watch](https://github.com/hamzafer/claude-code-mods/tree/main/mods/review-watch) - A live line for each running Codex review or review subagent, with its model and elapsed time, and a toast when it ends, with the findings when Codex's output has them.
 - [guided-mr](https://github.com/alexjacobs08/guided-mr) - Groups a GitHub PR, GitLab MR or branch diff into ordered review steps with summaries and check notes, paged through in a pane or a browser page with side-by-side diffs and a diagram.
+- [review-inbox](https://github.com/SummerRiversound/review-inbox) - Pull requests awaiting your review in a band above the prompt that turns yellow, then red, as they age, each summarized by a Sonnet call, and picked ones handed to Claude as review requests in your learned review style.
 
 ## Safety and privacy
 

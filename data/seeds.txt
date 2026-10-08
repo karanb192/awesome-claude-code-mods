@@ -51,3 +51,4 @@ joshuatonga/mini-claude-mods
 twjackysu/claude-code-stock-ticker
 vynnlee/mods
 alexjacobs08/guided-mr
+SummerRiversound/review-inbox
