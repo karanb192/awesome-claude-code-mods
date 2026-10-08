@@ -1100,6 +1100,7 @@ sTomerG/agent-kit
 Storybloq/storybloq
 stuinfla/ruvnet-brain
 Sumit189/explain-claude-mod
+SummerRiversound/review-inbox
 sundyme/usage-line
 Suntory-N-Water/suntory-n-water-marketplace
 superfly/sprites-claude-plugin

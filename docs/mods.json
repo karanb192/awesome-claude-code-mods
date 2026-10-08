@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-06T12:27:08.993Z",
   "claudeVersion": "2.1.291",
-  "repos": 1316,
+  "repos": 1317,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -292694,6 +292694,121 @@
       "stars": 0,
       "pushedAt": "2026-10-07T06:01:10Z",
       "createdAt": "2026-10-07T05:02:14Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main"
+    },
+    {
+      "id": "SummerRiversound/review-inbox:.",
+      "repo": "SummerRiversound/review-inbox",
+      "path": ".",
+      "sourceCommit": "7e23ce294885a02f22c6258eb4d923e6283a691e",
+      "name": "review-inbox",
+      "description": "Your GitHub work in a drawer: PRs waiting for your review, each summarized in plain language, your open PRs with their reviews, and your issues",
+      "author": "SummerRiversound",
+      "homepage": "https://github.com/SummerRiversound/review-inbox#readme",
+      "url": "https://github.com/SummerRiversound/review-inbox",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "review-inbox"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "review-inbox"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "review-inbox"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.sleep",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.fs.write",
+        "$.model.complete",
+        "$.process.run",
+        "$.prompt.fill",
+        "$.prompt.read",
+        "$.settings.read",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.291",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "review-inbox",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.prompt.read",
+          "other: $.state.get",
+          "other: $.state.set",
+          "runs processes",
+          "writes files",
+          "drives Claude",
+          "writes the prompt box",
+          "reads files",
+          "reads env vars",
+          "reads settings",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-07T09:52:46Z",
+      "createdAt": "2026-10-07T04:40:05Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main"
