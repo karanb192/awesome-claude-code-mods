@@ -69,6 +69,7 @@ alexandernicholson/agent-router
 AlexandreMartinezOlmos/claude-code-leakstop
 alexcz-a11y/claude-mods
 alexgreensh/token-optimizer
+alexjacobs08/guided-mr
 alexknowshtml/claude-auto-handoff
 aliemrevezir/mods
 aliir74/claude-code-rtl

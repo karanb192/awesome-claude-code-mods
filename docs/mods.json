@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-06T12:27:08.993Z",
   "claudeVersion": "2.1.291",
-  "repos": 1317,
+  "repos": 1318,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -292812,6 +292812,95 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main"
+    },
+    {
+      "id": "alexjacobs08/guided-mr:.",
+      "repo": "alexjacobs08/guided-mr",
+      "path": ".",
+      "sourceCommit": "46027a2a9b1a3ff19742c7f156221cd6963d948a",
+      "name": "guided-mr",
+      "description": "Guided review of a GitHub PR, GitLab MR or local branch: the diff grouped into ordered steps you page through in a pane",
+      "author": "Alex Jacobs",
+      "homepage": "https://github.com/alexjacobs08/guided-mr",
+      "url": "https://github.com/alexjacobs08/guided-mr",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "guided-mr"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "guided-mr"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.fs.write",
+        "$.model.complete",
+        "$.process.run",
+        "$.prompt.fill",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.291",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "guided-mr",
+          "status": "warnings",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "runs processes",
+          "writes files",
+          "drives Claude",
+          "writes the prompt box",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-07T22:19:28Z",
+      "createdAt": "2026-10-07T21:48:19Z",
+      "license": null,
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
     }
   ]
 }
