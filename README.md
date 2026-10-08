@@ -7,7 +7,7 @@ Add a browser beside your conversation, keep usage in view, or check a command b
 This community catalogue scans public GitHub repositories and records what Claude's validator reports each mod can read, write, run or send over the network. It is an independent scan, not an official Anthropic directory.
 
 <!-- stats:start -->
-**2690 mods** · Last scanned 2026-10-06.
+**2692 mods** · Last scanned 2026-10-06.
 <!-- stats:end -->
 
 ![Browsing a GitHub pull request beside a Claude Code conversation using terminal-browser](assets/terminal-browser-demo.gif)
@@ -100,6 +100,8 @@ Read the mod's source and access details before installing. Validation checks th
 - [pr-pulse](https://github.com/gerricchaplin/pr-pulse) - Live status, merge readiness, failed-check drill-down, review threads and change alerts for your GitHub pull requests, in a pane that collapses to a band above the prompt.
 - [github-issues](https://github.com/MarcoCarnevali/claude-code-mods/tree/main/github-issues) - A pane of a repository's GitHub issues as cards, with tabs, search, a label filter, linked pull requests and a picker of your repositories, plus a button that hands an issue to Claude, all read through the GitHub CLI.
 - [review-watch](https://github.com/hamzafer/claude-code-mods/tree/main/mods/review-watch) - A live line for each running Codex review or review subagent, with its model and elapsed time, and a toast when it ends, with the findings when Codex's output has them.
+- [guided-mr](https://github.com/alexjacobs08/guided-mr) - Groups a GitHub PR, GitLab MR or branch diff into ordered review steps with summaries and check notes, paged through in a pane or a browser page with side-by-side diffs and a diagram.
+- [review-inbox](https://github.com/SummerRiversound/review-inbox) - Pull requests awaiting your review in a band above the prompt that turns yellow, then red, as they age, each summarized by a Sonnet call, and picked ones handed to Claude as review requests in your learned review style.
 
 ## Safety and privacy
 
@@ -127,6 +129,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [pinboard](https://github.com/sirkitree/pinboard) - A pane that keeps open decisions, the task list and links Claude creates in view while the transcript scrolls, updated through its own tool.
 - [mokkan](https://github.com/vicmpen/mokkan/tree/main/claude-plugin) - `/mokkan` docks a pane of todos and timed reminders beside the transcript, shared with every Claude Code, Codex and terminal session through the mokkan server (api.mokkan.dev), which emails a due reminder nobody acknowledges.
 - [agent-compact-advisor](https://github.com/apolenkov/agent-compact-advisor) - A 0-100 score in the status line for how good a moment it is to `/compact`, with a ready `/compact` suggestion past a threshold and a template added to every compaction that keeps the goal, decisions and open leftovers; it never compacts by itself, and its one network call goes to a local Kev endpoint on loopback.
+- [context-canary](https://github.com/Nachx639/context-canary) - A pixel-art canary above the prompt that dies when a final reply skips a sentinel from CLAUDE.md, then compacts the session keeping your instructions and revives.
 
 ## Rendering
 
@@ -138,6 +141,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [ko-ui](https://github.com/moduvoice/claude-code-ko-ui) - Shows slash-command descriptions, `/config` rows, spinner words, tool-call summaries and some transcript lines in Korean from a static dictionary, with no model calls or network.
 - [explain-as](https://github.com/Sumit189/explain-claude-mod) - `/explain` turns answers into plain ASD-STE100 prose, a Mermaid diagram or an HTML page shown as a zoomable picture in a pane (screenshot by a local headless Chrome), or a narrated canvas explainer video that plays in Chrome.
 - [prismantis](https://github.com/NahumLitvin/prismantis) - Redraws Claude's replies in a chosen colour theme, with tables, highlighted code, numbers and paths, GitHub alerts, mermaid diagrams and charts as box art, and right-to-left Hebrew and Arabic.
+- [tessera](https://github.com/OG-Matcha/tessera) - Previews pasted images and collapsed pasted text above the prompt in any terminal, draws replies with CJK-aligned tables and charts, and refuses recursive deletes through links and main-tree Git rewrites while agents run.
 - [tex-display](https://github.com/samox73/claude-code-latex) - Draws LaTeX display math in Claude's replies as typeset pictures in kitty and Ghostty and as Unicode text elsewhere, with MathJax bundled, so it runs no processes and writes no files.
 - [md-preview](https://github.com/hamzafer/claude-code-mods/tree/main/mods/md-preview) - Renders the Markdown files Claude edits like GitHub does in a pane, with before and after side by side.
 
@@ -178,6 +182,8 @@ The **[full catalogue](catalogue.md#every-mod-the-scanner-found)** includes each
 ## How the scan works
 
 A scheduled scan searches GitHub for mod repositories, checks their plugin source with `claude plugin validate`, and proposes updates for review. The website and catalogue use the same scan data. Published results change when the update PR is merged.
+
+The scan also reads the catalogue of Anthropic's plugin directory (`claude plugin list --available --json`) and marks each mod the directory installs from the same repository and path. The website shows an "In Anthropic directory" mark and filter, and the catalogue has a matching column. If the directory cannot be read, a mod keeps its previous mark.
 
 Merging a seed submission also starts a separate publication check. New repositories with passing checks appear automatically after their generated update is merged by the workflow and the website deploys. Existing listings stay unchanged. A seed with validation failures or new review warnings stays unpublished and is reported in the workflow run; other seeds still publish. [Seed publication details](contributing.md#open-a-pull-request).
 

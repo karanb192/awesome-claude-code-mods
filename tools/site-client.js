@@ -3,23 +3,26 @@
   const count = document.getElementById('n')
   const tbody = document.querySelector('#t tbody')
   const rows = [...tbody.rows]
-  const filters = [...document.querySelectorAll('.lv')]
+  const filters = [...document.querySelectorAll('.lv[data-level]')]
+  const listedFilter = document.querySelector('.listed-filter')
   const reset = document.getElementById('reset')
   const searchPanel = document.querySelector('.catalog-search')
   const table = document.getElementById('t')
   const clearSearch = document.getElementById('clear-search')
   let level = ''
+  let listed = false
 
   function apply() {
     const search = q.value.trim().toLowerCase()
     let visible = 0
     for (const row of rows) {
-      row.hidden = !((level === '' || row.dataset.level === level) && (!search || row.dataset.name.toLowerCase().includes(search)))
+      row.hidden = !((level === '' || row.dataset.level === level) && (!listed || row.dataset.listed === '1') && (!search || row.dataset.name.toLowerCase().includes(search)))
       if (!row.hidden) visible++
     }
     count.textContent = visible === rows.length ? `${rows.length} mods` : `${visible} of ${rows.length} mods`
     for (const filter of filters) filter.setAttribute('aria-pressed', String(filter.dataset.level === level))
-    reset.hidden = !search && !level
+    listedFilter.setAttribute('aria-pressed', String(listed))
+    reset.hidden = !search && !level && !listed
     clearSearch.hidden = q.value.length === 0
     document.getElementById('empty').hidden = visible !== 0
   }
@@ -27,6 +30,7 @@
   function clear() {
     q.value = ''
     level = ''
+    listed = false
     apply()
   }
 
@@ -43,6 +47,10 @@
 
   for (const filter of filters) filter.addEventListener('click', () => {
     level = level === filter.dataset.level ? '' : filter.dataset.level
+    updateResults()
+  })
+  listedFilter.addEventListener('click', () => {
+    listed = !listed
     updateResults()
   })
   for (const button of document.querySelectorAll('#reset, [data-reset]')) button.addEventListener('click', () => {

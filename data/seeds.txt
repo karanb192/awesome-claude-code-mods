@@ -1,4 +1,5 @@
 # Repos the GitHub code search has not indexed yet. One owner/repo per line.
+Nachx639/context-canary
 3dnow/claude-mods
 halluton/Mindful-Claude
 danzerzine/claude-council
@@ -11,6 +12,7 @@ OneWave-AI/claude-code-mods
 yash-gadodia/claude-mods
 plaxagoras/clawd-tales
 kongyo2/context-view
+OG-Matcha/tessera
 BatuhanCakmakk/wavy-usage
 jarrodwatts/intermission
 hellosverre/claude-skins
@@ -50,5 +52,7 @@ MarcoCarnevali/claude-code-mods
 joshuatonga/mini-claude-mods
 twjackysu/claude-code-stock-ticker
 vynnlee/mods
+alexjacobs08/guided-mr
+SummerRiversound/review-inbox
 RadTech-Solutions/modwall
 RadTech-Solutions/agent-pager

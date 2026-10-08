@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Clones every repo in data/repos.txt, finds each plugin whose hooks.json names
 // a module, runs `claude plugin validate` on it and records the footprint the
-// validator prints. Writes data/mods.json. Nothing here executes mod code.
+// validator prints, and marks the ones Anthropic's plugin directory lists. Writes data/mods.json. Nothing here executes mod code.
 //
 //   node tools/scan.mjs [--clones DIR] [--repos FILE] [--out FILE]
 
@@ -18,6 +18,7 @@ import { parseArgs } from 'node:util'
 import { readRepos, mergeRepos } from './candidates.mjs'
 import { reconcile, checkRequired } from './inventory.mjs'
 import { metaBatch } from './meta.mjs'
+import { readDirectory, applyDirectory } from './directory.mjs'
 
 const { values: args } = parseArgs({ options: {
   clones: { type: 'string' }, repos: { type: 'string' }, out: { type: 'string' },
@@ -165,6 +166,10 @@ const renames = renamePairs(mods, currentName, freshIds)
 applyDuplicatesWithRenames(mods, readDuplicates(), renames)
 for (const [old, current] of renames) console.log(`renamed  ${old} is ${current}`)
 for (const pair of suspectDuplicates(mods)) console.log(`possible duplicate: ${pair.join(' and ')} share an owner and a name; if they are one mod, add the pair to data/duplicates.txt`)
+// Which mods Anthropic's plugin directory lists. A failed read leaves each mod's earlier answer.
+let directory = null
+try { directory = readDirectory() } catch (error) { console.error(`directory not read, keeping earlier listings: ${error.message}`) }
+applyDirectory(mods, directory, new Map(previous.map(mod => [mod.id, mod.directory ?? null])))
 mods.sort((a, b) => (b.stars ?? -1) - (a.stars ?? -1) || a.id.localeCompare(b.id))
 mkdirSync(dirname(OUT), { recursive: true })
 writeFileSync(OUT, JSON.stringify({ generated: new Date().toISOString(), claudeVersion, repos: readRepos(REPOS).length, mods,

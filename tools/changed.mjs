@@ -21,7 +21,7 @@ export function fingerprint(data) {
       id: m.id, kind: m.kind, name: m.name, description: m.description,
       hooks: m.hooks, calls: m.calls, reach: m.reach.level, sees: m.sees,
       validates: m.validate.status, archived: m.archived,
-      marketplaces: m.marketplaces ?? [], compatibility: m.compatibility ?? null,
+      marketplaces: m.marketplaces ?? [], compatibility: m.compatibility ?? null, directory: m.directory ?? null,
     }))
   return JSON.stringify({ claudeVersion: data.claudeVersion, mods })
 }
@@ -52,6 +52,7 @@ export function describeChange(before, after) {
     if (o.validate.status !== m.validate.status) lines.push(`${id}: validate ${o.validate.status} to ${m.validate.status}`)
     if (JSON.stringify(o.marketplaces ?? []) !== JSON.stringify(m.marketplaces ?? [])) lines.push(`${id}: marketplace validation changed`)
     if (JSON.stringify(o.compatibility ?? null) !== JSON.stringify(m.compatibility ?? null)) lines.push(`${id}: compatibility review changed`)
+    if (JSON.stringify(o.directory ?? null) !== JSON.stringify(m.directory ?? null)) lines.push(`${id}: ${m.directory ? 'now listed in' : 'no longer listed in'} Anthropic's directory`)
     if (o.reach.level !== m.reach.level) lines.push(`${id}: reach L${o.reach.level} to L${m.reach.level}`)
     else if (JSON.stringify(o.calls) !== JSON.stringify(m.calls) || JSON.stringify(o.hooks) !== JSON.stringify(m.hooks)) lines.push(`${id}: footprint changed`)
   }
