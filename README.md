@@ -89,6 +89,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [claude-pokemon](https://github.com/dgokcin/claude-pokemon-mod) - Any of the 151 gen 1 Pokémon above the prompt to feed, pet and evolve, with a Poké Ball for each running subagent and 135 animated attacks.
 - [Pixel Play](https://github.com/chrisluo5311/Pixel-Play) - A docked pane that streams a YouTube or local playlist through mpv and yt-dlp while an animated pixel-art skin of your choice dances beside the conversation.
 - [stock-ticker](https://github.com/twjackysu/claude-code-stock-ticker) - Taiwan and US stock quotes above the prompt, fetched from TWSE MIS and Yahoo Finance every 15 seconds while the market is open and the session is on screen, with `/stock` to edit the watchlist, refresh rate, colors, alerts and language.
+- [banana](https://github.com/somethingwentwell/cc-mod-banana-game) - A clicker pane that opens while Claude thinks, where clicks earn coins and rare banana drops that trade for $1 of LLM tokens through a sponsor server it syncs click counts with.
 
 ## Git, pull requests and CI
 
