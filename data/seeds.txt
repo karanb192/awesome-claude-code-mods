@@ -55,3 +55,4 @@ vynnlee/mods
 alexjacobs08/guided-mr
 SummerRiversound/review-inbox
 somethingwentwell/cc-mod-banana-game
+valeryia-piatrova/token-hamster

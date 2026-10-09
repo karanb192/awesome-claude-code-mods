@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-06T12:27:08.993Z",
   "claudeVersion": "2.1.291",
-  "repos": 1318,
+  "repos": 1319,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -292898,6 +292898,115 @@
       "pushedAt": "2026-10-07T22:19:28Z",
       "createdAt": "2026-10-07T21:48:19Z",
       "license": null,
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "valeryia-piatrova/token-hamster:.",
+      "repo": "valeryia-piatrova/token-hamster",
+      "path": ".",
+      "sourceCommit": "82dfb7a63080239c7f674e9792598850ca67a85d",
+      "name": "token-hamster",
+      "description": "Claude Code mod that shows token usage, 5-hour and weekly limits, reset countdown and cost per turn as an animated hamster above the prompt",
+      "author": "valeryia-piatrova",
+      "homepage": "https://github.com/valeryia-piatrova/token-hamster",
+      "url": "https://github.com/valeryia-piatrova/token-hamster",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "hamster"
+          }
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "token-hamster"
+          }
+        }
+      ],
+      "calls": [
+        "$.agent.list",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.session.usage",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.291",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "token-hamster",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call"
+      ],
+      "draws": [
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-08T19:51:45Z",
+      "createdAt": "2026-10-08T11:35:05Z",
+      "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
       "directory": null
