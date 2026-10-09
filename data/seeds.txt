@@ -19,6 +19,7 @@ hellosverre/claude-skins
 augiefra/claude-mods
 nuromirzak/nibbl
 augbastos/afkswitch
+somethingwentwell/cc-mod-banana-game
 SARTHAK2511/claude-combo
 ljmerza/prompt-spellcheck
 scasella/claude-flightdeck
@@ -54,5 +55,4 @@ twjackysu/claude-code-stock-ticker
 vynnlee/mods
 alexjacobs08/guided-mr
 SummerRiversound/review-inbox
-somethingwentwell/cc-mod-banana-game
 valeryia-piatrova/token-hamster
