@@ -66,6 +66,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [clawd-dash](https://github.com/pinkpixel-dev/clawd-dash) - A three-column dashboard under the prompt with 5-hour, 7-day and context gauges, model, effort, cost, session stats, git status and file changes, plus an animated pixel Clawd that works, celebrates and relaxes along with the session.
 - [context-bar](https://github.com/hamzafer/claude-code-mods/tree/main/mods/context-bar) - The context window as one stacked bar above the prompt, a color per category like `/context`, with token counts and the compaction point.
 - [token-hamster](https://github.com/valeryia-piatrova/token-hamster) - An animated hamster above the prompt that eats every token in the colours of the token mix, with moods from the 5-hour and weekly limits and a reset countdown, plus a `/hamster` pane with context, pace forecast, cost per turn and usage by subagent, tool and model.
+- [villager-hp](https://github.com/Ashley-Pettit/villager-hp) - The 5-hour and weekly limits as an animated villager health card above the prompt, his mood falling with your HP, with rank badges, sci-fi effects and a death screen at 0 HP, plus `/hp` to preview any level.
 
 ## While you wait
 
