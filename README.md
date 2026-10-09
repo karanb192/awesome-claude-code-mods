@@ -66,6 +66,8 @@ Read the mod's source and access details before installing. Validation checks th
 - [clawd-dash](https://github.com/pinkpixel-dev/clawd-dash) - A three-column dashboard under the prompt with 5-hour, 7-day and context gauges, model, effort, cost, session stats, git status and file changes, plus an animated pixel Clawd that works, celebrates and relaxes along with the session.
 - [context-bar](https://github.com/hamzafer/claude-code-mods/tree/main/mods/context-bar) - The context window as one stacked bar above the prompt, a color per category like `/context`, with token counts and the compaction point.
 - [token-hamster](https://github.com/valeryia-piatrova/token-hamster) - An animated hamster above the prompt that eats every token in the colours of the token mix, with moods from the 5-hour and weekly limits and a reset countdown, plus a `/hamster` pane with context, pace forecast, cost per turn and usage by subagent, tool and model.
+- [buildpane](https://github.com/griches/buildpane) - A pane of errors by file, failed tests and warnings from tsc, cargo, go, pytest, Jest, gradle and package scripts, with the diagnostics handed to Claude in place of the raw log and a count of the tokens that saved.
+- [xcpane](https://github.com/griches/xcpane) - A pane of `xcodebuild` and `swift build` errors by file, failed tests and coverage read from Xcode's result bundle, with the diagnostics handed to Claude in place of the raw log.
 
 ## While you wait
 
@@ -117,6 +119,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [merge-gate](https://github.com/yash-gadodia/claude-mods/tree/main/merge-gate) - Checks merge permission for recognized Bash merge commands and selected pushes from feature branches to trunk.
 - [receipt](https://github.com/yash-gadodia/claude-mods/tree/main/receipt) - Turns the turn footer into a receipt of edits, runs and curls, never folds a destructive command into a tool group, and names an unverified claim in the spinner.
 - [blast-radius](https://github.com/hamzafer/claude-code-mods/tree/main/mods/blast-radius) - Holds recognized recursive deletes, force pushes and migrations for confirmation, previews file deletions and branch changes, and cancels if nobody answers in time.
+- [installguard](https://github.com/griches/installguard) - Looks up each new npm, PyPI, crates.io or RubyGems package before it installs and asks before running one that does not exist, looks like a popular package, is days old or little used, or a script piped from a URL into a shell; it sends only the package name to the public registries.
 
 ## Memory and context
 
