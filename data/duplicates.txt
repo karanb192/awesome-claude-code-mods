@@ -1,4 +1,4 @@
-# A mod its author has moved or copied to another repo, so the scan found it twice.
+# Confirmed copies of one mod, including author moves and copies by other authors.
 # One pair per line: the superseded copy's id, then the id of the copy that counts.
 # Ids are owner/repo:path as in data/mods.json. The scanner never infers a pair; it
 # only flags same-owner same-name candidates in the nightly log for someone to confirm here.
@@ -64,3 +64,17 @@ dvakatsiienko/frame:home/.claude/plugin-x/mods/guard dvakatsiienko/frame:home/.c
 dvakatsiienko/frame:home/.claude/plugin-x/mods/redact dvakatsiienko/frame:home/.claude/plugin-x/mods/x-mod-redact
 dvakatsiienko/frame:home/.claude/plugin-x/mods/stash dvakatsiienko/frame:home/.claude/plugin-x/mods/x-mod-stash
 natsume-777/claude-mods:plugins/token-ledger natsume-777/claude-mods:plugins/usage-ledger
+inematds/claude-mods-starter-kit:plugins/auto-handoff promptadvisers/claude-mods-starter-kit:plugins/auto-handoff
+inematds/claude-mods-starter-kit:plugins/changes-receipt promptadvisers/claude-mods-starter-kit:plugins/changes-receipt
+inematds/claude-mods-starter-kit:plugins/context-meter promptadvisers/claude-mods-starter-kit:plugins/context-meter
+inematds/claude-mods-starter-kit:plugins/coral-skin promptadvisers/claude-mods-starter-kit:plugins/coral-skin
+inematds/claude-mods-starter-kit:plugins/flight-recorder promptadvisers/claude-mods-starter-kit:plugins/flight-recorder
+inematds/claude-mods-starter-kit:plugins/model-router promptadvisers/claude-mods-starter-kit:plugins/model-router
+inematds/claude-mods-starter-kit:plugins/output-tray promptadvisers/claude-mods-starter-kit:plugins/output-tray
+inematds/claude-mods-starter-kit:plugins/repo-heatmap promptadvisers/claude-mods-starter-kit:plugins/repo-heatmap
+inematds/claude-mods-starter-kit:plugins/session-bookmarks promptadvisers/claude-mods-starter-kit:plugins/session-bookmarks
+inematds/claude-mods-starter-kit:plugins/terminal-pet promptadvisers/claude-mods-starter-kit:plugins/terminal-pet
+inematds/5-mods:cache-keeper nateherkai/claude-code-mods:cache-keeper
+inematds/5-mods:collision-guard nateherkai/claude-code-mods:collision-guard
+inematds/5-mods:goal-meter nateherkai/claude-code-mods:goal-meter
+inematds/5-mods:recording-mode nateherkai/claude-code-mods:recording-mode

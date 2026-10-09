@@ -7,7 +7,7 @@ Add a browser beside your conversation, keep usage in view, or check a command b
 This community catalogue scans public GitHub repositories and records what Claude's validator reports each mod can read, write, run or send over the network. It is an independent scan, not an official Anthropic directory.
 
 <!-- stats:start -->
-**2692 mods** · Last scanned 2026-10-06.
+**2959 mods** · Last scanned 2026-10-09.
 <!-- stats:end -->
 
 ![Browsing a GitHub pull request beside a Claude Code conversation using terminal-browser](assets/terminal-browser-demo.gif)
@@ -65,6 +65,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [weektoken](https://github.com/3dnow/claude-mods/tree/main/weektoken) - Pace for the 5-hour, 7-day and per-model weekly limits such as Fable, shown as usage against elapsed time above the prompt, plus a `/weektoken` pane with a run-out forecast and a burn-up chart of past windows.
 - [clawd-dash](https://github.com/pinkpixel-dev/clawd-dash) - A three-column dashboard under the prompt with 5-hour, 7-day and context gauges, model, effort, cost, session stats, git status and file changes, plus an animated pixel Clawd that works, celebrates and relaxes along with the session.
 - [context-bar](https://github.com/hamzafer/claude-code-mods/tree/main/mods/context-bar) - The context window as one stacked bar above the prompt, a color per category like `/context`, with token counts and the compaction point.
+- [token-hamster](https://github.com/valeryia-piatrova/token-hamster) - An animated hamster above the prompt that eats every token in the colours of the token mix, with moods from the 5-hour and weekly limits and a reset countdown, plus a `/hamster` pane with context, pace forecast, cost per turn and usage by subagent, tool and model.
 
 ## While you wait
 
@@ -89,6 +90,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [claude-pokemon](https://github.com/dgokcin/claude-pokemon-mod) - Any of the 151 gen 1 Pokémon above the prompt to feed, pet and evolve, with a Poké Ball for each running subagent and 135 animated attacks.
 - [Pixel Play](https://github.com/chrisluo5311/Pixel-Play) - A docked pane that streams a YouTube or local playlist through mpv and yt-dlp while an animated pixel-art skin of your choice dances beside the conversation.
 - [stock-ticker](https://github.com/twjackysu/claude-code-stock-ticker) - Taiwan and US stock quotes above the prompt, fetched from TWSE MIS and Yahoo Finance every 15 seconds while the market is open and the session is on screen, with `/stock` to edit the watchlist, refresh rate, colors, alerts and language.
+- [banana](https://github.com/somethingwentwell/cc-mod-banana-game) - A clicker pane that opens while Claude thinks, where clicks earn coins and rare banana drops that trade for $1 of LLM tokens through a sponsor server it syncs click counts with.
 - [Code City](https://github.com/verdantran/code-city) - An idle city builder that grows as you prompt, where the tokens you spend buy buildings and other Claude Code sessions show up as neighbouring cities.
 
 ## Git, pull requests and CI
@@ -106,6 +108,7 @@ Read the mod's source and access details before installing. Validation checks th
 
 ## Safety and privacy
 
+- [ultramod](https://github.com/mertkayacs/ultramod) - Ten mods in one plugin: a limits HUD, receipts that flag unverified test claims, a guard that snapshots work before destructive Git and rm commands with `/ultra undo`, secret redaction and switchable sets.
 - [secret-redactor](https://github.com/ray-amjad/awesome-claude-code-function-hooks/tree/main/plugins/secret-redactor) - Swaps secrets, email addresses and IPs for stable placeholders before the model reads them, and restores them on the way into a tool call.
 - [honmoon-redact](https://github.com/pleaseai/honmoon/tree/main/packages/claude-plugin) - Redacts API keys and sensitive identifiers from Read, Bash and Grep output before it reaches the model.
 - [kb-settings-guard](https://github.com/ray-manaloto/knowledge-base/tree/main/.claude/mods/kb-settings-guard) - Denies a delegated agent lane any write to the repo's Claude settings files.
@@ -116,6 +119,8 @@ Read the mod's source and access details before installing. Validation checks th
 - [merge-gate](https://github.com/yash-gadodia/claude-mods/tree/main/merge-gate) - Checks merge permission for recognized Bash merge commands and selected pushes from feature branches to trunk.
 - [receipt](https://github.com/yash-gadodia/claude-mods/tree/main/receipt) - Turns the turn footer into a receipt of edits, runs and curls, never folds a destructive command into a tool group, and names an unverified claim in the spinner.
 - [blast-radius](https://github.com/hamzafer/claude-code-mods/tree/main/mods/blast-radius) - Holds recognized recursive deletes, force pushes and migrations for confirmation, previews file deletions and branch changes, and cancels if nobody answers in time.
+- [devtools](https://github.com/NMenzel/claude-devtools-mod) - Breakpoints on tools, shell commands, file paths and failures that hold a call in Claude Code's question dialog for Continue, Step or Reject, with a dim "break on" line under each tool row, a dashboard pane with timeline and inspector, and an Error Lens that explains failed calls as confirmed, possible or unknown causes, making no network or model calls.
+- [modwall](https://github.com/RadTech-Solutions/modwall) - Reads each mod's scanned footprint as it loads, labels its reach and risk, and audits, holds or refuses it by an audit, ask or allowlist policy with a blocklist.
 
 ## Memory and context
 
@@ -147,6 +152,7 @@ Read the mod's source and access details before installing. Validation checks th
 
 ## Agents and workflows
 
+- [rabe](https://github.com/lorenzh/rabe) - A band above the prompt and a `/rabe` pane with the session's subagents, workflows, Codex plugin jobs, background shells, monitors and cron jobs, each with live output, tokens and a stop key, plus Cost, Effects and Timeline tabs.
 - [agent-shell-watch](https://github.com/apolenkov/agent-shell-watch) - A status line and a `/shell-watch` pane for every Bash call, background task and delegated agent run of the session (Codex, Pi, Devin), with elapsed time, output freshness, the current output line and errors.
 - [agent-council](https://github.com/apolenkov/agent-council) - `/council` runs the Codex, Pi, Devin and OpenCodeReview CLIs on the working diff in parallel, which sends the diff to their providers, and merges their findings into agreements, disagreements and unique findings.
 - [autodev-core](https://github.com/djnsty23/claude-auto-dev/tree/main/plugins/autodev-core) - Brainstorm, auto, iterate, audit, review and ship commands with a prd.json sprint system.
@@ -163,6 +169,8 @@ Read the mod's source and access details before installing. Validation checks th
 - [claude-council](https://github.com/danzerzine/claude-council) - A band above the prompt that brings GPT in as fresh eyes on a stuck question, with its answer, Claude's take and GPT's reply pasted into the chat, and can have Codex check every handover against the chat's spec and send gross violations back before the agent answers.
 - [prompt-drafts](https://github.com/vynnlee/mods/tree/main/prompt-drafts) - End a prompt with `;;` to keep it as a draft of the session instead of sending it, then `/drafts` puts it back in the prompt box from a sidebar with number keys, or from Claude Code's question dialog in a narrow terminal.
 - [mission-control](https://github.com/hamzafer/claude-code-mods/tree/main/mods/mission-control) - A pane with every subagent and tool call live, plus a code map of the files they read and write, with a Haiku call that describes each file's changes.
+- [agent-pager](https://github.com/RadTech-Solutions/agent-pager) - Pages your phone through ntfy or your own Telegram bot when a long turn ends, a question or permission prompt waits, or a turn errors, and queues your Telegram replies as prompts in the one session you pick with `/pager listen`.
+- [session-board](https://github.com/danilpavlov/telescope-claude-code) - A floating tmux popup with an fzf picker of every Claude Code session running on the machine, showing which ones wait for you, a Haiku summary of each, and a jump to the tmux window of the one you pick.
 
 ## Building mods
 

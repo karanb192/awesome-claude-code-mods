@@ -6,6 +6,7 @@ danzerzine/claude-council
 anthropics/claude-code
 karanb192/claude-code-mods
 karanb192/cache-tax
+lorenzh/rabe
 Anerco/effort-cycle-mod
 moduvoice/claude-code-ko-ui
 OneWave-AI/claude-code-mods
@@ -19,6 +20,7 @@ hellosverre/claude-skins
 augiefra/claude-mods
 nuromirzak/nibbl
 augbastos/afkswitch
+somethingwentwell/cc-mod-banana-game
 SARTHAK2511/claude-combo
 ljmerza/prompt-spellcheck
 scasella/claude-flightdeck
@@ -54,4 +56,10 @@ twjackysu/claude-code-stock-ticker
 vynnlee/mods
 alexjacobs08/guided-mr
 SummerRiversound/review-inbox
+RadTech-Solutions/modwall
+RadTech-Solutions/agent-pager
+danilpavlov/telescope-claude-code
+valeryia-piatrova/token-hamster
+NMenzel/claude-devtools-mod
+mertkayacs/ultramod
 verdantran/code-city
