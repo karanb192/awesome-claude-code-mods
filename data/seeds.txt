@@ -6,6 +6,7 @@ danzerzine/claude-council
 anthropics/claude-code
 karanb192/claude-code-mods
 karanb192/cache-tax
+lorenzh/rabe
 Anerco/effort-cycle-mod
 moduvoice/claude-code-ko-ui
 OneWave-AI/claude-code-mods
@@ -54,4 +55,4 @@ twjackysu/claude-code-stock-ticker
 vynnlee/mods
 alexjacobs08/guided-mr
 SummerRiversound/review-inbox
-lorenzh/rabe
+valeryia-piatrova/token-hamster

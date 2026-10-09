@@ -7,7 +7,7 @@ Add a browser beside your conversation, keep usage in view, or check a command b
 This community catalogue scans public GitHub repositories and records what Claude's validator reports each mod can read, write, run or send over the network. It is an independent scan, not an official Anthropic directory.
 
 <!-- stats:start -->
-**2692 mods** · Last scanned 2026-10-06.
+**2693 mods** · Last scanned 2026-10-06.
 <!-- stats:end -->
 
 ![Browsing a GitHub pull request beside a Claude Code conversation using terminal-browser](assets/terminal-browser-demo.gif)
@@ -65,6 +65,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [weektoken](https://github.com/3dnow/claude-mods/tree/main/weektoken) - Pace for the 5-hour, 7-day and per-model weekly limits such as Fable, shown as usage against elapsed time above the prompt, plus a `/weektoken` pane with a run-out forecast and a burn-up chart of past windows.
 - [clawd-dash](https://github.com/pinkpixel-dev/clawd-dash) - A three-column dashboard under the prompt with 5-hour, 7-day and context gauges, model, effort, cost, session stats, git status and file changes, plus an animated pixel Clawd that works, celebrates and relaxes along with the session.
 - [context-bar](https://github.com/hamzafer/claude-code-mods/tree/main/mods/context-bar) - The context window as one stacked bar above the prompt, a color per category like `/context`, with token counts and the compaction point.
+- [token-hamster](https://github.com/valeryia-piatrova/token-hamster) - An animated hamster above the prompt that eats every token in the colours of the token mix, with moods from the 5-hour and weekly limits and a reset countdown, plus a `/hamster` pane with context, pace forecast, cost per turn and usage by subagent, tool and model.
 
 ## While you wait
 
@@ -146,6 +147,7 @@ Read the mod's source and access details before installing. Validation checks th
 
 ## Agents and workflows
 
+- [rabe](https://github.com/lorenzh/rabe) - A band above the prompt and a `/rabe` pane with the session's subagents, workflows, Codex plugin jobs, background shells, monitors and cron jobs, each with live output, tokens and a stop key, plus Cost, Effects and Timeline tabs.
 - [agent-shell-watch](https://github.com/apolenkov/agent-shell-watch) - A status line and a `/shell-watch` pane for every Bash call, background task and delegated agent run of the session (Codex, Pi, Devin), with elapsed time, output freshness, the current output line and errors.
 - [agent-council](https://github.com/apolenkov/agent-council) - `/council` runs the Codex, Pi, Devin and OpenCodeReview CLIs on the working diff in parallel, which sends the diff to their providers, and merges their findings into agreements, disagreements and unique findings.
 - [autodev-core](https://github.com/djnsty23/claude-auto-dev/tree/main/plugins/autodev-core) - Brainstorm, auto, iterate, audit, review and ship commands with a prd.json sprint system.
@@ -162,7 +164,6 @@ Read the mod's source and access details before installing. Validation checks th
 - [claude-council](https://github.com/danzerzine/claude-council) - A band above the prompt that brings GPT in as fresh eyes on a stuck question, with its answer, Claude's take and GPT's reply pasted into the chat, and can have Codex check every handover against the chat's spec and send gross violations back before the agent answers.
 - [prompt-drafts](https://github.com/vynnlee/mods/tree/main/prompt-drafts) - End a prompt with `;;` to keep it as a draft of the session instead of sending it, then `/drafts` puts it back in the prompt box from a sidebar with number keys, or from Claude Code's question dialog in a narrow terminal.
 - [mission-control](https://github.com/hamzafer/claude-code-mods/tree/main/mods/mission-control) - A pane with every subagent and tool call live, plus a code map of the files they read and write, with a Haiku call that describes each file's changes.
-- [rabe](https://github.com/lorenzh/rabe) - A band above the prompt and a `/rabe` pane with the session's subagents, workflows, Codex plugin jobs, background shells, monitors and cron jobs, each with live output, tokens and a stop key, plus Cost, Effects and Timeline tabs.
 
 ## Building mods
 
