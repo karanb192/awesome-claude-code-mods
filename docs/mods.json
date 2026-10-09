@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-06T12:27:08.993Z",
   "claudeVersion": "2.1.291",
-  "repos": 1319,
+  "repos": 1321,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -293006,6 +293006,221 @@
       "stars": 0,
       "pushedAt": "2026-10-08T19:51:45Z",
       "createdAt": "2026-10-08T11:35:05Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "danilpavlov/telescope-claude-code:.",
+      "repo": "danilpavlov/telescope-claude-code",
+      "path": ".",
+      "sourceCommit": "4a1c6ac36c7ec13ace1ef83384c7d79e09e35fa4",
+      "name": "session-board",
+      "description": "A floating board of the Claude Code sessions running right now: who works, who waits for you, what was done - and a jump to the tmux window of the one you pick.",
+      "author": "Daniil Pavlov",
+      "homepage": "https://github.com/danilpavlov/telescope-claude-code",
+      "url": "https://github.com/danilpavlov/telescope-claude-code",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "board"
+          }
+        },
+        {
+          "event": "prompt.edit",
+          "matcher": {}
+        },
+        {
+          "event": "ui.focus",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "board"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.write",
+        "$.model.complete",
+        "$.process.run",
+        "$.process.spawn",
+        "$.session.id",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.keys",
+        "$.store.set",
+        "$.ui.close",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.291",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "telescope-claude-code",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.process.spawn",
+          "other: $.state.get",
+          "other: $.state.set",
+          "runs processes",
+          "writes files",
+          "drives Claude",
+          "reads env vars",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-08T15:12:10Z",
+      "createdAt": "2026-10-08T14:40:34Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "somethingwentwell/cc-mod-banana-game:.",
+      "repo": "somethingwentwell/cc-mod-banana-game",
+      "path": ".",
+      "sourceCommit": "ee3d1660c509716fc8fbd893cb363c513220e2d8",
+      "name": "banana",
+      "description": "A clicker pane that opens while Claude thinks: earn coins, catch rare bananas, climb the leaderboard, and redeem $1 of LLM tokens from the sponsor.",
+      "author": "somethingwentwell",
+      "homepage": "https://banana.jevable.ai",
+      "url": "https://github.com/somethingwentwell/cc-mod-banana-game",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "banana"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "banana"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.sleep",
+        "$.command.register",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.http.fetch",
+        "$.process.run",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.close",
+        "$.ui.copy",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.291",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "banana",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "network",
+          "runs processes",
+          "reads files",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-08T12:25:58Z",
+      "createdAt": "2026-10-08T11:58:13Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

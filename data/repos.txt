@@ -301,6 +301,7 @@ DamianPala/sessile
 Dan-Millie-Front/turn-progress
 danieldeusing/capi-cc-mod
 DanielPodolsky/tokencraft
+danilpavlov/telescope-claude-code
 Danneftw1/neon-sumi
 DannyMac180/skills
 danyuchn/claude-cache-panel
@@ -1079,6 +1080,7 @@ soefrey/net-connections
 sofanaja44/slash
 sohryuu101/fast-jev-compaction
 sohryuu101/jev-vault-gate
+somethingwentwell/cc-mod-banana-game
 sonata39-star/claude-mod
 sontixyou/sushi-uchi
 soonavi/claude-mods
