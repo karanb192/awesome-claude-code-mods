@@ -1,5 +1,5 @@
-// A mod its author has moved or copied to another repo shows up twice in a scan. The pairs
-// that are one mod are recorded by hand in data/duplicates.txt; the scanner applies that
+// A mod moved or copied by its author, or copied by someone else, can appear twice. Confirmed
+// pairs are recorded by hand in data/duplicates.txt; the scanner applies that
 // list and flags same-owner same-name candidates for review. It collapses on its own only a
 // repository GitHub reports under a new name, because owner plus manifest name is not a
 // durable identity and a wrong match hides a mod.
