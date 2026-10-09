@@ -66,6 +66,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [clawd-dash](https://github.com/pinkpixel-dev/clawd-dash) - A three-column dashboard under the prompt with 5-hour, 7-day and context gauges, model, effort, cost, session stats, git status and file changes, plus an animated pixel Clawd that works, celebrates and relaxes along with the session.
 - [context-bar](https://github.com/hamzafer/claude-code-mods/tree/main/mods/context-bar) - The context window as one stacked bar above the prompt, a color per category like `/context`, with token counts and the compaction point.
 - [token-hamster](https://github.com/valeryia-piatrova/token-hamster) - An animated hamster above the prompt that eats every token in the colours of the token mix, with moods from the 5-hour and weekly limits and a reset countdown, plus a `/hamster` pane with context, pace forecast, cost per turn and usage by subagent, tool and model.
+- [cyxj-notch](https://github.com/chenyuxiaojin/cyxj-notch) - Five mods that draw a usage status line, a task-progress band and side panes, and feed a macOS notch panel showing the 5-hour and weekly limits, every open session with its progress, and the idle session whose prompt cache expires soonest.
 
 ## While you wait
 
