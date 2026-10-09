@@ -91,6 +91,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [Pixel Play](https://github.com/chrisluo5311/Pixel-Play) - A docked pane that streams a YouTube or local playlist through mpv and yt-dlp while an animated pixel-art skin of your choice dances beside the conversation.
 - [stock-ticker](https://github.com/twjackysu/claude-code-stock-ticker) - Taiwan and US stock quotes above the prompt, fetched from TWSE MIS and Yahoo Finance every 15 seconds while the market is open and the session is on screen, with `/stock` to edit the watchlist, refresh rate, colors, alerts and language.
 - [banana](https://github.com/somethingwentwell/cc-mod-banana-game) - A clicker pane that opens while Claude thinks, where clicks earn coins and rare banana drops that trade for $1 of LLM tokens through a sponsor server it syncs click counts with.
+- [lgtm-flash](https://github.com/Ashley-Pettit/lgtm-flash) - After every code change the LGTM Lines container ship sails in above the prompt, the L G T M containers slam onto its deck and the camera zooms in on LOOKS GOOD TO ME, drawn locally with no model calls or network, plus `/ship` to launch it any time.
 
 ## Git, pull requests and CI
 
