@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-06T12:27:08.993Z",
   "claudeVersion": "2.1.291",
-  "repos": 1321,
+  "repos": 1322,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -293221,6 +293221,280 @@
       "stars": 0,
       "pushedAt": "2026-10-08T12:25:58Z",
       "createdAt": "2026-10-08T11:58:13Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "lorenzh/rabe:.",
+      "repo": "lorenzh/rabe",
+      "path": ".",
+      "sourceCommit": "cc4f6c39373f4f3ec7de808202c71c890678b367",
+      "name": "rabe",
+      "description": "Watch Claude Code's background work: subagents, Codex jobs, shells, monitors, cron jobs and workflows.",
+      "author": "Lorenz Hilpert",
+      "homepage": "https://github.com/lorenzh/rabe",
+      "url": "https://github.com/lorenzh/rabe",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {
+            "cwd": "/\"^\"/"
+          }
+        },
+        {
+          "event": "agent.spawn",
+          "matcher": {
+            "subagentType": "/\"^\"/"
+          }
+        },
+        {
+          "event": "classic.SubagentStart",
+          "matcher": {
+            "agent_id": "/\"^\"/"
+          }
+        },
+        {
+          "event": "turn.step",
+          "matcher": {
+            "agentId": "/\"^\"/"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Edit|Write"
+          }
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {
+            "agentId": "/\"^\"/"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Workflow"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {
+            "origin has {kind": "task-notification"
+          }
+        },
+        {
+          "event": "session.start",
+          "matcher": {
+            "isInteractive": "true"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "rabe-stop",
+            "args": "/\"^\\\\s*codex:\"/"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {
+            "origin has {kind": "task-notification"
+          }
+        },
+        {
+          "event": "classic.Stop",
+          "matcher": {
+            "stop_hook_active": "true|false"
+          }
+        },
+        {
+          "event": "session.start",
+          "matcher": {
+            "isInteractive": "true|false"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Monitor"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {
+            "origin has {kind": "task-notification"
+          }
+        },
+        {
+          "event": "classic.Stop",
+          "matcher": {
+            "stop_hook_active": "true|false"
+          }
+        },
+        {
+          "event": "session.start",
+          "matcher": {
+            "isInteractive": "true|false"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "CronCreate"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "CronDelete"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "ScheduleWakeup"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {
+            "origin has {kind": "scheduled-trigger"
+          }
+        },
+        {
+          "event": "classic.Stop",
+          "matcher": {
+            "stop_hook_active": "true|false"
+          }
+        },
+        {
+          "event": "session.start",
+          "matcher": {
+            "isInteractive": "true|false"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "rabe"
+          }
+        },
+        {
+          "event": "session.en",
+          "matcher": {}
+        },
+        {
+          "event": "152",
+          "matcher": {}
+        },
+        {
+          "event": "chars",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.agent.list",
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.command.run",
+        "$.env.get",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.process.run",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.send",
+        "$.session.usage",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.tool.call",
+        "$.ui.copy",
+        "$.ui.focus",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.291",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "rabe",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "runs processes",
+          "drives Claude",
+          "reads files",
+          "reads env vars",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "subagent spawns",
+        "classic hooks",
+        "Edit|Write calls",
+        "Workflow calls",
+        "every prompt",
+        "Bash calls",
+        "Monitor calls",
+        "CronCreate calls",
+        "CronDelete calls",
+        "ScheduleWakeup calls"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-09T02:27:43Z",
+      "createdAt": "2026-10-08T20:26:43Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

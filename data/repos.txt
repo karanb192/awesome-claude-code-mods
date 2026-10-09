@@ -672,6 +672,7 @@ localailab/mod-db-conversation
 longmaba/no-limit
 LorcanChinnock/claude-desk-neighbours
 LorcanChinnock/claude-plugins
+lorenzh/rabe
 lossless-claude/lcm
 lperezmo/cache-caffeine
 lperezmo/caffeine
