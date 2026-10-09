@@ -1019,6 +1019,8 @@ r3al1tym/isobar
 r3dbars/transcripted
 radiator-engineering/eventlog
 radiator-engineering/offcut
+RadTech-Solutions/agent-pager
+RadTech-Solutions/modwall
 RafeSymonds/claude-mods
 railyai/claude-code-mods
 RakshitSathvara/rakshit-mods
