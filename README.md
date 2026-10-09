@@ -117,6 +117,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [merge-gate](https://github.com/yash-gadodia/claude-mods/tree/main/merge-gate) - Checks merge permission for recognized Bash merge commands and selected pushes from feature branches to trunk.
 - [receipt](https://github.com/yash-gadodia/claude-mods/tree/main/receipt) - Turns the turn footer into a receipt of edits, runs and curls, never folds a destructive command into a tool group, and names an unverified claim in the spinner.
 - [blast-radius](https://github.com/hamzafer/claude-code-mods/tree/main/mods/blast-radius) - Holds recognized recursive deletes, force pushes and migrations for confirmation, previews file deletions and branch changes, and cancels if nobody answers in time.
+- [devtools](https://github.com/NMenzel/claude-devtools-mod) - Breakpoints on tools, shell commands, file paths and failures that hold a call in Claude Code's question dialog for Continue, Step or Reject, with a dim "break on" line under each tool row, a dashboard pane with timeline and inspector, and an Error Lens that explains failed calls as confirmed, possible or unknown causes, making no network or model calls.
 
 ## Memory and context
 
