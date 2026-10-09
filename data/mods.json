@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-09T09:10:35.513Z",
   "claudeVersion": "2.1.295",
-  "repos": 1430,
+  "repos": 1432,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -331563,6 +331563,197 @@
       "stars": 0,
       "pushedAt": "2026-10-08T08:35:38Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "RadTech-Solutions/agent-pager:.",
+      "repo": "RadTech-Solutions/agent-pager",
+      "path": ".",
+      "sourceCommit": "79701a8bcd9812fe1f05aa3154dd2db0eebcc68a",
+      "name": "agent-pager",
+      "description": "Pages your phone (ntfy or Telegram) when the coding agent finishes a long turn or needs you, and lets you reply from the phone.",
+      "author": "RadTech",
+      "homepage": "https://github.com/RadTech-Solutions/agent-pager",
+      "url": "https://github.com/RadTech-Solutions/agent-pager",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "pager"
+          }
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "AskUserQuestion"
+          }
+        },
+        {
+          "event": "classic.Notification",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.http.fetch",
+        "$.prompt.submit",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.model",
+        "$.session.turns",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.keys",
+        "$.store.set",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.295",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "agent-pager",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "network",
+          "drives Claude",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "AskUserQuestion calls",
+        "classic hooks"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-10-09T07:07:18Z",
+      "createdAt": "2026-10-07T20:32:28Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "RadTech-Solutions/modwall:.",
+      "repo": "RadTech-Solutions/modwall",
+      "path": ".",
+      "sourceCommit": "959879ec08e5672dfe5e8c76133828baed24b607",
+      "name": "modwall",
+      "description": "A firewall for other mods: shows what each mod can reach as it loads, and audits, holds or refuses it by your policy",
+      "author": "RadTech",
+      "homepage": "https://github.com/RadTech-Solutions/modwall",
+      "url": "https://github.com/RadTech-Solutions/modwall",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "plugin.register",
+          "matcher": {}
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "modwall"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.command.register",
+        "$.process.run",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.295",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "modwall",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "runs processes",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-10-08T12:11:51Z",
+      "createdAt": "2026-10-07T20:41:11Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

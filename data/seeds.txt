@@ -56,6 +56,9 @@ twjackysu/claude-code-stock-ticker
 vynnlee/mods
 alexjacobs08/guided-mr
 SummerRiversound/review-inbox
+RadTech-Solutions/modwall
+RadTech-Solutions/agent-pager
 danilpavlov/telescope-claude-code
 valeryia-piatrova/token-hamster
 NMenzel/claude-devtools-mod
+mertkayacs/ultramod
