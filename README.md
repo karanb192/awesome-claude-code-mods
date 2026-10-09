@@ -134,6 +134,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [mokkan](https://github.com/vicmpen/mokkan/tree/main/claude-plugin) - `/mokkan` docks a pane of todos and timed reminders beside the transcript, shared with every Claude Code, Codex and terminal session through the mokkan server (api.mokkan.dev), which emails a due reminder nobody acknowledges.
 - [agent-compact-advisor](https://github.com/apolenkov/agent-compact-advisor) - A 0-100 score in the status line for how good a moment it is to `/compact`, with a ready `/compact` suggestion past a threshold and a template added to every compaction that keeps the goal, decisions and open leftovers; it never compacts by itself, and its one network call goes to a local Kev endpoint on loopback.
 - [context-canary](https://github.com/Nachx639/context-canary) - A pixel-art canary above the prompt that dies when a final reply skips a sentinel from CLAUDE.md, then compacts the session keeping your instructions and revives.
+- [session-links](https://github.com/samaphp/session-links) - Every link the session mentions in one band above the prompt, to pin, dismiss, rename or open in the browser, saved with the session; it never fetches a page and the model never sees the band.
 
 ## Rendering
 
