@@ -170,6 +170,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [mission-control](https://github.com/hamzafer/claude-code-mods/tree/main/mods/mission-control) - A pane with every subagent and tool call live, plus a code map of the files they read and write, with a Haiku call that describes each file's changes.
 - [agent-pager](https://github.com/RadTech-Solutions/agent-pager) - Pages your phone through ntfy or your own Telegram bot when a long turn ends, a question or permission prompt waits, or a turn errors, and queues your Telegram replies as prompts in the one session you pick with `/pager listen`.
 - [session-board](https://github.com/danilpavlov/telescope-claude-code) - A floating tmux popup with an fzf picker of every Claude Code session running on the machine, showing which ones wait for you, a Haiku summary of each, and a jump to the tmux window of the one you pick.
+- [jev-router](https://github.com/dominicrico/jev-router) - Asks TypeSafe Jev which Claude model and reasoning effort each prompt, step and subagent needs and applies the pick, with an effort cap, a prompt-cache guard that holds the current model while the cache is warm, a band above the prompt showing each pick, and `/jev status` for a savings estimate.
 
 ## Building mods
 
