@@ -347,6 +347,7 @@ danzerzine/claude-council
 DarioFontanel/claude-code-mods
 darkautism/ext-agent
 darkroomengineering/cc-settings
+DarkVelours/claude-code-galactic-battle
 darrell-tw/darrelltw-mods
 data-goblin/claude-code-filetree
 davekiss/env
