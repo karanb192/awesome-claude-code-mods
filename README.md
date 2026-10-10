@@ -46,6 +46,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [token-ledger](https://github.com/Arunjay4213/claude-mods/tree/main/plugins/token-ledger) - A pinned line with session cost, last-turn tokens and cache hit ratio, plus `/ledger` for the table.
 - [context-lens](https://github.com/Arunjay4213/claude-mods/tree/main/plugins/context-lens) - A live `/context` line with window fill and growth per turn, plus a pane with per-category bars.
 - [quota-meter](https://github.com/Arunjay4213/claude-mods/tree/main/plugins/quota-meter) - The 5-hour and 7-day plan windows as a pinned status line.
+- [auto-continue](https://github.com/icedevil2001/auto-continue) - Waits out the 5-hour limit and sends "continue" five minutes after the window resets, armed from a button above the prompt once the window is 25% used or with `/auto-continue`, using only the engine's own rate-limit reading and making no network calls.
 - [agent-flow](https://github.com/Charlie0113-T/claude-agent-flow) - `/flow` opens a live tree of the session's subagents and teammates beside the transcript.
 - [effort-cycle](https://github.com/Anerco/effort-cycle-mod) - Alt+E and Alt+Shift+E step the effort level without a transcript row, and the footer shows the model and level as a colored meter.
 - [model-pick](https://github.com/joshuatonga/mini-claude-mods/tree/main/model-pick) - `/pick` fuzzy-searches a model and effort combo and applies it through `/model` and `/effort`, with favorites, typed aliases and the last five picks.
