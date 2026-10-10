@@ -135,6 +135,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [mokkan](https://github.com/vicmpen/mokkan/tree/main/claude-plugin) - `/mokkan` docks a pane of todos and timed reminders beside the transcript, shared with every Claude Code, Codex and terminal session through the mokkan server (api.mokkan.dev), which emails a due reminder nobody acknowledges.
 - [agent-compact-advisor](https://github.com/apolenkov/agent-compact-advisor) - A 0-100 score in the status line for how good a moment it is to `/compact`, with a ready `/compact` suggestion past a threshold and a template added to every compaction that keeps the goal, decisions and open leftovers; it never compacts by itself, and its one network call goes to a local Kev endpoint on loopback.
 - [context-canary](https://github.com/Nachx639/context-canary) - A pixel-art canary above the prompt that dies when a final reply skips a sentinel from CLAUDE.md, then compacts the session keeping your instructions and revives.
+- [cache-warmer](https://github.com/paulbkim-dev/claude-code-cache-warmer) - Forks the last request with tools denied shortly before the 5-minute or 1-hour prompt cache expires, so the next prompt after a break reads the cache; each refresh is billed like any request, is skipped when its expected saving is under $0.05 and shows in a band above the prompt.
 
 ## Rendering
 
