@@ -1397,6 +1397,7 @@ VibeMage/claude-mod-pet
 vic0919/claude-task-hud
 vicmpen/mokkan
 victor-falcon/claude-status-bar
+vihrea1337/headroom
 viik2k/clawdify
 vincentlauriat/ModsTools
 vinta/hal-9000
