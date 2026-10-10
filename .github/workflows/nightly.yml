@@ -29,6 +29,10 @@ on:
 permissions:
   contents: read
 
+# Skips the validator's update and telemetry traffic, which is most of each validate call's time.
+env:
+  CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC: "1"
+
 jobs:
   refresh:
     if: github.event_name == 'push' || github.event_name == 'workflow_run'
@@ -83,8 +87,20 @@ jobs:
       - run: claude --version
       - run: npm ci
       - run: npm test
+      # Seed and data-list PRs change no code, so the browser render tests have nothing new to check.
+      - name: Check whether the pull request changes code
+        id: code
+        if: github.event_name == 'pull_request'
+        env:
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          if git diff --name-only "$PR_BASE" HEAD | grep -qE '^(tools/|package\.json|package-lock\.json|\.github/)'; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
       - run: npx playwright install --with-deps chromium
+        if: github.event_name != 'pull_request' || steps.code.outputs.changed == 'true'
       - run: npm run test:render
+        if: github.event_name != 'pull_request' || steps.code.outputs.changed == 'true'
       - name: Choose the discovery mode
         id: mode
         if: github.event_name != 'pull_request'
