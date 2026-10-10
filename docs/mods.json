@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-10T07:02:45.292Z",
   "claudeVersion": "2.1.296",
-  "repos": 1502,
+  "repos": 1503,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -347395,6 +347395,96 @@
       "stars": 0,
       "pushedAt": "2026-10-10T12:27:30Z",
       "createdAt": "2026-10-09T22:24:53Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "prod",
+      "directory": null
+    },
+    {
+      "id": "Ashley-Pettit/lgtm-flash:.",
+      "repo": "Ashley-Pettit/lgtm-flash",
+      "path": ".",
+      "sourceCommit": "89eb8846110778e681a8cdd0477ffaf6ac158f71",
+      "name": "lgtm-flash",
+      "description": "After every code change, the LGTM Lines container ship sails in, the L G T M containers slam onto its deck, and the camera zooms in on LOOKS GOOD TO ME",
+      "author": "Ash",
+      "homepage": "https://github.com/Ashley-Pettit/lgtm-flash",
+      "url": "https://github.com/Ashley-Pettit/lgtm-flash",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "ship"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "/\"^(Edit|MultiEdit|Write|NotebookEdit)$\"/"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.now",
+        "$.command.register",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [
+        "hooks/fly.tsx"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "lgtm-flash",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "draws"
+        ]
+      },
+      "sees": [
+        "/\"^(Edit|MultiEdit|Write|NotebookEdit)$\"/ calls"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-10T12:27:26Z",
+      "createdAt": "2026-10-09T22:32:50Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "prod",
