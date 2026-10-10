@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-10T07:02:45.292Z",
   "claudeVersion": "2.1.296",
-  "repos": 1493,
+  "repos": 1494,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -345686,6 +345686,105 @@
       "stars": 0,
       "pushedAt": "2026-10-08T08:35:38Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hellosverre/redgreen:.",
+      "repo": "hellosverre/redgreen",
+      "path": ".",
+      "sourceCommit": "4aafc775744451c488e35f8c59067d475c0f0824",
+      "name": "redgreen",
+      "description": "Test results pane for Claude Code: every test run Claude makes becomes a pass/fail list with the failure detail and run history. vitest, jest, pytest, cargo, go, bun, deno",
+      "author": "hellosverre",
+      "homepage": "https://github.com/hellosverre/redgreen",
+      "url": "https://github.com/hellosverre/redgreen",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "tests"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "PowerShell"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "redgreen"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.command.register",
+        "$.fs.read",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "redgreen",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "reads files",
+          "draws"
+        ]
+      },
+      "sees": [
+        "Bash calls",
+        "PowerShell calls"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-09T21:28:59Z",
+      "createdAt": "2026-10-09T21:28:50Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
