@@ -1382,6 +1382,7 @@ Vatsa10/Meta-Harness
 VdustR/vp-cc-mods
 VedantAndhale/claude-pro-kit
 VerbodhDev/tool-meter
+verdantran/code-city
 vgnshiyer/nowloading
 vgnshiyer/tps-report
 Vibe-Commit/claude-context-mods
