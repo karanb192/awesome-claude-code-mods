@@ -124,14 +124,16 @@ jobs:
           path: ${{ runner.temp }}/discovery
           key: discovery-${{ github.run_id }}-${{ github.run_attempt }}
       # A pull request that only adds seeds scans those seeds; publication validates them again
-      # after the merge. Tooling changes still rescan every committed candidate.
+      # after the merge. Tooling changes still rescan every committed candidate, and so does a
+      # duplicates edit that is not a plain append (candidates.mjs decides). Tests need no rescan:
+      # npm test already ran.
       - name: Choose the pull request scan scope
         id: scope
         if: github.event_name == 'pull_request'
         env:
           PR_BASE: ${{ github.event.pull_request.base.sha }}
         run: |
-          if git diff --name-only "$PR_BASE" HEAD | grep -qE '^(tools/|package\.json|package-lock\.json|\.github/|data/(duplicates|catalogs|fixture-exceptions)\.txt)'; then
+          if git diff --name-only "$PR_BASE" HEAD | grep -vE '^tools/.*\.test\.mjs$' | grep -qE '^(tools/|package\.json|package-lock\.json|\.github/|data/(catalogs|fixture-exceptions)\.txt)'; then
             echo "args=" >> "$GITHUB_OUTPUT"
           else
             echo "args=--seeds-only" >> "$GITHUB_OUTPUT"
