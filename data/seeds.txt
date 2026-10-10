@@ -74,3 +74,4 @@ amsultan2010/clawd-minecraft
 MohammedSaud404/rtl-terminal
 Ashley-Pettit/villager-hp
 Ashley-Pettit/lgtm-flash
+hellosverre/smart-compact
