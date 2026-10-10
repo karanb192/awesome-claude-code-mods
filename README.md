@@ -154,6 +154,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [tessera](https://github.com/OG-Matcha/tessera) - Previews pasted images and collapsed pasted text above the prompt in any terminal, draws replies with CJK-aligned tables and charts, and refuses recursive deletes through links and main-tree Git rewrites while agents run.
 - [tex-display](https://github.com/samox73/claude-code-latex) - Draws LaTeX display math in Claude's replies as typeset pictures in kitty and Ghostty and as Unicode text elsewhere, with MathJax bundled, so it runs no processes and writes no files.
 - [md-preview](https://github.com/hamzafer/claude-code-mods/tree/main/mods/md-preview) - Renders the Markdown files Claude edits like GitHub does in a pane, with before and after side by side.
+- [colorwheel](https://github.com/AlexeyHRDesign/colorwheel) - Draws desktop replies with the app's own markdown and code views and mermaid diagrams as themed SVG, and frames the band above the prompt with the 5-hour and 7-day limits on its edges, context as weather and running subagents and tasks inside.
 
 ## Agents and workflows
 
