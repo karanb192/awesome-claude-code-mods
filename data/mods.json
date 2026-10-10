@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-10T07:02:45.292Z",
   "claudeVersion": "2.1.296",
-  "repos": 1503,
+  "repos": 1504,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -347488,6 +347488,131 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "prod",
+      "directory": null
+    },
+    {
+      "id": "hellosverre/smart-compact:.",
+      "repo": "hellosverre/smart-compact",
+      "path": ".",
+      "sourceCommit": "5808714645dafabac65c4f51aab577759f615fc3",
+      "name": "smart-compact",
+      "description": "Compacts at the right moment: after a commit or green tests, a minute before the prompt cache expires, or when Claude asks for it with its own request_compact tool.",
+      "author": "hellosverre",
+      "homepage": "https://github.com/hellosverre/smart-compact",
+      "url": "https://github.com/hellosverre/smart-compact",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__smart-compact__request_compact"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "PowerShell"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "smart-compact"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "smart-compact"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.command.run",
+        "$.session.compact",
+        "$.session.usage",
+        "$.state.get",
+        "$.state.set",
+        "$.tool.register",
+        "$.ui.close",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "smart-compact",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "drives Claude",
+          "draws"
+        ]
+      },
+      "sees": [
+        "mcp__smart-compact__request_compact calls",
+        "Bash calls",
+        "PowerShell calls",
+        "every prompt"
+      ],
+      "draws": [
+        "Pane",
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-10T14:40:01Z",
+      "createdAt": "2026-10-10T14:35:52Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
       "directory": null
     }
   ]

@@ -549,6 +549,7 @@ hedingerm/image-preview
 helenkwok/gsd-status-mod
 hellosverre/claude-skins
 hellosverre/redgreen
+hellosverre/smart-compact
 hemanth/claude-code-youtube-mod
 henrik-thevibe/Claude-Fables
 herman925/925-cc-plugins
