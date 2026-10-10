@@ -78,6 +78,7 @@ alexcz-a11y/claude-mods
 alexgreensh/token-optimizer
 alexjacobs08/guided-mr
 alexknowshtml/claude-auto-handoff
+alexlifexyz/p3c-guard
 alexregrets/hyperspace
 aliemrevezir/mods
 aliir74/claude-code-rtl
