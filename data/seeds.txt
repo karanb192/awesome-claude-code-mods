@@ -62,3 +62,4 @@ danilpavlov/telescope-claude-code
 valeryia-piatrova/token-hamster
 NMenzel/claude-devtools-mod
 mertkayacs/ultramod
+alexlifexyz/p3c-guard

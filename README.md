@@ -120,6 +120,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [blast-radius](https://github.com/hamzafer/claude-code-mods/tree/main/mods/blast-radius) - Holds recognized recursive deletes, force pushes and migrations for confirmation, previews file deletions and branch changes, and cancels if nobody answers in time.
 - [devtools](https://github.com/NMenzel/claude-devtools-mod) - Breakpoints on tools, shell commands, file paths and failures that hold a call in Claude Code's question dialog for Continue, Step or Reject, with a dim "break on" line under each tool row, a dashboard pane with timeline and inspector, and an Error Lens that explains failed calls as confirmed, possible or unknown causes, making no network or model calls.
 - [modwall](https://github.com/RadTech-Solutions/modwall) - Reads each mod's scanned footprint as it loads, labels its reach and risk, and audits, holds or refuses it by an audit, ask or allowlist policy with a blocklist.
+- [p3c-guard](https://github.com/alexlifexyz/p3c-guard) - Refuses a Write or Edit to a Java file when it would add a violation of the Alibaba Java Coding Guidelines (p3c), and hands the rule, line and fix back to Claude; checks locally with PMD and downloads its rule jar from Maven Central on first use.
 
 ## Memory and context
 
