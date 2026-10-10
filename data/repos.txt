@@ -93,6 +93,7 @@ amahmood561/tripwire
 amigoer/ccprogress
 Amnesiac9/claude-mods
 Amorfx/claude-paste-view
+amsultan2010/clawd-minecraft
 an80sPWNstar/claude-mods
 anantraghunath/claude-code-usage-quota-mod
 AnatoliyShk/bulgolingo
@@ -1172,6 +1173,7 @@ savinofiore/lexi
 sayre4ux/autopilot
 scarrillo/agent-plugins
 scasella/claude-flightdeck
+scaso01/claude-risk-guardrails
 schalkneethling/claude-chef
 schmas/claude-plugins
 scholarly360/claude-mod-architecture-tree
