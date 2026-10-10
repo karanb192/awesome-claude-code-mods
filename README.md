@@ -183,6 +183,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [mission-control](https://github.com/hamzafer/claude-code-mods/tree/main/mods/mission-control) - A pane with every subagent and tool call live, plus a code map of the files they read and write, with a Haiku call that describes each file's changes.
 - [agent-pager](https://github.com/RadTech-Solutions/agent-pager) - Pages your phone through ntfy or your own Telegram bot when a long turn ends, a question or permission prompt waits, or a turn errors, and queues your Telegram replies as prompts in the one session you pick with `/pager listen`.
 - [session-board](https://github.com/danilpavlov/telescope-claude-code) - A floating tmux popup with an fzf picker of every Claude Code session running on the machine, showing which ones wait for you, a Haiku summary of each, and a jump to the tmux window of the one you pick.
+- [roadraven-hud](https://github.com/Shuffzord/RoadRaven/tree/master/plugins/roadraven-hud) - A `/roadraven` pane with the agent, model and current tool call on each node of a RoadRaven roadmap, acceptance checks to pass or fail in one batch that wakes the orchestrating agent, and a backlog to start or reprioritise.
 
 ## Building mods
 
