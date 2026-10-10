@@ -93,6 +93,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [Pixel Play](https://github.com/chrisluo5311/Pixel-Play) - A docked pane that streams a YouTube or local playlist through mpv and yt-dlp while an animated pixel-art skin of your choice dances beside the conversation.
 - [stock-ticker](https://github.com/twjackysu/claude-code-stock-ticker) - Taiwan and US stock quotes above the prompt, fetched from TWSE MIS and Yahoo Finance every 15 seconds while the market is open and the session is on screen, with `/stock` to edit the watchlist, refresh rate, colors, alerts and language.
 - [banana](https://github.com/somethingwentwell/cc-mod-banana-game) - A clicker pane that opens while Claude thinks, where clicks earn coins and rare banana drops that trade for $1 of LLM tokens through a sponsor server it syncs click counts with.
+- [galactic-battle](https://github.com/DarkVelours/claude-code-galactic-battle) - A space battle above the prompt while a turn runs: each tool that works is a rebel shot, each failure an Empire shot, each subagent one more fighter, with a double-bladed lightsaber for context and the 5-hour limit, blaster sounds and optional music.
 - [Code City](https://github.com/verdantran/code-city) - An idle city builder that grows as you prompt, where the tokens you spend buy buildings and other Claude Code sessions show up as neighbouring cities.
 
 ## Git, pull requests and CI

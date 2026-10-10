@@ -63,6 +63,7 @@ danilpavlov/telescope-claude-code
 valeryia-piatrova/token-hamster
 NMenzel/claude-devtools-mod
 mertkayacs/ultramod
+DarkVelours/claude-code-galactic-battle
 verdantran/code-city
 scaso01/claude-risk-guardrails
 hellosverre/redgreen
