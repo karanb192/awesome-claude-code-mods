@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-10T07:02:45.292Z",
   "claudeVersion": "2.1.296",
-  "repos": 1501,
+  "repos": 1502,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -347293,6 +347293,111 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "Ashley-Pettit/villager-hp:.",
+      "repo": "Ashley-Pettit/villager-hp",
+      "path": ".",
+      "sourceCommit": "d7893129e118fe1c96ba357ef12cd85092b04ba1",
+      "name": "villager-hp",
+      "description": "Your Claude session and weekly usage limits as an animated villager health card, with rank badges and a death screen at 0 HP",
+      "author": "Ash",
+      "homepage": "https://github.com/Ashley-Pettit/villager-hp",
+      "url": "https://github.com/Ashley-Pettit/villager-hp",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "die"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "revive"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "rank"
+          }
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "hp"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.command.register",
+        "$.session.usage",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "villager-hp",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-10T12:27:30Z",
+      "createdAt": "2026-10-09T22:24:53Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "prod",
       "directory": null
     }
   ]
