@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { parseArgs } from 'node:util'
+import { appliesWithoutRescan } from './dedupe.mjs'
 
 export function parseRepos(text) {
   return text.split('\n').map(line => line.trim()).filter(line => line && !line.startsWith('#'))
@@ -38,6 +39,16 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const seeds = readRepos('data/seeds.txt')
   const before = parseRepos(execFileSync('git', ['show', `${values.base}:data/seeds.txt`], { encoding: 'utf8' }))
   const added = newSeeds(before, seeds)
-  writeFileSync('data/pr-repos.txt', prScanRepos(readRepos('data/repos.txt'), seeds, added, values['seeds-only']).join('\n') + '\n')
+  let seedsOnly = values['seeds-only']
+  if (seedsOnly) {
+    let listed = ''
+    try { listed = execFileSync('git', ['show', `${values.base}:data/duplicates.txt`], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }) } catch {}
+    const committed = JSON.parse(readFileSync('data/mods.json', 'utf8')).mods
+    if (!appliesWithoutRescan(listed, readFileSync('data/duplicates.txt', 'utf8'), committed)) {
+      console.log('data/duplicates.txt changes more than appended pairs between counted mods; rescanning every candidate')
+      seedsOnly = false
+    }
+  }
+  writeFileSync('data/pr-repos.txt', prScanRepos(readRepos('data/repos.txt'), seeds, added, seedsOnly).join('\n') + '\n')
   writeFileSync('data/pr-required.txt', added.join('\n') + '\n')
 }

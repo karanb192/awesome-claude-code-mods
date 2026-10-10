@@ -66,7 +66,8 @@ test('visibility names what a hook can observe', () => {
 })
 
 import { fingerprint, describeChange, looksPartial } from './changed.mjs'
-import { applyDuplicates, applyDuplicatesWithRenames, suspectDuplicates, readDuplicates, renamePairs } from './dedupe.mjs'
+import { applyDuplicates, applyDuplicatesWithRenames, suspectDuplicates, readDuplicates, renamePairs, appliesWithoutRescan } from './dedupe.mjs'
+import { reconcile } from './inventory.mjs'
 import { kindOf, readCatalogs } from './kind.mjs'
 
 const base = { claudeVersion: '2.1.272', mods: [
@@ -111,6 +112,39 @@ test('a listed duplicate collapses onto its successor; an unlisted same-owner sa
   assert.deepEqual(listed[0], ['galElmalah/claude-queue-plugin:.', 'galElmalah/claude-mods:claude-queue'])
   for (const pair of listed) assert.ok(pair.length === 2 && pair.every(id => /^[\w.-]+\/[\w.-]+:\S+$/.test(id)) && pair[0] !== pair[1], pair.join(' '))
   assert.deepEqual([...readDuplicates('data/no-such-file.txt')], [])
+})
+
+test('only an appended pair between counted mods skips the PR rescan', () => {
+  const counted = id => ({ id, repo: id.split(':')[0], kind: 'mod' })
+  const committed = [
+    counted('o/a:.'), counted('o/b:.'), counted('o/c:.'), counted('o/d:.'), counted('o/e:.'),
+    { ...counted('o/x:.'), kind: 'duplicate', duplicateOf: 'o/y:.' }, counted('o/y:.'),
+    { ...counted('o/old:.'), kind: 'duplicate', duplicateOf: 'O/New:.' }, counted('O/New:.'),
+  ]
+  const base = '# copy keeper\no/x:. o/y:.\n'
+  assert.ok(appliesWithoutRescan(base, base, committed), 'an unchanged list')
+  assert.ok(appliesWithoutRescan(base, base + 'o/a:.   o/b:.\n# note\n', committed), 'an appended pair, spacing and comments aside')
+  assert.ok(!appliesWithoutRescan(base, '# copy keeper\n', committed), 'a removed pair')
+  assert.ok(!appliesWithoutRescan(base, 'o/y:. o/x:.\n', committed), 'a reversed pair')
+  assert.ok(!appliesWithoutRescan(base + 'o/a:. o/b:.\n', 'o/a:. o/b:.\no/x:. o/y:.\n', committed), 'reordered pairs')
+  assert.ok(!appliesWithoutRescan(base, base + 'o/c:. o/d:.\no/d:. o/e:.\n', committed), 'a chain')
+  assert.ok(!appliesWithoutRescan(base, base + 'o/y:. o/a:.\n', committed), 'a keeper already named in the list')
+  assert.ok(!appliesWithoutRescan(base, base + 'o/old:. o/a:.\n', committed), 'a copy already collapsed by a rename')
+  assert.ok(!appliesWithoutRescan(base, base + 'n/seed:. o/a:.\n', committed), 'a copy not yet in the inventory')
+  assert.ok(!appliesWithoutRescan(base, base + 'o/a:. n/seed:.\n', committed), 'a keeper not yet in the inventory')
+  const applied = committed.map(m => m.id === 'o/a:.' ? { ...m, kind: 'duplicate', duplicateOf: 'o/b:.' } : m)
+  assert.ok(appliesWithoutRescan(base, base + 'o/a:. o/b:.\n', applied), 'a pair the committed inventory already applies')
+  assert.ok(!appliesWithoutRescan(base, base + 'o/a:. o/c:.\n', applied), 'a copy collapsed onto a different keeper')
+})
+
+test('an append the PR check applies without a rescan matches a fresh classification', () => {
+  const fresh = () => ['o/a:.', 'o/b:.', 'o/x:.', 'o/y:.'].map(id => ({ id, repo: id.split(':')[0], kind: 'mod', validate: { status: 'passed', claudeVersion: '1' } }))
+  const view = mods => mods.map(({ id, kind, duplicateOf }) => ({ id, kind, duplicateOf })).sort((a, b) => a.id.localeCompare(b.id))
+  const before = new Map([['o/x:.', 'o/y:.']]), after = new Map([...before, ['o/a:.', 'o/b:.']])
+  const committed = applyDuplicatesWithRenames(fresh(), before, new Map())
+  assert.ok(appliesWithoutRescan('o/x:. o/y:.\n', 'o/x:. o/y:.\no/a:. o/b:.\n', committed))
+  const zeroRepoScan = applyDuplicatesWithRenames(reconcile(structuredClone(committed), [], new Map()).mods, after, new Map())
+  assert.deepEqual(view(zeroRepoScan), view(applyDuplicatesWithRenames(fresh(), after, new Map())))
 })
 
 test('a repository GitHub reports under a new name collapses onto that name', () => {

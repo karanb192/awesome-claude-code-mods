@@ -124,9 +124,9 @@ jobs:
           path: ${{ runner.temp }}/discovery
           key: discovery-${{ github.run_id }}-${{ github.run_attempt }}
       # A pull request that only adds seeds scans those seeds; publication validates them again
-      # after the merge. Tooling changes still rescan every committed candidate. The duplicates list
-      # and tests need no rescan: the scanner applies the list to the committed inventory after
-      # cloning, and npm test already ran.
+      # after the merge. Tooling changes still rescan every committed candidate, and so does a
+      # duplicates edit that is not a plain append (candidates.mjs decides). Tests need no rescan:
+      # npm test already ran.
       - name: Choose the pull request scan scope
         id: scope
         if: github.event_name == 'pull_request'
