@@ -27,9 +27,9 @@ export function newSeeds(before, after) {
   return mergeRepos(after).filter(repo => !known.has(repo.toLowerCase()))
 }
 
-// A seeds-only pull request scans just its new seeds; anything else rescans every candidate.
+// A seeds-only pull request scans just its new seeds, possibly none; anything else rescans every candidate.
 export function prScanRepos(candidates, seeds, added, seedsOnly) {
-  return seedsOnly && added.length ? added : mergeRepos(candidates, seeds)
+  return seedsOnly ? added : mergeRepos(candidates, seeds)
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
