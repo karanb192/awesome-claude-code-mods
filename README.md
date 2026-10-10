@@ -148,6 +148,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [tessera](https://github.com/OG-Matcha/tessera) - Previews pasted images and collapsed pasted text above the prompt in any terminal, draws replies with CJK-aligned tables and charts, and refuses recursive deletes through links and main-tree Git rewrites while agents run.
 - [tex-display](https://github.com/samox73/claude-code-latex) - Draws LaTeX display math in Claude's replies as typeset pictures in kitty and Ghostty and as Unicode text elsewhere, with MathJax bundled, so it runs no processes and writes no files.
 - [md-preview](https://github.com/hamzafer/claude-code-mods/tree/main/mods/md-preview) - Renders the Markdown files Claude edits like GitHub does in a pane, with before and after side by side.
+- [rtl-terminal](https://github.com/MohammedSaud404/rtl-terminal) - Lays out Arabic, Hebrew, Persian and Urdu replies and prompts right-to-left in Windows Terminal, conhost and VS Code's integrated terminal, with right-aligned lines, bullets on the right, mirrored brackets and code and links kept left-to-right, and makes no network, process or file calls.
 
 ## Agents and workflows
 
