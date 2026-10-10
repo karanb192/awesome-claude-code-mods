@@ -2,14 +2,15 @@
 // Clones every repo in data/repos.txt, finds each plugin whose hooks.json names
 // a module, runs `claude plugin validate` on it and records the footprint the
 // validator prints, and marks the ones Anthropic's plugin directory lists. Writes data/mods.json. Nothing here executes mod code.
+// Repositories are scanned several at a time; each checkout is deleted once read unless --clones names a folder to keep.
 //
-//   node tools/scan.mjs [--clones DIR] [--repos FILE] [--out FILE]
+//   node tools/scan.mjs [--clones DIR] [--repos FILE] [--out FILE] [--concurrency N]
 
-import { execFileSync, spawnSync } from 'node:child_process'
-import { existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, realpathSync, writeFileSync } from 'node:fs'
+import { execFileSync } from 'node:child_process'
+import { existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, realpathSync, rmSync, writeFileSync } from 'node:fs'
 import { join, relative, dirname } from 'node:path'
 import { tmpdir } from 'node:os'
-import { validate } from './validate.mjs'
+import { validateAsync, spawnAsync } from './validate.mjs'
 import { uiRewriteReview, marketplacesFor } from './compatibility.mjs'
 import { grade, visibility, drawsOn } from './grade.mjs'
 import { readDuplicates, applyDuplicatesWithRenames, suspectDuplicates, renamePairs } from './dedupe.mjs'
@@ -23,11 +24,14 @@ import { readDirectory, applyDirectory } from './directory.mjs'
 const { values: args } = parseArgs({ options: {
   clones: { type: 'string' }, repos: { type: 'string' }, out: { type: 'string' },
   required: { type: 'string' }, retire: { type: 'boolean', default: false },
-  'include-checked': { type: 'boolean', default: false },
+  'include-checked': { type: 'boolean', default: false }, concurrency: { type: 'string' },
 } })
 const CLONES = args.clones ?? mkdtempSync(join(tmpdir(), 'acm-clones-'))
 const REPOS = args.repos ?? 'data/repos.txt'
 const OUT = args.out ?? 'data/mods.json'
+const KEEP_CLONES = Boolean(args.clones)
+const CONCURRENCY = Number(args.concurrency ?? process.env.SCAN_CONCURRENCY ?? 16)
+if (!Number.isInteger(CONCURRENCY) || CONCURRENCY < 1) throw new Error(`invalid concurrency: ${CONCURRENCY}`)
 const SKIP_DIRS = new Set(['node_modules', '.git'])
 
 const claudeVersion = execFileSync('claude', ['--version'], { encoding: 'utf8' }).trim().split(' ')[0]
@@ -40,13 +44,13 @@ const catalogs = readCatalogs()
 const fixtureExceptions = readFixtureExceptions()
 mkdirSync(CLONES, { recursive: true })
 
-function clone(repo) {
+async function clone(repo) {
   const dir = join(CLONES, repo.replace('/', '__'))
   if (existsSync(dir)) throw new Error(`refusing cached checkout ${dir}; use a fresh clones directory`)
-  const r = spawnSync('git', ['clone', '-q', '--depth', '1', `https://github.com/${repo}`, dir], { encoding: 'utf8' })
+  const r = await spawnAsync('git', ['clone', '-q', '--depth', '1', `https://github.com/${repo}`, dir])
   if (r.status !== 0) { console.error(`clone failed: ${repo}: ${r.stderr.trim()}`); return null }
   // A repository with no commits yet clones fine but has no HEAD; treat it like a failed clone, not evidence of removal.
-  if (spawnSync('git', ['-C', dir, 'rev-parse', '--verify', '-q', 'HEAD'], { stdio: 'ignore' }).status !== 0) { console.error(`clone is empty: ${repo}`); return null }
+  if ((await spawnAsync('git', ['-C', dir, 'rev-parse', '--verify', '-q', 'HEAD'])).status !== 0) { console.error(`clone is empty: ${repo}`); return null }
   return realpathSync(dir)
 }
 
@@ -76,13 +80,24 @@ function readJson(p) { try { return JSON.parse(readFileSync(p, 'utf8')) } catch 
 
 const metas = metaBatch(repos)
 const currentName = new Map()
-let mods = []
-const seen = new Set()
-const marketplaceResults = new Map()
-for (const repo of repos) {
-  const dir = clone(repo)
-  if (!dir) continue
-  const revision = execFileSync('git', ['-C', dir, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim()
+
+let downloadedKb = 0
+async function scanRepo(repo) {
+  try {
+    const dir = await clone(repo)
+    return dir ? await inspect(repo, dir) : []
+  } finally {
+    const size = await spawnAsync('du', ['-sk', join(CLONES, repo.replace('/', '__'))])
+    downloadedKb += Number(size.stdout.split('\t')[0]) || 0
+    if (!KEEP_CLONES) rmSync(join(CLONES, repo.replace('/', '__')), { recursive: true, force: true })
+  }
+}
+
+async function inspect(repo, dir) {
+  const found = []
+  const seen = new Set()
+  const marketplaceResults = new Map()
+  const revision = (await spawnAsync('git', ['-C', dir, 'rev-parse', 'HEAD'])).stdout.trim()
   // Longest first: the checkout itself, then the clones folder, both as given and as resolved.
   const roots = [dir, join(CLONES, repo.replace('/', '__')), realpathSync(CLONES), CLONES]
   let complete = true
@@ -103,21 +118,22 @@ for (const repo of repos) {
     const id = `${repo}:${rel}`
     if (seen.has(id)) continue
     seen.add(id)
-    const parsed = validate(existsSync(manifestPath) ? '.claude-plugin/plugin.json' : '.', root, roots)
+    const parsed = await validateAsync(existsSync(manifestPath) ? '.claude-plugin/plugin.json' : '.', root, roots)
     const allHooks = parsed.modules.flatMap(x => x.hooks)
     const allCalls = [...new Set(parsed.modules.flatMap(x => x.calls))].sort()
     const reach = grade(allCalls)
     const dupKey = `${repo}:${manifest?.name}:${JSON.stringify(allHooks)}:${allCalls.join()}`
     if (seen.has(dupKey)) { console.log(`skip     duplicate ${id}`); continue }
     seen.add(dupKey)
-    const marketplaces = marketplacesFor(dir, root).map(path => {
+    const marketplaces = []
+    for (const path of marketplacesFor(dir, root)) {
       if (!marketplaceResults.has(path)) {
-        const result = validate(path, dir, roots)
+        const result = await validateAsync(path, dir, roots)
         marketplaceResults.set(path, { path: relative(dir, path), name: readJson(path)?.name ?? null, status: result.status, errors: result.errors })
       }
-      return marketplaceResults.get(path)
-    })
-    mods.push({
+      marketplaces.push(marketplaceResults.get(path))
+    }
+    found.push({
       id, repo, path: rel, sourceCommit: revision,
       name: manifest?.name ?? rel.split('/').pop(),
       description: manifest?.description ?? m.description ?? '',
@@ -146,7 +162,24 @@ for (const repo of repos) {
     console.log(`${parsed.status.padEnd(8)} L${reach.level} ${id}`)
   }
   if (complete) checkedRepos.set(repo.toLowerCase(), revision)
+  return found
 }
+
+// Results land by repository index, so the inventory comes out in the same order as a one-at-a-time scan.
+const started = Date.now()
+const byRepo = new Array(repos.length)
+let next = 0
+await Promise.all(Array.from({ length: Math.min(CONCURRENCY, repos.length) }, async () => {
+  while (next < repos.length) {
+    const i = next++
+    byRepo[i] = await scanRepo(repos[i])
+  }
+}))
+let mods = byRepo.flat()
+console.log(`scanned ${repos.length} repos in ${Math.round((Date.now() - started) / 1000)}s, ${CONCURRENCY} at a time; checkouts held ${Math.round(downloadedKb / 1024)} MB`)
+const checkedInOrder = repos.map(repo => repo.toLowerCase()).filter(key => checkedRepos.has(key)).map(key => [key, checkedRepos.get(key)])
+checkedRepos.clear()
+for (const [key, revision] of checkedInOrder) checkedRepos.set(key, revision)
 
 if (args.required) checkRequired(readRepos(args.required), mods, checkedRepos)
 const freshIds = new Set(mods.map(mod => mod.id))

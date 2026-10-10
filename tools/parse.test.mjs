@@ -2,7 +2,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { parseValidateOutput, parseHooks, parseCalls } from './parse.mjs'
 import { grade, visibility, drawsOn } from './grade.mjs'
-import { validate, relativePaths } from './validate.mjs'
+import { validate, validateAsync, spawnAsync, relativePaths } from './validate.mjs'
 import { mkdtempSync, mkdirSync, writeFileSync, chmodSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
@@ -265,7 +265,7 @@ test('a scan that lost most of its mods or repos is partial, a small dip is not'
   assert.equal(looksPartial({ repos: 0, mods: [] }, few), null)
 })
 
-test('validator errors keep paths relative to the scanned repository', t => {
+test('validator errors keep paths relative to the scanned repository', async t => {
   const root = mkdtempSync(join(tmpdir(), 'validate-paths-'))
   t.after(() => rmSync(root, { recursive: true, force: true }))
   const checkout = join(root, 'clones', 'owner__repo')
@@ -277,11 +277,26 @@ test('validator errors keep paths relative to the scanned repository', t => {
   process.env.PATH = join(root, 'bin') + ':' + path
   t.after(() => { process.env.PATH = path })
   const result = validate('.', checkout, [checkout, join(root, 'clones')])
+  assert.deepEqual(await validateAsync('.', checkout, [checkout, join(root, 'clones')]), result, 'the scanner\'s non-blocking call parses the same result')
   assert.equal(result.status, 'failed')
   assert.ok(result.errors.length > 0)
   for (const error of result.errors) assert.ok(!error.includes(root), error)
   assert.match(result.errors.join('\n'), /plugins\/demo\/hooks\/register\.ts: no such file \(from other__repo\/x\.ts\)/)
   assert.equal(relativePaths('/tmp/c/owner__repo', ['/tmp/c/owner__repo']), '.')
+})
+
+test('a non-blocking spawn reports what spawnSync reports', async () => {
+  const cases = [
+    [process.execPath, ['-e', 'process.stdout.write("out"); process.stderr.write("err"); process.exit(3)']],
+    ['no-such-validator-binary', []],
+    [process.execPath, ['-e', 'setTimeout(() => {}, 5000)']],
+  ]
+  for (const [command, args] of cases) {
+    const sync = spawnSync(command, args, { encoding: 'utf8', timeout: 500 })
+    const result = await spawnAsync(command, args, { timeout: 500 })
+    assert.deepEqual([result.status, result.signal, result.error?.code], [sync.status, sync.signal, sync.error?.code], command)
+    if (!sync.error) assert.deepEqual([result.stdout, result.stderr], [sync.stdout, sync.stderr])
+  }
 })
 
 test('the change check reads a committed scan larger than the default output buffer', t => {
