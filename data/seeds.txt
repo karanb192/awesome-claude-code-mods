@@ -63,3 +63,4 @@ valeryia-piatrova/token-hamster
 NMenzel/claude-devtools-mod
 mertkayacs/ultramod
 DarkVelours/claude-code-galactic-battle
+hellosverre/redgreen
