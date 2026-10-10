@@ -70,6 +70,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [clawd-minecraft](https://github.com/amsultan2010/clawd-minecraft) - The 7-day limit as hearts and armor, the 5-hour limit as an XP bar and the context window as a hunger bar above the desktop prompt, with a pixel Clawd that walks beside them and reacts to questions and finished turns.
 - [villager-hp](https://github.com/Ashley-Pettit/villager-hp) - The 5-hour and weekly limits as an animated villager health card above the prompt, his mood falling with your HP, with rank badges, sci-fi effects and a death screen at 0 HP, plus `/hp` to preview any level.
 - [headroom](https://github.com/vihrea1337/headroom) - The 5-hour and weekly limits above the prompt with reset countdowns and a run-out forecast drawn on a time axis, alerts at 80 and 95% and on reset, a session budget, and a docked pane whose prompt log scrolls the chat to each prompt.
+- [limits](https://github.com/VaitaR/claude-code-limits) - One line above the prompt with the 5-hour and 7-day limits, context with a compaction count, minutes left on the prompt cache, session cost and running subagents, with details on hover.
 
 ## While you wait
 
