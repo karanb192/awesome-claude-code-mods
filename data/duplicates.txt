@@ -78,3 +78,4 @@ inematds/5-mods:cache-keeper nateherkai/claude-code-mods:cache-keeper
 inematds/5-mods:collision-guard nateherkai/claude-code-mods:collision-guard
 inematds/5-mods:goal-meter nateherkai/claude-code-mods:goal-meter
 inematds/5-mods:recording-mode nateherkai/claude-code-mods:recording-mode
+danyuchn/claude-cache-panel:. danyuchn/claude-mods:cache-panel
