@@ -56,6 +56,7 @@ twjackysu/claude-code-stock-ticker
 vynnlee/mods
 alexjacobs08/guided-mr
 SummerRiversound/review-inbox
+Antreas-Strb/glanceflow
 RadTech-Solutions/modwall
 RadTech-Solutions/agent-pager
 danilpavlov/telescope-claude-code
@@ -63,4 +64,10 @@ valeryia-piatrova/token-hamster
 NMenzel/claude-devtools-mod
 mertkayacs/ultramod
 alexlifexyz/p3c-guard
+paragpandyareal/lazy-panda-panel
+AlexeyHRDesign/colorwheel
+DarkVelours/claude-code-galactic-battle
+verdantran/code-city
+scaso01/claude-risk-guardrails
 hellosverre/redgreen
+amsultan2010/clawd-minecraft
