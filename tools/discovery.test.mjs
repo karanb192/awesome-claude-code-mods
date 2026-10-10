@@ -83,7 +83,7 @@ test('candidate history survives a search omission and PR seeds are case-insensi
   assert.deepEqual(newSeeds(['old/mod'], ['OLD/mod', 'new/mod']), ['new/mod'])
   assert.deepEqual(prScanRepos(['old/mod'], ['old/mod', 'new/mod'], ['new/mod'], true), ['new/mod'])
   assert.deepEqual(prScanRepos(['old/mod'], ['old/mod', 'new/mod'], ['new/mod'], false), ['new/mod', 'old/mod'])
-  assert.deepEqual(prScanRepos(['old/mod'], ['old/mod'], [], true), ['old/mod'])
+  assert.deepEqual(prScanRepos(['old/mod'], ['old/mod'], [], true), [])
 })
 
 const prior = { id: 'old/mod:.', repo: 'old/mod', kind: 'mod', validate: { status: 'passed', claudeVersion: 'old' }, calls: ['$.fs.read'] }

@@ -11,6 +11,27 @@ export function readDuplicates(path = 'data/duplicates.txt') {
   return new Map(text.split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('#')).map(l => l.split(/\s+/)))
 }
 
+const pairLines = text => text.split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('#')).map(l => l.split(/\s+/).join(' '))
+
+// A PR that edits this list skips the full rescan only when the edit appends pairs that apply on
+// their own: the earlier rules keep their order, and each new pair joins a counted keeper and a
+// copy that is counted or already collapsed onto that keeper, both named nowhere else in the list.
+// A zero-repository scan keeps every committed classification, so a removed, reversed, reordered
+// or chained rule, or one naming a renamed or unpublished copy, rescans.
+export function appliesWithoutRescan(beforeText, afterText, mods) {
+  const before = pairLines(beforeText), after = pairLines(afterText)
+  const old = new Set(before)
+  if (after.filter(l => old.has(l)).join('\n') !== before.join('\n')) return false
+  const byId = new Map(mods.map(m => [m.id, m]))
+  const uses = new Map()
+  for (const id of after.flatMap(l => l.split(' '))) uses.set(id, (uses.get(id) ?? 0) + 1)
+  return after.filter(l => !old.has(l)).every(l => {
+    const [copy, keeper] = l.split(' '), m = byId.get(copy)
+    return byId.get(keeper)?.kind === 'mod' && (m?.kind === 'mod' || (m?.kind === 'duplicate' && m.duplicateOf === keeper))
+      && uses.get(copy) === 1 && uses.get(keeper) === 1
+  })
+}
+
 // Marks each listed copy as `duplicate` with a pointer, but only while the copy that counts is
 // still in the scan as a mod: once a successor disappears, the superseded copy counts again.
 export function applyDuplicates(mods, list) {
