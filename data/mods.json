@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-10T07:02:45.292Z",
   "claudeVersion": "2.1.296",
-  "repos": 1498,
+  "repos": 1499,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -346966,6 +346966,132 @@
       "stars": 0,
       "pushedAt": "2026-10-09T06:00:56Z",
       "createdAt": "2026-10-07T20:13:48Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "DarkVelours/claude-code-galactic-battle:.",
+      "repo": "DarkVelours/claude-code-galactic-battle",
+      "path": ".",
+      "sourceCommit": "190bd5350757b8afb750cc86066bb48bfc8c1c48",
+      "name": "galactic-battle",
+      "description": "Draws an animated space battle above the prompt while Claude works, driven by what Claude does (tool results, helpers), with a double-bladed lightsaber gauge for context and quota, blaster sounds and optional music.",
+      "author": "Dark Velours",
+      "homepage": "https://github.com/DarkVelours/claude-code-galactic-battle",
+      "url": "https://github.com/DarkVelours/claude-code-galactic-battle",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "battle"
+          }
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "ui.message",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Spinner"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.audio.play",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.config.set",
+        "$.env.get",
+        "$.fs.stat",
+        "$.process.run",
+        "$.session.usage",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.invalidate",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [
+        "hooks/battle.tsx"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "galactic-battle",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "runs processes",
+          "changes config",
+          "reads files",
+          "reads env vars",
+          "plays audio",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call"
+      ],
+      "draws": [
+        "Spinner",
+        "AbovePrompt"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-09T23:01:45Z",
+      "createdAt": "2026-10-09T22:26:27Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
