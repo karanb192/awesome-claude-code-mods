@@ -7,7 +7,7 @@ Add a browser beside your conversation, keep usage in view, or check a command b
 This community catalogue scans public GitHub repositories and records what Claude's validator reports each mod can read, write, run or send over the network. It is an independent scan, not an official Anthropic directory.
 
 <!-- stats:start -->
-**3062 mods** · Last scanned 2026-10-10.
+**3063 mods** · Last scanned 2026-10-10.
 <!-- stats:end -->
 
 ![Browsing a GitHub pull request beside a Claude Code conversation using terminal-browser](assets/terminal-browser-demo.gif)
@@ -65,7 +65,9 @@ Read the mod's source and access details before installing. Validation checks th
 - [weektoken](https://github.com/3dnow/claude-mods/tree/main/weektoken) - Pace for the 5-hour, 7-day and per-model weekly limits such as Fable, shown as usage against elapsed time above the prompt, plus a `/weektoken` pane with a run-out forecast and a burn-up chart of past windows.
 - [clawd-dash](https://github.com/pinkpixel-dev/clawd-dash) - A three-column dashboard under the prompt with 5-hour, 7-day and context gauges, model, effort, cost, session stats, git status and file changes, plus an animated pixel Clawd that works, celebrates and relaxes along with the session.
 - [context-bar](https://github.com/hamzafer/claude-code-mods/tree/main/mods/context-bar) - The context window as one stacked bar above the prompt, a color per category like `/context`, with token counts and the compaction point.
+- [glanceflow](https://github.com/Antreas-Strb/glanceflow) - A calm checklist above the prompt with Claude's plan in plain English, each step's progress and time left, a clear Needs you, and History with a daily team report.
 - [token-hamster](https://github.com/valeryia-piatrova/token-hamster) - An animated hamster above the prompt that eats every token in the colours of the token mix, with moods from the 5-hour and weekly limits and a reset countdown, plus a `/hamster` pane with context, pace forecast, cost per turn and usage by subagent, tool and model.
+- [clawd-minecraft](https://github.com/amsultan2010/clawd-minecraft) - The 7-day limit as hearts and armor, the 5-hour limit as an XP bar and the context window as a hunger bar above the desktop prompt, with a pixel Clawd that walks beside them and reacts to questions and finished turns.
 
 ## While you wait
 
@@ -122,6 +124,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [blast-radius](https://github.com/hamzafer/claude-code-mods/tree/main/mods/blast-radius) - Holds recognized recursive deletes, force pushes and migrations for confirmation, previews file deletions and branch changes, and cancels if nobody answers in time.
 - [devtools](https://github.com/NMenzel/claude-devtools-mod) - Breakpoints on tools, shell commands, file paths and failures that hold a call in Claude Code's question dialog for Continue, Step or Reject, with a dim "break on" line under each tool row, a dashboard pane with timeline and inspector, and an Error Lens that explains failed calls as confirmed, possible or unknown causes, making no network or model calls.
 - [modwall](https://github.com/RadTech-Solutions/modwall) - Reads each mod's scanned footprint as it loads, labels its reach and risk, and audits, holds or refuses it by an audit, ask or allowlist policy with a blocklist.
+- [claude-risk-guardrails](https://github.com/scaso01/claude-risk-guardrails) - Twenty-five model-risk controls in six packs that require human sign-off before irreversible actions, check the agent's claims against its sources, and keep a record of every step.
 
 ## Memory and context
 

@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-10T07:02:45.292Z",
   "claudeVersion": "2.1.296",
-  "repos": 1494,
+  "repos": 1495,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -345788,6 +345788,237 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "Antreas-Strb/glanceflow:glanceflow",
+      "repo": "Antreas-Strb/glanceflow",
+      "path": "glanceflow",
+      "sourceCommit": "8732c468fe4f8030e1f9da3912c4a5eb8fbd520e",
+      "name": "glanceflow",
+      "description": "GlanceFlow: see what Claude is doing, at a glance. Hides tool rows and shows one plain-English checklist above the prompt, with progress, helpers, history, a team report, pause and continue, and a password guard.",
+      "author": "Antreas-Strb",
+      "homepage": "https://github.com/Antreas-Strb/glanceflow",
+      "url": "https://github.com/Antreas-Strb/glanceflow/tree/master/glanceflow",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "glanceflow"
+          }
+        },
+        {
+          "event": "prompt.compose",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "UserMessage"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AssistantMessage"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "SessionMode"
+          }
+        },
+        {
+          "event": "agent.spawn",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "classic.Stop",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "classic.Notification",
+          "matcher": {}
+        },
+        {
+          "event": "classic.StopFailure",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolUse|ToolResult|ToolGroup"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolProgress"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "glanceflow-settings"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "glanceflow-recap"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "glanceflow-plan"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "glanceflow-history"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.audio.play",
+        "$.audio.speak",
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.command.run",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.read",
+        "$.model.complete",
+        "$.model.fork",
+        "$.process.run",
+        "$.prompt.fill",
+        "$.prompt.submit",
+        "$.session.compact",
+        "$.session.cwd",
+        "$.session.id",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.keys",
+        "$.store.set",
+        "$.tool.register",
+        "$.turn.abort",
+        "$.ui.close",
+        "$.ui.copy",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-mods",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "runs processes",
+          "drives Claude",
+          "writes the prompt box",
+          "reads files",
+          "reads env vars",
+          "plays audio",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt",
+        "subagent spawns",
+        "classic hooks",
+        "every tool call"
+      ],
+      "draws": [
+        "UserMessage",
+        "AssistantMessage",
+        "SessionMode",
+        "ToolUse|ToolResult|ToolGroup",
+        "ToolProgress",
+        "Pane",
+        "AbovePrompt"
+      ],
+      "stars": 2,
+      "pushedAt": "2026-10-10T01:54:24Z",
+      "createdAt": "2026-10-05T23:46:32Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "master",
       "directory": null
     }
   ]
