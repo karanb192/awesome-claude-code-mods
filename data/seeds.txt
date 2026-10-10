@@ -72,3 +72,4 @@ scaso01/claude-risk-guardrails
 hellosverre/redgreen
 amsultan2010/clawd-minecraft
 MohammedSaud404/rtl-terminal
+Ashley-Pettit/villager-hp
