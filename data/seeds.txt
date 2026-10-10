@@ -63,6 +63,7 @@ danilpavlov/telescope-claude-code
 valeryia-piatrova/token-hamster
 NMenzel/claude-devtools-mod
 mertkayacs/ultramod
+verdantran/code-city
 scaso01/claude-risk-guardrails
 hellosverre/redgreen
 amsultan2010/clawd-minecraft
