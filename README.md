@@ -67,6 +67,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [context-bar](https://github.com/hamzafer/claude-code-mods/tree/main/mods/context-bar) - The context window as one stacked bar above the prompt, a color per category like `/context`, with token counts and the compaction point.
 - [glanceflow](https://github.com/Antreas-Strb/glanceflow) - A calm checklist above the prompt with Claude's plan in plain English, each step's progress and time left, a clear Needs you, and History with a daily team report.
 - [token-hamster](https://github.com/valeryia-piatrova/token-hamster) - An animated hamster above the prompt that eats every token in the colours of the token mix, with moods from the 5-hour and weekly limits and a reset countdown, plus a `/hamster` pane with context, pace forecast, cost per turn and usage by subagent, tool and model.
+- [clawd-minecraft](https://github.com/amsultan2010/clawd-minecraft) - The 7-day limit as hearts and armor, the 5-hour limit as an XP bar and the context window as a hunger bar above the desktop prompt, with a pixel Clawd that walks beside them and reacts to questions and finished turns.
 
 ## While you wait
 

@@ -64,3 +64,4 @@ valeryia-piatrova/token-hamster
 NMenzel/claude-devtools-mod
 mertkayacs/ultramod
 hellosverre/redgreen
+amsultan2010/clawd-minecraft
