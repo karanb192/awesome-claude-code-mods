@@ -256,17 +256,20 @@ const freshItems = [
 ]
 
 test('a fast refresh skips code search, adds recent repos with hook modules and saves its progress', t => {
-  const state = { searchedThrough: '2026-10-03T09:00:00Z', checked: {}, deferred: [], pending: [] }
   const before = Date.now()
-  const { run, repos, note, gh: log, state: saved } = cli(t, searchGh, ['--skip-code-search', '--recent', '--search-pause', '0'], { state, env: { SEARCH_ITEMS: JSON.stringify(freshItems) } })
+  const checkpoint = new Date(Math.floor(before / 1000) * 1000 - 2 * 3600_000).toISOString().replace('.000Z', 'Z')
+  const since = new Date(Date.parse(checkpoint) - 3600_000).toISOString().replace('.000Z', 'Z')
+  const items = freshItems.map(item => ({ ...item, pushed_at: checkpoint }))
+  const state = { searchedThrough: checkpoint, checked: {}, deferred: [], pending: [] }
+  const { run, repos, note, gh: log, state: saved } = cli(t, searchGh, ['--skip-code-search', '--recent', '--search-pause', '0'], { state, env: { SEARCH_ITEMS: JSON.stringify(items) } })
   assert.equal(run.status, 0, run.stderr)
   assert.equal(repos, 'existing/mod\nfresh/mod\nseeded/mod\n')
   assert.ok(!log.includes('search/code'))
-  assert.match(log, /q=topic:claude-code-mod pushed:2026-10-03T08:00:00Z\.\.\S+Z /)
-  assert.match(note, /^Code search was skipped; this run covers known candidates and seeds\.\nRepository search since 2026-10-03T08:00:00Z matched 3 repositories; 2 needed a check, 2 were checked, 0 wait for the next run and 0 failed\.\nAdded fresh\/mod\.\n$/)
+  assert.ok(log.includes(`q=topic:claude-code-mod pushed:${since}..`))
+  assert.equal(note, `Code search was skipped; this run covers known candidates and seeds.\nRepository search since ${since} matched 3 repositories; 2 needed a check, 2 were checked, 0 wait for the next run and 0 failed.\nAdded fresh/mod.\n`)
   const progress = JSON.parse(saved)
   assert.ok(Date.parse(progress.searchedThrough) >= before - 1000)
-  assert.deepEqual(progress.checked, { 'fresh/plugin': '2026-10-03T09:30:00Z' })
+  assert.deepEqual(progress.checked, { 'fresh/plugin': checkpoint })
   assert.deepEqual(progress.deferred, [])
   assert.deepEqual(progress.pending, ['fresh/mod'])
 })
