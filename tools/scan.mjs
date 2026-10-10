@@ -93,10 +93,12 @@ const cached = args.cache && existsSync(args.cache) ? JSON.parse(readFileSync(ar
 const reusable = cached?.key === CACHE_KEY ? cached.repos : {}
 const findings = {}
 let downloadedKb = 0, reused = 0
+// A crashed or timed-out validator reports `unknown`; such findings are retried on the next scan, never reused.
+const settled = found => found.plugins.every(p => p.validate.status !== 'unknown' && p.marketplaces.every(m => m.status !== 'unknown'))
 
 async function scanRepo(repo) {
   const key = repo.toLowerCase(), batch = metas.get(key), hit = reusable[key]
-  if (hit && batch?.headOid && hit.revision === batch.headOid) {
+  if (hit && batch?.headOid && hit.revision === batch.headOid && settled(hit)) {
     reused++
     return records(repo, hit, batch)
   }
@@ -114,7 +116,7 @@ async function scanRepo(repo) {
 
 function records(repo, found, m) {
   const key = repo.toLowerCase()
-  findings[key] = found
+  if (settled(found)) findings[key] = found
   if (m.fullName) currentName.set(key, m.fullName)
   if (found.complete) checkedRepos.set(key, found.revision)
   return found.plugins.map(p => ({
