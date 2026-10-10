@@ -195,10 +195,10 @@ test('the API budget caps checks below the limit and defers the rest', () => {
 test('scan metadata comes in GraphQL batches and missing repos fall back', () => {
   assert.match(metaQuery(['a/b', 'c/d.e']), /^query \{ r0: repository\(owner: "a", name: "b"\) \{ .* \} r1: repository\(owner: "c", name: "d.e"\)/)
   const queries = []
-  const node = { nameWithOwner: 'A/One', stargazerCount: 5, pushedAt: 'p', createdAt: 'c', description: 'd', isArchived: true, licenseInfo: { spdxId: 'MIT' }, defaultBranchRef: { name: 'trunk' } }
+  const node = { nameWithOwner: 'A/One', stargazerCount: 5, pushedAt: 'p', createdAt: 'c', description: 'd', isArchived: true, licenseInfo: { spdxId: 'MIT' }, defaultBranchRef: { name: 'trunk', target: { oid: 'abc123' } } }
   const metas = metaBatch(['A/one', 'a/missing', 'a/three'], { size: 2, log: () => {}, run: query => { queries.push(query); return queries.length === 1 ? { r0: node, r1: null } : { r0: { ...node, licenseInfo: null, defaultBranchRef: null } } } })
   assert.equal(queries.length, 2)
-  assert.deepEqual(metas.get('a/one'), { stars: 5, pushedAt: 'p', createdAt: 'c', license: 'MIT', description: 'd', defaultBranch: 'trunk', archived: true, fullName: 'A/One' })
+  assert.deepEqual(metas.get('a/one'), { stars: 5, pushedAt: 'p', createdAt: 'c', license: 'MIT', description: 'd', defaultBranch: 'trunk', archived: true, fullName: 'A/One', headOid: 'abc123' })
   assert.equal(metas.has('a/missing'), false)
   assert.equal(metas.get('a/three').defaultBranch, null)
   assert.equal(metaBatch(['a/b'], { log: () => {}, run: () => { throw new Error('boom') } }).size, 0)

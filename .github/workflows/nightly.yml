@@ -158,14 +158,29 @@ jobs:
         if: github.event_name == 'pull_request'
         env:
           PR_BASE: ${{ github.event.pull_request.base.sha }}
-      - run: npm run scan -- --repos data/pr-repos.txt --required data/pr-required.txt
+      # Findings for repositories whose default branch has not moved are reused from the last scan with
+      # the same validator and scanner code. PRs read main's cache but never write it.
+      - name: Restore scan findings from the last run
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/scan-cache
+          key: scan-findings-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: scan-findings-
+      - run: npm run scan -- --repos data/pr-repos.txt --required data/pr-required.txt --cache "$RUNNER_TEMP/scan-cache/findings.json"
         if: github.event_name == 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}
-      - run: npm run scan
+      - run: npm run scan -- --cache "$RUNNER_TEMP/scan-cache/findings.json"
+        id: scan
         if: github.event_name != 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}
+      - name: Save scan findings for the next run
+        if: steps.scan.outcome == 'success'
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/scan-cache
+          key: scan-findings-${{ github.run_id }}-${{ github.run_attempt }}
       - run: npm run render
         if: github.event_name == 'pull_request'
       - run: npm run lint
