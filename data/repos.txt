@@ -542,6 +542,7 @@ hbkse/anki-claude-mod
 hedingerm/image-preview
 helenkwok/gsd-status-mod
 hellosverre/claude-skins
+hellosverre/redgreen
 hemanth/claude-code-youtube-mod
 henrik-thevibe/Claude-Fables
 herman925/925-cc-plugins
