@@ -27,13 +27,15 @@ on:
     paths: ["tools/**", "data/seeds.txt", "data/duplicates.txt", "data/catalogs.txt", "data/fixture-exceptions.txt", "package.json", "package-lock.json", ".github/workflows/nightly.yml", ".github/workflows/weekly-retirement.yml", ".github/workflows/publish-seeds.yml"]
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 jobs:
   refresh:
     if: github.event_name == 'push' || github.event_name == 'workflow_run'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     timeout-minutes: 30
     concurrency:
       group: scan
@@ -163,6 +165,9 @@ jobs:
   discover:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     concurrency:
       group: scan
       queue: max
