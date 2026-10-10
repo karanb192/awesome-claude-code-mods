@@ -111,6 +111,7 @@ anthonyhungnguyen/claude-code-mods
 anthonyzng/agent-cats
 anthropics/claude-code
 anthropics/claude-plugins-official
+Antreas-Strb/glanceflow
 anzal1/hush
 apolenkov/agent-autopilot
 apolenkov/agent-compact-advisor
