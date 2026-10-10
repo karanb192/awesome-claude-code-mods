@@ -877,6 +877,7 @@ mofocm/scope-creep-receipt
 MohabYasser2/claude-code-mods
 MohammadMD1383/claude-plugins
 mohammed-alsalhi/usage-band
+MohammedSaud404/rtl-terminal
 mohi-devhub/claude-games
 MongLong0214/jev-gate
 monowu/claude-mod-sidebot

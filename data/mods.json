@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-10T07:02:45.292Z",
   "claudeVersion": "2.1.296",
-  "repos": 1500,
+  "repos": 1501,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -347183,6 +347183,113 @@
       "stars": 1,
       "pushedAt": "2026-10-10T07:44:37Z",
       "createdAt": "2026-10-09T09:27:32Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "MohammedSaud404/rtl-terminal:.",
+      "repo": "MohammedSaud404/rtl-terminal",
+      "path": ".",
+      "sourceCommit": "12fcb10e4ada8dad29bb22da81e019418c3f2b43",
+      "name": "rtl-terminal",
+      "description": "Right-to-left layout for Arabic, Hebrew, Persian, Urdu and every RTL language in the Claude Code terminal",
+      "author": "MohammedSaud404",
+      "homepage": "https://github.com/MohammedSaud404/rtl-terminal",
+      "url": "https://github.com/MohammedSaud404/rtl-terminal",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "rtl"
+          }
+        },
+        {
+          "event": "prompt.edit",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AssistantMessage"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "UserMessage"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.command.register",
+        "$.env.get",
+        "$.prompt.read",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.invalidate",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "rtl-terminal",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "other: $.prompt.read",
+          "reads env vars",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt"
+      ],
+      "draws": [
+        "AbovePrompt",
+        "AssistantMessage",
+        "UserMessage"
+      ],
+      "stars": 3,
+      "pushedAt": "2026-10-10T12:09:12Z",
+      "createdAt": "2026-10-09T11:58:46Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
