@@ -145,6 +145,7 @@ ashafizullah/claude-code-muslim-mods
 ashafizullah/cmdc-worker
 ashfulcra/fulcra-tools
 ashishsk93/baton-mods
+Ashley-Pettit/lgtm-flash
 Ashley-Pettit/villager-hp
 asitha-w/pace
 AskTinNguyen/ather-mods
