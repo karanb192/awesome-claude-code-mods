@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-10T07:02:45.292Z",
   "claudeVersion": "2.1.296",
-  "repos": 1497,
+  "repos": 1498,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -346817,6 +346817,155 @@
       "stars": 0,
       "pushedAt": "2026-10-09T21:30:34Z",
       "createdAt": "2026-10-08T21:21:14Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "verdantran/code-city:.",
+      "repo": "verdantran/code-city",
+      "path": ".",
+      "sourceCommit": "50f89e5e339cb7d9d7e94510cc071c1d1007a874",
+      "name": "code-city",
+      "description": "An idle pixel-art city in a side pane that grows as you prompt, edit and run commands. Open it with /city.",
+      "author": "verdantran",
+      "homepage": "https://github.com/verdantran/code-city",
+      "url": "https://github.com/verdantran/code-city",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "city"
+          }
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "agent.spawn",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Edit"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Write"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "code-city"
+          }
+        }
+      ],
+      "calls": [
+        "$.agent.list",
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.fs.write",
+        "$.session.cwd",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.keys",
+        "$.store.set",
+        "$.ui.blit",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "code-city",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "writes files",
+          "reads files",
+          "reads env vars",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "subagent spawns",
+        "every prompt",
+        "Edit calls",
+        "Write calls",
+        "Bash calls"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-09T06:00:56Z",
+      "createdAt": "2026-10-07T20:13:48Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
