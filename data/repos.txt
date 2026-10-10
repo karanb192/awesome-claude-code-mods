@@ -93,6 +93,7 @@ amahmood561/tripwire
 amigoer/ccprogress
 Amnesiac9/claude-mods
 Amorfx/claude-paste-view
+amsultan2010/clawd-minecraft
 an80sPWNstar/claude-mods
 anantraghunath/claude-code-usage-quota-mod
 AnatoliyShk/bulgolingo
@@ -111,6 +112,7 @@ anthonyhungnguyen/claude-code-mods
 anthonyzng/agent-cats
 anthropics/claude-code
 anthropics/claude-plugins-official
+Antreas-Strb/glanceflow
 anzal1/hush
 apolenkov/agent-autopilot
 apolenkov/agent-compact-advisor
@@ -1171,6 +1173,7 @@ savinofiore/lexi
 sayre4ux/autopilot
 scarrillo/agent-plugins
 scasella/claude-flightdeck
+scaso01/claude-risk-guardrails
 schalkneethling/claude-chef
 schmas/claude-plugins
 scholarly360/claude-mod-architecture-tree
@@ -1379,6 +1382,7 @@ Vatsa10/Meta-Harness
 VdustR/vp-cc-mods
 VedantAndhale/claude-pro-kit
 VerbodhDev/tool-meter
+verdantran/code-city
 vgnshiyer/nowloading
 vgnshiyer/tps-report
 Vibe-Commit/claude-context-mods

@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-10T07:02:45.292Z",
   "claudeVersion": "2.1.296",
-  "repos": 1494,
+  "repos": 1498,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -345785,6 +345785,1187 @@
       "stars": 0,
       "pushedAt": "2026-10-09T21:28:59Z",
       "createdAt": "2026-10-09T21:28:50Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "Antreas-Strb/glanceflow:glanceflow",
+      "repo": "Antreas-Strb/glanceflow",
+      "path": "glanceflow",
+      "sourceCommit": "8732c468fe4f8030e1f9da3912c4a5eb8fbd520e",
+      "name": "glanceflow",
+      "description": "GlanceFlow: see what Claude is doing, at a glance. Hides tool rows and shows one plain-English checklist above the prompt, with progress, helpers, history, a team report, pause and continue, and a password guard.",
+      "author": "Antreas-Strb",
+      "homepage": "https://github.com/Antreas-Strb/glanceflow",
+      "url": "https://github.com/Antreas-Strb/glanceflow/tree/master/glanceflow",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "glanceflow"
+          }
+        },
+        {
+          "event": "prompt.compose",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "UserMessage"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AssistantMessage"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "SessionMode"
+          }
+        },
+        {
+          "event": "agent.spawn",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "classic.Stop",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "classic.Notification",
+          "matcher": {}
+        },
+        {
+          "event": "classic.StopFailure",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolUse|ToolResult|ToolGroup"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolProgress"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "glanceflow-settings"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "glanceflow-recap"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "glanceflow-plan"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "glanceflow-history"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.audio.play",
+        "$.audio.speak",
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.command.run",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.read",
+        "$.model.complete",
+        "$.model.fork",
+        "$.process.run",
+        "$.prompt.fill",
+        "$.prompt.submit",
+        "$.session.compact",
+        "$.session.cwd",
+        "$.session.id",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.keys",
+        "$.store.set",
+        "$.tool.register",
+        "$.turn.abort",
+        "$.ui.close",
+        "$.ui.copy",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-mods",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "runs processes",
+          "drives Claude",
+          "writes the prompt box",
+          "reads files",
+          "reads env vars",
+          "plays audio",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt",
+        "subagent spawns",
+        "classic hooks",
+        "every tool call"
+      ],
+      "draws": [
+        "UserMessage",
+        "AssistantMessage",
+        "SessionMode",
+        "ToolUse|ToolResult|ToolGroup",
+        "ToolProgress",
+        "Pane",
+        "AbovePrompt"
+      ],
+      "stars": 2,
+      "pushedAt": "2026-10-10T01:54:24Z",
+      "createdAt": "2026-10-05T23:46:32Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "master",
+      "directory": null
+    },
+    {
+      "id": "amsultan2010/clawd-minecraft:.",
+      "repo": "amsultan2010/clawd-minecraft",
+      "path": ".",
+      "sourceCommit": "c6a030a1078ececff13cae396696faa532263494",
+      "name": "clawd-minecraft",
+      "description": "Usage tracker drawn as a block-game HUD: hearts and armor for the 7-day limit, XP bar for the 5-hour limit, hunger for the context window, and a Clawd that walks beside it",
+      "author": "Abdullah Sultan",
+      "homepage": "https://github.com/amsultan2010/clawd-minecraft",
+      "url": "https://github.com/amsultan2010/clawd-minecraft",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "AskUserQuestion"
+          }
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.now",
+        "$.session.usage",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.invalidate",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "clawd-minecraft",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "draws"
+        ]
+      },
+      "sees": [
+        "AskUserQuestion calls"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-09T21:55:08Z",
+      "createdAt": "2026-10-09T14:26:14Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "scaso01/claude-risk-guardrails:docs/demo/isolation",
+      "repo": "scaso01/claude-risk-guardrails",
+      "path": "docs/demo/isolation",
+      "sourceCommit": "fcefc10f72765146a0fa9fe952e97846d8e5ff74",
+      "name": "demo-isolation",
+      "description": "Demo runs only: keep the person's own instruction files and email out of the session, so screenshots show the guardrails and nothing personal.",
+      "author": null,
+      "homepage": "https://github.com/scaso01/claude-risk-guardrails",
+      "url": "https://github.com/scaso01/claude-risk-guardrails/tree/main/docs/demo/isolation",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "prompt.context",
+          "matcher": {}
+        }
+      ],
+      "calls": [],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": []
+      },
+      "sees": [
+        "the system prompt"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-10-09T21:30:34Z",
+      "createdAt": "2026-10-08T21:21:14Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "scaso01/claude-risk-guardrails:packs/approval",
+      "repo": "scaso01/claude-risk-guardrails",
+      "path": "packs/approval",
+      "sourceCommit": "fcefc10f72765146a0fa9fe952e97846d8e5ff74",
+      "name": "guardrails-approval",
+      "description": "A human signs off before anything that can't be undone: publishing, killing protected processes, editing secrets or stale copies.",
+      "author": "scaso01",
+      "homepage": "https://github.com/scaso01/claude-risk-guardrails",
+      "url": "https://github.com/scaso01/claude-risk-guardrails/tree/main/packs/approval",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Edit|Write|NotebookEdit"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash|PowerShell"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash|PowerShell"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash|PowerShell"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "?"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Edit|Write|NotebookEdit|Bash|PowerShell"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash|PowerShell"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Edit|Write|NotebookEdit|Bash|PowerShell"
+          }
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.fs.write",
+        "$.http.fetch",
+        "$.process.run",
+        "$.session.cwd",
+        "$.ui.status"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-risk-guardrails",
+          "status": "warnings",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "network",
+          "runs processes",
+          "writes files",
+          "reads files",
+          "reads env vars",
+          "draws"
+        ]
+      },
+      "sees": [
+        "Edit|Write|NotebookEdit calls",
+        "Bash|PowerShell calls",
+        "? calls",
+        "Edit|Write|NotebookEdit|Bash|PowerShell calls",
+        "every prompt"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-10-09T21:30:34Z",
+      "createdAt": "2026-10-08T21:21:14Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "scaso01/claude-risk-guardrails:packs/challenge",
+      "repo": "scaso01/claude-risk-guardrails",
+      "path": "packs/challenge",
+      "sourceCommit": "fcefc10f72765146a0fa9fe952e97846d8e5ff74",
+      "name": "guardrails-challenge",
+      "description": "Effective challenge: hold answers to evidence under pushback, and check agents' commit claims against git.",
+      "author": "scaso01",
+      "homepage": "https://github.com/scaso01/claude-risk-guardrails",
+      "url": "https://github.com/scaso01/claude-risk-guardrails/tree/main/packs/challenge",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Agent"
+          }
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.env.get",
+        "$.fs.write",
+        "$.process.run",
+        "$.session.cwd"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-risk-guardrails",
+          "status": "warnings",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "writes files",
+          "reads env vars"
+        ]
+      },
+      "sees": [
+        "every prompt",
+        "Agent calls"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-10-09T21:30:34Z",
+      "createdAt": "2026-10-08T21:21:14Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "scaso01/claude-risk-guardrails:packs/development",
+      "repo": "scaso01/claude-risk-guardrails",
+      "path": "packs/development",
+      "sourceCommit": "fcefc10f72765146a0fa9fe952e97846d8e5ff74",
+      "name": "guardrails-development",
+      "description": "Development standards: look before building, test what changed, pass the repo's checks, keep the rules in view.",
+      "author": "scaso01",
+      "homepage": "https://github.com/scaso01/claude-risk-guardrails",
+      "url": "https://github.com/scaso01/claude-risk-guardrails/tree/main/packs/development",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Write|Edit|Bash|PowerShell"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Edit|Write"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash|PowerShell"
+          }
+        },
+        {
+          "event": "classic.SessionStart",
+          "matcher": {}
+        },
+        {
+          "event": "classic.PostModelSwitch",
+          "matcher": {}
+        },
+        {
+          "event": "classic.SubagentStart",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Write"
+          }
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.write",
+        "$.process.run",
+        "$.session.cwd",
+        "$.session.messages"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-risk-guardrails",
+          "status": "warnings",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "writes files",
+          "reads files",
+          "reads env vars",
+          "reads the transcript"
+        ]
+      },
+      "sees": [
+        "Write|Edit|Bash|PowerShell calls",
+        "Edit|Write calls",
+        "Bash|PowerShell calls",
+        "classic hooks",
+        "Write calls",
+        "every prompt"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-10-09T21:30:34Z",
+      "createdAt": "2026-10-08T21:21:14Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "scaso01/claude-risk-guardrails:packs/monitoring",
+      "repo": "scaso01/claude-risk-guardrails",
+      "path": "packs/monitoring",
+      "sourceCommit": "fcefc10f72765146a0fa9fe952e97846d8e5ff74",
+      "name": "guardrails-monitoring",
+      "description": "Ongoing monitoring: keep watching the agent after approval, and watch the controls themselves.",
+      "author": "scaso01",
+      "homepage": "https://github.com/scaso01/claude-risk-guardrails",
+      "url": "https://github.com/scaso01/claude-risk-guardrails/tree/main/packs/monitoring",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "classic.SubagentStart",
+          "matcher": {}
+        },
+        {
+          "event": "classic.SubagentStop",
+          "matcher": {}
+        },
+        {
+          "event": "classic.SessionStart",
+          "matcher": {}
+        },
+        {
+          "event": "classic.UserPromptSubmit",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Agent"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "full-reply"
+          }
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Edit|Write"
+          }
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "guardrails-status"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.write",
+        "$.model.complete",
+        "$.process.run",
+        "$.session.surfaces",
+        "$.ui.status"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-risk-guardrails",
+          "status": "warnings",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "writes files",
+          "drives Claude",
+          "reads files",
+          "reads env vars",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks",
+        "Agent calls",
+        "every prompt",
+        "Edit|Write calls"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-10-09T21:30:34Z",
+      "createdAt": "2026-10-08T21:21:14Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "scaso01/claude-risk-guardrails:packs/outcomes",
+      "repo": "scaso01/claude-risk-guardrails",
+      "path": "packs/outcomes",
+      "sourceCommit": "fcefc10f72765146a0fa9fe952e97846d8e5ff74",
+      "name": "guardrails-outcomes",
+      "description": "Outcomes analysis: check what a reply claims against what the evidence supports.",
+      "author": "scaso01",
+      "homepage": "https://github.com/scaso01/claude-risk-guardrails",
+      "url": "https://github.com/scaso01/claude-risk-guardrails/tree/main/packs/outcomes",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "classic.Stop",
+          "matcher": {}
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.env.get",
+        "$.fs.write"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-risk-guardrails",
+          "status": "warnings",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "writes files",
+          "reads env vars"
+        ]
+      },
+      "sees": [
+        "every prompt",
+        "every tool call",
+        "classic hooks"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-10-09T21:30:34Z",
+      "createdAt": "2026-10-08T21:21:14Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "scaso01/claude-risk-guardrails:packs/records",
+      "repo": "scaso01/claude-risk-guardrails",
+      "path": "packs/records",
+      "sourceCommit": "fcefc10f72765146a0fa9fe952e97846d8e5ff74",
+      "name": "guardrails-records",
+      "description": "Documentation: leave a trail a reviewer can follow, and keep what can't be rebuilt.",
+      "author": "scaso01",
+      "homepage": "https://github.com/scaso01/claude-risk-guardrails",
+      "url": "https://github.com/scaso01/claude-risk-guardrails/tree/main/packs/records",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Edit|Write|NotebookEdit"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash|PowerShell|Edit|Write|NotebookEdit"
+          }
+        },
+        {
+          "event": "classic.Stop",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Read"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Edit|Write"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash|PowerShell"
+          }
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.write",
+        "$.process.run",
+        "$.session.cwd",
+        "$.session.id"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-risk-guardrails",
+          "status": "warnings",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "writes files",
+          "reads files",
+          "reads env vars"
+        ]
+      },
+      "sees": [
+        "Edit|Write|NotebookEdit calls",
+        "Bash|PowerShell|Edit|Write|NotebookEdit calls",
+        "classic hooks",
+        "Read calls",
+        "Edit|Write calls",
+        "Bash|PowerShell calls",
+        "every tool call",
+        "every prompt"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-10-09T21:30:34Z",
+      "createdAt": "2026-10-08T21:21:14Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "verdantran/code-city:.",
+      "repo": "verdantran/code-city",
+      "path": ".",
+      "sourceCommit": "50f89e5e339cb7d9d7e94510cc071c1d1007a874",
+      "name": "code-city",
+      "description": "An idle pixel-art city in a side pane that grows as you prompt, edit and run commands. Open it with /city.",
+      "author": "verdantran",
+      "homepage": "https://github.com/verdantran/code-city",
+      "url": "https://github.com/verdantran/code-city",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "city"
+          }
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "agent.spawn",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Edit"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Write"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "code-city"
+          }
+        }
+      ],
+      "calls": [
+        "$.agent.list",
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.fs.write",
+        "$.session.cwd",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.keys",
+        "$.store.set",
+        "$.ui.blit",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "code-city",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "writes files",
+          "reads files",
+          "reads env vars",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "subagent spawns",
+        "every prompt",
+        "Edit calls",
+        "Write calls",
+        "Bash calls"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-09T06:00:56Z",
+      "createdAt": "2026-10-07T20:13:48Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
