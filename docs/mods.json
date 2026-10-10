@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-10T07:02:45.292Z",
   "claudeVersion": "2.1.296",
-  "repos": 1499,
+  "repos": 1500,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -347092,6 +347092,97 @@
       "stars": 1,
       "pushedAt": "2026-10-09T23:01:45Z",
       "createdAt": "2026-10-09T22:26:27Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "alexlifexyz/p3c-guard:.",
+      "repo": "alexlifexyz/p3c-guard",
+      "path": ".",
+      "sourceCommit": "f0cfa1ec5c9623e8d9ed17bcda479bd0ace6d3c2",
+      "name": "p3c-guard",
+      "description": "Agent 写 Java 时，新增的阿里 Java 规约（p3c）违规落不了盘。Blocks Java writes that add Alibaba p3c violations.",
+      "author": "alexlifexyz",
+      "homepage": "https://github.com/alexlifexyz/p3c-guard",
+      "url": "https://github.com/alexlifexyz/p3c-guard",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "p3c"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Write"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Edit"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.sleep",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.fs.write",
+        "$.process.run",
+        "$.ui.status"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "p3c-guard",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "writes files",
+          "reads files",
+          "reads env vars",
+          "draws"
+        ]
+      },
+      "sees": [
+        "Write calls",
+        "Edit calls"
+      ],
+      "draws": [],
+      "stars": 1,
+      "pushedAt": "2026-10-10T07:44:37Z",
+      "createdAt": "2026-10-09T09:27:32Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
