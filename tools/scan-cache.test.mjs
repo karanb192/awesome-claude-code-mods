@@ -14,7 +14,7 @@ function fixture(t) {
   const root = mkdtempSync(join(tmpdir(), 'scan-cache-'))
   t.after(() => rmSync(root, { recursive: true, force: true }))
   for (const dir of ['bin', 'data', 'tmp']) mkdirSync(join(root, dir))
-  const state = { revision: 'a'.repeat(40), version: 'fixture', stars: 1, description: 'First description', crash: '', fail: '' }
+  const state = { revision: 'a'.repeat(40), version: 'fixture', stars: 1, description: 'First description', crash: '', fail: '', twins: false }
   const stateFile = join(root, 'state.json'), callsFile = join(root, 'calls.log')
   for (const [file, text] of Object.entries({ 'repos.txt': 'fixture/mod\n', 'seeds.txt': '', 'duplicates.txt': '', 'catalogs.txt': '', 'fixture-exceptions.txt': '' })) writeFileSync(join(root, 'data', file), text)
   const command = (name, source) => writeFileSync(join(root, 'bin', name), `#!${process.execPath}\nconst fs = require('node:fs'), p = require('node:path'), state = JSON.parse(fs.readFileSync(process.env.FIXTURE_STATE, 'utf8')), args = process.argv.slice(2)\n${source}`, { mode: 0o755 })
@@ -23,11 +23,17 @@ function fixture(t) {
 if (args[0] === 'clone') {
   fs.appendFileSync(process.env.FIXTURE_CALLS, 'clone\\n')
   const dir = args.at(-1)
-  fs.mkdirSync(p.join(dir, 'hooks'), { recursive: true }); fs.mkdirSync(p.join(dir, '.claude-plugin'))
-  fs.writeFileSync(p.join(dir, 'hooks/hooks.json'), JSON.stringify({ modules: ['./register.ts'] }))
-  fs.writeFileSync(p.join(dir, 'hooks/register.ts'), 'export function register($) {}')
-  fs.writeFileSync(p.join(dir, '.claude-plugin/plugin.json'), JSON.stringify({ name: 'cache-fixture' }))
-  fs.writeFileSync(p.join(dir, '.claude-plugin/marketplace.json'), JSON.stringify({ name: 'cache-fixture', plugins: [{ name: 'cache-fixture', source: './' }] }))
+  const plugin = (at, name) => {
+    fs.mkdirSync(p.join(at, 'hooks'), { recursive: true }); fs.mkdirSync(p.join(at, '.claude-plugin'), { recursive: true })
+    fs.writeFileSync(p.join(at, 'hooks/hooks.json'), JSON.stringify({ modules: ['./register.ts'] }))
+    fs.writeFileSync(p.join(at, 'hooks/register.ts'), 'export function register($) {}')
+    fs.writeFileSync(p.join(at, '.claude-plugin/plugin.json'), JSON.stringify({ name }))
+  }
+  if (state.twins) { plugin(p.join(dir, 'plugins/a'), 'twin'); plugin(p.join(dir, 'plugins/b'), 'twin') }
+  else {
+    plugin(dir, 'cache-fixture')
+    fs.writeFileSync(p.join(dir, '.claude-plugin/marketplace.json'), JSON.stringify({ name: 'cache-fixture', plugins: [{ name: 'cache-fixture', source: './' }] }))
+  }
 } else if (args[0] === '-C') console.log(state.revision)
 else process.exit(1)
 `)
@@ -36,6 +42,11 @@ if (args[0] === '--version') { console.log(state.version + ' (Claude Code)'); pr
 if (args[1] !== 'validate') process.exit(1)
 const type = args.at(-1).includes('marketplace') ? 'marketplace' : 'plugin'
 fs.appendFileSync(process.env.FIXTURE_CALLS, 'validate ' + type + '\\n')
+if (state.twins) {
+  // plugins/a has an empty footprint, which is also what a crashed validation of plugins/b parses to.
+  if (process.cwd().endsWith('/a')) { console.log('✔ Validation passed'); process.exit(0) }
+  if (state.crash === 'twin') process.exit(137)
+}
 if (state.crash === type) process.exit(137)
 if (state.fail === type) { console.log('✘ Found 1 error:\\n  ❯ name: invalid\\n\\n✘ Validation failed'); process.exit(1) }
 console.log('  ❯ ./register.ts hooks: session.start\\n  ❯ ./register.ts calls: $.fs.read\\n✔ Validation passed')
@@ -106,6 +117,18 @@ for (const type of ['plugin', 'marketplace']) {
     assert.deepEqual(f.run().calls, [], 'the recovered result is cached')
   })
 }
+
+test('a crashed validation that duplicate filtering drops still blocks reuse', t => {
+  const f = fixture(t)
+  f.state.twins = true
+  f.state.crash = 'twin'
+  assert.deepEqual(f.run().data.mods.map(m => m.path), ['plugins/a'])
+  f.state.crash = ''
+  const recovered = f.run()
+  assert.ok(recovered.calls.includes('clone'))
+  assert.deepEqual(recovered.data.mods.map(m => m.path).sort(), ['plugins/a', 'plugins/b'])
+  assert.deepEqual(recovered.data, f.run({ cache: false }).data)
+})
 
 test('a crashed validation already in an older cache is not reused', t => {
   const f = fixture(t)

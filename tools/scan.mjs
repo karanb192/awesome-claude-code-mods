@@ -94,7 +94,8 @@ const reusable = cached?.key === CACHE_KEY ? cached.repos : {}
 const findings = {}
 let downloadedKb = 0, reused = 0
 // A crashed or timed-out validator reports `unknown`; such findings are retried on the next scan, never reused.
-const settled = found => found.plugins.every(p => p.validate.status !== 'unknown' && p.marketplaces.every(m => m.status !== 'unknown'))
+// `unsettled` also covers an unknown plugin that duplicate filtering dropped before it reached the findings.
+const settled = found => !found.unsettled && found.plugins.every(p => p.validate.status !== 'unknown' && p.marketplaces.every(m => m.status !== 'unknown'))
 
 async function scanRepo(repo) {
   const key = repo.toLowerCase(), batch = metas.get(key), hit = reusable[key]
@@ -154,7 +155,7 @@ async function inspect(repo, dir) {
   const revision = (await spawnAsync('git', ['-C', dir, 'rev-parse', 'HEAD'])).stdout.trim()
   // Longest first: the checkout itself, then the clones folder, both as given and as resolved.
   const roots = [dir, join(CLONES, repo.replace('/', '__')), realpathSync(CLONES), CLONES]
-  let complete = true
+  let complete = true, unsettled = false
   for (const hooksPath of hooksFiles(dir)) {
     const hooks = readJson(hooksPath)
     if (!hooks || typeof hooks !== 'object' || Array.isArray(hooks) || ('modules' in hooks && !Array.isArray(hooks.modules))) {
@@ -171,6 +172,7 @@ async function inspect(repo, dir) {
     if (seen.has(id)) continue
     seen.add(id)
     const parsed = await validateAsync(existsSync(manifestPath) ? '.claude-plugin/plugin.json' : '.', root, roots)
+    if (parsed.status === 'unknown') unsettled = true
     const allHooks = parsed.modules.flatMap(x => x.hooks)
     const allCalls = [...new Set(parsed.modules.flatMap(x => x.calls))].sort()
     const reach = grade(allCalls)
@@ -205,7 +207,7 @@ async function inspect(repo, dir) {
     })
     console.log(`${parsed.status.padEnd(8)} L${reach.level} ${id}`)
   }
-  return { revision, complete, plugins }
+  return unsettled ? { revision, complete, plugins, unsettled } : { revision, complete, plugins }
 }
 
 // Results land by repository index, so the inventory comes out in the same order as a one-at-a-time scan.
