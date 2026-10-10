@@ -63,3 +63,4 @@ valeryia-piatrova/token-hamster
 NMenzel/claude-devtools-mod
 mertkayacs/ultramod
 paragpandyareal/lazy-panda-panel
+hellosverre/redgreen
