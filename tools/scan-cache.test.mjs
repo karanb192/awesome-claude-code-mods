@@ -5,7 +5,7 @@ import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'nod
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { findingsModules } from './inspect.mjs'
+import { findingsModules, findingsPackages, findingsKey } from './inspect.mjs'
 
 const scanner = fileURLToPath(new URL('./scan.mjs', import.meta.url))
 
@@ -155,4 +155,17 @@ test('cached findings are keyed on the checkout reader, not on code that only sh
   const modules = findingsModules()
   for (const file of ['tools/inspect.mjs', 'tools/validate.mjs', 'tools/parse.mjs', 'tools/compatibility.mjs']) assert.ok(modules.includes(file), file)
   for (const file of ['tools/scan.mjs', 'tools/grade.mjs', 'tools/kind.mjs', 'tools/dedupe.mjs', 'tools/render.mjs']) assert.ok(!modules.includes(file), file)
+})
+
+test('a new parser release in the lockfile retires cached findings; other dependency changes do not', () => {
+  const lockText = readFileSync(new URL('../package-lock.json', import.meta.url), 'utf8')
+  assert.deepEqual(Object.keys(findingsPackages()), ['typescript'])
+  const relock = (name, version) => {
+    const lock = JSON.parse(lockText)
+    lock.packages[`node_modules/${name}`] = { ...lock.packages[`node_modules/${name}`], version }
+    return JSON.stringify(lock)
+  }
+  const key = findingsKey('fixture', lockText)
+  assert.notEqual(findingsKey('fixture', relock('typescript', '0.0.1')), key, 'TypeScript bump')
+  assert.equal(findingsKey('fixture', relock('playwright', '0.0.1')), key, 'Playwright bump')
 })

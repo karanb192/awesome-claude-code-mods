@@ -1,7 +1,7 @@
 // Reads what a scan records from one repository's checkout: each plugin whose hooks.json names a module,
 // its manifest fields, validator and marketplace results and UI compatibility warnings. These findings
-// depend only on the checkout's commit, the validator and this module with its imports, so the
-// scanner's cache is keyed on exactly those (see findingsKey).
+// depend only on the checkout's commit, the validator, this module with its local imports and the npm
+// packages those import, so the scanner's cache is keyed on exactly those (see findingsKey).
 
 import { existsSync, lstatSync, readFileSync, readdirSync, realpathSync } from 'node:fs'
 import { join, relative, dirname } from 'node:path'
@@ -25,9 +25,30 @@ export function findingsModules(entry = 'tools/inspect.mjs') {
   return [...loaded].sort()
 }
 
-export function findingsKey(claudeVersion) {
+// The npm packages those modules import, with their dependencies, as package-lock.json pins them; the
+// TypeScript parser behind the UI compatibility warnings is one.
+export function findingsPackages(modules = findingsModules(), lockText = readFileSync(new URL('../package-lock.json', import.meta.url), 'utf8')) {
+  const lock = JSON.parse(lockText).packages
+  const pending = modules.flatMap(file => [...readFileSync(new URL(`../${file}`, import.meta.url), 'utf8').matchAll(/^import\s[^\n]*?from '([^.'][^']*)'/gm)].map(([, spec]) => spec))
+    .filter(spec => !spec.startsWith('node:'))
+    .map(spec => spec.split('/').slice(0, spec.startsWith('@') ? 2 : 1).join('/'))
+  const pinned = {}
+  while (pending.length) {
+    const name = pending.pop()
+    if (pinned[name]) continue
+    const entry = lock[`node_modules/${name}`]
+    if (!entry) throw new Error(`package-lock.json does not pin ${name}, which the checkout reader imports`)
+    pinned[name] = `${entry.version} ${entry.integrity ?? ''}`
+    pending.push(...Object.keys(entry.dependencies ?? {}))
+  }
+  return Object.fromEntries(Object.entries(pinned).sort(([a], [b]) => a.localeCompare(b)))
+}
+
+export function findingsKey(claudeVersion, lockText) {
   const hash = createHash('sha256')
-  for (const path of findingsModules()) hash.update(`${path}\0${readFileSync(new URL(`../${path}`, import.meta.url))}\0`)
+  const modules = findingsModules()
+  for (const path of modules) hash.update(`${path}\0${readFileSync(new URL(`../${path}`, import.meta.url))}\0`)
+  hash.update(JSON.stringify(findingsPackages(modules, lockText)))
   return `${claudeVersion}:${hash.digest('hex')}`
 }
 
