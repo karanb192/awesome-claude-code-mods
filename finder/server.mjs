@@ -25,7 +25,7 @@ const TOOLS = [
         without: { type: 'array', items: { type: 'string', enum: [...ACCESS, ...SEES] }, description: 'Leave out mods with any of this access, or that see these events.' },
         max_reach: { type: 'integer', enum: [0, 1, 2, 3], description: 'Leave out mods above this level: 0 draws and remembers, 1 reads, 2 writes or runs, 3 network.' },
         verified_only: { type: 'boolean', description: 'Only mods that pass validation on the scanned Claude Code version.' },
-        include_unverified: { type: 'boolean', description: 'Let access filters keep mods whose validation did not pass. Their footprint may be incomplete.' },
+        include_unverified: { type: 'boolean', description: 'Let access filters keep mods whose validation did not pass or whose footprint has calls the scan could not classify. They may do more than their labels say.' },
         in_anthropic_directory: { type: 'boolean', description: "Only mods that Anthropic's plugin directory installs." },
         repo: { type: 'string', description: 'Only mods from this GitHub repository, as owner/repo.' },
         limit: { type: 'integer', minimum: 1, maximum: MAX_LIMIT, description: 'Results per page, default 8.' },
