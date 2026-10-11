@@ -578,6 +578,7 @@ HydrowZer/claude-mods
 hymleong/claude-mods
 HyunjunJeon/jev-context
 hyvanmielenpelit/ClaudeCodeMods
+i-harsha-reddy/naruto-mod
 i-noma-ru/claude-dotpet
 IAmAStealer/Claudou
 iamkhalid2/usage-band
@@ -1377,6 +1378,7 @@ unpaged/plugins
 uppinote20/claude-pets
 ushironoko/dotfiles
 UtakataKyosui/utakata-cc-mod
+VaitaR/claude-code-limits
 valeryia-piatrova/token-hamster
 VardhanKirti/claude-code-mods
 varunmoka7/layman

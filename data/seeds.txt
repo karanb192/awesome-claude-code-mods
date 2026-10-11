@@ -77,4 +77,14 @@ Ashley-Pettit/villager-hp
 Ashley-Pettit/lgtm-flash
 hellosverre/smart-compact
 vihrea1337/headroom
+dot-agi/arrester
+dot-agi/downrange
+dot-agi/sandbox-tuner
+dot-agi/high-command
+varunmoka7/image-shrinker
+varunmoka7/reddit-watch
+varunmoka7/next-steps-autopilot
+paragpandyareal/swear-slap
+VaitaR/claude-code-limits
+Arjun0014/project-sentinel
 i-harsha-reddy/naruto-mod
