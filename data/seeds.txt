@@ -30,6 +30,7 @@ dot-agi/sandbox-tuner
 gerricchaplin/pr-pulse
 halluton/Mindful-Claude
 helenkwok/gsd-status-mod
+helenkwok/open-links
 hellosverre/claude-skins
 hellosverre/redgreen
 hellosverre/smart-compact
