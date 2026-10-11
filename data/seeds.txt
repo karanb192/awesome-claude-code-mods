@@ -15,6 +15,7 @@ apolenkov/agent-shell-watch
 Arjun0014/project-sentinel
 Ashley-Pettit/lgtm-flash
 Ashley-Pettit/villager-hp
+atharv6f/headway
 augbastos/afkswitch
 augiefra/claude-mods
 BatuhanCakmakk/wavy-usage

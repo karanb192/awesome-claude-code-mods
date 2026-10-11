@@ -199,6 +199,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [high-command](https://github.com/dot-agi/high-command) - One inbox for messages from agent-team teammates, named subagents and your other Claude Code sessions, grouped by peer in a pane, a band and `/highcommand`, with unread counts, sender labels, marks on suspicious wording and the reported result of each plain-text send, kept in session memory with no network, file, process or model calls.
 - [next-steps-autopilot](https://github.com/varunmoka7/next-steps-autopilot) - Suggested next prompts above the prompt box, with an optional `/auto` mode, off by default, that sends the first one after a countdown.
 - [project-sentinel](https://github.com/Arjun0014/project-sentinel) - Context and run progress tracking, Autopilot handoffs, guardrails and an activity view for long sessions in the terminal and Claude Desktop.
+- [headway](https://github.com/atharv6f/headway) - A goal and step progress band above the prompt and a four-tab pane, fed by a plan Claude reports, plan-mode plans, a pinned plan file, task tools or Workflow phases, with every subagent under its step, warnings for dispatches that name no model or effort, and the exact session cost, with no network and no subprocess.
 
 ## Building mods
 
