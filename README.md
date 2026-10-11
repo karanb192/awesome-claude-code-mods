@@ -173,6 +173,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [colorwheel](https://github.com/AlexeyHRDesign/colorwheel) - Draws desktop replies with the app's own markdown and code views and mermaid diagrams as themed SVG, and frames the band above the prompt with the 5-hour and 7-day limits on its edges, context as weather and running subagents and tasks inside.
 - [rtl-terminal](https://github.com/MohammedSaud404/rtl-terminal) - Lays out Arabic, Hebrew, Persian and Urdu replies and prompts right-to-left in Windows Terminal, conhost and VS Code's integrated terminal, with right-aligned lines, bullets on the right, mirrored brackets and code and links kept left-to-right, and makes no network, process or file calls.
 - [open-links](https://github.com/helenkwok/open-links) - Under each reply, a line of links to the files it names that exist (absolute, home, relative or Windows paths, with `:line`); a click opens the file in its default app or your editor at the line, and it makes no network calls or writes.
+- [hablo](https://github.com/Jarvizx/hablo) - Reads replies aloud with the macOS or Windows voices, picking one for each reply's language, from a Listen button under each reply or `/hablo`.
 
 ## Agents and workflows
 

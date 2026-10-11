@@ -39,6 +39,7 @@ hoobnn/hoobnn-agent-mods
 i-harsha-reddy/naruto-mod
 icedevil2001/auto-continue
 jarrodwatts/intermission
+Jarvizx/hablo
 joshuatonga/mini-claude-mods
 karanb192/cache-tax
 karanb192/claude-code-mods
