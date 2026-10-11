@@ -57,6 +57,25 @@ test('access filters drop mods with the access and mods whose footprint is unver
   assert.deepEqual(ids(search(index, { query: 'cache', max_reach: 2 })).sort(), ['e/cache:.', 'g/eye:.'])
 })
 
+test('access filters leave out mods with calls the scan could not classify', () => {
+  // The shape of vinta/hal-9000:plugins/hal-grammar-check: it calls $.process.spawn, which the grader has no
+  // rule for, so its labels and level 1 say nothing about running processes.
+  const spawner = mod('l/hal:plugins/grammar-check', { description: 'Grammar check.', reach: { level: 1, name: 'reads', labels: ['other: $.process.spawn', 'draws'] } })
+  const plain = mod('m/plain:.', { name: 'grammar-pane', description: 'Grammar tips.' })
+  const odd = buildIndex({ generated: DATA.generated, mods: [spawner, plain] })
+  for (const filter of [{ without: ['runs processes'] }, { max_reach: 1 }]) {
+    const out = search(odd, { query: 'grammar', ...filter })
+    assert.deepEqual(ids(out), ['m/plain:.'], JSON.stringify(filter))
+    assert.match(out.notes.join(' '), /Left out 1 with unclassified calls/)
+  }
+  const loose = search(odd, { query: 'grammar', without: ['runs processes'], include_unverified: true })
+  assert.deepEqual(ids(loose).sort(), ['l/hal:plugins/grammar-check', 'm/plain:.'])
+  assert.deepEqual(loose.results.find(r => r.id === 'l/hal:plugins/grammar-check').access.unclassified_calls, ['$.process.spawn'])
+  assert.deepEqual(ids(search(odd, { query: 'grammar' })).sort(), ['l/hal:plugins/grammar-check', 'm/plain:.'], 'no filter, no exclusion')
+  const none = search(odd, { query: 'grammar check', without: ['runs processes'], repo: 'l/hal' })
+  assert.ok(!none.notes.some(n => /Nothing matched/.test(n)), 'a held-back match is not reported as no match')
+})
+
 test('one repository fills at most two places before other repositories get theirs', () => {
   const out = search(index, { query: 'review' })
   const firstFour = ids(out).slice(0, 4)
@@ -201,6 +220,21 @@ test('a failed refresh serves the cached snapshot marked stale, up to a week', a
   await assert.rejects(loadSnapshot({ ...down.opts, cacheDir: dir, now: T0 + MAX_STALE_MS + 1 }), /more than 7 days old/)
 })
 
+test('offline never touches the network and still applies the age limits', async t => {
+  const s = server()
+  await assert.rejects(loadSnapshot({ ...s.opts, cacheDir: cache(t), now: T0, refresh: 'never' }), /offline and there is no cached copy/)
+  assert.deepEqual(s.calls, [])
+  const dir = cache(t)
+  await loadSnapshot({ ...server().opts, cacheDir: dir, now: T0 })
+  const fresh = await loadSnapshot({ ...s.opts, cacheDir: dir, now: T0 + 1000, refresh: 'never' })
+  assert.ok(!fresh.revision.stale)
+  const old = await loadSnapshot({ ...s.opts, cacheDir: dir, now: T0 + REFRESH_AFTER_MS + 1, refresh: 'never' })
+  assert.equal(old.revision.stale, true)
+  assert.match(old.revision.refreshError, /offline/)
+  await assert.rejects(loadSnapshot({ ...s.opts, cacheDir: dir, now: T0 + 30 * 86400e3, refresh: 'never' }), /more than 7 days old/)
+  assert.deepEqual(s.calls, [])
+})
+
 test('a broken download never replaces a good cache, and with no cache it is an error', async t => {
   const dir = cache(t)
   await loadSnapshot({ ...server().opts, cacheDir: dir, now: T0 })
@@ -218,6 +252,9 @@ test('answers from the published snapshot stay small', { skip: !existsSync(publi
   const real = buildIndex(JSON.parse(readFileSync(published, 'utf8')))
   const sizes = real.data.mods.map(m => JSON.stringify(getMod(real, m.id)).length)
   assert.ok(Math.max(...sizes) < 16000, `largest get_mod answer is ${Math.max(...sizes)} bytes`)
+  for (const filter of [{ without: ['runs processes'] }, { max_reach: 1 }]) {
+    assert.ok(!ids(search(real, { query: 'grammar check', limit: MAX_LIMIT, ...filter })).includes('vinta/hal-9000:plugins/hal-grammar-check'), JSON.stringify(filter))
+  }
   for (const query of ['review', 'cache', 'a', '']) {
     const size = JSON.stringify(search(real, { query, limit: MAX_LIMIT })).length
     assert.ok(size < 24000, `a full page for "${query}" is ${size} bytes`)
@@ -228,7 +265,10 @@ test('the command line prints exactly what the module returns', t => {
   const dir = cache(t)
   const file = 'mods-test.json'
   writeFileSync(join(dir, file), JSON.stringify(DATA))
-  writeFileSync(join(dir, 'meta.json'), JSON.stringify({ commit: 'f'.repeat(40), sha256: 'abc', fetchedAt: Date.parse('2026-10-11T10:00:00Z'), file }))
+  // --offline now marks a cache older than the refresh interval stale, so the cache is written fresh.
+  const meta = { commit: 'f'.repeat(40), sha256: 'abc', fetchedAt: Date.now(), file }
+  writeFileSync(join(dir, 'meta.json'), JSON.stringify(meta))
+  const index = buildIndex(DATA, meta)
   const cli = fileURLToPath(new URL('./find-mods.mjs', import.meta.url))
   const run = (...args) => {
     const r = spawnSync(process.execPath, [cli, ...args, '--offline'], { encoding: 'utf8', env: { ...process.env, CLAUDE_MODS_CACHE: dir } })

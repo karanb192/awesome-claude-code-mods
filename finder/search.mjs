@@ -65,7 +65,13 @@ export async function loadSnapshot({ cacheDir = defaultCacheDir(), fetch = globa
   const cached = readCache(cacheDir)
   const age = cached ? now - cached.meta.fetchedAt : Infinity
   const result = (entry, extra = {}) => ({ data: entry.data, revision: { ...entry.meta, ...extra } })
-  if (cached && (refresh === 'never' || (refresh === 'auto' && age < REFRESH_AFTER_MS))) return result(cached)
+  // Offline never touches the network, and the age limits still apply to what it serves.
+  if (refresh === 'never') {
+    if (!cached) throw new Error('offline and there is no cached copy of the mods catalogue; run once with the network')
+    if (age > MAX_STALE_MS) throw new Error('offline and the cached copy of the mods catalogue is more than 7 days old')
+    return result(cached, age < REFRESH_AFTER_MS ? {} : { stale: true, refreshError: 'offline, not refreshed' })
+  }
+  if (cached && refresh === 'auto' && age < REFRESH_AFTER_MS) return result(cached)
   try {
     mkdirSync(cacheDir, { recursive: true })
     const touch = () => {
@@ -236,16 +242,27 @@ export function search(index, params) {
   const terms = raw(p.query).map(word => ({ word, term: stem(word) })).filter(t => !seen.has(t.term) && seen.add(t.term))
     .map(t => ({ ...t, alternatives: SYNONYMS[t.term] ?? [] }))
   const accessFilter = p.without.length || p.maxReach !== null
+  // The grader caps a call it has no rule for at level 1 with no label, so a mod that calls something like
+  // $.process.spawn would pass "without runs processes" and max_reach 1. An access filter cannot vouch for
+  // what the scan could not classify, so it leaves those mods out unless include_unverified asks for them.
   const keep = m => {
     if (p.repo && m.repo.toLowerCase() !== p.repo) return false
     if (p.inDirectory && !m.directory) return false
-    if ((p.verifiedOnly || (accessFilter && !p.includeUnverified)) && !verified(m)) return false
+    if (p.verifiedOnly && !verified(m)) return false
     if (p.maxReach !== null && m.reach.level > p.maxReach) return false
     const has = new Set([...(m.reach?.labels ?? []).filter(l => !l.startsWith('other: ')), ...(m.sees ?? [])])
-    return p.without.every(label => !has.has(label))
+    if (!p.without.every(label => !has.has(label))) return false
+    if (accessFilter && !p.includeUnverified) {
+      if (!verified(m)) return 'unverified'
+      if (unclassified(m).length) return 'unclassified'
+    }
+    return true
   }
-  let ranked = index.docs.filter(d => keep(d.mod)).map(d => ({ mod: d.mod, ...(terms.length ? score(index, d, terms) : { score: 0, matched: [] }) }))
+  const held = { unverified: 0, unclassified: 0 }
+  let ranked = index.docs.map(d => ({ d, kept: keep(d.mod) })).filter(({ kept }) => kept)
+    .map(({ d, kept }) => ({ mod: d.mod, kept, ...(terms.length ? score(index, d, terms) : { score: 0, matched: [] }) }))
   if (terms.length) ranked = ranked.filter(r => r.score > 0)
+  ranked = ranked.filter(r => r.kept === true || (held[r.kept]++, false))
   ranked.sort((a, b) => b.score - a.score || (b.mod.stars ?? 0) - (a.mod.stars ?? 0) || a.mod.id.localeCompare(b.mod.id))
   // One big pack should not fill a page: past two hits per repository, the rest move behind other repositories.
   if (!p.repo) {
@@ -260,10 +277,11 @@ export function search(index, params) {
   const page = ranked.slice(p.cursor, p.cursor + p.limit)
   const notes = []
   if (accessFilter) notes.push(p.includeUnverified
-    ? 'Access filters use the static footprint the validator reported. Unverified results may have an incomplete footprint.'
-    : 'Access filters use the static footprint the validator reported; mods without a passing validation are left out. No reported access is not proof the mod never does it at runtime.')
+    ? 'Access filters use the static footprint the validator reported. Unverified results, and results with unclassified_calls, may do more than their labels say.'
+    : 'Access filters use the static footprint the validator reported; mods without a passing validation, or with calls the scan could not classify, are left out. No reported access is not proof the mod never does it at runtime.')
+  if (held.unverified || held.unclassified) notes.push(`Left out ${[held.unverified && `${held.unverified} unverified`, held.unclassified && `${held.unclassified} with unclassified calls`].filter(Boolean).join(' and ')} that otherwise matched; pass include_unverified to see them.`)
   if (!terms.length && !p.query.trim()) notes.push('No query words, so results are ordered by repository stars, which belong to the repository, not the mod.')
-  if (!ranked.length && terms.length) notes.push('Nothing matched. Try fewer or broader words, or drop a filter.')
+  if (!ranked.length && terms.length && !held.unverified && !held.unclassified) notes.push('Nothing matched. Try fewer or broader words, or drop a filter.')
   return {
     snapshot: snapshotInfo(index),
     total: ranked.length,
