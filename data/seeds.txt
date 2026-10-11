@@ -76,3 +76,6 @@ Ashley-Pettit/villager-hp
 Ashley-Pettit/lgtm-flash
 hellosverre/smart-compact
 vihrea1337/headroom
+varunmoka7/image-shrinker
+varunmoka7/reddit-watch
+varunmoka7/next-steps-autopilot

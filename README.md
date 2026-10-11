@@ -98,6 +98,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [galactic-battle](https://github.com/DarkVelours/claude-code-galactic-battle) - A space battle above the prompt while a turn runs: each tool that works is a rebel shot, each failure an Empire shot, each subagent one more fighter, with a double-bladed lightsaber for context and the 5-hour limit, blaster sounds and optional music.
 - [Code City](https://github.com/verdantran/code-city) - An idle city builder that grows as you prompt, where the tokens you spend buy buildings and other Claude Code sessions show up as neighbouring cities.
 - [lgtm-flash](https://github.com/Ashley-Pettit/lgtm-flash) - After every code change the LGTM Lines container ship sails in above the prompt, the L G T M containers slam onto its deck and the camera zooms in on LOOKS GOOD TO ME, drawn locally with no model calls or network, plus `/ship` to launch it any time.
+- [reddit-watch](https://github.com/varunmoka7/reddit-watch) - Checks subreddits you choose, has Haiku pick posts with ideas for using Claude Code better, and lists them in a side pane, off until `/reddit on`.
 
 ## Git, pull requests and CI
 
@@ -145,6 +146,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [agent-compact-advisor](https://github.com/apolenkov/agent-compact-advisor) - A 0-100 score in the status line for how good a moment it is to `/compact`, with a ready `/compact` suggestion past a threshold and a template added to every compaction that keeps the goal, decisions and open leftovers; it never compacts by itself, and its one network call goes to a local Kev endpoint on loopback.
 - [context-canary](https://github.com/Nachx639/context-canary) - A pixel-art canary above the prompt that dies when a final reply skips a sentinel from CLAUDE.md, then compacts the session keeping your instructions and revives.
 - [smart-compact](https://github.com/hellosverre/smart-compact) - Offers a one-click compact after a commit or a green test run and a minute before the prompt cache expires, and gives Claude a `request_compact` tool to ask for one with what the summary must keep.
+- [image-shrinker](https://github.com/varunmoka7/image-shrinker) - Shrinks large image files before Claude reads them so they take less of the context window, and tells Claude the scale back to the original pixels.
 
 ## Rendering
 
@@ -184,6 +186,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [mission-control](https://github.com/hamzafer/claude-code-mods/tree/main/mods/mission-control) - A pane with every subagent and tool call live, plus a code map of the files they read and write, with a Haiku call that describes each file's changes.
 - [agent-pager](https://github.com/RadTech-Solutions/agent-pager) - Pages your phone through ntfy or your own Telegram bot when a long turn ends, a question or permission prompt waits, or a turn errors, and queues your Telegram replies as prompts in the one session you pick with `/pager listen`.
 - [session-board](https://github.com/danilpavlov/telescope-claude-code) - A floating tmux popup with an fzf picker of every Claude Code session running on the machine, showing which ones wait for you, a Haiku summary of each, and a jump to the tmux window of the one you pick.
+- [next-steps-autopilot](https://github.com/varunmoka7/next-steps-autopilot) - Suggested next prompts above the prompt box, with an optional `/auto` mode, off by default, that sends the first one after a countdown.
 
 ## Building mods
 
