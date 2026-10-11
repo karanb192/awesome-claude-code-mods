@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-10T07:02:45.292Z",
   "claudeVersion": "2.1.296",
-  "repos": 1505,
+  "repos": 1506,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -347747,6 +347747,144 @@
       "stars": 0,
       "pushedAt": "2026-10-10T17:40:13Z",
       "createdAt": "2026-10-10T17:40:07Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "i-harsha-reddy/naruto-mod:.",
+      "repo": "i-harsha-reddy/naruto-mod",
+      "path": ".",
+      "sourceCommit": "7b24a808d350efe8be5d458540bc0a105d6827e4",
+      "name": "naruto",
+      "description": "A pixel-art chibi ninja above your Claude Code prompt who fights while Claude works: 20 characters from Naruto, 60 animated jutsu, hand-drawn summons",
+      "author": "Harsha Reddy",
+      "homepage": "https://github.com/i-harsha-reddy/naruto-mod",
+      "url": "https://github.com/i-harsha-reddy/naruto-mod",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "ninja"
+          }
+        },
+        {
+          "event": "prompt.autocomplete",
+          "matcher": {
+            "text": "/\"^\\\\/ninja \"/"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "classic.PermissionRequest",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolProgress"
+          }
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Spinner"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "TurnDuration"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.command.register",
+        "$.env.get",
+        "$.prompt.suggest",
+        "$.settings.read",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.blit",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "naruto-mod",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "writes the prompt box",
+          "reads env vars",
+          "reads settings",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt",
+        "every tool call",
+        "classic hooks"
+      ],
+      "draws": [
+        "ToolProgress",
+        "Spinner",
+        "TurnDuration",
+        "AbovePrompt"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-10T19:14:45Z",
+      "createdAt": "2026-10-10T19:14:37Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

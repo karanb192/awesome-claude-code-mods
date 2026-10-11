@@ -578,6 +578,7 @@ HydrowZer/claude-mods
 hymleong/claude-mods
 HyunjunJeon/jev-context
 hyvanmielenpelit/ClaudeCodeMods
+i-harsha-reddy/naruto-mod
 i-noma-ru/claude-dotpet
 IAmAStealer/Claudou
 iamkhalid2/usage-band
