@@ -35,6 +35,11 @@ if (o.help || !['search', 'get'].includes(command)) {
   process.exit(o.help ? 0 : 2)
 }
 
+if (o.offline && o.refresh) {
+  console.error(`--offline and --refresh contradict each other\n${usage}`)
+  process.exit(2)
+}
+
 try {
   const { data, revision } = await loadSnapshot({ refresh: o.refresh ? 'force' : o.offline ? 'never' : 'auto' })
   const index = buildIndex(data, revision)

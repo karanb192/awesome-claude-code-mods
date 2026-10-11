@@ -27,10 +27,13 @@ export class InputError extends Error {}
 export const defaultCacheDir = () => process.env.CLAUDE_MODS_CACHE
   || join(process.env.XDG_CACHE_HOME || join(homedir(), '.cache'), 'claude-mods')
 
-function readCache(dir) {
+// A cache with an unreadable age, an age in the future, or a file that is not a snapshot counts as no cache,
+// so the age limits always apply and a corrupt copy is downloaded again instead of crashing the search.
+function readCache(dir, now) {
   try {
     const meta = JSON.parse(readFileSync(join(dir, 'meta.json'), 'utf8'))
-    return { meta, data: JSON.parse(readFileSync(join(dir, meta.file), 'utf8')) }
+    if (!Number.isFinite(meta.fetchedAt) || meta.fetchedAt > now + 60e3) return null
+    return { meta, data: checkShape(JSON.parse(readFileSync(join(dir, meta.file), 'utf8'))) }
   } catch { return null }
 }
 
@@ -42,7 +45,7 @@ function writeAtomic(path, text) {
 function checkShape(data) {
   if (!data || !Array.isArray(data.mods) || !data.mods.length || typeof data.generated !== 'string'
     || data.mods.some(m => typeof m?.id !== 'string' || typeof m.kind !== 'string')) {
-    throw new Error('the downloaded catalogue is not a mods.json snapshot')
+    throw new Error('the catalogue is not a mods.json snapshot')
   }
   return data
 }
@@ -62,7 +65,7 @@ async function latestCommit(fetch, api) {
 // download never mixes two revisions. When a refresh fails, the previous snapshot is served marked stale.
 export async function loadSnapshot({ cacheDir = defaultCacheDir(), fetch = globalThis.fetch, now = Date.now(), refresh = 'auto',
   raw = 'https://raw.githubusercontent.com', api = 'https://api.github.com' } = {}) {
-  const cached = readCache(cacheDir)
+  const cached = readCache(cacheDir, now)
   const age = cached ? now - cached.meta.fetchedAt : Infinity
   const result = (entry, extra = {}) => ({ data: entry.data, revision: { ...entry.meta, ...extra } })
   // Offline never touches the network, and the age limits still apply to what it serves.
@@ -157,6 +160,11 @@ export function snapshotInfo(index) {
   }
 }
 
+function flag(value, name) {
+  if (value === undefined || value === null || typeof value === 'boolean') return Boolean(value)
+  throw new InputError(`${name} must be true or false`)
+}
+
 function list(value, name, allowed) {
   if (value === undefined || value === null || value === '') return []
   const items = (Array.isArray(value) ? value : String(value).split(',')).map(v => String(v).trim()).filter(Boolean)
@@ -177,9 +185,9 @@ export function normalizeSearch(params = {}) {
     query: String(params.query ?? '').slice(0, 300),
     without: list(params.without, 'without', [...ACCESS, ...SEES]),
     maxReach,
-    verifiedOnly: Boolean(params.verified_only),
-    includeUnverified: Boolean(params.include_unverified),
-    inDirectory: Boolean(params.in_anthropic_directory),
+    verifiedOnly: flag(params.verified_only, 'verified_only'),
+    includeUnverified: flag(params.include_unverified, 'include_unverified'),
+    inDirectory: flag(params.in_anthropic_directory, 'in_anthropic_directory'),
     repo: params.repo ? String(params.repo).toLowerCase() : null,
     limit,
     cursor,
@@ -192,6 +200,43 @@ const clip = (text, n) => {
 }
 const verified = m => VERIFIED.has(m.validate?.status)
 const unclassified = m => (m.reach?.labels ?? []).filter(l => l.startsWith('other: ')).map(l => l.slice(7))
+
+// Which tools a matcher covers: 'all', 'some', or 'unknown' when the scan recorded it as dynamic ("?") or
+// as a regex that does not compile here. A regex covers all tools when it matches unrelated tool names.
+function toolScope(pattern) {
+  if (pattern === undefined || pattern === null || pattern === '') return 'all'
+  const regex = /^\/"(.*)"\/([a-z]*)$/s.exec(pattern)
+  if (regex) {
+    try {
+      const flags = regex[2].replace(/[gy]/g, '')
+      return ['Bash', 'Zq9', 'mcp__x__y'].every(name => new RegExp(regex[1], flags).test(name)) ? 'all' : 'some'
+    } catch { return 'unknown' }
+  }
+  return String(pattern).split('|').includes('?') ? 'unknown' : 'some'
+}
+
+const TOOL_EVENTS = new Set(['tool.call', 'tool.*', 'classic.PreToolUse', 'classic.PostToolUse', 'classic.PostToolUseFailure', 'classic.PostToolBatch'])
+const PROMPT_EVENTS = new Set(['prompt.submit', 'classic.UserPromptSubmit', 'classic.UserPromptExpansion'])
+const CONTEXT_EVENTS = new Set(['prompt.context', 'prompt.section'])
+
+// What a mod's hooks observe, per SEES label: 'yes' or 'maybe'. The scan's sees labels miss some of it:
+// a '*' hook is labelled "everything", a classic PreToolUse hook "classic hooks", and a match-all regex
+// "<regex> calls", yet each sees every tool call.
+function sightings(m) {
+  const out = {}
+  const mark = (label, how) => { if (out[label] !== 'yes') out[label] = how }
+  for (const s of m.sees ?? []) if (SEES.includes(s)) mark(s, 'yes')
+  for (const { event, matcher } of m.hooks ?? []) {
+    if (event === '*' || event === 'classic.*') { for (const s of SEES) mark(s, 'yes'); continue }
+    if (TOOL_EVENTS.has(event)) {
+      const scope = toolScope(event.startsWith('classic.') ? matcher?.tool_name : matcher?.tool)
+      if (scope !== 'some') mark('every tool call', scope === 'all' ? 'yes' : 'maybe')
+    }
+    if (PROMPT_EVENTS.has(event)) mark('every prompt', 'yes')
+    if (CONTEXT_EVENTS.has(event)) mark('the system prompt', 'yes')
+  }
+  return out
+}
 
 function summary(m, matched) {
   const odd = unclassified(m)
@@ -241,28 +286,34 @@ export function search(index, params) {
   const seen = new Set()
   const terms = raw(p.query).map(word => ({ word, term: stem(word) })).filter(t => !seen.has(t.term) && seen.add(t.term))
     .map(t => ({ ...t, alternatives: SYNONYMS[t.term] ?? [] }))
-  const accessFilter = p.without.length || p.maxReach !== null
-  // The grader caps a call it has no rule for at level 1 with no label, so a mod that calls something like
-  // $.process.spawn would pass "without runs processes" and max_reach 1. An access filter cannot vouch for
-  // what the scan could not classify, so it leaves those mods out unless include_unverified asks for them.
+  const reachFilter = p.maxReach !== null && p.maxReach < 3
+  const callFilter = reachFilter || p.without.some(label => ACCESS.includes(label))
+  const accessFilter = callFilter || p.without.length > 0
+  // The grader records a call it has no rule for as "other: <call>" at level 1 with no access label, so a mod
+  // that calls something like $.process.spawn would pass "without runs processes" and max_reach 1. A filter
+  // cannot vouch for what the scan could not classify, so it holds those mods back, along with mods whose
+  // hooks might see what a sees filter excludes, unless include_unverified asks for them.
   const keep = m => {
     if (p.repo && m.repo.toLowerCase() !== p.repo) return false
     if (p.inDirectory && !m.directory) return false
     if (p.verifiedOnly && !verified(m)) return false
     if (p.maxReach !== null && m.reach.level > p.maxReach) return false
-    const has = new Set([...(m.reach?.labels ?? []).filter(l => !l.startsWith('other: ')), ...(m.sees ?? [])])
-    if (!p.without.every(label => !has.has(label))) return false
+    const labels = new Set((m.reach?.labels ?? []).filter(l => !l.startsWith('other: ')))
+    const sees = p.without.some(label => SEES.includes(label)) ? sightings(m) : {}
+    if (p.without.some(label => labels.has(label) || sees[label] === 'yes')) return false
     if (accessFilter && !p.includeUnverified) {
       if (!verified(m)) return 'unverified'
-      if (unclassified(m).length) return 'unclassified'
+      if (callFilter && unclassified(m).length) return 'unclassified'
+      if (p.without.some(label => sees[label] === 'maybe')) return 'unclear'
     }
     return true
   }
-  const held = { unverified: 0, unclassified: 0 }
+  const held = { unverified: 0, unclassified: 0, unclear: 0 }
   let ranked = index.docs.map(d => ({ d, kept: keep(d.mod) })).filter(({ kept }) => kept)
     .map(({ d, kept }) => ({ mod: d.mod, kept, ...(terms.length ? score(index, d, terms) : { score: 0, matched: [] }) }))
   if (terms.length) ranked = ranked.filter(r => r.score > 0)
   ranked = ranked.filter(r => r.kept === true || (held[r.kept]++, false))
+  const heldTotal = held.unverified + held.unclassified + held.unclear
   ranked.sort((a, b) => b.score - a.score || (b.mod.stars ?? 0) - (a.mod.stars ?? 0) || a.mod.id.localeCompare(b.mod.id))
   // One big pack should not fill a page: past two hits per repository, the rest move behind other repositories.
   if (!p.repo) {
@@ -277,11 +328,15 @@ export function search(index, params) {
   const page = ranked.slice(p.cursor, p.cursor + p.limit)
   const notes = []
   if (accessFilter) notes.push(p.includeUnverified
-    ? 'Access filters use the static footprint the validator reported. Unverified results, and results with unclassified_calls, may do more than their labels say.'
-    : 'Access filters use the static footprint the validator reported; mods without a passing validation, or with calls the scan could not classify, are left out. No reported access is not proof the mod never does it at runtime.')
-  if (held.unverified || held.unclassified) notes.push(`Left out ${[held.unverified && `${held.unverified} unverified`, held.unclassified && `${held.unclassified} with unclassified calls`].filter(Boolean).join(' and ')} that otherwise matched; pass include_unverified to see them.`)
+    ? 'Access filters use the static footprint the validator reported. Unverified results, results with unclassified_calls, and results whose hooks might see what you excluded may do more than their labels say.'
+    : 'Access filters use the static footprint the validator reported; mods the filter cannot vouch for are left out. No reported access is not proof the mod never does it at runtime.')
+  if (heldTotal) {
+    const parts = [held.unverified && `${held.unverified} unverified`, held.unclassified && `${held.unclassified} with calls the scan could not classify`,
+      held.unclear && `${held.unclear} with hooks whose reach the scan could not pin down`].filter(Boolean)
+    notes.push(`Left out ${heldTotal} ${heldTotal === 1 ? 'mod' : 'mods'} that otherwise matched (${parts.join(', ')}); set include_unverified (--include-unverified on the command line) to see them.`)
+  }
   if (!terms.length && !p.query.trim()) notes.push('No query words, so results are ordered by repository stars, which belong to the repository, not the mod.')
-  if (!ranked.length && terms.length && !held.unverified && !held.unclassified) notes.push('Nothing matched. Try fewer or broader words, or drop a filter.')
+  if (!ranked.length && terms.length && !heldTotal) notes.push('Nothing matched. Try fewer or broader words, or drop a filter.')
   return {
     snapshot: snapshotInfo(index),
     total: ranked.length,

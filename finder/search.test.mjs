@@ -66,7 +66,7 @@ test('access filters leave out mods with calls the scan could not classify', () 
   for (const filter of [{ without: ['runs processes'] }, { max_reach: 1 }]) {
     const out = search(odd, { query: 'grammar', ...filter })
     assert.deepEqual(ids(out), ['m/plain:.'], JSON.stringify(filter))
-    assert.match(out.notes.join(' '), /Left out 1 with unclassified calls/)
+    assert.match(out.notes.join(' '), /Left out 1 mod that otherwise matched \(1 with calls the scan could not classify\)/)
   }
   const loose = search(odd, { query: 'grammar', without: ['runs processes'], include_unverified: true })
   assert.deepEqual(ids(loose).sort(), ['l/hal:plugins/grammar-check', 'm/plain:.'])
@@ -74,6 +74,29 @@ test('access filters leave out mods with calls the scan could not classify', () 
   assert.deepEqual(ids(search(odd, { query: 'grammar' })).sort(), ['l/hal:plugins/grammar-check', 'm/plain:.'], 'no filter, no exclusion')
   const none = search(odd, { query: 'grammar check', without: ['runs processes'], repo: 'l/hal' })
   assert.ok(!none.notes.some(n => /Nothing matched/.test(n)), 'a held-back match is not reported as no match')
+  for (const filter of [{ max_reach: 3 }, { without: ['every prompt'] }]) {
+    assert.equal(search(odd, { query: 'grammar', ...filter }).total, 2, `${JSON.stringify(filter)} cannot be broken by an unclassified call`)
+  }
+  assert.throws(() => search(odd, { query: 'grammar', without: ['runs processes'], include_unverified: 'false' }), /include_unverified must be true or false/)
+})
+
+test('sees filters read the hooks, not only the sees labels', () => {
+  const hook = (event, matcher = {}) => ({ event, matcher })
+  const watcher = (id, hooks, sees = []) => mod(id, { name: `${id.split('/')[0]}-watch`, description: 'Watches tools.', hooks, sees })
+  const odd = buildIndex({ generated: DATA.generated, mods: [
+    watcher('star/a:.', [hook('*')], ['everything']),
+    watcher('classic/a:.', [hook('classic.PreToolUse')], ['classic hooks']),
+    watcher('allre/a:.', [hook('tool.call', { tool: '/"^[\\s\\S]*$"/' })], ['/"^[\\s\\S]*$"/ calls']),
+    watcher('narrow/a:.', [hook('tool.call', { tool: '/"^mcp__"/' }), hook('tool.call', { tool: 'Edit|Write' }), hook('classic.PostToolUse', { tool_name: 'Bash' })], ['/"^mcp__"/ calls']),
+    watcher('dynamic/a:.', [hook('tool.call', { tool: '?' })], ['? calls']),
+    watcher('prompt/a:.', [hook('classic.UserPromptSubmit')], ['classic hooks']),
+  ] })
+  const out = search(odd, { query: 'watch', without: ['every tool call'] })
+  assert.deepEqual(ids(out).sort(), ['narrow/a:.', 'prompt/a:.'])
+  assert.match(out.notes.join(' '), /1 with hooks whose reach the scan could not pin down/)
+  assert.ok(ids(search(odd, { query: 'watch', without: ['every tool call'], include_unverified: true })).includes('dynamic/a:.'))
+  assert.deepEqual(ids(search(odd, { query: 'watch', without: ['every prompt'] })).sort(), ['allre/a:.', 'classic/a:.', 'dynamic/a:.', 'narrow/a:.'])
+  assert.ok(!ids(search(odd, { query: 'watch', without: ['the system prompt'] })).includes('star/a:.'))
 })
 
 test('one repository fills at most two places before other repositories get theirs', () => {
@@ -235,6 +258,23 @@ test('offline never touches the network and still applies the age limits', async
   assert.deepEqual(s.calls, [])
 })
 
+test('a cache with a missing or future age, or a file that is not a snapshot, counts as no cache', async t => {
+  const s = server()
+  for (const [meta, body] of [
+    [{ file: 'm.json' }, DATA],
+    [{ file: 'm.json', fetchedAt: '2026-09-01' }, DATA],
+    [{ file: 'm.json', fetchedAt: T0 + 30 * 86400e3 }, DATA],
+    [{ file: 'm.json', fetchedAt: T0 }, { generated: 'x' }],
+  ]) {
+    const dir = cache(t)
+    writeFileSync(join(dir, 'm.json'), JSON.stringify(body))
+    writeFileSync(join(dir, 'meta.json'), JSON.stringify(meta))
+    await assert.rejects(loadSnapshot({ ...s.opts, cacheDir: dir, now: T0, refresh: 'never' }), /no cached copy/, JSON.stringify(meta))
+    const fixed = await loadSnapshot({ ...s.opts, cacheDir: dir, now: T0 })
+    assert.equal(fixed.revision.fetchedAt, T0, 'auto mode downloads a fresh copy')
+  }
+})
+
 test('a broken download never replaces a good cache, and with no cache it is an error', async t => {
   const dir = cache(t)
   await loadSnapshot({ ...server().opts, cacheDir: dir, now: T0 })
@@ -255,6 +295,9 @@ test('answers from the published snapshot stay small', { skip: !existsSync(publi
   for (const filter of [{ without: ['runs processes'] }, { max_reach: 1 }]) {
     assert.ok(!ids(search(real, { query: 'grammar check', limit: MAX_LIMIT, ...filter })).includes('vinta/hal-9000:plugins/hal-grammar-check'), JSON.stringify(filter))
   }
+  const sees = (query, repo) => ids(search(real, { query, repo, without: ['every tool call'], limit: MAX_LIMIT }))
+  assert.ok(!sees('autotel', 'jagreehal/autotel').includes('jagreehal/autotel:packages/autotel-claude-code'), 'a * hook sees every tool call')
+  assert.ok(!sees('beads guard', 'baselane-sh/mods').includes('baselane-sh/mods:plugins/beads-guard'), 'a classic PreToolUse hook sees every tool call')
   for (const query of ['review', 'cache', 'a', '']) {
     const size = JSON.stringify(search(real, { query, limit: MAX_LIMIT })).length
     assert.ok(size < 24000, `a full page for "${query}" is ${size} bytes`)
@@ -265,7 +308,7 @@ test('the command line prints exactly what the module returns', t => {
   const dir = cache(t)
   const file = 'mods-test.json'
   writeFileSync(join(dir, file), JSON.stringify(DATA))
-  // --offline now marks a cache older than the refresh interval stale, so the cache is written fresh.
+  // --offline marks a cache older than the refresh interval stale, so the parity cache is written fresh.
   const meta = { commit: 'f'.repeat(40), sha256: 'abc', fetchedAt: Date.now(), file }
   writeFileSync(join(dir, 'meta.json'), JSON.stringify(meta))
   const index = buildIndex(DATA, meta)
@@ -279,4 +322,7 @@ test('the command line prints exactly what the module returns', t => {
   const bad = run('search', 'cache', '--without', 'nonsense')
   assert.equal(bad.status, 2)
   assert.match(bad.stderr, /not a without value/)
+  const both = run('search', 'cache', '--refresh')
+  assert.equal(both.status, 2, '--offline with --refresh is refused, not resolved by going online')
+  assert.match(both.stderr, /contradict/)
 })
