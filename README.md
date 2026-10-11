@@ -7,7 +7,7 @@ Add a browser beside your conversation, keep usage in view, or check a command b
 This community catalogue scans public GitHub repositories and records what Claude's validator reports each mod can read, write, run or send over the network. It is an independent scan, not an official Anthropic directory.
 
 <!-- stats:start -->
-**3078 mods** · Last scanned 2026-10-10.
+**3079 mods** · Last scanned 2026-10-10.
 <!-- stats:end -->
 
 ![Browsing a GitHub pull request beside a Claude Code conversation using terminal-browser](assets/terminal-browser-demo.gif)
@@ -70,6 +70,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [clawd-minecraft](https://github.com/amsultan2010/clawd-minecraft) - The 7-day limit as hearts and armor, the 5-hour limit as an XP bar and the context window as a hunger bar above the desktop prompt, with a pixel Clawd that walks beside them and reacts to questions and finished turns.
 - [villager-hp](https://github.com/Ashley-Pettit/villager-hp) - The 5-hour and weekly limits as an animated villager health card above the prompt, his mood falling with your HP, with rank badges, sci-fi effects and a death screen at 0 HP, plus `/hp` to preview any level.
 - [headroom](https://github.com/vihrea1337/headroom) - The 5-hour and weekly limits above the prompt with reset countdowns and a run-out forecast drawn on a time axis, alerts at 80 and 95% and on reset, a session budget, and a docked pane whose prompt log scrolls the chat to each prompt.
+- [limits](https://github.com/VaitaR/claude-code-limits) - One line above the prompt with the 5-hour and 7-day limits, context with a compaction count, minutes left on the prompt cache, session cost and running subagents, with details on hover.
 
 ## While you wait
 
@@ -99,6 +100,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [Code City](https://github.com/verdantran/code-city) - An idle city builder that grows as you prompt, where the tokens you spend buy buildings and other Claude Code sessions show up as neighbouring cities.
 - [lgtm-flash](https://github.com/Ashley-Pettit/lgtm-flash) - After every code change the LGTM Lines container ship sails in above the prompt, the L G T M containers slam onto its deck and the camera zooms in on LOOKS GOOD TO ME, drawn locally with no model calls or network, plus `/ship` to launch it any time.
 - [swear-slap](https://github.com/paragpandyareal/swear-slap) - Swear in a prompt and a pixel-art hand slaps the band above it instead of sending the message, then puts a polite version back in your prompt box, with a swear jar and a slap sound, drawn locally with no model calls or network.
+- [naruto](https://github.com/i-harsha-reddy/naruto-mod) - A hand-drawn pixel ninja above the prompt, any of 20 from Naruto, who casts their jutsu at a training post while Claude works, summons for subagents, cheers when a turn ends and sleeps when you step away, drawn locally with no model calls or network.
 
 ## Git, pull requests and CI
 
@@ -185,6 +187,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [mission-control](https://github.com/hamzafer/claude-code-mods/tree/main/mods/mission-control) - A pane with every subagent and tool call live, plus a code map of the files they read and write, with a Haiku call that describes each file's changes.
 - [agent-pager](https://github.com/RadTech-Solutions/agent-pager) - Pages your phone through ntfy or your own Telegram bot when a long turn ends, a question or permission prompt waits, or a turn errors, and queues your Telegram replies as prompts in the one session you pick with `/pager listen`.
 - [session-board](https://github.com/danilpavlov/telescope-claude-code) - A floating tmux popup with an fzf picker of every Claude Code session running on the machine, showing which ones wait for you, a Haiku summary of each, and a jump to the tmux window of the one you pick.
+- [project-sentinel](https://github.com/Arjun0014/project-sentinel) - Context and run progress tracking, Autopilot handoffs, guardrails and an activity view for long sessions in the terminal and Claude Desktop.
 
 ## Building mods
 
