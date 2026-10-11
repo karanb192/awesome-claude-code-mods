@@ -202,16 +202,20 @@ const verified = m => VERIFIED.has(m.validate?.status)
 const unclassified = m => (m.reach?.labels ?? []).filter(l => l.startsWith('other: ')).map(l => l.slice(7))
 
 // Which tools a matcher covers: 'all', 'some', or 'unknown' when the scan recorded it as dynamic ("?") or
-// as a regex that does not compile here. A regex covers all tools when it matches unrelated tool names.
+// as a regex that does not decode or compile here. The validator writes a regex as /"<source>"/flags with
+// the source as a JSON string, so /^[\s\S]*$/ arrives as /"^[\\s\\S]*$"/ and must be decoded first.
+// A regex covers all tools when it matches unrelated tool names.
 function toolScope(pattern) {
   if (pattern === undefined || pattern === null || pattern === '') return 'all'
-  const regex = /^\/"(.*)"\/([a-z]*)$/s.exec(pattern)
+  const regex = /^\/("(?:[^"\\]|\\.)*")\/([a-z]*)$/s.exec(pattern)
   if (regex) {
     try {
+      const source = JSON.parse(regex[1])
       const flags = regex[2].replace(/[gy]/g, '')
-      return ['Bash', 'Zq9', 'mcp__x__y'].every(name => new RegExp(regex[1], flags).test(name)) ? 'all' : 'some'
+      return ['Bash', 'Zq9', 'mcp__x__y'].every(name => new RegExp(source, flags).test(name)) ? 'all' : 'some'
     } catch { return 'unknown' }
   }
+  if (String(pattern).startsWith('/"')) return 'unknown'
   return String(pattern).split('|').includes('?') ? 'unknown' : 'some'
 }
 

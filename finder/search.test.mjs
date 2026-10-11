@@ -6,6 +6,8 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { loadSnapshot, buildIndex, search, getMod, InputError, MAX_LIMIT, REFRESH_AFTER_MS, MAX_STALE_MS } from './search.mjs'
+import { parseValidateOutput } from '../tools/parse.mjs'
+import { visibility } from '../tools/grade.mjs'
 
 const mod = (id, over = {}) => {
   const [repo, path] = id.split(':')
@@ -86,17 +88,35 @@ test('sees filters read the hooks, not only the sees labels', () => {
   const odd = buildIndex({ generated: DATA.generated, mods: [
     watcher('star/a:.', [hook('*')], ['everything']),
     watcher('classic/a:.', [hook('classic.PreToolUse')], ['classic hooks']),
-    watcher('allre/a:.', [hook('tool.call', { tool: '/"^[\\s\\S]*$"/' })], ['/"^[\\s\\S]*$"/ calls']),
+    // The validator's own form for /^[\s\S]*$/: the source is a JSON string, so its backslashes are escaped.
+    watcher('allre/a:.', [hook('tool.call', { tool: String.raw`/"^[\\s\\S]*$"/` })], [String.raw`/"^[\\s\\S]*$"/ calls`]),
+    watcher('badre/a:.', [hook('tool.call', { tool: String.raw`/"^[\s"/` })]),
     watcher('narrow/a:.', [hook('tool.call', { tool: '/"^mcp__"/' }), hook('tool.call', { tool: 'Edit|Write' }), hook('classic.PostToolUse', { tool_name: 'Bash' })], ['/"^mcp__"/ calls']),
     watcher('dynamic/a:.', [hook('tool.call', { tool: '?' })], ['? calls']),
     watcher('prompt/a:.', [hook('classic.UserPromptSubmit')], ['classic hooks']),
   ] })
   const out = search(odd, { query: 'watch', without: ['every tool call'] })
   assert.deepEqual(ids(out).sort(), ['narrow/a:.', 'prompt/a:.'])
-  assert.match(out.notes.join(' '), /1 with hooks whose reach the scan could not pin down/)
+  assert.match(out.notes.join(' '), /2 with hooks whose reach the scan could not pin down/)
   assert.ok(ids(search(odd, { query: 'watch', without: ['every tool call'], include_unverified: true })).includes('dynamic/a:.'))
-  assert.deepEqual(ids(search(odd, { query: 'watch', without: ['every prompt'] })).sort(), ['allre/a:.', 'classic/a:.', 'dynamic/a:.', 'narrow/a:.'])
+  assert.deepEqual(ids(search(odd, { query: 'watch', without: ['every prompt'] })).sort(), ['allre/a:.', 'badre/a:.', 'classic/a:.', 'dynamic/a:.', 'narrow/a:.'])
   assert.ok(!ids(search(odd, { query: 'watch', without: ['the system prompt'] })).includes('star/a:.'))
+})
+
+test('a match-all regex straight from claude plugin validate counts as seeing every tool call', () => {
+  // Captured from claude plugin validate 2.1.296 for on('tool.call', { tool: /^[\s\S]*$/ }, ...).
+  const printed = String.raw`  ❯ ./register.ts hooks: tool.call{tool=/"^[\\s\\S]*$"/}
+  ❯ ./register.ts calls: nothing on $
+
+✔ Validation passed`
+  const { status, modules } = parseValidateOutput(printed)
+  const hooks = modules.flatMap(m => m.hooks)
+  const all = mod('re/all:.', { name: 'regex-watch', description: 'Watches tools.', hooks, sees: visibility(hooks), validate: { status, claudeVersion: '2.1.296', errors: [] } })
+  const odd = buildIndex({ generated: DATA.generated, mods: [all] })
+  assert.equal(search(odd, { query: 'watch' }).total, 1)
+  const out = search(odd, { query: 'watch', without: ['every tool call'] })
+  assert.equal(out.total, 0)
+  assert.ok(!out.notes.some(n => /Left out/.test(n)), 'excluded outright, not held as unclear')
 })
 
 test('one repository fills at most two places before other repositories get theirs', () => {
