@@ -1,8 +1,20 @@
 # Mod finder
 
-Search the catalogue from a coding agent without loading `mods.json` into its context. `find-mods.mjs` is the command-line route; the MCP server planned in [#142](https://github.com/karanb192/awesome-claude-code-mods/issues/142) will call the same `search.mjs`, so both routes give the same answers.
+Ask Claude for a Claude Code mod and get matches from the catalogue, with what each one can access and a link to its source. The 9 MB catalogue stays on disk and never enters the model's context.
 
-Needs Node 18 or later and no packages.
+## In Claude Code (MCP)
+
+```text
+/plugin install mod-finder --marketplace karanb192/awesome-claude-code-mods
+```
+
+Then ask, for example: "Find a mod that helps with code reviews", "Which cache-monitoring mods have no network access reported by the validator?" or "Compare cctop, cache-meter by baselane-sh and review-watch."
+
+The plugin starts a local MCP server with two read-only tools. `search_mods` finds mods by what they do and what they can access. `get_mod` returns one mod's full record. It works in the CLI and in Desktop Code local sessions, where plugins load. It needs Node 18 or later on `PATH` and installs no packages.
+
+## From a shell
+
+`find-mods.mjs` gives the same answers as the MCP tools, because both call `search.mjs`.
 
 ```sh
 node finder/find-mods.mjs search "code review" --limit 5
@@ -24,7 +36,7 @@ Output is JSON. Add `--pretty` to indent it.
 | `--repo owner/repo` | Only that repository. |
 | `--limit N`, `--cursor C` | Page size (1 to 25, default 8) and the `next_cursor` of the previous page. |
 
-`get` takes an ID from a search result. A duplicate's ID returns the mod it copies, a repository name lists its mods, and an ID missing from the snapshot returns suggestions.
+`get` (the `get_mod` tool) takes an ID from a search result. A duplicate's ID returns the mod it copies, a repository name lists its mods, `owner/name` or a unique name resolves to the mod, and an ID missing from the snapshot returns suggestions. The MCP tools take the same options with underscores: `without`, `max_reach`, `verified_only`, `include_unverified`, `in_anthropic_directory`, `repo`, `limit`, `cursor`.
 
 ## Data and freshness
 
