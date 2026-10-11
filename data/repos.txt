@@ -219,6 +219,7 @@ Bilel-Gh/okb
 BillyMRX1/airlock
 bitranox/bitranox-skills
 bixxter/adlib-lyrics
+BjoernSchotte/ccmod-amp
 Bleach-Mods/bleach-mods
 bllshttng/footnote
 bn-l/claude-autoresearch-mod
@@ -626,6 +627,7 @@ ian-exnodes/statusbar
 ianlkl11234s/shark-tank
 iautom8things/bw-peek
 iceberggymnast/claude-code-mods
+icedevil2001/auto-continue
 icpmacdo/claude-mod-tldr-window
 IKnowJot/clawd-plugins
 Iliesseu28/claude-autocommit
@@ -1482,6 +1484,7 @@ victor-falcon/claude-status-bar
 vihrea1337/headroom
 viik2k/clawdify
 vincentlauriat/ModsTools
+vinkdc/roclaude
 vinta/hal-9000
 vishaljawahar/claude-mods
 vitoliu93/harness-dev-plugins

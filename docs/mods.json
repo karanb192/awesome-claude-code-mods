@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-11T09:26:34.682Z",
   "claudeVersion": "2.1.296",
-  "repos": 1590,
+  "repos": 1593,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -365685,6 +365685,380 @@
       "stars": 0,
       "pushedAt": "2026-10-11T06:19:54Z",
       "createdAt": "2026-10-11T05:20:25Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "BjoernSchotte/ccmod-amp:.",
+      "repo": "BjoernSchotte/ccmod-amp",
+      "path": ".",
+      "sourceCommit": "ff2117e0513e614e0a8fe92483ec2464de0254ab",
+      "name": "cliamp",
+      "description": "cliamp radio in Claude Code: sidebar with favorites, search and discovery, mini player, song log, focus mode, ducking and a radio tool for Claude",
+      "author": "Björn Schotte",
+      "homepage": "https://github.com/BjoernSchotte/ccmod-amp",
+      "url": "https://github.com/BjoernSchotte/ccmod-amp",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "cliamp"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__cliamp__radio"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {}
+        },
+        {
+          "event": "tool.check",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "cliamp"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.clock.sleep",
+        "$.command.register",
+        "$.http.fetch",
+        "$.process.run",
+        "$.process.spawn",
+        "$.settings.read",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.set",
+        "$.tool.register",
+        "$.ui.copy",
+        "$.ui.focus",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "ccmod-amp",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "other: $.process.spawn",
+          "other: $.state.get",
+          "other: $.state.set",
+          "network",
+          "runs processes",
+          "drives Claude",
+          "reads settings",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "mcp__cliamp__radio calls",
+        "every tool call"
+      ],
+      "draws": [
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-10T22:05:34Z",
+      "createdAt": "2026-10-10T21:53:18Z",
+      "license": "Apache-2.0",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "icedevil2001/auto-continue:.",
+      "repo": "icedevil2001/auto-continue",
+      "path": ".",
+      "sourceCommit": "e92536a8ac2bbc57812007be48d231abd06ad043",
+      "name": "auto-continue",
+      "description": "When the 5-hour usage limit is hit, wait for the reset and send \"continue\" automatically.",
+      "author": "icedevil2001",
+      "homepage": "https://github.com/icedevil2001/auto-continue",
+      "url": "https://github.com/icedevil2001/auto-continue",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "auto-continue"
+          }
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.now",
+        "$.command.register",
+        "$.prompt.submit",
+        "$.session.usage",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "auto-continue",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "drives Claude",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-11T05:59:26Z",
+      "createdAt": "2026-10-09T16:16:27Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "vinkdc/roclaude:.",
+      "repo": "vinkdc/roclaude",
+      "path": ".",
+      "sourceCommit": "e193fc2f876a2d6e22fcc1ba9ddde81bf122cfe0",
+      "name": "roclaude",
+      "description": "Roblox Studio safety layer for Claude Code (Studio MCP): RemoteEvent security audit, undo, Team Create protection, a confirmation before destructive Luau, and a live activity view that replays every change.",
+      "author": "vink",
+      "homepage": "https://github.com/vinkdc/roclaude",
+      "url": "https://github.com/vinkdc/roclaude",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "tool.describe",
+          "matcher": {
+            "tool": "/\"^mcp__.*(roblox|studio).*__[a-z_]+$\"/i"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "/\"^mcp__.*(roblox|studio).*__[a-z_]+$\"/i"
+          }
+        },
+        {
+          "event": "tool.check",
+          "matcher": {
+            "tool": "/\"^mcp__.*(roblox|studio).*__[a-z_]+$\"/i"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "roclaude"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "roclaude-remotes"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "roclaude-activity"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "CommandOutput",
+            "props has {command": "roclaude"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.sleep",
+        "$.command.register",
+        "$.command.run",
+        "$.mcp.call",
+        "$.prompt.submit",
+        "$.session.append",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "roclaude",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "MCP servers",
+          "drives Claude",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt",
+        "/\"^mcp__.*(roblox|studio).*__[a-z_]+$\"/i calls"
+      ],
+      "draws": [
+        "Pane",
+        "CommandOutput",
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-10T13:32:03Z",
+      "createdAt": "2026-10-08T19:20:20Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
