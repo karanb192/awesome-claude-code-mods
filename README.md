@@ -130,6 +130,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [modwall](https://github.com/RadTech-Solutions/modwall) - Reads each mod's scanned footprint as it loads, labels its reach and risk, and audits, holds or refuses it by an audit, ask or allowlist policy with a blocklist.
 - [p3c-guard](https://github.com/alexlifexyz/p3c-guard) - Refuses a Write or Edit to a Java file when it would add a violation of the Alibaba Java Coding Guidelines (p3c), and hands the rule, line and fix back to Claude; checks locally with PMD and downloads its rule jar from Maven Central on first use.
 - [claude-risk-guardrails](https://github.com/scaso01/claude-risk-guardrails) - Twenty-five model-risk controls in six packs that require human sign-off before irreversible actions, check the agent's claims against its sources, and keep a record of every step.
+- [roclaude](https://github.com/vinkdc/roclaude) - Undo, a RemoteEvent exploit audit, Team Create protection and a step-through replay of every change Claude makes in Roblox Studio through the Studio MCP server.
 
 ## Memory and context
 
