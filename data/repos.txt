@@ -1378,6 +1378,7 @@ unpaged/plugins
 uppinote20/claude-pets
 ushironoko/dotfiles
 UtakataKyosui/utakata-cc-mod
+VaitaR/claude-code-limits
 valeryia-piatrova/token-hamster
 VardhanKirti/claude-code-mods
 varunmoka7/layman
