@@ -8,7 +8,7 @@ A daily scan searches GitHub code for repositories that mention `CLAUDE_CODE_ENA
 
 ## Open a pull request
 
-1. Add your `owner/repo` to `data/seeds.txt`, one per line.
+1. Add your `owner/repo` to `data/seeds.txt`, one per line, in alphabetical order ignoring case. A line appended at the end conflicts with every other open seed PR.
    If you renamed a repository on GitHub, nothing is needed: the scan reads the current name and counts each plugin once, under that name. If you moved a mod to a different repository and the table lists both, add the pair to `data/duplicates.txt` so the old copy stops counting.
    A repo that repackages other authors' mods as a catalogue goes in `data/catalogs.txt`: it is named once with its count rather than listed per copy.
    If the scan files an installable mod as test material only because of its folder name (such as `bench` or `probe`), add its id to `data/fixture-exceptions.txt`.
@@ -20,7 +20,7 @@ A daily scan searches GitHub code for repositories that mention `CLAUDE_CODE_ENA
 
 3. Run `npm test` and `npm run lint`. Both must pass.
 
-PR checks scan newly added seeds. A new seed must clone successfully and contain mod plugins that validate; warnings are allowed. A pull request that changes `tools/`, the package files, the workflows or one of the classification lists (`data/duplicates.txt`, `data/catalogs.txt`, `data/fixture-exceptions.txt`) rescans every committed candidate alongside the seeds, so tooling and classification changes are checked against the whole collection. Global search runs in scheduled scans, not in PR checks.
+PR checks scan newly added seeds. A new seed must clone successfully and contain mod plugins that validate; warnings are allowed. A pull request that changes `tools/` (tests aside), the package files, the workflows, `data/catalogs.txt` or `data/fixture-exceptions.txt` rescans every committed candidate alongside the seeds, so tooling and classification changes are checked against the whole collection. A change to `data/duplicates.txt` that only appends pairs between two counted mods, neither named elsewhere in the list, is applied to the committed inventory without a rescan; removing, reversing, reordering or chaining pairs rescans everything. Global search runs in scheduled scans, not in PR checks.
 
 After a seed PR is merged, the `publish approved seeds` workflow scans approved repositories that have no published inventory entries. It adds all their mod entries, regenerates the catalogue and website, checks the result, then opens and squash-merges a dedicated publication PR automatically. It requests a GitHub Pages build explicitly. No second maintainer merge is needed for successful additions. A repository already represented in the inventory follows the normal refresh workflow.
 
@@ -80,6 +80,8 @@ Each scheduled scan runs this renderer and includes the updated README count, ca
 Approved seed additions use the separate automatic publication path above. Broader discovery, updates to existing mods and retirement proposals still require review of their generated PRs.
 
 The nightly scan reuses its completed results when main advances during publication. It preserves repository records changed on main since the scan started, including additions and retirements, then regenerates the catalogue and website using current main. If a concurrent record was validated with a different Claude Code version, it revalidates that record at its published source commit using the scan's version. Validation, footprint and marketplace evidence are updated without changing its classification or pulling in newer upstream commits. Those results are cached across publication retries. New seeds that were not scanned stay candidates for seed publication. Up to eight publication attempts reuse the full scan instead of repeating it.
+
+Scheduled scans clone only repositories whose default branch moved since the last scan that used the same Claude Code version and scanner code; the rest reuse that scan's findings, while stars, descriptions and classification lists are applied fresh. A new Claude Code release or a scanner change makes the next scan check every repository again. The weekly retirement review always clones every repository.
 
 Main pushes and completed seed-publication runs also refresh an open nightly scan PR without a full rescan. Nightly scans, refreshes and weekly retirement runs share a queue with room for up to 100 pending jobs or runs, so a new refresh does not replace a waiting scan. Each reads current main when it starts; redundant refreshes exit before installing dependencies. Contributor checks keep their separate cancellation groups. The scan PR still needs your review and merge. Changes to scanner inputs or classification rules require a fresh scan, as do conflicting duplicate decisions. Missing pinned source or incomplete revalidation stops publication. Weekly retirement proposals still need their separate review.
 

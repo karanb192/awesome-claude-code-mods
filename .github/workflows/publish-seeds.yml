@@ -10,6 +10,10 @@ on:
 permissions:
   contents: read
 
+# Skips the validator's update and telemetry traffic, which is most of each validate call's time.
+env:
+  CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC: "1"
+
 concurrency:
   group: publish-approved-seeds
   cancel-in-progress: false
