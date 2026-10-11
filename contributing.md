@@ -1,6 +1,6 @@
 # Contributing
 
-Two ways to get a mod listed.
+The full catalogue accepts discovered mods and seed submissions. The README's Featured section is a smaller selection made by Karan. Catalogue inclusion does not depend on being featured.
 
 ## Let the scanner find it
 
@@ -14,11 +14,7 @@ A daily scan searches GitHub code for repositories that mention `CLAUDE_CODE_ENA
    If the scan files an installable mod as test material only because of its folder name (such as `bench` or `probe`), add its id to `data/fixture-exceptions.txt`.
 
    Each distinct installable mod counts once, however many mods its repository holds. Sharing a repository or helper code does not make mods duplicates; only a confirmed copy or a renamed repository goes in `data/duplicates.txt`.
-2. If you want a curated entry (not only a row in the generated table), add one line under the matching section of `README.md` in this exact shape:
-
-   `- [name](https://github.com/owner/repo) - What it does, one sentence, ending with a period.`
-
-3. Run `npm test` and `npm run lint`. Both must pass.
+2. Run `npm test` and `npm run lint`. Both must pass. A catalogue submission only needs the seed; do not add a README entry. Use a Featured nomination for that separate selection.
 
 PR checks scan newly added seeds. A new seed must clone successfully and contain mod plugins that validate; warnings are allowed. A pull request that changes `tools/` (tests aside), the package files, the workflows, `data/catalogs.txt` or `data/fixture-exceptions.txt` rescans every committed candidate alongside the seeds, so tooling and classification changes are checked against the whole collection. A change to `data/duplicates.txt` that only appends pairs between two counted mods, neither named elsewhere in the list, is applied to the committed inventory without a rescan; removing, reversing, reordering or chaining pairs rescans everything. Global search runs in scheduled scans, not in PR checks.
 
@@ -34,9 +30,13 @@ Missing plugins stay listed as unverified during scheduled scans. Weekly retirem
 
 The count in `README.md` and the statistics and tables in [catalogue.md](catalogue.md) are generated. Do not edit anything between `<!-- scan:start -->` and `<!-- scan:end -->`, `<!-- builtin:start -->` and `<!-- builtin:end -->`, or `<!-- stats:start -->` and `<!-- stats:end -->`. The renderer would overwrite your change.
 
-## What gets a curated entry
+## Nominate a Featured mod
 
-The generated catalogue lists discovered mods, including failed and unverified results. The curated sections in the README list mods that a person would install: a README that explains what it does, an install path that works, and a footprint that matches the description. A game that hooks every tool call to feed a pet is fine. A game that calls `$.http.fetch` without saying why is not.
+The generated catalogue lists discovered mods, including failed and unverified results. Featured entries are recommendations for useful tasks, with a clear install path, accurate access disclosure and evidence of the main behavior.
+
+[Open a Featured nomination](https://github.com/karanb192/awesome-claude-code-mods/issues/new?template=featured-nomination.yml) with the mod URL, the task it helps with, a real recording or screenshot, installation steps and access notes. Include the Claude Code version and platform used to check it. Self-nominations are welcome; disclose your relationship to the mod.
+
+Karan selects the entries and can revise the selection. A nomination or a passing scan does not guarantee a Featured slot. Mods built by the maintainer are labelled. Once selected, entries use `- [name](url) - What it helps with, ending with a period.` Corrections to an existing Featured entry can be submitted as a pull request.
 
 ## Badges
 

@@ -82,6 +82,7 @@ export function renderSite(data) {
 <a class="skip" href="#directory">Skip to the mod directory</a>
 <div class="mast"><header class="shell"><a href="./" class="brand" aria-label="Claude Mods home">${mark}<span>claude<span class="brand-light">mods</span></span></a><nav aria-label="Main navigation"><a href="#directory">The collection</a><a href="#about">About mods</a><a class="github-link" href="${repo}" aria-label="Star the Claude Code mods list on GitHub">${star}Star on GitHub</a></nav></header>
 </div><main><div class="mast"><section class="hero shell" aria-labelledby="title"><div class="hero-intro"><h1 id="title">Awesome<br><span>Claude Code Mods</span></h1><p>Make Claude Code your own. A community catalogue of Claude Code mods built with function hooks, scanned from public GitHub repositories, with what each mod can access.</p></div>
+<details class="finder"><summary>Ask Claude to find a mod</summary><p>Install mod-finder in a Claude Code session, then ask “Find a mod that helps with code reviews”.</p><pre><code>/plugin install mod-finder --marketplace karanb192/awesome-claude-code-mods</code></pre><p>Works in the CLI and Desktop Code local sessions. Requires Node 18 or later. <a href="${repo}/blob/main/finder/README.md">Setup and requirements</a></p></details>
 </section></div>
 <section class="directory shell" id="directory" aria-labelledby="directory-title"><div class="section-heading"><div><h2 id="directory-title">The collection<span class="total">${mods.length}</span></h2><p>Find something useful. See what it can access.</p></div><a href="${repo}/blob/main/contributing.md">Submit a mod ${arrow}</a></div>
 <div class="catalog-search"><form class="search" role="search" action="#directory"><label class="sr-only" for="q">Search mods by name, repo or description</label><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="q" name="q" type="search" placeholder="Search by name or what it does" autocomplete="off" aria-controls="t"><button id="clear-search" class="clear-search" type="button" aria-label="Clear search" hidden><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></form>
@@ -137,7 +138,13 @@ Mods are Claude Code plugins whose JavaScript or TypeScript hooks run inside a s
 - [Browse the mods](${site}): searchable directory with access and validation details for every mod
 - [mods.json](${site}mods.json): every mod with its hooks, API calls, access level, stars and validation result
 - [catalogue.md](${rawCatalogue}): the same catalogue as Markdown tables
-- [README](${repo}#readme): curated picks by category, how to use mods, how the scan works
+- [README](${repo}#readme): Featured picks, how to use mods, how the scan works
+
+## Ask Claude to find a mod
+
+Install mod-finder in a Claude Code session with \`/plugin install mod-finder --marketplace karanb192/awesome-claude-code-mods\`, then ask for a task such as “Find a mod that helps with code reviews”. It works in the CLI and Desktop Code local sessions and requires Node 18 or later.
+
+- [Mod finder setup and tools](${repo}/blob/main/finder/README.md): installation, search_mods and get_mod, cache behavior and the limits of access filters
 
 ## Most starred mods
 

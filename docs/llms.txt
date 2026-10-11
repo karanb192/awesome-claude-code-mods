@@ -9,7 +9,13 @@ Mods are Claude Code plugins whose JavaScript or TypeScript hooks run inside a s
 - [Browse the mods](https://mods.aidojo.si/): searchable directory with access and validation details for every mod
 - [mods.json](https://mods.aidojo.si/mods.json): every mod with its hooks, API calls, access level, stars and validation result
 - [catalogue.md](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/catalogue.md): the same catalogue as Markdown tables
-- [README](https://github.com/karanb192/awesome-claude-code-mods#readme): curated picks by category, how to use mods, how the scan works
+- [README](https://github.com/karanb192/awesome-claude-code-mods#readme): Featured picks, how to use mods, how the scan works
+
+## Ask Claude to find a mod
+
+Install mod-finder in a Claude Code session with `/plugin install mod-finder --marketplace karanb192/awesome-claude-code-mods`, then ask for a task such as “Find a mod that helps with code reviews”. It works in the CLI and Desktop Code local sessions and requires Node 18 or later.
+
+- [Mod finder setup and tools](https://github.com/karanb192/awesome-claude-code-mods/blob/main/finder/README.md): installation, search_mods and get_mod, cache behavior and the limits of access filters
 
 ## Most starred mods
 
