@@ -225,8 +225,9 @@ function score(index, doc, terms) {
     }
     if (best) { total += best; hit += where.includes('~') ? 0.5 : 1; matched.push(where) }
   }
-  // Coverage dominates: a mod matching every query word outranks one matching a single rare word.
-  return { score: total * (hit / terms.length) ** 2, matched }
+  // Coverage dominates: a mod matching every query word outranks one matching a single rare word, and one
+  // matching under half the words is not a result at all.
+  return { score: hit >= terms.length / 2 ? total * (hit / terms.length) ** 2 : 0, matched }
 }
 
 export function search(index, params) {
@@ -339,8 +340,16 @@ export function getMod(index, id) {
     return { snapshot, id: m.id, status: 'duplicate', duplicate_of: m.duplicateOf, note: 'This ID is a copy of another listed mod; details are for the original.', mod: keeper ? detail(keeper) : null }
   }
   if (m) return { snapshot, mod: detail(m) }
-  const inRepo = index.data.mods.filter(x => x.kind !== 'duplicate' && x.repo.toLowerCase() === key.toLowerCase())
-  if (inRepo.length) return { snapshot, status: 'repository', note: `${key} is a repository; pick one of its mods by ID.`, ids: inRepo.slice(0, 50).map(x => ({ id: x.id, name: x.name, kind: x.kind })), total: inRepo.length }
+  const lower = key.toLowerCase()
+  const listed = index.data.mods.filter(x => x.kind !== 'duplicate')
+  const brief = x => ({ id: x.id, name: x.name, kind: x.kind })
+  const inRepo = listed.filter(x => x.repo.toLowerCase() === lower)
+  if (inRepo.length) return { snapshot, status: 'repository', note: `${key} is a repository; pick one of its mods by ID.`, ids: inRepo.slice(0, 50).map(brief), total: inRepo.length }
+  // People name mods as "owner/name" or by name alone. One match resolves; several are listed.
+  const [owner, name] = lower.includes('/') ? lower.split('/', 2) : [null, lower]
+  const named = listed.filter(x => x.name.toLowerCase() === name && (!owner || x.repo.toLowerCase().startsWith(owner + '/')))
+  if (named.length === 1) return { snapshot, matched_by: owner ? 'owner and name' : 'name', mod: detail(named[0]) }
+  if (named.length > 1) return { snapshot, status: 'ambiguous', note: `${named.length} entries are named ${name}; pick one by ID.`, ids: named.slice(0, 50).map(x => ({ ...brief(x), repo_stars: x.stars ?? null })), total: named.length }
   const suggestions = search(index, { query: key.replace(/[:/._-]+/g, ' '), limit: 5 }).results.map(r => ({ id: r.id, name: r.name }))
   return { snapshot, status: 'not_found', id: key, note: 'No entry has this ID in the loaded snapshot. It may have been removed, or its repository renamed.', suggestions }
 }

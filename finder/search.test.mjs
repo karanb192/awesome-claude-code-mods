@@ -108,6 +108,18 @@ test('lookups resolve copies, repositories, old IDs and case', () => {
   assert.throws(() => getMod(index, ''), InputError)
 })
 
+test('lookups by owner and name, or name alone, resolve when unique and list when not', () => {
+  const byOwner = getMod(index, 'd/cache-meter')
+  assert.equal(byOwner.matched_by, 'owner and name')
+  assert.equal(byOwner.mod.id, 'd/cache:plugin')
+  assert.equal(getMod(index, 'cache-watch').mod.id, 'e/cache:.')
+  assert.equal(getMod(index, 'review-desk').mod.id, 'a/reviews:mods/review-desk', 'its duplicate does not make the name ambiguous')
+  const twins = buildIndex({ ...DATA, mods: [mod('x/one:.', { name: 'twin' }), mod('y/two:.', { name: 'twin' })] })
+  const many = getMod(twins, 'twin')
+  assert.equal(many.status, 'ambiguous')
+  assert.deepEqual(many.ids.map(x => x.id), ['x/one:.', 'y/two:.'])
+})
+
 test('details carry evidence links pinned to the scanned commit and an install hint only when the scan saw one', () => {
   const { mod: m } = getMod(index, 'k/market:.')
   assert.equal(m.install.command, '/plugin install market-mod --marketplace k/market')
