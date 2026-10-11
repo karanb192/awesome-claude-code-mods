@@ -152,6 +152,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [context-canary](https://github.com/Nachx639/context-canary) - A pixel-art canary above the prompt that dies when a final reply skips a sentinel from CLAUDE.md, then compacts the session keeping your instructions and revives.
 - [smart-compact](https://github.com/hellosverre/smart-compact) - Offers a one-click compact after a commit or a green test run and a minute before the prompt cache expires, and gives Claude a `request_compact` tool to ask for one with what the summary must keep.
 - [image-shrinker](https://github.com/varunmoka7/image-shrinker) - Shrinks large image files before Claude reads them so they take less of the context window, and tells Claude the scale back to the original pixels.
+- [cache-warmer](https://github.com/paulbkim-dev/claude-code-cache-warmer) - Forks the last request with tools denied shortly before the 5-minute or 1-hour prompt cache expires, so the next prompt after a break reads the cache; each refresh is billed like any request, is skipped when its expected saving is under $0.05 and shows in a band above the prompt.
 
 ## Rendering
 
