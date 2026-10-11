@@ -13,9 +13,9 @@ Mods are Claude Code plugins whose JavaScript or TypeScript hooks run inside a s
 
 ## Ask Claude to find a mod
 
-Install mod-finder in a Claude Code session with `/plugin install mod-finder --marketplace karanb192/awesome-claude-code-mods`, then ask for a task such as “Find a mod that helps with code reviews”. It works in the CLI and Desktop Code local sessions and requires Node 18 or later.
+Install mod-finder in a Claude Code terminal session with `/plugin install mod-finder --marketplace karanb192/awesome-claude-code-mods`, complete the installation prompts, then run `/reload-plugins` before asking “Find a mod that helps with code reviews”. It requires Node 18 or later. For Desktop Code local sessions, follow the terminal installation route in the setup guide below.
 
-- [Mod finder setup and tools](https://github.com/karanb192/awesome-claude-code-mods/blob/main/finder/README.md): installation, search_mods and get_mod, cache behavior and the limits of access filters
+- [Mod finder setup and tools](https://github.com/karanb192/awesome-claude-code-mods/blob/main/finder/README.md#in-claude-code-mcp): installation, search_mods and get_mod, cache behavior and the limits of access filters
 
 ## Most starred mods
 

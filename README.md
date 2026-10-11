@@ -6,13 +6,13 @@ Add a browser beside your conversation, keep usage in view, or check a command b
 
 This community catalogue scans public GitHub repositories and records what Claude's validator reports each mod can read, write, run or send over the network. It is an independent scan, not an official Anthropic directory.
 
-Find a mod in the [full catalogue](https://mods.aidojo.si/#directory) by name or task and filter by access. Or ask Claude with [mod-finder](finder/README.md). Run this in a Claude Code session, then ask “Find a mod that helps with code reviews”.
+Find a mod in the [full catalogue][catalogue] by name or task and filter by access. Or ask Claude with [mod-finder](finder/README.md). Run this in a Claude Code terminal session and complete the installation prompts.
 
 ```text
 /plugin install mod-finder --marketplace karanb192/awesome-claude-code-mods
 ```
 
-Works in the CLI and Desktop Code local sessions. Requires Node 18 or later. [Setup and requirements](finder/README.md#in-claude-code-mcp).
+Then run `/reload-plugins` to activate it before asking “Find a mod that helps with code reviews”. Requires Node 18 or later. For Desktop Code local sessions, use the [setup instructions](finder/README.md#in-claude-code-mcp).
 
 <!-- stats:start -->
 **3382 mods** · Last scanned 2026-10-11.
@@ -39,11 +39,11 @@ Access reported by the latest scan (select the badge for details):
 
 Six picks for everyday tasks. Check each mod's platform requirements and access before installing. [Nominate a mod](contributing.md#nominate-a-featured-mod) for a future selection.
 
-- [cache-tax](https://github.com/karanb192/cache-tax) - Keeps the prompt cache warm during breaks and shows the estimated cost before a cold send. Warming uses tokens. Built by the maintainer. [Recording](https://github.com/karanb192/cache-tax/blob/main/site/assets/refusal.gif).
+- [cache-tax](https://github.com/karanb192/cache-tax) - Keeps the prompt cache warm during breaks and stops a cold send once to show its estimated cost. Warming uses tokens and needs a one-hour cache. Built by the maintainer. [Recording](https://github.com/karanb192/cache-tax/blob/main/site/assets/refusal.gif).
 - [image-view](https://github.com/jarrodwatts/claude-image-view) - Shows thumbnails of pasted images above the prompt so you can check each image before sending. Needs a kitty-graphics terminal such as Ghostty or kitty. [Screenshot](https://github.com/jarrodwatts/claude-image-view/blob/main/claude-image-view.png).
 - [prismantis](https://github.com/NahumLitvin/prismantis) - Renders tables, code, Mermaid diagrams and charts in the transcript, with copy buttons. Its default diagram hints add about 190 tokens per prompt and can be disabled. [Demo](https://github.com/NahumLitvin/prismantis/blob/main/docs/compare.gif).
 - [flightdeck](https://github.com/scasella/claude-flightdeck) - Shows context, cost, permission checks and subagents in a live dashboard, without changing tool calls. [Demo](https://github.com/scasella/claude-flightdeck/blob/main/docs/media/demo.gif).
-- [filetree](https://github.com/data-goblin/claude-code-filetree) - Shows a file tree with Git status and highlights files as Claude reads or edits them. Selecting a file adds it to prompt context; the terminal sidebar needs fullscreen and at least 110 columns. [Demo](https://github.com/data-goblin/claude-code-filetree/blob/main/media/filetree-shimmer.gif).
+- [filetree](https://github.com/data-goblin/claude-code-filetree) - Shows a file tree with Git status and highlights files as Claude reads or edits them. Selecting a file passes its path to Claude; the terminal sidebar needs fullscreen and at least 110 columns. [Demo](https://github.com/data-goblin/claude-code-filetree/blob/main/media/filetree-shimmer.gif).
 - [prompt-rail](https://github.com/oikon48/prompt-rail) - Adds a strip of past prompts to hover over and reread, with click-to-jump navigation in the terminal. [Demo](https://github.com/oikon48/prompt-rail/blob/main/docs/demo.gif).
 
 Flightdeck's README also links to this catalogue.
@@ -67,7 +67,7 @@ Read the mod's source and access details before installing. Validation checks th
 
 ## Every mod the scanner found
 
-The **[full catalogue](catalogue.md#every-mod-the-scanner-found)** includes each discovered mod's description, access, observed events and validation result. [Built-in mods](catalogue.md#built-into-claude-code) are listed separately.
+The **[full catalogue][catalogue]** includes each discovered mod's description, access, observed events and validation result. [Built-in mods](https://mods.aidojo.si/#built-in-mods) are listed separately. You can also [download the catalogue as raw Markdown](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/catalogue.md).
 
 ## How the scan works
 
@@ -77,7 +77,7 @@ The scan also reads the catalogue of Anthropic's plugin directory (`claude plugi
 
 Merging a seed submission also starts a separate publication check. New repositories with passing checks appear automatically after their generated update is merged by the workflow and the website deploys. Existing listings stay unchanged. A seed with validation failures or new review warnings stays unpublished and is reported in the workflow run; other seeds still publish. [Seed publication details](contributing.md#open-a-pull-request).
 
-Discovery depends on GitHub's index and our search patterns, so a new mod may not appear immediately. A scan usually picks up a repository with the `claude-code-mod` topic within a few hours of its next push, and the mod appears once that scan's pull request is merged. [How discovery and validation work](catalogue.md#how-the-scan-works) covers access levels, warnings, retry handling and removal reviews.
+Discovery depends on GitHub's index and our search patterns, so a new mod may not appear immediately. A scan usually picks up a repository with the `claude-code-mod` topic within a few hours of its next push, and the mod appears once that scan's pull request is merged. [How discovery and validation work](SCANNING.md) covers access levels, warnings, retry handling and removal reviews.
 
 <a id="contribute"></a>
 
@@ -89,3 +89,5 @@ To add a mod to the full catalogue, follow the [discovery and seed submission gu
 
 - [claude-code-hooks](https://github.com/karanb192/claude-code-hooks) - Shell-hook plugins for safety, cost, observability and productivity, the layer mods are replacing.
 - [awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) - The general Claude Code list.
+
+[catalogue]: https://mods.aidojo.si/#directory
