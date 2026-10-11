@@ -37,6 +37,7 @@ adamholter/claude-subway-surfers
 agentic-workbench/agent-quick-menu
 reporails/arcade
 njp-coder/meanwhile
+vinkdc/roclaude
 apolenkov/agent-shell-watch
 apolenkov/agent-council
 apolenkov/agent-compact-advisor
@@ -76,4 +77,4 @@ Ashley-Pettit/villager-hp
 Ashley-Pettit/lgtm-flash
 hellosverre/smart-compact
 vihrea1337/headroom
-vinkdc/roclaude
+i-harsha-reddy/naruto-mod
