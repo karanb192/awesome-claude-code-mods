@@ -5,6 +5,7 @@ import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'nod
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { findingsModules } from './inspect.mjs'
 
 const scanner = fileURLToPath(new URL('./scan.mjs', import.meta.url))
 
@@ -148,4 +149,10 @@ test('a validator that reports a failure is a settled result and is reused', t =
   const cached = f.run()
   assert.deepEqual(cached.calls, [])
   assert.equal(cached.data.mods[0].validate.status, 'failed')
+})
+
+test('cached findings are keyed on the checkout reader, not on code that only shapes records', () => {
+  const modules = findingsModules()
+  for (const file of ['tools/inspect.mjs', 'tools/validate.mjs', 'tools/parse.mjs', 'tools/compatibility.mjs']) assert.ok(modules.includes(file), file)
+  for (const file of ['tools/scan.mjs', 'tools/grade.mjs', 'tools/kind.mjs', 'tools/dedupe.mjs', 'tools/render.mjs']) assert.ok(!modules.includes(file), file)
 })
