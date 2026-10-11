@@ -166,6 +166,20 @@ test('a repository GitHub reports under a new name collapses onto that name', ()
   assert.equal(renamePairs(mods, currentName, stale).size, 0, 'a retained record of a failed clone never hides a fresh copy')
 })
 
+test('two old names of a repository whose current name is not a candidate collapse onto one', () => {
+  const plugin = (repo, sourceCommit = 'c1') => ({ id: `${repo}:plugin`, repo, path: 'plugin', sourceCommit, kind: 'mod' })
+  const mods = [plugin('o/prompt-bar'), plugin('o/ClauDiscombobulating'), plugin('o/other')]
+  const currentName = new Map([['o/prompt-bar', 'o/ClauDiscobombulating'], ['o/claudiscombobulating', 'o/ClauDiscobombulating'], ['o/other', 'o/other']])
+  const fresh = new Set(mods.map(m => m.id))
+  const pairs = renamePairs(mods, currentName, fresh)
+  assert.deepEqual([...pairs], [['o/prompt-bar:plugin', 'o/ClauDiscombobulating:plugin']])
+  assert.deepEqual(applyDuplicates(structuredClone(mods), pairs).filter(m => m.kind === 'mod').map(m => m.id), ['o/ClauDiscombobulating:plugin', 'o/other:plugin'])
+  assert.equal(renamePairs([plugin('o/prompt-bar', 'c2'), mods[1]], currentName, new Set(['o/prompt-bar:plugin', 'o/ClauDiscombobulating:plugin'])).size, 0, 'different commits are not proven to be one checkout')
+  assert.equal(renamePairs(mods, currentName, new Set(['o/ClauDiscombobulating:plugin'])).size, 0, 'a retained record never joins a pair')
+  const listed = [...mods, plugin('o/ClauDiscobombulating')]
+  assert.deepEqual([...renamePairs(listed, currentName, new Set(listed.map(m => m.id)))].sort(), [['o/ClauDiscombobulating:plugin', 'o/ClauDiscobombulating:plugin'], ['o/prompt-bar:plugin', 'o/ClauDiscobombulating:plugin']], 'a fresh copy under the current name still wins')
+})
+
 test('rename pairs keep plugin paths case-sensitive', () => {
   const mods = [
     { id: 'o/old:plugins/A', repo: 'o/old', path: 'plugins/A', kind: 'mod' },

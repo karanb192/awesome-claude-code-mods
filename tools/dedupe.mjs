@@ -59,6 +59,8 @@ export function suspectDuplicates(mods) {
 // every plugin twice. Pairs each plugin under the old name with the same path under the name
 // GitHub now reports, only when that copy came from this scan: a retained record of a failed
 // clone must not hide a fresh one. Repository names match without case; plugin paths do not.
+// When the current name is not on the candidate list but two or more old names are, their fresh
+// copies of a plugin collapse onto the first by id, only when they checked out the same commit.
 export function renamePairs(mods, currentName, freshIds) {
   const at = (repo, path) => `${repo.toLowerCase()}:${path}`
   const byPlace = new Map(mods.filter(m => freshIds.has(m.id)).map(m => [at(m.repo, m.path), m]))
@@ -68,6 +70,16 @@ export function renamePairs(mods, currentName, freshIds) {
     if (!now || now.toLowerCase() === m.repo.toLowerCase()) continue
     const keeper = byPlace.get(at(now, m.path))
     if (keeper && keeper !== m) pairs.set(m.id, keeper.id)
+  }
+  const orphans = new Map()
+  for (const m of mods) {
+    const now = currentName.get(m.repo.toLowerCase())
+    if (!now || now.toLowerCase() === m.repo.toLowerCase() || !freshIds.has(m.id) || byPlace.has(at(now, m.path))) continue
+    orphans.set(at(now, m.path), [...(orphans.get(at(now, m.path)) ?? []), m])
+  }
+  for (const group of orphans.values()) {
+    const [keeper, ...copies] = group.sort((a, b) => a.id.localeCompare(b.id))
+    for (const copy of copies) if (copy.sourceCommit === keeper.sourceCommit) pairs.set(copy.id, keeper.id)
   }
   return pairs
 }
