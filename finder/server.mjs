@@ -25,7 +25,7 @@ const TOOLS = [
         without: { type: 'array', items: { type: 'string', enum: [...ACCESS, ...SEES] }, description: 'Leave out mods with any of this access, or that see these events.' },
         max_reach: { type: 'integer', enum: [0, 1, 2, 3], description: 'Leave out mods above this level: 0 draws and remembers, 1 reads, 2 writes or runs, 3 network.' },
         verified_only: { type: 'boolean', description: 'Only mods that pass validation on the scanned Claude Code version.' },
-        include_unverified: { type: 'boolean', description: 'Let access filters keep mods whose validation did not pass or whose footprint has calls the scan could not classify. They may do more than their labels say.' },
+        include_unverified: { type: 'boolean', description: 'Let filters keep the mods they cannot vouch for: validation did not pass, calls the scan could not classify, or tool hooks with dynamic matchers. They may do more than their labels say.' },
         in_anthropic_directory: { type: 'boolean', description: "Only mods that Anthropic's plugin directory installs." },
         repo: { type: 'string', description: 'Only mods from this GitHub repository, as owner/repo.' },
         limit: { type: 'integer', minimum: 1, maximum: MAX_LIMIT, description: 'Results per page, default 8.' },
@@ -49,6 +49,10 @@ const TOOLS = [
   },
 ]
 
+// After a failed refresh the stale snapshot keeps serving, and the next attempt waits this long, so an
+// outage costs one slow call per interval instead of a full download timeout on every call.
+const RETRY_AFTER_MS = 15 * 60e3
+
 let current = null
 // Loads on first use, or after the refresh interval, and keeps the index in memory between calls.
 // A failed load is not kept, so the next call tries again.
@@ -56,8 +60,9 @@ function index() {
   if (current) {
     const { revision } = current.loaded ?? {}
     if (!revision || Date.now() - revision.fetchedAt < REFRESH_AFTER_MS) return current.ready
+    if (revision.stale && Date.now() - current.started < RETRY_AFTER_MS) return current.ready
   }
-  const entry = { loaded: null }
+  const entry = { loaded: null, started: Date.now() }
   entry.ready = loadSnapshot().then(({ data, revision }) => {
     entry.loaded = { revision }
     return buildIndex(data, revision)
