@@ -1,0 +1,230 @@
+import { test } from 'node:test'
+import assert from 'node:assert/strict'
+import { spawnSync } from 'node:child_process'
+import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { loadSnapshot, buildIndex, search, getMod, InputError, MAX_LIMIT, REFRESH_AFTER_MS, MAX_STALE_MS } from './search.mjs'
+
+const mod = (id, over = {}) => {
+  const [repo, path] = id.split(':')
+  return {
+    id, repo, path, name: path.split('/').pop(), description: '', kind: 'mod', sourceCommit: 'c'.repeat(40), defaultBranch: 'main',
+    url: `https://github.com/${repo}/tree/main/${path}`, modules: ['./register.ts'], hooks: [], calls: [], marketplaces: [],
+    validate: { status: 'passed', claudeVersion: '2.1.296', errors: [] }, compatibility: { runtime: 'not-tested', warnings: [] },
+    reach: { level: 0, name: 'draws and remembers', labels: ['draws'] }, sees: [], draws: ['Pane'], stars: 1, directory: null, ...over,
+  }
+}
+const net = { level: 3, name: 'network', labels: ['network', 'draws'] }
+const DATA = {
+  generated: '2026-10-11T09:26:34.682Z', claudeVersion: '2.1.296', repos: 9, mods: [
+    mod('a/reviews:mods/review-desk', { description: 'Shows the staged diff for review.' }),
+    mod('b/tools:mods/diff-pane', { description: 'A pane for code review of pull requests.', stars: 500 }),
+    mod('c/claude-code-mods:mods/clock', { description: 'A clock above the prompt.' }),
+    mod('d/cache:plugin', { name: 'cache-meter', description: 'Prompt cache time left.', reach: net }),
+    mod('e/cache:.', { name: 'cache-watch', description: 'Watches the prompt cache.' }),
+    mod('f/cache:.', { name: 'cache-guess', description: 'Cache countdown.', validate: { status: 'unknown', claudeVersion: '2.1.291', errors: ['Not found in this scan'] } }),
+    mod('g/eye:.', { name: 'cache-eye', description: 'Cache stats from every prompt.', sees: ['every prompt'] }),
+    ...['one', 'two', 'three'].map(n => mod(`h/pack:mods/review-${n}`, { description: 'Review helper.', stars: 9000 })),
+    mod('i/copy:mods/review-desk', { kind: 'duplicate', duplicateOf: 'a/reviews:mods/review-desk' }),
+    mod('j/fixtures:test/review-fixture', { kind: 'fixture' }),
+    mod('k/market:.', { name: 'market-mod', marketplaces: [{ path: '.claude-plugin/marketplace.json', name: 'k-market', status: 'passed', errors: [] }] }),
+  ],
+}
+const index = buildIndex(DATA, { commit: 'f'.repeat(40), sha256: 'abc', fetchedAt: Date.parse('2026-10-11T10:00:00Z') })
+const ids = out => out.results.map(r => r.id)
+
+test('name matches outrank description matches, and filler words match nothing', () => {
+  const out = search(index, { query: 'find me a code review mod' })
+  assert.ok(ids(out).indexOf('a/reviews:mods/review-desk') < ids(out).indexOf('b/tools:mods/diff-pane'), 'a name match beats more stars')
+  assert.ok(!ids(out).includes('c/claude-code-mods:mods/clock'), '"code" and "mods" in a repository name are not matches')
+  assert.ok(!ids(out).some(id => id.startsWith('i/') || id.startsWith('j/')), 'duplicates and fixtures are not search results')
+  assert.deepEqual(out.results.find(r => r.id === 'a/reviews:mods/review-desk').matched, ['review (name)'])
+})
+
+test('"pull request" and "PR" are the same words', () => {
+  assert.ok(ids(search(index, { query: 'PR viewer' })).includes('b/tools:mods/diff-pane'))
+})
+
+test('access filters drop mods with the access and mods whose footprint is unverified', () => {
+  const out = search(index, { query: 'cache', without: ['network', 'every prompt'] })
+  assert.deepEqual(ids(out), ['e/cache:.'])
+  assert.match(out.notes[0], /not proof/)
+  const loose = search(index, { query: 'cache', without: ['network'], include_unverified: true })
+  assert.deepEqual(ids(loose).sort(), ['e/cache:.', 'f/cache:.', 'g/eye:.'])
+  assert.equal(loose.results.find(r => r.id === 'f/cache:.').validation.footprint, 'unverified')
+  assert.deepEqual(ids(search(index, { query: 'cache', max_reach: 2 })).sort(), ['e/cache:.', 'g/eye:.'])
+})
+
+test('one repository fills at most two places before other repositories get theirs', () => {
+  const out = search(index, { query: 'review' })
+  const firstFour = ids(out).slice(0, 4)
+  assert.equal(firstFour.filter(id => id.startsWith('h/')).length, 2)
+  const thirdFromPack = ids(out).filter(id => id.startsWith('h/'))[2]
+  assert.ok(ids(out).indexOf(thirdFromPack) > ids(out).indexOf('b/tools:mods/diff-pane'), 'the third result from one pack waits behind the other repositories')
+  assert.equal(search(index, { query: 'review', repo: 'h/pack' }).total, 3)
+})
+
+test('pages are bounded and cursors walk the whole result set', () => {
+  const seen = []
+  let cursor
+  do {
+    const out = search(index, { query: 'review', limit: 2, cursor })
+    assert.ok(out.results.length <= 2)
+    seen.push(...ids(out))
+    cursor = out.next_cursor
+  } while (cursor)
+  assert.equal(seen.length, search(index, { query: 'review' }).total)
+  assert.equal(new Set(seen).size, seen.length)
+  for (const bad of [{ limit: 0 }, { limit: MAX_LIMIT + 1 }, { max_reach: 4 }, { cursor: 'x' }, { without: ['nonsense'] }]) {
+    assert.throws(() => search(index, { query: 'review', ...bad }), InputError)
+  }
+})
+
+test('a query that matches nothing says so', () => {
+  const out = search(index, { query: 'xyzzy' })
+  assert.equal(out.total, 0)
+  assert.match(out.notes.join(' '), /Nothing matched/)
+})
+
+test('every answer names the snapshot it came from', () => {
+  const { snapshot } = search(index, { query: 'review' })
+  assert.deepEqual(snapshot, { commit: 'f'.repeat(40), sha256: 'abc', scanned: DATA.generated, claude_version: '2.1.296', fetched_at: '2026-10-11T10:00:00.000Z' })
+})
+
+test('lookups resolve copies, repositories, old IDs and case', () => {
+  const copy = getMod(index, 'i/copy:mods/review-desk')
+  assert.equal(copy.status, 'duplicate')
+  assert.equal(copy.mod.id, 'a/reviews:mods/review-desk')
+  assert.equal(getMod(index, 'A/Reviews:mods/review-desk').mod.id, 'a/reviews:mods/review-desk')
+  assert.match(getMod(index, 'j/fixtures:test/review-fixture').mod.note, /not counted/)
+  const repo = getMod(index, 'h/pack')
+  assert.equal(repo.status, 'repository')
+  assert.equal(repo.ids.length, 3)
+  const gone = getMod(index, 'old-owner/reviews:mods/review-desk')
+  assert.equal(gone.status, 'not_found')
+  assert.equal(gone.suggestions[0].id, 'a/reviews:mods/review-desk')
+  assert.throws(() => getMod(index, ''), InputError)
+})
+
+test('details carry evidence links pinned to the scanned commit and an install hint only when the scan saw one', () => {
+  const { mod: m } = getMod(index, 'k/market:.')
+  assert.deepEqual(m.install.commands, ['/plugin marketplace add k/market', '/plugin install market-mod@k-market'])
+  assert.equal(m.manifest, `https://github.com/k/market/blob/${'c'.repeat(40)}/.claude-plugin/plugin.json`)
+  assert.equal(getMod(index, 'e/cache:.').mod.install, null)
+})
+
+// A stand-in for raw.githubusercontent.com and the GitHub API that counts requests.
+function server({ commit = 'a'.repeat(40), body = JSON.stringify(DATA), apiDown = false, rawDown = false, etag = '"v1"' } = {}) {
+  const calls = []
+  const fetch = async (url, init = {}) => {
+    calls.push(url)
+    if (url.startsWith('https://api.test/')) {
+      if (apiDown) return new Response('limited', { status: 403 })
+      return Response.json([{ sha: commit }])
+    }
+    if (rawDown) throw new TypeError('fetch failed')
+    if (init.headers?.['if-none-match'] === etag) return new Response(null, { status: 304 })
+    return new Response(body, { headers: { etag } })
+  }
+  return { fetch, calls, opts: { fetch, raw: 'https://raw.test', api: 'https://api.test' } }
+}
+function cache(t) {
+  const dir = mkdtempSync(join(tmpdir(), 'finder-'))
+  t.after(() => rmSync(dir, { recursive: true, force: true }))
+  return dir
+}
+const T0 = Date.parse('2026-10-11T00:00:00Z')
+
+test('the first load downloads the snapshot at the commit that published it', async t => {
+  const dir = cache(t), s = server()
+  const { data, revision } = await loadSnapshot({ ...s.opts, cacheDir: dir, now: T0 })
+  assert.equal(data.mods.length, DATA.mods.length)
+  assert.equal(revision.commit, 'a'.repeat(40))
+  assert.equal(s.calls.at(-1), `https://raw.test/karanb192/awesome-claude-code-mods/${'a'.repeat(40)}/docs/mods.json`)
+})
+
+test('a fresh cache answers without the network, and an unchanged commit skips the download', async t => {
+  const dir = cache(t), s = server()
+  await loadSnapshot({ ...s.opts, cacheDir: dir, now: T0 })
+  s.calls.length = 0
+  await loadSnapshot({ ...s.opts, cacheDir: dir, now: T0 + 1000 })
+  assert.deepEqual(s.calls, [])
+  const later = await loadSnapshot({ ...s.opts, cacheDir: dir, now: T0 + REFRESH_AFTER_MS + 1 })
+  assert.equal(s.calls.length, 1, 'only the commit lookup')
+  assert.equal(later.revision.fetchedAt, T0 + REFRESH_AFTER_MS + 1)
+})
+
+test('a new commit replaces the whole snapshot and removes the old file', async t => {
+  const dir = cache(t)
+  await loadSnapshot({ ...server().opts, cacheDir: dir, now: T0 })
+  const next = { ...DATA, generated: '2026-10-12T00:00:00.000Z', mods: DATA.mods.slice(0, 3) }
+  const { data, revision } = await loadSnapshot({ ...server({ commit: 'b'.repeat(40), body: JSON.stringify(next) }).opts, cacheDir: dir, now: T0, refresh: 'force' })
+  assert.equal(data.mods.length, 3)
+  assert.equal(revision.commit, 'b'.repeat(40))
+  assert.deepEqual(readdirSync(dir).filter(f => f.startsWith('mods-')), [revision.file])
+})
+
+test('without the API it falls back to main and revalidates with the ETag', async t => {
+  const dir = cache(t), s = server({ apiDown: true })
+  const first = await loadSnapshot({ ...s.opts, cacheDir: dir, now: T0 })
+  assert.equal(first.revision.commit, null)
+  assert.ok(first.revision.sha256)
+  assert.ok(s.calls.includes('https://raw.test/karanb192/awesome-claude-code-mods/main/docs/mods.json'))
+  const again = await loadSnapshot({ ...s.opts, cacheDir: dir, now: T0, refresh: 'force' })
+  assert.equal(again.revision.sha256, first.revision.sha256)
+  assert.ok(!again.revision.stale)
+})
+
+test('a failed refresh serves the cached snapshot marked stale, up to a week', async t => {
+  const dir = cache(t)
+  await loadSnapshot({ ...server().opts, cacheDir: dir, now: T0 })
+  const down = server({ commit: 'b'.repeat(40), rawDown: true })
+  const stale = await loadSnapshot({ ...down.opts, cacheDir: dir, now: T0 + REFRESH_AFTER_MS + 1 })
+  assert.equal(stale.revision.stale, true)
+  assert.equal(stale.revision.commit, 'a'.repeat(40))
+  assert.match(stale.revision.refreshError, /fetch failed/)
+  assert.equal(search(buildIndex(stale.data, stale.revision), { query: 'review' }).snapshot.stale, true)
+  await assert.rejects(loadSnapshot({ ...down.opts, cacheDir: dir, now: T0 + MAX_STALE_MS + 1 }), /more than 7 days old/)
+})
+
+test('a broken download never replaces a good cache, and with no cache it is an error', async t => {
+  const dir = cache(t)
+  await loadSnapshot({ ...server().opts, cacheDir: dir, now: T0 })
+  const broken = await loadSnapshot({ ...server({ commit: 'b'.repeat(40), body: '{"mods": [' }).opts, cacheDir: dir, now: T0, refresh: 'force' })
+  assert.equal(broken.revision.stale, true)
+  assert.equal(broken.revision.commit, 'a'.repeat(40))
+  const wrong = await loadSnapshot({ ...server({ commit: 'b'.repeat(40), body: '{"mods": []}' }).opts, cacheDir: dir, now: T0, refresh: 'force' })
+  assert.match(wrong.revision.refreshError, /not a mods.json snapshot/)
+  await assert.rejects(loadSnapshot({ ...server({ rawDown: true }).opts, cacheDir: cache(t), now: T0 }), /could not download/)
+})
+
+const published = fileURLToPath(new URL('../docs/mods.json', import.meta.url))
+
+test('answers from the published snapshot stay small', { skip: !existsSync(published) }, () => {
+  const real = buildIndex(JSON.parse(readFileSync(published, 'utf8')))
+  const sizes = real.data.mods.map(m => JSON.stringify(getMod(real, m.id)).length)
+  assert.ok(Math.max(...sizes) < 16000, `largest get_mod answer is ${Math.max(...sizes)} bytes`)
+  for (const query of ['review', 'cache', 'a', '']) {
+    const size = JSON.stringify(search(real, { query, limit: MAX_LIMIT })).length
+    assert.ok(size < 24000, `a full page for "${query}" is ${size} bytes`)
+  }
+})
+
+test('the command line prints exactly what the module returns', t => {
+  const dir = cache(t)
+  const file = 'mods-test.json'
+  writeFileSync(join(dir, file), JSON.stringify(DATA))
+  writeFileSync(join(dir, 'meta.json'), JSON.stringify({ commit: 'f'.repeat(40), sha256: 'abc', fetchedAt: Date.parse('2026-10-11T10:00:00Z'), file }))
+  const cli = fileURLToPath(new URL('./find-mods.mjs', import.meta.url))
+  const run = (...args) => {
+    const r = spawnSync(process.execPath, [cli, ...args, '--offline'], { encoding: 'utf8', env: { ...process.env, CLAUDE_MODS_CACHE: dir } })
+    return { ...r, json: r.status === 0 ? JSON.parse(r.stdout) : null }
+  }
+  assert.deepEqual(run('search', 'cache', '--without', 'network,every prompt').json, search(index, { query: 'cache', without: ['network', 'every prompt'] }))
+  assert.deepEqual(run('get', 'i/copy:mods/review-desk').json, getMod(index, 'i/copy:mods/review-desk'))
+  const bad = run('search', 'cache', '--without', 'nonsense')
+  assert.equal(bad.status, 2)
+  assert.match(bad.stderr, /not a without value/)
+})
