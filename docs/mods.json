@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-11T09:26:34.682Z",
   "claudeVersion": "2.1.296",
-  "repos": 1589,
+  "repos": 1590,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -365620,6 +365620,71 @@
       "stars": 0,
       "pushedAt": "2026-10-08T08:35:38Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "helenkwok/open-links:.",
+      "repo": "helenkwok/open-links",
+      "path": ".",
+      "sourceCommit": "58647889a155e464756aff0781c7b63208c4ca09",
+      "name": "open-links",
+      "description": "A Claude Code mod: file paths in Claude's replies become links that open the file (or your editor at the line). macOS, Linux and Windows paths, relative ones resolved against the session folder.",
+      "author": "Helen Kwok",
+      "homepage": "https://github.com/helenkwok/open-links",
+      "url": "https://github.com/helenkwok/open-links",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./open-links.ts"
+      ],
+      "hooks": [
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AssistantMessage"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.env.get",
+        "$.fs.stat",
+        "$.process.run",
+        "$.session.cwd",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "reads files",
+          "reads env vars",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AssistantMessage"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-11T06:19:54Z",
+      "createdAt": "2026-10-11T05:20:25Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
