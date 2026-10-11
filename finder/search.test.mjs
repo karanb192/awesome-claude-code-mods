@@ -110,7 +110,7 @@ test('lookups resolve copies, repositories, old IDs and case', () => {
 
 test('details carry evidence links pinned to the scanned commit and an install hint only when the scan saw one', () => {
   const { mod: m } = getMod(index, 'k/market:.')
-  assert.deepEqual(m.install.commands, ['/plugin marketplace add k/market', '/plugin install market-mod@k-market'])
+  assert.equal(m.install.command, '/plugin install market-mod --marketplace k/market')
   assert.equal(m.manifest, `https://github.com/k/market/blob/${'c'.repeat(40)}/.claude-plugin/plugin.json`)
   assert.equal(getMod(index, 'e/cache:.').mod.install, null)
 })

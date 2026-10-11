@@ -275,13 +275,14 @@ export function search(index, params) {
 const manifestUrl = m => `https://github.com/${m.repo}/blob/${m.sourceCommit ?? m.defaultBranch ?? 'main'}/${m.path === '.' ? '' : m.path + '/'}.claude-plugin/plugin.json`
 const atCommit = (m, file, line) => `https://github.com/${m.repo}/blob/${m.sourceCommit ?? m.defaultBranch ?? 'main'}/${file.split('/').map(encodeURIComponent).join('/')}${line ? '#L' + line : ''}`
 
-// What a user would type to install, when the scan saw a marketplace that lists this mod. The scan
-// records the marketplace's name, not its entry for the mod, so the plugin name is the manifest's.
+// What a user would type to install, when the scan saw a marketplace that lists this mod. It names the
+// repository rather than the marketplace, because dozens of unrelated marketplaces share names like
+// claude-mods. The scan records the manifest's plugin name, not the marketplace entry's.
 function install(m) {
   if (m.directory?.plugin) return { command: `/plugin install ${m.directory.plugin}`, from: "Anthropic's plugin directory" }
-  const root = (m.marketplaces ?? []).find(p => p.path === '.claude-plugin/marketplace.json' && p.name && VERIFIED.has(p.status))
+  const root = (m.marketplaces ?? []).find(p => p.path === '.claude-plugin/marketplace.json' && VERIFIED.has(p.status))
   if (!root) return null
-  return { commands: [`/plugin marketplace add ${m.repo}`, `/plugin install ${m.name}@${root.name}`], from: "the repository's own marketplace", check: "Confirm the plugin name in the repository's README before installing." }
+  return { command: `/plugin install ${m.name} --marketplace ${m.repo}`, from: "the repository's own marketplace", check: "Confirm the plugin name in the repository's README before installing." }
 }
 
 function detail(m) {
