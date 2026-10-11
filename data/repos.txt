@@ -16,6 +16,7 @@
 0xnicholasy/claude-mod-todo-list
 0xR4vens/clawd-mods
 11Fred11/claude-mods
+11Fred11/fredj-hammami-plugins
 177cubicube-star/claude-code-mods
 20alexl/windvane
 2bo/pr-inbox
@@ -25,6 +26,7 @@
 5dive-ai/5dive-plugins
 5omeOtherGuy/slab-deck
 851-labs/subway-surfers-claude-code-mod
+a-bine/claude-mods
 a252937166/cc-mod
 Aaravkataria24/aarav-mods
 ABDUAZIZX/env-guard
@@ -44,6 +46,8 @@ achiurizo/dreeft
 AdamCaviness/prompt-marks
 adamholter/claude-minecraft
 adamholter/claude-subway-surfers
+adammhal/claude-mods
+adamnroman/claude-chatroom
 AdityaUmale/claude-commit-nag
 adriancoman/claude-code-mods
 aerovato/operator-memory
@@ -69,6 +73,7 @@ ajbarea/keryx
 ajbarea/techne
 AJclemendor/my-mods
 ak110/dotfiles
+Akagamisora/diagram-pane
 Akagamisora/session-memo
 akagaya/claude-code-mods
 Akash001uts/claude-mods
@@ -78,6 +83,7 @@ Akramovic1/jev-pilot
 aksh1618/claude-mods
 alamine42/claude-mods
 Alchez/claude-mods
+Alejoaguilarg/claude-mods
 alex2481kobe/claude-mods
 alex4o/system-one-mods
 Alexander-Prime/revdiff-relay
@@ -90,6 +96,7 @@ alexjacobs08/guided-mr
 alexknowshtml/claude-auto-handoff
 alexlifexyz/p3c-guard
 alexregrets/hyperspace
+alexyslozada/claude-mods
 alfredwesterveld/claude-cache-status
 aliemrevezir/mods
 aliir74/claude-code-rtl
@@ -113,6 +120,7 @@ AnatoliyShk/bulgolingo
 andras-gyarmati/claude-quota-band
 andras-gyarmati/claude-task-progress
 AndreasOA/claude-code-mods
+andreichiritescu/claude-code-cache-keep-warm
 andrewbakercloudscale/claude-code-cost-sidebar
 andrewstephenson-v1/mod-claude-tasks
 Anerco/claude-code-effort-cycle
@@ -149,12 +157,15 @@ Arjun0014/project-sentinel
 arsenii-cmd/Claude-mod
 arseum/claude-mods
 artemnovichkov/xcode-mods
+artemvoidd/cache-timer
 arthur-fontaine/cc-mod-auto-effort
 arthurseredaa/clawdgotchi
 Arunjay4213/claude-mods
 Arunprakaash/claude-mods
 arvakme/claude-code-butler
 aryanvisualize/Understanding-Jev
+aryswisnu/campfire-hud
+aryswisnu/session-hud
 asdrubalivan/lingo-pane
 ashafizullah/claude-code-muslim-mods
 ashafizullah/cmdc-worker
@@ -229,6 +240,7 @@ borabiricik/claude-mods
 Borgerod/claude-files-office
 BorjaGM1/token-printer
 bostonaholic/claude-mods
+boxiaolanya2008/claudecode-plus-mod
 bps2414/clawd-mods
 bqnhat/claude-local-plugins
 BrainRev/claude-session-panels
@@ -254,6 +266,7 @@ builtbyjia/claude-code-mods
 Bulls-Work/bullswarm
 bzatrok/ClaudeMods
 cablate/ctx-handoff-mod
+cainmaila/claude-code-git-graph
 caliber-ai-org/ai-setup
 calm-logic/incremental-claude-mod
 calm-logic/visualize-claude-mod
@@ -265,6 +278,7 @@ cardosoads/jev-suite
 carlvellotti/mods-starter
 catmei/claude-code-english-coach
 catsby/claude-code-buddy
+cavallinilorenzo/claude-code-mods
 cbruyndoncx/claude-diagrams-renderer-mod
 cbruyndoncx/claude-skills-manager-mod
 cbruyndoncx/claude-tasknotes-renderer-mod
@@ -302,6 +316,7 @@ cglremrcn/pixlings
 chadboyda/sotto
 chandan84/cache-time-pending-usage-limit-mod
 chang-07/cc-latex
+chanlito/claude-mods
 chaoshengsc/focus-band
 charanjit-singh/ClaudeVsCodeMinimal
 charimsma/dopa-mode
@@ -322,9 +337,11 @@ ChristianBuzzetti/ClaudeMods
 Chronosauros/claude-mods
 cjavdev/mods
 claudemodz/mods
+claytonmgravatt/claude-mods
 cldotdev/claude-todo-list
 clockendbader/dancing-claude
 clockendbader/mascot-studio
+cmbaldwin/claude-usage-band
 cmj-hub/gtm-operator-claude-mod
 cmyanar-max/claude-code-kedi-modu
 CocoSgt/yujie-mod
@@ -337,6 +354,7 @@ CommunityPokeOrg/claude-code-modscope
 Comp0te/claude-plugins
 condor090/clima-condor
 conorbronsdon/eunuch-mode
+contactflowclient-blip/mods-claude
 Conte777/claude-lint
 Conte777/claude-mermaid
 coolthor/cc-dash-kit
@@ -350,6 +368,7 @@ craigmcampbell/claude-plugins
 craneyu/claude-paste-preview
 crebot51/jack-mods
 crenshawdev/cadence
+crockalet/claude-mods
 cskwork/claude-code-mods
 csmoot99/Mafioso
 CtrlAltFocus/claude-mods
@@ -379,6 +398,7 @@ davekiss/env
 davekiss/md
 davesienkowski/gsd-cc-mods
 davidar/claude-idle-compact
+davidbalzan/status-band
 davideiffert/check-it
 davidho27941/cockpit
 davidlambl/claude-extensions
@@ -408,6 +428,7 @@ designnotdrum/fast-jev-compaction-codex
 desuqcafe/cc-mascot
 devbrother2024/devbrothers-mods
 devohmycode/claude-mods
+devsomelife/somelife-claude-mods
 dgokcin/claude-pokemon-mod
 dgsantana/claude-mods
 dhruvkumar1805/cricket-commentary
@@ -416,6 +437,7 @@ diegocamara89/claude-mods
 diegorv/claude-functions-hook
 diegorv/claude-mods-diegorv
 dikeckaan/claude-system-promt
+diogosarti/my-claude-code
 dip497/claude-statusband
 diwakersurya/flowpane
 dixonSolutions/ClaudeKeys
@@ -424,6 +446,7 @@ DJPalefaceSD/rostech-mods
 DmitryBMsk/thinkdial
 domain-centric-development/dca-marketplace
 DominickGiordano/claude-mods
+DonMecha/tool-tape
 Dos2Locos/claude-code-mods
 dot-agi/arrester
 dot-agi/downrange
@@ -458,6 +481,8 @@ eel-brah/burn-baby-burn
 effectustasi/kit
 Egor062020/claude-code-pult
 eighteyes/cactus
+einaruk/claude-session-band
+ejklock/claude-code-mode
 ekinertac/claude-code-mods
 Elesiann/usagemeter
 elharchaoui/claude-mods
@@ -466,6 +491,7 @@ elijah-rou/agent-kit
 elkinaguas/claude-mods
 elparko/look-claude-no-hands
 emaballarin/ccplugins
+endless-fr/claude-mods
 enes/proctree
 EnyMan/simple-memory
 EricJamie/claude-code-mods
@@ -476,6 +502,7 @@ etding/cache-keeper
 Ev3nt1ne/grammar-guard
 evggzzz/cc-contextbar
 ezoushen/claude-mods
+f64991144/claude-image-preview
 fabiopbarbieri/claude-test-progress
 facumarcet/archpane
 Fahim-2135/crew
@@ -491,12 +518,14 @@ FayequeP/sidebar
 FazalAAli/pi-agent-for-claude
 Fazzani/claude-mods
 Felixosk/cache-wetter
+Felixosk/cockpit-bar
 fernandomoraes/loose-ends
 ffalor/ffalor-plugins
 fib1618agent/claude-mod-speckit
 Firefade0329/claude-code-pet
 five82/claude-mods
 fivood/nier-ui
+fixter-dev/claude-code-session-tracker
 fixter-dev/flappy-code
 fixter-dev/session-pings
 Flam1ngFir3ball/jev-claude-router
@@ -509,6 +538,7 @@ FrogAi/Xenopus
 fstandhartinger/limitpace
 FukKwang/claude-msg-timestamps
 furqan-khan07/pixelband
+FynnXland/fynn-mods
 g-campillo/claude-mods
 gaaurav03/Jev-Project
 gabedeluna/claude-mods
@@ -520,6 +550,7 @@ GastonGelhorn/jevmate
 gauravlahoti/claude-mods
 gblacher2/repo-sessions
 gebeer/jev-effort
+GeckoKing9/claude-code-copy-button
 genail/genail-mods
 generonishimura/ccm-where-am-i
 gergesh/claude-queue-mod
@@ -548,9 +579,11 @@ gpr/claude-code-mods
 Grandullon/diariovida-mods
 graugart/flingo
 greenpolo/cc-multi-cli-plugin
+gregpa/ctx-cache-band
 grennis/ClaudeCacheTimer
 griches/claude-xcode-mod
 griches/xcpane
+grozoww/idlecrash
 GrubbyLee/claude_wechat_view_mod
 GruperTal/claude-pin-message
 GrzeskoByte/claude-work-visualized
@@ -559,12 +592,14 @@ gtapps/hermitd
 Gu1llaum-3/claude-mods-cockpit
 guasam/cc-paste-thumbnails
 GuillermoAlbert/claude-mods
+gveshk/barebone-mods
 gwbtc/claude-mods
 gxcsoccer/claude-in-human
 gxcsoccer/claude-taxi-meter
 h1048576/claude-mods
 h1994st/rllvm
 hacksurvivor/claude-mods
+hagaybar/claude-secret-guard
 hahahahahahahahah6/task-progress-mod
 HaiNNT/c-hottag
 halluton/Mindful-Claude
@@ -575,6 +610,7 @@ hamzafer/claude-code-mods
 Hangghost/learning-hacker-claude-mod
 HaoYan-A/claude-code-mods
 HAR5HA-7663/jev-compact
+hardkoded/playwright-claude-mod
 harshadmadaye/OPM
 harshitmywork17/claude-mods
 hasuwini77/agentille
@@ -588,6 +624,7 @@ hellosverre/claude-skins
 hellosverre/redgreen
 hellosverre/smart-compact
 hemanth/claude-code-youtube-mod
+hemichaeli/hebrew-rtl
 henrik-thevibe/Claude-Fables
 herman925/925-cc-plugins
 hex/claude-council
@@ -598,6 +635,7 @@ heyJordanParker/cmod
 hicrandn/claude-mods
 higorcesarqn/rich-input-editor
 himazintom/claude-code-sea
+hjsh200219/meta-status
 hnkabraham/claude-code-mobile-mode
 hoangbits/claude-implement-plan-tracker
 HolyGrail/claude-mods
@@ -605,6 +643,7 @@ home-dev-lab/workflow-toolbox
 homieyangg/claude-code-mods
 hoobnn/hoobnn-agent-mods
 HoshimuraYuto/cc-sidecar
+Hsiang-LinC/vault-jot
 hudcolighting/clawd-crew
 hugo88/claude-code-recording-mode
 hugoamadio/claude-quickbar
@@ -618,7 +657,10 @@ hymleong/claude-mods
 HyunjunJeon/jev-context
 hyvanmielenpelit/ClaudeCodeMods
 i-harsha-reddy/naruto-mod
+i-noma-ru/claude-ask-choice
+i-noma-ru/claude-clip-command
 i-noma-ru/claude-dotpet
+i-noma-ru/claude-drop-thumb
 IAmAStealer/Claudou
 iamkhalid2/usage-band
 iamomiid/cache-countdown
@@ -630,6 +672,7 @@ iceberggymnast/claude-code-mods
 icedevil2001/auto-continue
 icpmacdo/claude-mod-tldr-window
 IKnowJot/clawd-plugins
+ikstewa/workstreams
 Iliesseu28/claude-autocommit
 ilkayGkbdk/cctop
 iluolSNS/claude-code-usage-band
@@ -677,7 +720,9 @@ JayDoubleu/aside
 JayDoubleu/cc-mod-jev
 jayjongcheolpark/firstmate-mods
 jayteealao/agent-skills
+jbauman-26/aeo-audit-mod
 jeffbruchado/tokeneater-mod
+jeffzi/cc-heads-up
 JeongJaeSoon/claude-vimium
 JeongJaeSoon/hintvim
 jeremehancock/cinemetric
@@ -700,6 +745,7 @@ jewdev/claude-spotify-mod
 jfcarpiopuntocom/friendly-123
 jh3ady/claude-time-check
 Jiang-Yude/pii-shield
+Jianyuuuuu/claude-code-feishu-mod
 jiikko/dotfiles
 jimador/brigade
 jimmyeao/claude-code-bars
@@ -710,10 +756,12 @@ jkf87/ide-mod
 jmac122/cache-countdown
 jmgirard/cairn
 jnk0vc/clawd-factory
+joaopasbento/claude-mods
 johncasana-neo/tiktok-claude-mod
 johndpope/mathcat
 JohnnyVizz/claude-kit
 johntrob14/lens-view
+jonasthim/claude
 jonathan-fielding/dotclaude
 jongcheol-pak/Claude-Code-Mode
 jonpojonpo/cc-crayon
@@ -721,12 +769,14 @@ JoosepHint/flappy-code
 joshhornby/dotfiles
 joshuatonga/mini-claude-mods
 Jovan1666/claude-code-runway
+Joxtacy/claude-code-mods
 JoyceGu/apple-tree-mod
 joydeep-pm/agent-theater
 joydeep-pm/usage-band
 JPanna/claude-mods
 jpoucabanillas-lang/claude-mods
 JrCx7scC/claude-code-fanyi
+JSUYA/claude-token-panel
 JSUYA/claude-token-panel-mod
 JuanjoFuchs/ccburn-mod
 jumoog/claude_mod_usage
@@ -735,6 +785,7 @@ juninmd/cc-litellm
 just-every/12ui-claude-plugin
 just-every/12ui-plugin
 JustAzul/agent-cli-sdk
+justerification/claude-code-context-meter
 JustinPerea/notch-crab
 Justmalhar/awesome-claude-mods
 justmytwospence/claude-auto-effort
@@ -746,6 +797,8 @@ kagamiurayama/claude-code-roof-mod
 KaiC5504/clawd-bar
 kaicodedocument/claude-code-usage-bar
 kakapo1933/mermaid-dianliu
+kakha13/claude
+KamilMarzynski/claude-code-mods
 karan-79/airquote
 karanb192/awesome-claude-code-mods
 karanb192/cache-tax
@@ -795,10 +848,12 @@ kreddevils18/claude-usage-mod
 kshitiz-swim/claude-plugins
 KTCrisis/flux7-mods
 ktripathi2281/LoopDetector
+kuan0808/cliproxy-kit
 kuhku/kuhaku-plugins
 kukaka/cc-mods
 kunchenguid/compact-adviser
 kunchenguid/firstmate
+Kvadratni/claude-mods
 KyoMio/zcode-executor
 KyongSik-Yoon/claude-mods
 kys0213/kys-claude-plugin
@@ -820,11 +875,15 @@ lenadweb/claude-code-plugins
 leonqi-io/claude-code-mods
 leopiney/wolfbud-claude-mod
 letnonesurvive/claude-code-mods
+letswritetw/claude-mod-open-todos
+letswritetw/claude-mod-token-usage
 leviyehonatan/claude-time-spent
+lianmatsuo/remcycle
 liawzishen/claude-code-mods
 liawzishen/git-diff-timeline
 Liberty-Technical-Solutions/claude-workflow-mods
 likephp-github/likephp-mods
+liliang-cn/aigui
 liquid1982/claude-plugins
 ljmerza/prompt-spellcheck
 lmdrew96/codynd
@@ -843,6 +902,7 @@ Luban-Labs/native-hud
 LucasAntunesdeAlmeida/laa-claude
 LucasLeguizamo/colombian-claude
 lucassimzq/claude-usage-mod
+lucastononro/cc-traj-seg
 lucenity0/claude-code-mods
 lucenity0/claude-familiar
 lucenity0/claude-readout
@@ -855,12 +915,14 @@ lunatictaco/claude-mods
 Lunik/gmz-claude-marketplace
 lurenxing628/claude-code-mod-statusline
 lwyBZss8924d/ultrafast-atif-helper
+m-aoki1348125/ccmod-chronicle
 m-mahiro/claude-code-mods
 m-mizutani/dotfiles
 m0hamedb3ngab5ia/fast-jev-compaction
 m2ai-portfolio/claude-mods
 m4cd4r4/clear-resume
 m4cd4r4/spare-cycles
+macleodlabs-ai/claudeflow
 MadAppGang/magus-alpha
 madisonrickert/jev-permission-gate
 madolphe/skill-trace
@@ -868,6 +930,7 @@ Maduki-tech/skillmonitor
 MaeharaTakumi/claude-usage-band
 Magazem/sticky-board
 magnuswiderberg/claude-code-mods
+MahadSalim/claude-mods
 mahuebel/segmem
 mako-code/gobworks
 manfye/cc-dino
@@ -885,13 +948,17 @@ mareksulik/appshot
 mareksulik/contentshot
 mark-liu/cc-mods
 MarkMerk/markmerk-mods
+markneonin/paneline
 martineserios/thebrana
 MaryCache/claude-code-companion-mod
 masahide/agent-kit
 mashabek/claude-mods
 mashiro-no-rabo/blaze-mod
 matecocidocontortafritas/growth-lab-mods
+matheusbuniotto/lazyreview
+matias00allende/mods-personales
 matthlh/claude-cat-mod
+max06/claude-mods
 maxturazzini/bubble-contesto
 mberto10/applied-systems
 mediavee/cold-cache-guard
@@ -915,6 +982,7 @@ michelr/query-table
 midudev/after-for-claude-code
 MiguelMachado-dev/miguel-mods
 miguelrisero/better-shunt
+mikhin/claude-shot-preview
 mikljohansson/claude-code-status-line
 mindthink/zen-breath
 minipai/claudecafe
@@ -947,6 +1015,7 @@ mrfoxes/rainbow-cat
 MridulNegi2005/glyph-hud
 mrkhachaturov/ccode-personal-plugins
 mrzzmrzz/claude-code-mods
+mtami/terminal-tab-title
 mthli/cc-shorts
 mtmtian/cc-mods
 muellerei/enable-todo-tools
@@ -969,9 +1038,11 @@ nadie12/claude-surf
 NahumLitvin/prismantis
 nakadaharuki/desk-meter
 nakadaharuki/mods-trade
+nakadaharuki/multichat
 nakadaharuki/parallel-pacer
 nalyk/nalyk-skills
 naniiluja/ccf
+nankris/claude-code-mods
 NarenDawar/narens-claude-toolkit
 narley/sessions-sidebar
 narrowstacks/claude-code-mods
@@ -1001,9 +1072,12 @@ netgfx/claude-swarm-mod
 netgfx/claude-terminal-mod
 NetipunJi/sessiondeck
 nexika/nexika
+nextscape/ns-mods
 NgoTuong12345/claude-mod-vn-stock-watch
 NgoTuong12345/vn-stock-heatmap-claude-mod
 nickdemari/ember
+nickohold/what-what-what
+nickpotet/claude-hamster
 nicodunks/goodfriend
 Niedvin/ClauDiscombobulating
 Niedvin/prompt-bar
@@ -1067,6 +1141,7 @@ orangeJigglypuff/better-btw
 OrenSegal/blast-shield
 orfevre-34/thinking-band
 OrihuelaConde/cozy-clawd
+oryuuuuuuAI/inmu-king
 oshnilia/claude-plugins
 oter/bruh
 ottho-nocode/claude-mod-pokemon
@@ -1074,6 +1149,7 @@ Oualid0/claude-mods
 ozansozuozgit/clawd-mods
 ozcinax-star/verinoda-symbiosis
 ozlar34/claude-code-mods
+p2p2sp/p2p2.claude
 pacomarques71/claude-mods
 panyuti-ai/ship-check-mods
 Para-FR/claude-code-mods-fr
@@ -1082,8 +1158,10 @@ Paradox07127/claude-utopia
 paragpandyareal/lazy-panda-panel
 paragpandyareal/swear-slap
 Parais4/parais-mods
+parkyountaek/claude-mods
 patheonsceo/claudinator
 paulbkim-dev/claude-code-cache-warmer
+pauldandurand/claude-mods
 paulosergio-jnr/claude-code-mods
 PAVincius/cosmos-nebuloz
 pawandeepdhall/claude-mods
@@ -1120,8 +1198,10 @@ pourya7/claude-code-mods
 powerofjinbo/claude-code-spell-bar
 prabowosd/clawd-buddy
 pradyb/claude-mods
+prakash-rai/usage-meter
 proagent-ai/claude-hangul
 procoders/superpowers-v
+ProjectAJ14/eklavya
 promptadvisers/claude-mods-computer-use-threads
 promptadvisers/claude-mods-starter-kit
 PromptSign/promptsign-plugin
@@ -1137,18 +1217,21 @@ radiator-engineering/offcut
 RadTech-Solutions/agent-pager
 RadTech-Solutions/modwall
 RafeSymonds/claude-mods
+Rahat-ch/squishys
 railyai/claude-code-mods
 RakshitSathvara/rakshit-mods
 RanaRauff/claude-dev-dashboard
 raresmun/claude-mods
 rasa-mrankovic/agent-dash
 rashedInt32/glass
+rav3n/claude_mode_sniper
 ravipatel7/claude-mods
 ray-amjad/awesome-claude-code-function-hooks
 ray-manaloto/dotfiles
 ray-manaloto/knowledge-base
 RaySu/usage-glance
 rb17080/trek-band
+Rctt27/clean-end-of-session
 RedesignedRobot/cdx
 redyf/claude-mods
 redzrush101/claude-mods
@@ -1156,6 +1239,7 @@ reecelikesramen/claude-task-list
 refact0r/claude-surf
 RektyRowdyy/claude-mods
 renchris/claude-infrastructure
+rendi-febrian/rendifebrian-mods
 rennerdo30/agent-bridge
 reporails/arcade
 restante/claudio-tts
@@ -1171,6 +1255,7 @@ richardcsuwandi/claude-mods
 richkuo/claude-code-model-effort-shortcuts
 riethmayer/dotfiles
 rightlabs/claude-open-points
+ririversoza/agent-office
 rjohnt/linear-claude-mod
 rjwittams/katzensteg
 rlorenzo/ai-coding-setup
@@ -1178,9 +1263,11 @@ rlpb/pitwall
 roaringsoul404/cc-mods
 robdmac/flow
 robertgregorywest/claude-mods
+robw-raviga/claude-mods
 Rocha101/claude-code-glance
 Rocha101/claude-code-quickswitch
 rodbegbie/rod-claude-mods
+roma-vibe/jev-governor
 RomanHotsiy/claude-mods
 romtaugranot/issue-map
 ronanworks/claude-code-mods
@@ -1191,6 +1278,7 @@ rse/ase
 rsvishalsingh93/claude-usage-hud
 ruah-dev/ruah-map
 ruanss4/prompt-jump
+rube-de/cc-skills
 rudrasecure/claude-mods
 ruihe774/cc-bash-guardrails
 ruihe774/cc-delay-no-more
@@ -1232,7 +1320,10 @@ sameerthapax/know-your-claude
 samfrmr/barmkin-mod
 samgutentag-deepgram/claude-code-voice-mod
 samox73/claude-code-latex
+samuelnyamukapa/claude-code-action-inbox
+Samy-Green/usage-panel
 Sanexxxx777/claude-cache-timer
+santosli/claude-mods
 santtisosa/coverage-band
 santtisosa/plan-limits
 santtisosa/worklog
@@ -1254,13 +1345,19 @@ schreibse/claude-code-mods
 Schweem/usage-report
 scodge-24/workface
 scoobynko/claude-code-mods
+scottcrosby-securebine/sbs-deck
+sd0xdev/sd0x-harness
 seanGSISG/ad-ldap-plugin
 seanmars/my-agent-plugins
+SeanPeppers/claude-files
 seanrobertwright/claude-mods
 segfaultlab/clawd-hud
 seiya8bit/claude-mods
 SeKondBrainAILabs/kemory-plugin
 selmakcby/clawd-madenci
+Sennjen/claude-sdlc
+SeongGwangJu/k-mods
+serhandenizhan/serhan-kit
 Sertelegger/astir
 sevq1993-cyber/claude-code-kids
 sezaakgun/cc-arcade
@@ -1293,6 +1390,7 @@ Singh-AP/awesome-claude-mods
 sipyourdrink-ltd/segue
 sirkitree/pinboard
 sivori/claude-mods
+Skalin/teamwork-chat
 skanehira/claude-recap-plus
 skanehira/claude-session-brief
 sKeLe100/firstmate
@@ -1322,6 +1420,8 @@ Spardutti/claude-mods
 spiiritual/claude-code-stuff
 spinlockdevelopment/lean-and-mean
 sreshtalluri/claude-mods
+SSFSKIM/designer
+sshamilton/claude-mods
 StanislavKozachenko/claude-mods
 stanvx/flow-stack
 starlabs007/claude-mod-usage-tracker
@@ -1344,12 +1444,14 @@ surendranb/cc-radio
 sushant-kum/ccstatus
 SuzumiyaAoba/claude-essential-conversation-mod
 sverma24/claude-code-mods
+swchooi/claude-mods
 swei99386-alt/exam-gate
 synex1437/noctis
 Syrul/claudagotchi
 szarkans/gamble-with-claude-code
 Szewowsky/mody-claude-code
 Szotasz/claude-mods
+tadassuksteris/thread-setup
 tak-kam/claude-mods
 takahirom/takahirom-claude-code-marketplace
 takosasi-dev/reply-frame
@@ -1366,6 +1468,7 @@ tboydar/claude-code-mods-research
 TCcodemaster/claude-mods
 tdimino/claude-code-minoan
 teatimedev/doomscroll
+techkwon/rescene
 teransarathchandra/coachline
 testy-cool/claude-agent-portraits
 thanhnhoncntt/oxen-pet
@@ -1388,8 +1491,10 @@ thnk2wn/trail
 ThomasTartrau/charts
 threesil/claude-mods
 tibzejoker/claude-mods
+tiger3645/claude-tts
 tiger42/claude-mods
 Tihi321/claude-mods
+timgrossmann/orbit-claude-mod
 timinguniq/claude-work-summary
 timothylok/ClaudeCodeModsByTimLok
 tjwds/better-spellcheck
@@ -1407,6 +1512,7 @@ tomatoaiu/rename-ja
 tomikng/prompt-quest
 tommy5dollar/claude-mods
 tommy5dollar/claude-plugins
+tommy5dollar/effort-router
 tomstagl/cctop
 Tomy-Phillip/claude-mods
 Tora29/my-claude-tools
@@ -1431,6 +1537,7 @@ Tsun-u/tsunu-pet
 tsurutanmen/homedot-panel
 tsurutanmen/session-bridge
 tsurutanmen/session-dash
+Tunai-0511/clawd-sidekick
 tunglt1810/claude-gadgets
 tungnt1203/cmusic
 Turbo-Thorschten/shell-highlight
@@ -1469,6 +1576,7 @@ Vatroslav/cc-mod-ferro
 Vatroslav/cc-mod-suggestion-sentence-case
 Vatroslav/mod-ferro
 Vatsa10/Meta-Harness
+vavald/screen-context
 VdustR/vp-cc-mods
 VedantAndhale/claude-pro-kit
 VerbodhDev/tool-meter
@@ -1487,6 +1595,7 @@ vincentlauriat/ModsTools
 vinkdc/roclaude
 vinta/hal-9000
 vishaljawahar/claude-mods
+visiblesoft-es/claude-mods
 vitoliu93/harness-dev-plugins
 vivi-0124/me
 VKirill/claude-lane-stack
@@ -1510,6 +1619,7 @@ WhiteKr/claude-plugin-mermaid
 whoisclebs/openspec-governance
 whyashthakker/awesome-claude-code-mods
 wickedhardflip/claude-code-mods
+williamchong/cc-mod-caffeinate
 willmail3333/venzor-claude-model-switch
 WilsonKinyua/claude-mods
 WingedGuardian/GENesis-AGI
@@ -1522,6 +1632,7 @@ XavierYounan/claude-code-tmux-status
 XD3an/cc-notify
 xiaolai/claude-rich-terminal
 xiflow0623/creek-spinner
+xingkaixin/claude-mods
 Xiuu404/clawdy
 xotong/claude-marketplace
 xsyetopz/dotclaude
@@ -1566,6 +1677,7 @@ yuk7392/prompt-coach
 yunjiaz7/claude-timeline-mod
 yushiran/cc-clawd
 YuvalSarel1/claude-plugins
+Yuvalz19500/claude-mods
 yuyongyan29-dev/claude-pet
 yyosifov/prompt-mods
 yzwooyi/claude-glance
@@ -1589,5 +1701,6 @@ zwbao/claude-code-life-coach
 zwbao/longpi-mod
 zycck/claude-mods
 zyx1121/hint-mod
+zyx1121/image-mod
 zyx1121/music-mod
 zyx1121/today-mod
