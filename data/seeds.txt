@@ -35,6 +35,7 @@ hellosverre/redgreen
 hellosverre/smart-compact
 hoobnn/hoobnn-agent-mods
 i-harsha-reddy/naruto-mod
+iamumeransari/claude-show-your-work
 jarrodwatts/intermission
 joshuatonga/mini-claude-mods
 karanb192/cache-tax
