@@ -1,6 +1,6 @@
 name: nightly scan
 
-# The 22:30 run is the full GitHub code search. The three-hourly runs rescan known candidates
+# The 22:41 run is the full GitHub code search. The three-hourly runs rescan known candidates
 # and seeds, plus repositories pushed since the last scan that repository search finds. Seed
 # additions publish separately (publish-seeds.yml) without waiting for either.
 on:
@@ -11,8 +11,9 @@ on:
     types: [completed]
     branches: [main]
   schedule:
-    - cron: "30 22 * * *"
-    - cron: "0 1-19/3 * * *"
+    # Not on the hour: GitHub delays or drops scheduled runs at the start of every hour.
+    - cron: "41 22 * * *"
+    - cron: "17 1-19/3 * * *"
   workflow_dispatch:
     inputs:
       force:
@@ -108,7 +109,7 @@ jobs:
           SCHEDULE: ${{ github.event.schedule }}
           CRAWL: ${{ inputs.crawl }}
         run: |
-          if [ "$SCHEDULE" = "30 22 * * *" ] || [ "$CRAWL" = "true" ]; then
+          if [ "$SCHEDULE" = "41 22 * * *" ] || [ "$CRAWL" = "true" ]; then
             echo "mode=full" >> "$GITHUB_OUTPUT"
             echo "args=--recent --keep-on-failure" >> "$GITHUB_OUTPUT"
           else
