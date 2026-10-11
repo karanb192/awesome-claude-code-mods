@@ -7,6 +7,7 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { reconcileScan } from './scan-publication.mjs'
 import { revalidatePublished } from './revalidate-publication.mjs'
+import { SCANNER_INPUTS } from './inventory.mjs'
 
 const mod = (repo, extra = {}) => ({ id: `${repo}:.`, repo, kind: 'mod', name: repo.split('/')[1], path: '.', description: 'A mod.', url: `https://github.com/${repo}`, stars: 1, reach: { level: 0, labels: [] }, sees: [], hooks: [], calls: [], surfaceModules: [], validate: { status: 'passed', claudeVersion: '2.1.287', errors: [] }, ...extra })
 const inventory = mods => ({ generated: '2026-01-01T00:00:00Z', claudeVersion: '2.1.287', repos: new Set(mods.map(m => m.repo)).size, mods })
@@ -231,4 +232,15 @@ if(args[0]==='api'){
   assert.notEqual(blocked.status, 0)
   assert.match(blocked.stderr, /Scanner inputs changed/)
   assert.equal(git('--git-dir', remote, 'rev-parse', 'nightly-scan'), priorHead)
+})
+
+test('every module the scanner loads is a scanner input, so the scan cache key covers it', () => {
+  const pending = ['tools/scan.mjs'], loaded = new Set()
+  while (pending.length) {
+    const file = pending.pop()
+    if (loaded.has(file)) continue
+    loaded.add(file)
+    for (const [, path] of readFileSync(new URL(`../${file}`, import.meta.url), 'utf8').matchAll(/from '\.\/([\w.-]+\.mjs)'/g)) pending.push(`tools/${path}`)
+  }
+  for (const file of loaded) assert.ok(SCANNER_INPUTS.includes(file), file)
 })

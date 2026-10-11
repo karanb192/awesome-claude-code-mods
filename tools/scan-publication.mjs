@@ -4,6 +4,7 @@ import { parseArgs } from 'node:util'
 import { mergeRepos, parseRepos, readRepos } from './candidates.mjs'
 import { looksPartial } from './changed.mjs'
 import { revalidatePublished } from './revalidate-publication.mjs'
+import { SCANNER_INPUTS } from './inventory.mjs'
 
 const key = repo => repo.toLowerCase()
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 }).trim()
@@ -53,8 +54,7 @@ export function reconcileScan(before, scanned, latest, beforeRepos, scannedRepos
 }
 
 export function assertReusable(base, latest) {
-  const inputs = ['tools/scan.mjs', 'tools/parse.mjs', 'tools/validate.mjs', 'tools/compatibility.mjs', 'tools/grade.mjs', 'tools/dedupe.mjs', 'tools/kind.mjs', 'tools/inventory.mjs', 'tools/meta.mjs', 'tools/directory.mjs', 'tools/candidates.mjs', 'tools/discover.mjs', 'tools/recent.mjs', 'tools/github-search.mjs', 'tools/revalidate-publication.mjs', 'package.json', 'package-lock.json', 'data/duplicates.txt', 'data/catalogs.txt', 'data/fixture-exceptions.txt']
-  if (git('diff', '--name-only', base, latest, '--', ...inputs)) throw new Error('Scanner inputs changed since this scan; run a fresh scan')
+  if (git('diff', '--name-only', base, latest, '--', ...SCANNER_INPUTS)) throw new Error('Scanner inputs changed since this scan; run a fresh scan')
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
