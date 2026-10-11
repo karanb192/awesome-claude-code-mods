@@ -72,6 +72,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [villager-hp](https://github.com/Ashley-Pettit/villager-hp) - The 5-hour and weekly limits as an animated villager health card above the prompt, his mood falling with your HP, with rank badges, sci-fi effects and a death screen at 0 HP, plus `/hp` to preview any level.
 - [headroom](https://github.com/vihrea1337/headroom) - The 5-hour and weekly limits above the prompt with reset countdowns and a run-out forecast drawn on a time axis, alerts at 80 and 95% and on reset, a session budget, and a docked pane whose prompt log scrolls the chat to each prompt.
 - [limits](https://github.com/VaitaR/claude-code-limits) - One line above the prompt with the 5-hour and 7-day limits, context with a compaction count, minutes left on the prompt cache, session cost and running subagents, with details on hover.
+- [usage-bar](https://github.com/andrej-kolic/claude-mods/tree/main/plugins/usage-bar) - The 5-hour and weekly limits with reset countdowns, context and session cost on one line above the prompt, beside your status line, with alerts at 50, 80 and 95% shown once per limit period.
 
 ## While you wait
 
