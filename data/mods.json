@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-10T07:02:45.292Z",
   "claudeVersion": "2.1.296",
-  "repos": 1507,
+  "repos": 1515,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -347999,6 +347999,930 @@
       "stars": 0,
       "pushedAt": "2026-10-11T00:17:25Z",
       "createdAt": "2026-10-10T22:10:09Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "dot-agi/arrester:.",
+      "repo": "dot-agi/arrester",
+      "path": ".",
+      "sourceCommit": "f4252f706385f590b6eab5ab588a8cff0a63d53d",
+      "name": "arrester",
+      "description": "After a hook, deny rule, or auto mode blocks a tool call, Arrester stops later calls that reach the same result another way or read or change your guards. After your No, it stops only exact retries.",
+      "author": "dot-agi",
+      "homepage": "https://github.com/dot-agi/arrester",
+      "url": "https://github.com/dot-agi/arrester",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "classic.PreToolUse",
+          "matcher": {}
+        },
+        {
+          "event": "tool.check",
+          "matcher": {}
+        },
+        {
+          "event": "classic.PermissionDenied",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "arrester"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.session.cwd",
+        "$.session.root",
+        "$.session.turns",
+        "$.settings.read",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.ask",
+        "$.ui.log",
+        "$.ui.status"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "arrester",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "reads files",
+          "reads env vars",
+          "reads settings",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks",
+        "every tool call"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-10-11T05:08:33Z",
+      "createdAt": "2026-10-04T00:36:49Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "dot-agi/downrange:.",
+      "repo": "dot-agi/downrange",
+      "path": ".",
+      "sourceCommit": "9f949ca2be63902bed5c81a6c013451d67d20cae",
+      "name": "downrange",
+      "description": "A band, pane, and /downrange table: progress, ETA, and last output for Claude Code background shells and Monitor watches, tool activity for subagents, state for workflows, and the next /loop wakeup.",
+      "author": "dot-agi",
+      "homepage": "https://github.com/dot-agi/downrange",
+      "url": "https://github.com/dot-agi/downrange",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "classic.SessionStart",
+          "matcher": {
+            "source": "clear|resume|fork"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "downrange"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Monitor"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Agent"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Workflow"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "ScheduleWakeup"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "TaskStop"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "session.append",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "classic.Stop",
+          "matcher": {}
+        },
+        {
+          "event": "classic.SubagentStop",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "downrange"
+          }
+        }
+      ],
+      "calls": [
+        "$.agent.list",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.process.run",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.surfaces",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.close",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "downrange",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "runs processes",
+          "reads files",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks",
+        "Bash calls",
+        "Monitor calls",
+        "Agent calls",
+        "Workflow calls",
+        "ScheduleWakeup calls",
+        "TaskStop calls",
+        "every tool call",
+        "every prompt"
+      ],
+      "draws": [
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-11T05:08:46Z",
+      "createdAt": "2026-10-04T00:36:53Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "dot-agi/high-command:.",
+      "repo": "dot-agi/high-command",
+      "path": ".",
+      "sourceCommit": "f05c2369d17170a1b1500d61cc37007b49f7ddc1",
+      "name": "high-command",
+      "description": "See the messages your teammates, named subagents, and other Claude Code sessions send you, grouped by peer with unread counts: a pane, a band above the prompt, and /highcommand.",
+      "author": "dot-agi",
+      "homepage": "https://github.com/dot-agi/high-command",
+      "url": "https://github.com/dot-agi/high-command",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "classic.SessionStart",
+          "matcher": {
+            "source": "clear|resume|fork"
+          }
+        },
+        {
+          "event": "session.receive",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {
+            "origin has {kind": "peer"
+          }
+        },
+        {
+          "event": "session.send",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "ListAgents"
+          }
+        },
+        {
+          "event": "agent.spawn",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "highcommand"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "high-command"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.agent.list",
+        "$.clock.now",
+        "$.command.register",
+        "$.session.surfaces",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "high-command",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks",
+        "every prompt",
+        "ListAgents calls",
+        "subagent spawns"
+      ],
+      "draws": [
+        "Pane",
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-11T05:08:51Z",
+      "createdAt": "2026-10-04T00:37:02Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "dot-agi/sandbox-tuner:.",
+      "repo": "dot-agi/sandbox-tuner",
+      "path": ".",
+      "sourceCommit": "f875c886d034e78b7e6b452d424eacce699557b9",
+      "name": "sandbox-tuner",
+      "description": "Explains each Claude Code sandbox block in plain words and turns recurring blocks into reviewed, one-press, undoable edits of your user settings.",
+      "author": "dot-agi",
+      "homepage": "https://github.com/dot-agi/sandbox-tuner",
+      "url": "https://github.com/dot-agi/sandbox-tuner",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "classic.SessionStart",
+          "matcher": {
+            "source": "clear|resume|fork"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Monitor"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "sandbox-tuner"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "sandbox-tuner"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.fs.write",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.root",
+        "$.session.surfaces",
+        "$.settings.read",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.keys",
+        "$.store.set",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "sandbox-tuner",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "writes files",
+          "reads files",
+          "reads env vars",
+          "reads settings",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks",
+        "Bash calls",
+        "Monitor calls"
+      ],
+      "draws": [
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-11T05:08:39Z",
+      "createdAt": "2026-10-04T00:36:58Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "paragpandyareal/swear-slap:.",
+      "repo": "paragpandyareal/swear-slap",
+      "path": ".",
+      "sourceCommit": "c612435de6f0a086bc2b427e15b6575dec6cb1b3",
+      "name": "swear-slap",
+      "description": "Swear at Claude and a cartoon hand slaps your screen. The message is never sent, so it costs nothing, and a polite version goes back in your prompt box. Nothing to install.",
+      "author": "Parag Pandya",
+      "homepage": "https://github.com/paragpandyareal/swear-slap",
+      "url": "https://github.com/paragpandyareal/swear-slap",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "slap"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.audio.play",
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.process.run",
+        "$.prompt.fill",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.invalidate",
+        "$.ui.notify",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "swear-slap",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "writes the prompt box",
+          "reads env vars",
+          "plays audio",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-11T00:44:05Z",
+      "createdAt": "2026-10-10T23:23:58Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "varunmoka7/image-shrinker:.",
+      "repo": "varunmoka7/image-shrinker",
+      "path": ".",
+      "sourceCommit": "215aa3ff91e8c176a3d2c45a0a023a51562303cf",
+      "name": "image-shrinker",
+      "description": "Shrinks big screenshots before Claude reads them, so long sessions last longer, and tells Claude the scale so clicks still land in the right place.",
+      "author": "Varun Moka",
+      "homepage": "https://github.com/varunmoka7/image-shrinker",
+      "url": "https://github.com/varunmoka7/image-shrinker",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Read"
+          }
+        }
+      ],
+      "calls": [
+        "$.process.run",
+        "$.tool.check"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "image-shrinker",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.tool.check",
+          "runs processes"
+        ]
+      },
+      "sees": [
+        "Read calls"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-10-11T04:43:13Z",
+      "createdAt": "2026-10-11T04:27:12Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "varunmoka7/next-steps-autopilot:.",
+      "repo": "varunmoka7/next-steps-autopilot",
+      "path": ".",
+      "sourceCommit": "fd091e95eb7906b2f8342761fe73a691a159a1e6",
+      "name": "next-steps-autopilot",
+      "description": "Shows suggested next prompts above the prompt box. Type /auto to let it send the first suggestion for you after a 10 second countdown. Off by default.",
+      "author": "Varun Moka",
+      "homepage": "https://github.com/varunmoka7/next-steps-autopilot",
+      "url": "https://github.com/varunmoka7/next-steps-autopilot",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "auto"
+          }
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.edit",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.command.list",
+        "$.command.register",
+        "$.model.fork",
+        "$.prompt.fill",
+        "$.prompt.read",
+        "$.prompt.submit",
+        "$.prompt.suggest",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "next-steps-autopilot",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.prompt.read",
+          "drives Claude",
+          "writes the prompt box",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-11T04:27:24Z",
+      "createdAt": "2026-10-11T04:27:20Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "varunmoka7/reddit-watch:.",
+      "repo": "varunmoka7/reddit-watch",
+      "path": ".",
+      "sourceCommit": "aa7a3557eed62865e64b1c758c33614441d9fee0",
+      "name": "reddit-watch",
+      "description": "Watches subreddits you choose, has Claude's small model (Haiku) pick out posts that could improve your Claude Code use, and lists them with links in a side pane. Off until you turn it on.",
+      "author": "Varun Moka",
+      "homepage": "https://github.com/varunmoka7/reddit-watch",
+      "url": "https://github.com/varunmoka7/reddit-watch",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "classic.SessionStart",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "reddit"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "reddit-watch"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.command.register",
+        "$.http.fetch",
+        "$.model.complete",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "reddit-watch",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "network",
+          "drives Claude",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-11T04:28:53Z",
+      "createdAt": "2026-10-11T04:28:49Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

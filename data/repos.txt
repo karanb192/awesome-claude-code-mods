@@ -400,6 +400,10 @@ DmitryBMsk/thinkdial
 domain-centric-development/dca-marketplace
 DominickGiordano/claude-mods
 Dos2Locos/claude-code-mods
+dot-agi/arrester
+dot-agi/downrange
+dot-agi/high-command
+dot-agi/sandbox-tuner
 drdickgraysonjr/chalkery
 drewpayment/jev-route
 drnic/claude-mods
@@ -1021,6 +1025,7 @@ panyuti-ai/ship-check-mods
 Para-FR/claude-code-mods-fr
 Paradigm-Study/claude-share
 Paradox07127/claude-utopia
+paragpandyareal/swear-slap
 Parais4/parais-mods
 patheonsceo/claudinator
 paulbkim-dev/claude-code-cache-warmer
@@ -1381,7 +1386,10 @@ UtakataKyosui/utakata-cc-mod
 VaitaR/claude-code-limits
 valeryia-piatrova/token-hamster
 VardhanKirti/claude-code-mods
+varunmoka7/image-shrinker
 varunmoka7/layman
+varunmoka7/next-steps-autopilot
+varunmoka7/reddit-watch
 varunmoka7/side-chat
 Vatroslav/cc-mod-ferro
 Vatroslav/cc-mod-suggestion-sentence-case
