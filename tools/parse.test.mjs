@@ -214,6 +214,8 @@ test('kindOf files built-ins, fixtures, mirrors and catalogue copies, and counts
   assert.equal(kindOf('a/b', 'mods/abilities/bench', { name: 'bench', description: 'Not a plugin to install.' }, new Set(), exceptions), 'fixture', 'a description that rules it out still wins')
   assert.equal(kindOf('a/b', 'plugins/clip', { name: 'clip' }), 'mod')
   assert.equal(kindOf('a/b', '.', { name: 'x', description: 'A test fixture, not a product mod' }), 'fixture')
+  assert.equal(kindOf('a/b', 'tools/demo', { name: 'x-demo', description: 'Development only: plays a scripted turn for screenshots.' }), 'fixture')
+  assert.equal(kindOf('a/b', '.', { name: 'x', description: 'Speeds up development only when tests pass.' }), 'mod', 'the phrase must open the description')
   assert.equal(kindOf('a/b', 'skills/builder/assets/probe-mod', { name: 'probe-mod', description: '[probe] Loaded headlessly by the builder. Not a mod to install.' }), 'fixture')
   assert.equal(kindOf('a/b', 'plugins/clip', { name: 'clip', description: 'A mod to install from the marketplace.' }), 'mod')
   assert.equal(kindOf('a/b', 'upstreams/claude-code/mods/telemetry', { name: 'telemetry' }), 'fixture')
