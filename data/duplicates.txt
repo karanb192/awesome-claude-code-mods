@@ -78,3 +78,13 @@ inematds/5-mods:cache-keeper nateherkai/claude-code-mods:cache-keeper
 inematds/5-mods:collision-guard nateherkai/claude-code-mods:collision-guard
 inematds/5-mods:goal-meter nateherkai/claude-code-mods:goal-meter
 inematds/5-mods:recording-mode nateherkai/claude-code-mods:recording-mode
+danyuchn/claude-cache-panel:. danyuchn/claude-mods:cache-panel
+cpeaustriajc/cj-stack:mods/work-pane cpeaustriajc/cj-stack:mods/archived/work-pane
+herman925/925-cc-plugins:clean-view herman925/925-cc-plugins:session-panel
+savinofiore/lexi:jev savinofiore/lexi:.
+afterever/claude-mods:savvy-progress afterever/claude-mods:subagent-progress
+Bobby-cell-commits/named-subagents:mod Bobby-cell-commits/named-subagents-mod:.
+Ascurse/claude-mods:local-mods/plugins/flightdeck scasella/claude-flightdeck:.
+Ascurse/claude-mods:local-mods/plugins/agent-flow Charlie0113-T/claude-agent-flow:.
+Ascurse/claude-mods:local-mods/plugins/agent-compact-advisor apolenkov/agent-compact-advisor:.
+Ascurse/claude-mods:local-mods/plugins/next-steps pawandeepdhall/claude-mods:plugins/next-steps

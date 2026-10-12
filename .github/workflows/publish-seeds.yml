@@ -10,6 +10,10 @@ on:
 permissions:
   contents: read
 
+# Skips the validator's nonessential traffic (update checks, telemetry); validator output is the same either way.
+env:
+  CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC: "1"
+
 concurrency:
   group: publish-approved-seeds
   cancel-in-progress: false

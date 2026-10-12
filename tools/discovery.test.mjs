@@ -2,7 +2,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { search as discover } from './discover.mjs'
 import { createSearchRequest } from './github-search.mjs'
-import { mergeRepos, newSeeds, prScanRepos } from './candidates.mjs'
+import { mergeRepos, newSeeds, prScanRepos, readRepos } from './candidates.mjs'
 import { reconcile, checkRequired } from './inventory.mjs'
 import { execFileSync, spawnSync } from 'node:child_process'
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, chmodSync } from 'node:fs'
@@ -83,7 +83,7 @@ test('candidate history survives a search omission and PR seeds are case-insensi
   assert.deepEqual(newSeeds(['old/mod'], ['OLD/mod', 'new/mod']), ['new/mod'])
   assert.deepEqual(prScanRepos(['old/mod'], ['old/mod', 'new/mod'], ['new/mod'], true), ['new/mod'])
   assert.deepEqual(prScanRepos(['old/mod'], ['old/mod', 'new/mod'], ['new/mod'], false), ['new/mod', 'old/mod'])
-  assert.deepEqual(prScanRepos(['old/mod'], ['old/mod'], [], true), ['old/mod'])
+  assert.deepEqual(prScanRepos(['old/mod'], ['old/mod'], [], true), [])
 })
 
 const prior = { id: 'old/mod:.', repo: 'old/mod', kind: 'mod', validate: { status: 'passed', claudeVersion: 'old' }, calls: ['$.fs.read'] }
@@ -184,4 +184,11 @@ test('scanner CLI skips a repository with no commits instead of crashing', t => 
   const retired = JSON.parse(readFileSync(join(root, 'data/retirements.json')))
   assert.deepEqual(retired.repos.map(entry => entry.repo), ['old/mod'], 'the empty repository is not retired, only the checked one')
   assert.equal(readFileSync(join(root, 'data/repos.txt'), 'utf8'), 'empty/repo\n')
+})
+
+test('data/seeds.txt stays in alphabetical order so seed PRs do not all edit its last line', () => {
+  const seeds = readRepos('data/seeds.txt')
+  const misplaced = seeds.find((repo, i) => i > 0 && seeds[i - 1].toLowerCase() > repo.toLowerCase())
+  assert.equal(misplaced, undefined, `data/seeds.txt must be in alphabetical order ignoring case; move ${misplaced} to its place instead of appending it`)
+  assert.equal(new Set(seeds.map(repo => repo.toLowerCase())).size, seeds.length, 'data/seeds.txt lists a repository twice')
 })

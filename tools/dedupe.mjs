@@ -11,6 +11,27 @@ export function readDuplicates(path = 'data/duplicates.txt') {
   return new Map(text.split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('#')).map(l => l.split(/\s+/)))
 }
 
+const pairLines = text => text.split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('#')).map(l => l.split(/\s+/).join(' '))
+
+// A PR that edits this list skips the full rescan only when the edit appends pairs that apply on
+// their own: the earlier rules keep their order, and each new pair joins a counted keeper and a
+// copy that is counted or already collapsed onto that keeper, both named nowhere else in the list.
+// A zero-repository scan keeps every committed classification, so a removed, reversed, reordered
+// or chained rule, or one naming a renamed or unpublished copy, rescans.
+export function appliesWithoutRescan(beforeText, afterText, mods) {
+  const before = pairLines(beforeText), after = pairLines(afterText)
+  const old = new Set(before)
+  if (after.filter(l => old.has(l)).join('\n') !== before.join('\n')) return false
+  const byId = new Map(mods.map(m => [m.id, m]))
+  const uses = new Map()
+  for (const id of after.flatMap(l => l.split(' '))) uses.set(id, (uses.get(id) ?? 0) + 1)
+  return after.filter(l => !old.has(l)).every(l => {
+    const [copy, keeper] = l.split(' '), m = byId.get(copy)
+    return byId.get(keeper)?.kind === 'mod' && (m?.kind === 'mod' || (m?.kind === 'duplicate' && m.duplicateOf === keeper))
+      && uses.get(copy) === 1 && uses.get(keeper) === 1
+  })
+}
+
 // Marks each listed copy as `duplicate` with a pointer, but only while the copy that counts is
 // still in the scan as a mod: once a successor disappears, the superseded copy counts again.
 export function applyDuplicates(mods, list) {
@@ -38,6 +59,8 @@ export function suspectDuplicates(mods) {
 // every plugin twice. Pairs each plugin under the old name with the same path under the name
 // GitHub now reports, only when that copy came from this scan: a retained record of a failed
 // clone must not hide a fresh one. Repository names match without case; plugin paths do not.
+// When the current name is not on the candidate list but two or more old names are, their fresh
+// copies of a plugin collapse onto the first by id, only when they checked out the same commit.
 export function renamePairs(mods, currentName, freshIds) {
   const at = (repo, path) => `${repo.toLowerCase()}:${path}`
   const byPlace = new Map(mods.filter(m => freshIds.has(m.id)).map(m => [at(m.repo, m.path), m]))
@@ -47,6 +70,16 @@ export function renamePairs(mods, currentName, freshIds) {
     if (!now || now.toLowerCase() === m.repo.toLowerCase()) continue
     const keeper = byPlace.get(at(now, m.path))
     if (keeper && keeper !== m) pairs.set(m.id, keeper.id)
+  }
+  const orphans = new Map()
+  for (const m of mods) {
+    const now = currentName.get(m.repo.toLowerCase())
+    if (!now || now.toLowerCase() === m.repo.toLowerCase() || !freshIds.has(m.id) || byPlace.has(at(now, m.path))) continue
+    orphans.set(at(now, m.path), [...(orphans.get(at(now, m.path)) ?? []), m])
+  }
+  for (const group of orphans.values()) {
+    const [keeper, ...copies] = group.sort((a, b) => a.id.localeCompare(b.id))
+    for (const copy of copies) if (copy.sourceCommit === keeper.sourceCommit) pairs.set(copy.id, keeper.id)
   }
   return pairs
 }
