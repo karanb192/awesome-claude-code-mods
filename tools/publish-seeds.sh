@@ -27,7 +27,7 @@ for attempt in {1..8}; do
   git switch -C "$branch" "$base"
   # awesome-lint resolves GitHub from the current branch's configured remote.
   git branch --set-upstream-to=origin/main "$branch"
-  node tools/seed-publication.mjs --repos "$RUNNER_TEMP/seeds.txt" --scan "$RUNNER_TEMP/seed-scan.json" --result "$RUNNER_TEMP/seed-result.txt" --skipped "$skipped"
+  node tools/seed-publication.mjs --repos "$RUNNER_TEMP/seeds.txt" --scan "$RUNNER_TEMP/seed-scan.json" --result "$RUNNER_TEMP/seed-result.txt" --skipped "$skipped" --published "$RUNNER_TEMP/seed-published.txt"
   if [ "$(cat "$RUNNER_TEMP/seed-result.txt")" = unchanged ]; then
     pr=$(gh pr list --head "$branch" --base main --state open --json number --jq '.[0].number // empty')
     if [ -n "$pr" ]; then gh pr close "$pr"; fi
@@ -75,6 +75,9 @@ for attempt in {1..8}; do
   fi
   if [ "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)" != "$base" ]; then continue; fi
   if gh pr merge "$pr" --squash --delete-branch --match-head-commit "$seed_head" --subject 'Publish approved seed mods' --body 'Publish validated additions from approved seeds.'; then
+    # A failed thank-you must not turn a completed publication red.
+    git fetch origin main
+    node tools/thank-contributors.mjs --published "$RUNNER_TEMP/seed-published.txt" || echo '::warning title=Contributor thanks not posted::See the publish step log.'
     finish 0
   fi
   if [ "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)" = "$base" ]; then

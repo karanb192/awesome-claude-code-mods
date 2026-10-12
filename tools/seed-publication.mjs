@@ -90,7 +90,7 @@ export function planPublication(before, scanned, requested, approved, candidates
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const { values } = parseArgs({ options: { prepare: { type: 'boolean' }, repos: { type: 'string' }, scan: { type: 'string' }, result: { type: 'string' }, skipped: { type: 'string' } } })
+  const { values } = parseArgs({ options: { prepare: { type: 'boolean' }, repos: { type: 'string' }, scan: { type: 'string' }, result: { type: 'string' }, skipped: { type: 'string' }, published: { type: 'string' } } })
   const inventory = JSON.parse(readFileSync('data/mods.json', 'utf8'))
   if (values.prepare) {
     const pending = pendingSeeds(readRepos('data/seeds.txt'), inventory)
@@ -106,6 +106,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     }
     for (const { repo, reason } of result?.skipped ?? []) console.log(`not published: ${repo}: ${reason}`)
     if (values.result) writeFileSync(values.result, result?.inventory ? 'added\n' : 'unchanged\n')
+    if (values.published) writeFileSync(values.published, (result?.inventory ? result.published : []).map(repo => `${repo}\n`).join(''))
     if (values.skipped) writeFileSync(values.skipped, (result?.skipped ?? []).map(({ repo, reason }) => `- ${repo}: ${reason}\n`).join(''))
   }
 }

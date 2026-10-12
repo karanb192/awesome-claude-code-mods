@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs'
-import { slugs } from './slug.mjs'
+import { siteAnchors } from './slug.mjs'
 
 const css = readFileSync(new URL('./site.css', import.meta.url), 'utf8')
 const script = readFileSync(new URL('./site-client.js', import.meta.url), 'utf8')
@@ -23,7 +23,7 @@ export const reviewNotes = mod => [
 export function renderSite(data) {
   const mods = data.mods.filter(mod => mod.kind === 'mod')
   const builtins = data.mods.filter(mod => mod.kind === 'builtin')
-  const keys = slugs([...mods, ...builtins])
+  const keys = siteAnchors(data.mods)
   const slug = mod => keys.get(mod)
   const catalogs = [...new Set(data.mods.filter(mod => mod.kind === 'catalog').map(mod => mod.repo))]
   const date = data.generated.slice(0, 10)

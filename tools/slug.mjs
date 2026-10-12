@@ -20,3 +20,6 @@ export function slugs(mods) {
   }
   return out
 }
+
+// The website and README anchor counted mods and built-ins together, in this order.
+export const siteAnchors = mods => slugs([...mods.filter(m => m.kind === 'mod'), ...mods.filter(m => m.kind === 'builtin')])

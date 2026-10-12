@@ -5,7 +5,7 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync } from 'node:fs'
 import { LEVEL_NAMES } from './grade.mjs'
 import { renderSite, renderSitemap, renderRobots, renderLlms, reviewNotes } from './site.mjs'
-import { slugs } from './slug.mjs'
+import { siteAnchors } from './slug.mjs'
 
 const data = JSON.parse(readFileSync('data/mods.json', 'utf8'))
 for (const m of data.mods) m.description = String(m.description ?? '').replace(/\s*[\u2014\u2013]\s*/g, ': ')
@@ -17,7 +17,7 @@ const asOf = data.generated.slice(0, 10)
 const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 const cell = s => String(s ?? '').replace(/\|/g, '\\|').replace(/[\[\]]/g, '\\$&').replace(/\n/g, ' ')
 const manifestUrl = m => `https://github.com/${m.repo}/blob/${m.defaultBranch ?? 'main'}/${m.path === '.' ? '' : m.path + '/'}.claude-plugin/plugin.json`
-const keys = slugs([...mods, ...builtins])
+const keys = siteAnchors(data.mods)
 const slug = m => keys.get(m)
 const short = (s, n = 110) => { s = String(s ?? '').replace(/\s+/g, ' ').replace(/\s*[\u2014\u2013]\s*/g, ': ').trim(); return s.length > n ? s.slice(0, n - 1).trimEnd() + '…' : s }
 
