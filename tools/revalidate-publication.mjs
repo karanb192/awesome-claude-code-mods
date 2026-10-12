@@ -69,7 +69,10 @@ export function revalidatePublished(records, version, cache = {}, deps = {}) {
         validate: { status: parsed.status, claudeVersion: version, errors: parsed.errors }, marketplaces,
         compatibility: { runtime: 'not-tested', warnings: uiRewriteReview(dir, plugin, record.modules ?? [], hooks) },
         reach: grade(calls), sees: visibility(hooks), draws: [...new Set(drawsOn(hooks))] }
-      delete updated.lastKnownValidate
+      if (record.validate.status === 'unknown' && record.lastKnownValidate) {
+        updated.lastKnownValidate = updated.validate
+        updated.validate = { ...record.validate, claudeVersion: version }
+      } else delete updated.lastKnownValidate
       cache[cacheKey] = updated
       return structuredClone(updated)
     })
