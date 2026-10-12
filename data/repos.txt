@@ -350,6 +350,7 @@ ChaseWNorton/claude-doom
 Chaveex/martians-mods-4-claude
 chenmochaos/naiwa_cc_mod
 chenyao0910/claude-ptt-mod
+chenyuxiaojin/cyxj-notch
 chinayuren2022-2025/claude-desktop-mods-light
 ChiragSehra/claude-code-mods-interop-probe
 choas/claude-mods
@@ -478,6 +479,7 @@ dkoh0207/compact-usage-meter
 DmitryBMsk/thinkdial
 domain-centric-development/dca-marketplace
 DominickGiordano/claude-mods
+dominicrico/jev-router
 DonMecha/tool-tape
 Dos2Locos/claude-code-mods
 dot-agi/arrester

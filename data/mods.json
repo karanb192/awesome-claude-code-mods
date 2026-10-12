@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-12T07:24:41.369Z",
   "claudeVersion": "2.1.296",
-  "repos": 1825,
+  "repos": 1827,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -407969,6 +407969,554 @@
       "stars": 0,
       "pushedAt": "2026-10-11T12:42:40Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "dominicrico/jev-router:.",
+      "repo": "dominicrico/jev-router",
+      "path": ".",
+      "sourceCommit": "39712e36c0e2aa5e4cfc887a49c3ef5d5041f122",
+      "name": "jev-router",
+      "description": "Asks TypeSafe Jev before each task which Claude model and effort fit best, then runs the turn on it",
+      "author": null,
+      "homepage": "https://github.com/dominicrico/jev-router",
+      "url": "https://github.com/dominicrico/jev-router",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "jev"
+          }
+        },
+        {
+          "event": "agent.spawn",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "jev"
+          }
+        }
+      ],
+      "calls": [
+        "$.agent.list",
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.clock.sleep",
+        "$.command.register",
+        "$.env.get",
+        "$.http.fetch",
+        "$.session.messages",
+        "$.session.model",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.log",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "jev-router",
+          "status": "warnings",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "network",
+          "reads env vars",
+          "reads the transcript",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt",
+        "subagent spawns",
+        "every tool call"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 3,
+      "pushedAt": "2026-10-12T07:41:20Z",
+      "createdAt": "2026-10-09T10:35:32Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "chenyuxiaojin/cyxj-notch:mods/publish-pulse",
+      "repo": "chenyuxiaojin/cyxj-notch",
+      "path": "mods/publish-pulse",
+      "sourceCommit": "8adb1fffc89b88490c62197302871f021845555f",
+      "name": "publish-pulse",
+      "description": "Status line showing days since your last publish (traffic light) and the next scheduled release, read from Markdown files under NOTCH_PUBLISH_ROOT; also writes ~/.claude/notch/pulse.json for the cyxj-notch panel.",
+      "author": "chenyuxiaojin",
+      "homepage": "https://github.com/chenyuxiaojin/cyxj-notch",
+      "url": "https://github.com/chenyuxiaojin/cyxj-notch/tree/main/mods/publish-pulse",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.env.get",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.write",
+        "$.ui.status"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "writes files",
+          "reads files",
+          "reads env vars",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 2,
+      "pushedAt": "2026-10-11T16:42:06Z",
+      "createdAt": "2026-10-09T15:18:42Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "chenyuxiaojin/cyxj-notch:mods/quota-status",
+      "repo": "chenyuxiaojin/cyxj-notch",
+      "path": "mods/quota-status",
+      "sourceCommit": "8adb1fffc89b88490c62197302871f021845555f",
+      "name": "quota-status",
+      "description": "Status line with 5-hour and weekly usage, reset day, session cost and prompt-cache countdown; toasts at 90% usage and 5 minutes before the cache goes cold; writes per-session JSON to ~/.claude/notch/sessions/.",
+      "author": "chenyuxiaojin",
+      "homepage": "https://github.com/chenyuxiaojin/cyxj-notch",
+      "url": "https://github.com/chenyuxiaojin/cyxj-notch/tree/main/mods/quota-status",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.env.get",
+        "$.fs.write",
+        "$.process.run",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.model",
+        "$.session.usage",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "writes files",
+          "reads env vars",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt"
+      ],
+      "draws": [],
+      "stars": 2,
+      "pushedAt": "2026-10-11T16:42:06Z",
+      "createdAt": "2026-10-09T15:18:42Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "chenyuxiaojin/cyxj-notch:mods/task-progress",
+      "repo": "chenyuxiaojin/cyxj-notch",
+      "path": "mods/task-progress",
+      "sourceCommit": "8adb1fffc89b88490c62197302871f021845555f",
+      "name": "task-progress",
+      "description": "Registers a progress tool so Claude reports multi-step work, and draws a progress bar above the input box; writes per-session progress to ~/.claude/notch/sessions/.",
+      "author": "chenyuxiaojin",
+      "homepage": "https://github.com/chenyuxiaojin/cyxj-notch",
+      "url": "https://github.com/chenyuxiaojin/cyxj-notch/tree/main/mods/task-progress",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__task-progress__progress"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "TodoWrite"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.env.get",
+        "$.fs.write",
+        "$.session.id",
+        "$.state.get",
+        "$.state.set",
+        "$.tool.register",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "writes files",
+          "drives Claude",
+          "reads env vars",
+          "draws"
+        ]
+      },
+      "sees": [
+        "mcp__task-progress__progress calls",
+        "TodoWrite calls",
+        "every prompt"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 2,
+      "pushedAt": "2026-10-11T16:42:06Z",
+      "createdAt": "2026-10-09T15:18:42Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "chenyuxiaojin/cyxj-notch:mods/todo-pane",
+      "repo": "chenyuxiaojin/cyxj-notch",
+      "path": "mods/todo-pane",
+      "sourceCommit": "8adb1fffc89b88490c62197302871f021845555f",
+      "name": "todo-pane",
+      "description": "/daiban side pane listing the in-progress and wrap-up items of a Markdown to-do log (NOTCH_TODO_LOG); writes ~/.claude/notch/todo.json.",
+      "author": "chenyuxiaojin",
+      "homepage": "https://github.com/chenyuxiaojin/cyxj-notch",
+      "url": "https://github.com/chenyuxiaojin/cyxj-notch/tree/main/mods/todo-pane",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "daiban"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "todo"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.read",
+        "$.fs.write",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "writes files",
+          "reads files",
+          "reads env vars",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 2,
+      "pushedAt": "2026-10-11T16:42:06Z",
+      "createdAt": "2026-10-09T15:18:42Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "chenyuxiaojin/cyxj-notch:mods/version-board",
+      "repo": "chenyuxiaojin/cyxj-notch",
+      "path": "mods/version-board",
+      "sourceCommit": "8adb1fffc89b88490c62197302871f021845555f",
+      "name": "version-board",
+      "description": "/banben side pane of preview servers started by headless claude -p runs (port, effort level, done or running), using local lsof/ps; blocks opening more than 3 at once; writes ~/.claude/notch/versions.json.",
+      "author": "chenyuxiaojin",
+      "homepage": "https://github.com/chenyuxiaojin/cyxj-notch",
+      "url": "https://github.com/chenyuxiaojin/cyxj-notch/tree/main/mods/version-board",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "banben"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "versions"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.list",
+        "$.fs.write",
+        "$.process.run",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "runs processes",
+          "writes files",
+          "reads files",
+          "reads env vars",
+          "draws"
+        ]
+      },
+      "sees": [
+        "Bash calls"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 2,
+      "pushedAt": "2026-10-11T16:42:06Z",
+      "createdAt": "2026-10-09T15:18:42Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
