@@ -87,8 +87,9 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   if (!published.length) process.exit(0)
   const deadline = Date.now() + 240_000
   const run = (command, args) => {
-    if (Date.now() > deadline) throw new Error('Thanks step ran out of time')
-    return execFileSync(command, args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, timeout: 60_000 })
+    const left = deadline - Date.now()
+    if (left <= 0) throw new Error('Thanks step ran out of time')
+    return execFileSync(command, args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, timeout: Math.min(60_000, left) })
   }
   const gh = (...args) => run('gh', args)
   const lines = text => text.split('\n').filter(Boolean)
