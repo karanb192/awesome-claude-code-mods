@@ -88,3 +88,4 @@ Ascurse/claude-mods:local-mods/plugins/flightdeck scasella/claude-flightdeck:.
 Ascurse/claude-mods:local-mods/plugins/agent-flow Charlie0113-T/claude-agent-flow:.
 Ascurse/claude-mods:local-mods/plugins/agent-compact-advisor apolenkov/agent-compact-advisor:.
 Ascurse/claude-mods:local-mods/plugins/next-steps pawandeepdhall/claude-mods:plugins/next-steps
+midudev/after-for-claude-code:. midudev/after-for-claude-code:after

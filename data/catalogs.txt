@@ -3,3 +3,4 @@
 # row per copy, so repo stars never rank a copy above the author's own repo.
 # One owner/repo per line.
 davila7/claude-code-templates
+DrishtantKaushal/AwesomeClaudeCodeMods

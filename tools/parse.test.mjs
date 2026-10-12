@@ -237,7 +237,7 @@ test('kindOf files built-ins, fixtures, mirrors and catalogue copies, and counts
   assert.equal(kindOf('cat/templates', 'components/mods/games/tetris', { name: 'tetris' }, catalogs), 'catalog')
   assert.equal(kindOf('cat/templates', 'tests/fixtures/x', { name: 'x' }, catalogs), 'fixture')
   assert.equal(kindOf('a/b', 'plugins/x', { name: 'x' }, catalogs), 'mod')
-  assert.deepEqual([...readCatalogs('data/catalogs.txt')], ['davila7/claude-code-templates'])
+  assert.deepEqual([...readCatalogs('data/catalogs.txt')], ['davila7/claude-code-templates', 'DrishtantKaushal/AwesomeClaudeCodeMods'])
   assert.deepEqual([...readCatalogs('data/no-such-file.txt')], [])
   const after = clone()
   after.mods.push({ ...clone().mods[0], id: 'cat/templates:mods/x', repo: 'cat/templates', kind: 'catalog' })
