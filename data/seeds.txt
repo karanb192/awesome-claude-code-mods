@@ -43,6 +43,7 @@ joshuatonga/mini-claude-mods
 karanb192/cache-tax
 karanb192/claude-code-mods
 kongyo2/context-view
+Kruhlikau/subagent-tuner
 ljmerza/prompt-spellcheck
 lorenzh/rabe
 ManuelWarland/claude-codex-pane
