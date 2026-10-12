@@ -75,9 +75,8 @@ for attempt in {1..8}; do
   fi
   if [ "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)" != "$base" ]; then continue; fi
   if gh pr merge "$pr" --squash --delete-branch --match-head-commit "$seed_head" --subject 'Publish approved seed mods' --body 'Publish validated additions from approved seeds.'; then
-    # A failed thank-you must not turn a completed publication red.
-    git fetch origin main
-    node tools/thank-contributors.mjs --published "$RUNNER_TEMP/seed-published.txt" || echo '::warning title=Contributor thanks not posted::See the publish step log.'
+    # A failed or slow thank-you must not turn a completed publication red or delay Pages.
+    node tools/thank-contributors.mjs --ref "$seed_head" --published "$RUNNER_TEMP/seed-published.txt" || echo '::warning title=Contributor thanks not posted::See the publish step log.'
     finish 0
   fi
   if [ "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)" = "$base" ]; then
