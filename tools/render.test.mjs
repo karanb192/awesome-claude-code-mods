@@ -27,6 +27,47 @@ function fixture(t, mods) {
 
 const render = dir => execFileSync(process.execPath, [renderer], { cwd: dir, stdio: 'pipe' })
 
+test('finder copies the exact install command and reports clipboard failures', async t => {
+  const dir = fixture(t, [mod(0)])
+  render(dir)
+  const browser = await chromium.launch()
+  t.after(() => browser.close())
+  const tab = await browser.newPage()
+  await tab.addInitScript(() => {
+    Object.defineProperty(navigator, 'clipboard', { configurable: true, value: {
+      writeText: text => new Promise(resolve => {
+        window.copiedCommand = text
+        window.finishCopy = resolve
+      }),
+    } })
+  })
+  const url = pathToFileURL(join(dir, 'docs/index.html')).href
+  await tab.goto(url)
+  await tab.locator('.finder summary').click()
+  const button = tab.getByRole('button', { name: 'Copy install command' })
+  await button.focus()
+  await tab.keyboard.press('Enter')
+  assert.equal(await button.isDisabled(), true)
+  assert.equal(await tab.evaluate(() => window.copiedCommand), '/plugin install mod-finder --marketplace karanb192/awesome-claude-code-mods')
+  await tab.evaluate(() => window.finishCopy())
+  assert.equal(await tab.locator('#finder-copy-status').textContent(), 'Copied.')
+  assert.equal(await button.isEnabled(), true)
+  await tab.evaluate(() => { navigator.clipboard.writeText = async () => { throw new Error('Permission denied') } })
+  await button.click()
+  assert.equal(await tab.locator('#finder-copy-status').textContent(), 'Copy failed. Select the command and copy it manually.')
+  await tab.evaluate(() => { Object.defineProperty(navigator, 'clipboard', { value: undefined }) })
+  await button.click()
+  assert.equal(await tab.locator('#finder-copy-status').textContent(), 'Copy failed. Select the command and copy it manually.')
+  assert.equal(await button.isEnabled(), true)
+  await tab.getByRole('searchbox').fill('no match')
+  assert.equal(await tab.locator('#empty').isVisible(), true)
+  const noScript = await browser.newPage({ javaScriptEnabled: false })
+  await noScript.goto(url)
+  await noScript.locator('.finder summary').click()
+  assert.equal(await noScript.locator('#finder-copy').isVisible(), false)
+  assert.equal(await noScript.locator('#finder-command').isVisible(), true)
+})
+
 test('two plugins with one name in one repo get separate badges and anchors', t => {
   const near = { ...mod(2), path: 'clip', name: 'clip' }
   const deep = { ...mod(0), path: 'plugins/more/clip', name: 'clip' }
