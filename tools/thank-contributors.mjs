@@ -30,13 +30,13 @@ export function seedCommits(log) {
   return present
 }
 
-// Only the workflow's own comments count, and only for the PR they were posted on, so a quoted
-// marker in someone else's comment cannot suppress a thank-you or a star request.
-export function readMarkers(comments) {
+// Only comments by the workflow or the repository owner count, and only for the PR they were posted
+// on, so a quoted marker in someone else's comment cannot suppress a thank-you or a star request.
+export function readMarkers(comments, owner) {
   const thanked = new Set(), asked = new Set()
   for (const { issue, author, body } of comments) {
     const match = MARKER.exec(body ?? '')
-    if (!match || author !== BOT || Number(match[1]) !== Number(issue)) continue
+    if (!match || (author !== BOT && key(author ?? '') !== key(owner ?? '')) || Number(match[1]) !== Number(issue)) continue
     thanked.add(Number(match[1]))
     if (match[3]) asked.add(key(match[2]))
   }
@@ -107,7 +107,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const stargazers = new Set(lines(gh('api', '--paginate', `repos/${repository}/stargazers?per_page=100`, '--jq', '.[].login')).map(key))
   const comments = lines(gh('api', '--paginate', `repos/${repository}/issues/comments?per_page=100`, '--jq', '.[] | select(.body | contains("publication-thanks")) | [(.issue_url | split("/") | last), .user.login, (.body | gsub("\\n"; " "))] | @tsv'))
     .map(line => { const [issue, author, ...body] = line.split('\t'); return { issue, author, body: body.join('\t') } })
-  const { thanked, asked } = readMarkers(comments)
+  const { thanked, asked } = readMarkers(comments, repository.split('/')[0])
   const dir = mkdtempSync(join(tmpdir(), 'thanks-'))
   for (const { pr, body } of planThanks({ published, inventory, prs, owner: repository.split('/')[0], stargazers, thanked, asked })) {
     if (values['dry-run']) { console.log(`would thank #${pr}\n${body}`); continue }

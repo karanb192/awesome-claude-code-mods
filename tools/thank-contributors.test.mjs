@@ -40,7 +40,7 @@ test('the star request goes only to authors who have not starred and were never 
 })
 
 test('markers written by one run are read back by the next', () => {
-  const { thanked, asked } = readMarkers([...fromBot(plan()), { issue: '3', author: 'someone', body: 'An unrelated comment.' }])
+  const { thanked, asked } = readMarkers([...fromBot(plan()), { issue: '3', author: 'someone', body: 'An unrelated comment.' }], 'owner')
   assert.deepEqual([...thanked], [10, 11, 14])
   assert.deepEqual([...asked], ['alice', 'carol'])
   assert.equal(plan({ thanked, asked }).length, 0)
@@ -49,8 +49,14 @@ test('markers written by one run are read back by the next', () => {
 test('a quoted marker from anyone else, or on another PR, is ignored', () => {
   const quoted = fromBot(plan(), 'mallory')
   const moved = fromBot(plan()).map(c => ({ ...c, issue: '99' }))
-  const { thanked, asked } = readMarkers([...quoted, ...moved])
+  const { thanked, asked } = readMarkers([...quoted, ...moved], 'owner')
   assert.equal(thanked.size + asked.size, 0)
+})
+
+test('markers in comments the owner posted by hand count like the workflow\'s own', () => {
+  const { thanked, asked } = readMarkers(fromBot(plan(), 'Owner'), 'owner')
+  assert.deepEqual([...thanked], [10, 11, 14])
+  assert.deepEqual([...asked], ['alice', 'carol'])
 })
 
 test('one PR that added several published seeds gets one comment listing all of them', () => {
