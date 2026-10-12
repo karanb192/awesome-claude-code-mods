@@ -166,6 +166,20 @@ test('a repository GitHub reports under a new name collapses onto that name', ()
   assert.equal(renamePairs(mods, currentName, stale).size, 0, 'a retained record of a failed clone never hides a fresh copy')
 })
 
+test('two old names of a repository whose current name is not a candidate collapse onto one', () => {
+  const plugin = (repo, sourceCommit = 'c1') => ({ id: `${repo}:plugin`, repo, path: 'plugin', sourceCommit, kind: 'mod' })
+  const mods = [plugin('o/prompt-bar'), plugin('o/ClauDiscombobulating'), plugin('o/other')]
+  const currentName = new Map([['o/prompt-bar', 'o/ClauDiscobombulating'], ['o/claudiscombobulating', 'o/ClauDiscobombulating'], ['o/other', 'o/other']])
+  const fresh = new Set(mods.map(m => m.id))
+  const pairs = renamePairs(mods, currentName, fresh)
+  assert.deepEqual([...pairs], [['o/prompt-bar:plugin', 'o/ClauDiscombobulating:plugin']])
+  assert.deepEqual(applyDuplicates(structuredClone(mods), pairs).filter(m => m.kind === 'mod').map(m => m.id), ['o/ClauDiscombobulating:plugin', 'o/other:plugin'])
+  assert.equal(renamePairs([plugin('o/prompt-bar', 'c2'), mods[1]], currentName, new Set(['o/prompt-bar:plugin', 'o/ClauDiscombobulating:plugin'])).size, 0, 'different commits are not proven to be one checkout')
+  assert.equal(renamePairs(mods, currentName, new Set(['o/ClauDiscombobulating:plugin'])).size, 0, 'a retained record never joins a pair')
+  const listed = [...mods, plugin('o/ClauDiscobombulating')]
+  assert.deepEqual([...renamePairs(listed, currentName, new Set(listed.map(m => m.id)))].sort(), [['o/ClauDiscombobulating:plugin', 'o/ClauDiscobombulating:plugin'], ['o/prompt-bar:plugin', 'o/ClauDiscobombulating:plugin']], 'a fresh copy under the current name still wins')
+})
+
 test('rename pairs keep plugin paths case-sensitive', () => {
   const mods = [
     { id: 'o/old:plugins/A', repo: 'o/old', path: 'plugins/A', kind: 'mod' },
@@ -233,6 +247,27 @@ test('kindOf files built-ins, fixtures, mirrors and catalogue copies, and counts
 test('fixtures never count', () => {
   const after = clone(); after.mods[1].calls = ['$.http.fetch']
   assert.equal(fingerprint(base), fingerprint(after))
+})
+
+test('course exercises stay out while finished mods and unrelated repositories count', () => {
+  const paths = [
+    '02-first-mod/broken/2-5-syntax-error',
+    '03-events/3-1-start', '03-events/3-2-start', '03-events/3-3-start', '03-events/3-4-start', '03-events/3-5-secret-guard',
+    '04-test-pilot/4-4-start', '05-ui/broken/5-4-refused',
+    '08-testing/errors/1-hook-skipped', '08-testing/errors/2-worker-crash', '08-testing/errors/3-refused',
+    '08-testing/errors/4-reload-failed', '08-testing/errors/5-no-command-hook', '09-distribution/tool-tally',
+  ]
+  for (const path of paths) {
+    assert.equal(kindOf('kurushiba/claude-mods', path, { name: 'lesson' }), 'fixture', path)
+    assert.equal(kindOf('another/claude-mods', path, { name: 'lesson' }), 'mod', path)
+  }
+  for (const path of ['.', 'final/test-pilot', 'final/model-router', 'plugins/error-monitor', '03-events-dashboard']) {
+    assert.equal(kindOf('kurushiba/claude-mods', path, { name: 'finished' }), 'mod', path)
+  }
+  assert.equal(kindOf('Kurushiba/claude-mods', paths[0], {}), 'fixture')
+  const exceptions = new Set([`kurushiba/claude-mods:${paths[0]}`])
+  assert.equal(kindOf('kurushiba/claude-mods', paths[0], {}, new Set(), exceptions), 'mod')
+  assert.equal(kindOf('kurushiba/claude-mods', paths[0], { description: 'A test fixture.' }, new Set(), exceptions), 'fixture')
 })
 
 test('benchmark fixtures stay out without excluding usable evaluation mods', () => {

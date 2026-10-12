@@ -1,4 +1,20 @@
 (() => {
+  const copyCommand = document.getElementById('finder-copy')
+  const copyStatus = document.getElementById('finder-copy-status')
+  document.querySelector('.finder-command-actions').hidden = false
+  copyCommand.addEventListener('click', async () => {
+    copyStatus.textContent = ''
+    copyCommand.disabled = true
+    try {
+      await navigator.clipboard.writeText(document.getElementById('finder-command').textContent)
+      copyStatus.textContent = 'Copied.'
+    } catch {
+      copyStatus.textContent = 'Copy failed. Select the command and copy it manually.'
+    } finally {
+      copyCommand.disabled = false
+    }
+  })
+
   const q = document.getElementById('q')
   const count = document.getElementById('n')
   const tbody = document.querySelector('#t tbody')

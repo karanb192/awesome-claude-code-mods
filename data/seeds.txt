@@ -19,6 +19,7 @@ augbastos/afkswitch
 augiefra/claude-mods
 BatuhanCakmakk/wavy-usage
 ben-rogerson/claude-counter-strike
+BjoernSchotte/ccmod-amp
 chrisluo5311/Pixel-Play
 danilpavlov/telescope-claude-code
 danzerzine/claude-council
@@ -30,12 +31,14 @@ dot-agi/sandbox-tuner
 gerricchaplin/pr-pulse
 halluton/Mindful-Claude
 helenkwok/gsd-status-mod
+helenkwok/open-links
 hellosverre/claude-skins
 hellosverre/redgreen
 hellosverre/smart-compact
 hoobnn/hoobnn-agent-mods
 i-harsha-reddy/naruto-mod
 iamumeransari/claude-show-your-work
+icedevil2001/auto-continue
 jarrodwatts/intermission
 joshuatonga/mini-claude-mods
 karanb192/cache-tax
@@ -83,6 +86,7 @@ varunmoka7/reddit-watch
 verdantran/code-city
 vicmpen/mokkan
 vihrea1337/headroom
+vinkdc/roclaude
 vynnlee/mods
 xuanji86/claude-agentpane
 xuanji86/claude-mdview
