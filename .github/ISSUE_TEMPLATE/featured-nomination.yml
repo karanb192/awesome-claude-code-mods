@@ -1,0 +1,45 @@
+name: Nominate a Featured mod
+description: Suggest a mod for the README's Featured selection.
+title: "Feature: "
+labels: [featured-nomination]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Karan selects Featured entries. A nomination does not guarantee a slot.
+        To add a mod to the full catalogue, follow the [contribution guide](https://github.com/karanb192/awesome-claude-code-mods/blob/main/contributing.md).
+  - type: input
+    id: mod-url
+    attributes:
+      label: Mod URL
+      description: Link to the mod's repository or its folder within a repository.
+    validations:
+      required: true
+  - type: textarea
+    id: task
+    attributes:
+      label: What task does it help with?
+      description: Explain when someone would use this mod and what it does for them.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence that it works
+      description: Link a real recording or screenshot of the main behavior. Include install steps, Claude Code version, platform and any limitations.
+    validations:
+      required: true
+  - type: textarea
+    id: access
+    attributes:
+      label: Access details
+      description: Describe what the mod reads, writes, runs or sends over the network. Link its access disclosure and, if available, its scanned catalogue entry.
+    validations:
+      required: true
+  - type: input
+    id: relationship
+    attributes:
+      label: Your relationship to the mod
+      description: Author, contributor, user or no affiliation. Self-nominations are welcome.
+    validations:
+      required: true

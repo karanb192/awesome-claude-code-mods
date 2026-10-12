@@ -6,8 +6,11 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
+
+# Skips the validator's nonessential traffic (update checks, telemetry); validator output is the same either way.
+env:
+  CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC: "1"
 
 concurrency:
   group: scan
@@ -16,6 +19,9 @@ concurrency:
 jobs:
   retire:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
         with:
