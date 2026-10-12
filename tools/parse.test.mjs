@@ -249,6 +249,27 @@ test('fixtures never count', () => {
   assert.equal(fingerprint(base), fingerprint(after))
 })
 
+test('course exercises stay out while finished mods and unrelated repositories count', () => {
+  const paths = [
+    '02-first-mod/broken/2-5-syntax-error',
+    '03-events/3-1-start', '03-events/3-2-start', '03-events/3-3-start', '03-events/3-4-start', '03-events/3-5-secret-guard',
+    '04-test-pilot/4-4-start', '05-ui/broken/5-4-refused',
+    '08-testing/errors/1-hook-skipped', '08-testing/errors/2-worker-crash', '08-testing/errors/3-refused',
+    '08-testing/errors/4-reload-failed', '08-testing/errors/5-no-command-hook', '09-distribution/tool-tally',
+  ]
+  for (const path of paths) {
+    assert.equal(kindOf('kurushiba/claude-mods', path, { name: 'lesson' }), 'fixture', path)
+    assert.equal(kindOf('another/claude-mods', path, { name: 'lesson' }), 'mod', path)
+  }
+  for (const path of ['.', 'final/test-pilot', 'final/model-router', 'plugins/error-monitor', '03-events-dashboard']) {
+    assert.equal(kindOf('kurushiba/claude-mods', path, { name: 'finished' }), 'mod', path)
+  }
+  assert.equal(kindOf('Kurushiba/claude-mods', paths[0], {}), 'fixture')
+  const exceptions = new Set([`kurushiba/claude-mods:${paths[0]}`])
+  assert.equal(kindOf('kurushiba/claude-mods', paths[0], {}, new Set(), exceptions), 'mod')
+  assert.equal(kindOf('kurushiba/claude-mods', paths[0], { description: 'A test fixture.' }, new Set(), exceptions), 'fixture')
+})
+
 test('benchmark fixtures stay out without excluding usable evaluation mods', () => {
   for (const path of ['lab/bench', 'benchmarks/baseline', 'benchmark/no-trace']) {
     assert.equal(kindOf('a/b', path, { name: 'baseline' }), 'fixture')
