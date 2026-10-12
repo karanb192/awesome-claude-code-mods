@@ -7,7 +7,7 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { reconcileScan } from './scan-publication.mjs'
 import { revalidatePublished } from './revalidate-publication.mjs'
-import { SCANNER_INPUTS } from './inventory.mjs'
+import { reconcile, SCANNER_INPUTS } from './inventory.mjs'
 
 const mod = (repo, extra = {}) => ({ id: `${repo}:.`, repo, kind: 'mod', name: repo.split('/')[1], path: '.', description: 'A mod.', url: `https://github.com/${repo}`, stars: 1, reach: { level: 0, labels: [] }, sees: [], hooks: [], calls: [], surfaceModules: [], validate: { status: 'passed', claudeVersion: '2.1.287', errors: [] }, ...extra })
 const inventory = mods => ({ generated: '2026-01-01T00:00:00Z', claudeVersion: '2.1.287', repos: new Set(mods.map(m => m.repo)).size, mods })
@@ -100,6 +100,31 @@ test('concurrent additions cannot disguise a partial scan or roll back a newer f
   const latest = inventory([...before.mods, ...Array.from({ length: 20 }, (_, i) => mod(`o/new${i}`))])
   assert.throws(() => merge(before, inventory(before.mods.slice(0, 2)), latest), /scan looks partial/)
   assert.throws(() => merge(before, before, { ...before, generated: '2026-01-02T00:00:00Z' }), /newer full scan/)
+})
+
+for (const missing of [true, false]) test(`pinned revalidation preserves ${missing ? 'missing' : 'unscannable'} repository evidence`, () => {
+  const original = mod('o/retained', { sourceCommit: 'a'.repeat(40) })
+  const [retained] = reconcile([original], [], new Map(missing ? [[original.repo, 'b'.repeat(40)]] : [])).mods
+  const before = inventory([original])
+  const latest = inventory([retained])
+  const scan = { ...before, claudeVersion: '2.1.290' }
+  for (const status of ['passed', 'warnings', 'failed']) {
+    const cache = {}, calls = []
+    const deps = {
+      ensureVersion: () => {},
+      checkout: (repo, revision) => calls.push([repo, revision]),
+      validate: () => ({ status, errors: status === 'passed' ? [] : ['Pinned source diagnostic'], modules: [{ hooks: [], calls: ['$.fs.write'], surfaceModules: [] }] }),
+    }
+    const revalidate = (records, version) => revalidatePublished(records, version, cache, deps)
+    const [updated] = reconcileScan(before, scan, latest, repos(before), repos(scan), repos(latest), [], revalidate).inventory.mods
+    assert.deepEqual(updated.validate, { ...retained.validate, claudeVersion: '2.1.290' })
+    assert.deepEqual(updated.lastKnownValidate, { status, claudeVersion: '2.1.290', errors: status === 'passed' ? [] : ['Pinned source diagnostic'] })
+    assert.equal(updated.sourceCommit, original.sourceCommit)
+    assert.equal(updated.reach.level, 2)
+    assert.deepEqual(revalidate([retained], '2.1.290'), [updated])
+    assert.deepEqual(calls, [[original.repo, original.sourceCommit]])
+    assert.equal(retained.lastKnownValidate.claudeVersion, '2.1.287')
+  }
 })
 
 test('repository casing and record order alone do not change the reconciliation decision', () => {

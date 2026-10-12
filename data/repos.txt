@@ -350,6 +350,7 @@ ChaseWNorton/claude-doom
 Chaveex/martians-mods-4-claude
 chenmochaos/naiwa_cc_mod
 chenyao0910/claude-ptt-mod
+chenyuxiaojin/cyxj-notch
 chinayuren2022-2025/claude-desktop-mods-light
 ChiragSehra/claude-code-mods-interop-probe
 choas/claude-mods
@@ -478,6 +479,7 @@ dkoh0207/compact-usage-meter
 DmitryBMsk/thinkdial
 domain-centric-development/dca-marketplace
 DominickGiordano/claude-mods
+dominicrico/jev-router
 DonMecha/tool-tape
 Dos2Locos/claude-code-mods
 dot-agi/arrester
@@ -703,6 +705,7 @@ i-noma-ru/claude-drop-thumb
 IAmAStealer/Claudou
 iamkhalid2/usage-band
 iamomiid/cache-countdown
+iamumeransari/claude-show-your-work
 IAmUnbounded/save-token-jev-clean
 ian-exnodes/statusbar
 ianlkl11234s/shark-tank
@@ -755,6 +758,7 @@ JanSuthacheeva/claude-code-mods
 japan-da-man/claude-code
 jarrodwatts/claude-image-view
 jarrodwatts/intermission
+Jarvizx/hablo
 jasmo13/usage-mod
 JasonWarrenUK/goblin-mode
 jasonzh0/claudify
@@ -1474,6 +1478,7 @@ shimo4228/harness-scope
 shissncg/claude-mods
 shoujiki-panman/claude-code-mods
 ShriD5/claude-mods
+Shuffzord/RoadRaven
 shuletadev/certbuddycr
 Sickin/claude-code-notes-panel
 SID-Technologies/gh-pulse
