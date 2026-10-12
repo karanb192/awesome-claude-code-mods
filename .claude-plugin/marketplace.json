@@ -1,0 +1,14 @@
+{
+  "name": "aidojo",
+  "description": "Tools from the Awesome Claude Code Mods list.",
+  "owner": {
+    "name": "Karan Bansal"
+  },
+  "plugins": [
+    {
+      "name": "mod-finder",
+      "source": "./finder",
+      "description": "Search 3,000+ community Claude Code mods by what they do and what they can access."
+    }
+  ]
+}
