@@ -66,7 +66,10 @@ test('the handshake negotiates the protocol version and advertises read-only too
   s.notify('notifications/initialized')
   const { result } = await s.request('tools/list')
   assert.deepEqual(result.tools.map(tool => tool.name), ['search_mods', 'get_mod'])
-  for (const tool of result.tools) assert.equal(tool.annotations.readOnlyHint, true)
+  for (const tool of result.tools) {
+    assert.equal(tool.annotations.readOnlyHint, true)
+    assert.equal(tool.annotations.openWorldHint, true)
+  }
   assert.deepEqual((await s.request('ping')).result, {})
 })
 
