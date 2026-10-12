@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-12T07:24:41.369Z",
   "claudeVersion": "2.1.296",
-  "repos": 1827,
+  "repos": 1830,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -408517,6 +408517,364 @@
       "stars": 2,
       "pushedAt": "2026-10-11T16:42:06Z",
       "createdAt": "2026-10-09T15:18:42Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "iamumeransari/claude-show-your-work:.",
+      "repo": "iamumeransari/claude-show-your-work",
+      "path": ".",
+      "sourceCommit": "0a08f8451d4a9e2be5b0a49456a426ffdee766db",
+      "name": "show-your-work",
+      "description": "Claude shows its finished work right in the chat: screenshots, videos of it clicking through your app, and synced before/after QA",
+      "author": "Umer Ansari",
+      "homepage": "https://github.com/iamumeransari/claude-show-your-work",
+      "url": "https://github.com/iamumeransari/claude-show-your-work",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.compose",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "show-your-work-settings"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "img"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "/\"^mcp__show-your-work__show_(image|video)$\"/"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolUse"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolResult"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "show-your-work"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.clock.sleep",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.http.fetch",
+        "$.process.run",
+        "$.session.id",
+        "$.session.version",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.tool.register",
+        "$.ui.blit",
+        "$.ui.copy",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "iamumeransari",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "network",
+          "runs processes",
+          "drives Claude",
+          "reads files",
+          "reads env vars",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt",
+        "/\"^mcp__show-your-work__show_(image|video)$\"/ calls"
+      ],
+      "draws": [
+        "ToolUse",
+        "ToolResult",
+        "Pane"
+      ],
+      "stars": 141,
+      "pushedAt": "2026-10-12T06:49:32Z",
+      "createdAt": "2026-10-08T11:57:55Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "Shuffzord/RoadRaven:plugins/roadraven-hud",
+      "repo": "Shuffzord/RoadRaven",
+      "path": "plugins/roadraven-hud",
+      "sourceCommit": "b89e2a7b4c605c4ff948b9126cd87ffe56711bd9",
+      "name": "roadraven-hud",
+      "description": "RoadRaven pane in Claude Code: live agents on roadmap nodes, batched UAT sign-off, and a backlog you can start or prioritise",
+      "author": "Shuffzord",
+      "homepage": "https://shuffzord.github.io/RoadRaven/plugin-authoring.html",
+      "url": "https://github.com/Shuffzord/RoadRaven/tree/master/plugins/roadraven-hud",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "roadraven"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "agent.spawn",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "roadraven"
+          }
+        }
+      ],
+      "calls": [
+        "$.agent.spawn",
+        "$.clock.every",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.read",
+        "$.mcp.call",
+        "$.prompt.submit",
+        "$.session.append",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "roadraven",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "MCP servers",
+          "drives Claude",
+          "reads files",
+          "reads env vars",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call",
+        "subagent spawns"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 8,
+      "pushedAt": "2026-10-12T15:33:50Z",
+      "createdAt": "2026-04-12T11:32:50Z",
+      "license": "NOASSERTION",
+      "archived": false,
+      "defaultBranch": "master",
+      "directory": null
+    },
+    {
+      "id": "Jarvizx/hablo:.",
+      "repo": "Jarvizx/hablo",
+      "path": ".",
+      "sourceCommit": "9a1635135c2a57a1c22853b2e5216858e1a4ac81",
+      "name": "hablo",
+      "description": "Hear Claude Code's replies aloud in your language: a Listen button under each reply and /hablo. Free and offline on macOS and Windows.",
+      "author": "Robin Buitrago",
+      "homepage": "https://github.com/Jarvizx/hablo#readme",
+      "url": "https://github.com/Jarvizx/hablo",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "hablo"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AssistantMessage"
+          }
+        }
+      ],
+      "calls": [
+        "$.audio.speak",
+        "$.clock.every",
+        "$.command.register",
+        "$.env.get",
+        "$.process.run",
+        "$.process.spawn",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.resolve",
+        "$.ui.selection",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.296",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "hablo",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.process.spawn",
+          "other: $.state.get",
+          "other: $.state.set",
+          "runs processes",
+          "reads env vars",
+          "plays audio",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AssistantMessage"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-11T13:54:05Z",
+      "createdAt": "2026-10-09T09:58:36Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

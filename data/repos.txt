@@ -705,6 +705,7 @@ i-noma-ru/claude-drop-thumb
 IAmAStealer/Claudou
 iamkhalid2/usage-band
 iamomiid/cache-countdown
+iamumeransari/claude-show-your-work
 IAmUnbounded/save-token-jev-clean
 ian-exnodes/statusbar
 ianlkl11234s/shark-tank
@@ -757,6 +758,7 @@ JanSuthacheeva/claude-code-mods
 japan-da-man/claude-code
 jarrodwatts/claude-image-view
 jarrodwatts/intermission
+Jarvizx/hablo
 jasmo13/usage-mod
 JasonWarrenUK/goblin-mode
 jasonzh0/claudify
@@ -1476,6 +1478,7 @@ shimo4228/harness-scope
 shissncg/claude-mods
 shoujiki-panman/claude-code-mods
 ShriD5/claude-mods
+Shuffzord/RoadRaven
 shuletadev/certbuddycr
 Sickin/claude-code-notes-panel
 SID-Technologies/gh-pulse
