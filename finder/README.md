@@ -8,9 +8,20 @@ Ask Claude for a Claude Code mod and get matches from the catalogue, with what e
 /plugin install mod-finder --marketplace karanb192/awesome-claude-code-mods
 ```
 
+Complete the installation prompts, then run `/reload-plugins` in the session to activate the plugin. If activation remains pending, follow the reload message before asking for a mod.
+
 Then ask, for example: "Find a mod that helps with code reviews", "Which cache-monitoring mods have no network access reported by the validator?" or "Compare cctop, cache-meter by baselane-sh and review-watch."
 
 The plugin starts a local MCP server with two read-only tools. `search_mods` finds mods by what they do and what they can access. `get_mod` returns one mod's full record. It works in the CLI and in Desktop Code local sessions, where plugins load. It needs Node 18 or later on `PATH` and installs no packages.
+
+The slash-command install above is for terminal sessions. Desktop Code was tested with a user-scope install from the terminal:
+
+```sh
+claude plugin marketplace add karanb192/awesome-claude-code-mods
+claude plugin install mod-finder@aidojo --scope user
+```
+
+Then open a new local session in Desktop's Code tab. Installing through Desktop's own plugin browser has not been tested here.
 
 ## From a shell
 
