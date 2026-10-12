@@ -45,6 +45,7 @@ karanb192/claude-code-mods
 kongyo2/context-view
 ljmerza/prompt-spellcheck
 lorenzh/rabe
+magiclin99/buddy-go
 ManuelWarland/claude-codex-pane
 MarcoCarnevali/claude-code-mods
 mertkayacs/ultramod
