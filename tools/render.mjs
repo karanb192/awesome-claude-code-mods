@@ -63,12 +63,13 @@ const stats = `As of ${asOf}, scanned against Claude Code ${data.claudeVersion}:
   + `${count(has('network'))} reach the network, ${count(m => m.sees.includes('every tool call'))} see every tool call, `
   + `${count(m => m.sees.includes('every prompt'))} see every prompt, ${count(m => m.validate.status === 'failed')} fail to validate on this version. `
   + `Reach levels: ${[0, 1, 2, 3].map(l => `L${l} ${LEVEL_NAMES[l]}: ${count(m => m.reach.level === l)}`).join(' · ')}.`
+  + ` ${count(m => m.directory)} are also listed in Anthropic's plugin directory.`
   + (catalogs.length ? ` Not counted: ${catalogs.map(c => `[${c.repo}](https://github.com/${c.repo}) repackages ${c.n} mods`).join(', ')}, a catalogue named here once instead of once per copy.` : '')
 
-const row = m => [`[${cell(m.name)}](${manifestUrl(m)})`, cell(short(m.description)), `![reach](badges/${slug(m)}-reach.svg)`, cell(m.sees.join(', ') || 'only what it hooks'), scanText(m), String(m.stars ?? '?')]
+const row = m => [`[${cell(m.name)}](${manifestUrl(m)})`, cell(short(m.description)), `![reach](badges/${slug(m)}-reach.svg)`, cell(m.sees.join(', ') || 'only what it hooks'), scanText(m), m.directory ? 'listed' : 'no', String(m.stars ?? '?')]
 // awesome-lint wants aligned pipes and padded cells, so every column is padded to its widest cell.
 function table(rows) {
-  const head = ['Mod', 'What it does', 'Reach', 'Sees', 'Validates on', 'Stars']
+  const head = ['Mod', 'What it does', 'Reach', 'Sees', 'Validates on', 'In Anthropic directory', 'Stars']
   const all = [head, ...rows.map(row)]
   const widths = head.map((_, i) => Math.max(...all.map(r => r[i].length)))
   const line = r => `| ${r.map((c, i) => c.padEnd(widths[i])).join(' | ')} |`

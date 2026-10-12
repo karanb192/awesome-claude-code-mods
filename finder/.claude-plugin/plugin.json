@@ -1,0 +1,10 @@
+{
+  "name": "mod-finder",
+  "version": "0.1.0",
+  "description": "Ask Claude for a Claude Code mod and get matches from 3,000+ community mods, with what each one can read, write, run or send over the network and a link to its source.",
+  "author": { "name": "Karan Bansal", "url": "https://karanbansal.in" },
+  "homepage": "https://mods.aidojo.si",
+  "repository": "https://github.com/karanb192/awesome-claude-code-mods",
+  "license": "CC0-1.0",
+  "keywords": ["mods", "search", "mcp", "catalogue"]
+}

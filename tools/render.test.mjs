@@ -27,6 +27,47 @@ function fixture(t, mods) {
 
 const render = dir => execFileSync(process.execPath, [renderer], { cwd: dir, stdio: 'pipe' })
 
+test('finder copies the exact install command and reports clipboard failures', async t => {
+  const dir = fixture(t, [mod(0)])
+  render(dir)
+  const browser = await chromium.launch()
+  t.after(() => browser.close())
+  const tab = await browser.newPage()
+  await tab.addInitScript(() => {
+    Object.defineProperty(navigator, 'clipboard', { configurable: true, value: {
+      writeText: text => new Promise(resolve => {
+        window.copiedCommand = text
+        window.finishCopy = resolve
+      }),
+    } })
+  })
+  const url = pathToFileURL(join(dir, 'docs/index.html')).href
+  await tab.goto(url)
+  await tab.locator('.finder summary').click()
+  const button = tab.getByRole('button', { name: 'Copy install command' })
+  await button.focus()
+  await tab.keyboard.press('Enter')
+  assert.equal(await button.isDisabled(), true)
+  assert.equal(await tab.evaluate(() => window.copiedCommand), '/plugin install mod-finder --marketplace karanb192/awesome-claude-code-mods')
+  await tab.evaluate(() => window.finishCopy())
+  assert.equal(await tab.locator('#finder-copy-status').textContent(), 'Copied.')
+  assert.equal(await button.isEnabled(), true)
+  await tab.evaluate(() => { navigator.clipboard.writeText = async () => { throw new Error('Permission denied') } })
+  await button.click()
+  assert.equal(await tab.locator('#finder-copy-status').textContent(), 'Copy failed. Select the command and copy it manually.')
+  await tab.evaluate(() => { Object.defineProperty(navigator, 'clipboard', { value: undefined }) })
+  await button.click()
+  assert.equal(await tab.locator('#finder-copy-status').textContent(), 'Copy failed. Select the command and copy it manually.')
+  assert.equal(await button.isEnabled(), true)
+  await tab.getByRole('searchbox').fill('no match')
+  assert.equal(await tab.locator('#empty').isVisible(), true)
+  const noScript = await browser.newPage({ javaScriptEnabled: false })
+  await noScript.goto(url)
+  await noScript.locator('.finder summary').click()
+  assert.equal(await noScript.locator('#finder-copy').isVisible(), false)
+  assert.equal(await noScript.locator('#finder-command').isVisible(), true)
+})
+
 test('two plugins with one name in one repo get separate badges and anchors', t => {
   const near = { ...mod(2), path: 'clip', name: 'clip' }
   const deep = { ...mod(0), path: 'plugins/more/clip', name: 'clip' }
@@ -443,4 +484,25 @@ test('the site ships its crawl and agent files with the catalogue facts', t => {
   assert.match(llms, /L3 Uses the network: 1\./)
   assert.match(llms, /^- \[mod-3\]\(https:\/\/example\.com\): Example mod 3$/m)
   assert.ok(llms.indexOf('[mod-3]') < llms.indexOf('[mod-0]'), 'most starred first')
+})
+
+test('a mod listed in Anthropic\'s directory is marked in the catalogue and on the site, and can be filtered', async t => {
+  const listed = { ...mod(1), directory: { plugin: 'mod-1@anthropic-plugin-directory' } }
+  const dir = fixture(t, [listed, mod(2)])
+  render(dir)
+  const catalogue = readFileSync(join(dir, 'catalogue.md'), 'utf8')
+  const page = readFileSync(join(dir, 'docs/index.html'), 'utf8')
+  assert.match(catalogue, /\| listed /)
+  assert.match(catalogue, /1 are also listed in Anthropic's plugin directory/)
+  assert.equal(page.match(/class="listed"/g).length, 1)
+  assert.match(page, /mod-1@anthropic-plugin-directory/)
+  const browser = await chromium.launch()
+  t.after(() => browser.close())
+  const tab = await browser.newPage()
+  await tab.goto(pathToFileURL(join(dir, 'docs/index.html')).href)
+  await tab.click('.listed-filter')
+  assert.equal(await tab.locator('#t tbody tr:not([hidden])').count(), 1)
+  assert.equal(await tab.locator('.listed-filter').getAttribute('aria-pressed'), 'true')
+  await tab.click('#reset')
+  assert.equal(await tab.locator('#t tbody tr:not([hidden])').count(), 2)
 })
