@@ -46,11 +46,11 @@ jobs:
       group: scan
       queue: max
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: main
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 22
       - name: Check whether the pending scan needs a refresh
@@ -74,11 +74,11 @@ jobs:
       group: scan-pr-${{ github.event.pull_request.number }}
       cancel-in-progress: true
     steps: &scan_steps
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.event_name == 'pull_request' && github.ref || 'main' }}
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 22
       - name: Install Claude Code
@@ -119,7 +119,7 @@ jobs:
       # Discovery progress waits in the open scan PR until it is merged; the cache hands it to the next run.
       - name: Restore discovery progress from the last run
         if: github.event_name != 'pull_request'
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ${{ runner.temp }}/discovery
           key: discovery-${{ github.run_id }}-${{ github.run_attempt }}
@@ -136,7 +136,7 @@ jobs:
         run: mkdir -p "$RUNNER_TEMP/discovery" && cp data/discovery.json "$RUNNER_TEMP/discovery/discovery.json"
       - name: Save discovery progress for the next run
         if: steps.discover.outcome == 'success'
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ${{ runner.temp }}/discovery
           key: discovery-${{ github.run_id }}-${{ github.run_attempt }}
@@ -162,7 +162,7 @@ jobs:
       # Findings for repositories whose default branch has not moved are reused from the last scan with
       # the same validator and scanner code. PRs read main's cache but never write it.
       - name: Restore scan findings from the last run
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ${{ runner.temp }}/scan-cache
           key: scan-findings-${{ github.run_id }}-${{ github.run_attempt }}
@@ -178,7 +178,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
       - name: Save scan findings for the next run
         if: steps.scan.outcome == 'success'
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ${{ runner.temp }}/scan-cache
           key: scan-findings-${{ github.run_id }}-${{ github.run_attempt }}
