@@ -21,6 +21,7 @@ augiefra/claude-mods
 BatuhanCakmakk/wavy-usage
 ben-rogerson/claude-counter-strike
 BjoernSchotte/ccmod-amp
+candygoogy/notary
 chenyuxiaojin/cyxj-notch
 chrisluo5311/Pixel-Play
 danilpavlov/telescope-claude-code
