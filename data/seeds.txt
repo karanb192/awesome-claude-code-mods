@@ -96,6 +96,7 @@ vicmpen/mokkan
 vihrea1337/headroom
 vinkdc/roclaude
 vynnlee/mods
+wjsekrud/motive-mem
 xuanji86/claude-agentpane
 xuanji86/claude-mdview
 xuanji86/claude-statuspane
