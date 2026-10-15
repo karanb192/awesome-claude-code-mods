@@ -915,6 +915,7 @@ jfcarpiopuntocom/friendly-123
 jh3ady/claude-time-check
 Jhonatan-de-Souza/ClaudeMods
 Jiang-Yude/pii-shield
+jiangnanquan/claude-code-zh
 Jianyuuuuu/claude-code-feishu-mod
 jiikko/dotfiles
 jimador/brigade

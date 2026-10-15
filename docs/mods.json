@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-15T06:15:28.072Z",
   "claudeVersion": "2.1.300",
-  "repos": 2142,
+  "repos": 2143,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -503092,6 +503092,253 @@
       "stars": 0,
       "pushedAt": "2026-10-11T12:42:40Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "jiangnanquan/claude-code-zh:mods/cc-zh",
+      "repo": "jiangnanquan/claude-code-zh",
+      "path": "mods/cc-zh",
+      "sourceCommit": "6a0c44c94a9a37f5280466f80c8bf4f012fbdc18",
+      "name": "cc-zh",
+      "description": "Claude Code 简体中文 UI mod: : 以静态词典把斜杠命令说明、/config 项、Spinner 词、提示与通知显示为中文。零 token、零网络、不碰官方产物。",
+      "author": "jnq",
+      "homepage": "https://github.com/jiangnanquan/claude-code-zh",
+      "url": "https://github.com/jiangnanquan/claude-code-zh/tree/main/mods/cc-zh",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "cc-zh-dump"
+          }
+        },
+        {
+          "event": "command.describe",
+          "matcher": {}
+        },
+        {
+          "event": "config.describe",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Spinner"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "PromptHint"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "InfoNotice"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "SessionMode"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolProgress"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "CommandOutput"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "UserMessage",
+            "props.origin has {kind": "task-notification"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolGroup"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "TurnDuration"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.command.list",
+        "$.command.register",
+        "$.config.list",
+        "$.fs.read",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.invalidate",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.300",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-code-zh",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads files",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Spinner",
+        "PromptHint",
+        "InfoNotice",
+        "SessionMode",
+        "ToolProgress",
+        "CommandOutput",
+        "UserMessage",
+        "ToolGroup",
+        "TurnDuration"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-13T07:30:28Z",
+      "createdAt": "2026-08-11T07:42:39Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "jiangnanquan/claude-code-zh:mods/cc-zh/tools/runtime-sampler",
+      "repo": "jiangnanquan/claude-code-zh",
+      "path": "mods/cc-zh/tools/runtime-sampler",
+      "sourceCommit": "6a0c44c94a9a37f5280466f80c8bf4f012fbdc18",
+      "name": "cc-zh-runtime-sampler",
+      "description": "Development only: 采样插件（非发布物）：把引擎的**运行时字符串**（命令描述 / 配置项 / 各渲染点 props）原样导出为 JSON，供 cc-zh 的 exact 词典取权威 key。只读、只写 /tmp，不翻译、不改动任何东西。",
+      "author": "jnq",
+      "homepage": "https://github.com/jiangnanquan/claude-code-zh",
+      "url": "https://github.com/jiangnanquan/claude-code-zh/tree/main/mods/cc-zh/tools/runtime-sampler",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.describe",
+          "matcher": {}
+        },
+        {
+          "event": "config.describe",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "PromptHint"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Spinner"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "InfoNotice"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolProgress"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "SessionMode"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.list",
+        "$.config.list",
+        "$.fs.write"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.300",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "writes files"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "PromptHint",
+        "Spinner",
+        "InfoNotice",
+        "ToolProgress",
+        "SessionMode"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-13T07:30:28Z",
+      "createdAt": "2026-08-11T07:42:39Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
