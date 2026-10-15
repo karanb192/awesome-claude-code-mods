@@ -49,6 +49,7 @@ Jarvizx/hablo
 joshuatonga/mini-claude-mods
 karanb192/cache-tax
 karanb192/claude-code-mods
+kiankhooban/open-paths
 kongyo2/context-view
 ljmerza/prompt-spellcheck
 lorenzh/rabe
