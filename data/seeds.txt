@@ -88,9 +88,14 @@ twjackysu/claude-code-stock-ticker
 ugglr/claude-token-monster
 VaitaR/claude-code-limits
 valeryia-piatrova/token-hamster
+varunmoka7/disk-sweep
 varunmoka7/image-shrinker
 varunmoka7/next-steps-autopilot
+varunmoka7/park
+varunmoka7/read-fence
 varunmoka7/reddit-watch
+varunmoka7/skills-az
+varunmoka7/unattended
 verdantran/code-city
 vicmpen/mokkan
 vihrea1337/headroom
