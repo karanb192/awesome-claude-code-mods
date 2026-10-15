@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-15T06:15:28.072Z",
   "claudeVersion": "2.1.300",
-  "repos": 2143,
+  "repos": 2145,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -503339,6 +503339,285 @@
       "stars": 0,
       "pushedAt": "2026-10-13T07:30:28Z",
       "createdAt": "2026-08-11T07:42:39Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "tozmoz/sparkmine:.",
+      "repo": "tozmoz/sparkmine",
+      "path": ".",
+      "sourceCommit": "dd67cc6a20abf9db1139ac3cd35696c68567be6c",
+      "name": "sparkmine",
+      "description": "A pixel-art mining clicker above your prompt. Claude works, you click.",
+      "author": "tozmoz",
+      "homepage": "https://github.com/tozmoz/sparkmine",
+      "url": "https://github.com/tozmoz/sparkmine",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "classic.SessionStart",
+          "matcher": {
+            "source": "clear|resume|fork"
+          }
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "ui.message",
+          "matcher": {
+            "element": "shopbtn"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {
+            "element": "vein"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {
+            "element": "stats"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {
+            "element": "hud|shophud"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "sparkmine"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Spinner"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "mine"
+          }
+        }
+      ],
+      "calls": [
+        "$.audio.play",
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.ask",
+        "$.ui.blit",
+        "$.ui.copy",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [
+        "hooks/hud.ts",
+        "hooks/shopbutton.ts",
+        "hooks/stats.ts",
+        "hooks/vein.ts"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.300",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "sparkmine",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "plays audio",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks",
+        "every prompt",
+        "every tool call"
+      ],
+      "draws": [
+        "AbovePrompt",
+        "Pane",
+        "Spinner"
+      ],
+      "stars": 3,
+      "pushedAt": "2026-10-14T14:04:16Z",
+      "createdAt": "2026-10-08T11:17:59Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "andrej-kolic/claude-mods:plugins/usage-bar",
+      "repo": "andrej-kolic/claude-mods",
+      "path": "plugins/usage-bar",
+      "sourceCommit": "8e8a80ff8736ee8e482e929b69073dc9ec3db3d0",
+      "name": "usage-bar",
+      "description": "Usage limits, context and cost above the prompt; keeps your status line",
+      "author": "andrej-kolic",
+      "homepage": "https://github.com/andrej-kolic/claude-mods/tree/main/plugins/usage-bar",
+      "url": "https://github.com/andrej-kolic/claude-mods/tree/main/plugins/usage-bar",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "classic.SessionStart",
+          "matcher": {}
+        },
+        {
+          "event": "session.compact",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.env.get",
+        "$.process.run",
+        "$.session.model",
+        "$.session.usage",
+        "$.settings.read",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.300",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-mods",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "runs processes",
+          "reads env vars",
+          "reads settings",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks",
+        "compaction"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-15T11:33:16Z",
+      "createdAt": "2026-10-09T15:04:44Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

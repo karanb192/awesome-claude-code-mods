@@ -146,6 +146,7 @@ andras-gyarmati/claude-quota-band
 andras-gyarmati/claude-task-progress
 AndreasOA/claude-code-mods
 andreichiritescu/claude-code-cache-keep-warm
+andrej-kolic/claude-mods
 andrewbakercloudscale/claude-code-cost-sidebar
 andrewstephenson-v1/mod-claude-tasks
 Anerco/claude-code-effort-cycle
@@ -1909,6 +1910,7 @@ Tora29/my-claude-tools
 Toshkee/clawd-usage
 totally-tim/effort-router
 touchizen/context-weather
+tozmoz/sparkmine
 tractorjuice/arckit-claude
 transkatgirl/vibeclaude
 TransmuteLabs/Catalyst
