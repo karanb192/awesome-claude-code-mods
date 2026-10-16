@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 // Renders data/mods.json into the README count, catalogue, one SVG badge pair
-// per mod under badges/ and docs/badges/, and the directory under docs/.
+// per mod under badges/ and docs/badges/, the directory under docs/ and one page
+// per mod under docs/mods/, whose paths are kept in data/pages.json.
 
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync } from 'node:fs'
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync, rmSync, existsSync } from 'node:fs'
 import { LEVEL_NAMES, grade, hasFootprint } from './grade.mjs'
-import { renderSite, renderSitemap, renderRobots, renderLlms, reviewNotes } from './site.mjs'
+import { renderSite, renderSitemap, renderRobots, renderLlms, reviewNotes, css } from './site.mjs'
+import { assignPages, formatRegistry, idOf, indexable, readRegistry, renderModPage, renderNotFound, renderRedirect } from './pages.mjs'
 import { siteAnchors } from './slug.mjs'
 
 const data = JSON.parse(readFileSync('data/mods.json', 'utf8'))
@@ -95,11 +97,32 @@ function updateBlocks(file, blocks) {
 updateBlocks('README.md', { stats: `**${mods.length} mods** · Last scanned ${asOf}.` })
 updateBlocks('catalogue.md', { stats, scan: table(mods), builtin: table(builtins) })
 
-const site = renderSite(data)
-mkdirSync('docs', { recursive: true })
+const records = [...mods, ...builtins]
+const identity = assignPages(records, readRegistry(existsSync('data/pages.json') ? readFileSync('data/pages.json', 'utf8') : ''), data.mods, keys)
+const pageOf = mod => identity.pages.get(mod)
+const byRepo = new Map()
+for (const m of [...records].sort((a, b) => a.name.localeCompare(b.name, 'en') || (idOf(a) < idOf(b) ? -1 : 1))) byRepo.set(m.repo, [...(byRepo.get(m.repo) ?? []), m])
+
+const site = renderSite(data, identity.pages)
+mkdirSync('docs/mods', { recursive: true })
 writeFileSync('docs/index.html', site)
 writeFileSync('docs/mods.json', JSON.stringify(data, null, 2) + '\n')
-writeFileSync('docs/sitemap.xml', renderSitemap())
+// Everything under docs/mods/ is generated, so a folder this render does not write belongs to a retired mod.
+const pageFolders = new Set([...identity.pages.values(), ...identity.redirects.keys()])
+for (const entry of readdirSync('docs/mods')) if (!pageFolders.has(entry)) rmSync(`docs/mods/${entry}`, { recursive: true, force: true })
+for (const m of records) {
+  mkdirSync(`docs/mods/${pageOf(m)}`, { recursive: true })
+  const siblings = byRepo.get(m.repo).filter(other => other !== m).map(other => ({ mod: other, slug: pageOf(other) }))
+  writeFileSync(`docs/mods/${pageOf(m)}/index.html`, renderModPage(m, { slug: pageOf(m), anchor: slug(m), claudeVersion: data.claudeVersion, siblings }))
+}
+for (const [from, to] of identity.redirects) {
+  mkdirSync(`docs/mods/${from}`, { recursive: true })
+  writeFileSync(`docs/mods/${from}/index.html`, renderRedirect(to))
+}
+writeFileSync('docs/site.css', css + readFileSync(new URL('./page.css', import.meta.url), 'utf8'))
+writeFileSync('docs/404.html', renderNotFound())
+writeFileSync('data/pages.json', formatRegistry(identity.registry))
+writeFileSync('docs/sitemap.xml', renderSitemap(records.filter(indexable).map(m => `mods/${pageOf(m)}/`).sort()))
 writeFileSync('docs/robots.txt', renderRobots())
 writeFileSync('docs/llms.txt', renderLlms(data))
-console.log(`rendered ${mods.length} mods and ${builtins.length} built-ins into README.md, catalogue.md, badges/, docs/ and docs/badges/`)
+console.log(`rendered ${mods.length} mods and ${builtins.length} built-ins into README.md, catalogue.md, badges/, docs/, docs/badges/ and docs/mods/`)

@@ -1,15 +1,16 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
-import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, existsSync, rmSync } from 'node:fs'
+import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, existsSync, rmSync, readdirSync, cpSync } from 'node:fs'
+import { createServer } from 'node:http'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { join, extname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { chromium } from 'playwright'
 
 const renderer = fileURLToPath(new URL('./render.mjs', import.meta.url))
 const mod = (i, status = 'passed', kind = 'mod') => ({
-  repo: 'example/mods', path: `plugins/mod-${i}`, name: `mod-${i}`, kind,
+  id: `example/mods:plugins/mod-${i}`, repo: 'example/mods', path: `plugins/mod-${i}`, name: `mod-${i}`, kind,
   description: `Example mod ${i}`, url: 'https://example.com', stars: i,
   reach: { level: i % 4, labels: [] }, sees: [], hooks: [], calls: [], surfaceModules: [],
   validate: { status, errors: status === 'failed' ? ['name: Plugin name is reserved.'] : [] },
@@ -26,6 +27,22 @@ function fixture(t, mods) {
 }
 
 const render = dir => execFileSync(process.execPath, [renderer], { cwd: dir, stdio: 'pipe' })
+const modPage = (dir, slug) => readFileSync(join(dir, 'docs/mods', slug, 'index.html'), 'utf8')
+const tree = folder => Object.fromEntries(readdirSync(folder, { recursive: true }).sort().map(path => [path, existsSync(join(folder, path, 'index.html')) ? readFileSync(join(folder, path, 'index.html'), 'utf8') : null]))
+
+// Mod pages use root-relative asset paths, so they are checked through a server that answers like GitHub Pages.
+function serve(t, root) {
+  const types = { '.html': 'text/html', '.css': 'text/css', '.svg': 'image/svg+xml', '.woff2': 'font/woff2' }
+  const server = createServer((req, res) => {
+    let file = join(root, decodeURIComponent(new URL(req.url, 'http://x').pathname))
+    if (existsSync(join(file, 'index.html'))) file = join(file, 'index.html')
+    if (!existsSync(file) || !extname(file)) { res.writeHead(404, { 'content-type': 'text/html' }); return res.end(readFileSync(join(root, '404.html'))) }
+    res.writeHead(200, { 'content-type': types[extname(file)] ?? 'application/octet-stream' })
+    res.end(readFileSync(file))
+  }).listen(0)
+  t.after(() => server.close())
+  return `http://127.0.0.1:${server.address().port}`
+}
 
 test('finder copies the exact install command and reports clipboard failures', async t => {
   const dir = fixture(t, [mod(0)])
@@ -135,7 +152,7 @@ test('render preserves failures, distinguishes unknown results and removes exclu
   assert.match(catalogue, /not verified/)
   assert.doesNotMatch(catalogue, /mod-4/)
   assert.doesNotMatch(readme, /mod-0|fails on|run host processes/)
-  assert.match(page, /Plugin name is reserved/)
+  assert.match(modPage(dir, 'example--mods--mod-2'), /Plugin name is reserved/)
   assert.match(page, /not a runtime compatibility test/)
   for (const folder of ['badges', 'docs/badges']) {
     assert.equal(existsSync(join(dir, folder, 'example--mods--mod-4-reach.svg')), false)
@@ -192,10 +209,10 @@ test('unavailable footprints render as unknown in every export and never enter t
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true)
     await page.locator('.lv.all').click()
   }
-  const row = page.locator('#example--mods--mod-1')
-  await row.locator('summary').click()
-  assert.match(await row.locator('dl').innerText(), /Footprint\nUnavailable or incomplete/)
-  assert.match(await row.locator('dl').innerText(), /API calls\nnot reported/)
+  const record = modPage(dir, 'example--mods--mod-1')
+  assert.match(record, /<dt>Footprint<\/dt><dd>Unavailable or incomplete/)
+  assert.match(record, /<dt>API calls<\/dt><dd><code>not reported<\/code>/)
+  assert.match(record, /Unknown access<\/span>/)
   const counts = await page.locator('.strip-legend .legend-count').allTextContents()
   assert.equal(counts.reduce((sum, text) => sum + parseInt(text), 0), 5)
   for (let i = 0; i < 2; i++) {
@@ -214,13 +231,14 @@ test('compatibility warnings stay distinct from validation failures and link to 
   const dir = fixture(t, [reviewed, { ...mod(1), marketplaces: [{ path: '.claude-plugin/marketplace.json', name: 'unknown', status: 'unknown', errors: [] }] }])
   render(dir)
   const page = readFileSync(join(dir, 'docs/index.html'), 'utf8')
+  const record = modPage(dir, 'example--mods--mod-0')
   const catalogue = readFileSync(join(dir, 'catalogue.md'), 'utf8')
   assert.match(catalogue, /2\.1\.287; marketplace fails; review UI rewrite/)
   assert.match(catalogue, /marketplace not verified/)
   assert.doesNotMatch(catalogue, /fails on 2\.1\.287/)
-  assert.match(page, /&lt;market&gt;/)
-  assert.match(page, /Review &lt;text&gt; control strings/)
-  assert.match(page, new RegExp(`blob/${'a'.repeat(40)}/plugins/mod-0/hooks/colour.ts#L12`))
+  assert.match(record, /&lt;market&gt;/)
+  assert.match(record, /Review &lt;text&gt; control strings/)
+  assert.match(record, new RegExp(`blob/${'a'.repeat(40)}/plugins/mod-0/hooks/colour.ts#L12`))
   assert.match(page, /does not prove those strings reach a text rewrite/)
   assert.match(readFileSync(join(dir, 'badges/example--mods--mod-0-validates.svg'), 'utf8'), /#c96442/)
   const browser = await chromium.launch()
@@ -235,12 +253,13 @@ test('compatibility warnings stay distinct from validation failures and link to 
     assert.match(await row.locator('.compatibility').innerText(), /marketplace fails; review UI rewrite/)
     assert.equal(await row.locator('.bad').count(), 0)
   }
-  await row.locator('summary').click()
-  const source = row.getByRole('link', { name: 'plugins/mod-0/hooks/colour.ts:12' })
+  await tab.goto(`${serve(t, join(dir, 'docs'))}/mods/example--mods--mod-0/`)
+  const source = tab.getByRole('link', { name: 'plugins/mod-0/hooks/colour.ts:12' })
   assert.equal(await source.isVisible(), true)
   assert.equal(await source.getAttribute('href'), `https://github.com/example/mods/blob/${'a'.repeat(40)}/plugins/mod-0/hooks/colour.ts#L12`)
-  assert.match(await row.locator('dl').innerText(), /Marketplace failed/)
-  assert.match(await row.locator('dl').innerText(), /Validation on 2.1.287\nPassed/)
+  assert.match(await tab.locator('dl').innerText(), /Marketplace failed/)
+  assert.match(await tab.locator('dl').innerText(), /Validation on 2.1.287\nPassed/)
+  assert.match(await tab.locator('.compatibility').innerText(), /marketplace fails; review UI rewrite/)
 })
 
 test('scoreboard stays within desktop and mobile viewports as the scan grows', async t => {
@@ -562,4 +581,95 @@ test('a mod listed in Anthropic\'s directory is marked in the catalogue and on t
   assert.equal(await tab.locator('.listed-filter').getAttribute('aria-pressed'), 'true')
   await tab.click('#reset')
   assert.equal(await tab.locator('#t tbody tr:not([hidden])').count(), 2)
+})
+
+test('every mod gets a page linked from its row, and the sitemap lists only indexable pages', t => {
+  const empty = { ...mod(3), description: '' }
+  const dir = fixture(t, [mod(0), mod(1, 'failed'), mod(2, 'unknown'), empty, mod(4, 'passed', 'builtin')])
+  render(dir)
+  const home = readFileSync(join(dir, 'docs/index.html'), 'utf8')
+  for (const i of [0, 1, 2, 3, 4]) {
+    assert.match(home, new RegExp(`<a class="mod-name" href="mods/example--mods--mod-${i}/">mod-${i}</a>`))
+    assert.match(modPage(dir, `example--mods--mod-${i}`), new RegExp(`<a href="/#example--mods--mod-${i}">All Claude Code mods</a>`))
+  }
+  assert.doesNotMatch(home, /<details><summary>Access/, 'the full record lives on the page')
+  const sitemap = readFileSync(join(dir, 'docs/sitemap.xml'), 'utf8')
+  assert.deepEqual([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]), ['https://mods.aidojo.si/', ...[0, 1, 4].map(i => `https://mods.aidojo.si/mods/example--mods--mod-${i}/`)])
+  assert.match(modPage(dir, 'example--mods--mod-2'), /<meta name="robots" content="noindex">/)
+  assert.match(modPage(dir, 'example--mods--mod-3'), /<meta name="robots" content="noindex">/)
+  assert.doesNotMatch(modPage(dir, 'example--mods--mod-1'), /noindex/)
+  assert.match(modPage(dir, 'example--mods--mod-0'), /<a href="\/mods\/example--mods--mod-1\/">mod-1<\/a>/, 'pages link to other mods from the same repository')
+  assert.deepEqual(Object.keys(JSON.parse(readFileSync(join(dir, 'data/pages.json'), 'utf8'))).length, 5)
+  assert.ok(existsSync(join(dir, 'docs/404.html')) && existsSync(join(dir, 'docs/site.css')))
+})
+
+test('a rescan that only moves stars and dates leaves every page and the registry untouched', t => {
+  const dir = fixture(t, [mod(0), mod(1), mod(2, 'passed', 'builtin')])
+  render(dir)
+  const pages = tree(join(dir, 'docs/mods')), registry = readFileSync(join(dir, 'data/pages.json'), 'utf8'), sitemap = readFileSync(join(dir, 'docs/sitemap.xml'), 'utf8')
+  render(dir)
+  assert.deepEqual(tree(join(dir, 'docs/mods')), pages)
+  const data = JSON.parse(readFileSync(join(dir, 'data/mods.json'), 'utf8'))
+  data.generated = '2026-03-03T00:00:00Z'
+  data.mods = data.mods.reverse().map(m => ({ ...m, stars: m.stars + 1000, pushedAt: '2026-03-02T00:00:00Z' }))
+  writeFileSync(join(dir, 'data/mods.json'), JSON.stringify(data))
+  render(dir)
+  assert.deepEqual(tree(join(dir, 'docs/mods')), pages)
+  assert.equal(readFileSync(join(dir, 'data/pages.json'), 'utf8'), registry)
+  assert.equal(readFileSync(join(dir, 'docs/sitemap.xml'), 'utf8'), sitemap)
+})
+
+test('retired mods lose their page, renamed ones leave a redirect, and their paths stay reserved', t => {
+  const dir = fixture(t, [mod(0), mod(1), mod(2)])
+  render(dir)
+  mkdirSync(join(dir, 'docs/mods/stray-folder'))
+  const data = JSON.parse(readFileSync(join(dir, 'data/mods.json'), 'utf8'))
+  const renamed = { ...mod(2), id: 'example/renamed:plugins/mod-2', repo: 'example/renamed' }
+  data.mods = [mod(0), renamed, { ...mod(2), kind: 'duplicate', duplicateOf: renamed.id }]
+  writeFileSync(join(dir, 'data/mods.json'), JSON.stringify(data))
+  render(dir)
+  assert.equal(existsSync(join(dir, 'docs/mods/example--mods--mod-1')), false)
+  assert.equal(existsSync(join(dir, 'docs/mods/stray-folder')), false)
+  assert.match(modPage(dir, 'example--mods--mod-2'), /url=\/mods\/example--renamed--mod-2\//)
+  assert.match(modPage(dir, 'example--renamed--mod-2'), /<h1>mod-2<\/h1>/)
+  const registry = JSON.parse(readFileSync(join(dir, 'data/pages.json'), 'utf8'))
+  assert.equal(registry['example--mods--mod-1'].id, 'example/mods:plugins/mod-1')
+  assert.equal(registry['example--mods--mod-2'].to, 'example--renamed--mod-2')
+  assert.doesNotMatch(readFileSync(join(dir, 'docs/sitemap.xml'), 'utf8'), /mod-1\/|example--mods--mod-2/)
+  data.mods = [mod(0), renamed]
+  writeFileSync(join(dir, 'data/mods.json'), JSON.stringify(data))
+  render(dir)
+  assert.match(modPage(dir, 'example--mods--mod-2'), /url=\/mods\/example--renamed--mod-2\//, 'the redirect survives retirement of the old record')
+})
+
+test('mod pages load every asset over HTTP, fit a phone, need no script and show a 404 for removed mods', async t => {
+  const hostile = { ...mod(1), name: 'x<b>bold</b>', description: 'Closes </script> early & "quotes" stay text.' }
+  const dir = fixture(t, [mod(0), hostile])
+  render(dir)
+  cpSync(fileURLToPath(new URL('../docs/fonts', import.meta.url)), join(dir, 'docs/fonts'), { recursive: true })
+  cpSync(fileURLToPath(new URL('../docs/favicon.svg', import.meta.url)), join(dir, 'docs/favicon.svg'))
+  const slug = Object.entries(JSON.parse(readFileSync(join(dir, 'data/pages.json'), 'utf8'))).find(([, entry]) => entry.id === hostile.id)[0]
+  const base = serve(t, join(dir, 'docs'))
+  const browser = await chromium.launch()
+  t.after(() => browser.close())
+  for (const { width, colorScheme } of [{ width: 390, colorScheme: 'light' }, { width: 1440, colorScheme: 'dark' }]) {
+    const page = await browser.newPage({ viewport: { width, height: 900 }, colorScheme, javaScriptEnabled: false })
+    const failed = []
+    page.on('requestfailed', request => failed.push(request.url()))
+    page.on('response', response => { if (response.status() >= 400) failed.push(`${response.status()} ${response.url()}`) })
+    await page.goto(`${base}/mods/${slug}/`)
+    await page.waitForLoadState('networkidle')
+    assert.deepEqual(failed, [])
+    assert.equal(await page.locator('h1').innerText(), 'x<b>bold</b>')
+    assert.equal(await page.locator('.lede').innerText(), hostile.description)
+    assert.equal(await page.evaluate(() => document.fonts.check('16px "Hanken Grotesk"')), true)
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true)
+    assert.notEqual(await page.evaluate(() => getComputedStyle(document.body).backgroundColor), 'rgba(0, 0, 0, 0)')
+    await page.close()
+  }
+  const gone = await browser.newPage()
+  const response = await gone.goto(`${base}/mods/example--mods--retired/`)
+  assert.equal(response.status(), 404)
+  assert.equal(await gone.locator('h1').innerText(), 'No page here.')
+  assert.equal(await gone.locator('form[action="/"] input[name="q"]').count(), 1)
 })

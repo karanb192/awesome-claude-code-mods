@@ -1,0 +1,117 @@
+import { test } from 'node:test'
+import assert from 'node:assert/strict'
+import { assignPages, formatRegistry, indexable, readRegistry, renderModPage, renderRedirect } from './pages.mjs'
+import { siteAnchors } from './slug.mjs'
+
+const mod = (repo, name, extra = {}) => ({
+  id: `${repo}:${extra.path ?? name}`, repo, name, path: name, kind: 'mod', description: `${name} does one useful thing for a Claude Code session.`,
+  url: `https://github.com/${repo}`, stars: 1, reach: { level: 0, labels: [] }, sees: [], hooks: [], calls: [], surfaceModules: [],
+  validate: { status: 'passed', claudeVersion: '2.1.300', errors: [] }, ...extra,
+})
+const assign = (records, registry = {}, all = records) => assignPages(records, registry, all, siteAnchors(records))
+const slugOf = (result, id) => [...result.pages].find(([m]) => m.id === id)?.[1]
+
+test('new mods take their homepage anchor and the registry records each owner', () => {
+  const result = assign([mod('a/one', 'clip'), mod('b/two', 'meter')])
+  assert.equal(slugOf(result, 'a/one:clip'), 'a--one--clip')
+  assert.deepEqual(result.registry, { 'a--one--clip': { id: 'a/one:clip' }, 'b--two--meter': { id: 'b/two:meter' } })
+  assert.equal(result.redirects.size, 0)
+})
+
+test('paths do not depend on input order or star counts', () => {
+  const records = [mod('a/r', 'x', { path: 'deep/x' }), mod('a/r', 'x', { path: 'other/x' }), mod('b/r', 'y')]
+  const forward = assign(records)
+  const shuffled = assign([records[2], { ...records[1], stars: 900 }, records[0]].map(m => ({ ...m })))
+  assert.deepEqual(forward.registry, shuffled.registry)
+})
+
+test('a later same-named plugin nearer the root does not take an existing page', () => {
+  const deep = mod('a/r', 'clip', { path: 'plugins/clip' })
+  const first = assign([deep])
+  assert.equal(slugOf(first, deep.id), 'a--r--clip')
+  const root = mod('a/r', 'clip', { path: '.' })
+  const second = assign([deep, root], first.registry)
+  assert.equal(slugOf(second, deep.id), 'a--r--clip')
+  assert.notEqual(slugOf(second, root.id), 'a--r--clip')
+  assert.equal(second.registry['a--r--clip'].id, deep.id)
+})
+
+test('paths that differ only in case never share a folder', () => {
+  const result = assign([mod('a/r', 'Clip')], { 'a--r--clip': { id: 'gone/r:clip' } })
+  assert.equal(slugOf(result, 'a/r:Clip'), 'a--r--Clip--2')
+})
+
+test('a renamed or copied mod redirects to its keeper, and keeps redirecting after the copy is retired', () => {
+  const old = mod('old/name', 'tool')
+  const first = assign([old])
+  const renamed = mod('new/name', 'tool')
+  const copy = { ...old, kind: 'duplicate', duplicateOf: renamed.id }
+  const second = assign([renamed], first.registry, [renamed, copy])
+  assert.deepEqual([...second.redirects], [['old--name--tool', 'new--name--tool']])
+  assert.deepEqual(second.registry['old--name--tool'], { id: old.id, to: 'new--name--tool' })
+  const retired = assign([renamed], second.registry, [renamed])
+  assert.deepEqual([...retired.redirects], [['old--name--tool', 'new--name--tool']])
+  const gone = assign([mod('c/d', 'other')], retired.registry, [])
+  assert.equal(gone.redirects.size, 0)
+  assert.ok(gone.registry['old--name--tool'], 'a retired path stays reserved')
+})
+
+test('duplicate chains resolve to the surviving keeper and cycles stop', () => {
+  const a = mod('x/a', 'm'), b = mod('x/b', 'm'), c = mod('x/c', 'm')
+  const registry = assign([a, b, c]).registry
+  const chain = assign([c], registry, [c, { ...a, kind: 'duplicate', duplicateOf: b.id }, { ...b, kind: 'duplicate', duplicateOf: c.id }])
+  assert.equal(chain.redirects.get('x--a--m'), 'x--c--m')
+  const cycle = assign([mod('z/z', 'z')], registry, [{ ...a, kind: 'duplicate', duplicateOf: b.id }, { ...b, kind: 'duplicate', duplicateOf: a.id }])
+  assert.equal(cycle.redirects.size, 0)
+})
+
+test('a mod that returns reclaims its page and drops its recorded redirect', () => {
+  const back = mod('r/back', 'tool')
+  const result = assign([back, mod('r/keeper', 'tool')], { 'r--back--tool': { id: back.id, to: 'r--keeper--tool' }, 'r--keeper--tool': { id: 'r/keeper:tool' } })
+  assert.equal(slugOf(result, back.id), 'r--back--tool')
+  assert.deepEqual(result.registry['r--back--tool'], { id: back.id })
+  assert.equal(result.redirects.size, 0)
+})
+
+test('the registry format is sorted, one entry per line, and rejects unsafe paths', () => {
+  const text = formatRegistry({ b: { id: 'x' }, a: { id: 'y', to: 'b' } })
+  assert.equal(text, '{\n  "a": {"id":"y","to":"b"},\n  "b": {"id":"x"}\n}\n')
+  assert.deepEqual(readRegistry(text), { a: { id: 'y', to: 'b' }, b: { id: 'x' } })
+  assert.throws(() => readRegistry('{"../escape": {"id": "x"}}'), /invalid entry/)
+  assert.throws(() => readRegistry('{"ok": {}}'), /invalid entry/)
+})
+
+test('search engines index failed mods but not retained records or empty descriptions', () => {
+  assert.equal(indexable(mod('a/b', 'c')), true)
+  assert.equal(indexable(mod('a/b', 'c', { validate: { status: 'failed', errors: ['x'] } })), true)
+  assert.equal(indexable(mod('a/b', 'c', { validate: { status: 'unknown', errors: [] } })), false)
+  assert.equal(indexable(mod('a/b', 'c', { description: '  ' })), false)
+})
+
+test('author text is escaped in the page body, metadata and structured data', () => {
+  const hostile = mod('evil/repo', '<img src=x onerror=alert(1)>', { description: 'Ends the script </script><script>alert(1)</script> & "quotes"' })
+  const html = renderModPage(hostile, { slug: 'evil--repo--x', anchor: 'evil--repo--x', claudeVersion: '2.1.300' })
+  assert.doesNotMatch(html, /<img src=x/)
+  assert.doesNotMatch(html, /<script>alert/)
+  assert.equal(html.match(/<\/script>/g).length, 1, 'only the JSON-LD block closes a script')
+  const ld = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])
+  assert.equal(ld['@graph'][0].description, hostile.description)
+  assert.match(html, /<link rel="canonical" href="https:\/\/mods\.aidojo\.si\/mods\/evil--repo--x\/">/)
+  assert.match(html, /<a href="\/#evil--repo--x">/)
+  assert.doesNotMatch(html, /noindex/)
+})
+
+test('pages carry no stars or scan dates, and noindex follows the gate', () => {
+  const page = renderModPage(mod('a/b', 'c', { stars: 4321, pushedAt: '2026-10-01T00:00:00Z' }), { slug: 's', anchor: 's', claudeVersion: '2.1.300' })
+  assert.doesNotMatch(page, /4321|4,321|2026-10-01/)
+  const unknown = renderModPage(mod('a/b', 'c', { validate: { status: 'unknown', claudeVersion: '2.1.291', errors: ['Repository could not be scanned; showing the last known footprint.'] }, lastKnownValidate: { status: 'passed', claudeVersion: '2.1.291', errors: [] } }), { slug: 's', anchor: 's', claudeVersion: '2.1.300' })
+  assert.match(unknown, /<meta name="robots" content="noindex">/)
+  assert.match(unknown, /Validation on 2\.1\.291/)
+  assert.match(unknown, /Last known result<\/dt><dd>Passed on 2\.1\.291/)
+})
+
+test('a redirect stub sends visitors and crawlers to the keeper', () => {
+  const html = renderRedirect('new--name--tool')
+  assert.match(html, /<meta http-equiv="refresh" content="0; url=\/mods\/new--name--tool\/">/)
+  assert.match(html, /<link rel="canonical" href="https:\/\/mods\.aidojo\.si\/mods\/new--name--tool\/">/)
+})

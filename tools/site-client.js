@@ -126,4 +126,5 @@
   if (query) q.value = query
   apply()
   if (location.hash) reveal(location.hash.slice(1))
+  else if (query) document.getElementById('directory').scrollIntoView({ block: 'start', behavior: 'instant' })
 })()
