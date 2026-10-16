@@ -1,14 +1,13 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { assignPages, formatRegistry, indexable, readRegistry, renderModPage, renderRedirect } from './pages.mjs'
-import { siteAnchors } from './slug.mjs'
 
 const mod = (repo, name, extra = {}) => ({
   id: `${repo}:${extra.path ?? name}`, repo, name, path: name, kind: 'mod', description: `${name} does one useful thing for a Claude Code session.`,
   url: `https://github.com/${repo}`, stars: 1, reach: { level: 0, labels: [] }, sees: [], hooks: [], calls: [], surfaceModules: [],
   validate: { status: 'passed', claudeVersion: '2.1.300', errors: [] }, ...extra,
 })
-const assign = (records, registry = {}, all = records) => assignPages(records, registry, all, siteAnchors(records))
+const assign = (records, registry = {}, all = records) => assignPages(records, registry, all)
 const slugOf = (result, id) => [...result.pages].find(([m]) => m.id === id)?.[1]
 
 test('new mods take their homepage anchor and the registry records each owner', () => {
@@ -36,6 +35,23 @@ test('a later same-named plugin nearer the root does not take an existing page',
   assert.equal(second.registry['a--r--clip'].id, deep.id)
 })
 
+test('names that collide with another plugin\'s path suffix get the same paths in any order', () => {
+  const records = [mod('a/r', 'x', { path: '.' }), mod('a/r', 'x', { path: 'y' }), mod('a/r', 'x--y', { path: 'z' })]
+  const orders = [[0, 1, 2], [2, 1, 0], [1, 2, 0], [2, 0, 1]].map(order => assign(order.map(i => records[i])).registry)
+  for (const registry of orders) assert.deepEqual(registry, orders[0])
+})
+
+test('a repository that changes letter case keeps its pages', () => {
+  const before = mod('Owner/Repo', 'Tool')
+  const first = assign([before])
+  const after = { ...mod('owner/repo', 'Tool') }
+  const second = assign([after], first.registry)
+  assert.equal(slugOf(second, after.id), 'Owner--Repo--Tool')
+  assert.deepEqual(second.registry, { 'Owner--Repo--Tool': { id: after.id } })
+  const plugin = assign([mod('owner/repo', 'tool')], second.registry)
+  assert.notEqual(slugOf(plugin, 'owner/repo:tool'), 'Owner--Repo--Tool', 'plugin paths keep their case')
+})
+
 test('paths that differ only in case never share a folder', () => {
   const result = assign([mod('a/r', 'Clip')], { 'a--r--clip': { id: 'gone/r:clip' } })
   assert.equal(slugOf(result, 'a/r:Clip'), 'a--r--Clip--2')
@@ -54,6 +70,21 @@ test('a renamed or copied mod redirects to its keeper, and keeps redirecting aft
   const gone = assign([mod('c/d', 'other')], retired.registry, [])
   assert.equal(gone.redirects.size, 0)
   assert.ok(gone.registry['old--name--tool'], 'a retired path stays reserved')
+})
+
+test('a second rename keeps the first redirect pointing at the newest page in the same render', () => {
+  const a = mod('x/a', 'm'), b = mod('x/b', 'm'), c = mod('x/c', 'm')
+  const first = assign([b], assign([a]).registry, [b, { ...a, kind: 'duplicate', duplicateOf: b.id }])
+  const retired = assign([b], first.registry, [b])
+  const second = assign([c], retired.registry, [c, { ...b, kind: 'duplicate', duplicateOf: c.id }])
+  assert.deepEqual([...second.redirects].sort(), [['x--a--m', 'x--c--m'], ['x--b--m', 'x--c--m']])
+  assert.equal(second.registry['x--a--m'].to, 'x--c--m')
+})
+
+test('a maintainer can point a retired path at another page by hand', () => {
+  const keeper = mod('new/home', 'tool')
+  const result = assign([keeper], { 'old--home--tool': { id: 'old/home:tool', to: 'new--home--tool' } })
+  assert.deepEqual([...result.redirects], [['old--home--tool', 'new--home--tool']])
 })
 
 test('duplicate chains resolve to the surviving keeper and cycles stop', () => {
@@ -78,6 +109,9 @@ test('the registry format is sorted, one entry per line, and rejects unsafe path
   assert.equal(text, '{\n  "a": {"id":"y","to":"b"},\n  "b": {"id":"x"}\n}\n')
   assert.deepEqual(readRegistry(text), { a: { id: 'y', to: 'b' }, b: { id: 'x' } })
   assert.throws(() => readRegistry('{"../escape": {"id": "x"}}'), /invalid entry/)
+  for (const slug of ['..', '.', '.hidden']) assert.throws(() => readRegistry(JSON.stringify({ [slug]: { id: 'x' } })), /invalid entry/)
+  assert.throws(() => readRegistry('{"Foo": {"id": "a"}, "foo": {"id": "b"}}'), /invalid entry/)
+  assert.throws(() => readRegistry('{"a": {"id": "x", "to": "../b"}}'), /invalid entry/)
   assert.throws(() => readRegistry('{"ok": {}}'), /invalid entry/)
 })
 

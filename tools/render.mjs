@@ -98,7 +98,7 @@ updateBlocks('README.md', { stats: `**${mods.length} mods** · Last scanned ${as
 updateBlocks('catalogue.md', { stats, scan: table(mods), builtin: table(builtins) })
 
 const records = [...mods, ...builtins]
-const identity = assignPages(records, readRegistry(existsSync('data/pages.json') ? readFileSync('data/pages.json', 'utf8') : ''), data.mods, keys)
+const identity = assignPages(records, readRegistry(existsSync('data/pages.json') ? readFileSync('data/pages.json', 'utf8') : ''), data.mods)
 const pageOf = mod => identity.pages.get(mod)
 const byRepo = new Map()
 for (const m of [...records].sort((a, b) => a.name.localeCompare(b.name, 'en') || (idOf(a) < idOf(b) ? -1 : 1))) byRepo.set(m.repo, [...(byRepo.get(m.repo) ?? []), m])
