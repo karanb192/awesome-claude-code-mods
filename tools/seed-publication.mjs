@@ -2,6 +2,7 @@ import { appendFileSync, readFileSync, writeFileSync } from 'node:fs'
 import { isDeepStrictEqual, parseArgs } from 'node:util'
 import { mergeRepos, readRepos } from './candidates.mjs'
 import { applyDuplicates, readDuplicates, suspectDuplicates } from './dedupe.mjs'
+import { hasFootprint } from './grade.mjs'
 
 const ACCEPTED = ['passed', 'warnings']
 const key = repo => repo.toLowerCase()
@@ -19,6 +20,7 @@ export function reviewSeed(mods, claudeVersion, publishedIds, compatibilityRevie
     if (mod.validate.claudeVersion !== claudeVersion) return `validator mismatch: ${mod.id}`
     if (mod.kind !== 'mod') continue
     if (!ACCEPTED.includes(mod.validate.status)) return `validation needs review: ${mod.id}`
+    if (!hasFootprint(mod)) return `footprint unavailable; needs review: ${mod.id}`
     if ((mod.marketplaces ?? []).some(market => !ACCEPTED.includes(market.status))) return `marketplace needs review: ${mod.id}`
     if (mod.compatibility?.warnings?.length && !compatibilityReviews.some(review =>
       review?.id === mod.id && /^[a-f0-9]{40}$/.test(review.sourceCommit ?? '') &&

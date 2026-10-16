@@ -20,4 +20,8 @@ Validation is a static check, not a runtime compatibility test. Reserved plugin 
 
 Benchmark directories and plugins that identify themselves as fixtures or non-installable harnesses are recorded but excluded from the mod count, tables and badges. Confirmed course exercise folders are also excluded; finished mods in the same repository still count. Confirmed local copies use individual duplicate mappings so original mods in a mixed repository remain listed. The workflow tests classification and renders sample lists of up to 1000 mods in Chromium at desktop and mobile widths before scanning.
 
-The [raw scan result](https://mods.aidojo.si/mods.json) records each entry. See [Contributing](contributing.md#running-the-tools) to reproduce the scan or add badges to your own mod.
+Each fresh record has a `footprint.status` of `reported` only when every declared module has both hooks and calls output. An explicit `nothing on $` can establish L0; missing output cannot. Incomplete coverage sets `footprint.status` to `unavailable` and `reach.level` to `null`, while preserving the source revision, validation result and any reported calls. `reach.minimumLevel` is the lower bound from those calls, not the mod's total access.
+
+Older failed records do not establish complete coverage. Until a fresh scan, the website, badges and finder show their access as unknown, including when some calls were recorded. Retained records use their last-known successful validation when available. Rendering normalizes the [public JSON](https://mods.aidojo.si/mods.json) to the same unknown representation without rewriting the raw inventory. Old completed scans cannot be reused after a scanner change; regenerate them with a fresh scan.
+
+The [public scan result](https://mods.aidojo.si/mods.json) records each entry. See [Contributing](contributing.md#running-the-tools) to reproduce the scan or add badges to your own mod.

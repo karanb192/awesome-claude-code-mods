@@ -15,7 +15,7 @@ function fixture(t) {
   const root = mkdtempSync(join(tmpdir(), 'scan-cache-'))
   t.after(() => rmSync(root, { recursive: true, force: true }))
   for (const dir of ['bin', 'data', 'tmp']) mkdirSync(join(root, dir))
-  const state = { revision: 'a'.repeat(40), version: 'fixture', stars: 1, description: 'First description', crash: '', fail: '', twins: false }
+  const state = { revision: 'a'.repeat(40), version: 'fixture', stars: 1, description: 'First description', crash: '', fail: '', twins: false, calls: '$.fs.read', output: true }
   const stateFile = join(root, 'state.json'), callsFile = join(root, 'calls.log')
   for (const [file, text] of Object.entries({ 'repos.txt': 'fixture/mod\n', 'seeds.txt': '', 'duplicates.txt': '', 'catalogs.txt': '', 'fixture-exceptions.txt': '' })) writeFileSync(join(root, 'data', file), text)
   const command = (name, source) => writeFileSync(join(root, 'bin', name), `#!${process.execPath}\nconst fs = require('node:fs'), p = require('node:path'), state = JSON.parse(fs.readFileSync(process.env.FIXTURE_STATE, 'utf8')), args = process.argv.slice(2)\n${source}`, { mode: 0o755 })
@@ -43,14 +43,15 @@ if (args[0] === '--version') { console.log(state.version + ' (Claude Code)'); pr
 if (args[1] !== 'validate') process.exit(1)
 const type = args.at(-1).includes('marketplace') ? 'marketplace' : 'plugin'
 fs.appendFileSync(process.env.FIXTURE_CALLS, 'validate ' + type + '\\n')
-if (state.twins) {
+if (state.twins && !state.fail) {
   // plugins/a has an empty footprint, which is also what a crashed validation of plugins/b parses to.
-  if (process.cwd().endsWith('/a')) { console.log('✔ Validation passed'); process.exit(0) }
+  if (process.cwd().endsWith('/a')) { console.log('  ❯ ./register.ts hooks: nothing\\n  ❯ ./register.ts calls: nothing on $\\n✔ Validation passed'); process.exit(0) }
   if (state.crash === 'twin') process.exit(137)
 }
 if (state.crash === type) process.exit(137)
+if (state.output) console.log('  ❯ ./register.ts hooks: session.start\\n  ❯ ./register.ts calls: ' + state.calls)
 if (state.fail === type) { console.log('✘ Found 1 error:\\n  ❯ name: invalid\\n\\n✘ Validation failed'); process.exit(1) }
-console.log('  ❯ ./register.ts hooks: session.start\\n  ❯ ./register.ts calls: $.fs.read\\n✔ Validation passed')
+console.log('✔ Validation passed')
 `)
   let runs = 0
   function run({ cache = true } = {}) {
@@ -119,11 +120,11 @@ for (const type of ['plugin', 'marketplace']) {
   })
 }
 
-test('a crashed validation that duplicate filtering drops still blocks reuse', t => {
+test('a crashed same-name plugin stays recorded and still blocks cache reuse', t => {
   const f = fixture(t)
   f.state.twins = true
   f.state.crash = 'twin'
-  assert.deepEqual(f.run().data.mods.map(m => m.path), ['plugins/a'])
+  assert.deepEqual(f.run().data.mods.map(m => m.path).sort(), ['plugins/a', 'plugins/b'])
   f.state.crash = ''
   const recovered = f.run()
   assert.ok(recovered.calls.includes('clone'))
@@ -149,6 +150,38 @@ test('a validator that reports a failure is a settled result and is reused', t =
   const cached = f.run()
   assert.deepEqual(cached.calls, [])
   assert.equal(cached.data.mods[0].validate.status, 'failed')
+})
+
+test('early validation failure never turns network access into L0 and does not hide same-name plugins', t => {
+  const f = fixture(t)
+  f.state.calls = '$.http.fetch'
+  const first = f.run().data.mods[0]
+  assert.equal(first.reach.level, 3)
+  f.state.revision = 'b'.repeat(40)
+  f.state.fail = 'plugin'
+  f.state.output = false
+  const failed = f.run().data.mods[0]
+  assert.equal(failed.sourceCommit, 'b'.repeat(40))
+  assert.equal(failed.validate.status, 'failed')
+  assert.equal(failed.footprint.status, 'unavailable')
+  assert.equal(failed.reach.level, null)
+  assert.deepEqual(failed.calls, [])
+  assert.deepEqual(f.run().data.mods[0], failed, 'a cache hit keeps the unavailable state')
+  f.state.revision = 'c'.repeat(40)
+  f.state.twins = true
+  const twins = f.run().data.mods
+  assert.equal(twins.length, 2)
+  assert.ok(twins.every(m => m.validate.status === 'failed' && m.reach.level === null))
+  f.state.revision = 'd'.repeat(40)
+  f.state.twins = false
+  f.state.output = true
+  assert.equal(f.run().data.mods[0].reach.level, 3, 'a failure with complete reported calls keeps its reach')
+  f.state.revision = 'e'.repeat(40)
+  f.state.fail = ''
+  f.state.calls = 'nothing on $'
+  const recovered = f.run().data.mods[0]
+  assert.equal(recovered.footprint.status, 'reported')
+  assert.equal(recovered.reach.level, 0)
 })
 
 test('cached findings are keyed on the checkout reader, not on code that only shapes records', () => {

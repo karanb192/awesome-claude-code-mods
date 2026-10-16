@@ -102,6 +102,7 @@
     button.dataset.dir = direction
     button.closest('th').setAttribute('aria-sort', direction === 'asc' ? 'ascending' : 'descending')
     rows.sort((a, b) => {
+      if (key === 'level' && (a.dataset.level === 'unknown') !== (b.dataset.level === 'unknown')) return a.dataset.level === 'unknown' ? 1 : -1
       const comparison = key === 'stars' ? Number(a.dataset.stars) - Number(b.dataset.stars) : key === 'level' ? Number(a.dataset.level) - Number(b.dataset.level) || Number(b.dataset.stars) - Number(a.dataset.stars) : a.dataset.name.localeCompare(b.dataset.name)
       return direction === 'asc' ? comparison : -comparison
     })

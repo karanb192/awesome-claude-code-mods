@@ -55,8 +55,35 @@ test('access filters drop mods with the access and mods whose footprint is unver
   assert.match(out.notes[0], /not proof/)
   const loose = search(index, { query: 'cache', without: ['network'], include_unverified: true })
   assert.deepEqual(ids(loose).sort(), ['e/cache:.', 'f/cache:.', 'g/eye:.'])
-  assert.equal(loose.results.find(r => r.id === 'f/cache:.').validation.footprint, 'unverified')
+  assert.equal(loose.results.find(r => r.id === 'f/cache:.').validation.footprint, 'unavailable')
   assert.deepEqual(ids(search(index, { query: 'cache', max_reach: 2 })).sort(), ['e/cache:.', 'g/eye:.'])
+})
+
+test('unavailable access stays unknown in search and details, including legacy failures', () => {
+  const unavailable = { status: 'unavailable' }
+  const records = [
+    mod('a/empty:.', { footprint: unavailable, reach: { level: null, name: 'unknown', labels: [], minimumLevel: 0 } }),
+    mod('b/partial:.', { footprint: unavailable, calls: ['$.http.fetch'], reach: { level: null, name: 'unknown', labels: ['network'], minimumLevel: 3 } }),
+    mod('c/legacy:.', { validate: { status: 'failed' }, calls: ['$.http.fetch'], reach: net }),
+    mod('d/zero:.', { footprint: { status: 'reported' }, calls: [], reach: { level: 0, name: 'draws and remembers', labels: [] } }),
+  ]
+  const ix = buildIndex({ ...DATA, mods: records })
+  for (const filter of [{ max_reach: 0 }, { max_reach: 3 }, { without: ['every prompt'] }, { without: ['network'] }]) {
+    assert.deepEqual(ids(search(ix, filter)), ['d/zero:.'], JSON.stringify(filter))
+  }
+  assert.deepEqual(ids(search(ix, { max_reach: 0, include_unverified: true })).sort(), ['a/empty:.', 'd/zero:.'])
+  assert.deepEqual(ids(search(ix, { without: ['network'], include_unverified: true })).sort(), ['a/empty:.', 'd/zero:.'])
+  for (const id of ['a/empty:.', 'b/partial:.', 'c/legacy:.']) {
+    const summary = search(ix, {}).results.find(r => r.id === id)
+    const detail = getMod(ix, id).mod
+    for (const view of [summary, detail]) {
+      assert.equal(view.access.level, null)
+      assert.equal(view.access.level_name, 'unknown')
+      assert.equal(view.validation.footprint, 'unavailable')
+    }
+  }
+  assert.deepEqual(getMod(ix, 'b/partial:.').mod.calls, ['$.http.fetch'])
+  assert.equal(getMod(ix, 'b/partial:.').mod.access.minimum_level, 3)
 })
 
 test('access filters leave out mods with calls the scan could not classify', () => {

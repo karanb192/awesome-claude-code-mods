@@ -148,6 +148,63 @@ test('render preserves failures, distinguishes unknown results and removes exclu
   }
 })
 
+test('unavailable footprints render as unknown in every export and never enter the L0 filter', async t => {
+  const unavailable = { status: 'unavailable' }
+  const empty = { ...mod(1, 'failed'), footprint: unavailable, reach: { level: null, labels: [] }, sourceCommit: 'a'.repeat(40) }
+  const partial = { ...mod(2, 'failed'), calls: ['$.http.fetch'], reach: { level: 3, labels: ['network'] } }
+  const passedMissing = { ...mod(3), footprint: unavailable, reach: { level: null, labels: [] } }
+  const completeFailed = { ...mod(4, 'failed'), footprint: { status: 'reported' }, reach: { level: 3, labels: ['network'] }, calls: ['$.http.fetch'] }
+  const dir = fixture(t, [mod(0), empty, partial, passedMissing, completeFailed])
+  const original = readFileSync(join(dir, 'data/mods.json'), 'utf8')
+  render(dir)
+  assert.equal(readFileSync(join(dir, 'data/mods.json'), 'utf8'), original)
+  const snapshot = JSON.parse(readFileSync(join(dir, 'docs/mods.json'), 'utf8'))
+  for (const i of [1, 2, 3]) {
+    assert.equal(snapshot.mods[i].reach.level, null)
+    assert.equal(snapshot.mods[i].footprint.status, 'unavailable')
+    for (const folder of ['badges', 'docs/badges']) {
+      const badge = readFileSync(join(dir, folder, `example--mods--mod-${i}-reach.svg`), 'utf8')
+      assert.match(badge, /unknown access/)
+      assert.doesNotMatch(badge, /L0|Lnull|undefined|draws only/)
+    }
+  }
+  assert.equal(snapshot.mods[1].sourceCommit, empty.sourceCommit)
+  assert.deepEqual(snapshot.mods[1].validate, empty.validate)
+  assert.deepEqual(snapshot.mods[2].calls, ['$.http.fetch'])
+  assert.equal(snapshot.mods[2].reach.minimumLevel, 3)
+  assert.equal(snapshot.mods[4].reach.level, 3)
+  assert.match(readFileSync(join(dir, 'catalogue.md'), 'utf8'), /Unknown access: 3/)
+  assert.match(readFileSync(join(dir, 'catalogue.md'), 'utf8'), /unknown; incomplete footprint/)
+  assert.match(readFileSync(join(dir, 'docs/llms.txt'), 'utf8'), /Unknown access: 3/)
+  const browser = await chromium.launch()
+  t.after(() => browser.close())
+  const page = await browser.newPage()
+  await page.route('https://**/*', route => route.abort())
+  await page.goto(pathToFileURL(join(dir, 'docs/index.html')).href)
+  for (const width of [320, 390, 1440]) {
+    await page.setViewportSize({ width, height: 900 })
+    await page.locator('.lv[data-level="0"]').click()
+    assert.deepEqual(await page.locator('#t tbody tr:visible').evaluateAll(rows => rows.map(row => row.id)), ['example--mods--mod-0'])
+    await page.locator('.lv[data-level="unknown"]').click()
+    assert.equal(await page.locator('#t tbody tr:visible').count(), 3)
+    assert.equal(await page.locator('#example--mods--mod-1 .track .on').count(), 0)
+    assert.match(await page.locator('#example--mods--mod-1 .reach').innerText(), /unknown access\nfails on/)
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true)
+    await page.locator('.lv.all').click()
+  }
+  const row = page.locator('#example--mods--mod-1')
+  await row.locator('summary').click()
+  assert.match(await row.locator('dl').innerText(), /Footprint\nUnavailable or incomplete/)
+  assert.match(await row.locator('dl').innerText(), /API calls\nnot reported/)
+  const counts = await page.locator('.strip-legend .legend-count').allTextContents()
+  assert.equal(counts.reduce((sum, text) => sum + parseInt(text), 0), 5)
+  for (let i = 0; i < 2; i++) {
+    await page.locator('button[data-k="level"]').click()
+    const sorted = await page.locator('#t tbody tr').evaluateAll(rows => rows.map(row => row.dataset.level))
+    assert.deepEqual(sorted.slice(-3), ['unknown', 'unknown', 'unknown'])
+  }
+})
+
 test('compatibility warnings stay distinct from validation failures and link to scanned source', async t => {
   const reviewed = {
     ...mod(0), sourceCommit: 'a'.repeat(40),
@@ -481,7 +538,7 @@ test('the site ships its crawl and agent files with the catalogue facts', t => {
   assert.ok(llms.includes(`[catalogue.md](${dataset.distribution[1].contentUrl})`))
   assert.match(llms, /^# Awesome Claude Code Mods\n\n> A community list of 4 Claude Code mods/)
   assert.match(llms, /Last scanned 2026-01-01 on Claude Code 2\.1\.287/)
-  assert.match(llms, /L3 Uses the network: 1\./)
+  assert.match(llms, /L3 Uses the network: 1, Unknown access: 0\./)
   assert.match(llms, /^- \[mod-3\]\(https:\/\/example\.com\): Example mod 3$/m)
   assert.ok(llms.indexOf('[mod-3]') < llms.indexOf('[mod-0]'), 'most starred first')
 })

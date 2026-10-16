@@ -8,6 +8,12 @@ import { fileURLToPath } from 'node:url'
 import { reconcileScan } from './scan-publication.mjs'
 import { revalidatePublished } from './revalidate-publication.mjs'
 import { reconcile, SCANNER_INPUTS } from './inventory.mjs'
+import { parseValidateOutput } from './parse.mjs'
+
+const writeHooks = (dir, modules = ['./register.ts']) => {
+  mkdirSync(join(dir, 'hooks'), { recursive: true })
+  writeFileSync(join(dir, 'hooks/hooks.json'), JSON.stringify({ modules }))
+}
 
 const mod = (repo, extra = {}) => ({ id: `${repo}:.`, repo, kind: 'mod', name: repo.split('/')[1], path: '.', description: 'A mod.', url: `https://github.com/${repo}`, stars: 1, reach: { level: 0, labels: [] }, sees: [], hooks: [], calls: [], surfaceModules: [], validate: { status: 'passed', claudeVersion: '2.1.287', errors: [] }, ...extra })
 const inventory = mods => ({ generated: '2026-01-01T00:00:00Z', claudeVersion: '2.1.287', repos: new Set(mods.map(m => m.repo)).size, mods })
@@ -70,13 +76,14 @@ test('revalidation refreshes marketplace evidence, caches exact records and reje
       assert.equal(repo, record.repo)
       assert.equal(revision, record.sourceCommit)
       paths.push(dir)
+      writeHooks(dir)
       mkdirSync(join(dir, '.claude-plugin'))
       writeFileSync(join(dir, '.claude-plugin/plugin.json'), '{"name":"new"}')
       writeFileSync(join(dir, '.claude-plugin/marketplace.json'), '{"name":"market","plugins":[{"name":"new","source":"./"}]}')
     },
     validate: path => {
       validations.push(path)
-      return { status: path.endsWith('marketplace.json') ? 'failed' : 'passed', errors: [], modules: [{ hooks: [{ event: 'prompt.submit', matcher: {} }], calls: ['$.fs.write'], surfaceModules: [] }] }
+      return parseValidateOutput(`  ❯ ./register.ts hooks: prompt.submit\n  ❯ ./register.ts calls: $.fs.write\n${path.endsWith('marketplace.json') ? '✘ Validation failed' : '✔ Validation passed'}`)
     },
   }
   const [updated] = revalidatePublished([record], '2.1.290', cache, deps)
@@ -102,6 +109,39 @@ test('concurrent additions cannot disguise a partial scan or roll back a newer f
   assert.throws(() => merge(before, before, { ...before, generated: '2026-01-02T00:00:00Z' }), /newer full scan/)
 })
 
+test('pinned revalidation replaces prior access with unknown until every declared module reports', () => {
+  const record = mod('o/network', { sourceCommit: 'a'.repeat(40), modules: ['./old.ts'], calls: ['$.http.fetch'], reach: { level: 3, labels: ['network'] }, footprint: { status: 'reported' } })
+  let output = '✘ Validation failed'
+  const deps = {
+    ensureVersion: () => {},
+    checkout: (repo, revision, dir) => writeHooks(dir, ['./register.ts', './second.ts']),
+    validate: () => parseValidateOutput(output),
+  }
+  const fresh = value => revalidatePublished([value], '2.1.301', {}, deps)[0]
+  const unavailable = fresh(record)
+  assert.equal(unavailable.sourceCommit, record.sourceCommit)
+  assert.equal(unavailable.validate.status, 'failed')
+  assert.equal(unavailable.reach.level, null)
+  assert.equal(unavailable.footprint.status, 'unavailable')
+  assert.deepEqual(unavailable.calls, [])
+  assert.deepEqual(unavailable.modules, ['./register.ts', './second.ts'])
+  output = '  ❯ ./register.ts hooks: session.start\n  ❯ ./register.ts calls: $.http.fetch\n✘ Validation failed'
+  const partial = fresh(unavailable)
+  assert.equal(partial.reach.level, null)
+  assert.equal(partial.reach.minimumLevel, 3)
+  assert.deepEqual(partial.calls, ['$.http.fetch'])
+  output = output.replace('✘ Validation failed', '  ❯ ./second.ts hooks: nothing\n  ❯ ./second.ts calls: nothing on $\n✘ Validation failed')
+  const complete = fresh(partial)
+  assert.equal(complete.validate.status, 'failed')
+  assert.equal(complete.footprint.status, 'reported')
+  assert.equal(complete.reach.level, 3)
+  output = output.replace('$.http.fetch', 'nothing on $').replace('✘ Validation failed', '✔ Validation passed')
+  const recovered = fresh(complete)
+  assert.equal(recovered.validate.status, 'passed')
+  assert.equal(recovered.reach.level, 0)
+  assert.equal(recovered.footprint.status, 'reported')
+})
+
 for (const missing of [true, false]) test(`pinned revalidation preserves ${missing ? 'missing' : 'unscannable'} repository evidence`, () => {
   const original = mod('o/retained', { sourceCommit: 'a'.repeat(40) })
   const [retained] = reconcile([original], [], new Map(missing ? [[original.repo, 'b'.repeat(40)]] : [])).mods
@@ -112,8 +152,8 @@ for (const missing of [true, false]) test(`pinned revalidation preserves ${missi
     const cache = {}, calls = []
     const deps = {
       ensureVersion: () => {},
-      checkout: (repo, revision) => calls.push([repo, revision]),
-      validate: () => ({ status, errors: status === 'passed' ? [] : ['Pinned source diagnostic'], modules: [{ hooks: [], calls: ['$.fs.write'], surfaceModules: [] }] }),
+      checkout: (repo, revision, dir) => { calls.push([repo, revision]); writeHooks(dir) },
+      validate: () => ({ ...parseValidateOutput('  ❯ ./register.ts hooks: nothing\n  ❯ ./register.ts calls: $.fs.write'), status, errors: status === 'passed' ? [] : ['Pinned source diagnostic'] }),
     }
     const revalidate = (records, version) => revalidatePublished(records, version, cache, deps)
     const [updated] = reconcileScan(before, scan, latest, repos(before), repos(scan), repos(latest), [], revalidate).inventory.mods
@@ -149,6 +189,7 @@ for (const mixedVersion of [false, true]) test(`scan publication retries concurr
   writeFileSync(join(checkout, '.gitignore'), 'node_modules\n')
   const source = join(root, 'source')
   mkdirSync(source)
+  writeHooks(source)
   git('init', '-b', 'fixture', source)
   mkdirSync(join(source, '.claude-plugin'))
   writeFileSync(join(source, '.claude-plugin/plugin.json'), '{"name":"published"}')

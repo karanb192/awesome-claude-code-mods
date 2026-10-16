@@ -12,6 +12,7 @@
 import { execFileSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
 import { suspectDuplicates } from './dedupe.mjs'
+import { hasFootprint } from './grade.mjs'
 
 export function fingerprint(data) {
   const mods = [...data.mods]
@@ -19,7 +20,8 @@ export function fingerprint(data) {
     .sort((a, b) => a.id.localeCompare(b.id))
     .map(m => ({
       id: m.id, kind: m.kind, name: m.name, description: m.description,
-      hooks: m.hooks, calls: m.calls, reach: m.reach.level, sees: m.sees,
+      hooks: m.hooks, calls: m.calls, reach: hasFootprint(m) ? m.reach.level : null, sees: m.sees,
+      footprint: hasFootprint(m),
       validates: m.validate.status, archived: m.archived,
       marketplaces: m.marketplaces ?? [], compatibility: m.compatibility ?? null, directory: m.directory ?? null,
     }))
@@ -53,7 +55,8 @@ export function describeChange(before, after) {
     if (JSON.stringify(o.marketplaces ?? []) !== JSON.stringify(m.marketplaces ?? [])) lines.push(`${id}: marketplace validation changed`)
     if (JSON.stringify(o.compatibility ?? null) !== JSON.stringify(m.compatibility ?? null)) lines.push(`${id}: compatibility review changed`)
     if (JSON.stringify(o.directory ?? null) !== JSON.stringify(m.directory ?? null)) lines.push(`${id}: ${m.directory ? 'now listed in' : 'no longer listed in'} Anthropic's directory`)
-    if (o.reach.level !== m.reach.level) lines.push(`${id}: reach L${o.reach.level} to L${m.reach.level}`)
+    const reach = mod => hasFootprint(mod) ? `L${mod.reach.level}` : 'unknown'
+    if (reach(o) !== reach(m)) lines.push(`${id}: reach ${reach(o)} to ${reach(m)}`)
     else if (JSON.stringify(o.calls) !== JSON.stringify(m.calls) || JSON.stringify(o.hooks) !== JSON.stringify(m.hooks)) lines.push(`${id}: footprint changed`)
   }
   for (const pair of suspectDuplicates(after.mods)) lines.push(`possible duplicate: ${pair.join(' and ')} share an owner and a name; if they are one mod, add the pair to data/duplicates.txt`)

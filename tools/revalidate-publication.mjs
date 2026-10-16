@@ -3,6 +3,7 @@ import { existsSync, mkdtempSync, readFileSync, realpathSync, rmSync } from 'nod
 import { homedir, tmpdir } from 'node:os'
 import { isAbsolute, join, relative, resolve } from 'node:path'
 import { validate } from './validate.mjs'
+import { footprintStatus } from './parse.mjs'
 import { grade, visibility, drawsOn } from './grade.mjs'
 import { marketplacesFor, uiRewriteReview } from './compatibility.mjs'
 
@@ -57,6 +58,9 @@ export function revalidatePublished(records, version, cache = {}, deps = {}) {
       if (existsSync(manifest)) inside(relative(dir, manifest))
       const parsed = runValidate(existsSync(manifest) ? '.claude-plugin/plugin.json' : '.', plugin, [dir])
       if (parsed.status === 'unknown') throw new Error(`Revalidation incomplete: ${record.id}`)
+      const hooksPath = inside(join(record.path, 'hooks/hooks.json'))
+      const modules = JSON.parse(readFileSync(hooksPath, 'utf8')).modules
+      const footprint = footprintStatus(parsed, modules)
       const hooks = parsed.modules.flatMap(module => module.hooks)
       const calls = [...new Set(parsed.modules.flatMap(module => module.calls))].sort()
       const marketplaces = marketplacesFor(dir, plugin).map(path => {
@@ -65,10 +69,10 @@ export function revalidatePublished(records, version, cache = {}, deps = {}) {
         if (result.status === 'unknown') throw new Error(`Marketplace revalidation incomplete: ${record.id}`)
         return { path: relative(dir, path), name: JSON.parse(readFileSync(path, 'utf8')).name ?? null, status: result.status, errors: result.errors }
       })
-      const updated = { ...record, hooks, calls, surfaceModules: [...new Set(parsed.modules.flatMap(module => module.surfaceModules))],
+      const updated = { ...record, modules, footprint, hooks, calls, surfaceModules: [...new Set(parsed.modules.flatMap(module => module.surfaceModules))],
         validate: { status: parsed.status, claudeVersion: version, errors: parsed.errors }, marketplaces,
-        compatibility: { runtime: 'not-tested', warnings: uiRewriteReview(dir, plugin, record.modules ?? [], hooks) },
-        reach: grade(calls), sees: visibility(hooks), draws: [...new Set(drawsOn(hooks))] }
+        compatibility: { runtime: 'not-tested', warnings: uiRewriteReview(dir, plugin, Array.isArray(modules) ? modules : [], hooks) },
+        reach: grade(calls, footprint.status === 'reported'), sees: visibility(hooks), draws: [...new Set(drawsOn(hooks))] }
       if (record.validate.status === 'unknown' && record.lastKnownValidate) {
         updated.lastKnownValidate = updated.validate
         updated.validate = { ...record.validate, claudeVersion: version }

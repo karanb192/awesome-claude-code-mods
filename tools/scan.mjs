@@ -85,7 +85,7 @@ async function scanRepo(repo) {
   }
   if (!found) return []
   const fresh = records(repo, found, batch ?? meta(repo))
-  for (const mod of fresh) console.log(`${mod.validate.status.padEnd(8)} L${mod.reach.level} ${mod.id}`)
+  for (const mod of fresh) console.log(`${mod.validate.status.padEnd(8)} ${mod.reach.level === null ? 'unknown access' : 'L' + mod.reach.level} ${mod.id}`)
   return fresh
 }
 
@@ -104,13 +104,14 @@ function records(repo, found, m) {
     kind: kindOf(repo, p.rel, { name: p.manifestName, description: p.manifestDescription }, catalogs, fixtureExceptions),
     hasManifest: p.hasManifest,
     modules: p.modules,
+    footprint: p.footprint,
     hooks: p.hooks,
     calls: p.calls,
     surfaceModules: p.surfaceModules,
     validate: p.validate,
     marketplaces: p.marketplaces,
     compatibility: { runtime: 'not-tested', warnings: p.warnings },
-    reach: grade(p.calls),
+    reach: grade(p.calls, p.footprint.status === 'reported'),
     sees: visibility(p.hooks),
     draws: [...new Set(drawsOn(p.hooks))],
     stars: m.stars ?? null,

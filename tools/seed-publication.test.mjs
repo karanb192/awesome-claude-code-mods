@@ -63,6 +63,7 @@ test('failed, unknown, marketplace and compatibility results keep that seed unpu
   skippedFor(append(inventory([mod('new/repo', 'x', { id: 'existing/repo:mod' })])), /already published/)
   skippedFor(append(inventory([mod('new/repo', 'x', { validate: { status: 'passed', claudeVersion: '2.1.288' } })])), /validator mismatch/)
   assert.equal(reviewSeed(scan().mods, '2.1.287', new Set()), null)
+  assert.match(reviewSeed([{ ...scan().mods[0], footprint: { status: 'unavailable' } }], '2.1.287', new Set()), /footprint unavailable/)
 })
 
 test('one failing seed does not hold back the others', () => {
@@ -148,7 +149,7 @@ test('scanner reports partial repositories so passing siblings can publish alone
   mkdirSync(join(root, 'bin'))
   writeFileSync(join(root, 'data/seeds.txt'), 'owner/partial\nother/good\n')
   const binary = (name, code) => writeFileSync(join(root, 'bin', name), `#!${process.execPath}\n${code}`, { mode: 0o755 })
-  binary('claude', `console.log(process.argv.includes('--version') ? '2.1.287' : '✔ Validation passed')`)
+  binary('claude', `console.log(process.argv.includes('--version') ? '2.1.287' : '  ❯ mod.js hooks: nothing\\n  ❯ mod.js calls: nothing on $\\n✔ Validation passed')`)
   binary('gh', `console.log(JSON.stringify({stars: 0, defaultBranch: 'main'}))`)
   binary('git', `
     const fs = require('node:fs'), path = require('node:path');

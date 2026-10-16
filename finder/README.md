@@ -59,7 +59,9 @@ Output is JSON. Add `--pretty` to indent it.
 
 ## What the access fields mean
 
-Access comes from the static footprint that `claude plugin validate` reports for the source at `source_commit`. A pass is not a runtime test or a safety guarantee. No reported network access means the validator found no network API call, not that the mod never reaches the network. `unclassified_calls` lists API calls the grader has no rule for yet; the access labels and level do not account for them.
+Access comes from the static footprint that `claude plugin validate` reports for the source at `source_commit`. A pass is not a runtime test or a safety guarantee. For a complete reported footprint, no reported network access means the validator found no network API call, not that the mod never reaches the network. `unclassified_calls` lists API calls the grader has no rule for yet; the access labels and level do not account for them.
+
+When the footprint is unavailable or incomplete, `validation.footprint` is `unavailable` and `access.level` is `null`. Recorded calls and labels may be partial. `access.minimum_level` only bounds the calls that were reported. Any `--max-reach` limit, including 3, and any `--without` filter leave out these results unless `include_unverified` is true; that option still cannot override a known access label or minimum level. Older failed records without coverage metadata also use this unknown representation until rescanned.
 
 `--without` and `--max-reach` below 3 leave out the mods they cannot vouch for, and say how many:
 

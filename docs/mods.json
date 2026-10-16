@@ -510,8 +510,8 @@
         "warnings": []
       },
       "reach": {
-        "level": 3,
-        "name": "network",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "network",
           "runs processes",
@@ -520,7 +520,8 @@
           "reads settings",
           "reads the transcript",
           "draws"
-        ]
+        ],
+        "minimumLevel": 3
       },
       "sees": [],
       "draws": [],
@@ -530,7 +531,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "ruvnet/RuView:harness/ruview/mod",
@@ -3535,9 +3539,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -3547,7 +3552,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "ruvnet/ruflo:plugins/ruflo-protector",
@@ -8955,8 +8963,8 @@
         ]
       },
       "reach": {
-        "level": 2,
-        "name": "writes or runs",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "runs processes",
           "writes files",
@@ -8967,7 +8975,8 @@
           "reads env vars",
           "persists state",
           "draws"
-        ]
+        ],
+        "minimumLevel": 2
       },
       "sees": [
         "Bash calls",
@@ -8984,7 +8993,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "Storybloq/storybloq:plugins/storybloq",
@@ -9868,9 +9880,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -9880,7 +9893,10 @@
       "license": "BSD-3-Clause",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "notque/vexjoy-agent:plugins/jev-auto-compact",
@@ -13414,8 +13430,8 @@
         "warnings": []
       },
       "reach": {
-        "level": 3,
-        "name": "network",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "other: $.prompt.read",
           "other: $.state",
@@ -13429,7 +13445,8 @@
           "reads files",
           "reads env vars",
           "reads the transcript"
-        ]
+        ],
+        "minimumLevel": 3
       },
       "sees": [
         "compaction",
@@ -13450,7 +13467,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "iamumeransari/claude-show-your-work:.",
@@ -14801,9 +14821,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -14813,7 +14834,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "hellosverre/claude-skins:.",
@@ -16225,9 +16249,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -16237,7 +16262,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "gtapps/hermitd:plugins/hermitd",
@@ -17036,9 +17064,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -17048,7 +17077,10 @@
       "license": "NOASSERTION",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "mukiwu/muki-ai-plugins:plugins/hyday-pet",
@@ -29308,8 +29340,8 @@
         "warnings": []
       },
       "reach": {
-        "level": 3,
-        "name": "network",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "other: $.runtime.emit",
           "network",
@@ -29319,7 +29351,8 @@
           "reads env vars",
           "reads settings",
           "persists state"
-        ]
+        ],
+        "minimumLevel": 3
       },
       "sees": [
         "every prompt",
@@ -29334,7 +29367,10 @@
       "archived": false,
       "defaultBranch": "main",
       "duplicateOf": "ucsandman/Agnostic-AI:engine/mods/claude-runtime",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "ucsandman/claude-harness:engine/mods/harness-mods",
@@ -32093,14 +32129,15 @@
         "warnings": []
       },
       "reach": {
-        "level": 2,
-        "name": "writes or runs",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "runs processes",
           "changes config",
           "persists state",
           "draws"
-        ]
+        ],
+        "minimumLevel": 2
       },
       "sees": [
         "compaction"
@@ -32114,7 +32151,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "edwinhu/workflows:.",
@@ -35525,8 +35565,8 @@
         "warnings": []
       },
       "reach": {
-        "level": 3,
-        "name": "network",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "other: $.runtime.emit",
           "network",
@@ -35536,7 +35576,8 @@
           "reads env vars",
           "reads settings",
           "persists state"
-        ]
+        ],
+        "minimumLevel": 3
       },
       "sees": [
         "every prompt",
@@ -35550,7 +35591,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "master",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "ucsandman/Agnostic-AI:engine/mods/harness-mods",
@@ -43682,9 +43726,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -43694,7 +43739,10 @@
       "license": "NOASSERTION",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "AgriciDaniel/claude-mods-brain:tests/fixtures/mods/clean-band",
@@ -43815,15 +43863,16 @@
         "warnings": []
       },
       "reach": {
-        "level": 3,
-        "name": "network",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "network",
           "runs processes",
           "drives Claude",
           "reads files",
           "reads env vars"
-        ]
+        ],
+        "minimumLevel": 3
       },
       "sees": [
         "Bash calls",
@@ -43836,7 +43885,10 @@
       "license": "NOASSERTION",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "GGGODLIN/cc-mod-park:.",
@@ -45051,13 +45103,14 @@
         "warnings": []
       },
       "reach": {
-        "level": 2,
-        "name": "writes or runs",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "runs processes",
           "drives Claude",
           "reads files"
-        ]
+        ],
+        "minimumLevel": 2
       },
       "sees": [
         "mcp__claude-image-generation__generate calls"
@@ -45069,7 +45122,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "jsk4581/jev-blindspot:mod",
@@ -57476,9 +57532,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -57488,7 +57545,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "jagreehal/autotel:packages/autotel-claude-code",
@@ -63470,9 +63530,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -63482,7 +63543,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "wasd96040501/taskcut:eval/replaycheck",
@@ -63515,9 +63579,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -63527,7 +63592,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "Zoria-Lind/cc-token-optimizer:plugin",
@@ -78690,12 +78758,13 @@
         ]
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "persists state",
           "draws"
-        ]
+        ],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [
@@ -78707,7 +78776,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "DrishtantKaushal/AwesomeClaudeCodeMods:sources/diagrams-and-queue/source/claude-queue",
@@ -78803,13 +78875,14 @@
         "warnings": []
       },
       "reach": {
-        "level": 2,
-        "name": "writes or runs",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "drives Claude",
           "writes the prompt box",
           "draws"
-        ]
+        ],
+        "minimumLevel": 2
       },
       "sees": [
         "classic hooks",
@@ -78825,7 +78898,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "DrishtantKaushal/AwesomeClaudeCodeMods:sources/dino-game/source",
@@ -85687,14 +85763,15 @@
         "warnings": []
       },
       "reach": {
-        "level": 1,
-        "name": "reads",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "other: $.state.get",
           "other: $.state.set",
           "persists state",
           "draws"
-        ]
+        ],
+        "minimumLevel": 1
       },
       "sees": [
         "every prompt",
@@ -85717,7 +85794,10 @@
           "types ./types/index.d.ts declares state: claude-cat.cat, claude-cat.motion, claude-cat.limits, claude-cat.isHidden, claude-cat.prefs, claude-cat.isSettingsOpen, claude-cat.identity, claude-cat.stats"
         ]
       },
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "mertkayacs/ultramod:plugin",
@@ -86186,12 +86266,13 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "persists state",
           "draws"
-        ]
+        ],
+        "minimumLevel": 0
       },
       "sees": [
         "every tool call"
@@ -86205,7 +86286,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "NathanAB/statusline-anywhere:.",
@@ -87421,9 +87505,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -87433,7 +87518,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "ray-manaloto/dotfiles:tests/fixtures/fnhook/bad-event",
@@ -87466,9 +87554,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -87478,7 +87567,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "ray-manaloto/dotfiles:tests/fixtures/fnhook/bad-return",
@@ -87663,9 +87755,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -87675,7 +87768,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "ray-manaloto/dotfiles:tests/fixtures/fnhook/reserved-name",
@@ -87715,9 +87811,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [
         "classic hooks"
@@ -87729,7 +87826,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "ray-manaloto/dotfiles:tests/fixtures/fnhook/untyped",
@@ -94944,9 +95044,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -94956,7 +95057,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "martineserios/thebrana:tests/fixtures/mods/bad-bracket-http",
@@ -94989,9 +95093,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -95001,7 +95106,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "martineserios/thebrana:tests/fixtures/mods/bad-bracket-model",
@@ -95034,9 +95142,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -95046,7 +95155,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "martineserios/thebrana:tests/fixtures/mods/bad-bun-file",
@@ -95079,9 +95191,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -95091,7 +95204,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "martineserios/thebrana:tests/fixtures/mods/bad-calls-http",
@@ -95124,9 +95240,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -95136,7 +95253,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "martineserios/thebrana:tests/fixtures/mods/bad-calls-model",
@@ -95169,9 +95289,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -95181,7 +95302,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "martineserios/thebrana:tests/fixtures/mods/bad-child-process",
@@ -95214,9 +95338,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -95226,7 +95351,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "martineserios/thebrana:tests/fixtures/mods/bad-destructured-http",
@@ -95259,9 +95387,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -95271,7 +95400,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "martineserios/thebrana:tests/fixtures/mods/bad-destructured-model",
@@ -95304,9 +95436,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -95316,7 +95449,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "martineserios/thebrana:tests/fixtures/mods/bad-destructured-process",
@@ -95349,9 +95485,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -95361,7 +95498,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "martineserios/thebrana:tests/fixtures/mods/bad-fs-read",
@@ -95394,9 +95534,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -95406,7 +95547,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "martineserios/thebrana:tests/fixtures/mods/bad-git-common-dir",
@@ -95439,9 +95583,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -95451,7 +95596,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "martineserios/thebrana:tests/fixtures/mods/bad-global-fetch",
@@ -95484,9 +95632,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -95496,7 +95645,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "martineserios/thebrana:tests/fixtures/mods/bad-process-run-direct",
@@ -95529,9 +95681,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -95541,7 +95694,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "martineserios/thebrana:tests/fixtures/mods/bad-process-spawn",
@@ -95574,9 +95730,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -95586,7 +95743,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "martineserios/thebrana:tests/fixtures/mods/bad-readfile",
@@ -95619,9 +95779,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -95631,7 +95792,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "martineserios/thebrana:tests/fixtures/mods/bad-reads-ledger",
@@ -95664,9 +95828,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -95676,7 +95841,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "martineserios/thebrana:tests/fixtures/mods/bad-reflect-get",
@@ -95709,9 +95877,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -95721,7 +95890,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "martineserios/thebrana:tests/fixtures/mods/bad-tool-call-hook",
@@ -95754,9 +95926,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -95766,7 +95939,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "martineserios/thebrana:tests/fixtures/mods/bad-tool-check-hook",
@@ -95799,9 +95975,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -95811,7 +95988,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "martineserios/thebrana:tests/fixtures/mods/captures/t-3493-model-billing/mod",
@@ -95906,9 +96086,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -95918,7 +96099,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "martineserios/thebrana:tests/fixtures/mods/good-minimal",
@@ -95951,9 +96135,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -95963,7 +96148,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "mkpvishnu/claude-mods:codecraft",
@@ -96298,9 +96486,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -96310,7 +96499,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "MongLong0214/jev-gate:mods/output",
@@ -96420,9 +96612,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -96432,7 +96625,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "mthli/cc-shorts:.",
@@ -107894,9 +108090,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -107907,7 +108104,10 @@
       "archived": false,
       "defaultBranch": "main",
       "duplicateOf": "xsyetopz/dotclaude:plugins/dotclaude-browser",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "xtrm-dev/specialists:plugins/specialists",
@@ -117313,15 +117513,16 @@
         "warnings": []
       },
       "reach": {
-        "level": 2,
-        "name": "writes or runs",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "other: $.state.get",
           "other: $.state.set",
           "runs processes",
           "reads env vars",
           "draws"
-        ]
+        ],
+        "minimumLevel": 2
       },
       "sees": [],
       "draws": [
@@ -117333,7 +117534,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "etding/cache-keeper:cache-keeper",
@@ -123181,8 +123385,8 @@
         "warnings": []
       },
       "reach": {
-        "level": 2,
-        "name": "writes or runs",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "other: $.state.get",
           "other: $.state.set",
@@ -123194,7 +123398,8 @@
           "reads env vars",
           "persists state",
           "draws"
-        ]
+        ],
+        "minimumLevel": 2
       },
       "sees": [
         "classic hooks",
@@ -123214,7 +123419,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "macleodlabs-ai/claudeflow:plugins/streams",
@@ -141680,9 +141888,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -141692,7 +141901,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "MusicStudioNYC/lossless-compact:.",
@@ -143091,9 +143303,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -143103,7 +143316,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "master",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "nathanliow/meme-watch:.",
@@ -195437,9 +195653,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -195449,7 +195666,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "home-dev-lab/workflow-toolbox:plugin",
@@ -195587,9 +195807,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -195599,7 +195820,10 @@
       "license": "NOASSERTION",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "home-dev-lab/workflow-toolbox:plugins/wt-deep-search",
@@ -206784,9 +207008,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -206796,7 +207021,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "legostin/claude-code-secret-guard:.",
@@ -208082,9 +208310,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -208094,7 +208323,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "m4cd4r4/clear-resume:plugin",
@@ -210642,9 +210874,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -210654,7 +210887,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "moelahmady/jev-model-router:.",
@@ -248536,14 +248772,15 @@
         "warnings": []
       },
       "reach": {
-        "level": 3,
-        "name": "network",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "network",
           "reads env vars",
           "persists state",
           "draws"
-        ]
+        ],
+        "minimumLevel": 3
       },
       "sees": [
         "classic hooks"
@@ -248557,7 +248794,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "tomada1114/clawd-band:plugins/clawd-band",
@@ -267386,8 +267626,8 @@
         "warnings": []
       },
       "reach": {
-        "level": 2,
-        "name": "writes or runs",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "other: $.state.get",
           "other: $.state.set",
@@ -267395,7 +267635,8 @@
           "reads env vars",
           "persists state",
           "draws"
-        ]
+        ],
+        "minimumLevel": 2
       },
       "sees": [],
       "draws": [
@@ -267407,7 +267648,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "Alejoaguilarg/claude-mods:plugins/tablero-consumo",
@@ -287537,9 +287781,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -287549,7 +287794,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "master",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "boxiaolanya2008/claudecode-plus-mod:mods/agent-charter",
@@ -287589,9 +287837,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -287601,7 +287850,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "master",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "boxiaolanya2008/claudecode-plus-mod:mods/cache-guard",
@@ -287641,9 +287893,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -287653,7 +287906,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "master",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "boxiaolanya2008/claudecode-plus-mod:mods/clear-intent",
@@ -287693,9 +287949,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -287705,7 +287962,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "master",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "boxiaolanya2008/claudecode-plus-mod:mods/human-tone",
@@ -287745,9 +288005,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -287757,7 +288018,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "master",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "boxiaolanya2008/claudecode-plus-mod:mods/prompt-shield",
@@ -287797,9 +288061,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -287809,7 +288074,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "master",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "bps2414/clawd-mods:cloud-pet",
@@ -291359,9 +291627,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -291371,7 +291640,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "BuddyLim/claude-code-mod-ledger:.",
@@ -323859,8 +324131,8 @@
         "warnings": []
       },
       "reach": {
-        "level": 3,
-        "name": "network",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "other: $.state.get",
           "other: $.state.set",
@@ -323872,7 +324144,8 @@
           "reads env vars",
           "reads the transcript",
           "persists state"
-        ]
+        ],
+        "minimumLevel": 3
       },
       "sees": [
         "compaction",
@@ -323890,7 +324163,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "Egor062020/claude-code-pult:.",
@@ -333600,13 +333876,14 @@
         "warnings": []
       },
       "reach": {
-        "level": 2,
-        "name": "writes or runs",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "drives Claude",
           "writes the prompt box",
           "draws"
-        ]
+        ],
+        "minimumLevel": 2
       },
       "sees": [
         "every tool call",
@@ -333629,6 +333906,9 @@
         "errors": [
           "name: Plugin name \"claude-queue\" is reserved: it passes as one of Anthropic's own. A third party's plugin name cannot start with \"claude-\", \"anthropic-\", \"anthropics-\", or \"cc-plugin-\", be \"claude\", \"anthropic\", \"anthropics\", \"claude-code\", or \"claude-mods\", or put \"official\" beside \"claude\" or \"anthropic\". Name it for what it does. If this is one of Anthropic's own plugins, validate the marketplace that lists it."
         ]
+      },
+      "footprint": {
+        "status": "unavailable"
       }
     },
     {
@@ -339749,9 +340029,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -339761,7 +340042,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "HaoYan-A/claude-code-mods:plugins/subagent-effort",
@@ -341940,8 +342224,8 @@
         "warnings": []
       },
       "reach": {
-        "level": 3,
-        "name": "network",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "network",
           "runs processes",
@@ -341950,7 +342234,8 @@
           "reads settings",
           "reads the transcript",
           "draws"
-        ]
+        ],
+        "minimumLevel": 3
       },
       "sees": [],
       "draws": [],
@@ -341960,7 +342245,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "hathcox/claudomon:plugin",
@@ -344497,13 +344785,14 @@
         "warnings": []
       },
       "reach": {
-        "level": 1,
-        "name": "reads",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "other: $.state.get",
           "other: $.state.set",
           "draws"
-        ]
+        ],
+        "minimumLevel": 1
       },
       "sees": [],
       "draws": [
@@ -344515,7 +344804,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "Humpens/claude-mods:baton-notify",
@@ -375456,9 +375748,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -375468,7 +375761,10 @@
       "license": "NOASSERTION",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "konnokai/claude-mods:plan-tally",
@@ -378466,9 +378762,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -378478,7 +378775,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "kurushiba/claude-mods:03-events/3-1-start",
@@ -381853,12 +382153,13 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "persists state",
           "draws"
-        ]
+        ],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [
@@ -381871,7 +382172,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "lenadweb/claude-code-plugins:plugins/lenadweb-image-preview",
@@ -391892,8 +392196,8 @@
         "warnings": []
       },
       "reach": {
-        "level": 2,
-        "name": "writes or runs",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "other: $.process.spawn",
           "other: $.state.get",
@@ -391907,7 +392211,8 @@
           "reads the transcript",
           "persists state",
           "draws"
-        ]
+        ],
+        "minimumLevel": 2
       },
       "sees": [
         "mcp__claude-code-cockpit__meter calls",
@@ -391925,7 +392230,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "m-esm/questioning-meter:.",
@@ -392049,8 +392357,8 @@
         "warnings": []
       },
       "reach": {
-        "level": 2,
-        "name": "writes or runs",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "other: $.process.spawn",
           "other: $.state.get",
@@ -392064,7 +392372,8 @@
           "reads the transcript",
           "persists state",
           "draws"
-        ]
+        ],
+        "minimumLevel": 2
       },
       "sees": [
         "mcp__claude-code-cockpit__meter calls",
@@ -392083,7 +392392,10 @@
       "archived": false,
       "defaultBranch": "main",
       "duplicateOf": "m-esm/claude-code-cockpit:.",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "m-mahiro/claude-code-mods:mods/btw-fix",
@@ -405068,13 +405380,14 @@
         "warnings": []
       },
       "reach": {
-        "level": 3,
-        "name": "network",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "network",
           "MCP servers",
           "draws"
-        ]
+        ],
+        "minimumLevel": 3
       },
       "sees": [
         "every prompt"
@@ -405086,7 +405399,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "nakadaharuki/desk-meter:.",
@@ -416821,8 +417137,8 @@
         ]
       },
       "reach": {
-        "level": 2,
-        "name": "writes or runs",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "other: $.process.spawn",
           "other: $.state.get",
@@ -416836,7 +417152,8 @@
           "reads the transcript",
           "persists state",
           "draws"
-        ]
+        ],
+        "minimumLevel": 2
       },
       "sees": [
         "mcp__track__restore_tracker calls",
@@ -416865,7 +417182,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "ohade/claude-mods:track/tests/fixtures/performance-probe",
@@ -422223,9 +422543,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -422242,7 +422563,10 @@
           "modules../fast-jev.ts: fast-jev-compaction: .maestri/plugins/fast-jev-compaction/hooks/fast-jev.ts, compiled line 147 `const fromEnv = await $.env.get(name);`: $.env.get takes a literal name as its first argument, so the variables a module reads and writes can be listed (got the variable name); $ is always spelled $.noun.event(...) at the call site, on is always on(\"<even… [+51 chars]"
         ]
       },
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "paweechinagarn/claude-code-mods:cache-watch",
@@ -428172,8 +428496,8 @@
         "warnings": []
       },
       "reach": {
-        "level": 3,
-        "name": "network",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "other: $.state.get",
           "other: $.state.set",
@@ -428182,7 +428506,8 @@
           "reads files",
           "reads env vars",
           "draws"
-        ]
+        ],
+        "minimumLevel": 3
       },
       "sees": [
         "mcp__claude-link__chats calls",
@@ -428198,7 +428523,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "putraridho/sonar-dock:.",
@@ -430834,9 +431162,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -430846,7 +431175,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "ray-manaloto/knowledge-base:tests/fixtures/fnhook/bad-return",
@@ -431031,9 +431363,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -431043,7 +431376,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "ray-manaloto/knowledge-base:tests/fixtures/fnhook/reserved-name",
@@ -431083,9 +431419,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [
         "classic hooks"
@@ -431097,7 +431434,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "ray-manaloto/knowledge-base:tests/fixtures/fnhook/untyped",
@@ -435217,8 +435557,8 @@
         "warnings": []
       },
       "reach": {
-        "level": 3,
-        "name": "network",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "other: $.process.spawn",
           "other: $.state.get",
@@ -435231,7 +435571,8 @@
           "reads env vars",
           "persists state",
           "draws"
-        ]
+        ],
+        "minimumLevel": 3
       },
       "sees": [
         "? calls"
@@ -435246,7 +435587,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "Roberdinho/claude-mods:plugins/claude-pets",
@@ -435331,14 +435675,15 @@
         "warnings": []
       },
       "reach": {
-        "level": 1,
-        "name": "reads",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "other: $.state.get",
           "other: $.state.set",
           "persists state",
           "draws"
-        ]
+        ],
+        "minimumLevel": 1
       },
       "sees": [
         "every prompt",
@@ -435354,7 +435699,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "Roberdinho/claude-mods:plugins/coding-pet",
@@ -441452,14 +441800,15 @@
         "warnings": []
       },
       "reach": {
-        "level": 3,
-        "name": "network",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "network",
           "runs processes",
           "persists state",
           "draws"
-        ]
+        ],
+        "minimumLevel": 3
       },
       "sees": [],
       "draws": [
@@ -441471,7 +441820,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "sahiltalwar88/claude-mods:session-ledger",
@@ -443376,9 +443728,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -443388,7 +443741,10 @@
       "license": null,
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "sandipchitale/Avatar:mod",
@@ -466719,8 +467075,8 @@
         "warnings": []
       },
       "reach": {
-        "level": 2,
-        "name": "writes or runs",
+        "level": null,
+        "name": "unknown",
         "labels": [
           "other: $.state.get",
           "other: $.state.set",
@@ -466730,7 +467086,8 @@
           "reads settings",
           "persists state",
           "draws"
-        ]
+        ],
+        "minimumLevel": 2
       },
       "sees": [
         "compaction",
@@ -466747,7 +467104,10 @@
       "license": "Apache-2.0",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "theagitist/claude-mods:box-status",
@@ -495792,9 +496152,10 @@
         "warnings": []
       },
       "reach": {
-        "level": 0,
-        "name": "draws and remembers",
-        "labels": []
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
       },
       "sees": [],
       "draws": [],
@@ -495804,7 +496165,10 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "footprint": {
+        "status": "unavailable"
+      }
     },
     {
       "id": "wpvip-awesomeface/claude-mods:bento",

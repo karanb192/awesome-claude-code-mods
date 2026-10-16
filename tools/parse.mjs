@@ -2,6 +2,8 @@
 // The validator prints one "hooks:" and one "calls:" line per module; the calls
 // line may annotate helpers as "$.x.y (via a, b)", which is stripped here.
 
+import { posix } from 'node:path'
+
 const LINE = /^\s*❯\s+(\S+)\s+(hooks|calls|surface modules):\s*(.*)$/
 
 export function parseValidateOutput(text) {
@@ -10,10 +12,14 @@ export function parseValidateOutput(text) {
     const m = raw.match(LINE)
     if (!m) continue
     const [, file, kind, rest] = m
-    const mod = modules.get(file) ?? { file, hooks: [], calls: [], surfaceModules: [] }
-    if (kind === 'hooks') mod.hooks = parseHooks(rest)
-    else if (kind === 'calls') mod.calls = parseCalls(rest)
-    else mod.surfaceModules = rest.split(',').map(s => s.trim()).filter(Boolean)
+    const mod = modules.get(file) ?? { file, hooks: [], calls: [], surfaceModules: [], reported: [] }
+    if (kind === 'hooks') {
+      mod.hooks = parseHooks(rest)
+      if (rest.trim()) mod.reported.push('hooks')
+    } else if (kind === 'calls') {
+      mod.calls = parseCalls(rest)
+      if (mod.calls.length || /^nothing on \$\s*$/.test(rest.trim())) mod.reported.push('calls')
+    } else mod.surfaceModules = rest.split(',').map(s => s.trim()).filter(Boolean)
     modules.set(file, mod)
   }
   const status = /✔ Validation passed with warnings/.test(text) ? 'warnings'
@@ -31,6 +37,14 @@ export function parseValidateOutput(text) {
     }
   }
   return { status, errors, modules: [...modules.values()] }
+}
+
+export function footprintStatus(parsed, declared) {
+  const complete = Array.isArray(declared) && declared.length > 0 && declared.every(file =>
+    typeof file === 'string' && parsed.modules.some(mod => typeof mod.file === 'string'
+      && posix.normalize(mod.file) === posix.normalize(file)
+      && mod.reported?.includes('hooks') && mod.reported?.includes('calls')))
+  return { status: complete ? 'reported' : 'unavailable' }
 }
 
 // "session.start, tool.call{tool=Bash}, ui.render{component=Pane, surface=terminal}"

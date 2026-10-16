@@ -1,7 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { parseValidateOutput, parseHooks, parseCalls } from './parse.mjs'
-import { grade, visibility, drawsOn } from './grade.mjs'
+import { parseValidateOutput, parseHooks, parseCalls, footprintStatus } from './parse.mjs'
+import { grade, visibility, drawsOn, hasFootprint } from './grade.mjs'
 import { validate, validateAsync, spawnAsync, relativePaths } from './validate.mjs'
 import { mkdtempSync, mkdirSync, writeFileSync, chmodSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
@@ -34,6 +34,30 @@ test('parses hooks, matchers, calls and surface modules', () => {
 test('nothing on $ means no calls', () => {
   assert.deepEqual(parseCalls('nothing on $'), [])
   assert.deepEqual(parseHooks('tool.call'), [{ event: 'tool.call', matcher: {} }])
+})
+
+test('footprint coverage requires hooks and explicit calls for every declared module', () => {
+  const read = text => parseValidateOutput(text + '\n✘ Validation failed')
+  const full = '  ❯ ./a.ts hooks: session.start\n  ❯ ./a.ts calls: $.http.fetch'
+  assert.equal(footprintStatus(read(full), ['./a.ts']).status, 'reported')
+  assert.equal(footprintStatus(read(full), ['./a.ts', './b.ts']).status, 'unavailable')
+  for (const text of ['', '  ❯ ./a.ts hooks: session.start', '  ❯ ./a.ts calls: $.http.fetch',
+    '  ❯ ./a.ts hooks: session.start\n  ❯ ./a.ts calls:', '  ❯ ./a.ts hooks: session.start\n  ❯ ./a.ts calls: unknown']) {
+    assert.equal(footprintStatus(read(text), ['./a.ts']).status, 'unavailable', text)
+  }
+  const empty = read('  ❯ ./a.ts hooks: nothing\n  ❯ ./a.ts calls: nothing on $')
+  assert.equal(footprintStatus(empty, ['a.ts']).status, 'reported')
+  assert.equal(grade(empty.modules[0].calls).level, 0)
+  assert.equal(footprintStatus(empty, [null]).status, 'unavailable')
+})
+
+test('unknown access retains a lower bound and treats legacy failures conservatively', () => {
+  assert.deepEqual(grade(['$.http.fetch'], false), { level: null, name: 'unknown', labels: ['network'], minimumLevel: 3 })
+  for (const calls of [[], ['$.http.fetch']]) assert.equal(hasFootprint({ calls, validate: { status: 'failed' } }), false)
+  assert.equal(hasFootprint({ calls: [], validate: { status: 'passed' } }), true)
+  assert.equal(hasFootprint({ calls: [], validate: { status: 'unknown' }, lastKnownValidate: { status: 'warnings' } }), true)
+  assert.equal(hasFootprint({ footprint: { status: 'reported' }, validate: { status: 'failed' } }), true)
+  assert.equal(hasFootprint({ footprint: { status: 'unavailable' }, validate: { status: 'passed' } }), false)
 })
 
 test('failed validation carries the error line', () => {
@@ -90,7 +114,7 @@ test('a new mod, a footprint change, a validate flip and a version bump are chan
   assert.notEqual(fingerprint(base), fingerprint(after))
   assert.deepEqual(describeChange(base, after), ['Claude Code 2.1.272 to 2.1.280', 'new: e/f:.', 'a/b:.: reach L0 to L3'])
   const broken = clone(); broken.mods[0].validate.status = 'failed'
-  assert.deepEqual(describeChange(base, broken), ['a/b:.: validate passed to failed'])
+  assert.deepEqual(describeChange(base, broken), ['a/b:.: validate passed to failed', 'a/b:.: reach L0 to unknown'])
 })
 
 test('a listed duplicate collapses onto its successor; an unlisted same-owner same-name pair is only flagged', () => {

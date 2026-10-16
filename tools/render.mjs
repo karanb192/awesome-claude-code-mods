@@ -3,12 +3,18 @@
 // per mod under badges/ and docs/badges/, and the directory under docs/.
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync } from 'node:fs'
-import { LEVEL_NAMES } from './grade.mjs'
+import { LEVEL_NAMES, grade, hasFootprint } from './grade.mjs'
 import { renderSite, renderSitemap, renderRobots, renderLlms, reviewNotes } from './site.mjs'
 import { siteAnchors } from './slug.mjs'
 
 const data = JSON.parse(readFileSync('data/mods.json', 'utf8'))
-for (const m of data.mods) m.description = String(m.description ?? '').replace(/\s*[\u2014\u2013]\s*/g, ': ')
+for (const m of data.mods) {
+  m.description = String(m.description ?? '').replace(/\s*[\u2014\u2013]\s*/g, ': ')
+  if (!hasFootprint(m)) {
+    m.footprint = { status: 'unavailable' }
+    m.reach = grade(m.calls, false)
+  }
+}
 const mods = data.mods.filter(m => m.kind === 'mod')
 const builtins = data.mods.filter(m => m.kind === 'builtin')
 const catalogs = [...new Set(data.mods.filter(m => m.kind === 'catalog').map(m => m.repo))].map(repo => ({ repo, n: data.mods.filter(m => m.kind === 'catalog' && m.repo === repo).length }))
@@ -24,7 +30,7 @@ const short = (s, n = 110) => { s = String(s ?? '').replace(/\s+/g, ' ').replace
 // Anthropic palette (olive, clay, deep clay, plum, error red) with ivory text, matching claude.com and claude.dev.
 const LEVEL_COLORS = ['#788c5d', '#c96442', '#a94e2f', '#827dbd']
 const FAIL_COLOR = '#b53333'
-const reachText = m => m.reach.labels.length ? m.reach.labels.join(', ') : 'draws only'
+const reachText = m => !hasFootprint(m) ? 'unknown access' : m.reach.labels.length ? m.reach.labels.join(', ') : 'draws only'
 const validates = m => ['passed', 'warnings'].includes(m.validate.status)
 const validationText = m => validates(m) ? data.claudeVersion : m.validate.status === 'failed' ? `fails on ${data.claudeVersion}` : 'not verified'
 const scanText = m => [validationText(m), ...reviewNotes(m)].join('; ')
@@ -52,7 +58,7 @@ for (const dir of BADGE_DIRS) {
 }
 const writeBadge = (file, svg) => { for (const dir of BADGE_DIRS) writeFileSync(`${dir}/${file}`, svg) }
 for (const m of [...mods, ...builtins]) {
-  writeBadge(`${slug(m)}-reach.svg`, badge('reach', `L${m.reach.level} ${reachText(m)}`, LEVEL_COLORS[m.reach.level]))
+  writeBadge(`${slug(m)}-reach.svg`, badge('reach', `${hasFootprint(m) ? 'L' + m.reach.level + ' ' : ''}${reachText(m)}`, hasFootprint(m) ? LEVEL_COLORS[m.reach.level] : '#5e5d59'))
   writeBadge(`${slug(m)}-validates.svg`, badge('validates on', scanText(m), !validates(m) ? FAIL_COLOR : reviewNotes(m).length ? LEVEL_COLORS[1] : LEVEL_COLORS[0]))
 }
 
@@ -63,10 +69,11 @@ const stats = `As of ${asOf}, scanned against Claude Code ${data.claudeVersion}:
   + `${count(has('network'))} reach the network, ${count(m => m.sees.includes('every tool call'))} see every tool call, `
   + `${count(m => m.sees.includes('every prompt'))} see every prompt, ${count(m => m.validate.status === 'failed')} fail to validate on this version. `
   + `Reach levels: ${[0, 1, 2, 3].map(l => `L${l} ${LEVEL_NAMES[l]}: ${count(m => m.reach.level === l)}`).join(' · ')}.`
+  + ` Unknown access: ${count(m => !hasFootprint(m))}.`
   + ` ${count(m => m.directory)} are also listed in Anthropic's plugin directory.`
   + (catalogs.length ? ` Not counted: ${catalogs.map(c => `[${c.repo}](https://github.com/${c.repo}) repackages ${c.n} mods`).join(', ')}, a catalogue named here once instead of once per copy.` : '')
 
-const row = m => [`[${cell(m.name)}](${manifestUrl(m)})`, cell(short(m.description)), `![reach](badges/${slug(m)}-reach.svg)`, cell(m.sees.join(', ') || 'only what it hooks'), scanText(m), m.directory ? 'listed' : 'no', String(m.stars ?? '?')]
+const row = m => [`[${cell(m.name)}](${manifestUrl(m)})`, cell(short(m.description)), `![reach](badges/${slug(m)}-reach.svg)`, cell(hasFootprint(m) ? m.sees.join(', ') || 'only what it hooks' : 'unknown; incomplete footprint'), scanText(m), m.directory ? 'listed' : 'no', String(m.stars ?? '?')]
 // awesome-lint wants aligned pipes and padded cells, so every column is padded to its widest cell.
 function table(rows) {
   const head = ['Mod', 'What it does', 'Reach', 'Sees', 'Validates on', 'In Anthropic directory', 'Stars']

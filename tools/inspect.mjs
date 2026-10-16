@@ -7,6 +7,7 @@ import { existsSync, lstatSync, readFileSync, readdirSync, realpathSync } from '
 import { join, relative, dirname } from 'node:path'
 import { createHash } from 'node:crypto'
 import { validateAsync, spawnAsync } from './validate.mjs'
+import { footprintStatus } from './parse.mjs'
 import { uiRewriteReview, marketplacesFor } from './compatibility.mjs'
 
 const SKIP_DIRS = new Set(['node_modules', '.git'])
@@ -102,9 +103,12 @@ export async function inspect(repo, dir, clones, claudeVersion) {
     if (parsed.status === 'unknown') unsettled = true
     const allHooks = parsed.modules.flatMap(x => x.hooks)
     const allCalls = [...new Set(parsed.modules.flatMap(x => x.calls))].sort()
+    const footprint = footprintStatus(parsed, hooks.modules)
     const dupKey = `${repo}:${manifest?.name}:${JSON.stringify(allHooks)}:${allCalls.join()}`
-    if (seen.has(dupKey)) { console.log(`skip     duplicate ${id}`); continue }
-    seen.add(dupKey)
+    if (footprint.status === 'reported') {
+      if (seen.has(dupKey)) { console.log(`skip     duplicate ${id}`); continue }
+      seen.add(dupKey)
+    }
     const marketplaces = []
     for (const path of marketplacesFor(dir, root)) {
       if (!marketplaceResults.has(path)) {
@@ -121,6 +125,7 @@ export async function inspect(repo, dir, clones, claudeVersion) {
       manifestHomepage: manifest?.homepage ?? null,
       hasManifest: existsSync(manifestPath),
       modules: hooks.modules,
+      footprint,
       hooks: allHooks,
       calls: allCalls,
       surfaceModules: [...new Set(parsed.modules.flatMap(x => x.surfaceModules))],
