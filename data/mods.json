@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-15T06:15:28.072Z",
   "claudeVersion": "2.1.300",
-  "repos": 2145,
+  "repos": 2146,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -503618,6 +503618,241 @@
       "stars": 0,
       "pushedAt": "2026-10-15T11:33:16Z",
       "createdAt": "2026-10-09T15:04:44Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "404Mayank/cachebeat:.",
+      "repo": "404Mayank/cachebeat",
+      "path": ".",
+      "sourceCommit": "c84ac68ec30720083f503ac0ed1bc28393e44c5d",
+      "name": "cachebeat",
+      "description": "Keeps the prompt cache warm while a session sits idle: shortly before the cache would expire, a small background request re-reads it, without touching the transcript. A beating heart under the prompt shows it working, and Claude can read and change it for you. Each beat counts toward your usage.",
+      "author": "Mayank",
+      "homepage": "https://github.com/404Mayank/cachebeat",
+      "url": "https://github.com/404Mayank/cachebeat",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {
+            "reason": "clear"
+          }
+        },
+        {
+          "event": "session.end",
+          "matcher": {
+            "reason": "resume"
+          }
+        },
+        {
+          "event": "classic.SessionStart",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "cachebeat"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__cachebeat__state"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__cachebeat__set"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolUse",
+            "props has {tool": "mcp__cachebeat__state"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolUse",
+            "props has {tool": "mcp__cachebeat__set"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolResult",
+            "props has {tool": "mcp__cachebeat__state"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolResult",
+            "props has {tool": "mcp__cachebeat__set"
+          }
+        },
+        {
+          "event": "classic.PostModelSwitch",
+          "matcher": {}
+        },
+        {
+          "event": "session.compact",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "TurnDuration"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "PromptHint"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "?"
+          }
+        },
+        {
+          "event": "ui.focus",
+          "matcher": {
+            "requestId": "?"
+          }
+        },
+        {
+          "event": "ui.scroll",
+          "matcher": {
+            "requestId": "?"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "?"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.model.fork",
+        "$.session.messages",
+        "$.session.model",
+        "$.session.root",
+        "$.session.usage",
+        "$.settings.read",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.tool.register",
+        "$.ui.focus",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.scroll",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.300",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "cachebeat",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": [
+          {
+            "code": "ui-control-characters",
+            "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+            "evidence": [
+              {
+                "file": "hooks/register.tsx",
+                "line": 403
+              }
+            ]
+          }
+        ]
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "drives Claude",
+          "reads env vars",
+          "reads settings",
+          "reads the transcript",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks",
+        "mcp__cachebeat__state calls",
+        "mcp__cachebeat__set calls",
+        "compaction"
+      ],
+      "draws": [
+        "ToolUse",
+        "ToolResult",
+        "TurnDuration",
+        "PromptHint",
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-13T19:44:48Z",
+      "createdAt": "2026-10-08T20:56:40Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

@@ -24,6 +24,7 @@
 2bo/pr-inbox
 3DMolier/3D-Models
 3dnow/claude-mods
+404Mayank/cachebeat
 416rehman/spinlings
 4DvAnCeBoY/rook-claude-plugin
 5dive-ai/5dive-plugins
