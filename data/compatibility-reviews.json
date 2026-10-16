@@ -1,0 +1,30 @@
+[
+  {
+    "id": "404Mayank/cachebeat:.",
+    "sourceCommit": "c84ac68ec30720083f503ac0ed1bc28393e44c5d",
+    "claudeVersion": "2.1.300",
+    "warnings": [
+      {
+        "code": "ui-control-characters",
+        "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+        "evidence": [{ "file": "hooks/register.tsx", "line": 403 }]
+      }
+    ],
+    "reason": "The control characters delimit hash input. hashOf returns a base-36 string; these delimiters are not rendered or passed to next() as rewritten text.",
+    "source": "https://github.com/404Mayank/cachebeat/blob/c84ac68ec30720083f503ac0ed1bc28393e44c5d/hooks/register.tsx#L403-L406"
+  },
+  {
+    "id": "kiankhooban/open-paths:.",
+    "sourceCommit": "dad28e23010500d228a70ad1e048e0888d402a17",
+    "claudeVersion": "2.1.300",
+    "warnings": [
+      {
+        "code": "ui-control-characters",
+        "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+        "evidence": [{ "file": "hooks/paths.ts", "line": 138 }]
+      }
+    ],
+    "reason": "The null character is used only to reject paths containing it. resolvePath returns undefined for that input; the literal is not inserted into rendered text.",
+    "source": "https://github.com/kiankhooban/open-paths/blob/dad28e23010500d228a70ad1e048e0888d402a17/hooks/paths.ts#L138"
+  }
+]

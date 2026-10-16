@@ -1,11 +1,13 @@
 # Repos the GitHub code search has not indexed yet. One owner/repo per line, in alphabetical order ignoring case.
 3dnow/claude-mods
+404Mayank/cachebeat
 adamholter/claude-subway-surfers
 agentic-workbench/agent-quick-menu
 AlexeyHRDesign/colorwheel
 alexjacobs08/guided-mr
 alexlifexyz/p3c-guard
 amsultan2010/clawd-minecraft
+andrej-kolic/claude-mods
 Anerco/effort-cycle-mod
 anthropics/claude-code
 Antreas-Strb/glanceflow
@@ -38,6 +40,7 @@ halluton/Mindful-Claude
 helenkwok/gsd-status-mod
 helenkwok/open-links
 hellosverre/claude-skins
+hellosverre/mod-store
 hellosverre/redgreen
 hellosverre/smart-compact
 hoobnn/hoobnn-agent-mods
@@ -46,12 +49,15 @@ iamumeransari/claude-show-your-work
 icedevil2001/auto-continue
 jarrodwatts/intermission
 Jarvizx/hablo
+jiangnanquan/claude-code-zh
 joshuatonga/mini-claude-mods
 karanb192/cache-tax
 karanb192/claude-code-mods
+kiankhooban/open-paths
 kongyo2/context-view
 ljmerza/prompt-spellcheck
 lorenzh/rabe
+magiclin99/buddy-go
 ManuelWarland/claude-codex-pane
 MarcoCarnevali/claude-code-mods
 mertkayacs/ultramod
@@ -85,6 +91,7 @@ somethingwentwell/cc-mod-banana-game
 Sumit189/explain-claude-mod
 SummerRiversound/review-inbox
 T-AI-Labs/claude-code-mods
+tozmoz/sparkmine
 twjackysu/claude-code-stock-ticker
 ugglr/claude-token-monster
 VaitaR/claude-code-limits
@@ -92,6 +99,7 @@ valeryia-piatrova/token-hamster
 varunmoka7/image-shrinker
 varunmoka7/next-steps-autopilot
 varunmoka7/reddit-watch
+vcdim/claude-code-sciplot
 verdantran/code-city
 vicmpen/mokkan
 vihrea1337/headroom

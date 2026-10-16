@@ -75,6 +75,43 @@ test('one failing seed does not hold back the others', () => {
   assert.deepEqual(pendingSeeds(['new/repo', 'bad/repo', 'gone/repo', 'missing/repo'], result.inventory), ['bad/repo', 'gone/repo', 'missing/repo'])
 })
 
+test('a reviewed compatibility warning publishes only its exact source and warning records', () => {
+  const warning = { code: 'ui-control-characters', message: 'Review UI strings', evidence: [{ file: 'hooks/mod.js', line: 10 }] }
+  const entry = mod('new/repo', 'one', { compatibility: { warnings: [warning] } })
+  const review = { id: entry.id, sourceCommit: entry.sourceCommit, claudeVersion: '2.1.287', warnings: [warning], reason: 'Hash delimiter only' }
+  const publish = (reviews, current = inventory([entry])) => planPublication(before(), current, ['new/repo'], ['new/repo'], ['existing/repo'], undefined, reviews)
+  const original = structuredClone(entry)
+  const accepted = publish([review])
+  assert.deepEqual(accepted.published, ['new/repo'])
+  assert.deepEqual(accepted.inventory.mods.at(-1), original)
+  assert.deepEqual(entry, original)
+  for (const change of [
+    { id: 'new/repo:other' }, { sourceCommit: 'b'.repeat(40) }, { sourceCommit: '' },
+    { claudeVersion: '2.1.288' }, { reason: ' ' }, { warnings: [] },
+    { warnings: [{ ...warning, code: 'another-warning' }] },
+    { warnings: [{ ...warning, message: 'Changed warning' }] },
+    { warnings: [{ ...warning, evidence: [{ file: 'hooks/mod.js', line: 11 }] }] },
+    { warnings: [warning, warning] },
+  ]) skippedFor(publish([{ ...review, ...change }]), /compatibility needs review/)
+  skippedFor(publish([]), /compatibility needs review/)
+  skippedFor(publish([null, 0, 'invalid']), /compatibility needs review/)
+  assert.deepEqual(publish([null, review]).published, ['new/repo'])
+  skippedFor(publish([review], inventory([entry, mod('new/repo', 'two', { compatibility: entry.compatibility })])), /compatibility needs review/)
+})
+
+test('compatibility reviews cannot bypass validation, marketplace, inspection or duplicate holds', () => {
+  const warning = { code: 'ui-control-characters', evidence: [{ file: 'hooks/mod.js', line: 10 }] }
+  const entry = mod('existing/other', 'mod', { compatibility: { warnings: [warning] } })
+  const review = { id: entry.id, sourceCommit: entry.sourceCommit, claudeVersion: '2.1.287', warnings: [warning], reason: 'Hash delimiter only' }
+  const publish = current => appendSeeds(before(), current, ['existing/other'], ['existing/repo'], undefined, [review])
+  skippedFor(publish(inventory([entry])), /possible duplicate/)
+  for (const status of ['failed', 'unknown']) {
+    skippedFor(publish(inventory([{ ...entry, validate: { ...entry.validate, status } }])), /validation needs review/)
+    skippedFor(publish(inventory([{ ...entry, marketplaces: [{ status }] }])), /marketplace needs review/)
+  }
+  skippedFor(publish({ ...inventory([entry]), checkedRepos: [] }), /not fully inspected/)
+})
+
 test('warnings and fixtures are retained when the seed includes valid counted mods', () => {
   const current = inventory([mod('new/repo', 'real', { validate: { status: 'warnings', claudeVersion: '2.1.287' } }), mod('new/repo', 'probe', { kind: 'fixture' })])
   assert.equal(append(current).inventory.mods.length, 3)
@@ -238,6 +275,7 @@ for (const concurrentPublication of [false, true]) test(`publication handles a c
   const publishedBefore = [renderable('existing/repo', 'old'), renderable('existing/repo', 'copy')]
   writeFileSync(join(checkout, 'data/mods.json'), JSON.stringify(inventory(publishedBefore)))
   writeFileSync(join(checkout, 'data/duplicates.txt'), 'existing/repo:copy existing/repo:old\n')
+  writeFileSync(join(checkout, 'data/compatibility-reviews.json'), '[]\n')
   writeFileSync(join(checkout, 'data/repos.txt'), 'existing/repo\n')
   writeFileSync(join(checkout, 'data/seeds.txt'), 'existing/repo\nnew/repo\nbroken/repo\n')
   writeFileSync(join(checkout, 'README.md'), '<!-- stats:start -->\n<!-- stats:end -->\n')

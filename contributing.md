@@ -24,6 +24,8 @@ This path preserves existing entries and the last full-scan date. It uses the pu
 
 Duplicate rules involving a new seed are checked during publication. Rules between entries already published wait for a reviewed full scan; merging those rules does not block unrelated seed additions or silently change older listings. A new seed that would reclassify an existing mod still waits for review.
 
+A maintainer can record a verified UI-warning false positive in `data/compatibility-reviews.json`, with its source link and reason, to clear that publication hold. Publication accepts it only for the exact plugin ID, upstream commit, validator version and complete warning records reviewed. A changed commit or warning requires another review. The original warning remains in the inventory, and validation, marketplace and duplicate checks still apply. Contributors do not add their own approvals to this file.
+
 Publication runs share a separate queue and never scan in parallel with each other. When several contributor PRs merge, the active run reuses its completed scan on the latest main and repeats generation and checks if needed. The next queued run reads current main and scans all remaining unpublished seeds together. Already published seeds are skipped. A full scan can still run independently; its newer records are preserved. Eight consecutive main changes during publication stop that run for a later retry.
 
 Missing plugins stay listed as unverified during scheduled scans. Weekly retirement proposals require a fresh successful checkout and record the revision used to establish that a hook module is gone. Clone failures and failed validation are not removal evidence. Curated descriptions need a separate human review when an upstream project changes.

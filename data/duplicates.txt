@@ -89,3 +89,7 @@ Ascurse/claude-mods:local-mods/plugins/agent-flow Charlie0113-T/claude-agent-flo
 Ascurse/claude-mods:local-mods/plugins/agent-compact-advisor apolenkov/agent-compact-advisor:.
 Ascurse/claude-mods:local-mods/plugins/next-steps pawandeepdhall/claude-mods:plugins/next-steps
 midudev/after-for-claude-code:. midudev/after-for-claude-code:after
+xsyetopz/dotclaude:src/plugins/dotclaude-browser xsyetopz/dotclaude:plugins/dotclaude-browser
+liveweird/plan-progress:. liveweird/claude-mods:plan-progress
+potto007/ottomation:plugins/diagram-pane ray-amjad/awesome-claude-code-function-hooks:plugins/diagram-pane
+sr-gene/claude-mod:. sr-gene/claude-mod:plugins/step-tracker

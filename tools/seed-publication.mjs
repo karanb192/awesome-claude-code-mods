@@ -1,5 +1,5 @@
 import { appendFileSync, readFileSync, writeFileSync } from 'node:fs'
-import { parseArgs } from 'node:util'
+import { isDeepStrictEqual, parseArgs } from 'node:util'
 import { mergeRepos, readRepos } from './candidates.mjs'
 import { applyDuplicates, readDuplicates, suspectDuplicates } from './dedupe.mjs'
 
@@ -12,7 +12,7 @@ export function pendingSeeds(seeds, inventory) {
 }
 
 // Why one repository cannot publish automatically, or null when every record qualifies.
-export function reviewSeed(mods, claudeVersion, publishedIds) {
+export function reviewSeed(mods, claudeVersion, publishedIds, compatibilityReviews = []) {
   if (!mods.some(mod => mod.kind === 'mod')) return 'no validating mod plugins found; the repository may have failed to clone'
   for (const mod of mods) {
     if (publishedIds.has(mod.id)) return `plugin ID already published: ${mod.id}`
@@ -20,14 +20,19 @@ export function reviewSeed(mods, claudeVersion, publishedIds) {
     if (mod.kind !== 'mod') continue
     if (!ACCEPTED.includes(mod.validate.status)) return `validation needs review: ${mod.id}`
     if ((mod.marketplaces ?? []).some(market => !ACCEPTED.includes(market.status))) return `marketplace needs review: ${mod.id}`
-    if (mod.compatibility?.warnings?.length) return `compatibility needs review: ${mod.id}`
+    if (mod.compatibility?.warnings?.length && !compatibilityReviews.some(review =>
+      review?.id === mod.id && /^[a-f0-9]{40}$/.test(review.sourceCommit ?? '') &&
+      review.sourceCommit === mod.sourceCommit && review.claudeVersion === claudeVersion &&
+      typeof review.reason === 'string' && review.reason.trim() &&
+      isDeepStrictEqual(review.warnings, mod.compatibility.warnings)
+    )) return `compatibility needs review: ${mod.id}`
   }
   return null
 }
 
 // Publishes every seed whose records qualify and reports the rest, so one broken seed does
 // not hold back the batch. Only inconsistencies in the scan itself stop the whole run.
-export function appendSeeds(before, scanned, seeds, candidates, duplicates = new Map()) {
+export function appendSeeds(before, scanned, seeds, candidates, duplicates = new Map(), compatibilityReviews = []) {
   const wanted = mergeRepos(seeds)
   const wantedKeys = new Set(wanted.map(key))
   if (!wanted.length) throw new Error('No unpublished seeds')
@@ -44,7 +49,7 @@ export function appendSeeds(before, scanned, seeds, candidates, duplicates = new
   const skipped = []
   let accepted = wanted.filter(repo => {
     const records = scanned.mods.filter(mod => key(mod.repo) === key(repo))
-    const reason = reviewSeed(records, before.claudeVersion, publishedIds)
+    const reason = reviewSeed(records, before.claudeVersion, publishedIds, compatibilityReviews)
       ?? (checked.has(key(repo)) ? null : 'repository was not fully inspected; retry or repair malformed hooks')
     if (reason) skipped.push({ repo, reason })
     return !reason
@@ -80,13 +85,13 @@ export function appendSeeds(before, scanned, seeds, candidates, duplicates = new
   }
 }
 
-export function planPublication(before, scanned, requested, approved, candidates, duplicates) {
+export function planPublication(before, scanned, requested, approved, candidates, duplicates, compatibilityReviews = []) {
   const requestedKeys = new Set(mergeRepos(requested).map(key))
   if (scanned.mods.some(mod => !requestedKeys.has(key(mod.repo)))) throw new Error('Scan includes a repository that was not requested')
   const pending = pendingSeeds(approved, before).filter(repo => requestedKeys.has(key(repo)))
   if (!pending.length) return null
   const selected = new Set(pending.map(key))
-  return appendSeeds(before, { ...scanned, mods: scanned.mods.filter(mod => selected.has(key(mod.repo))) }, pending, candidates, duplicates)
+  return appendSeeds(before, { ...scanned, mods: scanned.mods.filter(mod => selected.has(key(mod.repo))) }, pending, candidates, duplicates, compatibilityReviews)
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
@@ -99,7 +104,9 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `pending=${pending.length > 0}\nversion=${inventory.claudeVersion}\n`)
     console.log(`${pending.length} unpublished seed repositories`)
   } else {
-    const result = planPublication(inventory, JSON.parse(readFileSync(values.scan, 'utf8')), readRepos(values.repos), readRepos('data/seeds.txt'), readRepos('data/repos.txt'), readDuplicates())
+    const compatibilityReviews = JSON.parse(readFileSync('data/compatibility-reviews.json', 'utf8'))
+    if (!Array.isArray(compatibilityReviews)) throw new Error('Compatibility reviews must be an array')
+    const result = planPublication(inventory, JSON.parse(readFileSync(values.scan, 'utf8')), readRepos(values.repos), readRepos('data/seeds.txt'), readRepos('data/repos.txt'), readDuplicates(), compatibilityReviews)
     if (result?.inventory) {
       writeFileSync('data/mods.json', JSON.stringify(result.inventory, null, 2) + '\n')
       writeFileSync('data/repos.txt', result.repos.join('\n') + '\n')
