@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-15T06:15:28.072Z",
   "claudeVersion": "2.1.300",
-  "repos": 2148,
+  "repos": 2151,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -504077,6 +504077,319 @@
       "stars": 2,
       "pushedAt": "2026-10-15T07:26:09Z",
       "createdAt": "2026-10-12T13:53:15Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "edtrackai/claude-code-guardrails-lite:.",
+      "repo": "edtrackai/claude-code-guardrails-lite",
+      "path": ".",
+      "sourceCommit": "26efbe7c9e7ec5fd1bd29d357ffbcca26a7fe51f",
+      "name": "guardrails-lite",
+      "description": "Pattern-based checks that deny .env reads, git force pushes and rm -rf on / or your home folder before Claude Code runs them.",
+      "author": "Stack & Ship",
+      "homepage": "https://github.com/edtrackai/claude-code-guardrails-lite",
+      "url": "https://github.com/edtrackai/claude-code-guardrails-lite",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.mjs"
+      ],
+      "hooks": [
+        {
+          "event": "tool.call",
+          "matcher": {}
+        }
+      ],
+      "calls": [],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.300",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "guardrails-lite",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": []
+      },
+      "sees": [
+        "every tool call"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-10-16T05:51:44Z",
+      "createdAt": "2026-10-15T05:51:52Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "HuliLulu46/polish:.",
+      "repo": "HuliLulu46/polish",
+      "path": ".",
+      "sourceCommit": "c33521eda8e1273c4f6d209eda16a9ae6aec1d4c",
+      "name": "polish",
+      "description": "/polish <text>: rewrites it into a clearer prompt and leaves the result in the input box for you to confirm",
+      "author": null,
+      "homepage": "https://github.com/HuliLulu46/polish",
+      "url": "https://github.com/HuliLulu46/polish",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "hooks": [
+        {
+          "event": "session.append",
+          "matcher": {
+            "door": "command"
+          }
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "polish"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.model.complete",
+        "$.model.fork",
+        "$.prompt.fill",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.300",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "polish",
+          "status": "warnings",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "drives Claude",
+          "writes the prompt box",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-10-15T02:59:33Z",
+      "createdAt": "2026-10-15T02:53:16Z",
+      "license": null,
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "T-AI-Labs/claude-code-mods:cache-meter",
+      "repo": "T-AI-Labs/claude-code-mods",
+      "path": "cache-meter",
+      "sourceCommit": "166f72dadb5e04482857ffab4b64503fee24ffac",
+      "name": "cache-meter",
+      "description": "Prompt-cache hit rate and context fill in one row above the prompt, with a switchable auto-compact threshold and Compact and Clear buttons.",
+      "author": "Claude",
+      "homepage": "https://github.com/T-AI-Labs/claude-code-mods",
+      "url": "https://github.com/T-AI-Labs/claude-code-mods/tree/main/cache-meter",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "session.compact",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.command.run",
+        "$.session.usage",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.300",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "T-AI-Labs",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "drives Claude",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "compaction"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-13T18:58:43Z",
+      "createdAt": "2026-10-12T19:11:31Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "T-AI-Labs/claude-code-mods:usage-limits",
+      "repo": "T-AI-Labs/claude-code-mods",
+      "path": "usage-limits",
+      "sourceCommit": "166f72dadb5e04482857ffab4b64503fee24ffac",
+      "name": "usage-limits",
+      "description": "One row above the prompt: how much of the 5-hour and weekly usage limits is used, in percent, with the time until each resets.",
+      "author": "Claude",
+      "homepage": "https://github.com/T-AI-Labs/claude-code-mods",
+      "url": "https://github.com/T-AI-Labs/claude-code-mods/tree/main/usage-limits",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.session.usage",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.300",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "T-AI-Labs",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-13T18:58:43Z",
+      "createdAt": "2026-10-12T19:11:31Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

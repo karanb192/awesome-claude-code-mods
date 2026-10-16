@@ -582,6 +582,7 @@ EasyAIHenry/henry-mods
 echo724/echo-claude-mod
 eddiezhan/xhs-count-mod
 edoproch/compact-jev
+edtrackai/claude-code-guardrails-lite
 eduardocruz/cc-kit
 edwinhu/workflows
 eel-brah/burn-baby-burn
@@ -797,6 +798,7 @@ hugo88/claude-code-recording-mode
 hugoamadio/claude-quickbar
 Hugopvigo/claude-statusline-mod
 Hula-Hoop-AI/supermods
+HuliLulu46/polish
 Humpens/claude-mods
 Huuuuung/think-meter
 huydepzai121/claude-acp-ui
@@ -1822,6 +1824,7 @@ Syrul/claudagotchi
 szarkans/gamble-with-claude-code
 Szewowsky/mody-claude-code
 Szotasz/claude-mods
+T-AI-Labs/claude-code-mods
 tadassuksteris/thread-setup
 tadokorokantoku/cc-mods
 tak-kam/claude-mods
