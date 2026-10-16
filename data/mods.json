@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-15T06:15:28.072Z",
   "claudeVersion": "2.1.300",
-  "repos": 2147,
+  "repos": 2148,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -503963,6 +503963,120 @@
       "stars": 0,
       "pushedAt": "2026-10-15T05:45:04Z",
       "createdAt": "2026-10-15T05:27:35Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "Kruhlikau/subagent-tuner:.",
+      "repo": "Kruhlikau/subagent-tuner",
+      "path": ".",
+      "sourceCommit": "46bee016e183ca81ede82139fa01b17048ee721e",
+      "name": "subagent-tuner",
+      "description": "Picks the model and reasoning effort of every subagent: a recommendation by task kind, a band above the prompt, and a saved default that wins. Needs Claude Code 2.1.295 or later.",
+      "author": "Aleh Kruhlikau",
+      "homepage": "https://github.com/Kruhlikau/subagent-tuner",
+      "url": "https://github.com/Kruhlikau/subagent-tuner",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "hooks": [
+        {
+          "event": "agent.offer",
+          "matcher": {}
+        },
+        {
+          "event": "agent.spawn",
+          "matcher": {}
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Agent"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.clock.sleep",
+        "$.fs.write",
+        "$.process.run",
+        "$.session.surfaces",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.ask",
+        "$.ui.close",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.300",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "subagent-tuner",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "runs processes",
+          "writes files",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "subagent spawns",
+        "Agent calls"
+      ],
+      "draws": [
+        "Pane",
+        "AbovePrompt"
+      ],
+      "stars": 2,
+      "pushedAt": "2026-10-15T07:26:09Z",
+      "createdAt": "2026-10-12T13:53:15Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
