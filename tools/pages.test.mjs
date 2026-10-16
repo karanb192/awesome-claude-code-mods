@@ -105,6 +105,28 @@ test('a retained record follows a hand-set redirect until a fresh scan finds it 
   assert.deepEqual(back.registry['deleted--repo--tool'], { id: gone.id })
 })
 
+test('a redirect to a repository that changed case lands on the rescanned page, not the retained copy', () => {
+  const old = mod('Owner/Repo', 'tool'), copy = mod('x/y', 'tool')
+  const first = assign([old, copy])
+  const stale = { ...old, validate: { status: 'unknown', errors: [] } }
+  const fresh = mod('owner/repo', 'tool')
+  const second = assign([stale, fresh], first.registry, [stale, fresh, { ...copy, kind: 'duplicate', duplicateOf: fresh.id }])
+  assert.equal(slugOf(second, fresh.id), 'Owner--Repo--tool')
+  assert.equal(second.redirects.get('x--y--tool'), 'Owner--Repo--tool')
+})
+
+test('retained records that redirect follow each other to a live page, and a cycle of them redirects nowhere', () => {
+  const gone = status => ({ validate: { status, errors: [] } })
+  const a = mod('x/a', 'm', gone('unknown')), b = mod('x/b', 'm', gone('unknown')), c = mod('x/c', 'm')
+  const base = assign([a, b, c]).registry
+  const chain = assign([a, b, c], { ...base, 'x--a--m': { id: a.id, to: 'x--b--m' }, 'x--b--m': { id: b.id, to: 'x--c--m' } })
+  assert.deepEqual([...chain.redirects].sort(), [['x--a--m', 'x--c--m'], ['x--b--m', 'x--c--m']])
+  const cycle = assign([a, b, c], { ...base, 'x--a--m': { id: a.id, to: 'x--b--m' }, 'x--b--m': { id: b.id, to: 'x--a--m' } })
+  assert.equal(cycle.redirects.size, 0)
+  assert.equal(slugOf(cycle, a.id), 'x--a--m')
+  assert.equal(cycle.registry['x--a--m'].to, 'x--b--m', 'a hand-set target is kept for the maintainer to fix')
+})
+
 test('a maintainer can point a retired path at another page by hand', () => {
   const keeper = mod('new/home', 'tool')
   const result = assign([keeper], { 'old--home--tool': { id: 'old/home:tool', to: 'new--home--tool' } })

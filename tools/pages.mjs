@@ -56,25 +56,32 @@ export function assignPages(records, registry, all) {
     pages.set(mod, slug)
   }
   const ownerOf = new Map([...pages].map(([mod, slug]) => [slug, mod]))
-  const pageOf = new Map([...pages].map(([mod, slug]) => [identity(idOf(mod)), slug]))
+  // pages is in claim order, so a rescanned record wins over a retained copy under the old letter case.
+  const pageOf = new Map()
+  for (const [mod, slug] of pages) if (!pageOf.has(identity(idOf(mod)))) pageOf.set(identity(idOf(mod)), slug)
   const duplicateOf = new Map(all.filter(mod => mod.kind === 'duplicate' && mod.duplicateOf).map(mod => [identity(idOf(mod)), identity(mod.duplicateOf)]))
   const resolve = (slug, seen = new Set()) => {
     const entry = entries.get(slug)
     if (!entry || seen.has(slug)) return
     seen.add(slug)
     for (let id = identity(entry.id), hops = new Set(); id && !hops.has(id); id = duplicateOf.get(id)) {
-      if (pageOf.has(id)) return pageOf.get(id)
+      if (pageOf.has(id)) return follow(pageOf.get(id), seen)
       hops.add(id)
     }
     return entry.to ? resolve(entry.to, seen) : undefined
+  }
+  // A retained page that itself redirects is not a terminal page; a cycle of them resolves to nothing.
+  const follow = (slug, seen) => {
+    const owner = ownerOf.get(slug), to = entries.get(slug).to
+    return owner && retained(owner) && to ? resolve(to, seen) : slug
   }
   const redirects = new Map()
   for (const [slug, entry] of [...entries]) {
     const owner = ownerOf.get(slug)
     if (owner) {
-      const target = entry.to && retained(owner) ? resolve(entry.to) : undefined
-      if (target && target !== slug) redirects.set(slug, target)
-      else if (entry.to) entries.set(slug, { id: entry.id })
+      if (!retained(owner)) { if (entry.to) entries.set(slug, { id: entry.id }); continue }
+      const target = entry.to ? resolve(entry.to, new Set([slug])) : undefined
+      if (target) redirects.set(slug, target)
       continue
     }
     const target = resolve(slug)
