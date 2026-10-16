@@ -26,29 +26,36 @@ export function readRegistry(text) {
 // One entry per line keeps the diff of an added mod to one line.
 export const formatRegistry = registry => `{\n${Object.entries(registry).sort(([a], [b]) => byText(a, b)).map(([slug, entry]) => `  ${JSON.stringify(slug)}: ${JSON.stringify(entry)}`).join(',\n')}\n}\n`
 
+const retained = mod => mod.validate?.status === 'unknown'
+
 // records: the mods and built-ins that get pages. all: every scanned record, for duplicateOf links.
-// A maintainer can point a retired path at another page by setting its "to" in data/pages.json.
+// A maintainer can point a retired path at another page by setting its "to" in data/pages.json; a record
+// the scan only retained follows that redirect until a fresh scan finds it again.
 export function assignPages(records, registry, all) {
   const entries = new Map(Object.entries(registry).sort(([a], [b]) => byText(a, b)))
   // macOS checkouts are case-insensitive, so two paths differing only in case would overwrite each other.
   const taken = new Set([...entries.keys()].map(slug => slug.toLowerCase()))
   const owned = new Map()
-  for (const [slug, entry] of entries) if (!owned.has(identity(entry.id))) owned.set(identity(entry.id), slug)
-  // Input order follows stars, so candidate paths are worked out and handed out in id order.
-  const ordered = [...records].sort((a, b) => byText(idOf(a), idOf(b)))
-  const candidates = slugs(ordered)
-  const pages = new Map()
+  for (const [slug, entry] of entries) owned.set(identity(entry.id), [...(owned.get(identity(entry.id)) ?? []), slug])
+  // Input order follows stars, so candidate paths are worked out in id order. A rescanned record claims a
+  // shared path before a retained copy of it under the repository's old letter case.
+  const candidates = slugs([...records].sort((a, b) => byText(idOf(a), idOf(b))))
+  const ordered = [...records].sort((a, b) => retained(a) - retained(b) || byText(idOf(a), idOf(b)))
+  const pages = new Map(), claimed = new Set()
   for (const mod of ordered) {
-    let slug = owned.get(identity(idOf(mod)))
+    const mine = (owned.get(identity(idOf(mod))) ?? []).filter(slug => !claimed.has(slug))
+    let slug = mine.find(slug => entries.get(slug).id === idOf(mod)) ?? mine[0]
     if (!slug) {
       const base = candidates.get(mod)
       slug = base
       for (let n = 2; taken.has(slug.toLowerCase()); n++) slug = `${base}--${n}`
       taken.add(slug.toLowerCase())
     }
+    claimed.add(slug)
     entries.set(slug, { ...entries.get(slug), id: idOf(mod) })
     pages.set(mod, slug)
   }
+  const ownerOf = new Map([...pages].map(([mod, slug]) => [slug, mod]))
   const pageOf = new Map([...pages].map(([mod, slug]) => [identity(idOf(mod)), slug]))
   const duplicateOf = new Map(all.filter(mod => mod.kind === 'duplicate' && mod.duplicateOf).map(mod => [identity(idOf(mod)), identity(mod.duplicateOf)]))
   const resolve = (slug, seen = new Set()) => {
@@ -63,8 +70,11 @@ export function assignPages(records, registry, all) {
   }
   const redirects = new Map()
   for (const [slug, entry] of [...entries]) {
-    if (pageOf.get(identity(entry.id)) === slug) {
-      if (entry.to) entries.set(slug, { id: entry.id })
+    const owner = ownerOf.get(slug)
+    if (owner) {
+      const target = entry.to && retained(owner) ? resolve(entry.to) : undefined
+      if (target && target !== slug) redirects.set(slug, target)
+      else if (entry.to) entries.set(slug, { id: entry.id })
       continue
     }
     const target = resolve(slug)

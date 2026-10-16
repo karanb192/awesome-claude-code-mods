@@ -110,7 +110,9 @@ writeFileSync('docs/mods.json', JSON.stringify(data, null, 2) + '\n')
 // Everything under docs/mods/ is generated, so a folder this render does not write belongs to a retired mod.
 const pageFolders = new Set([...identity.pages.values(), ...identity.redirects.keys()])
 for (const entry of readdirSync('docs/mods')) if (!pageFolders.has(entry)) rmSync(`docs/mods/${entry}`, { recursive: true, force: true })
+if (new Set(identity.pages.values()).size !== records.length) throw new Error('two mods were given the same page path')
 for (const m of records) {
+  if (identity.redirects.has(pageOf(m))) continue
   mkdirSync(`docs/mods/${pageOf(m)}`, { recursive: true })
   const siblings = byRepo.get(m.repo).filter(other => other !== m).map(other => ({ mod: other, slug: pageOf(other) }))
   writeFileSync(`docs/mods/${pageOf(m)}/index.html`, renderModPage(m, { slug: pageOf(m), anchor: slug(m), claudeVersion: data.claudeVersion, siblings }))

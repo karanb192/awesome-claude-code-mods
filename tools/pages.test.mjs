@@ -81,6 +81,30 @@ test('a second rename keeps the first redirect pointing at the newest page in th
   assert.equal(second.registry['x--a--m'].to, 'x--c--m')
 })
 
+test('a retained record under the old letter case never shares a page with the rescanned one', () => {
+  const first = assign([mod('Owner/Repo', 'tool')])
+  const stale = mod('Owner/Repo', 'tool', { validate: { status: 'unknown', errors: [] } })
+  const fresh = mod('owner/repo', 'tool')
+  const second = assign([stale, fresh], first.registry)
+  assert.equal(slugOf(second, fresh.id), 'Owner--Repo--tool')
+  assert.notEqual(slugOf(second, stale.id), 'Owner--Repo--tool')
+  const third = assign([fresh, stale], second.registry)
+  assert.deepEqual(third.registry, second.registry, 'both paths stay put on the next render')
+})
+
+test('a retained record follows a hand-set redirect until a fresh scan finds it again', () => {
+  const keeper = mod('new/repo', 'tool')
+  const gone = mod('deleted/repo', 'tool', { validate: { status: 'unknown', errors: ['Repository could not be scanned; showing the last known footprint.'] } })
+  const registry = { ...assign([gone, keeper]).registry }
+  registry['deleted--repo--tool'] = { id: gone.id, to: 'new--repo--tool' }
+  const held = assign([gone, keeper], registry)
+  assert.deepEqual([...held.redirects], [['deleted--repo--tool', 'new--repo--tool']])
+  assert.equal(held.registry['deleted--repo--tool'].to, 'new--repo--tool')
+  const back = assign([{ ...gone, validate: { status: 'passed', errors: [] } }, keeper], held.registry)
+  assert.equal(back.redirects.size, 0)
+  assert.deepEqual(back.registry['deleted--repo--tool'], { id: gone.id })
+})
+
 test('a maintainer can point a retired path at another page by hand', () => {
   const keeper = mod('new/home', 'tool')
   const result = assign([keeper], { 'old--home--tool': { id: 'old/home:tool', to: 'new--home--tool' } })
