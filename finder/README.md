@@ -23,6 +23,15 @@ claude plugin install mod-finder@aidojo --scope user
 
 Then open a new local session in Desktop's Code tab. Installing through Desktop's own plugin browser has not been tested here.
 
+To update an existing install:
+
+```sh
+claude plugin marketplace update aidojo
+claude plugin update mod-finder@aidojo
+```
+
+Restart Claude Code, or open a new local session in Desktop, to load the updated plugin.
+
 ## From a shell
 
 `find-mods.mjs` gives the same answers as the MCP tools, because both call `search.mjs`.
