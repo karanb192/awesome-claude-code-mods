@@ -22,7 +22,6 @@
 1cookstar2-web/prompt-polish
 20alexl/windvane
 2bo/pr-inbox
-3DMolier/3D-Models
 3dnow/claude-mods
 404Mayank/cachebeat
 416rehman/spinlings
@@ -445,7 +444,6 @@ cprussin/claude-code-mods
 craigmcampbell/claude-plugins
 craneyu/claude-paste-preview
 crebot51/jack-mods
-crenshawdev/cadence
 crockalet/claude-mods
 cskwork/claude-code-mods
 csmoot99/Mafioso
@@ -1253,7 +1251,6 @@ minjun0219/rocky
 minsubb13/claude-hud-mod
 mintyantralabs-hub/claude_mods
 miox-team/claude-recap-tr
-Miracle0x0/CCometixLine
 mishgoldenberg/claude-mods
 mitaku/cc-shiori
 mixmin0197/usage-band
@@ -1571,7 +1568,6 @@ richard-parayno/ccsidebar
 RichardBray/firecrawl-credits-mod
 richardcsuwandi/claude-mods
 richkuo/claude-code-model-effort-shortcuts
-riethmayer/dotfiles
 rightlabs/claude-open-points
 ririversoza/agent-office
 RJ-Stony/claude-hangul-mods
@@ -1696,7 +1692,6 @@ seanyyoo/claude-code-mods
 sebastianhuus/claude-session-timer
 segfaultlab/clawd-hud
 seiya8bit/claude-mods
-SeKondBrainAILabs/kemory-plugin
 selmakcby/clawd-madenci
 selvr0/harness-panel
 Sennjen/claude-sdlc
@@ -1786,7 +1781,6 @@ sr-gene/claude-mod
 sreshtalluri/claude-mods
 srwiseman/claude-mods
 ssenge/ClaudeVideoMod
-SSFSKIM/designer
 sshamilton/claude-mods
 ST-byte441/stWorkflow
 StanislavKozachenko/claude-mods
@@ -1917,7 +1911,6 @@ Toshkee/clawd-usage
 totally-tim/effort-router
 touchizen/context-weather
 tozmoz/sparkmine
-tractorjuice/arckit-claude
 transkatgirl/vibeclaude
 TransmuteLabs/Catalyst
 TransmuteLabs/Catalyst-CC-Patch
@@ -1932,7 +1925,6 @@ Troepster/overalls
 trongtaiz/account-swap
 trsdn/sieve
 TrueShine/learn-mode
-TrulyNotMalware/skills
 trytofly94/handoff-compact
 tsanva/cc-discord-presence
 tsukimiya/agmsg-inbox
@@ -1986,7 +1978,6 @@ varunmoka7/side-chat
 Vatroslav/cc-mod-ferro
 Vatroslav/cc-mod-suggestion-sentence-case
 Vatroslav/mod-ferro
-Vatsa10/Meta-Harness
 vavald/screen-context
 vayungodara/orbit
 vcdim/claude-code-sciplot
