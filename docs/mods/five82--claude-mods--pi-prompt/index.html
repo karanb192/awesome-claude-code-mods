@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>pi-prompt, a Claude Code mod by five82 | Awesome Claude Code Mods</title>
+<meta name="description" content="Replaces Claude Code's core system prompt with pi's coding agent prompt; /pi-prompt toggles it, remembered across sessions."><meta name="robots" content="noindex"><meta name="theme-color" content="#f0eee6" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1c1c1a" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://mods.aidojo.si/mods/five82--claude-mods--pi-prompt/"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/site.css">
+<meta property="og:type" content="website"><meta property="og:title" content="pi-prompt, a Claude Code mod"><meta property="og:description" content="Replaces Claude Code's core system prompt with pi's coding agent prompt; /pi-prompt toggles it, remembered across sessions."><meta property="og:url" content="https://mods.aidojo.si/mods/five82--claude-mods--pi-prompt/">
+<meta property="og:image" content="https://mods.aidojo.si/social-preview.png?v=2"><meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareSourceCode","@id":"https://mods.aidojo.si/mods/five82--claude-mods--pi-prompt/#mod","name":"pi-prompt","url":"https://mods.aidojo.si/mods/five82--claude-mods--pi-prompt/","codeRepository":"https://github.com/five82/claude-mods","description":"Replaces Claude Code's core system prompt with pi's coding agent prompt; /pi-prompt toggles it, remembered across sessions.","author":{"@type":"Person","name":"five82","url":"https://github.com/five82"},"isPartOf":{"@id":"https://mods.aidojo.si/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Claude Code mods","item":"https://mods.aidojo.si/"},{"@type":"ListItem","position":2,"name":"pi-prompt","item":"https://mods.aidojo.si/mods/five82--claude-mods--pi-prompt/"}]}]}</script></head><body>
+<div class="mast"><header class="shell"><a href="/" class="brand" aria-label="Claude Mods home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11 5H5v22h6M21 5h6v22h-6M16 10v12M10 16h12"/></svg><span>claude<span class="brand-light">mods</span></span></a><nav aria-label="Main navigation"><a href="/#directory">The collection</a><a href="/#about">About mods</a><a class="github-link" href="https://github.com/karanb192/awesome-claude-code-mods" aria-label="Star the Claude Code mods list on GitHub"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 2.8 5.7 6.3.9-4.5 4.4 1.1 6.2-5.7-3-5.7 3 1.1-6.2L2.9 9.6l6.3-.9Z"/></svg>Star on GitHub</a></nav></header></div>
+<main class="shell mod-page" id="main">
+<p class="crumbs"><a href="/#five82--claude-mods--pi-prompt">All Claude Code mods</a><span aria-hidden="true">/</span><span>five82/claude-mods</span></p>
+<h1>pi-prompt</h1>
+<p class="byline">A Claude Code mod in <a href="https://github.com/five82/claude-mods">five82/claude-mods</a></p>
+<p class="lede">Replaces Claude Code's core system prompt with pi's coding agent prompt; /pi-prompt toggles it, remembered across sessions.</p>
+
+<div class="facts"><div><h2>Access</h2><span class="level">L0 Draws &amp; remembers</span><span class="track" aria-label="Reach level 0: Draws & remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">persists state</span></div>
+<div><h2>Validation</h2><span class="status bad">not verified</span></div></div>
+<p class="actions"><a class="source" href="https://github.com/five82/claude-mods/tree/main/mods/pi-prompt">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#five82--claude-mods--pi-prompt">Back to the list</a></p>
+<p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
+<section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
+<dl>
+
+    <dt>Observed events</dt><dd>Only what it hooks</dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.compose, command.run {command=pi-prompt}</code></dd>
+    <dt>API calls</dt><dd><code>$.command.register, $.session.cwd, $.store.get, $.store.set</code></dd>
+
+    <dt>Validation on 2.1.291</dt><dd>not verified</dd>
+    <dt>Last known result</dt><dd>Passed with warnings on 2.1.291</dd>
+    <dt>Validator output</dt><dd>Repository could not be scanned; showing the last known footprint.</dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/five82/claude-mods/tree/74622a3844da447c826dc8c4f6ed6eaf7e679c35"><code>74622a3844da</code></a></dd>
+    <dt>Marketplace warnings</dt><dd><a href="https://github.com/five82/claude-mods/blob/74622a3844da447c826dc8c4f6ed6eaf7e679c35/.claude-plugin/marketplace.json">claude-mods</a></dd></dl>
+<p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="https://github.com/karanb192/awesome-claude-code-mods/blob/main/SCANNING.md">How the scan works</a>.</p></section>
+<section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from five82/claude-mods</h2><ul><li><a href="/mods/five82--claude-mods--agent-skills/">agent-skills</a><span>Loads skills from the cross-harness .agents/skills directories (project and ~) into Claude Code: listed for t…</span></li><li><a href="/mods/five82--claude-mods--prompt-footer/">prompt-footer</a><span>A minimal footer under the prompt: busy or idle, project directory and git branch, context usage, model and e…</span></li><li><a href="/mods/five82--claude-mods--show-work/">show-work</a><span>Shows what Claude is running and adding to the model's context, the way pi does: every tool call on its own r…</span></li></ul></section>
+</main>
+<footer class="shell"><a href="/" class="brand"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11 5H5v22h6M21 5h6v22h-6M16 10v12M10 16h12"/></svg><span>claude<span class="brand-light">mods</span></span></a><p>An independent community scan.<br>Not an official Anthropic directory.</p><a href="https://github.com/karanb192/awesome-claude-code-mods">Awesome Claude Code Mods on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a></footer>
+</body></html>

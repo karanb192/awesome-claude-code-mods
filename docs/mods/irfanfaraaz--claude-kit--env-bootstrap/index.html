@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>env-bootstrap, a Claude Code mod by irfanfaraaz | Awesome Claude Code Mods</title>
+<meta name="description" content="Per-project Node version on PATH and env file auto-loaded for Bash, so Claude stops typing nvm use / source .env"><meta name="theme-color" content="#f0eee6" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1c1c1a" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://mods.aidojo.si/mods/irfanfaraaz--claude-kit--env-bootstrap/"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/site.css">
+<meta property="og:type" content="website"><meta property="og:title" content="env-bootstrap, a Claude Code mod"><meta property="og:description" content="Per-project Node version on PATH and env file auto-loaded for Bash, so Claude stops typing nvm use / source .env"><meta property="og:url" content="https://mods.aidojo.si/mods/irfanfaraaz--claude-kit--env-bootstrap/">
+<meta property="og:image" content="https://mods.aidojo.si/social-preview.png?v=2"><meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareSourceCode","@id":"https://mods.aidojo.si/mods/irfanfaraaz--claude-kit--env-bootstrap/#mod","name":"env-bootstrap","url":"https://mods.aidojo.si/mods/irfanfaraaz--claude-kit--env-bootstrap/","codeRepository":"https://github.com/irfanfaraaz/claude-kit","description":"Per-project Node version on PATH and env file auto-loaded for Bash, so Claude stops typing nvm use / source .env","author":{"@type":"Person","name":"irfanfaraaz","url":"https://github.com/irfanfaraaz"},"isPartOf":{"@id":"https://mods.aidojo.si/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Claude Code mods","item":"https://mods.aidojo.si/"},{"@type":"ListItem","position":2,"name":"env-bootstrap","item":"https://mods.aidojo.si/mods/irfanfaraaz--claude-kit--env-bootstrap/"}]}]}</script></head><body>
+<div class="mast"><header class="shell"><a href="/" class="brand" aria-label="Claude Mods home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11 5H5v22h6M21 5h6v22h-6M16 10v12M10 16h12"/></svg><span>claude<span class="brand-light">mods</span></span></a><nav aria-label="Main navigation"><a href="/#directory">The collection</a><a href="/#about">About mods</a><a class="github-link" href="https://github.com/karanb192/awesome-claude-code-mods" aria-label="Star the Claude Code mods list on GitHub"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 2.8 5.7 6.3.9-4.5 4.4 1.1 6.2-5.7-3-5.7 3 1.1-6.2L2.9 9.6l6.3-.9Z"/></svg>Star on GitHub</a></nav></header></div>
+<main class="shell mod-page" id="main">
+<p class="crumbs"><a href="/#irfanfaraaz--claude-kit--env-bootstrap">All Claude Code mods</a><span aria-hidden="true">/</span><span>irfanfaraaz/claude-kit</span></p>
+<h1>env-bootstrap</h1>
+<p class="byline">A Claude Code mod in <a href="https://github.com/irfanfaraaz/claude-kit">irfanfaraaz/claude-kit</a></p>
+<p class="lede">Per-project Node version on PATH and env file auto-loaded for Bash, so Claude stops typing nvm use / source .env</p>
+
+<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">sets env vars, reads files, reads env vars, draws</span></div>
+<div><h2>Validation</h2><span class="status">Passed with warnings on Claude Code 2.1.301</span></div></div>
+<p class="actions"><a class="source" href="https://github.com/irfanfaraaz/claude-kit/tree/main/mods/env-bootstrap">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#irfanfaraaz--claude-kit--env-bootstrap">Back to the list</a></p>
+<p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
+<section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
+<dl>
+
+    <dt>Observed events</dt><dd>the system prompt, Bash calls</dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.context, tool.call {tool=Bash}</code></dd>
+    <dt>API calls</dt><dd><code>$.env.get, $.env.set, $.fs.list, $.ui.status, $.ui.toast</code></dd>
+
+    <dt>Validation on 2.1.301</dt><dd>Passed with warnings</dd>
+
+
+    <dt>Scanned revision</dt><dd><a href="https://github.com/irfanfaraaz/claude-kit/tree/9c80414892d8452b980a6afb2167e87e2eb5d5a6"><code>9c80414892d8</code></a></dd>
+    </dl>
+<p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="https://github.com/karanb192/awesome-claude-code-mods/blob/main/SCANNING.md">How the scan works</a>.</p></section>
+<section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from irfanfaraaz/claude-kit</h2><ul><li><a href="/mods/irfanfaraaz--claude-kit--carousel-ship/">carousel-ship</a><span>After a carousel render: Caption, Queue Threads and Log ledger buttons; blocks Threads posts with a part over…</span></li><li><a href="/mods/irfanfaraaz--claude-kit--commit-guard/">commit-guard</a><span>Never commits docs/superpowers, never pushes unless you said push, asks before committing on main/staging/prod</span></li><li><a href="/mods/irfanfaraaz--claude-kit--ctx-keeper/">ctx-keeper</a><span>Cache countdown, context, limits and cost band; past 350k it runs /re-fresh, copies it, compacts and pastes i…</span></li><li><a href="/mods/irfanfaraaz--claude-kit--git-band/">git-band</a><span>Git state above the prompt: branch, upstream, ahead/behind, Claude vs your changes, PR and CI, worktree, stas…</span></li><li><a href="/mods/irfanfaraaz--claude-kit--hybrid-agents/">hybrid-agents</a><span>Subagents default to Sonnet; pasting a plan path adds the hybrid rule (inline small tasks, Sonnet subagents f…</span></li><li><a href="/mods/irfanfaraaz--claude-kit--rm-to-trash/">rm-to-trash</a><span>Rewrites rm into macOS trash so deletes are recoverable and stop hitting the rm deny rule</span></li><li><a href="/mods/irfanfaraaz--claude-kit--tool-preload/">tool-preload</a><span>Keeps context-mode, jcodemunch, claude-mem, WebSearch, Task and Supabase tools loaded so Claude stops calling…</span></li><li><a href="/mods/irfanfaraaz--claude-kit--turn-coach/">turn-coach</a><span>One fork per turn: a verdict on work turns (solved, gaps, shortcuts) plus up to 3 next prompts, in one compac…</span></li></ul></section>
+</main>
+<footer class="shell"><a href="/" class="brand"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11 5H5v22h6M21 5h6v22h-6M16 10v12M10 16h12"/></svg><span>claude<span class="brand-light">mods</span></span></a><p>An independent community scan.<br>Not an official Anthropic directory.</p><a href="https://github.com/karanb192/awesome-claude-code-mods">Awesome Claude Code Mods on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a></footer>
+</body></html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hidevalues, a Claude Code mod by konsta95 | Awesome Claude Code Mods</title>
+<meta name="description" content="Hides high-entropy tokens and e-mail addresses in Bash results until hovered"><meta name="robots" content="noindex"><meta name="theme-color" content="#f0eee6" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1c1c1a" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://mods.aidojo.si/mods/konsta95--ClaudeCodeMods--hidevalues/"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/site.css">
+<meta property="og:type" content="website"><meta property="og:title" content="hidevalues, a Claude Code mod"><meta property="og:description" content="Hides high-entropy tokens and e-mail addresses in Bash results until hovered"><meta property="og:url" content="https://mods.aidojo.si/mods/konsta95--ClaudeCodeMods--hidevalues/">
+<meta property="og:image" content="https://mods.aidojo.si/social-preview.png?v=2"><meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareSourceCode","@id":"https://mods.aidojo.si/mods/konsta95--ClaudeCodeMods--hidevalues/#mod","name":"hidevalues","url":"https://mods.aidojo.si/mods/konsta95--ClaudeCodeMods--hidevalues/","codeRepository":"https://github.com/konsta95/ClaudeCodeMods","description":"Hides high-entropy tokens and e-mail addresses in Bash results until hovered","author":{"@type":"Person","name":"konsta95","url":"https://github.com/konsta95"},"isPartOf":{"@id":"https://mods.aidojo.si/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Claude Code mods","item":"https://mods.aidojo.si/"},{"@type":"ListItem","position":2,"name":"hidevalues","item":"https://mods.aidojo.si/mods/konsta95--ClaudeCodeMods--hidevalues/"}]}]}</script></head><body>
+<div class="mast"><header class="shell"><a href="/" class="brand" aria-label="Claude Mods home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11 5H5v22h6M21 5h6v22h-6M16 10v12M10 16h12"/></svg><span>claude<span class="brand-light">mods</span></span></a><nav aria-label="Main navigation"><a href="/#directory">The collection</a><a href="/#about">About mods</a><a class="github-link" href="https://github.com/karanb192/awesome-claude-code-mods" aria-label="Star the Claude Code mods list on GitHub"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 2.8 5.7 6.3.9-4.5 4.4 1.1 6.2-5.7-3-5.7 3 1.1-6.2L2.9 9.6l6.3-.9Z"/></svg>Star on GitHub</a></nav></header></div>
+<main class="shell mod-page" id="main">
+<p class="crumbs"><a href="/#konsta95--ClaudeCodeMods--hidevalues">All Claude Code mods</a><span aria-hidden="true">/</span><span>konsta95/ClaudeCodeMods</span></p>
+<h1>hidevalues</h1>
+<p class="byline">A Claude Code mod in <a href="https://github.com/konsta95/ClaudeCodeMods">konsta95/ClaudeCodeMods</a></p>
+<p class="lede">Hides high-entropy tokens and e-mail addresses in Bash results until hovered</p>
+
+<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">writes files, reads env vars, draws</span></div>
+<div><h2>Validation</h2><span class="status bad">not verified</span></div></div>
+<p class="actions"><a class="source" href="https://github.com/konsta95/ClaudeCodeMods/tree/main/mods/hidevalues">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#konsta95--ClaudeCodeMods--hidevalues">Back to the list</a></p>
+<p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
+<section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
+<dl>
+
+    <dt>Observed events</dt><dd>Only what it hooks</dd>
+    <dt>Hooks</dt><dd><code>ui.render {component=ToolUse|ToolResult}</code></dd>
+    <dt>API calls</dt><dd><code>$.env.get, $.fs.write, $.ui.resolve</code></dd>
+
+    <dt>Validation on 2.1.288</dt><dd>not verified</dd>
+    <dt>Last known result</dt><dd>Passed on 2.1.288</dd>
+    <dt>Validator output</dt><dd>Repository could not be scanned; showing the last known footprint.</dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/konsta95/ClaudeCodeMods/tree/fe23a21830c2a042da1a3fe11582276b79344954"><code>fe23a21830c2</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/konsta95/ClaudeCodeMods/blob/fe23a21830c2a042da1a3fe11582276b79344954/.claude-plugin/marketplace.json">ClaudeCodeMods</a></dd></dl>
+<p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="https://github.com/karanb192/awesome-claude-code-mods/blob/main/SCANNING.md">How the scan works</a>.</p></section>
+<section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from konsta95/ClaudeCodeMods</h2><ul><li><a href="/mods/konsta95--ClaudeCodeMods--mod-settings/">mod-settings</a><span>Draft and apply mod settings, with declared presets, undo and observed hook previews.</span></li><li><a href="/mods/konsta95--ClaudeCodeMods--statusline/">statusline</a><span>ClaudeCodeStatusline as a function-hook mod: the status bar drawn in the hint line under the prompt, each seg…</span></li><li><a href="/mods/konsta95--ClaudeCodeMods--video/">video</a><span>Prepare recording containers and build clear side-by-side comparisons with saved drafts, event alignment and…</span></li></ul></section>
+</main>
+<footer class="shell"><a href="/" class="brand"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11 5H5v22h6M21 5h6v22h-6M16 10v12M10 16h12"/></svg><span>claude<span class="brand-light">mods</span></span></a><p>An independent community scan.<br>Not an official Anthropic directory.</p><a href="https://github.com/karanb192/awesome-claude-code-mods">Awesome Claude Code Mods on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a></footer>
+</body></html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>u, a Claude Code mod by Humpens | Awesome Claude Code Mods</title>
+<meta name="description" content="5時間・1週間・Fable の使用率と API 換算の料金をステータスバーに表示する"><meta name="theme-color" content="#f0eee6" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1c1c1a" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://mods.aidojo.si/mods/Humpens--claude-mods--u/"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/site.css">
+<meta property="og:type" content="website"><meta property="og:title" content="u, a Claude Code mod"><meta property="og:description" content="5時間・1週間・Fable の使用率と API 換算の料金をステータスバーに表示する"><meta property="og:url" content="https://mods.aidojo.si/mods/Humpens--claude-mods--u/">
+<meta property="og:image" content="https://mods.aidojo.si/social-preview.png?v=2"><meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareSourceCode","@id":"https://mods.aidojo.si/mods/Humpens--claude-mods--u/#mod","name":"u","url":"https://mods.aidojo.si/mods/Humpens--claude-mods--u/","codeRepository":"https://github.com/Humpens/claude-mods","description":"5時間・1週間・Fable の使用率と API 換算の料金をステータスバーに表示する","author":{"@type":"Person","name":"Humpens","url":"https://github.com/Humpens"},"isPartOf":{"@id":"https://mods.aidojo.si/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Claude Code mods","item":"https://mods.aidojo.si/"},{"@type":"ListItem","position":2,"name":"u","item":"https://mods.aidojo.si/mods/Humpens--claude-mods--u/"}]}]}</script></head><body>
+<div class="mast"><header class="shell"><a href="/" class="brand" aria-label="Claude Mods home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11 5H5v22h6M21 5h6v22h-6M16 10v12M10 16h12"/></svg><span>claude<span class="brand-light">mods</span></span></a><nav aria-label="Main navigation"><a href="/#directory">The collection</a><a href="/#about">About mods</a><a class="github-link" href="https://github.com/karanb192/awesome-claude-code-mods" aria-label="Star the Claude Code mods list on GitHub"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 2.8 5.7 6.3.9-4.5 4.4 1.1 6.2-5.7-3-5.7 3 1.1-6.2L2.9 9.6l6.3-.9Z"/></svg>Star on GitHub</a></nav></header></div>
+<main class="shell mod-page" id="main">
+<p class="crumbs"><a href="/#Humpens--claude-mods--u">All Claude Code mods</a><span aria-hidden="true">/</span><span>Humpens/claude-mods</span></p>
+<h1>u</h1>
+<p class="byline">A Claude Code mod in <a href="https://github.com/Humpens/claude-mods">Humpens/claude-mods</a></p>
+<p class="lede">5時間・1週間・Fable の使用率と API 換算の料金をステータスバーに表示する</p>
+
+<div class="facts"><div><h2>Access</h2><span class="level">L1 Reads files</span><span class="track" aria-label="Reach level 1: Reads files"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">other: $.state.get, other: $.state.set, persists state, draws</span></div>
+<div><h2>Validation</h2><span class="status">Passed on Claude Code 2.1.301</span></div></div>
+<p class="actions"><a class="source" href="https://github.com/Humpens/claude-mods/tree/main/u">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#Humpens--claude-mods--u">Back to the list</a></p>
+<p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
+<section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
+<dl>
+
+    <dt>Observed events</dt><dd>Only what it hooks</dd>
+    <dt>Hooks</dt><dd><code>session.start, session.measure, command.run {command=meter}, ui.render {component=Pane, requestId=u}</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.session.usage, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.open, $.ui.resolve, $.ui.status</code></dd>
+
+    <dt>Validation on 2.1.301</dt><dd>Passed</dd>
+
+
+    <dt>Scanned revision</dt><dd><a href="https://github.com/Humpens/claude-mods/tree/33e070e5c565ded61429f52558b6669b4be179c9"><code>33e070e5c565</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/Humpens/claude-mods/blob/33e070e5c565ded61429f52558b6669b4be179c9/.claude-plugin/marketplace.json">claude-mods</a></dd></dl>
+<p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="https://github.com/karanb192/awesome-claude-code-mods/blob/main/SCANNING.md">How the scan works</a>.</p></section>
+<section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from Humpens/claude-mods</h2><ul><li><a href="/mods/Humpens--claude-mods--baton-notify/">baton-notify</a><span>Claude からバトンが渡ったとき（完了・質問・許可待ち）に、どのセッションかが分かる Mac の通知を出す</span></li><li><a href="/mods/Humpens--claude-mods--status/">status</a><span>ツールバー（入力欄の上）の Menu から、TODO・通知・使用率表示の設定を開く</span></li><li><a href="/mods/Humpens--claude-mods--today/">today</a><span>TODO を Today・◎・○・△ の段階で管理し、ステータスバーに今日の件数を出す。一覧の画面からボタンで移動・完了できる</span></li></ul></section>
+</main>
+<footer class="shell"><a href="/" class="brand"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11 5H5v22h6M21 5h6v22h-6M16 10v12M10 16h12"/></svg><span>claude<span class="brand-light">mods</span></span></a><p>An independent community scan.<br>Not an official Anthropic directory.</p><a href="https://github.com/karanb192/awesome-claude-code-mods">Awesome Claude Code Mods on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a></footer>
+</body></html>

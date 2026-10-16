@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>env, a Claude Code mod by davekiss | Awesome Claude Code Mods</title>
+<meta name="description" content="Edit .env files in a pane inside Claude Code. Claude manages keys and asks you for values without ever seeing them."><meta name="theme-color" content="#f0eee6" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1c1c1a" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://mods.aidojo.si/mods/davekiss--env--env/"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/site.css">
+<meta property="og:type" content="website"><meta property="og:title" content="env, a Claude Code mod"><meta property="og:description" content="Edit .env files in a pane inside Claude Code. Claude manages keys and asks you for values without ever seeing them."><meta property="og:url" content="https://mods.aidojo.si/mods/davekiss--env--env/">
+<meta property="og:image" content="https://mods.aidojo.si/social-preview.png?v=2"><meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareSourceCode","@id":"https://mods.aidojo.si/mods/davekiss--env--env/#mod","name":"env","url":"https://mods.aidojo.si/mods/davekiss--env--env/","codeRepository":"https://github.com/davekiss/env","description":"Edit .env files in a pane inside Claude Code. Claude manages keys and asks you for values without ever seeing them.","author":{"@type":"Person","name":"davekiss","url":"https://github.com/davekiss"},"isPartOf":{"@id":"https://mods.aidojo.si/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Claude Code mods","item":"https://mods.aidojo.si/"},{"@type":"ListItem","position":2,"name":"env","item":"https://mods.aidojo.si/mods/davekiss--env--env/"}]}]}</script></head><body>
+<div class="mast"><header class="shell"><a href="/" class="brand" aria-label="Claude Mods home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11 5H5v22h6M21 5h6v22h-6M16 10v12M10 16h12"/></svg><span>claude<span class="brand-light">mods</span></span></a><nav aria-label="Main navigation"><a href="/#directory">The collection</a><a href="/#about">About mods</a><a class="github-link" href="https://github.com/karanb192/awesome-claude-code-mods" aria-label="Star the Claude Code mods list on GitHub"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 2.8 5.7 6.3.9-4.5 4.4 1.1 6.2-5.7-3-5.7 3 1.1-6.2L2.9 9.6l6.3-.9Z"/></svg>Star on GitHub</a></nav></header></div>
+<main class="shell mod-page" id="main">
+<p class="crumbs"><a href="/#davekiss--env--env">All Claude Code mods</a><span aria-hidden="true">/</span><span>davekiss/env</span></p>
+<h1>env</h1>
+<p class="byline">A Claude Code mod in <a href="https://github.com/davekiss/env">davekiss/env</a></p>
+<p class="lede">Edit .env files in a pane inside Claude Code. Claude manages keys and asks you for values without ever seeing them.</p>
+<p class="compatibility">review UI rewrite</p>
+<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">other: $.state.get, other: $.state.set, runs processes, writes files, drives Claude, reads files, reads env vars, draws</span></div>
+<div><h2>Validation</h2><span class="status">Passed on Claude Code 2.1.301</span></div></div>
+<p class="actions"><a class="source" href="https://github.com/davekiss/env">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#davekiss--env--env">Back to the list</a></p>
+<p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
+<section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
+<dl>
+
+    <dt>Observed events</dt><dd>every tool call, mcp__env__list calls, mcp__env__request calls, mcp__env__generate calls, mcp__env__copy calls, mcp__env__remove calls, mcp__env__push calls, mcp__env__pull calls</dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=env}, ui.close, tool.call, session.append, session.send, tool.call {tool=mcp__env__list}, tool.call {tool=mcp__env__request}, tool.call {tool=mcp__env__generate}, tool.call {tool=mcp__env__copy}, tool.call {tool=mcp__env__remove}, tool.call {tool=mcp__env__push}, tool.call {tool=mcp__env__pull}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=env}</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.write, $.process.run, $.prompt.submit, $.state.get, $.state.set, $.tool.register, $.ui.ask, $.ui.copy, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
+
+    <dt>Validation on 2.1.301</dt><dd>Passed</dd>
+
+
+    <dt>Scanned revision</dt><dd><a href="https://github.com/davekiss/env/tree/95218d5eed9861cce8bbc61f1e8df78d64bf48d4"><code>95218d5eed98</code></a></dd>
+    <dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/davekiss/env/blob/95218d5eed9861cce8bbc61f1e8df78d64bf48d4/hooks/dotenv.ts#L47">hooks/dotenv.ts:47</a></dd></dl>
+<p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="https://github.com/karanb192/awesome-claude-code-mods/blob/main/SCANNING.md">How the scan works</a>.</p></section>
+
+</main>
+<footer class="shell"><a href="/" class="brand"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11 5H5v22h6M21 5h6v22h-6M16 10v12M10 16h12"/></svg><span>claude<span class="brand-light">mods</span></span></a><p>An independent community scan.<br>Not an official Anthropic directory.</p><a href="https://github.com/karanb192/awesome-claude-code-mods">Awesome Claude Code Mods on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a></footer>
+</body></html>

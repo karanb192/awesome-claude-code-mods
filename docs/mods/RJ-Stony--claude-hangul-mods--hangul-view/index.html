@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hangul-view, a Claude Code mod by RJ-Stony | Awesome Claude Code Mods</title>
+<meta name="description" content="한글 화면: 표·코드·mermaid·제목을 읽기 쉽게 그리고, 도구 줄과 스피너를 한글로 바꿔요 (prismantis 한글판)"><meta name="theme-color" content="#f0eee6" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1c1c1a" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://mods.aidojo.si/mods/RJ-Stony--claude-hangul-mods--hangul-view/"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/site.css">
+<meta property="og:type" content="website"><meta property="og:title" content="hangul-view, a Claude Code mod"><meta property="og:description" content="한글 화면: 표·코드·mermaid·제목을 읽기 쉽게 그리고, 도구 줄과 스피너를 한글로 바꿔요 (prismantis 한글판)"><meta property="og:url" content="https://mods.aidojo.si/mods/RJ-Stony--claude-hangul-mods--hangul-view/">
+<meta property="og:image" content="https://mods.aidojo.si/social-preview.png?v=2"><meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareSourceCode","@id":"https://mods.aidojo.si/mods/RJ-Stony--claude-hangul-mods--hangul-view/#mod","name":"hangul-view","url":"https://mods.aidojo.si/mods/RJ-Stony--claude-hangul-mods--hangul-view/","codeRepository":"https://github.com/RJ-Stony/claude-hangul-mods","description":"한글 화면: 표·코드·mermaid·제목을 읽기 쉽게 그리고, 도구 줄과 스피너를 한글로 바꿔요 (prismantis 한글판)","author":{"@type":"Person","name":"RJ-Stony","url":"https://github.com/RJ-Stony"},"isPartOf":{"@id":"https://mods.aidojo.si/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Claude Code mods","item":"https://mods.aidojo.si/"},{"@type":"ListItem","position":2,"name":"hangul-view","item":"https://mods.aidojo.si/mods/RJ-Stony--claude-hangul-mods--hangul-view/"}]}]}</script></head><body>
+<div class="mast"><header class="shell"><a href="/" class="brand" aria-label="Claude Mods home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11 5H5v22h6M21 5h6v22h-6M16 10v12M10 16h12"/></svg><span>claude<span class="brand-light">mods</span></span></a><nav aria-label="Main navigation"><a href="/#directory">The collection</a><a href="/#about">About mods</a><a class="github-link" href="https://github.com/karanb192/awesome-claude-code-mods" aria-label="Star the Claude Code mods list on GitHub"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 2.8 5.7 6.3.9-4.5 4.4 1.1 6.2-5.7-3-5.7 3 1.1-6.2L2.9 9.6l6.3-.9Z"/></svg>Star on GitHub</a></nav></header></div>
+<main class="shell mod-page" id="main">
+<p class="crumbs"><a href="/#RJ-Stony--claude-hangul-mods--hangul-view">All Claude Code mods</a><span aria-hidden="true">/</span><span>RJ-Stony/claude-hangul-mods</span></p>
+<h1>hangul-view</h1>
+<p class="byline">A Claude Code mod in <a href="https://github.com/RJ-Stony/claude-hangul-mods">RJ-Stony/claude-hangul-mods</a></p>
+<p class="lede">한글 화면: 표·코드·mermaid·제목을 읽기 쉽게 그리고, 도구 줄과 스피너를 한글로 바꿔요 (prismantis 한글판)</p>
+<p class="compatibility">review UI rewrite</p>
+<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">changes config, reads env vars, reads the transcript, draws</span></div>
+<div><h2>Validation</h2><span class="status">Passed on Claude Code 2.1.301</span></div></div>
+<p class="actions"><a class="source" href="https://github.com/RJ-Stony/claude-hangul-mods/tree/main/hangul-view">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#RJ-Stony--claude-hangul-mods--hangul-view">Back to the list</a></p>
+<p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
+<section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
+<dl>
+
+    <dt>Observed events</dt><dd>every prompt</dd>
+    <dt>Hooks</dt><dd><code>engine.create, ui.render {component=ToolGroup}, ui.render {component=ToolUse}, session.start, command.run {command=hangul}, ui.render {component=TurnDuration}, ui.render {component=PromptHint}, ui.render {component=SessionMode}, ui.render {component=InfoNotice}, ui.render {component=ToolProgress}, ui.render {component=Spinner}, prompt.submit, ui.render {component=CommandOutput}, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}, hangulview.markdown</code></dd>
+    <dt>API calls</dt><dd><code>$.command.register, $.config.set, $.env.get, $.session.messages, $.ui.copy, $.ui.resolve, $.ui.toast</code></dd>
+
+    <dt>Validation on 2.1.301</dt><dd>Passed</dd>
+
+
+    <dt>Scanned revision</dt><dd><a href="https://github.com/RJ-Stony/claude-hangul-mods/tree/c7330ac5993a1366ccc676ee49bac134b40e12e5"><code>c7330ac5993a</code></a></dd>
+    <dt>Marketplace warnings</dt><dd><a href="https://github.com/RJ-Stony/claude-hangul-mods/blob/c7330ac5993a1366ccc676ee49bac134b40e12e5/.claude-plugin/marketplace.json">healing-mods</a></dd><dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/RJ-Stony/claude-hangul-mods/blob/c7330ac5993a1366ccc676ee49bac134b40e12e5/hangul-view/hooks/render.tsx#L98">hangul-view/hooks/render.tsx:98</a>, <a href="https://github.com/RJ-Stony/claude-hangul-mods/blob/c7330ac5993a1366ccc676ee49bac134b40e12e5/hangul-view/hooks/vendor/mermaid-text.js#L4">hangul-view/hooks/vendor/mermaid-text.js:4</a>, <a href="https://github.com/RJ-Stony/claude-hangul-mods/blob/c7330ac5993a1366ccc676ee49bac134b40e12e5/hangul-view/hooks/vendor/prism.js#L1">hangul-view/hooks/vendor/prism.js:1</a></dd></dl>
+<p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="https://github.com/karanb192/awesome-claude-code-mods/blob/main/SCANNING.md">How the scan works</a>.</p></section>
+<section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from RJ-Stony/claude-hangul-mods</h2><ul><li><a href="/mods/RJ-Stony--claude-hangul-mods--md-prompt/">md-prompt</a><span>입력창 꾸미기: 입력하는 동안 코드 블록은 문법 색이 들어간 카드로, 굵게·목록·표·링크·제목은 색으로 보여줘요. 색만 칠하고 글자는 바꾸지 않아요. (원작: nogu66/md-prompt, MI…</span></li><li><a href="/mods/RJ-Stony--claude-hangul-mods--yuni/">yuni</a><span>유니: 일하는 방식대로 진화하는 유니콘 펫. 입력창 위 정보 줄, 위험 명령어 경보, 휴식·숨쉬기 알림</span></li></ul></section>
+</main>
+<footer class="shell"><a href="/" class="brand"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11 5H5v22h6M21 5h6v22h-6M16 10v12M10 16h12"/></svg><span>claude<span class="brand-light">mods</span></span></a><p>An independent community scan.<br>Not an official Anthropic directory.</p><a href="https://github.com/karanb192/awesome-claude-code-mods">Awesome Claude Code Mods on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a></footer>
+</body></html>

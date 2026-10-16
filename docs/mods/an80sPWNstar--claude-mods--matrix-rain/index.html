@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>matrix-rain, a Claude Code mod by an80sPWNstar | Awesome Claude Code Mods</title>
+<meta name="description" content="Matrix digital rain: a /matrix pane, and a few rows above the prompt while Claude works. Pure eye candy."><meta name="theme-color" content="#f0eee6" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1c1c1a" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://mods.aidojo.si/mods/an80sPWNstar--claude-mods--matrix-rain/"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/site.css">
+<meta property="og:type" content="website"><meta property="og:title" content="matrix-rain, a Claude Code mod"><meta property="og:description" content="Matrix digital rain: a /matrix pane, and a few rows above the prompt while Claude works. Pure eye candy."><meta property="og:url" content="https://mods.aidojo.si/mods/an80sPWNstar--claude-mods--matrix-rain/">
+<meta property="og:image" content="https://mods.aidojo.si/social-preview.png?v=2"><meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareSourceCode","@id":"https://mods.aidojo.si/mods/an80sPWNstar--claude-mods--matrix-rain/#mod","name":"matrix-rain","url":"https://mods.aidojo.si/mods/an80sPWNstar--claude-mods--matrix-rain/","codeRepository":"https://github.com/an80sPWNstar/claude-mods","description":"Matrix digital rain: a /matrix pane, and a few rows above the prompt while Claude works. Pure eye candy.","author":{"@type":"Person","name":"an80sPWNstar","url":"https://github.com/an80sPWNstar"},"isPartOf":{"@id":"https://mods.aidojo.si/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Claude Code mods","item":"https://mods.aidojo.si/"},{"@type":"ListItem","position":2,"name":"matrix-rain","item":"https://mods.aidojo.si/mods/an80sPWNstar--claude-mods--matrix-rain/"}]}]}</script></head><body>
+<div class="mast"><header class="shell"><a href="/" class="brand" aria-label="Claude Mods home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11 5H5v22h6M21 5h6v22h-6M16 10v12M10 16h12"/></svg><span>claude<span class="brand-light">mods</span></span></a><nav aria-label="Main navigation"><a href="/#directory">The collection</a><a href="/#about">About mods</a><a class="github-link" href="https://github.com/karanb192/awesome-claude-code-mods" aria-label="Star the Claude Code mods list on GitHub"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 2.8 5.7 6.3.9-4.5 4.4 1.1 6.2-5.7-3-5.7 3 1.1-6.2L2.9 9.6l6.3-.9Z"/></svg>Star on GitHub</a></nav></header></div>
+<main class="shell mod-page" id="main">
+<p class="crumbs"><a href="/#an80sPWNstar--claude-mods--matrix-rain">All Claude Code mods</a><span aria-hidden="true">/</span><span>an80sPWNstar/claude-mods</span></p>
+<h1>matrix-rain</h1>
+<p class="byline">A Claude Code mod in <a href="https://github.com/an80sPWNstar/claude-mods">an80sPWNstar/claude-mods</a></p>
+<p class="lede">Matrix digital rain: a /matrix pane, and a few rows above the prompt while Claude works. Pure eye candy.</p>
+
+<div class="facts"><div><h2>Access</h2><span class="level">L0 Draws &amp; remembers</span><span class="track" aria-label="Reach level 0: Draws & remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">persists state, draws</span></div>
+<div><h2>Validation</h2><span class="status">Passed on Claude Code 2.1.301</span></div></div>
+<p class="actions"><a class="source" href="https://github.com/an80sPWNstar/claude-mods/tree/main/matrix-rain">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#an80sPWNstar--claude-mods--matrix-rain">Back to the list</a></p>
+<p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
+<section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
+<dl>
+
+    <dt>Observed events</dt><dd>every prompt</dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.submit, turn.complete, ui.close, ui.render {component=Pane, requestId=matrix-rain}, ui.render {component=AbovePrompt}, command.run {command=matrix}</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve</code></dd>
+
+    <dt>Validation on 2.1.301</dt><dd>Passed</dd>
+
+
+    <dt>Scanned revision</dt><dd><a href="https://github.com/an80sPWNstar/claude-mods/tree/bb073ac41d6b29f4c270d756c11db6bcc04fddf1"><code>bb073ac41d6b</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/an80sPWNstar/claude-mods/blob/bb073ac41d6b29f4c270d756c11db6bcc04fddf1/.claude-plugin/marketplace.json">claude-mods</a></dd></dl>
+<p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="https://github.com/karanb192/awesome-claude-code-mods/blob/main/SCANNING.md">How the scan works</a>.</p></section>
+<section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from an80sPWNstar/claude-mods</h2><ul><li><a href="/mods/an80sPWNstar--claude-mods--token-meter/">token-meter</a><span>This session's token use, Claude vs local LLMs: status line, live spinner count, and a /tokens pane with a Pa…</span></li></ul></section>
+</main>
+<footer class="shell"><a href="/" class="brand"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11 5H5v22h6M21 5h6v22h-6M16 10v12M10 16h12"/></svg><span>claude<span class="brand-light">mods</span></span></a><p>An independent community scan.<br>Not an official Anthropic directory.</p><a href="https://github.com/karanb192/awesome-claude-code-mods">Awesome Claude Code Mods on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a></footer>
+</body></html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>md-view, a Claude Code mod by scoobynko | Awesome Claude Code Mods</title>
+<meta name="description" content="Click a Markdown file in Claude's reply to read it rendered in a side pane, or list the session's Markdown files with /md-view."><meta name="theme-color" content="#f0eee6" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1c1c1a" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://mods.aidojo.si/mods/scoobynko--claude-code-mods--md-view/"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/site.css">
+<meta property="og:type" content="website"><meta property="og:title" content="md-view, a Claude Code mod"><meta property="og:description" content="Click a Markdown file in Claude's reply to read it rendered in a side pane, or list the session's Markdown files with /md-view."><meta property="og:url" content="https://mods.aidojo.si/mods/scoobynko--claude-code-mods--md-view/">
+<meta property="og:image" content="https://mods.aidojo.si/social-preview.png?v=2"><meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareSourceCode","@id":"https://mods.aidojo.si/mods/scoobynko--claude-code-mods--md-view/#mod","name":"md-view","url":"https://mods.aidojo.si/mods/scoobynko--claude-code-mods--md-view/","codeRepository":"https://github.com/scoobynko/claude-code-mods","description":"Click a Markdown file in Claude's reply to read it rendered in a side pane, or list the session's Markdown files with /md-view.","author":{"@type":"Person","name":"scoobynko","url":"https://github.com/scoobynko"},"isPartOf":{"@id":"https://mods.aidojo.si/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Claude Code mods","item":"https://mods.aidojo.si/"},{"@type":"ListItem","position":2,"name":"md-view","item":"https://mods.aidojo.si/mods/scoobynko--claude-code-mods--md-view/"}]}]}</script></head><body>
+<div class="mast"><header class="shell"><a href="/" class="brand" aria-label="Claude Mods home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11 5H5v22h6M21 5h6v22h-6M16 10v12M10 16h12"/></svg><span>claude<span class="brand-light">mods</span></span></a><nav aria-label="Main navigation"><a href="/#directory">The collection</a><a href="/#about">About mods</a><a class="github-link" href="https://github.com/karanb192/awesome-claude-code-mods" aria-label="Star the Claude Code mods list on GitHub"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 2.8 5.7 6.3.9-4.5 4.4 1.1 6.2-5.7-3-5.7 3 1.1-6.2L2.9 9.6l6.3-.9Z"/></svg>Star on GitHub</a></nav></header></div>
+<main class="shell mod-page" id="main">
+<p class="crumbs"><a href="/#scoobynko--claude-code-mods--md-view">All Claude Code mods</a><span aria-hidden="true">/</span><span>scoobynko/claude-code-mods</span></p>
+<h1>md-view</h1>
+<p class="byline">A Claude Code mod in <a href="https://github.com/scoobynko/claude-code-mods">scoobynko/claude-code-mods</a></p>
+<p class="lede">Click a Markdown file in Claude's reply to read it rendered in a side pane, or list the session's Markdown files with /md-view.</p>
+
+<div class="facts"><div><h2>Access</h2><span class="level">L1 Reads files</span><span class="track" aria-label="Reach level 1: Reads files"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">other: $.state.get, other: $.state.set, reads files, reads env vars, reads the transcript, draws</span></div>
+<div><h2>Validation</h2><span class="status">Passed on Claude Code 2.1.301</span></div></div>
+<p class="actions"><a class="source" href="https://github.com/scoobynko/claude-code-mods/tree/main/plugins/md-view">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#scoobynko--claude-code-mods--md-view">Back to the list</a></p>
+<p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
+<section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
+<dl>
+
+    <dt>Observed events</dt><dd>Write|Edit|Bash calls</dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.step, tool.call {tool=Write|Edit|Bash}, turn.complete, command.run {command=md-view}, ui.render {component=AssistantMessage}, ui.render {component=Pane, requestId=md-view}</code></dd>
+    <dt>API calls</dt><dd><code>$.command.register, $.env.get, $.fs.read, $.fs.stat, $.session.cwd, $.session.messages, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.scroll</code></dd>
+
+    <dt>Validation on 2.1.301</dt><dd>Passed</dd>
+
+
+    <dt>Scanned revision</dt><dd><a href="https://github.com/scoobynko/claude-code-mods/tree/2b60bc6c9e3aa4da63045c6a8a702c5d79b9aa7c"><code>2b60bc6c9e3a</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/scoobynko/claude-code-mods/blob/2b60bc6c9e3aa4da63045c6a8a702c5d79b9aa7c/.claude-plugin/marketplace.json">scoobynko-mods</a></dd></dl>
+<p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="https://github.com/karanb192/awesome-claude-code-mods/blob/main/SCANNING.md">How the scan works</a>.</p></section>
+<section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from scoobynko/claude-code-mods</h2><ul><li><a href="/mods/scoobynko--claude-code-mods--clawd-spinner/">clawd-spinner</a><span>Clawd types on a tiny laptop under the spinner: the code Claude writes floats out of the screen, input tokens…</span></li><li><a href="/mods/scoobynko--claude-code-mods--image-preview/">image-preview</a><span>/image-preview opens a pane listing every image of the session, pasted or returned by a tool, and shows the o…</span></li></ul></section>
+</main>
+<footer class="shell"><a href="/" class="brand"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11 5H5v22h6M21 5h6v22h-6M16 10v12M10 16h12"/></svg><span>claude<span class="brand-light">mods</span></span></a><p>An independent community scan.<br>Not an official Anthropic directory.</p><a href="https://github.com/karanb192/awesome-claude-code-mods">Awesome Claude Code Mods on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a></footer>
+</body></html>
