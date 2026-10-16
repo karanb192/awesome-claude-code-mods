@@ -1040,6 +1040,7 @@ kgaidev/kgai
 kgrvGRECO/woo-mods
 kguidonimartins/claude-mods
 KhadeerBasha1232/claude-usage-mod
+kiankhooban/open-paths
 kikostefanov-lab/claude-code-mods
 KilimcininKorOglu/claude-code-mods
 KimSuro5773/korean-ui

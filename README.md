@@ -15,7 +15,7 @@ Find a mod in the [full catalogue][catalogue] by name or task and filter by acce
 Then run `/reload-plugins` to activate it before asking “Find a mod that helps with code reviews”. Requires Node 18 or later. For Desktop Code local sessions, use the [setup instructions](finder/README.md#in-claude-code-mcp).
 
 <!-- stats:start -->
-**4322 mods** · Last scanned 2026-10-15.
+**4323 mods** · Last scanned 2026-10-15.
 <!-- stats:end -->
 
 ![Browsing a GitHub pull request beside a Claude Code conversation using terminal-browser](assets/terminal-browser-demo.gif)
