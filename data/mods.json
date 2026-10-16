@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-16T16:05:19.141Z",
   "claudeVersion": "2.1.301",
-  "repos": 2142,
+  "repos": 2143,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -515552,6 +515552,298 @@
       "stars": 0,
       "pushedAt": "2026-10-16T12:21:14Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "candygoogy/notary:plugins/changes",
+      "repo": "candygoogy/notary",
+      "path": "plugins/changes",
+      "sourceCommit": "4638e58fe41527221db1eff4f4720e82633a6dd7",
+      "name": "changes",
+      "description": "See what Claude changed, turn by turn. Keep it or send it back. A per-turn timeline with each file's diff and keep/revert.",
+      "author": "Notary contributors",
+      "homepage": "https://github.com/candygoogy/notary/tree/main/plugins/changes",
+      "url": "https://github.com/candygoogy/notary/tree/main/plugins/changes",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "changes"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "changes"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "PromptHint"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "changes"
+          }
+        },
+        {
+          "event": "ui.focus",
+          "matcher": {
+            "requestId": "changes"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.fs.write",
+        "$.process.run",
+        "$.session.append",
+        "$.session.id",
+        "$.session.root",
+        "$.session.version",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.301",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "notary",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "runs processes",
+          "writes files",
+          "reads files",
+          "reads env vars",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call",
+        "every prompt"
+      ],
+      "draws": [
+        "AbovePrompt",
+        "PromptHint",
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-16T16:28:00Z",
+      "createdAt": "2026-10-13T18:21:07Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "candygoogy/notary:plugins/receipts",
+      "repo": "candygoogy/notary",
+      "path": "plugins/receipts",
+      "sourceCommit": "4638e58fe41527221db1eff4f4720e82633a6dd7",
+      "name": "receipts",
+      "description": "Claude says the tests pass. Receipts checks. Flags success claims that no check backs up.",
+      "author": "Notary contributors",
+      "homepage": "https://github.com/candygoogy/notary/tree/main/plugins/receipts",
+      "url": "https://github.com/candygoogy/notary/tree/main/plugins/receipts",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "classic.Stop",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "receipts"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "receipts"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "receipts"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.command.register",
+        "$.config.set",
+        "$.fs.stat",
+        "$.model.complete",
+        "$.session.append",
+        "$.session.cwd",
+        "$.session.version",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.301",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "notary",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "changes config",
+          "drives Claude",
+          "reads files",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call",
+        "classic hooks",
+        "every prompt"
+      ],
+      "draws": [
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-16T16:28:00Z",
+      "createdAt": "2026-10-13T18:21:07Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

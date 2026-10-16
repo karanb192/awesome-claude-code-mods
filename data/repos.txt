@@ -333,6 +333,7 @@ calm-logic/visualize-claude-mod
 CamdenBopp/claude-afk
 Camellia-inc/usage-guard
 camlloyd/metro-map-mod
+candygoogy/notary
 Canine89/cc-mod-file-explorer
 cardosoads/jev-suite
 carlvellotti/mods-starter
