@@ -52,6 +52,7 @@ jiangnanquan/claude-code-zh
 joshuatonga/mini-claude-mods
 karanb192/cache-tax
 karanb192/claude-code-mods
+KiranPothana/session-board
 kongyo2/context-view
 ljmerza/prompt-spellcheck
 lorenzh/rabe
