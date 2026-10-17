@@ -45,6 +45,7 @@ hellosverre/claude-skins
 hellosverre/mod-store
 hellosverre/redgreen
 hellosverre/smart-compact
+hnikoloski/rixflow
 hoobnn/hoobnn-agent-mods
 HuliLulu46/polish
 i-harsha-reddy/naruto-mod
