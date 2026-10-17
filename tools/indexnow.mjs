@@ -3,7 +3,7 @@
 // site owns the key; it is public by design.
 //
 //   node tools/indexnow.mjs --base <sha> --head <sha>   pages changed between two commits
-//   node tools/indexnow.mjs --all                       every URL in docs/sitemap.xml
+//   node tools/indexnow.mjs --all [--base <sha>]        every URL in docs/sitemap.xml, plus pages changed since base
 //   add --dry-run to print the URLs without sending them
 
 import { execFileSync } from 'node:child_process'
@@ -38,9 +38,9 @@ export const payload = urlList => ({ host: new URL(site).host, key: KEY, keyLoca
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const { values } = parseArgs({ options: { base: { type: 'string' }, head: { type: 'string' }, all: { type: 'boolean' }, 'dry-run': { type: 'boolean' } } })
-  const urls = values.all
-    ? sitemapUrls(readFileSync('docs/sitemap.xml', 'utf8'))
-    : urlsForPaths(execFileSync('git', ['diff', '--name-only', '--no-renames', values.base, values.head, '--', 'docs/index.html', 'docs/mods'], { encoding: 'utf8' }).split('\n').filter(Boolean))
+  const changed = values.base ? urlsForPaths(execFileSync('git', ['diff', '--name-only', '--no-renames', values.base, values.head ?? 'HEAD', '--', 'docs/index.html', 'docs/mods'], { encoding: 'utf8' }).split('\n').filter(Boolean)) : []
+  // --all with a base also sends removed pages, which the sitemap no longer lists.
+  const urls = values.all ? [...new Set([...sitemapUrls(readFileSync('docs/sitemap.xml', 'utf8')), ...changed])].sort() : changed
   console.log(`${urls.length} URLs`)
   if (values['dry-run']) for (const url of urls) console.log(url)
   else for (const urlList of batches(urls)) {

@@ -60,8 +60,10 @@ jobs:
           ALL: ${{ inputs.all }}
         run: |
           base=$(gh run list --workflow indexnow.yml --branch main --status success --limit 1 --json headSha --jq '.[0].headSha // empty')
-          if [ "$ALL" = true ] || [ -z "$base" ]; then
+          if [ -z "$base" ]; then
             node tools/indexnow.mjs --all
+          elif [ "$ALL" = true ]; then
+            node tools/indexnow.mjs --all --base "$base" --head HEAD
           else
             node tools/indexnow.mjs --base "$base" --head HEAD
           fi
