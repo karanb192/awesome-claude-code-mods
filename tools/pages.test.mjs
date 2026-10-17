@@ -224,14 +224,20 @@ test('unclassified calls never lift the level a page states', () => {
   const calls = ['$.ui.render', '$.state.get']
   assert.equal(grade(calls).level, 1, 'the stored level counts the unclassified call as 1')
   assert.match(text(scanSummary(scanned(calls), '2.1.300').html), /reaches L0 \(draws and remembers\) by its classified calls/)
-  assert.match(text(scanSummary(scanned(['$.state.get']), '2.1.300').html), /^The scanner could not classify any of the 1 API methods tool references, so its access is unknown/)
-  assert.match(text(scanSummary(scanned([]), '2.1.300').html), /^tool makes no API calls the scanner recorded/)
+  const none = scanSummary(scanned(['$.state.get', '$.state.set']), '2.1.300')
+  assert.match(text(none.html), /^The scanner could not classify any of the 2 API methods tool references, so its access is unknown/)
+  assert.match(none.html, /Unclassified calls: 2 \(<code>\$\.state\.get<\/code>, <code>\$\.state\.set<\/code>\), full access unknown/)
+  const empty = scanSummary(scanned([]), '2.1.300')
+  assert.match(text(empty.html), /^The validator reported no API methods for tool; it passed/)
+  assert.match(text(empty.html), /Access: no API methods recorded/)
+  assert.doesNotMatch(empty.html + empty.short, /none beyond|no API calls/)
+  assert.equal(empty.short, 'Scan: no API methods recorded, passes validation on 2.1.300.')
 })
 
 test('incomplete footprints, failures and retained records are worded for what the scan knows', () => {
   const partial = scanSummary(scanned(['$.fs.write'], { footprint: { status: 'unavailable' } }), '2.1.300')
   assert.match(text(partial.html), /^The scan could not record a complete footprint for tool, so its access is unknown/)
-  assert.doesNotMatch(partial.html, /L2/)
+  assert.doesNotMatch(partial.html, /L2|Events hooked|API methods referenced/)
   const failed = scanSummary(scanned(['$.ui.render'], { validate: { status: 'failed', claudeVersion: '2.1.300', errors: ['manifest <bad>\nsecond line'] } }), '2.1.300')
   assert.match(failed.html, /fails <code>claude plugin validate<\/code> on Claude Code 2\.1\.300: manifest &lt;bad&gt;\./)
   assert.doesNotMatch(failed.html, /second line/)
@@ -272,7 +278,7 @@ test('metadata keeps the purpose first, adds the scan, and the index gate does n
   const page = renderModPage(mod('a/b', 'tool', { description: long, license: 'MIT' }), { slug: 's', anchor: 's', claudeVersion: '2.1.300' })
   const meta = page.match(/<meta name="description" content="([^"]*)">/)[1]
   assert.ok(meta.startsWith('A very long purpose sentence'))
-  assert.ok(meta.endsWith('Scan: no API calls, passes validation on 2.1.300.'))
+  assert.ok(meta.endsWith('Scan: no API methods recorded, passes validation on 2.1.300.'))
   assert.ok(meta.length <= 160, `meta is ${meta.length} characters`)
   const ld = JSON.parse(page.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'][0]
   assert.equal(ld.runtimePlatform, 'Claude Code')

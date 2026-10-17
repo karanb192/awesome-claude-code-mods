@@ -142,9 +142,9 @@ export function scanSummary(mod, version) {
     access = 'Access: unknown, the footprint is incomplete'
     short = `Scan: access unknown, ${shortValidation}.`
   } else if (!calls.length) {
-    sentence = `${name} makes no API calls the scanner recorded and ${validation}.`
-    access = 'Access: none beyond the events it hooks'
-    short = `Scan: no API calls, ${shortValidation}.`
+    sentence = `The validator reported no API methods for ${name}; it ${validation}.`
+    access = 'Access: no API methods recorded'
+    short = `Scan: no API methods recorded, ${shortValidation}.`
   } else if (!c.unclassified.length || calls.length > c.unclassified.length) {
     sentence = `${name} reaches L${c.level} (${c.name})${c.unclassified.length ? ' by its classified calls' : ''} and ${validation}.`
     access = `Access from classified calls: L${c.level}, ${c.name}${c.labels.length ? ': ' + esc(c.labels.join(', ')) : ''}`
@@ -154,11 +154,11 @@ export function scanSummary(mod, version) {
     access = 'Access: unknown, no call could be classified'
     short = `Scan: access unknown, ${shortValidation}.`
   }
+  // An incomplete footprint can under-report both counts, so it shows neither.
   const items = [
-    `Events hooked: ${new Set(mod.hooks.map(hook => hook.event)).size}`,
-    `API methods referenced: ${calls.length}`,
+    ...(hasFootprint(mod) ? [`Events hooked: ${new Set(mod.hooks.map(hook => hook.event)).size}`, `API methods referenced: ${calls.length}`] : []),
     access,
-    ...(hasFootprint(mod) && c.unclassified.length && calls.length > c.unclassified.length ? [`Unclassified calls: ${c.unclassified.length} (${callList(c.unclassified)}), full access unknown`] : []),
+    ...(hasFootprint(mod) && c.unclassified.length ? [`Unclassified calls: ${c.unclassified.length} (${callList(c.unclassified)}), full access unknown`] : []),
     ...(retained ? [`Last recorded footprint${mod.sourceCommit ? `, revision <code>${esc(mod.sourceCommit.slice(0, 7))}</code>` : ''}: ${esc(mod.validate.errors[0] ?? 'not rescanned in the latest scan.')}`] : []),
     'Static scan, not a runtime test',
   ]
