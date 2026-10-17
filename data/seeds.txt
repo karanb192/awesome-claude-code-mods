@@ -100,6 +100,7 @@ T-AI-Labs/claude-code-mods
 tozmoz/sparkmine
 twjackysu/claude-code-stock-ticker
 ugglr/claude-token-monster
+UtsavBalar1231/oh-my-claudeagent
 VaitaR/claude-code-limits
 valeryia-piatrova/token-hamster
 varunmoka7/image-shrinker
