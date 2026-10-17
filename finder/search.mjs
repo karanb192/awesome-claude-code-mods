@@ -7,6 +7,7 @@ import { createHash } from 'node:crypto'
 import { mkdirSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs'
 import { homedir } from 'node:os'
 import { join } from 'node:path'
+import { install } from './install.mjs'
 
 export const REPO = 'karanb192/awesome-claude-code-mods'
 const SNAPSHOT = 'docs/mods.json'
@@ -357,16 +358,6 @@ export function search(index, params) {
 
 const manifestUrl = m => `https://github.com/${m.repo}/blob/${m.sourceCommit ?? m.defaultBranch ?? 'main'}/${m.path === '.' ? '' : m.path + '/'}.claude-plugin/plugin.json`
 const atCommit = (m, file, line) => `https://github.com/${m.repo}/blob/${m.sourceCommit ?? m.defaultBranch ?? 'main'}/${file.split('/').map(encodeURIComponent).join('/')}${line ? '#L' + line : ''}`
-
-// What a user would type to install, when the scan saw a marketplace that lists this mod. It names the
-// repository rather than the marketplace, because dozens of unrelated marketplaces share names like
-// claude-mods. The scan records the manifest's plugin name, not the marketplace entry's.
-function install(m) {
-  if (m.directory?.plugin) return { command: `/plugin install ${m.directory.plugin}`, from: "Anthropic's plugin directory" }
-  const root = (m.marketplaces ?? []).find(p => p.path === '.claude-plugin/marketplace.json' && VERIFIED.has(p.status))
-  if (!root) return null
-  return { command: `/plugin install ${m.name} --marketplace ${m.repo}`, from: "the repository's own marketplace", check: "Confirm the plugin name in the repository's README before installing." }
-}
 
 function detail(m) {
   const kindNote = {

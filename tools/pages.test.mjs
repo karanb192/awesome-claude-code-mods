@@ -1,6 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { assignPages, formatRegistry, indexable, readRegistry, renderModPage, renderRedirect } from './pages.mjs'
+import { assignPages, formatRegistry, indexable, readRegistry, renderModPage, renderRedirect, scanSummary } from './pages.mjs'
+import { grade } from './grade.mjs'
 
 const mod = (repo, name, extra = {}) => ({
   id: `${repo}:${extra.path ?? name}`, repo, name, path: name, kind: 'mod', description: `${name} does one useful thing for a Claude Code session.`,
@@ -202,4 +203,89 @@ test('a mod page offers README badges that link back to it, and built-ins do not
   assert.equal(snippet, '[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/a--b--c-reach.svg)](https://mods.aidojo.si/mods/a--b--c/)\n[![validates](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/a--b--c-validates.svg)](https://mods.aidojo.si/mods/a--b--c/)')
   assert.match(page, /<img src="\/badges\/a--b--c-reach\.svg"/)
   assert.doesNotMatch(renderModPage(mod('anthropics/claude-code', 'x', { kind: 'builtin' }), { slug: 's', anchor: 's', claudeVersion: '2.1.300' }), /badge-snippet/)
+})
+
+const scanned = (calls, extra = {}) => mod('a/b', 'tool', { calls, reach: grade(calls), hooks: [{ event: 'session.start', matcher: {} }, { event: 'tool.call', matcher: { tool: 'Bash' } }, { event: 'tool.call', matcher: { tool: 'Edit' } }], ...extra })
+const text = html => html.replace(/<[^>]+>/g, ' ').replace(/&#39;/g, "'").replace(/\s+/g, ' ').trim()
+
+test('the scan summary states the level of classified calls and names the calls it cannot classify', () => {
+  const summary = scanSummary(scanned(['$.env.get', '$.process.run', '$.state.get', '$.state.set']), '2.1.300')
+  assert.match(text(summary.html), /^tool reaches L2 \(writes or runs\) by its classified calls and passed claude plugin validate on Claude Code 2\.1\.300\./)
+  assert.match(text(summary.html), /Events hooked: 2 API methods referenced: 4 Access from classified calls: L2, writes or runs: runs processes, reads env vars/)
+  assert.match(summary.html, /Unclassified calls: 2 \(<code>\$\.state\.get<\/code>, <code>\$\.state\.set<\/code>\), full access unknown/)
+  assert.match(text(summary.html), /Static scan, not a runtime test/)
+  assert.equal(summary.short, 'Scan: L2 writes or runs by classified calls, passes validation on 2.1.300.')
+  const clean = scanSummary(scanned(['$.ui.render']), '2.1.300')
+  assert.match(text(clean.html), /^tool reaches L0 \(draws and remembers\) and passed/)
+  assert.doesNotMatch(clean.html, /Unclassified/)
+})
+
+test('unclassified calls never lift the level a page states', () => {
+  const calls = ['$.ui.render', '$.state.get']
+  assert.equal(grade(calls).level, 1, 'the stored level counts the unclassified call as 1')
+  assert.match(text(scanSummary(scanned(calls), '2.1.300').html), /reaches L0 \(draws and remembers\) by its classified calls/)
+  assert.match(text(scanSummary(scanned(['$.state.get']), '2.1.300').html), /^The scanner could not classify any of the 1 API methods tool references, so its access is unknown/)
+  assert.match(text(scanSummary(scanned([]), '2.1.300').html), /^tool makes no API calls the scanner recorded/)
+})
+
+test('incomplete footprints, failures and retained records are worded for what the scan knows', () => {
+  const partial = scanSummary(scanned(['$.fs.write'], { footprint: { status: 'unavailable' } }), '2.1.300')
+  assert.match(text(partial.html), /^The scan could not record a complete footprint for tool, so its access is unknown/)
+  assert.doesNotMatch(partial.html, /L2/)
+  const failed = scanSummary(scanned(['$.ui.render'], { validate: { status: 'failed', claudeVersion: '2.1.300', errors: ['manifest <bad>\nsecond line'] } }), '2.1.300')
+  assert.match(failed.html, /fails <code>claude plugin validate<\/code> on Claude Code 2\.1\.300: manifest &lt;bad&gt;\./)
+  assert.doesNotMatch(failed.html, /second line/)
+  for (const reason of ['Not found in this scan; retained pending weekly retirement review.', 'Repository could not be scanned; showing the last known footprint.']) {
+    const kept = scanSummary(scanned(['$.ui.render'], { sourceCommit: 'abcdef1234567', validate: { status: 'unknown', claudeVersion: '2.1.291', errors: [reason] }, lastKnownValidate: { status: 'passed', claudeVersion: '2.1.291', errors: [] } }), '2.1.300')
+    assert.match(text(kept.html), /^In its last recorded footprint, tool reaches L0 \(draws and remembers\) and passed claude plugin validate on Claude Code 2\.1\.291\./)
+    assert.ok(kept.html.includes(`Last recorded footprint, revision <code>abcdef1</code>: ${reason}`))
+    assert.doesNotMatch(kept.html, /last successful/i)
+  }
+  const keptPartial = scanSummary(scanned(['$.ui.render'], { footprint: { status: 'unavailable' }, validate: { status: 'unknown', errors: ['Repository could not be scanned; showing the last known footprint.'] } }), '2.1.300')
+  assert.match(text(keptPartial.html), /^In its last recorded footprint, the scan could not record a complete footprint/)
+})
+
+test('events are counted once however many hooks share them, and generated copy has no dashes', () => {
+  const summary = scanSummary(scanned(['$.ui.render']), '2.1.300')
+  assert.match(text(summary.html), /Events hooked: 2 /)
+  assert.doesNotMatch(summary.html + summary.short, /[–—]/)
+})
+
+test('a mod page offers an install hint when the scan saw a marketplace or Anthropic directory entry', () => {
+  const page = (extra = {}) => renderModPage(mod('a/b', 'tool', extra), { slug: 's', anchor: 's', claudeVersion: '2.1.300' })
+  const root = page({ marketplaces: [{ path: '.claude-plugin/marketplace.json', name: 'b', status: 'passed', errors: [] }] })
+  assert.match(root, /<h2 id="install-title">Install hint<\/h2><div class="command"><pre><code>\/plugin install tool --marketplace a\/b<\/code><\/pre><button type="button" class="copy" data-copy hidden>Copy<\/button>/)
+  assert.match(root, /From the repository's own marketplace\. Confirm the plugin name/)
+  assert.equal(root.match(/<\/script>/g).length, 2, 'JSON-LD plus the copy button script')
+  assert.match(page({ directory: { plugin: 'tool' } }), /<code>\/plugin install tool<\/code>/)
+  const none = page({ marketplaces: [{ path: 'sub/.claude-plugin/marketplace.json', name: 'b', status: 'passed', errors: [] }] })
+  assert.match(none, /follow the author’s setup instructions/)
+  assert.doesNotMatch(none, /data-copy/)
+  assert.match(page({ marketplaces: [{ path: '.claude-plugin/marketplace.json', name: 'b', status: 'passed', errors: [] }], validate: { status: 'failed', claudeVersion: '2.1.300', errors: ['x'] } }), /It fails validation in the latest scan, so it may not install\./)
+  const builtin = renderModPage(mod('anthropics/claude-code', 'x', { kind: 'builtin', directory: { plugin: 'x' } }), { slug: 's', anchor: 's', claudeVersion: '2.1.300' })
+  assert.match(builtin, /It ships inside Claude Code, so there is nothing to install\./)
+  assert.doesNotMatch(builtin, /Install hint/)
+})
+
+test('metadata keeps the purpose first, adds the scan, and the index gate does not move', () => {
+  const long = 'A very long purpose sentence that keeps going '.repeat(6)
+  const page = renderModPage(mod('a/b', 'tool', { description: long, license: 'MIT' }), { slug: 's', anchor: 's', claudeVersion: '2.1.300' })
+  const meta = page.match(/<meta name="description" content="([^"]*)">/)[1]
+  assert.ok(meta.startsWith('A very long purpose sentence'))
+  assert.ok(meta.endsWith('Scan: no API calls, passes validation on 2.1.300.'))
+  assert.ok(meta.length <= 160, `meta is ${meta.length} characters`)
+  const ld = JSON.parse(page.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'][0]
+  assert.equal(ld.runtimePlatform, 'Claude Code')
+  assert.equal(ld.license, 'https://spdx.org/licenses/MIT.html')
+  for (const license of ['NOASSERTION', null, undefined, 'Other']) {
+    assert.equal(JSON.parse(renderModPage(mod('a/b', 'tool', { license }), { slug: 's', anchor: 's', claudeVersion: '2.1.300' }).match(/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'][0].license, undefined)
+  }
+  const blank = mod('a/b', 'tool', { description: '' })
+  assert.equal(indexable(blank), false)
+  assert.match(renderModPage(blank, { slug: 's', anchor: 's', claudeVersion: '2.1.300' }), /<meta name="robots" content="noindex">/)
+})
+
+test('a page changes when the scan changes', () => {
+  const opts = { slug: 's', anchor: 's', claudeVersion: '2.1.300' }
+  assert.notEqual(renderModPage(scanned(['$.ui.render']), opts), renderModPage(scanned(['$.ui.render', '$.http.fetch']), opts))
 })

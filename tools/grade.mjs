@@ -45,6 +45,14 @@ export function grade(calls, complete = true) {
   return { level: complete ? level : null, name: complete ? LEVEL_NAMES[level] : 'unknown', labels: [...labels].sort((a, b) => order(a) - order(b)), ...(!complete ? { minimumLevel: level } : {}) }
 }
 
+// The level and labels of the calls the rules recognise, and the calls they do not. The stored level counts
+// an unclassified call as 1, which is neither a ceiling nor a floor, so pages state the two apart.
+export function classified(calls) {
+  const known = calls.filter(call => RULES.some(([re]) => re.test(call)))
+  const { level, name, labels } = grade(known)
+  return { level, name, labels, unclassified: calls.filter(call => !known.includes(call)) }
+}
+
 // What the mod observes, from the events it hooks.
 export function visibility(hooks) {
   const sees = new Set()

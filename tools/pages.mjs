@@ -4,7 +4,8 @@
 // of the mod that replaced it, and the registry remembers that target after the copy's record is retired.
 
 import { esc, arrow, mark, star, repo, site, levels, reachText, track, recordDetails, validationStatus, reviewNotes } from './site.mjs'
-import { hasFootprint } from './grade.mjs'
+import { hasFootprint, classified } from './grade.mjs'
+import { install } from '../finder/install.mjs'
 import { slugs } from './slug.mjs'
 
 export const idOf = mod => mod.id ?? `${mod.repo}:${mod.path}`
@@ -114,6 +115,71 @@ ${body}
 </body></html>`.replace(/[ \t]+\n/g, '\n') + '\n'
 }
 
+const firstLine = text => clip(String(text ?? '').split('\n')[0], 160)
+const callList = calls => calls.slice(0, 6).map(call => `<code>${esc(call)}</code>`).join(', ') + (calls.length > 6 ? ` and ${calls.length - 6} more` : '')
+const SPDX = /^[A-Za-z0-9][A-Za-z0-9.+-]*$/
+const licenseUrl = license => typeof license === 'string' && SPDX.test(license) && !['NOASSERTION', 'NONE', 'Other'].includes(license) ? `https://spdx.org/licenses/${license}.html` : null
+
+// What the scan recorded, as one sentence and a short list, built only from scan fields so it never repeats
+// author text. The level comes from classified calls alone; unclassified calls are named, not scored.
+// A retained record describes its last recorded footprint and why it was not rescanned.
+export function scanSummary(mod, version) {
+  const name = esc(mod.name)
+  const calls = [...new Set(mod.calls)]
+  const retained = mod.validate.status === 'unknown'
+  const result = retained ? mod.lastKnownValidate : mod.validate
+  const raw = result?.claudeVersion ?? version
+  const at = esc(raw)
+  const validation = result?.status === 'passed' ? `passed <code>claude plugin validate</code> on Claude Code ${at}`
+    : result?.status === 'warnings' ? `passed <code>claude plugin validate</code> with warnings on Claude Code ${at}`
+    : result?.status === 'failed' ? `fails <code>claude plugin validate</code> on Claude Code ${at}${result.errors?.length ? `: ${esc(firstLine(result.errors[0]))}` : ''}`
+    : 'has no recorded validation result'
+  const shortValidation = result?.status === 'passed' ? `passes validation on ${raw}` : result?.status === 'warnings' ? `passes validation with warnings on ${raw}` : result?.status === 'failed' ? `fails validation on ${raw}` : 'not validated'
+  const c = classified(calls)
+  let sentence, access, short
+  if (!hasFootprint(mod)) {
+    sentence = `The scan could not record a complete footprint for ${name}, so its access is unknown; it ${validation}.`
+    access = 'Access: unknown, the footprint is incomplete'
+    short = `Scan: access unknown, ${shortValidation}.`
+  } else if (!calls.length) {
+    sentence = `${name} makes no API calls the scanner recorded and ${validation}.`
+    access = 'Access: none beyond the events it hooks'
+    short = `Scan: no API calls, ${shortValidation}.`
+  } else if (!c.unclassified.length || calls.length > c.unclassified.length) {
+    sentence = `${name} reaches L${c.level} (${c.name})${c.unclassified.length ? ' by its classified calls' : ''} and ${validation}.`
+    access = `Access from classified calls: L${c.level}, ${c.name}${c.labels.length ? ': ' + esc(c.labels.join(', ')) : ''}`
+    short = `Scan: L${c.level} ${c.name}${c.unclassified.length ? ' by classified calls' : ''}, ${shortValidation}.`
+  } else {
+    sentence = `The scanner could not classify any of the ${calls.length} API methods ${name} references, so its access is unknown; it ${validation}.`
+    access = 'Access: unknown, no call could be classified'
+    short = `Scan: access unknown, ${shortValidation}.`
+  }
+  const items = [
+    `Events hooked: ${new Set(mod.hooks.map(hook => hook.event)).size}`,
+    `API methods referenced: ${calls.length}`,
+    access,
+    ...(hasFootprint(mod) && c.unclassified.length && calls.length > c.unclassified.length ? [`Unclassified calls: ${c.unclassified.length} (${callList(c.unclassified)}), full access unknown`] : []),
+    ...(retained ? [`Last recorded footprint${mod.sourceCommit ? `, revision <code>${esc(mod.sourceCommit.slice(0, 7))}</code>` : ''}: ${esc(mod.validate.errors[0] ?? 'not rescanned in the latest scan.')}`] : []),
+    'Static scan, not a runtime test',
+  ]
+  return {
+    html: `<section class="summary" aria-label="Scan summary"><p class="summary-line">${retained ? 'In its last recorded footprint, ' + sentence.replace(/^The /, 'the ') : sentence}</p><ul>${items.map(item => `<li>${item}</li>`).join('')}</ul></section>`,
+    short: (retained ? 'Last recorded scan. ' : '') + short,
+  }
+}
+
+const COPY = `<script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>`
+
+// How to install the mod: built-ins ship with Claude Code; otherwise the finder's install hint, labelled as
+// a hint because the scan reads the manifest's plugin name, not the marketplace entry's.
+function installBlock(mod) {
+  if (mod.kind === 'builtin') return '<p class="install">It ships inside Claude Code, so there is nothing to install.</p>'
+  const hint = install(mod)
+  if (!hint) return '<p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>'
+  const caution = mod.validate.status === 'failed' ? ' It fails validation in the latest scan, so it may not install.' : mod.validate.status === 'unknown' ? ' The latest scan could not confirm this mod, so the command may be out of date.' : ''
+  return `<section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>${esc(hint.command)}</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From ${esc(hint.from)}.${hint.check ? ' ' + esc(hint.check) : ''} Mods need Claude Code 2.1.287 or later.${caution}</p></section>${COPY}`
+}
+
 // siblings: other mods from the same repository with their page paths, already in display order.
 export function renderModPage(mod, { slug, anchor, claudeVersion, siblings = [] }) {
   const url = `${site}mods/${slug}/`
@@ -121,14 +187,15 @@ export function renderModPage(mod, { slug, anchor, claudeVersion, siblings = [] 
   const described = String(mod.description ?? '').trim()
   const version = mod.validate.claudeVersion ?? claudeVersion
   const title = `${mod.name}, a Claude Code mod by ${owner} | Awesome Claude Code Mods`
+  const summary = scanSummary(mod, version)
   const description = described
-    ? clip(described, 155)
+    ? `${clip(described, 154 - summary.short.length)} ${summary.short}`
     : `${mod.name} is a Claude Code mod in ${mod.repo}. See the hooks, API calls and access recorded by a static scan.`
   const shown = siblings.slice(0, 20)
   const ld = jsonLd({
     '@context': 'https://schema.org',
     '@graph': [
-      { '@type': 'SoftwareSourceCode', '@id': `${url}#mod`, name: mod.name, url, codeRepository: `https://github.com/${mod.repo}`, ...(described ? { description: described } : {}),
+      { '@type': 'SoftwareSourceCode', '@id': `${url}#mod`, name: mod.name, url, codeRepository: `https://github.com/${mod.repo}`, runtimePlatform: 'Claude Code', ...(licenseUrl(mod.license) ? { license: licenseUrl(mod.license) } : {}), ...(described ? { description: described } : {}),
         author: { '@type': 'Person', name: owner, url: `https://github.com/${owner}` }, isPartOf: { '@id': `${site}#website` } },
       { '@type': 'BreadcrumbList', itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Claude Code mods', item: site },
@@ -152,10 +219,11 @@ export function renderModPage(mod, { slug, anchor, claudeVersion, siblings = [] 
 <p class="byline">A Claude Code mod in <a href="https://github.com/${esc(mod.repo)}">${esc(mod.repo)}</a>${mod.kind === 'builtin' ? ', built into Claude Code' : ''}${mod.directory ? ` <span class="listed" title="Listed in Anthropic's plugin directory as ${esc(mod.directory.plugin)}">In Anthropic directory</span>` : ''}</p>
 <p class="lede">${described ? esc(described) : 'No description provided by the author.'}</p>
 ${reviewNotes(mod).length ? `<p class="compatibility">${esc(reviewNotes(mod).join('; '))}</p>` : ''}
+${summary.html}
+${installBlock(mod)}
 <div class="facts"><div><h2>Access</h2><span class="level">${esc(hasFootprint(mod) ? `L${mod.reach.level} ${levels[mod.reach.level]}` : 'Unknown access')}</span>${track(mod)}<span class="labels">${esc(hasFootprint(mod) ? reachText(mod) : 'The footprint is unavailable or incomplete.')}</span></div>
 <div><h2>Validation</h2><span class="status${statusClass}">${esc(status)}${mod.validate.status === 'passed' || mod.validate.status === 'warnings' ? ` on Claude Code ${esc(version)}` : ''}</span></div></div>
 <p class="actions"><a class="source" href="${esc(sourceOf(mod))}">View the source on GitHub ${arrow}</a><a href="/#${esc(anchor)}">Back to the list</a></p>
-<p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 ${recordDetails(mod, claudeVersion)}
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="${repo}/blob/main/SCANNING.md">How the scan works</a>.</p></section>
