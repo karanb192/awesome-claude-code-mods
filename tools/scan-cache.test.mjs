@@ -256,6 +256,7 @@ test('truncated successful validation stays unknown through scans, cache and pub
   assert.deepEqual(record.calls, ['$.fs.read'])
   const index = buildIndex(first)
   assert.equal(getMod(index, record.id).mod.validation.footprint, 'unavailable')
+  assert.deepEqual(search(index, {}).results.map(result => result.id), [record.id])
   for (const filter of [{ without: ['network'] }, { max_reach: 1 }, { without: ['every prompt'] }]) {
     assert.deepEqual(search(index, filter).results, [])
   }
