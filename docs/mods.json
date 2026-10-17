@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-16T16:05:19.141Z",
   "claudeVersion": "2.1.301",
-  "repos": 2143,
+  "repos": 2144,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -515853,6 +515853,137 @@
       "pushedAt": "2026-10-16T16:28:00Z",
       "createdAt": "2026-10-13T18:21:07Z",
       "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "leonidb/claude-code-mods:mods/twenty-forty-wait",
+      "repo": "leonidb/claude-code-mods",
+      "path": "mods/twenty-forty-wait",
+      "sourceCommit": "2978c748dfc7c132f9031239591c8997660dc64b",
+      "name": "twenty-forty-wait",
+      "description": "A 2048 game above the prompt to keep your attention in Claude Code while it works, with a live view of Claude's work and a your-turn card when it stops.",
+      "author": "Leonid Bakaleynik",
+      "homepage": "https://github.com/leonidb/claude-code-mods/tree/main/mods/twenty-forty-wait",
+      "url": "https://github.com/leonidb/claude-code-mods/tree/main/mods/twenty-forty-wait",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "fortywait"
+          }
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "classic.PermissionRequest",
+          "matcher": {}
+        },
+        {
+          "event": "ui.message",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "prompt.edit",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "ui.fault",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.model.complete",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [
+        "hooks/board.tsx"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.301",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "leonidb",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "drives Claude",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call",
+        "classic hooks",
+        "every prompt"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-16T18:19:57Z",
+      "createdAt": "2026-10-11T08:03:05Z",
+      "license": "Apache-2.0",
       "archived": false,
       "defaultBranch": "main",
       "directory": null

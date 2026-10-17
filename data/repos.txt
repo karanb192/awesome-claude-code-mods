@@ -1106,6 +1106,7 @@ leinardi/adversarial-review-loop
 lemomo-ai/lemo-mod
 lemonlatte/claude-maru-run
 lenadweb/claude-code-plugins
+leonidb/claude-code-mods
 leonqi-io/claude-code-mods
 leopiney/wolfbud-claude-mod
 Leoworkman/claude-mods

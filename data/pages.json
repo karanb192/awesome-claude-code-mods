@@ -2654,6 +2654,7 @@
   "lemonlatte--claude-maru-run--claude-maru-run": {"id":"lemonlatte/claude-maru-run:."},
   "lenadweb--claude-code-plugins--lenadweb-image-preview": {"id":"lenadweb/claude-code-plugins:plugins/lenadweb-image-preview"},
   "lenadweb--claude-code-plugins--lenadweb-usage-meter": {"id":"lenadweb/claude-code-plugins:plugins/lenadweb-usage-meter"},
+  "leonidb--claude-code-mods--twenty-forty-wait": {"id":"leonidb/claude-code-mods:mods/twenty-forty-wait"},
   "leonqi-io--claude-code-mods--session-band": {"id":"leonqi-io/claude-code-mods:session-band"},
   "leopiney--wolfbud-claude-mod--wolfbud": {"id":"leopiney/wolfbud-claude-mod:mods/wolfbud"},
   "letnonesurvive--claude-code-mods--context-bar": {"id":"letnonesurvive/claude-code-mods:context-bar"},
