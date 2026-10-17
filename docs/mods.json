@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-17T15:18:44.233Z",
   "claudeVersion": "2.1.302",
-  "repos": 2318,
+  "repos": 2319,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -552149,6 +552149,98 @@
       "pushedAt": "2026-10-17T11:16:54Z",
       "createdAt": "2026-10-15T10:51:00Z",
       "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "HuliLulu46/cc-effort-switch:.",
+      "repo": "HuliLulu46/cc-effort-switch",
+      "path": ".",
+      "sourceCommit": "68a5104ddb4c454f41cf714f104226d5ff76d10e",
+      "name": "cc-effort-switch",
+      "description": "Step the main thread's reasoning effort with Alt/Option+Up and Alt/Option+Down, shown in the prompt footer",
+      "author": null,
+      "homepage": "https://github.com/HuliLulu46/cc-effort-switch",
+      "url": "https://github.com/HuliLulu46/cc-effort-switch",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "effort"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "SessionMode"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.env.get",
+        "$.session.model",
+        "$.settings.read",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.302",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "cc-effort-switch",
+          "status": "warnings",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "reads env vars",
+          "reads settings",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "SessionMode",
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-17T08:11:20Z",
+      "createdAt": "2026-10-15T02:39:56Z",
+      "license": null,
       "archived": false,
       "defaultBranch": "main",
       "directory": null

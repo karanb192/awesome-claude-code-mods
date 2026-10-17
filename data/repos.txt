@@ -864,6 +864,7 @@ hugo88/claude-code-recording-mode
 hugoamadio/claude-quickbar
 Hugopvigo/claude-statusline-mod
 Hula-Hoop-AI/supermods
+HuliLulu46/cc-effort-switch
 HuliLulu46/polish
 Humpens/claude-mods
 Huuuuung/think-meter
