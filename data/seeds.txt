@@ -46,6 +46,7 @@ hellosverre/mod-store
 hellosverre/redgreen
 hellosverre/smart-compact
 hoobnn/hoobnn-agent-mods
+HuliLulu46/cc-commit-command
 HuliLulu46/polish
 i-harsha-reddy/naruto-mod
 iamumeransari/claude-show-your-work
