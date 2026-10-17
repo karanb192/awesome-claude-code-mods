@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-17T15:18:44.233Z",
   "claudeVersion": "2.1.302",
-  "repos": 2317,
+  "repos": 2318,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -552136,6 +552136,123 @@
       "stars": 0,
       "pushedAt": "2026-10-17T02:40:48Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "edsoncantuaria/cc-cost:.",
+      "repo": "edsoncantuaria/cc-cost",
+      "path": ".",
+      "sourceCommit": "8a394a7d5fcc4bd9874f16a4d534cdfd626d8163",
+      "name": "cc-cost",
+      "description": "Minimal band above the prompt with session and daily tokens, context and usage limits",
+      "author": "edsoncantuaria",
+      "homepage": "https://github.com/edsoncantuaria/cc-cost",
+      "url": "https://github.com/edsoncantuaria/cc-cost",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "session.compact",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.agent.list",
+        "$.clock.now",
+        "$.command.run",
+        "$.env.get",
+        "$.session.compact",
+        "$.session.id",
+        "$.session.messages",
+        "$.session.usage",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.keys",
+        "$.store.set",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.302",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "cc-cost",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "drives Claude",
+          "reads env vars",
+          "reads the transcript",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "compaction"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-17T11:16:54Z",
+      "createdAt": "2026-10-15T10:51:00Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

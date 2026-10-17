@@ -2198,6 +2198,7 @@
   "echo724--echo-claude-mod--echo-widget": {"id":"echo724/echo-claude-mod:mods/echo-widget"},
   "eddiezhan--xhs-count-mod--xhs-count": {"id":"eddiezhan/xhs-count-mod:."},
   "edoproch--compact-jev--compact-jev": {"id":"edoproch/compact-jev:."},
+  "edsoncantuaria--cc-cost--cc-cost": {"id":"edsoncantuaria/cc-cost:."},
   "edtrackai--claude-code-guardrails-lite--guardrails-lite": {"id":"edtrackai/claude-code-guardrails-lite:."},
   "eduardocruz--cc-kit--kit-sink": {"id":"eduardocruz/cc-kit:mods/kit-sink"},
   "edwinhu--workflows--workflows": {"id":"edwinhu/workflows:."},

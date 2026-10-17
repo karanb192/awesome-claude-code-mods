@@ -623,6 +623,7 @@ EasyAIHenry/henry-mods
 echo724/echo-claude-mod
 eddiezhan/xhs-count-mod
 edoproch/compact-jev
+edsoncantuaria/cc-cost
 edtrackai/claude-code-guardrails-lite
 eduardocruz/cc-kit
 edwinhu/workflows
