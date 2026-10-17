@@ -99,6 +99,7 @@ SummerRiversound/review-inbox
 T-AI-Labs/claude-code-mods
 tozmoz/sparkmine
 twjackysu/claude-code-stock-ticker
+tyler4400/tyler-claude-mods
 ugglr/claude-token-monster
 VaitaR/claude-code-limits
 valeryia-piatrova/token-hamster
