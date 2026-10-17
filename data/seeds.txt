@@ -77,6 +77,7 @@ NMenzel/claude-devtools-mod
 nuromirzak/nibbl
 OG-Matcha/tessera
 OneWave-AI/claude-code-mods
+onk3sh/fix-on-edit
 paragpandyareal/lazy-panda-panel
 paragpandyareal/swear-slap
 pawandeepdhall/claude-mods
