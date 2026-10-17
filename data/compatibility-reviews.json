@@ -26,5 +26,37 @@
     ],
     "reason": "The null character is used only to reject paths containing it. resolvePath returns undefined for that input; the literal is not inserted into rendered text.",
     "source": "https://github.com/kiankhooban/open-paths/blob/dad28e23010500d228a70ad1e048e0888d402a17/hooks/paths.ts#L138"
+  },
+  {
+    "id": "wjsekrud/motive-mem:.",
+    "sourceCommit": "7b85f2a7b963d2b46ce4cb90b1687af8b6bb462a",
+    "claudeVersion": "2.1.301",
+    "warnings": [
+      {
+        "code": "ui-control-characters",
+        "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+        "evidence": [
+          { "file": "hooks/register.tsx", "line": 111 },
+          { "file": "hooks/register.tsx", "line": 147 },
+          { "file": "hooks/register.tsx", "line": 156 }
+        ]
+      }
+    ],
+    "reason": "The null characters split Git's NUL-delimited path output or identify binary file content that is excluded from the diff. They are not inserted into rendered text or forwarded as rewritten props.text.",
+    "source": "https://github.com/wjsekrud/motive-mem/blob/7b85f2a7b963d2b46ce4cb90b1687af8b6bb462a/hooks/register.tsx#L111-L156"
+  },
+  {
+    "id": "muellerei/sweet-spot:.",
+    "sourceCommit": "8750a5390d58c52919973453efed63a330d5f4f9",
+    "claudeVersion": "2.1.301",
+    "warnings": [
+      {
+        "code": "ui-control-characters",
+        "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+        "evidence": [{ "file": "hooks/standing.ts", "line": 131 }]
+      }
+    ],
+    "reason": "The null character marks quoted spans inside the shell-command classifier. Quoted command heads are rejected and displayed labels use matched command, subcommand and flag words; this private marker is not rendered or passed to next() as rewritten text.",
+    "source": "https://github.com/muellerei/sweet-spot/blob/8750a5390d58c52919973453efed63a330d5f4f9/hooks/standing.ts#L131"
   }
 ]
