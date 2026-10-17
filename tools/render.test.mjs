@@ -262,6 +262,26 @@ test('compatibility warnings stay distinct from validation failures and link to 
   assert.match(await tab.locator('.compatibility').innerText(), /marketplace fails; review UI rewrite/)
 })
 
+test('incomplete UI review is labelled separately on the catalogue, badge and mod page', async t => {
+  const entry = { ...mod(0), sourceCommit: 'a'.repeat(40), compatibility: { warnings: [{
+    code: 'ui-review-incomplete', message: 'UI source review incomplete: source byte limit reached.',
+    evidence: [{ file: 'hooks/large.ts', line: 1 }],
+  }] } }
+  const dir = fixture(t, [entry])
+  render(dir)
+  for (const file of ['catalogue.md', 'badges/example--mods--mod-0-validates.svg', 'docs/mods/example--mods--mod-0/index.html']) {
+    const text = readFileSync(join(dir, file), 'utf8')
+    assert.match(text, /UI review incomplete/)
+    assert.doesNotMatch(text, /UI rewrite review|review UI rewrite/)
+  }
+  const browser = await chromium.launch()
+  t.after(() => browser.close())
+  const tab = await browser.newPage({ viewport: { width: 390, height: 844 } })
+  await tab.goto(`${serve(t, join(dir, 'docs'))}/mods/example--mods--mod-0/`)
+  assert.match(await tab.locator('dl').innerText(), /UI review incomplete/)
+  assert.equal(await tab.getByRole('link', { name: 'hooks/large.ts:1' }).getAttribute('href'), `https://github.com/example/mods/blob/${'a'.repeat(40)}/hooks/large.ts#L1`)
+})
+
 test('scoreboard stays within desktop and mobile viewports as the scan grows', async t => {
   const browser = await chromium.launch()
   t.after(() => browser.close())

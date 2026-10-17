@@ -102,6 +102,28 @@ test('revalidation refreshes marketplace evidence, caches exact records and reje
   assert.throws(() => revalidatePublished([{ ...record, sourceCommit: null }], '2.1.290', {}, deps), /Missing pinned source/)
 })
 
+test('pinned revalidation rejects and retries incomplete UI analysis', () => {
+  const record = mod('o/new', { sourceCommit: 'a'.repeat(40) }), cache = {}
+  let validations = 0, broken = true
+  const deps = {
+    ensureVersion: () => {},
+    checkout: (repo, revision, dir) => {
+      writeHooks(dir)
+      writeFileSync(join(dir, 'hooks/register.ts'), broken ? 'const value=' + '('.repeat(12000) + '1' + ')'.repeat(12000) : 'const value="safe"')
+    },
+    validate: () => { validations++; return parseValidateOutput('  ❯ ./register.ts hooks: ui.render{component=AssistantMessage}\n  ❯ ./register.ts calls: nothing on $\n✔ Validation passed') },
+  }
+  for (let i = 0; i < 2; i++) {
+    assert.throws(() => revalidatePublished([record], '2.1.301', cache, deps), /UI revalidation incomplete/)
+    assert.deepEqual(cache, {})
+  }
+  assert.equal(validations, 2)
+  broken = false
+  assert.deepEqual(revalidatePublished([record], '2.1.301', cache, deps)[0].compatibility.warnings, [])
+  revalidatePublished([record], '2.1.301', cache, deps)
+  assert.equal(validations, 3)
+})
+
 test('concurrent additions cannot disguise a partial scan or roll back a newer full scan', () => {
   const before = inventory(Array.from({ length: 6 }, (_, i) => mod(`o/old${i}`)))
   const latest = inventory([...before.mods, ...Array.from({ length: 20 }, (_, i) => mod(`o/new${i}`))])

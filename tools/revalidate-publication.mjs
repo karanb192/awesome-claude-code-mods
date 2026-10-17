@@ -69,9 +69,11 @@ export function revalidatePublished(records, version, cache = {}, deps = {}) {
         if (result.status === 'unknown') throw new Error(`Marketplace revalidation incomplete: ${record.id}`)
         return { path: relative(dir, path), name: JSON.parse(readFileSync(path, 'utf8')).name ?? null, status: result.status, errors: result.errors }
       })
+      const warnings = uiRewriteReview(dir, plugin, Array.isArray(modules) ? modules : [], hooks)
+      if (warnings.some(w => w.code === 'ui-review-incomplete')) throw new Error(`UI revalidation incomplete: ${record.id}`)
       const updated = { ...record, modules, footprint, hooks, calls, surfaceModules: [...new Set(parsed.modules.flatMap(module => module.surfaceModules))],
         validate: { status: parsed.status, claudeVersion: version, errors: parsed.errors }, marketplaces,
-        compatibility: { runtime: 'not-tested', warnings: uiRewriteReview(dir, plugin, Array.isArray(modules) ? modules : [], hooks) },
+        compatibility: { runtime: 'not-tested', warnings },
         reach: grade(calls, footprint.status === 'reported'), sees: visibility(hooks), draws: [...new Set(drawsOn(hooks))] }
       if (record.validate.status === 'unknown' && record.lastKnownValidate) {
         updated.lastKnownValidate = updated.validate

@@ -63,6 +63,7 @@ const CACHE_KEY = findingsKey(claudeVersion)
 const cached = args.cache && existsSync(args.cache) ? JSON.parse(readFileSync(args.cache, 'utf8')) : null
 const reusable = cached?.key === CACHE_KEY ? cached.repos : {}
 const findings = {}
+const inspectionFailures = new Set()
 let downloadedKb = 0, reused = 0
 // A crashed or timed-out validator reports `unknown`; such findings are retried on the next scan, never reused.
 // `unsettled` also covers an unknown plugin that duplicate filtering dropped before it reached the findings.
@@ -77,7 +78,13 @@ async function scanRepo(repo) {
   let found = null
   try {
     const dir = await clone(repo, CLONES)
-    if (dir) found = await inspect(repo, dir, CLONES, claudeVersion)
+    if (dir) {
+      try { found = await inspect(repo, dir, CLONES, claudeVersion) }
+      catch (error) {
+        inspectionFailures.add(repo)
+        console.error(`inspection failed: ${repo}: ${error.name}; retaining earlier records and retrying next scan`)
+      }
+    }
   } finally {
     const size = await spawnAsync('du', ['-sk', join(CLONES, repo.replace('/', '__'))])
     downloadedKb += Number(size.stdout.split('\t')[0]) || 0
@@ -135,6 +142,7 @@ await Promise.all(Array.from({ length: Math.min(CONCURRENCY, repos.length) }, as
 }))
 let mods = byRepo.flat()
 console.log(`scanned ${repos.length} repos in ${Math.round((Date.now() - started) / 1000)}s, ${CONCURRENCY} at a time; ${reused} unchanged since a cached scan; checkouts held ${Math.round(downloadedKb / 1024)} MB`)
+if (inspectionFailures.size) console.error(`inspection incomplete for ${inspectionFailures.size} repositories: ${repos.filter(repo => inspectionFailures.has(repo)).join(', ')}`)
 if (args.cache) {
   mkdirSync(dirname(args.cache), { recursive: true })
   writeFileSync(args.cache, JSON.stringify({ key: CACHE_KEY, repos: findings }))

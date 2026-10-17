@@ -117,6 +117,8 @@ export async function inspect(repo, dir, clones, claudeVersion) {
       }
       marketplaces.push(marketplaceResults.get(path))
     }
+    const warnings = uiRewriteReview(dir, root, hooks.modules, allHooks)
+    if (warnings.some(w => w.code === 'ui-review-incomplete')) { complete = false; unsettled = true }
     plugins.push({
       rel,
       manifestName: manifest?.name ?? null,
@@ -131,7 +133,7 @@ export async function inspect(repo, dir, clones, claudeVersion) {
       surfaceModules: [...new Set(parsed.modules.flatMap(x => x.surfaceModules))],
       validate: { status: parsed.status, claudeVersion, errors: parsed.errors },
       marketplaces,
-      warnings: uiRewriteReview(dir, root, hooks.modules, allHooks),
+      warnings,
     })
   }
   return unsettled ? { revision, complete, plugins, unsettled } : { revision, complete, plugins }

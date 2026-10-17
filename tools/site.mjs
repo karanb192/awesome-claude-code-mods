@@ -21,7 +21,8 @@ const sourceUrl = (mod, file, line) => `https://github.com/${mod.repo}/blob/${mo
 export const reviewNotes = mod => [
   ...((mod.marketplaces ?? []).some(p => p.status === 'failed') ? ['marketplace fails'] : []),
   ...((mod.marketplaces ?? []).some(p => p.status === 'unknown') ? ['marketplace not verified'] : []),
-  ...(mod.compatibility?.warnings?.length ? ['review UI rewrite'] : []),
+  ...((mod.compatibility?.warnings ?? []).some(w => w.code !== 'ui-review-incomplete') ? ['review UI rewrite'] : []),
+  ...((mod.compatibility?.warnings ?? []).some(w => w.code === 'ui-review-incomplete') ? ['UI review incomplete'] : []),
 ]
 export const reachText = mod => !hasFootprint(mod) ? 'unknown access' : mod.reach.labels.join(', ') || 'draws only'
 export const validationStatus = (mod, version) => ['passed', 'warnings'].includes(mod.validate.status) ? (mod.validate.status === 'warnings' ? 'Passed with warnings' : 'Passed') : mod.validate.status === 'failed' ? `fails on ${version}` : 'not verified'
@@ -33,7 +34,7 @@ export function recordDetails(mod, claudeVersion) {
   const version = mod.validate.claudeVersion ?? claudeVersion
   const last = mod.validate.status === 'unknown' && mod.lastKnownValidate
   const compatibility = (mod.marketplaces ?? []).map(p => `<dt>Marketplace ${esc(p.status)}</dt><dd><a href="${esc(sourceUrl(mod, p.path))}">${esc(p.name ?? p.path)}</a>${p.errors.length ? ': ' + esc(p.errors.join('; ')) : ''}</dd>`).join('')
-    + (mod.compatibility?.warnings ?? []).map(w => `<dt>UI rewrite review</dt><dd>${esc(w.message)} ${(w.evidence ?? []).map(e => `<a href="${esc(sourceUrl(mod, e.file, e.line))}">${esc(e.file)}:${e.line}</a>`).join(', ')}</dd>`).join('')
+    + (mod.compatibility?.warnings ?? []).map(w => `<dt>${w.code === 'ui-review-incomplete' ? 'UI review incomplete' : 'UI rewrite review'}</dt><dd>${esc(w.message)} ${(w.evidence ?? []).map(e => `<a href="${esc(sourceUrl(mod, e.file, e.line))}">${esc(e.file)}:${e.line}</a>`).join(', ')}</dd>`).join('')
   return `<dl>
     ${mod.directory ? `<dt>Anthropic directory</dt><dd>Listed as <code>${esc(mod.directory.plugin)}</code></dd>` : ''}${!hasFootprint(mod) ? '\n    <dt>Footprint</dt><dd>Unavailable or incomplete. Recorded events and calls below may omit access.</dd>' : ''}
     <dt>Observed events</dt><dd>${esc(mod.sees.join(', ') || (hasFootprint(mod) ? 'Only what it hooks' : 'unknown'))}</dd>
