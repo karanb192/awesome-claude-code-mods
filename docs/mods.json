@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-16T16:05:19.141Z",
   "claudeVersion": "2.1.301",
-  "repos": 2144,
+  "repos": 2146,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -515984,6 +515984,305 @@
       "pushedAt": "2026-10-16T18:19:57Z",
       "createdAt": "2026-10-11T08:03:05Z",
       "license": "Apache-2.0",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "muellerei/sweet-spot:.",
+      "repo": "muellerei/sweet-spot",
+      "path": ".",
+      "sourceCommit": "8750a5390d58c52919973453efed63a330d5f4f9",
+      "name": "sweet-spot",
+      "description": "Hands a long session over, to a fresh one or by compacting, before the context gets too big",
+      "author": "Patrick Müller",
+      "homepage": "https://github.com/muellerei/sweet-spot",
+      "url": "https://github.com/muellerei/sweet-spot",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "sweet-spot"
+          }
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "classic.SessionStart",
+          "matcher": {}
+        },
+        {
+          "event": "classic.PostModelSwitch",
+          "matcher": {}
+        },
+        {
+          "event": "classic.PermissionRequest",
+          "matcher": {}
+        },
+        {
+          "event": "classic.UserPromptSubmit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "session.compact",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.edit",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "classic.Stop",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.agent.list",
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.list",
+        "$.command.register",
+        "$.command.run",
+        "$.env.get",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.model.fork",
+        "$.process.run",
+        "$.prompt.fill",
+        "$.prompt.read",
+        "$.prompt.submit",
+        "$.session.compact",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.surfaces",
+        "$.session.turns",
+        "$.session.usage"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.301",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "muellerei-sweet-spot",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": [
+          {
+            "code": "ui-control-characters",
+            "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+            "evidence": [
+              {
+                "file": "hooks/standing.ts",
+                "line": 131
+              }
+            ]
+          }
+        ]
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.prompt.read",
+          "runs processes",
+          "drives Claude",
+          "writes the prompt box",
+          "reads files",
+          "reads env vars"
+        ]
+      },
+      "sees": [
+        "classic hooks",
+        "every prompt",
+        "every tool call",
+        "compaction"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-17T02:10:46Z",
+      "createdAt": "2026-10-09T22:34:17Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "wjsekrud/motive-mem:.",
+      "repo": "wjsekrud/motive-mem",
+      "path": ".",
+      "sourceCommit": "7b85f2a7b963d2b46ce4cb90b1687af8b6bb462a",
+      "name": "motive-mem",
+      "description": "After every turn, a separate model reviews what changed against your repo's .claude/principles.md: intent, principle violations, band-aid fixes: and shows it in a panel",
+      "author": "wjsekrud",
+      "homepage": "https://github.com/wjsekrud/motive-mem",
+      "url": "https://github.com/wjsekrud/motive-mem",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "motive-mem"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "motive-mem"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.now",
+        "$.clock.sleep",
+        "$.command.register",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.write",
+        "$.model.complete",
+        "$.process.run",
+        "$.prompt.fill",
+        "$.session.cwd",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.301",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "motive-mem",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": [
+          {
+            "code": "ui-control-characters",
+            "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+            "evidence": [
+              {
+                "file": "hooks/register.tsx",
+                "line": 111
+              },
+              {
+                "file": "hooks/register.tsx",
+                "line": 147
+              },
+              {
+                "file": "hooks/register.tsx",
+                "line": 156
+              }
+            ]
+          }
+        ]
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "runs processes",
+          "writes files",
+          "drives Claude",
+          "writes the prompt box",
+          "reads files",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-16T16:56:32Z",
+      "createdAt": "2026-10-15T12:22:19Z",
+      "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
       "directory": null

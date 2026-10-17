@@ -1289,6 +1289,7 @@ mtami/terminal-tab-title
 mthli/cc-shorts
 mtmtian/cc-mods
 muellerei/enable-todo-tools
+muellerei/sweet-spot
 muellerei/task-line
 mukiwu/jev-search-mcp
 mukiwu/muki-ai-plugins
@@ -2047,6 +2048,7 @@ willmail3333/venzor-claude-model-switch
 WilsonKinyua/claude-mods
 WingedGuardian/GENesis-AGI
 wisbech/molt
+wjsekrud/motive-mem
 wmayner/claude-glance
 wmkeza/claude-plugins
 WoBok/claude-mods
