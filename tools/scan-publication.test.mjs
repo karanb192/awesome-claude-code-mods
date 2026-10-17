@@ -207,6 +207,8 @@ for (const mixedVersion of [false, true]) test(`scan publication retries concurr
   git('init', '-b', 'fixture')
   git('remote', 'add', 'origin', remote)
   cpSync(fileURLToPath(new URL('.', import.meta.url)), join(checkout, 'tools'), { recursive: true })
+  // Mod pages take their install hint from the finder's helper.
+  cpSync(fileURLToPath(new URL('../finder', import.meta.url)), join(checkout, 'finder'), { recursive: true })
   symlinkSync(fileURLToPath(new URL('../node_modules', import.meta.url)), join(checkout, 'node_modules'))
   writeFileSync(join(checkout, '.gitignore'), 'node_modules\n')
   const source = join(root, 'source')
