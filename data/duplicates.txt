@@ -51,7 +51,7 @@ michelr/query-table:. michelr/dotclaude:plugins/query-table
 SApplefeld/agent_persona:. SApplefeld/claude-kit:plugins/personas
 Zaho92/claude-arcade:. Zaho92/claude-arcade:plugin
 bsamiee/Rasm:.claude/plugins/function-hooks bsamiee/Rasm:plugins/function-hooks
-xsyetopz/dotclaude:. xsyetopz/dotclaude:plugins/dotclaude
+xsyetopz/dotclaude:. xsyetopz/dotclaude:plugins/claudetto
 jessetsai1024/claude-mods:ctx-panel jessetsai1024/claude-ctx-panel:.
 jessetsai1024/claude-mods:files jessetsai1024/claude-files:.
 jessetsai1024/claude-mods:maomao jessetsai1024/claude-maomao:.
@@ -89,7 +89,14 @@ Ascurse/claude-mods:local-mods/plugins/agent-flow Charlie0113-T/claude-agent-flo
 Ascurse/claude-mods:local-mods/plugins/agent-compact-advisor apolenkov/agent-compact-advisor:.
 Ascurse/claude-mods:local-mods/plugins/next-steps pawandeepdhall/claude-mods:plugins/next-steps
 midudev/after-for-claude-code:. midudev/after-for-claude-code:after
-xsyetopz/dotclaude:src/plugins/dotclaude-browser xsyetopz/dotclaude:plugins/dotclaude-browser
+xsyetopz/dotclaude:src/plugins/dotclaude-browser xsyetopz/dotclaude:plugins/claudetto-browser
 liveweird/plan-progress:. liveweird/claude-mods:plan-progress
 potto007/ottomation:plugins/diagram-pane ray-amjad/awesome-claude-code-function-hooks:plugins/diagram-pane
 sr-gene/claude-mod:. sr-gene/claude-mod:plugins/step-tracker
+matthlh/claude-idle-mod:. matthlh/claude-cat-mod:plugins/token-tycoon
+xsyetopz/dotclaude:src/plugins/claudetto-browser xsyetopz/dotclaude:plugins/claudetto-browser
+xsyetopz/dotclaude:plugins/dotclaude xsyetopz/dotclaude:plugins/claudetto
+xsyetopz/dotclaude:plugins/dotclaude-browser xsyetopz/dotclaude:plugins/claudetto-browser
+xsyetopz/dotclaude:plugins/dotclaude-codegraph xsyetopz/dotclaude:plugins/claudetto-codegraph
+xsyetopz/dotclaude:plugins/dotclaude-sessions xsyetopz/dotclaude:plugins/claudetto-sessions
+xsyetopz/dotclaude:plugins/dcc-plugin-you-should-know xsyetopz/dotclaude:plugins/claudetto-you-should-know

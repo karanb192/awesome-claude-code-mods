@@ -138,6 +138,26 @@ test('a listed duplicate collapses onto its successor; an unlisted same-owner sa
   assert.deepEqual([...readDuplicates('data/no-such-file.txt')], [])
 })
 
+test('a retained duplicate follows an explicit keeper move only when the new keeper is counted', () => {
+  const records = [
+    { id: 'o/repo:.', kind: 'duplicate', duplicateOf: 'o/repo:old' },
+    { id: 'o/repo:old', kind: 'mod' },
+    { id: 'o/repo:new', kind: 'mod' },
+  ]
+  const rules = new Map([['o/repo:.', 'o/repo:new'], ['o/repo:old', 'o/repo:new']])
+  const retained = reconcile(records.map(m => ({ ...m, repo: 'o/repo', validate: { status: 'passed', claudeVersion: '1' } })), [], new Map()).mods
+  const result = applyDuplicates(structuredClone(retained), rules)
+  assert.deepEqual(result.map(m => [m.kind, m.duplicateOf]), [
+    ['duplicate', 'o/repo:new'], ['duplicate', 'o/repo:new'], ['mod', undefined],
+  ])
+  assert.deepEqual(applyDuplicates(structuredClone(result), rules), result)
+  for (const kind of [null, 'fixture', 'catalog', 'duplicate']) {
+    const unavailable = retained.filter(m => m.id !== 'o/repo:new')
+    if (kind) unavailable.push({ id: 'o/repo:new', kind })
+    assert.deepEqual(applyDuplicates(structuredClone(unavailable), rules), unavailable)
+  }
+})
+
 test('only an appended pair between counted mods skips the PR rescan', () => {
   const counted = id => ({ id, repo: id.split(':')[0], kind: 'mod' })
   const committed = [

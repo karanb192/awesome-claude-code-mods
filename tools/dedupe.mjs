@@ -38,7 +38,7 @@ export function applyDuplicates(mods, list) {
   const byId = new Map(mods.map(m => [m.id, m]))
   for (const [dup, keeper] of list) {
     const m = byId.get(dup), k = byId.get(keeper)
-    if (!m || m.kind !== 'mod' || !k || k.kind !== 'mod') continue
+    if (!m || !['mod', 'duplicate'].includes(m.kind) || !k || k.kind !== 'mod') continue
     m.kind = 'duplicate'; m.duplicateOf = keeper
   }
   return mods
