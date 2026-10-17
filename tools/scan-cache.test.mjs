@@ -6,6 +6,8 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { findingsModules, findingsPackages, findingsKey } from './inspect.mjs'
+import { buildIndex, search, getMod } from '../finder/search.mjs'
+import { reviewSeed } from './seed-publication.mjs'
 
 const scanner = fileURLToPath(new URL('./scan.mjs', import.meta.url))
 
@@ -240,6 +242,33 @@ test('cached findings are keyed on the checkout reader, not on code that only sh
   const modules = findingsModules()
   for (const file of ['tools/inspect.mjs', 'tools/validate.mjs', 'tools/parse.mjs', 'tools/compatibility.mjs']) assert.ok(modules.includes(file), file)
   for (const file of ['tools/scan.mjs', 'tools/grade.mjs', 'tools/kind.mjs', 'tools/dedupe.mjs', 'tools/render.mjs']) assert.ok(!modules.includes(file), file)
+})
+
+test('truncated successful validation stays unknown through scans, cache and publication filters', t => {
+  const f = fixture(t)
+  f.state.calls = '$.fs.read, $.http.fet… [+2 chars]'
+  const first = f.run().data
+  const record = first.mods[0]
+  assert.equal(record.validate.status, 'passed')
+  assert.equal(record.footprint.status, 'unavailable')
+  assert.equal(record.reach.level, null)
+  assert.equal(record.reach.minimumLevel, 1)
+  assert.deepEqual(record.calls, ['$.fs.read'])
+  const index = buildIndex(first)
+  assert.equal(getMod(index, record.id).mod.validation.footprint, 'unavailable')
+  for (const filter of [{ without: ['network'] }, { max_reach: 1 }, { without: ['every prompt'] }]) {
+    assert.deepEqual(search(index, filter).results, [])
+  }
+  assert.match(reviewSeed(first.mods, first.claudeVersion, new Set()), /footprint unavailable/)
+  const cached = f.run()
+  assert.deepEqual(cached.calls, [])
+  assert.deepEqual(cached.data.mods[0], record)
+  assert.notEqual(f.run({ required: true }).status, 0)
+  f.state.revision = 'b'.repeat(40)
+  f.state.calls = '$.fs.read, $.http.fetch'
+  const recovered = f.run().data.mods[0]
+  assert.equal(recovered.footprint.status, 'reported')
+  assert.equal(recovered.reach.level, 3)
 })
 
 test('a new parser release in the lockfile retires cached findings; other dependency changes do not', () => {

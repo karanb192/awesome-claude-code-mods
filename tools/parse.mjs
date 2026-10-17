@@ -5,14 +5,29 @@
 import { posix } from 'node:path'
 
 const LINE = /^\s*❯\s+(\S+)\s+(hooks|calls|surface modules):\s*(.*)$/
+const TRUNCATED = /(?:…|\.{3})\s*\[\+\d+ chars?\]\s*$/
+
+function completePrefix(text) {
+  let depth = 0, end = 0
+  for (let i = 0; i < text.length; i++) {
+    if ('({'.includes(text[i])) depth++
+    else if (')}'.includes(text[i])) depth--
+    else if (text[i] === ',' && depth === 0) end = i
+  }
+  return text.slice(0, end)
+}
 
 export function parseValidateOutput(text) {
   const modules = new Map()
   for (const raw of text.split('\n')) {
     const m = raw.match(LINE)
     if (!m) continue
-    const [, file, kind, rest] = m
+    const [, file, kind, output] = m
     const mod = modules.get(file) ?? { file, hooks: [], calls: [], surfaceModules: [], reported: [] }
+    const truncated = TRUNCATED.test(output)
+    // A cut can split a matcher or a helper annotation; retain only whole list entries.
+    const rest = truncated ? completePrefix(output.replace(TRUNCATED, '')) : output
+    if (truncated) mod.truncated = true
     if (kind === 'hooks') {
       mod.hooks = parseHooks(rest)
       if (rest.trim()) mod.reported.push('hooks')
@@ -40,6 +55,7 @@ export function parseValidateOutput(text) {
 }
 
 export function footprintStatus(parsed, declared) {
+  if (parsed.modules.some(mod => mod.truncated)) return { status: 'unavailable', reason: 'Validator output was truncated' }
   const complete = Array.isArray(declared) && declared.length > 0 && declared.every(file =>
     typeof file === 'string' && parsed.modules.some(mod => typeof mod.file === 'string'
       && posix.normalize(mod.file) === posix.normalize(file)

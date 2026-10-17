@@ -28,6 +28,8 @@ An unexpected checkout inspection error is isolated to that repository and named
 
 Each fresh record has a `footprint.status` of `reported` only when every declared module has both hooks and calls output. An explicit `nothing on $` can establish L0; missing output cannot. Incomplete coverage sets `footprint.status` to `unavailable` and `reach.level` to `null`, while preserving the source revision, validation result and any reported calls. `reach.minimumLevel` is the lower bound from those calls, not the mod's total access.
 
+The validator can shorten long lists with a character-count marker. A shortened hooks, calls or surface-modules list makes the footprint unavailable, even when validation passes. The scanner keeps only complete entries before the cut; it does not interpret the marker or a partial name as source information. These results can be cached for the same source and validator version. A changed validator or checkout reader invalidates the cache.
+
 Older failed records do not establish complete coverage. Until a fresh scan, the website, badges and finder show their access as unknown, including when some calls were recorded. Retained records use their last-known successful validation when available. Rendering normalizes the [public JSON](https://mods.aidojo.si/mods.json) to the same unknown representation without rewriting the raw inventory. Old completed scans cannot be reused after a scanner change; regenerate them with a fresh scan.
 
 The [public scan result](https://mods.aidojo.si/mods.json) records each entry. See [Contributing](contributing.md#running-the-tools) to reproduce the scan or add badges to your own mod.

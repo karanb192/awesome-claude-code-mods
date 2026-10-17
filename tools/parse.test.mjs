@@ -60,6 +60,30 @@ test('unknown access retains a lower bound and treats legacy failures conservati
   assert.equal(hasFootprint({ footprint: { status: 'unavailable' }, validate: { status: 'passed' } }), false)
 })
 
+test('truncated validator lists retain whole entries but never establish a complete footprint', () => {
+  const read = (hooks, calls, surfaces = '') => parseValidateOutput(`  ❯ ./register.ts hooks: ${hooks}\n  ❯ ./register.ts calls: ${calls}\n${surfaces && `  ❯ ./register.ts surface modules: ${surfaces}`}\n✔ Validation passed`)
+  const cut = read('session.start, ui.render{component=Pane, r… [+281 chars]', '$.http.fetch (via first, second), $.ui.clos… [+250 chars]')
+  assert.equal(cut.status, 'passed')
+  assert.deepEqual(cut.modules[0].hooks, [{ event: 'session.start', matcher: {} }])
+  assert.deepEqual(cut.modules[0].calls, ['$.http.fetch'])
+  assert.equal(footprintStatus(cut, ['./register.ts']).status, 'unavailable')
+  assert.equal(grade(cut.modules[0].calls, false).level, null)
+  assert.equal(grade(cut.modules[0].calls, false).minimumLevel, 3)
+  for (const r of [
+    read('session.st… [+1 char]', 'nothing on $'),
+    read('session.start', '$.ui.log (via first, seco… [+20 chars]'),
+    read('session.start', '$.http.fetch, $.ui.clos... [+250 chars]'),
+    read('session.start', 'nothing on $', 'hooks/a.tsx, hooks/par… [+10 chars]'),
+  ]) {
+    assert.equal(footprintStatus(r, ['./register.ts']).status, 'unavailable')
+    assert.ok(!JSON.stringify(r.modules[0].hooks).includes('chars'))
+  }
+  assert.deepEqual(read('session.start', '$.ui.log (via first, seco… [+20 chars]').modules[0].calls, [])
+  assert.deepEqual(read('session.start', 'nothing on $', 'hooks/a.tsx, hooks/par… [+10 chars]').modules[0].surfaceModules, ['hooks/a.tsx'])
+  const mixed = parseValidateOutput(SAMPLE + '  ❯ ./b.ts hooks: nothing\n  ❯ ./b.ts calls: $.fs.wri… [+2 chars]')
+  assert.equal(footprintStatus(mixed, ['./register.tsx', './b.ts']).status, 'unavailable')
+})
+
 test('failed validation carries the error line', () => {
   const r = parseValidateOutput('✘ Found 1 error:\n\n  ❯ directory: No manifest found\n\n✘ Validation failed\n')
   assert.equal(r.status, 'failed')
