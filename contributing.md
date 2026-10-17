@@ -42,14 +42,14 @@ Karan selects the entries and can revise the selection. A nomination or a passin
 
 ## Badges
 
-Every scanned mod gets two badges you can paste into your README:
+Every scanned mod gets two badges you can paste into your README. Each one links to the mod's page, which shows what the scan recorded. The easiest way is to copy the ready-made snippet at the bottom of your mod's page on [mods.aidojo.si](https://mods.aidojo.si/). It looks like this:
 
 ```markdown
-![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/OWNER--REPO--NAME-reach.svg)
-![validates](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/OWNER--REPO--NAME-validates.svg)
+[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/OWNER--REPO--NAME-reach.svg)](https://mods.aidojo.si/mods/OWNER--REPO--NAME/)
+[![validates](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/OWNER--REPO--NAME-validates.svg)](https://mods.aidojo.si/mods/OWNER--REPO--NAME/)
 ```
 
-Replace `OWNER--REPO--NAME` with your GitHub owner, repo and the `name` from your `plugin.json`, joined by double dashes. The exact file names are in the `badges/` folder.
+`OWNER--REPO--NAME` is your GitHub owner, repo and the `name` from your `plugin.json`, joined by double dashes. The badge file names are in the `badges/` folder and page paths are in `data/pages.json`; the two differ only when a page path needed a numbered suffix.
 
 ## Disputing a footprint
 

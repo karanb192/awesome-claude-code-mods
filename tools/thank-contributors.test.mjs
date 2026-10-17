@@ -68,13 +68,21 @@ test('one PR that added several published seeds gets one comment listing all of 
   assert.equal((plans[0].body.match(/star on this repository/g) ?? []).length, 1)
 })
 
-test('the comment links counted mods to their website anchors and escapes link text', () => {
-  const body = plan().find(p => p.pr === 14).body
+test('the comment links counted mods to their pages, falls back to homepage rows, and escapes link text', () => {
+  const pages = { 'carol--fixture--real': { id: 'carol/fixture:real' }, 'alice--tools--meter': { id: 'alice/tools:meter' }, 'old--tools--guard': { id: 'alice/tools:guard', to: 'alice--tools--meter' } }
+  const body = plan({ pages }).find(p => p.pr === 14).body
   assert.match(body, /Its mod is now in the catalogue/)
-  assert.match(body, /\[real\]\(https:\/\/mods\.aidojo\.si\/#carol--fixture--real\)/)
+  assert.match(body, /\[real\]\(https:\/\/mods\.aidojo\.si\/mods\/carol--fixture--real\/\)/)
+  assert.match(body, /The page has a README badge you can copy, which links back to it\./)
   assert.doesNotMatch(body, /probe/)
-  assert.match(plan()[0].body, /Its 2 mods are now in the catalogue/)
+  const alice = plan({ pages }).find(p => p.pr === 10).body
+  assert.match(alice, /Its 2 mods are now in the catalogue/)
+  assert.match(alice, /\[meter\]\(https:\/\/mods\.aidojo\.si\/mods\/alice--tools--meter\/\)/)
+  assert.match(alice, /\[guard\]\(https:\/\/mods\.aidojo\.si\/#alice--tools--guard\)/, 'a redirect entry is not the mod\'s page')
+  assert.match(alice, /Each page has a README badge/)
+  assert.match(plan().find(p => p.pr === 14).body, /\[real\]\(https:\/\/mods\.aidojo\.si\/#carol--fixture--real\)/, 'no registry falls back to the homepage row')
   const odd = mod('x/y', 'a]b')
-  assert.match(thanksBody(1, 'x', ['x/y'], [odd], siteAnchors([odd]), false), /\[a\\]b\]\(https:\/\/mods\.aidojo\.si\/#x--y--a-b\)/)
+  const anchors = siteAnchors([odd])
+  assert.match(thanksBody(1, 'x', ['x/y'], [odd], m => `https://mods.aidojo.si/#${anchors.get(m)}`, false), /\[a\\]b\]\(https:\/\/mods\.aidojo\.si\/#x--y--a-b\)/)
   assert.doesNotMatch(body, /[\u2013\u2014]/)
 })

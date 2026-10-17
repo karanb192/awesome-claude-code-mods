@@ -24,7 +24,7 @@ A six-second recording with [terminal-browser by zenbu-labs](https://github.com/
 
 Access reported by the latest scan (select the badge for details):
 
-[![Terminal-browser access reported by the scanner](badges/zenbu-labs--terminal-browser--terminal-browser-reach.svg)](https://mods.aidojo.si/#zenbu-labs--terminal-browser--terminal-browser)
+[![Terminal-browser access reported by the scanner](badges/zenbu-labs--terminal-browser--terminal-browser-reach.svg)](https://mods.aidojo.si/mods/zenbu-labs--terminal-browser--terminal-browser/)
 
 ## Contents
 

@@ -195,3 +195,11 @@ test('a redirect stub sends visitors and crawlers to the keeper', () => {
   assert.match(html, /<meta http-equiv="refresh" content="0; url=\/mods\/new--name--tool\/">/)
   assert.match(html, /<link rel="canonical" href="https:\/\/mods\.aidojo\.si\/mods\/new--name--tool\/">/)
 })
+
+test('a mod page offers README badges that link back to it, and built-ins do not', () => {
+  const page = renderModPage(mod('a/b', 'c'), { slug: 'a--b--c', anchor: 'a--b--c', claudeVersion: '2.1.300' })
+  const snippet = page.match(/<pre><code>([\s\S]*?)<\/code><\/pre>/)[1].replace(/&#39;|&quot;|&amp;/g, m => ({ '&#39;': "'", '&quot;': '"', '&amp;': '&' })[m])
+  assert.equal(snippet, '[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/a--b--c-reach.svg)](https://mods.aidojo.si/mods/a--b--c/)\n[![validates](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/a--b--c-validates.svg)](https://mods.aidojo.si/mods/a--b--c/)')
+  assert.match(page, /<img src="\/badges\/a--b--c-reach\.svg"/)
+  assert.doesNotMatch(renderModPage(mod('anthropics/claude-code', 'x', { kind: 'builtin' }), { slug: 's', anchor: 's', claudeVersion: '2.1.300' }), /badge-snippet/)
+})

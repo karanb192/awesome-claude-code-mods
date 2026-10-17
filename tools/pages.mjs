@@ -137,6 +137,8 @@ export function renderModPage(mod, { slug, anchor, claudeVersion, siblings = [] 
     ],
   })
   const status = validationStatus(mod, version)
+  const badgeUrl = kind => `https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/${anchor}-${kind}.svg`
+  const snippet = `[![reach](${badgeUrl('reach')})](${url})\n[![validates](${badgeUrl('validates')})](${url})`
   const statusClass = mod.validate.status === 'passed' || mod.validate.status === 'warnings' ? '' : ' bad'
   return shell({
     title, description, canonical: url, robots: indexable(mod) ? '' : 'noindex',
@@ -158,6 +160,7 @@ ${reviewNotes(mod).length ? `<p class="compatibility">${esc(reviewNotes(mod).joi
 ${recordDetails(mod, claudeVersion)}
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="${repo}/blob/main/SCANNING.md">How the scan works</a>.</p></section>
 ${shown.length ? `<section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from ${esc(mod.repo)}</h2><ul>${shown.map(({ mod: other, slug: path }) => `<li><a href="/mods/${esc(path)}/">${esc(other.name)}</a>${String(other.description ?? '').trim() ? `<span>${esc(clip(other.description, 110))}</span>` : ''}</li>`).join('')}</ul>${siblings.length > shown.length ? `<p><a href="/?q=${encodeURIComponent(mod.repo)}#directory">See all ${siblings.length + 1} mods from ${esc(mod.repo)}</a></p>` : ''}</section>` : ''}
+${mod.kind === 'builtin' ? '' : `<section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/${esc(anchor)}-reach.svg" alt="Reach badge for ${esc(mod.name)}"> <img src="/badges/${esc(anchor)}-validates.svg" alt="Validation badge for ${esc(mod.name)}"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>${esc(snippet)}</code></pre></section>`}
 </main>`,
   })
 }
