@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-17T15:18:44.233Z",
   "claudeVersion": "2.1.302",
-  "repos": 2319,
+  "repos": 2320,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -552240,6 +552240,126 @@
       "stars": 0,
       "pushedAt": "2026-10-17T08:11:20Z",
       "createdAt": "2026-10-15T02:39:56Z",
+      "license": null,
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "HuliLulu46/pending-decisions:.",
+      "repo": "HuliLulu46/pending-decisions",
+      "path": ".",
+      "sourceCommit": "ecf5057052490ba5532a8cfb2aa32c04a435eb1b",
+      "name": "pending-decisions",
+      "description": "Tracks what the AI is waiting on you to decide in the main conversation: a reminder above the prompt, and /decisions opens a pane to quote, accept or remove each item.",
+      "author": null,
+      "homepage": "https://github.com/HuliLulu46/pending-decisions",
+      "url": "https://github.com/HuliLulu46/pending-decisions",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "decisions"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "pending-decisions"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.command.register",
+        "$.model.complete",
+        "$.prompt.fill",
+        "$.prompt.read",
+        "$.session.id",
+        "$.session.messages",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.close",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.302",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "pending-decisions",
+          "status": "warnings",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.prompt.read",
+          "other: $.state.get",
+          "other: $.state.set",
+          "drives Claude",
+          "writes the prompt box",
+          "reads the transcript",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-17T09:42:04Z",
+      "createdAt": "2026-10-15T02:51:49Z",
       "license": null,
       "archived": false,
       "defaultBranch": "main",

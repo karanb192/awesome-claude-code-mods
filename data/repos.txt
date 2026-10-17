@@ -865,6 +865,7 @@ hugoamadio/claude-quickbar
 Hugopvigo/claude-statusline-mod
 Hula-Hoop-AI/supermods
 HuliLulu46/cc-effort-switch
+HuliLulu46/pending-decisions
 HuliLulu46/polish
 Humpens/claude-mods
 Huuuuung/think-meter
