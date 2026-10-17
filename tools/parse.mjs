@@ -5,7 +5,7 @@
 import { posix } from 'node:path'
 
 const LINE = /^\s*❯\s+(\S+)\s+(hooks|calls|surface modules):\s*(.*)$/
-const TRUNCATED = /(?:…|\.{3})\s*\[\+\d+ chars?\]\s*$/
+const TRUNCATED = /(?:…|\.{3})?\s*\[\+\d+ chars?\]/
 
 function completePrefix(text) {
   let depth = 0, end = 0
@@ -24,9 +24,9 @@ export function parseValidateOutput(text) {
     if (!m) continue
     const [, file, kind, output] = m
     const mod = modules.get(file) ?? { file, hooks: [], calls: [], surfaceModules: [], reported: [] }
-    const truncated = TRUNCATED.test(output)
+    const truncated = output.match(TRUNCATED)
     // A cut can split a matcher or a helper annotation; retain only whole list entries.
-    const rest = truncated ? completePrefix(output.replace(TRUNCATED, '')) : output
+    const rest = truncated ? completePrefix(output.slice(0, truncated.index)) : output
     if (truncated) mod.truncated = true
     if (kind === 'hooks') {
       mod.hooks = parseHooks(rest)

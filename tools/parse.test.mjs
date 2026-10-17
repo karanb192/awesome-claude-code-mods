@@ -84,6 +84,19 @@ test('truncated validator lists retain whole entries but never establish a compl
   assert.equal(footprintStatus(mixed, ['./register.tsx', './b.ts']).status, 'unavailable')
 })
 
+test('embedded character-count markers discard the affected matcher before parsing it', () => {
+  for (const suffix of ['', ', ui.render{component=Pane, r… [+248 chars]']) {
+    const parsed = parseValidateOutput(`  ❯ ./register.ts hooks: session.start, command.run{command=status}, tool.call{tool=/"^mcp__(?:service|[0-9a-fA-F]{8})__"[+47 chars]/}, session.end${suffix}\n  ❯ ./register.ts calls: $.http.fetch\n✔ Validation passed`)
+    assert.equal(parsed.status, 'passed')
+    assert.deepEqual(parsed.modules[0].hooks, [
+      { event: 'session.start', matcher: {} },
+      { event: 'command.run', matcher: { command: 'status' } },
+    ])
+    assert.deepEqual(footprintStatus(parsed, ['./register.ts']), { status: 'unavailable', reason: 'Validator output was truncated' })
+    assert.deepEqual(parsed.modules[0].calls, ['$.http.fetch'])
+  }
+})
+
 test('failed validation carries the error line', () => {
   const r = parseValidateOutput('✘ Found 1 error:\n\n  ❯ directory: No manifest found\n\n✘ Validation failed\n')
   assert.equal(r.status, 'failed')
