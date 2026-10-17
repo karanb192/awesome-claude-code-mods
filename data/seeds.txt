@@ -60,6 +60,7 @@ kiankhooban/open-paths
 kongyo2/context-view
 Kruhlikau/subagent-tuner
 leonidb/claude-code-mods
+letusnotc/folder-map
 ljmerza/prompt-spellcheck
 lorenzh/rabe
 magiclin99/buddy-go
