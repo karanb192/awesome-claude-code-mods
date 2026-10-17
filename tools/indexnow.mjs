@@ -1,4 +1,4 @@
-// Tells IndexNow (Bing, Yandex, Seznam, Naver) which pages changed, so a new or removed mod page is
+// Tells IndexNow (Amazon, Bing, Naver, Seznam.cz, Yandex, Yep; not Google) which pages changed, so a new or removed mod page is
 // recrawled within hours instead of waiting for the sitemap. The key file docs/<KEY>.txt proves the
 // site owns the key; it is public by design.
 //
