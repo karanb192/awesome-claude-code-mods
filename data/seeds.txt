@@ -89,6 +89,7 @@ pawandeepdhall/claude-mods
 plaxagoras/clawd-tales
 RadTech-Solutions/agent-pager
 RadTech-Solutions/modwall
+razorback16/cc-intelligent-ui
 reporails/arcade
 ruihe774/cc-micro-compaction
 saiharsha03/clawd-spinner
