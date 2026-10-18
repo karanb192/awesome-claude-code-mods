@@ -2,7 +2,7 @@ import { appendFileSync, readFileSync, writeFileSync } from 'node:fs'
 import { isDeepStrictEqual, parseArgs } from 'node:util'
 import { mergeRepos, readRepos } from './candidates.mjs'
 import { applyDuplicates, readDuplicates, suspectDuplicates } from './dedupe.mjs'
-import { hasFootprint } from './grade.mjs'
+import { hasFootprint, regrade } from './grade.mjs'
 
 const ACCEPTED = ['passed', 'warnings']
 const key = repo => repo.toLowerCase()
@@ -110,6 +110,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     if (!Array.isArray(compatibilityReviews)) throw new Error('Compatibility reviews must be an array')
     const result = planPublication(inventory, JSON.parse(readFileSync(values.scan, 'utf8')), readRepos(values.repos), readRepos('data/seeds.txt'), readRepos('data/repos.txt'), readDuplicates(), compatibilityReviews)
     if (result?.inventory) {
+      regrade(result.inventory.mods)
       writeFileSync('data/mods.json', JSON.stringify(result.inventory, null, 2) + '\n')
       writeFileSync('data/repos.txt', result.repos.join('\n') + '\n')
     }

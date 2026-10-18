@@ -136,6 +136,7 @@ export function scanSummary(mod, version) {
     : 'has no recorded validation result'
   const shortValidation = result?.status === 'passed' ? `passes validation on ${raw}` : result?.status === 'warnings' ? `passes validation with warnings on ${raw}` : result?.status === 'failed' ? `fails validation on ${raw}` : 'not validated'
   const c = classified(calls)
+  const ungraded = c.unclassified.length + c.foreign.length
   let sentence, access, short
   if (!hasFootprint(mod)) {
     sentence = `The scan could not record a complete footprint for ${name}, so its access is unknown; it ${validation}.`
@@ -145,10 +146,10 @@ export function scanSummary(mod, version) {
     sentence = `The validator reported no API methods for ${name}; it ${validation}.`
     access = 'Access: no API methods recorded'
     short = `Scan: no API methods recorded, ${shortValidation}.`
-  } else if (!c.unclassified.length || calls.length > c.unclassified.length) {
-    sentence = `${name} reaches L${c.level} (${c.name})${c.unclassified.length ? ' by its classified calls' : ''} and ${validation}.`
+  } else if (c.graded) {
+    sentence = `${name} reaches L${c.level} (${c.name})${ungraded ? ' by its classified calls' : ''} and ${validation}.`
     access = `Access from classified calls: L${c.level}, ${c.name}${c.labels.length ? ': ' + esc(c.labels.join(', ')) : ''}`
-    short = `Scan: L${c.level} ${c.name}${c.unclassified.length ? ' by classified calls' : ''}, ${shortValidation}.`
+    short = `Scan: L${c.level} ${c.name}${ungraded ? ' by classified calls' : ''}, ${shortValidation}.`
   } else {
     sentence = `The scanner could not classify any of the ${calls.length} API methods ${name} references, so its access is unknown; it ${validation}.`
     access = 'Access: unknown, no call could be classified'
@@ -159,6 +160,8 @@ export function scanSummary(mod, version) {
     ...(hasFootprint(mod) ? [`Events hooked: ${new Set(mod.hooks.map(hook => hook.event)).size}`, `API methods referenced: ${calls.length}`] : []),
     access,
     ...(hasFootprint(mod) && c.unclassified.length ? [`Unclassified calls: ${c.unclassified.length} (${callList(c.unclassified)}), full access unknown`] : []),
+    ...(hasFootprint(mod) && c.foreign.length ? [`Calls in a namespace that is not part of Claude Code: ${c.foreign.length} (${callList(c.foreign)}), so what they do depends on the mod that provides them`] : []),
+    ...(hasFootprint(mod) && c.labels.includes('reads mod state') ? ['Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values'] : []),
     ...(retained ? [`Last recorded footprint${mod.sourceCommit ? `, revision <code>${esc(mod.sourceCommit.slice(0, 7))}</code>` : ''}: ${esc(mod.validate.errors[0] ?? 'not rescanned in the latest scan.')}`] : []),
     'Static scan, not a runtime test',
   ]

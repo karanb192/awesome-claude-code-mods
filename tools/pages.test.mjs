@@ -209,24 +209,24 @@ const scanned = (calls, extra = {}) => mod('a/b', 'tool', { calls, reach: grade(
 const text = html => html.replace(/<[^>]+>/g, ' ').replace(/&#39;/g, "'").replace(/\s+/g, ' ').trim()
 
 test('the scan summary states the level of classified calls and names the calls it cannot classify', () => {
-  const summary = scanSummary(scanned(['$.env.get', '$.process.run', '$.state.get', '$.state.set']), '2.1.300')
+  const summary = scanSummary(scanned(['$.env.get', '$.process.run', '$.prompt.steer', '$.fs.readFile']), '2.1.300')
   assert.match(text(summary.html), /^tool reaches L2 \(writes or runs\) by its classified calls and passed claude plugin validate on Claude Code 2\.1\.300\./)
   assert.match(text(summary.html), /Events hooked: 2 API methods referenced: 4 Access from classified calls: L2, writes or runs: runs processes, reads env vars/)
-  assert.match(summary.html, /Unclassified calls: 2 \(<code>\$\.state\.get<\/code>, <code>\$\.state\.set<\/code>\), full access unknown/)
+  assert.match(summary.html, /Unclassified calls: 2 \(<code>\$\.prompt\.steer<\/code>, <code>\$\.fs\.readFile<\/code>\), full access unknown/)
   assert.match(text(summary.html), /Static scan, not a runtime test/)
   assert.equal(summary.short, 'Scan: L2 writes or runs by classified calls, passes validation on 2.1.300.')
-  const clean = scanSummary(scanned(['$.ui.render']), '2.1.300')
+  const clean = scanSummary(scanned(['$.ui.open']), '2.1.300')
   assert.match(text(clean.html), /^tool reaches L0 \(draws and remembers\) and passed/)
   assert.doesNotMatch(clean.html, /Unclassified/)
 })
 
 test('unclassified calls never lift the level a page states', () => {
-  const calls = ['$.ui.render', '$.state.get']
+  const calls = ['$.ui.open', '$.prompt.steer']
   assert.equal(grade(calls).level, 1, 'the stored level counts the unclassified call as 1')
   assert.match(text(scanSummary(scanned(calls), '2.1.300').html), /reaches L0 \(draws and remembers\) by its classified calls/)
-  const none = scanSummary(scanned(['$.state.get', '$.state.set']), '2.1.300')
+  const none = scanSummary(scanned(['$.prompt.steer', '$.fs.readFile']), '2.1.300')
   assert.match(text(none.html), /^The scanner could not classify any of the 2 API methods tool references, so its access is unknown/)
-  assert.match(none.html, /Unclassified calls: 2 \(<code>\$\.state\.get<\/code>, <code>\$\.state\.set<\/code>\), full access unknown/)
+  assert.match(none.html, /Unclassified calls: 2 \(<code>\$\.prompt\.steer<\/code>, <code>\$\.fs\.readFile<\/code>\), full access unknown/)
   const empty = scanSummary(scanned([]), '2.1.300')
   assert.match(text(empty.html), /^The validator reported no API methods for tool; it passed/)
   assert.match(text(empty.html), /Access: no API methods recorded/)
@@ -238,21 +238,21 @@ test('incomplete footprints, failures and retained records are worded for what t
   const partial = scanSummary(scanned(['$.fs.write'], { footprint: { status: 'unavailable' } }), '2.1.300')
   assert.match(text(partial.html), /^The scan could not record a complete footprint for tool, so its access is unknown/)
   assert.doesNotMatch(partial.html, /L2|Events hooked|API methods referenced/)
-  const failed = scanSummary(scanned(['$.ui.render'], { validate: { status: 'failed', claudeVersion: '2.1.300', errors: ['manifest <bad>\nsecond line'] } }), '2.1.300')
+  const failed = scanSummary(scanned(['$.ui.open'], { validate: { status: 'failed', claudeVersion: '2.1.300', errors: ['manifest <bad>\nsecond line'] } }), '2.1.300')
   assert.match(failed.html, /fails <code>claude plugin validate<\/code> on Claude Code 2\.1\.300: manifest &lt;bad&gt;\./)
   assert.doesNotMatch(failed.html, /second line/)
   for (const reason of ['Not found in this scan; retained pending weekly retirement review.', 'Repository could not be scanned; showing the last known footprint.']) {
-    const kept = scanSummary(scanned(['$.ui.render'], { sourceCommit: 'abcdef1234567', validate: { status: 'unknown', claudeVersion: '2.1.291', errors: [reason] }, lastKnownValidate: { status: 'passed', claudeVersion: '2.1.291', errors: [] } }), '2.1.300')
+    const kept = scanSummary(scanned(['$.ui.open'], { sourceCommit: 'abcdef1234567', validate: { status: 'unknown', claudeVersion: '2.1.291', errors: [reason] }, lastKnownValidate: { status: 'passed', claudeVersion: '2.1.291', errors: [] } }), '2.1.300')
     assert.match(text(kept.html), /^In its last recorded footprint, tool reaches L0 \(draws and remembers\) and passed claude plugin validate on Claude Code 2\.1\.291\./)
     assert.ok(kept.html.includes(`Last recorded footprint, revision <code>abcdef1</code>: ${reason}`))
     assert.doesNotMatch(kept.html, /last successful/i)
   }
-  const keptPartial = scanSummary(scanned(['$.ui.render'], { footprint: { status: 'unavailable' }, validate: { status: 'unknown', errors: ['Repository could not be scanned; showing the last known footprint.'] } }), '2.1.300')
+  const keptPartial = scanSummary(scanned(['$.ui.open'], { footprint: { status: 'unavailable' }, validate: { status: 'unknown', errors: ['Repository could not be scanned; showing the last known footprint.'] } }), '2.1.300')
   assert.match(text(keptPartial.html), /^In its last recorded footprint, the scan could not record a complete footprint/)
 })
 
 test('events are counted once however many hooks share them, and generated copy has no dashes', () => {
-  const summary = scanSummary(scanned(['$.ui.render']), '2.1.300')
+  const summary = scanSummary(scanned(['$.ui.open']), '2.1.300')
   assert.match(text(summary.html), /Events hooked: 2 /)
   assert.doesNotMatch(summary.html + summary.short, /[–—]/)
 })
@@ -293,5 +293,17 @@ test('metadata keeps the purpose first, adds the scan, and the index gate does n
 
 test('a page changes when the scan changes', () => {
   const opts = { slug: 's', anchor: 's', claudeVersion: '2.1.300' }
-  assert.notEqual(renderModPage(scanned(['$.ui.render']), opts), renderModPage(scanned(['$.ui.render', '$.http.fetch']), opts))
+  assert.notEqual(renderModPage(scanned(['$.ui.open']), opts), renderModPage(scanned(['$.ui.open', '$.http.fetch']), opts))
+})
+
+test('calls in other namespaces and mod state reads are stated apart from the level', () => {
+  const mixed = scanSummary(scanned(['$.state.get', '$.mods.hello', '$.prompt.steer']), '2.1.300')
+  assert.match(text(mixed.html), /^tool reaches L1 \(reads\) by its classified calls/)
+  assert.match(mixed.html, /Unclassified calls: 1 \(<code>\$\.prompt\.steer<\/code>\), full access unknown/)
+  assert.match(mixed.html, /Calls in a namespace that is not part of Claude Code: 1 \(<code>\$\.mods\.hello<\/code>\), so what they do depends on the mod that provides them/)
+  assert.match(mixed.html, /Reads mod state: the scan does not record whose state/)
+  const foreignOnly = scanSummary(scanned(['$.mods.hello', '$.widgets.card']), '2.1.300')
+  assert.match(text(foreignOnly.html), /^The scanner could not classify any of the 2 API methods tool references, so its access is unknown/)
+  assert.doesNotMatch(foreignOnly.html, /reaches L/)
+  assert.doesNotMatch(scanSummary(scanned(['$.store.get']), '2.1.300').html, /mod state/)
 })

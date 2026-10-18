@@ -5,6 +5,7 @@ import { mergeRepos, parseRepos, readRepos } from './candidates.mjs'
 import { looksPartial } from './changed.mjs'
 import { revalidatePublished } from './revalidate-publication.mjs'
 import { SCANNER_INPUTS } from './inventory.mjs'
+import { regrade } from './grade.mjs'
 
 const key = repo => repo.toLowerCase()
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 }).trim()
@@ -72,6 +73,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     const cache = values.cache && existsSync(values.cache) ? JSON.parse(readFileSync(values.cache, 'utf8')) : {}
     const result = reconcileScan(jsonAt(saved.base, 'data/mods.json'), saved.scanned, latest, reposAt(saved.base), saved.repos, readRepos('data/repos.txt'), readRepos('data/seeds.txt'), (records, version) => revalidatePublished(records, version, cache))
     if (values.cache) writeFileSync(values.cache, JSON.stringify(cache))
+    regrade(result.inventory.mods)
     writeFileSync('data/mods.json', JSON.stringify(result.inventory, null, 2) + '\n')
     writeFileSync('data/repos.txt', result.repos.join('\n') + '\n')
     // A merged scan may have advanced discovery after this snapshot was captured.

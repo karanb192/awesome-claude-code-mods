@@ -12,7 +12,7 @@ const url = value => /^https?:\/\//i.test(String(value)) ? esc(value) : '#direct
 export const arrow = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg>'
 export const mark = '<svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11 5H5v22h6M21 5h6v22h-6M16 10v12M10 16h12"/></svg>'
 export const star = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 2.8 5.7 6.3.9-4.5 4.4 1.1 6.2-5.7-3-5.7 3 1.1-6.2L2.9 9.6l6.3-.9Z"/></svg>'
-export const levels = ['Draws & remembers', 'Reads files', 'Writes or runs', 'Uses the network']
+export const levels = ['Draws & remembers', 'Reads', 'Writes or runs', 'Uses the network']
 const levelOf = mod => hasFootprint(mod) ? mod.reach.level : 'unknown'
 const accessGroups = mods => [...levels.map((label, level) => ({ label, level, count: mods.filter(mod => levelOf(mod) === level).length })),
   { label: 'Unknown access', level: 'unknown', count: mods.filter(mod => !hasFootprint(mod)).length }]

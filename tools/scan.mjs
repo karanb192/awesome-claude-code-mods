@@ -14,7 +14,7 @@ import { join, dirname } from 'node:path'
 import { tmpdir } from 'node:os'
 import { spawnAsync } from './validate.mjs'
 import { clone, inspect, findingsKey } from './inspect.mjs'
-import { grade, visibility, drawsOn } from './grade.mjs'
+import { grade, regrade, visibility, drawsOn } from './grade.mjs'
 import { readDuplicates, applyDuplicatesWithRenames, suspectDuplicates, renamePairs } from './dedupe.mjs'
 import { kindOf, readCatalogs, readFixtureExceptions } from './kind.mjs'
 import { parseArgs } from 'node:util'
@@ -173,6 +173,8 @@ for (const pair of suspectDuplicates(mods)) console.log(`possible duplicate: ${p
 let directory = null
 try { directory = readDirectory() } catch (error) { console.error(`directory not read, keeping earlier listings: ${error.message}`) }
 applyDirectory(mods, directory, new Map(previous.map(mod => [mod.id, mod.directory ?? null])))
+// Retained records keep the grade they were scanned with until this regrades them from their calls.
+regrade(mods)
 mods.sort((a, b) => (b.stars ?? -1) - (a.stars ?? -1) || a.id.localeCompare(b.id))
 mkdirSync(dirname(OUT), { recursive: true })
 writeFileSync(OUT, JSON.stringify({ generated: new Date().toISOString(), claudeVersion, repos: readRepos(REPOS).length, mods,

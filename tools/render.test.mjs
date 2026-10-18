@@ -9,10 +9,12 @@ import { fileURLToPath, pathToFileURL } from 'node:url'
 import { chromium } from 'playwright'
 
 const renderer = fileURLToPath(new URL('./render.mjs', import.meta.url))
+// Render grades from recorded calls, so each fixture level comes from a call that produces it.
+const LEVEL_CALLS = [[], ['$.fs.read'], ['$.process.run'], ['$.http.fetch']]
 const mod = (i, status = 'passed', kind = 'mod') => ({
   id: `example/mods:plugins/mod-${i}`, repo: 'example/mods', path: `plugins/mod-${i}`, name: `mod-${i}`, kind,
   description: `Example mod ${i}`, url: 'https://example.com', stars: i,
-  reach: { level: i % 4, labels: [] }, sees: [], hooks: [], calls: [], surfaceModules: [],
+  reach: { level: i % 4, labels: [] }, sees: [], hooks: [], calls: LEVEL_CALLS[i % 4], surfaceModules: [],
   validate: { status, errors: status === 'failed' ? ['name: Plugin name is reserved.'] : [] },
 })
 
@@ -167,9 +169,9 @@ test('render preserves failures, distinguishes unknown results and removes exclu
 
 test('unavailable footprints render as unknown in every export and never enter the L0 filter', async t => {
   const unavailable = { status: 'unavailable' }
-  const empty = { ...mod(1, 'failed'), footprint: unavailable, reach: { level: null, labels: [] }, sourceCommit: 'a'.repeat(40) }
+  const empty = { ...mod(1, 'failed'), footprint: unavailable, calls: [], reach: { level: null, labels: [] }, sourceCommit: 'a'.repeat(40) }
   const partial = { ...mod(2, 'failed'), calls: ['$.http.fetch'], reach: { level: 3, labels: ['network'] } }
-  const passedMissing = { ...mod(3), footprint: unavailable, reach: { level: null, labels: [] } }
+  const passedMissing = { ...mod(3), footprint: unavailable, calls: [], reach: { level: null, labels: [] } }
   const completeFailed = { ...mod(4, 'failed'), footprint: { status: 'reported' }, reach: { level: 3, labels: ['network'] }, calls: ['$.http.fetch'] }
   const dir = fixture(t, [mod(0), empty, partial, passedMissing, completeFailed])
   const original = readFileSync(join(dir, 'data/mods.json'), 'utf8')

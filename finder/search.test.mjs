@@ -373,3 +373,16 @@ test('the command line prints exactly what the module returns', t => {
   assert.equal(both.status, 2, '--offline with --refresh is refused, not resolved by going online')
   assert.match(both.stderr, /contradict/)
 })
+
+test('graded mod-state readers pass access filters, while calls nobody can grade stay held back', async () => {
+  const { grade } = await import('../tools/grade.mjs')
+  const at = (id, calls) => mod(id, { calls, reach: grade(calls) })
+  const data = { ...DATA, mods: [at('s/state:.', ['$.state.get', '$.ui.open']), at('t/hub:.', ['$.mods.hello']), at('u/odd:.', ['$.prompt.steer'])] }
+  const idx = buildIndex(data, { commit: 'f'.repeat(40), sha256: 'abc', fetchedAt: Date.parse('2026-10-11T10:00:00Z') })
+  const out = search(idx, { query: '', without: ['network'], max_reach: 1 })
+  assert.deepEqual(out.results.map(r => r.id), ['s/state:.'])
+  assert.deepEqual(search(idx, { query: '', without: ['reads mod state'] }).results.map(r => r.id).includes('s/state:.'), false)
+  const hub = search(idx, { query: '', include_unverified: true }).results.find(r => r.id === 't/hub:.')
+  assert.deepEqual(hub.access.other_namespace_calls, ['$.mods.hello'])
+  assert.deepEqual(hub.access.unclassified_calls, ['$.mods.hello'])
+})

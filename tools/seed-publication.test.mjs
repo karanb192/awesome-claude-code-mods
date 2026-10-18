@@ -274,7 +274,7 @@ for (const concurrentPublication of [false, true]) test(`publication handles a c
   // Mod pages take their install hint from the finder's helper.
   cpSync(fileURLToPath(new URL('../finder', import.meta.url)), join(checkout, 'finder'), { recursive: true })
   mkdirSync(join(checkout, 'data'))
-  const renderable = (repo, name) => ({ ...mod(repo, name), path: name, description: name, url: `https://github.com/${repo}`, stars: 1, reach: { level: 0, labels: [] }, sees: [], hooks: [], calls: [], surfaceModules: [] })
+  const renderable = (repo, name) => ({ ...mod(repo, name), path: name, description: name, url: `https://github.com/${repo}`, stars: 1, reach: { level: 0, name: 'draws and remembers', labels: [] }, sees: [], hooks: [], calls: [], surfaceModules: [] })
   const publishedBefore = [renderable('existing/repo', 'old'), renderable('existing/repo', 'copy')]
   writeFileSync(join(checkout, 'data/mods.json'), JSON.stringify(inventory(publishedBefore)))
   writeFileSync(join(checkout, 'data/duplicates.txt'), 'existing/repo:copy existing/repo:old\n')

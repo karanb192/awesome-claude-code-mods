@@ -12,10 +12,9 @@ import { siteAnchors } from './slug.mjs'
 const data = JSON.parse(readFileSync('data/mods.json', 'utf8'))
 for (const m of data.mods) {
   m.description = String(m.description ?? '').replace(/\s*[\u2014\u2013]\s*/g, ': ')
-  if (!hasFootprint(m)) {
-    m.footprint = { status: 'unavailable' }
-    m.reach = grade(m.calls, false)
-  }
+  if (!hasFootprint(m)) m.footprint = { status: 'unavailable' }
+  // Grades from recorded calls on every render, so a grading change reaches every output at once.
+  m.reach = grade(m.calls, hasFootprint(m))
 }
 const mods = data.mods.filter(m => m.kind === 'mod')
 const builtins = data.mods.filter(m => m.kind === 'builtin')
