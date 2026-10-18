@@ -329,6 +329,7 @@
   "FrogAi--Xenopus--collapse-work": {"id":"FrogAi/Xenopus:claude/mods/collapse-work"},
   "FrogAi--Xenopus--queue": {"id":"FrogAi/Xenopus:claude/mods/queue"},
   "FukKwang--claude-msg-timestamps--msg-timestamps": {"id":"FukKwang/claude-msg-timestamps:."},
+  "FunJim--claude-code-add-to-chat--add-to-chat": {"id":"FunJim/claude-code-add-to-chat:add-to-chat"},
   "Furkan-rgb--claude-config--roadmap": {"id":"Furkan-rgb/claude-config:mods/roadmap"},
   "FynnXland--fynn-mods--clawd-buddy": {"id":"FynnXland/fynn-mods:mods/clawd-buddy"},
   "FynnXland--fynn-mods--cost-ledger": {"id":"FynnXland/fynn-mods:mods/cost-ledger"},

@@ -770,6 +770,7 @@ fruizg0302/pixel-pets
 fs666666/plan-limits
 fstandhartinger/limitpace
 FukKwang/claude-msg-timestamps
+FunJim/claude-code-add-to-chat
 Furkan-rgb/claude-config
 furqan-khan07/pixelband
 FynnXland/fynn-mods

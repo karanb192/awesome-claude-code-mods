@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-18T07:06:09.260Z",
   "claudeVersion": "2.1.302",
-  "repos": 2488,
+  "repos": 2489,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -591442,6 +591442,293 @@
       "stars": 0,
       "pushedAt": "2026-10-17T02:40:48Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "FunJim/claude-code-add-to-chat:add-to-chat",
+      "repo": "FunJim/claude-code-add-to-chat",
+      "path": "add-to-chat",
+      "sourceCommit": "c1797d334705dae6fe12ff427d76227bbec15ed7",
+      "name": "add-to-chat",
+      "description": "Select text in the fullscreen transcript and attach it, with an optional comment, to your next prompt",
+      "author": "FunJim",
+      "homepage": "https://github.com/FunJim/claude-code-add-to-chat",
+      "url": "https://github.com/FunJim/claude-code-add-to-chat/tree/main/add-to-chat",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "add-to-chat"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AssistantMessage"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "UserMessage"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "?|?"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "?"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "PromptHint"
+          }
+        },
+        {
+          "event": "prompt.change",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "?"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.command.register",
+        "$.prompt.fill",
+        "$.prompt.read",
+        "$.session.id",
+        "$.session.messages",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.keys",
+        "$.store.set",
+        "$.ui.close",
+        "$.ui.focus",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.scroll",
+        "$.ui.selection",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.302",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "add-to-chat",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": [
+          {
+            "code": "ui-control-characters",
+            "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+            "evidence": [
+              {
+                "file": "add-to-chat/hooks/selection.ts",
+                "line": 36
+              }
+            ]
+          }
+        ]
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "other: $.prompt.read",
+          "other: $.state.get",
+          "other: $.state.set",
+          "writes the prompt box",
+          "reads the transcript",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt"
+      ],
+      "draws": [
+        "AssistantMessage",
+        "UserMessage",
+        "?|?",
+        "AbovePrompt",
+        "PromptHint",
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-17T04:28:01Z",
+      "createdAt": "2026-10-12T12:30:54Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "FunJim/claude-code-add-to-chat:e2e/probe",
+      "repo": "FunJim/claude-code-add-to-chat",
+      "path": "e2e/probe",
+      "sourceCommit": "c1797d334705dae6fe12ff427d76227bbec15ed7",
+      "name": "atc-probe",
+      "description": "Test-only: records what the e2e harness asserts on (rows, selection, prompts, turns, add-to-chat's state). Changes nothing.",
+      "author": "FunJim",
+      "homepage": "https://github.com/FunJim/claude-code-add-to-chat",
+      "url": "https://github.com/FunJim/claude-code-add-to-chat/tree/main/e2e/probe",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "probe-out"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "probe-say"
+          }
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.change",
+          "matcher": {}
+        },
+        {
+          "event": "ui.input",
+          "matcher": {}
+        },
+        {
+          "event": "ui.toast",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.write",
+        "$.prompt.submit",
+        "$.session.cwd",
+        "$.session.id",
+        "$.state.get",
+        "$.ui.selection"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.302",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "other: $.state.get",
+          "writes files",
+          "drives Claude",
+          "reads env vars",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt"
+      ],
+      "draws": [
+        "any component"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-17T04:28:01Z",
+      "createdAt": "2026-10-12T12:30:54Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
