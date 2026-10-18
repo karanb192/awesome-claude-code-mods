@@ -300,7 +300,7 @@ test('calls in other namespaces and mod state reads are stated apart from the le
   const mixed = scanSummary(scanned(['$.state.get', '$.mods.hello', '$.prompt.steer']), '2.1.300')
   assert.match(text(mixed.html), /^tool reaches L1 \(reads\) by its classified calls/)
   assert.match(mixed.html, /Unclassified calls: 1 \(<code>\$\.prompt\.steer<\/code>\), full access unknown/)
-  assert.match(mixed.html, /Calls in a namespace that is not part of Claude Code: 1 \(<code>\$\.mods\.hello<\/code>\), so what they do depends on the mod that provides them/)
+  assert.match(mixed.html, /Calls in a namespace that is not in the Claude Code 2.1.302 core table: 1 \(<code>\$\.mods\.hello<\/code>\), full access unknown/)
   assert.match(mixed.html, /Reads mod state: the scan does not record whose state/)
   const foreignOnly = scanSummary(scanned(['$.mods.hello', '$.widgets.card']), '2.1.300')
   assert.match(text(foreignOnly.html), /^The scanner could not classify any of the 2 API methods tool references, so its access is unknown/)

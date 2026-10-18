@@ -160,7 +160,7 @@ export function scanSummary(mod, version) {
     ...(hasFootprint(mod) ? [`Events hooked: ${new Set(mod.hooks.map(hook => hook.event)).size}`, `API methods referenced: ${calls.length}`] : []),
     access,
     ...(hasFootprint(mod) && c.unclassified.length ? [`Unclassified calls: ${c.unclassified.length} (${callList(c.unclassified)}), full access unknown`] : []),
-    ...(hasFootprint(mod) && c.foreign.length ? [`Calls in a namespace that is not part of Claude Code: ${c.foreign.length} (${callList(c.foreign)}), so what they do depends on the mod that provides them`] : []),
+    ...(hasFootprint(mod) && c.foreign.length ? [`Calls in a namespace that is not in the Claude Code 2.1.302 core table: ${c.foreign.length} (${callList(c.foreign)}), full access unknown`] : []),
     ...(hasFootprint(mod) && c.labels.includes('reads mod state') ? ['Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values'] : []),
     ...(retained ? [`Last recorded footprint${mod.sourceCommit ? `, revision <code>${esc(mod.sourceCommit.slice(0, 7))}</code>` : ''}: ${esc(mod.validate.errors[0] ?? 'not rescanned in the latest scan.')}`] : []),
     'Static scan, not a runtime test',

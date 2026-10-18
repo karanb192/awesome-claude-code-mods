@@ -66,3 +66,13 @@ test('a grading change that only relabels a mod still counts as a change', () =>
   assert.notEqual(fingerprint(before), fingerprint(after))
   assert.deepEqual(describeChange(before, after), ['a/b:x: access labels changed'])
 })
+
+test('a call named after an inherited object property is unclassified, never graded', () => {
+  for (const call of ['$.constructor', '$.toString', '$.__proto__', '$.hasOwnProperty']) {
+    const reach = grade([call, '$.http.fetch'])
+    assert.equal(reach.level, 3, call)
+    assert.ok(reach.labels.includes(`other: ${call}`), call)
+    assert.ok(Number.isInteger(grade([call]).level), call)
+  }
+  assert.deepEqual(classified(['$.constructor']), { level: 0, name: 'draws and remembers', labels: [], graded: 0, unclassified: [], foreign: ['$.constructor'] })
+})

@@ -5,8 +5,8 @@
 // Every member of the mods API in Claude Code 2.1.302, from the type declarations it writes for a mod
 // (claude-code/index.d.ts), with the level and label its description supports. tools/api-members.json lists
 // the same members, and a test keeps the two equal. A call outside this table is unclassified: either a
-// Claude Code method this table does not know yet, or a namespace Claude Code does not have, such as an API
-// another mod adds. Levels are this catalogue's ordering of what a mod's own code references, not limits on
+// method in a namespace the table covers, or a namespace it does not cover, which could be an API another
+// mod adds, a different Claude Code version or a typo. Levels are this catalogue's ordering of what a mod's own code references, not limits on
 // what can follow from it.
 export const METHODS = {
   'plugin.name': [0, null], 'plugin.root': [0, null],
@@ -44,6 +44,8 @@ const LABEL_ORDER = ['network', 'MCP servers', 'runs processes', 'writes files',
   'requests an Anthropic credential handle', 'reads your sign-in', 'telemetry', 'plays audio', 'persists state', 'draws']
 const CORE = new Set(Object.keys(METHODS).map(member => member.split('.')[0]))
 const member = call => call.startsWith('$.') ? call.slice(2) : call
+// Own keys only: a recorded call such as $.constructor must not match an inherited property.
+const ruleOf = call => Object.hasOwn(METHODS, member(call)) ? METHODS[member(call)] : undefined
 const namespaceOf = call => member(call).split('.')[0]
 
 export const LEVEL_NAMES = ['draws and remembers', 'reads', 'writes or runs', 'network']
@@ -56,12 +58,12 @@ export function hasFootprint(mod) {
 }
 
 // An unclassified call is labelled "other: <call>" and counts as level 1, the form installed copies of
-// mod-finder read; calls in a namespace Claude Code does not have are also listed under `foreign`.
+// mod-finder read; calls in a namespace the table does not cover are also listed under `foreign`.
 export function grade(calls, complete = true) {
   let level = 0
   const labels = new Set(), foreign = new Set()
   for (const call of calls) {
-    const rule = METHODS[member(call)]
+    const rule = ruleOf(call)
     if (!rule) {
       labels.add(`other: ${call}`)
       level = Math.max(level, 1)
@@ -89,11 +91,11 @@ export function regrade(records) {
 
 // The level and labels of the calls the table grades, apart from the ones it does not. The stored level counts
 // an ungraded call as 1, which is neither a ceiling nor a floor, so pages state them apart: `unclassified`
-// holds Claude Code methods the table does not know, `foreign` calls in namespaces Claude Code does not have.
+// holds methods in namespaces the table covers, `foreign` calls in namespaces it does not.
 export function classified(calls) {
-  const known = calls.filter(call => METHODS[member(call)])
+  const known = calls.filter(call => ruleOf(call))
   const { level, name, labels } = grade(known)
-  const unknown = calls.filter(call => !METHODS[member(call)])
+  const unknown = calls.filter(call => !ruleOf(call))
   return { level, name, labels, graded: known.length, unclassified: unknown.filter(call => CORE.has(namespaceOf(call))), foreign: unknown.filter(call => !CORE.has(namespaceOf(call))) }
 }
 
