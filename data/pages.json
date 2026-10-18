@@ -3117,6 +3117,7 @@
   "letnonesurvive--claude-code-mods--context-bar": {"id":"letnonesurvive/claude-code-mods:context-bar"},
   "letswritetw--claude-mod-open-todos--open-todos": {"id":"letswritetw/claude-mod-open-todos:open-todos"},
   "letswritetw--claude-mod-token-usage--token-usage": {"id":"letswritetw/claude-mod-token-usage:token-usage"},
+  "letusnotc--folder-map--folder-map": {"id":"letusnotc/folder-map:."},
   "leviyehonatan--claude-time-spent--time-spent": {"id":"leviyehonatan/claude-time-spent:."},
   "lianmatsuo--remcycle--remcycle": {"id":"lianmatsuo/remcycle:mod"},
   "liawzishen--claude-code-mods--git-diff-timeline": {"id":"liawzishen/claude-code-mods:git-diff-timeline"},

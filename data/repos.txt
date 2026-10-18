@@ -1294,6 +1294,7 @@ lesjeuxmathis/conso-tokens
 letnonesurvive/claude-code-mods
 letswritetw/claude-mod-open-todos
 letswritetw/claude-mod-token-usage
+letusnotc/folder-map
 leviyehonatan/claude-time-spent
 Li-Technologies/claude-mods
 lianmatsuo/remcycle

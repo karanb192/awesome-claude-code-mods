@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-18T07:06:09.260Z",
   "claudeVersion": "2.1.302",
-  "repos": 2489,
+  "repos": 2490,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -591729,6 +591729,107 @@
       "stars": 0,
       "pushedAt": "2026-10-17T04:28:01Z",
       "createdAt": "2026-10-12T12:30:54Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "letusnotc/folder-map:.",
+      "repo": "letusnotc/folder-map",
+      "path": ".",
+      "sourceCommit": "43055ba416b48b74d116db6c2dadaa57333f3c5b",
+      "name": "folder-map",
+      "description": "Side panel that opens when Claude edits files: the whole folder tree, every edited file numbered in order, and a highlighted trail from the project root to the file being edited. /folder-map toggles it.",
+      "author": "Arnav Pandey",
+      "homepage": "https://github.com/letusnotc/folder-map",
+      "url": "https://github.com/letusnotc/folder-map",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "folder-map"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "folder-map"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "folder-map"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.session.cwd",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.close",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.302",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "folder-map",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "other: $.state.get",
+          "other: $.state.set",
+          "reads files",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-18T08:14:14Z",
+      "createdAt": "2026-10-17T06:09:44Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
