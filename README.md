@@ -15,7 +15,7 @@ Find a mod in the [full catalogue][catalogue] by name or task and filter by acce
 Then run `/reload-plugins` to activate it before asking “Find a mod that helps with code reviews”. Requires Node 18 or later. For Desktop Code local sessions, use the [setup instructions](finder/README.md#in-claude-code-mcp).
 
 <!-- stats:start -->
-**4321 mods** · Last scanned 2026-10-15.
+**4924 mods** · Last scanned 2026-10-18.
 <!-- stats:end -->
 
 ![Browsing a GitHub pull request beside a Claude Code conversation using terminal-browser](assets/terminal-browser-demo.gif)
@@ -24,7 +24,7 @@ A six-second recording with [terminal-browser by zenbu-labs](https://github.com/
 
 Access reported by the latest scan (select the badge for details):
 
-[![Terminal-browser access reported by the scanner](badges/zenbu-labs--terminal-browser--terminal-browser-reach.svg)](https://mods.aidojo.si/#zenbu-labs--terminal-browser--terminal-browser)
+[![Terminal-browser access reported by the scanner](badges/zenbu-labs--terminal-browser--terminal-browser-reach.svg)](https://mods.aidojo.si/mods/zenbu-labs--terminal-browser--terminal-browser/)
 
 ## Contents
 
@@ -89,5 +89,6 @@ To add a mod to the full catalogue, follow the [discovery and seed submission gu
 
 - [claude-code-hooks](https://github.com/karanb192/claude-code-hooks) - Shell-hook plugins for safety, cost, observability and productivity, the layer mods are replacing.
 - [awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) - The general Claude Code list.
+- [statuslin.es](https://statuslin.es/mods) - A reviewed mod gallery with terminal and Claude Desktop previews, and installs pinned to reviewed commits.
 
 [catalogue]: https://mods.aidojo.si/#directory

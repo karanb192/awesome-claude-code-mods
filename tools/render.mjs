@@ -1,14 +1,21 @@
 #!/usr/bin/env node
 // Renders data/mods.json into the README count, catalogue, one SVG badge pair
-// per mod under badges/ and docs/badges/, and the directory under docs/.
+// per mod under badges/ and docs/badges/, the directory under docs/ and one page
+// per mod under docs/mods/, whose paths are kept in data/pages.json.
 
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync } from 'node:fs'
-import { LEVEL_NAMES } from './grade.mjs'
-import { renderSite, renderSitemap, renderRobots, renderLlms, reviewNotes } from './site.mjs'
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync, rmSync, existsSync } from 'node:fs'
+import { LEVEL_NAMES, grade, hasFootprint } from './grade.mjs'
+import { renderSite, renderSitemap, renderRobots, renderLlms, reviewNotes, css } from './site.mjs'
+import { assignPages, formatRegistry, idOf, indexable, readRegistry, renderModPage, renderNotFound, renderRedirect } from './pages.mjs'
 import { siteAnchors } from './slug.mjs'
 
 const data = JSON.parse(readFileSync('data/mods.json', 'utf8'))
-for (const m of data.mods) m.description = String(m.description ?? '').replace(/\s*[\u2014\u2013]\s*/g, ': ')
+for (const m of data.mods) {
+  m.description = String(m.description ?? '').replace(/\s*[\u2014\u2013]\s*/g, ': ')
+  if (!hasFootprint(m)) m.footprint = { status: 'unavailable' }
+  // Grades from recorded calls on every render, so a grading change reaches every output at once.
+  m.reach = grade(m.calls, hasFootprint(m))
+}
 const mods = data.mods.filter(m => m.kind === 'mod')
 const builtins = data.mods.filter(m => m.kind === 'builtin')
 const catalogs = [...new Set(data.mods.filter(m => m.kind === 'catalog').map(m => m.repo))].map(repo => ({ repo, n: data.mods.filter(m => m.kind === 'catalog' && m.repo === repo).length }))
@@ -24,7 +31,7 @@ const short = (s, n = 110) => { s = String(s ?? '').replace(/\s+/g, ' ').replace
 // Anthropic palette (olive, clay, deep clay, plum, error red) with ivory text, matching claude.com and claude.dev.
 const LEVEL_COLORS = ['#788c5d', '#c96442', '#a94e2f', '#827dbd']
 const FAIL_COLOR = '#b53333'
-const reachText = m => m.reach.labels.length ? m.reach.labels.join(', ') : 'draws only'
+const reachText = m => !hasFootprint(m) ? 'unknown access' : m.reach.labels.length ? m.reach.labels.join(', ') : 'draws only'
 const validates = m => ['passed', 'warnings'].includes(m.validate.status)
 const validationText = m => validates(m) ? data.claudeVersion : m.validate.status === 'failed' ? `fails on ${data.claudeVersion}` : 'not verified'
 const scanText = m => [validationText(m), ...reviewNotes(m)].join('; ')
@@ -52,7 +59,7 @@ for (const dir of BADGE_DIRS) {
 }
 const writeBadge = (file, svg) => { for (const dir of BADGE_DIRS) writeFileSync(`${dir}/${file}`, svg) }
 for (const m of [...mods, ...builtins]) {
-  writeBadge(`${slug(m)}-reach.svg`, badge('reach', `L${m.reach.level} ${reachText(m)}`, LEVEL_COLORS[m.reach.level]))
+  writeBadge(`${slug(m)}-reach.svg`, badge('reach', `${hasFootprint(m) ? 'L' + m.reach.level + ' ' : ''}${reachText(m)}`, hasFootprint(m) ? LEVEL_COLORS[m.reach.level] : '#5e5d59'))
   writeBadge(`${slug(m)}-validates.svg`, badge('validates on', scanText(m), !validates(m) ? FAIL_COLOR : reviewNotes(m).length ? LEVEL_COLORS[1] : LEVEL_COLORS[0]))
 }
 
@@ -63,10 +70,11 @@ const stats = `As of ${asOf}, scanned against Claude Code ${data.claudeVersion}:
   + `${count(has('network'))} reach the network, ${count(m => m.sees.includes('every tool call'))} see every tool call, `
   + `${count(m => m.sees.includes('every prompt'))} see every prompt, ${count(m => m.validate.status === 'failed')} fail to validate on this version. `
   + `Reach levels: ${[0, 1, 2, 3].map(l => `L${l} ${LEVEL_NAMES[l]}: ${count(m => m.reach.level === l)}`).join(' · ')}.`
+  + ` Unknown access: ${count(m => !hasFootprint(m))}.`
   + ` ${count(m => m.directory)} are also listed in Anthropic's plugin directory.`
   + (catalogs.length ? ` Not counted: ${catalogs.map(c => `[${c.repo}](https://github.com/${c.repo}) repackages ${c.n} mods`).join(', ')}, a catalogue named here once instead of once per copy.` : '')
 
-const row = m => [`[${cell(m.name)}](${manifestUrl(m)})`, cell(short(m.description)), `![reach](badges/${slug(m)}-reach.svg)`, cell(m.sees.join(', ') || 'only what it hooks'), scanText(m), m.directory ? 'listed' : 'no', String(m.stars ?? '?')]
+const row = m => [`[${cell(m.name)}](${manifestUrl(m)})`, cell(short(m.description)), `![reach](badges/${slug(m)}-reach.svg)`, cell(hasFootprint(m) ? m.sees.join(', ') || 'only what it hooks' : 'unknown; incomplete footprint'), scanText(m), m.directory ? 'listed' : 'no', String(m.stars ?? '?')]
 // awesome-lint wants aligned pipes and padded cells, so every column is padded to its widest cell.
 function table(rows) {
   const head = ['Mod', 'What it does', 'Reach', 'Sees', 'Validates on', 'In Anthropic directory', 'Stars']
@@ -88,11 +96,34 @@ function updateBlocks(file, blocks) {
 updateBlocks('README.md', { stats: `**${mods.length} mods** · Last scanned ${asOf}.` })
 updateBlocks('catalogue.md', { stats, scan: table(mods), builtin: table(builtins) })
 
-const site = renderSite(data)
-mkdirSync('docs', { recursive: true })
+const records = [...mods, ...builtins]
+const identity = assignPages(records, readRegistry(existsSync('data/pages.json') ? readFileSync('data/pages.json', 'utf8') : ''), data.mods)
+const pageOf = mod => identity.pages.get(mod)
+const byRepo = new Map()
+for (const m of [...records].sort((a, b) => a.name.localeCompare(b.name, 'en') || (idOf(a) < idOf(b) ? -1 : 1))) byRepo.set(m.repo, [...(byRepo.get(m.repo) ?? []), m])
+
+const site = renderSite(data, identity.pages)
+mkdirSync('docs/mods', { recursive: true })
 writeFileSync('docs/index.html', site)
 writeFileSync('docs/mods.json', JSON.stringify(data, null, 2) + '\n')
-writeFileSync('docs/sitemap.xml', renderSitemap())
+// Everything under docs/mods/ is generated, so a folder this render does not write belongs to a retired mod.
+const pageFolders = new Set([...identity.pages.values(), ...identity.redirects.keys()])
+for (const entry of readdirSync('docs/mods')) if (!pageFolders.has(entry)) rmSync(`docs/mods/${entry}`, { recursive: true, force: true })
+if (new Set(identity.pages.values()).size !== records.length) throw new Error('two mods were given the same page path')
+for (const m of records) {
+  if (identity.redirects.has(pageOf(m))) continue
+  mkdirSync(`docs/mods/${pageOf(m)}`, { recursive: true })
+  const siblings = byRepo.get(m.repo).filter(other => other !== m).map(other => ({ mod: other, slug: pageOf(other) }))
+  writeFileSync(`docs/mods/${pageOf(m)}/index.html`, renderModPage(m, { slug: pageOf(m), anchor: slug(m), claudeVersion: data.claudeVersion, siblings }))
+}
+for (const [from, to] of identity.redirects) {
+  mkdirSync(`docs/mods/${from}`, { recursive: true })
+  writeFileSync(`docs/mods/${from}/index.html`, renderRedirect(to))
+}
+writeFileSync('docs/site.css', css + readFileSync(new URL('./page.css', import.meta.url), 'utf8'))
+writeFileSync('docs/404.html', renderNotFound())
+writeFileSync('data/pages.json', formatRegistry(identity.registry))
+writeFileSync('docs/sitemap.xml', renderSitemap(records.filter(indexable).map(m => `mods/${pageOf(m)}/`).sort()))
 writeFileSync('docs/robots.txt', renderRobots())
 writeFileSync('docs/llms.txt', renderLlms(data))
-console.log(`rendered ${mods.length} mods and ${builtins.length} built-ins into README.md, catalogue.md, badges/, docs/ and docs/badges/`)
+console.log(`rendered ${mods.length} mods and ${builtins.length} built-ins into README.md, catalogue.md, badges/, docs/, docs/badges/ and docs/mods/`)

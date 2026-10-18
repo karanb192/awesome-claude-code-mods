@@ -28,7 +28,7 @@ export function reconcile(previous, current, checkedRepos, retire = false) {
 export function checkRequired(repos, mods, checkedRepos) {
   for (const repo of repos) {
     const matches = mods.filter(mod => mod.repo.toLowerCase() === repo.toLowerCase() && mod.kind === 'mod')
-    if (!checkedRepos.has(repo.toLowerCase()) || !matches.length || matches.some(mod => !['passed', 'warnings'].includes(mod.validate.status))) {
+    if (!checkedRepos.has(repo.toLowerCase()) || !matches.length || matches.some(mod => !['passed', 'warnings'].includes(mod.validate.status) || mod.footprint?.status === 'unavailable')) {
       throw new Error(`new seed ${repo} must clone successfully and contain validating mod plugins`)
     }
   }

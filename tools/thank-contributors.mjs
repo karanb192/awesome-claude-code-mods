@@ -9,6 +9,7 @@ import { join } from 'node:path'
 import { parseArgs } from 'node:util'
 import { readRepos } from './candidates.mjs'
 import { siteAnchors } from './slug.mjs'
+import { idOf, readRegistry } from './pages.mjs'
 
 const SITE = 'https://mods.aidojo.si/'
 const BOT = 'github-actions[bot]'
@@ -45,21 +46,28 @@ export function readMarkers(comments, owner) {
 
 const list = items => items.length < 2 ? items.join('') : `${items.slice(0, -1).join(', ')} and ${items.at(-1)}`
 
-export function thanksBody(pr, author, repos, mods, anchors, askStar) {
+// linkOf: each mod's page on the website.
+export function thanksBody(pr, author, repos, mods, linkOf, askStar) {
   const label = name => String(name).replace(/[[\]\\]/g, '\\$&')
   return [
     `<!-- publication-thanks pr=${pr} author=${author}${askStar ? ' star-asked' : ''} -->`,
     `Thanks for submitting ${list(repos)}. ${mods.length === 1 ? 'Its mod is' : `${repos.length === 1 ? 'Its' : 'Their'} ${mods.length} mods are`} now in the catalogue, with the access the scan recorded:`,
     '',
-    ...mods.map(mod => `- [${label(mod.name)}](${SITE}#${anchors.get(mod)})`),
+    ...mods.map(mod => `- [${label(mod.name)}](${linkOf(mod)})`),
+    '',
+    `${mods.length === 1 ? 'The page has' : 'Each page has'} a README badge you can copy, which links back to it.`,
     ...(askStar ? ['', 'If the catalogue is useful to you, a star on this repository helps other people find it.'] : []),
   ].join('\n') + '\n'
 }
 
 // One comment per contributor PR, covering every seed it added that this run published. Skips the
 // owner, bots, PRs already thanked and seeds whose PR cannot be found; asks for a star at most once per author.
-export function planThanks({ published, inventory, prs, owner, stargazers, thanked, asked }) {
+// pages: data/pages.json. A mod without a page there, such as one published before pages existed, links to
+// its row on the homepage instead.
+export function planThanks({ published, inventory, prs, owner, stargazers, thanked, asked, pages = {} }) {
   const anchors = siteAnchors(inventory.mods)
+  const pageOf = new Map(Object.entries(pages).filter(([, entry]) => !entry.to).map(([slug, entry]) => [entry.id, slug]))
+  const linkOf = mod => pageOf.has(idOf(mod)) ? `${SITE}mods/${pageOf.get(idOf(mod))}/` : `${SITE}#${anchors.get(mod)}`
   const byPr = new Map()
   for (const repo of published) {
     const pr = prs.get(key(repo))
@@ -75,7 +83,7 @@ export function planThanks({ published, inventory, prs, owner, stargazers, thank
   return [...byPr.values()].map(({ pr, repos, mods }) => {
     const askStar = !stargazers.has(key(pr.author)) && !askedNow.has(key(pr.author))
     if (askStar) askedNow.add(key(pr.author))
-    return { pr: pr.number, body: thanksBody(pr.number, pr.author, repos, mods, anchors, askStar) }
+    return { pr: pr.number, body: thanksBody(pr.number, pr.author, repos, mods, linkOf, askStar) }
   })
 }
 
@@ -95,6 +103,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const lines = text => text.split('\n').filter(Boolean)
   // The publication commit, not the working tree: branch cleanup after the merge can leave it stale.
   const inventory = JSON.parse(run('git', ['show', `${values.ref}:data/mods.json`]))
+  const pages = readRegistry(run('git', ['show', `${values.ref}:data/pages.json`]))
   const commits = seedCommits(run('git', ['log', '--reverse', '--first-parent', '-m', '--format=%x00%H', '-p', '-U0', values.ref, '--', 'data/seeds.txt']))
   const prs = new Map()
   for (const repo of published) {
@@ -109,7 +118,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     .map(line => { const [issue, author, ...body] = line.split('\t'); return { issue, author, body: body.join('\t') } })
   const { thanked, asked } = readMarkers(comments, repository.split('/')[0])
   const dir = mkdtempSync(join(tmpdir(), 'thanks-'))
-  for (const { pr, body } of planThanks({ published, inventory, prs, owner: repository.split('/')[0], stargazers, thanked, asked })) {
+  for (const { pr, body } of planThanks({ published, inventory, prs, owner: repository.split('/')[0], stargazers, thanked, asked, pages })) {
     if (values['dry-run']) { console.log(`would thank #${pr}\n${body}`); continue }
     const file = join(dir, `${pr}.md`)
     writeFileSync(file, body)

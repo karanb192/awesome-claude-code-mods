@@ -1,0 +1,69 @@
+name: indexnow
+
+# Tells Bing and the other IndexNow engines which mod pages changed, once Pages serves them. Seed
+# publications merge with the workflow token, which starts no push event, hence workflow_run.
+on:
+  push:
+    branches: [main]
+    paths: ["docs/index.html", "docs/mods/**"]
+  workflow_run:
+    workflows: [publish approved seeds]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      all:
+        description: Send every URL in the sitemap
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  actions: read
+  pages: read
+
+concurrency:
+  group: indexnow
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+          filter: blob:none
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - name: Wait until Pages serves this commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          head=$(git rev-parse HEAD)
+          for _ in $(seq 40); do
+            build=$(gh api "repos/$GITHUB_REPOSITORY/pages/builds/latest")
+            commit=$(jq -r .commit <<< "$build")
+            git fetch -q origin "$commit" 2>/dev/null || true
+            if [ "$(jq -r .status <<< "$build")" = built ] && git merge-base --is-ancestor "$head" "$commit" 2>/dev/null; then exit 0; fi
+            sleep 30
+          done
+          echo "Pages has not served $head after 20 minutes" >&2
+          exit 1
+      # The last successful run's commit is the base. Runs start after their commit, so the range can
+      # overlap one already sent, which only resends a few URLs. No earlier run sends the whole sitemap.
+      - name: Send changed pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ALL: ${{ inputs.all }}
+        run: |
+          base=$(gh run list --workflow indexnow.yml --branch main --status success --limit 1 --json headSha --jq '.[0].headSha // empty')
+          if [ -z "$base" ]; then
+            node tools/indexnow.mjs --all
+          elif [ "$ALL" = true ]; then
+            node tools/indexnow.mjs --all --base "$base" --head HEAD
+          else
+            node tools/indexnow.mjs --base "$base" --head HEAD
+          fi

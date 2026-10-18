@@ -1,5 +1,6 @@
 # Repos the GitHub code search has not indexed yet. One owner/repo per line, in alphabetical order ignoring case.
 3dnow/claude-mods
+404Mayank/cachebeat
 adamholter/claude-subway-surfers
 agentic-workbench/agent-quick-menu
 AlexeyHRDesign/colorwheel
@@ -22,6 +23,7 @@ augiefra/claude-mods
 BatuhanCakmakk/wavy-usage
 ben-rogerson/claude-counter-strike
 BjoernSchotte/ccmod-amp
+candygoogy/notary
 chenyuxiaojin/cyxj-notch
 chrisluo5311/Pixel-Play
 danilpavlov/telescope-claude-code
@@ -32,6 +34,9 @@ dot-agi/arrester
 dot-agi/downrange
 dot-agi/high-command
 dot-agi/sandbox-tuner
+edsoncantuaria/cc-cost
+edtrackai/claude-code-guardrails-lite
+FunJim/claude-code-add-to-chat
 gerricchaplin/pr-pulse
 griches/buildpane
 griches/installguard
@@ -43,6 +48,9 @@ hellosverre/mod-store
 hellosverre/redgreen
 hellosverre/smart-compact
 hoobnn/hoobnn-agent-mods
+HuliLulu46/cc-effort-switch
+HuliLulu46/pending-decisions
+HuliLulu46/polish
 i-harsha-reddy/naruto-mod
 iamumeransari/claude-show-your-work
 icedevil2001/auto-continue
@@ -52,7 +60,11 @@ jiangnanquan/claude-code-zh
 joshuatonga/mini-claude-mods
 karanb192/cache-tax
 karanb192/claude-code-mods
+kiankhooban/open-paths
 kongyo2/context-view
+Kruhlikau/subagent-tuner
+leonidb/claude-code-mods
+letusnotc/folder-map
 ljmerza/prompt-spellcheck
 lorenzh/rabe
 magiclin99/buddy-go
@@ -62,6 +74,7 @@ mertkayacs/ultramod
 moduvoice/claude-code-ko-ui
 MohammedSaud404/rtl-terminal
 muellerei/enable-todo-tools
+muellerei/sweet-spot
 muellerei/task-line
 Nachx639/context-canary
 njp-coder/meanwhile
@@ -88,6 +101,7 @@ Shuffzord/RoadRaven
 somethingwentwell/cc-mod-banana-game
 Sumit189/explain-claude-mod
 SummerRiversound/review-inbox
+T-AI-Labs/claude-code-mods
 tozmoz/sparkmine
 twjackysu/claude-code-stock-ticker
 tyler4400/tyler-claude-mods
@@ -103,6 +117,7 @@ vicmpen/mokkan
 vihrea1337/headroom
 vinkdc/roclaude
 vynnlee/mods
+wjsekrud/motive-mem
 xuanji86/claude-agentpane
 xuanji86/claude-mdview
 xuanji86/claude-statuspane

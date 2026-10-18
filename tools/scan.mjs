@@ -14,7 +14,7 @@ import { join, dirname } from 'node:path'
 import { tmpdir } from 'node:os'
 import { spawnAsync } from './validate.mjs'
 import { clone, inspect, findingsKey } from './inspect.mjs'
-import { grade, visibility, drawsOn } from './grade.mjs'
+import { grade, regrade, visibility, drawsOn } from './grade.mjs'
 import { readDuplicates, applyDuplicatesWithRenames, suspectDuplicates, renamePairs } from './dedupe.mjs'
 import { kindOf, readCatalogs, readFixtureExceptions } from './kind.mjs'
 import { parseArgs } from 'node:util'
@@ -63,6 +63,7 @@ const CACHE_KEY = findingsKey(claudeVersion)
 const cached = args.cache && existsSync(args.cache) ? JSON.parse(readFileSync(args.cache, 'utf8')) : null
 const reusable = cached?.key === CACHE_KEY ? cached.repos : {}
 const findings = {}
+const inspectionFailures = new Set()
 let downloadedKb = 0, reused = 0
 // A crashed or timed-out validator reports `unknown`; such findings are retried on the next scan, never reused.
 // `unsettled` also covers an unknown plugin that duplicate filtering dropped before it reached the findings.
@@ -77,7 +78,13 @@ async function scanRepo(repo) {
   let found = null
   try {
     const dir = await clone(repo, CLONES)
-    if (dir) found = await inspect(repo, dir, CLONES, claudeVersion)
+    if (dir) {
+      try { found = await inspect(repo, dir, CLONES, claudeVersion) }
+      catch (error) {
+        inspectionFailures.add(repo)
+        console.error(`inspection failed: ${repo}: ${error.name}; retaining earlier records and retrying next scan`)
+      }
+    }
   } finally {
     const size = await spawnAsync('du', ['-sk', join(CLONES, repo.replace('/', '__'))])
     downloadedKb += Number(size.stdout.split('\t')[0]) || 0
@@ -85,7 +92,7 @@ async function scanRepo(repo) {
   }
   if (!found) return []
   const fresh = records(repo, found, batch ?? meta(repo))
-  for (const mod of fresh) console.log(`${mod.validate.status.padEnd(8)} L${mod.reach.level} ${mod.id}`)
+  for (const mod of fresh) console.log(`${mod.validate.status.padEnd(8)} ${mod.reach.level === null ? 'unknown access' : 'L' + mod.reach.level} ${mod.id}`)
   return fresh
 }
 
@@ -104,13 +111,14 @@ function records(repo, found, m) {
     kind: kindOf(repo, p.rel, { name: p.manifestName, description: p.manifestDescription }, catalogs, fixtureExceptions),
     hasManifest: p.hasManifest,
     modules: p.modules,
+    footprint: p.footprint,
     hooks: p.hooks,
     calls: p.calls,
     surfaceModules: p.surfaceModules,
     validate: p.validate,
     marketplaces: p.marketplaces,
     compatibility: { runtime: 'not-tested', warnings: p.warnings },
-    reach: grade(p.calls),
+    reach: grade(p.calls, p.footprint.status === 'reported'),
     sees: visibility(p.hooks),
     draws: [...new Set(drawsOn(p.hooks))],
     stars: m.stars ?? null,
@@ -134,6 +142,7 @@ await Promise.all(Array.from({ length: Math.min(CONCURRENCY, repos.length) }, as
 }))
 let mods = byRepo.flat()
 console.log(`scanned ${repos.length} repos in ${Math.round((Date.now() - started) / 1000)}s, ${CONCURRENCY} at a time; ${reused} unchanged since a cached scan; checkouts held ${Math.round(downloadedKb / 1024)} MB`)
+if (inspectionFailures.size) console.error(`inspection incomplete for ${inspectionFailures.size} repositories: ${repos.filter(repo => inspectionFailures.has(repo)).join(', ')}`)
 if (args.cache) {
   mkdirSync(dirname(args.cache), { recursive: true })
   writeFileSync(args.cache, JSON.stringify({ key: CACHE_KEY, repos: findings }))
@@ -164,6 +173,8 @@ for (const pair of suspectDuplicates(mods)) console.log(`possible duplicate: ${p
 let directory = null
 try { directory = readDirectory() } catch (error) { console.error(`directory not read, keeping earlier listings: ${error.message}`) }
 applyDirectory(mods, directory, new Map(previous.map(mod => [mod.id, mod.directory ?? null])))
+// Retained records keep the grade they were scanned with until this regrades them from their calls.
+regrade(mods)
 mods.sort((a, b) => (b.stars ?? -1) - (a.stars ?? -1) || a.id.localeCompare(b.id))
 mkdirSync(dirname(OUT), { recursive: true })
 writeFileSync(OUT, JSON.stringify({ generated: new Date().toISOString(), claudeVersion, repos: readRepos(REPOS).length, mods,

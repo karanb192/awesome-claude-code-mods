@@ -24,6 +24,8 @@ This path preserves existing entries and the last full-scan date. It uses the pu
 
 Duplicate rules involving a new seed are checked during publication. Rules between entries already published wait for a reviewed full scan; merging those rules does not block unrelated seed additions or silently change older listings. A new seed that would reclassify an existing mod still waits for review.
 
+A maintainer can record a verified UI-warning false positive in `data/compatibility-reviews.json`, with its source link and reason, to clear that publication hold. Publication accepts it only for the exact plugin ID, upstream commit, validator version and complete warning records reviewed. A changed commit or warning requires another review. The original warning remains in the inventory, and validation, marketplace and duplicate checks still apply. Contributors do not add their own approvals to this file.
+
 Publication runs share a separate queue and never scan in parallel with each other. When several contributor PRs merge, the active run reuses its completed scan on the latest main and repeats generation and checks if needed. The next queued run reads current main and scans all remaining unpublished seeds together. Already published seeds are skipped. A full scan can still run independently; its newer records are preserved. Eight consecutive main changes during publication stop that run for a later retry.
 
 Missing plugins stay listed as unverified during scheduled scans. Weekly retirement proposals require a fresh successful checkout and record the revision used to establish that a hook module is gone. Clone failures and failed validation are not removal evidence. Curated descriptions need a separate human review when an upstream project changes.
@@ -40,14 +42,14 @@ Karan selects the entries and can revise the selection. A nomination or a passin
 
 ## Badges
 
-Every scanned mod gets two badges you can paste into your README:
+Every scanned mod gets two badges you can paste into your README. Each one links to the mod's page, which shows what the scan recorded. The easiest way is to copy the ready-made snippet at the bottom of your mod's page on [mods.aidojo.si](https://mods.aidojo.si/). It looks like this:
 
 ```markdown
-![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/OWNER--REPO--NAME-reach.svg)
-![validates](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/OWNER--REPO--NAME-validates.svg)
+[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/OWNER--REPO--NAME-reach.svg)](https://mods.aidojo.si/mods/OWNER--REPO--NAME/)
+[![validates](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/OWNER--REPO--NAME-validates.svg)](https://mods.aidojo.si/mods/OWNER--REPO--NAME/)
 ```
 
-Replace `OWNER--REPO--NAME` with your GitHub owner, repo and the `name` from your `plugin.json`, joined by double dashes. The exact file names are in the `badges/` folder.
+`OWNER--REPO--NAME` is usually your GitHub owner, repo and the `name` from your `plugin.json`, joined by double dashes. The badge file name and the page path can differ, for example when a renamed plugin keeps its original page, so copy the snippet from your mod's page rather than building it by hand.
 
 ## Disputing a footprint
 

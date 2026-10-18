@@ -63,6 +63,7 @@ test('failed, unknown, marketplace and compatibility results keep that seed unpu
   skippedFor(append(inventory([mod('new/repo', 'x', { id: 'existing/repo:mod' })])), /already published/)
   skippedFor(append(inventory([mod('new/repo', 'x', { validate: { status: 'passed', claudeVersion: '2.1.288' } })])), /validator mismatch/)
   assert.equal(reviewSeed(scan().mods, '2.1.287', new Set()), null)
+  assert.match(reviewSeed([{ ...scan().mods[0], footprint: { status: 'unavailable' } }], '2.1.287', new Set()), /footprint unavailable/)
 })
 
 test('one failing seed does not hold back the others', () => {
@@ -73,6 +74,43 @@ test('one failing seed does not hold back the others', () => {
   assert.deepEqual(result.repos, ['existing/repo', 'new/repo'])
   assert.deepEqual(result.skipped.map(s => s.repo).sort(), ['bad/repo', 'gone/repo', 'missing/repo'])
   assert.deepEqual(pendingSeeds(['new/repo', 'bad/repo', 'gone/repo', 'missing/repo'], result.inventory), ['bad/repo', 'gone/repo', 'missing/repo'])
+})
+
+test('a reviewed compatibility warning publishes only its exact source and warning records', () => {
+  const warning = { code: 'ui-control-characters', message: 'Review UI strings', evidence: [{ file: 'hooks/mod.js', line: 10 }] }
+  const entry = mod('new/repo', 'one', { compatibility: { warnings: [warning] } })
+  const review = { id: entry.id, sourceCommit: entry.sourceCommit, claudeVersion: '2.1.287', warnings: [warning], reason: 'Hash delimiter only' }
+  const publish = (reviews, current = inventory([entry])) => planPublication(before(), current, ['new/repo'], ['new/repo'], ['existing/repo'], undefined, reviews)
+  const original = structuredClone(entry)
+  const accepted = publish([review])
+  assert.deepEqual(accepted.published, ['new/repo'])
+  assert.deepEqual(accepted.inventory.mods.at(-1), original)
+  assert.deepEqual(entry, original)
+  for (const change of [
+    { id: 'new/repo:other' }, { sourceCommit: 'b'.repeat(40) }, { sourceCommit: '' },
+    { claudeVersion: '2.1.288' }, { reason: ' ' }, { warnings: [] },
+    { warnings: [{ ...warning, code: 'another-warning' }] },
+    { warnings: [{ ...warning, message: 'Changed warning' }] },
+    { warnings: [{ ...warning, evidence: [{ file: 'hooks/mod.js', line: 11 }] }] },
+    { warnings: [warning, warning] },
+  ]) skippedFor(publish([{ ...review, ...change }]), /compatibility needs review/)
+  skippedFor(publish([]), /compatibility needs review/)
+  skippedFor(publish([null, 0, 'invalid']), /compatibility needs review/)
+  assert.deepEqual(publish([null, review]).published, ['new/repo'])
+  skippedFor(publish([review], inventory([entry, mod('new/repo', 'two', { compatibility: entry.compatibility })])), /compatibility needs review/)
+})
+
+test('compatibility reviews cannot bypass validation, marketplace, inspection or duplicate holds', () => {
+  const warning = { code: 'ui-control-characters', evidence: [{ file: 'hooks/mod.js', line: 10 }] }
+  const entry = mod('existing/other', 'mod', { compatibility: { warnings: [warning] } })
+  const review = { id: entry.id, sourceCommit: entry.sourceCommit, claudeVersion: '2.1.287', warnings: [warning], reason: 'Hash delimiter only' }
+  const publish = current => appendSeeds(before(), current, ['existing/other'], ['existing/repo'], undefined, [review])
+  skippedFor(publish(inventory([entry])), /possible duplicate/)
+  for (const status of ['failed', 'unknown']) {
+    skippedFor(publish(inventory([{ ...entry, validate: { ...entry.validate, status } }])), /validation needs review/)
+    skippedFor(publish(inventory([{ ...entry, marketplaces: [{ status }] }])), /marketplace needs review/)
+  }
+  skippedFor(publish({ ...inventory([entry]), checkedRepos: [] }), /not fully inspected/)
 })
 
 test('warnings and fixtures are retained when the seed includes valid counted mods', () => {
@@ -111,7 +149,7 @@ test('scanner reports partial repositories so passing siblings can publish alone
   mkdirSync(join(root, 'bin'))
   writeFileSync(join(root, 'data/seeds.txt'), 'owner/partial\nother/good\n')
   const binary = (name, code) => writeFileSync(join(root, 'bin', name), `#!${process.execPath}\n${code}`, { mode: 0o755 })
-  binary('claude', `console.log(process.argv.includes('--version') ? '2.1.287' : '✔ Validation passed')`)
+  binary('claude', `console.log(process.argv.includes('--version') ? '2.1.287' : '  ❯ mod.js hooks: nothing\\n  ❯ mod.js calls: nothing on $\\n✔ Validation passed')`)
   binary('gh', `console.log(JSON.stringify({stars: 0, defaultBranch: 'main'}))`)
   binary('git', `
     const fs = require('node:fs'), path = require('node:path');
@@ -233,16 +271,21 @@ for (const concurrentPublication of [false, true]) test(`publication handles a c
   git('init', '-b', 'fixture')
   git('remote', 'add', 'origin', remote)
   cpSync(fileURLToPath(new URL('.', import.meta.url)), join(checkout, 'tools'), { recursive: true })
+  // Mod pages take their install hint from the finder's helper.
+  cpSync(fileURLToPath(new URL('../finder', import.meta.url)), join(checkout, 'finder'), { recursive: true })
   mkdirSync(join(checkout, 'data'))
-  const renderable = (repo, name) => ({ ...mod(repo, name), path: name, description: name, url: `https://github.com/${repo}`, stars: 1, reach: { level: 0, labels: [] }, sees: [], hooks: [], calls: [], surfaceModules: [] })
+  const renderable = (repo, name) => ({ ...mod(repo, name), path: name, description: name, url: `https://github.com/${repo}`, stars: 1, reach: { level: 0, name: 'draws and remembers', labels: [] }, sees: [], hooks: [], calls: [], surfaceModules: [] })
   const publishedBefore = [renderable('existing/repo', 'old'), renderable('existing/repo', 'copy')]
   writeFileSync(join(checkout, 'data/mods.json'), JSON.stringify(inventory(publishedBefore)))
   writeFileSync(join(checkout, 'data/duplicates.txt'), 'existing/repo:copy existing/repo:old\n')
+  writeFileSync(join(checkout, 'data/compatibility-reviews.json'), '[]\n')
   writeFileSync(join(checkout, 'data/repos.txt'), 'existing/repo\n')
   writeFileSync(join(checkout, 'data/seeds.txt'), 'existing/repo\nnew/repo\nbroken/repo\n')
   writeFileSync(join(checkout, 'README.md'), '<!-- stats:start -->\n<!-- stats:end -->\n')
   writeFileSync(join(checkout, 'catalogue.md'), ['stats', 'scan', 'builtin'].map(name => `<!-- ${name}:start -->\n<!-- ${name}:end -->`).join('\n'))
   execFileSync(process.execPath, ['tools/render.mjs'], { cwd: checkout, env })
+  mkdirSync(join(checkout, 'docs/mods/retired--repo--gone'))
+  writeFileSync(join(checkout, 'docs/mods/retired--repo--gone/index.html'), 'stale page')
   git('add', '.')
   git('commit', '-m', 'Fixture inventory')
   git('push', 'origin', 'HEAD:main')
@@ -286,6 +329,10 @@ if(args[0]==='api'){
   assert.deepEqual(published.mods.slice(0, 2), publishedBefore)
   assert.deepEqual(published.mods.map(mod => mod.repo), ['existing/repo', 'existing/repo', 'new/repo'])
   assert.match(git('--git-dir', remote, 'show', 'main:data/seeds.txt'), /later\/repo/)
+  assert.equal(JSON.parse(git('--git-dir', remote, 'show', 'main:data/pages.json'))['new--repo--new'].id, 'new/repo:new')
+  assert.match(git('--git-dir', remote, 'show', 'main:docs/mods/new--repo--new/index.html'), /<h1>new<\/h1>/)
+  assert.match(git('--git-dir', remote, 'show', 'main:docs/sitemap.xml'), /mods\/new--repo--new\//)
+  assert.doesNotMatch(git('--git-dir', remote, 'ls-tree', '-r', '--name-only', 'main', 'docs/mods'), /retired--repo--gone/, 'publication commits removed pages')
   assert.deepEqual(pendingSeeds(['existing/repo', 'new/repo', 'later/repo', 'broken/repo'], published), ['broken/repo', 'later/repo'])
   assert.match(readFileSync(join(runner, 'seed-skipped.md'), 'utf8'), /^- broken\/repo: no validating mod plugins/)
   if (!concurrentPublication) assert.match(readFileSync(pr, 'utf8'), /## Seeds not published\n\n- broken\/repo/)

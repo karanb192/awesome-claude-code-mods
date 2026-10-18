@@ -1,7 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { parseValidateOutput, parseHooks, parseCalls } from './parse.mjs'
-import { grade, visibility, drawsOn } from './grade.mjs'
+import { parseValidateOutput, parseHooks, parseCalls, footprintStatus } from './parse.mjs'
+import { grade, visibility, drawsOn, hasFootprint } from './grade.mjs'
 import { validate, validateAsync, spawnAsync, relativePaths } from './validate.mjs'
 import { mkdtempSync, mkdirSync, writeFileSync, chmodSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
@@ -34,6 +34,67 @@ test('parses hooks, matchers, calls and surface modules', () => {
 test('nothing on $ means no calls', () => {
   assert.deepEqual(parseCalls('nothing on $'), [])
   assert.deepEqual(parseHooks('tool.call'), [{ event: 'tool.call', matcher: {} }])
+})
+
+test('footprint coverage requires hooks and explicit calls for every declared module', () => {
+  const read = text => parseValidateOutput(text + '\n✘ Validation failed')
+  const full = '  ❯ ./a.ts hooks: session.start\n  ❯ ./a.ts calls: $.http.fetch'
+  assert.equal(footprintStatus(read(full), ['./a.ts']).status, 'reported')
+  assert.equal(footprintStatus(read(full), ['./a.ts', './b.ts']).status, 'unavailable')
+  for (const text of ['', '  ❯ ./a.ts hooks: session.start', '  ❯ ./a.ts calls: $.http.fetch',
+    '  ❯ ./a.ts hooks: session.start\n  ❯ ./a.ts calls:', '  ❯ ./a.ts hooks: session.start\n  ❯ ./a.ts calls: unknown']) {
+    assert.equal(footprintStatus(read(text), ['./a.ts']).status, 'unavailable', text)
+  }
+  const empty = read('  ❯ ./a.ts hooks: nothing\n  ❯ ./a.ts calls: nothing on $')
+  assert.equal(footprintStatus(empty, ['a.ts']).status, 'reported')
+  assert.equal(grade(empty.modules[0].calls).level, 0)
+  assert.equal(footprintStatus(empty, [null]).status, 'unavailable')
+})
+
+test('unknown access retains a lower bound and treats legacy failures conservatively', () => {
+  assert.deepEqual(grade(['$.http.fetch'], false), { level: null, name: 'unknown', labels: ['network'], minimumLevel: 3 })
+  for (const calls of [[], ['$.http.fetch']]) assert.equal(hasFootprint({ calls, validate: { status: 'failed' } }), false)
+  assert.equal(hasFootprint({ calls: [], validate: { status: 'passed' } }), true)
+  assert.equal(hasFootprint({ calls: [], validate: { status: 'unknown' }, lastKnownValidate: { status: 'warnings' } }), true)
+  assert.equal(hasFootprint({ footprint: { status: 'reported' }, validate: { status: 'failed' } }), true)
+  assert.equal(hasFootprint({ footprint: { status: 'unavailable' }, validate: { status: 'passed' } }), false)
+})
+
+test('truncated validator lists retain whole entries but never establish a complete footprint', () => {
+  const read = (hooks, calls, surfaces = '') => parseValidateOutput(`  ❯ ./register.ts hooks: ${hooks}\n  ❯ ./register.ts calls: ${calls}\n${surfaces && `  ❯ ./register.ts surface modules: ${surfaces}`}\n✔ Validation passed`)
+  const cut = read('session.start, ui.render{component=Pane, r… [+281 chars]', '$.http.fetch (via first, second), $.ui.clos… [+250 chars]')
+  assert.equal(cut.status, 'passed')
+  assert.deepEqual(cut.modules[0].hooks, [{ event: 'session.start', matcher: {} }])
+  assert.deepEqual(cut.modules[0].calls, ['$.http.fetch'])
+  assert.equal(footprintStatus(cut, ['./register.ts']).status, 'unavailable')
+  assert.equal(grade(cut.modules[0].calls, false).level, null)
+  assert.equal(grade(cut.modules[0].calls, false).minimumLevel, 3)
+  for (const r of [
+    read('session.st… [+1 char]', 'nothing on $'),
+    read('session.start', '$.ui.log (via first, seco… [+20 chars]'),
+    read('session.start', '$.http.fetch, $.ui.clos... [+250 chars]'),
+    read('session.start', 'nothing on $', 'hooks/a.tsx, hooks/par… [+10 chars]'),
+  ]) {
+    assert.equal(footprintStatus(r, ['./register.ts']).status, 'unavailable')
+    assert.ok(!JSON.stringify(r.modules[0].hooks).includes('chars'))
+  }
+  assert.deepEqual(read('session.start', '$.ui.log (via first, seco… [+20 chars]').modules[0].calls, [])
+  assert.deepEqual(read('session.start', 'nothing on $', 'hooks/a.tsx, hooks/par… [+10 chars]').modules[0].surfaceModules, ['hooks/a.tsx'])
+  const mixed = parseValidateOutput(SAMPLE + '  ❯ ./b.ts hooks: nothing\n  ❯ ./b.ts calls: $.fs.wri… [+2 chars]')
+  assert.equal(footprintStatus(mixed, ['./register.tsx', './b.ts']).status, 'unavailable')
+})
+
+test('embedded character-count markers discard the affected matcher before parsing it', () => {
+  for (const suffix of ['', ', ui.render{component=Pane, r… [+248 chars]']) {
+    const parsed = parseValidateOutput(`  ❯ ./register.ts hooks: session.start, command.run{command=status}, tool.call{tool=/"^mcp__(?:service|[0-9a-fA-F]{8})__"[+47 chars]/}, session.end${suffix}\n  ❯ ./register.ts calls: $.http.fetch\n✔ Validation passed`)
+    assert.equal(parsed.status, 'passed')
+    assert.deepEqual(parsed.modules[0].hooks, [
+      { event: 'session.start', matcher: {} },
+      { event: 'command.run', matcher: { command: 'status' } },
+    ])
+    assert.deepEqual(footprintStatus(parsed, ['./register.ts']), { status: 'unavailable', reason: 'Validator output was truncated' })
+    assert.deepEqual(parsed.modules[0].calls, ['$.http.fetch'])
+  }
 })
 
 test('failed validation carries the error line', () => {
@@ -90,7 +151,7 @@ test('a new mod, a footprint change, a validate flip and a version bump are chan
   assert.notEqual(fingerprint(base), fingerprint(after))
   assert.deepEqual(describeChange(base, after), ['Claude Code 2.1.272 to 2.1.280', 'new: e/f:.', 'a/b:.: reach L0 to L3'])
   const broken = clone(); broken.mods[0].validate.status = 'failed'
-  assert.deepEqual(describeChange(base, broken), ['a/b:.: validate passed to failed'])
+  assert.deepEqual(describeChange(base, broken), ['a/b:.: validate passed to failed', 'a/b:.: reach L0 to unknown'])
 })
 
 test('a listed duplicate collapses onto its successor; an unlisted same-owner same-name pair is only flagged', () => {
@@ -112,6 +173,26 @@ test('a listed duplicate collapses onto its successor; an unlisted same-owner sa
   assert.deepEqual(listed[0], ['galElmalah/claude-queue-plugin:.', 'galElmalah/claude-mods:claude-queue'])
   for (const pair of listed) assert.ok(pair.length === 2 && pair.every(id => /^[\w.-]+\/[\w.-]+:\S+$/.test(id)) && pair[0] !== pair[1], pair.join(' '))
   assert.deepEqual([...readDuplicates('data/no-such-file.txt')], [])
+})
+
+test('a retained duplicate follows an explicit keeper move only when the new keeper is counted', () => {
+  const records = [
+    { id: 'o/repo:.', kind: 'duplicate', duplicateOf: 'o/repo:old' },
+    { id: 'o/repo:old', kind: 'mod' },
+    { id: 'o/repo:new', kind: 'mod' },
+  ]
+  const rules = new Map([['o/repo:.', 'o/repo:new'], ['o/repo:old', 'o/repo:new']])
+  const retained = reconcile(records.map(m => ({ ...m, repo: 'o/repo', validate: { status: 'passed', claudeVersion: '1' } })), [], new Map()).mods
+  const result = applyDuplicates(structuredClone(retained), rules)
+  assert.deepEqual(result.map(m => [m.kind, m.duplicateOf]), [
+    ['duplicate', 'o/repo:new'], ['duplicate', 'o/repo:new'], ['mod', undefined],
+  ])
+  assert.deepEqual(applyDuplicates(structuredClone(result), rules), result)
+  for (const kind of [null, 'fixture', 'catalog', 'duplicate']) {
+    const unavailable = retained.filter(m => m.id !== 'o/repo:new')
+    if (kind) unavailable.push({ id: 'o/repo:new', kind })
+    assert.deepEqual(applyDuplicates(structuredClone(unavailable), rules), unavailable)
+  }
 })
 
 test('only an appended pair between counted mods skips the PR rescan', () => {
@@ -268,6 +349,22 @@ test('course exercises stay out while finished mods and unrelated repositories c
   const exceptions = new Set([`kurushiba/claude-mods:${paths[0]}`])
   assert.equal(kindOf('kurushiba/claude-mods', paths[0], {}, new Set(), exceptions), 'mod')
   assert.equal(kindOf('kurushiba/claude-mods', paths[0], { description: 'A test fixture.' }, new Set(), exceptions), 'fixture')
+})
+
+test('qualification helpers stay out while the product and unrelated repositories count', () => {
+  const repo = 'milocosmopolitan/redacton'
+  const paths = ['authority-companion', 'config-race-companion', 'helper-counter', 'race-companion', 'ui-companion'].map(name => `qualification/${name}`)
+  for (const path of paths) {
+    assert.equal(kindOf(repo, path, {}), 'fixture', path)
+    assert.equal(kindOf('another/redacton', path, {}), 'mod', path)
+  }
+  for (const path of ['.', 'plugins/redacton', 'qualification-dashboard']) {
+    assert.equal(kindOf(repo, path, {}), 'mod', path)
+  }
+  assert.equal(kindOf('Milocosmopolitan/Redacton', paths[0], {}), 'fixture')
+  const exceptions = new Set([`${repo}:${paths[0]}`])
+  assert.equal(kindOf(repo, paths[0], {}, new Set(), exceptions), 'mod')
+  assert.equal(kindOf(repo, paths[0], { description: 'Not a plugin to install.' }, new Set(), exceptions), 'fixture')
 })
 
 test('benchmark fixtures stay out without excluding usable evaluation mods', () => {

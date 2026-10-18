@@ -46,6 +46,41 @@ import type { Colour } from './types'
   assert.deepEqual(uiRewriteReview(dir, dir, ['./register.ts'], ui), [])
 })
 
+test('deep expression trees still report control strings and later imports', t => {
+  const { dir, write } = fixture(t)
+  write('hooks/register.ts', 'const text = ' + Array(12000).fill('"safe"').join('+') + '+"\\x1b";\nimport "./later";')
+  write('hooks/later.ts', 'export const marker = "\\x07"')
+  assert.deepEqual(uiRewriteReview(dir, dir, ['./register.ts'], ui)[0].evidence, [
+    { file: 'hooks/later.ts', line: 1 }, { file: 'hooks/register.ts', line: 1 },
+  ])
+})
+
+test('parser exhaustion is explicit and does not hide another module warning', t => {
+  const { dir, write } = fixture(t)
+  write('hooks/register.ts', 'const text = ' + '('.repeat(12000) + '"text"' + ')'.repeat(12000))
+  write('hooks/other.ts', 'const text = "\\x1b"')
+  const warnings = uiRewriteReview(dir, dir, ['./register.ts', './other.ts'], ui)
+  assert.ok(warnings.some(w => w.code === 'ui-review-incomplete' && w.evidence.some(e => e.file === 'hooks/register.ts')))
+  assert.ok(warnings.some(w => w.code === 'ui-control-characters' && w.evidence.some(e => e.file === 'hooks/other.ts')))
+})
+
+test('oversized sources are held for review instead of read as clean', t => {
+  const { dir, write } = fixture(t)
+  write('hooks/register.ts', ' '.repeat(8 * 1024 * 1024 + 1))
+  const warnings = uiRewriteReview(dir, dir, ['./register.ts'], ui)
+  assert.equal(warnings[0].code, 'ui-review-incomplete')
+  assert.match(warnings[0].message, /limit/)
+})
+
+test('long import chains are traversed without recursion and stop at the file limit', t => {
+  const { dir, write } = fixture(t)
+  for (let i = 0; i < 4100; i++) write(`hooks/file${i}.ts`, `import "./file${i + 1}";`)
+  write('hooks/file3500.ts', 'export const marker="\\x1b"; import "./file3501";')
+  const warnings = uiRewriteReview(dir, dir, ['./file0.ts'], ui)
+  assert.ok(warnings.some(w => w.code === 'ui-control-characters' && w.evidence.some(e => e.file === 'hooks/file3500.ts')))
+  assert.ok(warnings.some(w => w.code === 'ui-review-incomplete' && /limit/.test(w.message)))
+})
+
 test('UI review follows re-exports, require and dynamic literal imports and refuses paths outside the repo', t => {
   const { dir, write } = fixture(t)
   write('repo/hooks/register.ts', 'export * from "./helpers"; require("./more.cjs"); import("./later"); import "../../outside"; import "./link"')
