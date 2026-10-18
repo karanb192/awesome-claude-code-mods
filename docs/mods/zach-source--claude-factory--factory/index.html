@@ -24,13 +24,13 @@
 <dl>
 
     <dt>Observed events</dt><dd>Bash calls, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=factory}, tool.call {tool=Bash}, agent.offer {agent=factory:patrol}, agent.offer {agent=factory:pm}, turn.complete, prompt.submit, prompt.compose, ui.render {component=Pane, requestId=factory}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=factory}, tool.call {tool=Bash}, agent.offer {agent=factory:patrol}, agent.offer {agent=factory:pm}, agent.offer {agent=factory:briefer}, turn.complete, prompt.submit, prompt.compose, ui.render {component=Pane, requestId=factory}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.agent.register, $.agent.spawn, $.clock.every, $.clock.now, $.command.register, $.fs.read, $.fs.stat, $.fs.write, $.process.run, $.prompt.submit, $.session.id, $.state.get, $.state.set, $.tool.list, $.ui.ask, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation on 2.1.302</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/zach-source/claude-factory/tree/a4036a2695f0339499e05289f680e13e1552a758"><code>a4036a2695f0</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/zach-source/claude-factory/tree/fb78269fc0188fb7afc1e50b9f9a380c6b2d11ca"><code>fb78269fc018</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="https://github.com/karanb192/awesome-claude-code-mods/blob/main/SCANNING.md">How the scan works</a>.</p></section>
 

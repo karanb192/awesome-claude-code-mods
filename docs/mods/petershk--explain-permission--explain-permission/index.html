@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/petershk/explain-permission">petershk/explain-permission</a></p>
 <p class="lede">Explains each Claude Code permission request in plain English (WHAT, WHY, RISK) in a side pane</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">explain-permission reaches L2 (writes or runs) by its classified calls and passed <code>claude plugin validate</code> on Claude Code 2.1.302.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: drives Claude, draws</li><li>Unclassified calls: 2 (<code>$.state.get</code>, <code>$.state.set</code>), full access unknown</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">explain-permission reaches L2 (writes or runs) by its classified calls and passed <code>claude plugin validate</code> on Claude Code 2.1.302.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 10</li><li>Access from classified calls: L2, writes or runs: drives Claude, draws</li><li>Unclassified calls: 2 (<code>$.state.get</code>, <code>$.state.set</code>), full access unknown</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install explain-permission --marketplace petershk/explain-permission</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">other: $.state.get, other: $.state.set, drives Claude, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed on Claude Code 2.1.302</span></div></div>
@@ -23,15 +23,15 @@
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=explain-permission}, classic.PermissionRequest, ui.render {component=Pane, requestId=explain-permission}</code></dd>
-    <dt>API calls</dt><dd><code>$.command.register, $.model.complete, $.model.fork, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
+    <dt>Observed events</dt><dd>classic hooks, every tool call</dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=explain-permission}, classic.PermissionRequest, tool.call, ui.scroll {component=Pane, requestId=explain-permission}, ui.render {component=Pane, requestId=explain-permission}</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.model.complete, $.model.fork, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.scroll, $.ui.toast</code></dd>
 
     <dt>Validation on 2.1.302</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/petershk/explain-permission/tree/e08ba8ab1b14830d11692e91f1dc070985ea173a"><code>e08ba8ab1b14</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/petershk/explain-permission/blob/e08ba8ab1b14830d11692e91f1dc070985ea173a/.claude-plugin/marketplace.json">hermann-mods</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/petershk/explain-permission/tree/4d339c8bfe3efe3cf287a931d1f24eef9138e47a"><code>4d339c8bfe3e</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/petershk/explain-permission/blob/4d339c8bfe3efe3cf287a931d1f24eef9138e47a/.claude-plugin/marketplace.json">hermann-mods</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="https://github.com/karanb192/awesome-claude-code-mods/blob/main/SCANNING.md">How the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/petershk--explain-permission--explain-permission-reach.svg" alt="Reach badge for explain-permission"> <img src="/badges/petershk--explain-permission--explain-permission-validates.svg" alt="Validation badge for explain-permission"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/petershk--explain-permission--explain-permission-reach.svg)](https://mods.aidojo.si/mods/petershk--explain-permission--explain-permission/)
