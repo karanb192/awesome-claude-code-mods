@@ -691,6 +691,7 @@ enpixeles-ai/mods-claude
 EnyMan/simple-memory
 EricJamie/claude-code-mods
 ErnestTramp/claude-usage-meter
+errhythm/ccswap
 ersinkoc/claude-mods
 escapeboy/claude-code-kit
 EsenssiAromasDev/context-lab
