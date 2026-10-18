@@ -63,6 +63,7 @@ karanb192/claude-code-mods
 kiankhooban/open-paths
 kongyo2/context-view
 Kruhlikau/subagent-tuner
+kushalBanda/claude-tldr
 leonidb/claude-code-mods
 ljmerza/prompt-spellcheck
 lorenzh/rabe
