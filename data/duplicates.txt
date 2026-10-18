@@ -102,3 +102,6 @@ xsyetopz/dotclaude:plugins/dotclaude-sessions xsyetopz/dotclaude:plugins/claudet
 xsyetopz/dotclaude:plugins/dcc-plugin-you-should-know xsyetopz/dotclaude:plugins/claudetto-you-should-know
 cpeaustriajc/cj-stack:mods/denial-explainer cpeaustriajc/cj-stack:mods/archived/denial-explainer
 vivi-0124/me:mermaid-live vivi-0124/me:projects/mermaid-live
+lakmadev/claude-mods:plugins/pixel-pet lakmadev/pixel-pet:.
+lakmadev/claude-mods:plugins/code-wrapped lakmadev/code-wrapped:.
+lakmadev/claude-mods:plugins/repo-radar lakmadev/repo-radar:.
