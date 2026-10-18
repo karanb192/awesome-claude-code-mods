@@ -100,3 +100,5 @@ xsyetopz/dotclaude:plugins/dotclaude-browser xsyetopz/dotclaude:plugins/claudett
 xsyetopz/dotclaude:plugins/dotclaude-codegraph xsyetopz/dotclaude:plugins/claudetto-codegraph
 xsyetopz/dotclaude:plugins/dotclaude-sessions xsyetopz/dotclaude:plugins/claudetto-sessions
 xsyetopz/dotclaude:plugins/dcc-plugin-you-should-know xsyetopz/dotclaude:plugins/claudetto-you-should-know
+cpeaustriajc/cj-stack:mods/denial-explainer cpeaustriajc/cj-stack:mods/archived/denial-explainer
+vivi-0124/me:mermaid-live vivi-0124/me:projects/mermaid-live

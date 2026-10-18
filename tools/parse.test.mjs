@@ -351,6 +351,22 @@ test('course exercises stay out while finished mods and unrelated repositories c
   assert.equal(kindOf('kurushiba/claude-mods', paths[0], { description: 'A test fixture.' }, new Set(), exceptions), 'fixture')
 })
 
+test('qualification helpers stay out while the product and unrelated repositories count', () => {
+  const repo = 'milocosmopolitan/redacton'
+  const paths = ['authority-companion', 'config-race-companion', 'helper-counter', 'race-companion', 'ui-companion'].map(name => `qualification/${name}`)
+  for (const path of paths) {
+    assert.equal(kindOf(repo, path, {}), 'fixture', path)
+    assert.equal(kindOf('another/redacton', path, {}), 'mod', path)
+  }
+  for (const path of ['.', 'plugins/redacton', 'qualification-dashboard']) {
+    assert.equal(kindOf(repo, path, {}), 'mod', path)
+  }
+  assert.equal(kindOf('Milocosmopolitan/Redacton', paths[0], {}), 'fixture')
+  const exceptions = new Set([`${repo}:${paths[0]}`])
+  assert.equal(kindOf(repo, paths[0], {}, new Set(), exceptions), 'mod')
+  assert.equal(kindOf(repo, paths[0], { description: 'Not a plugin to install.' }, new Set(), exceptions), 'fixture')
+})
+
 test('benchmark fixtures stay out without excluding usable evaluation mods', () => {
   for (const path of ['lab/bench', 'benchmarks/baseline', 'benchmark/no-trace']) {
     assert.equal(kindOf('a/b', path, { name: 'baseline' }), 'fixture')
