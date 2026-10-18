@@ -2257,6 +2257,7 @@ Turbo-Thorschten/shell-highlight
 tusharranjan-ai/usage-line
 twjackysu/claude-code-stock-ticker
 twok020101/claude-jarvis
+tyler4400/tyler-claude-mods
 tylergraydev/cc-mods
 tylergraydev/rail-runner
 tyree88/tempered_plugins
@@ -2386,6 +2387,7 @@ WorldInnovationsDepartment/claude_slots
 wpvip-awesomeface/claude-mods
 WQGGSEY/cache-ttl-timer
 wverri/neon-hud
+Xabilimon1/emcc-claude-code-mods
 xaiksan1/modnest
 XavierYounan/claude-code-tmux-status
 xavortm/claude-mods

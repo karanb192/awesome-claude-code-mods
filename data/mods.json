@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-18T07:06:09.260Z",
   "claudeVersion": "2.1.302",
-  "repos": 2491,
+  "repos": 2493,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -590991,6 +590991,817 @@
       "stars": 33,
       "pushedAt": "2026-10-18T13:21:45Z",
       "createdAt": "2026-07-10T09:18:19Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "Xabilimon1/emcc-claude-code-mods:mods/emcc-core",
+      "repo": "Xabilimon1/emcc-claude-code-mods",
+      "path": "mods/emcc-core",
+      "sourceCommit": "47cb3d4af819775721ab2a28b1bdc81ca3e30ea4",
+      "name": "emcc-core",
+      "description": "EMCC's shared base: the $.emcc noun (evidence of tests, builds, lints and edits; badges; profile; kill switch) and one status band above the prompt.",
+      "author": "Xabilimon1",
+      "homepage": "https://github.com/Xabilimon1/emcc-claude-code-mods",
+      "url": "https://github.com/Xabilimon1/emcc-claude-code-mods/tree/main/mods/emcc-core",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "engine.create",
+          "matcher": {}
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "emcc"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "emcc-halt"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Edit"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Write"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "NotebookEdit"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.command.register",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.302",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "emcc",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "Bash calls",
+        "Edit calls",
+        "Write calls",
+        "NotebookEdit calls"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-18T12:05:01Z",
+      "createdAt": "2026-10-12T17:08:43Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "Xabilimon1/emcc-claude-code-mods:mods/goalpost-guard",
+      "repo": "Xabilimon1/emcc-claude-code-mods",
+      "path": "mods/goalpost-guard",
+      "sourceCommit": "47cb3d4af819775721ab2a28b1bdc81ca3e30ea4",
+      "name": "goalpost-guard",
+      "description": "Stops Claude from passing a check by lowering the bar: weakened or deleted tests, new suppressions, relaxed config, softened CI, lowered coverage, skipped git hooks.",
+      "author": "Xabilimon1",
+      "homepage": "https://github.com/Xabilimon1/emcc-claude-code-mods",
+      "url": "https://github.com/Xabilimon1/emcc-claude-code-mods/tree/main/mods/goalpost-guard",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "goalposts"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Edit"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Write"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "goalposts"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.command.register",
+        "$.emcc.badge",
+        "$.emcc.flag",
+        "$.emcc.profile",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.process.run",
+        "$.session.cwd",
+        "$.session.surfaces",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.ask",
+        "$.ui.open",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.302",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "emcc",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "reads files",
+          "reads mod state",
+          "persists state",
+          "draws",
+          "other: $.emcc.badge",
+          "other: $.emcc.flag",
+          "other: $.emcc.profile"
+        ],
+        "foreign": [
+          "$.emcc.badge",
+          "$.emcc.flag",
+          "$.emcc.profile"
+        ]
+      },
+      "sees": [
+        "Edit calls",
+        "Write calls",
+        "Bash calls"
+      ],
+      "draws": [
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-18T12:05:01Z",
+      "createdAt": "2026-10-12T17:08:43Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "Xabilimon1/emcc-claude-code-mods:mods/headspace",
+      "repo": "Xabilimon1/emcc-claude-code-mods",
+      "path": "mods/headspace",
+      "sourceCommit": "47cb3d4af819775721ab2a28b1bdc81ca3e30ea4",
+      "name": "headspace",
+      "description": "What Claude carries, in colour: a bar above the prompt with system, rules, conversation and large tool results, and a pane to turn rules off for the session, edit and save them, and take out large results.",
+      "author": "Xabilimon1",
+      "homepage": "https://github.com/Xabilimon1/emcc-claude-code-mods",
+      "url": "https://github.com/Xabilimon1/emcc-claude-code-mods/tree/main/mods/headspace",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.context",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.section",
+          "matcher": {
+            "name": "memory"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "headspace"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "headspace"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.fs.write",
+        "$.session.compact",
+        "$.session.cwd",
+        "$.session.messages",
+        "$.session.root",
+        "$.session.usage",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.ask",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.302",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "emcc",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "writes files",
+          "drives Claude",
+          "reads files",
+          "reads env vars",
+          "reads the transcript",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "the system prompt"
+      ],
+      "draws": [
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-18T12:05:01Z",
+      "createdAt": "2026-10-12T17:08:43Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "Xabilimon1/emcc-claude-code-mods:mods/headspace-cut",
+      "repo": "Xabilimon1/emcc-claude-code-mods",
+      "path": "mods/headspace-cut",
+      "sourceCommit": "47cb3d4af819775721ab2a28b1bdc81ca3e30ea4",
+      "name": "headspace-cut",
+      "description": "headspace's companion: answers the compactions headspace starts, replacing the marked tool results with one line each and summarizing nothing.",
+      "author": "Xabilimon1",
+      "homepage": "https://github.com/Xabilimon1/emcc-claude-code-mods",
+      "url": "https://github.com/Xabilimon1/emcc-claude-code-mods/tree/main/mods/headspace-cut",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "session.compact",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.state.set"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.302",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "emcc",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": []
+      },
+      "sees": [
+        "compaction"
+      ],
+      "draws": [],
+      "stars": 1,
+      "pushedAt": "2026-10-18T12:05:01Z",
+      "createdAt": "2026-10-12T17:08:43Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "Xabilimon1/emcc-claude-code-mods:mods/witness",
+      "repo": "Xabilimon1/emcc-claude-code-mods",
+      "path": "mods/witness",
+      "sourceCommit": "47cb3d4af819775721ab2a28b1bdc81ca3e30ea4",
+      "name": "witness",
+      "description": "A live view of Claude's work: the goal, a ribbon of what it spent its time on, what it is doing now, and each step marked proven, unproven, stale or flagged.",
+      "author": "Xabilimon1",
+      "homepage": "https://github.com/Xabilimon1/emcc-claude-code-mods",
+      "url": "https://github.com/Xabilimon1/emcc-claude-code-mods/tree/main/mods/witness",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "live"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "goal"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "witness"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "witness"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.emcc.badge",
+        "$.emcc.evidenceSince",
+        "$.emcc.flagsSince",
+        "$.emcc.isHalted",
+        "$.emcc.kindsOf",
+        "$.emcc.profile",
+        "$.session.cwd",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.302",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "emcc",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads mod state",
+          "draws",
+          "other: $.emcc.badge",
+          "other: $.emcc.evidenceSince",
+          "other: $.emcc.flagsSince",
+          "other: $.emcc.isHalted",
+          "other: $.emcc.kindsOf",
+          "other: $.emcc.profile"
+        ],
+        "foreign": [
+          "$.emcc.badge",
+          "$.emcc.evidenceSince",
+          "$.emcc.flagsSince",
+          "$.emcc.isHalted",
+          "$.emcc.kindsOf",
+          "$.emcc.profile"
+        ]
+      },
+      "sees": [
+        "every prompt",
+        "every tool call"
+      ],
+      "draws": [
+        "Pane",
+        "AbovePrompt"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-18T12:05:01Z",
+      "createdAt": "2026-10-12T17:08:43Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "tyler4400/tyler-claude-mods:mods/session-title",
+      "repo": "tyler4400/tyler-claude-mods",
+      "path": "mods/session-title",
+      "sourceCommit": "a184e5e1c03b9baa39bb3320cbd2b75b78051cef",
+      "name": "session-title",
+      "description": "用 Haiku 按「前缀｜MMDD｜主体」规则自动维护会话标题，不占主模型上下文",
+      "author": "tyler4400",
+      "homepage": "https://github.com/tyler4400/tyler-claude-mods",
+      "url": "https://github.com/tyler4400/tyler-claude-mods/tree/main/mods/session-title",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "classic.UserPromptSubmit",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.now",
+        "$.fs.read",
+        "$.mcp.call",
+        "$.model.complete",
+        "$.process.run",
+        "$.session.id",
+        "$.session.messages",
+        "$.session.surfaces",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.keys",
+        "$.store.set",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.302",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "tyler-claude-mods",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "MCP servers",
+          "runs processes",
+          "drives Claude",
+          "reads files",
+          "reads the transcript",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-10-18T13:39:08Z",
+      "createdAt": "2026-10-13T11:50:50Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "tyler4400/tyler-claude-mods:mods/status-card",
+      "repo": "tyler4400/tyler-claude-mods",
+      "path": "mods/status-card",
+      "sourceCommit": "a184e5e1c03b9baa39bb3320cbd2b75b78051cef",
+      "name": "status-card",
+      "description": "输入框上方的会话摘要卡片：目标、现在、下一步、等你处理的事。跨重启保留，回看旧会话也能看到；可展开详情、折叠成胶囊。",
+      "author": "tyler4400",
+      "homepage": "https://github.com/tyler4400/tyler-claude-mods",
+      "url": "https://github.com/tyler4400/tyler-claude-mods/tree/main/mods/status-card",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "classic.SessionStart",
+          "matcher": {}
+        },
+        {
+          "event": "classic.UserPromptSubmit",
+          "matcher": {}
+        },
+        {
+          "event": "classic.PostModelSwitch",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.model.complete",
+        "$.process.run",
+        "$.session.id",
+        "$.session.messages",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.keys",
+        "$.store.set",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.302",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "tyler-claude-mods",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "drives Claude",
+          "reads the transcript",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks",
+        "every prompt",
+        "every tool call"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-18T13:39:08Z",
+      "createdAt": "2026-10-13T11:50:50Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
