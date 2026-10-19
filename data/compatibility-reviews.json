@@ -1,5 +1,116 @@
 [
   {
+    "id": "e950280/hudlite:.",
+    "sourceCommit": "47390aa15998df24e59b1ba51b6a22ee2f16fddb",
+    "claudeVersion": "2.1.302",
+    "warnings": [
+      {
+        "code": "ui-control-characters",
+        "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+        "evidence": [
+          {
+            "file": "hooks/extras.ts",
+            "line": 167
+          },
+          {
+            "file": "hooks/extras.ts",
+            "line": 168
+          },
+          {
+            "file": "hooks/hud/git.ts",
+            "line": 164
+          },
+          {
+            "file": "hooks/hud/git.ts",
+            "line": 213
+          },
+          {
+            "file": "hooks/hud/jj.ts",
+            "line": 13
+          },
+          {
+            "file": "hooks/hud/jj.ts",
+            "line": 14
+          },
+          {
+            "file": "hooks/hud/render/ansi.ts",
+            "line": 7
+          },
+          {
+            "file": "hooks/hud/render/ansi.ts",
+            "line": 19
+          },
+          {
+            "file": "hooks/hud/render/ansi.ts",
+            "line": 24
+          },
+          {
+            "file": "hooks/hud/render/ansi.ts",
+            "line": 30
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 5
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 7
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 8
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 9
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 10
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 11
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 12
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 13
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 14
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 15
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 33
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 45
+          },
+          {
+            "file": "hooks/hud/utils/hyperlinks.ts",
+            "line": 20
+          },
+          {
+            "file": "hooks/stdin.ts",
+            "line": 273
+          }
+        ]
+      }
+    ],
+    "reason": "The NUL literals split Git and environment output. ANSI and OSC literals in the bundled HUD formatter are parsed by hooks/ansi.ts into styled spans before hooks/draw.tsx creates Text and Link elements. The render hooks call next(e) with unchanged props and retain its result; they do not forward these strings as rewritten props.text.",
+    "source": "https://github.com/e950280/hudlite/blob/47390aa15998df24e59b1ba51b6a22ee2f16fddb/hooks/render.ts#L53"
+  },
+  {
     "id": "FunJim/claude-code-add-to-chat:add-to-chat",
     "sourceCommit": "c1797d334705dae6fe12ff427d76227bbec15ed7",
     "claudeVersion": "2.1.302",
