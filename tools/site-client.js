@@ -29,6 +29,9 @@
   let listed = false
   let loaded = false
   let order = null
+  // A #slug arrival jumps to its row once the list loads, unless the reader has already started using the directory.
+  let used = false
+  for (const type of ['input', 'click', 'focusin']) document.getElementById('directory').addEventListener(type, () => { used = true }, true)
 
   function apply() {
     const search = q.value.trim().toLowerCase()
@@ -133,8 +136,8 @@
       reveal(segment.hash.slice(1))
     })
     apply()
-    if (location.hash) reveal(location.hash.slice(1))
-    else if (query && q.value === query) document.getElementById('directory').scrollIntoView({ block: 'start', behavior: 'instant' })
+    if (!used && location.hash) reveal(location.hash.slice(1))
+    else if (!used && query) document.getElementById('directory').scrollIntoView({ block: 'start', behavior: 'instant' })
     table.dataset.loaded = 'true'
   }
 
@@ -147,12 +150,14 @@
   fetch('directory.json')
     .then(response => { if (!response.ok) throw new Error(String(response.status)); return response.json() })
     .then(data => {
-      const focused = document.activeElement?.closest('#t tbody tr')?.id
+      const active = document.activeElement
+      const focused = active?.closest('#t tbody tr')
+      const at = focused ? [...focused.querySelectorAll('a, button')].indexOf(active) : -1
       tbody.innerHTML = data.rows.join('\n')
       rows = [...tbody.rows]
       loaded = true
       if (order) sortRows()
-      if (focused) document.getElementById(focused)?.querySelector('.mod-name').focus({ preventScroll: true })
+      if (focused) document.getElementById(focused.id)?.querySelectorAll('a, button')[at]?.focus({ preventScroll: true })
       document.querySelector('.strip').innerHTML = data.strip
     })
     .catch(() => { document.getElementById('load-note').hidden = false })

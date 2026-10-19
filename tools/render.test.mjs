@@ -831,3 +831,26 @@ test('the homepage links only letters that have a page, and unusual initials fal
   assert.deepEqual([...home.matchAll(/href="\/browse\/([^/]+)\/"/g)].map(m => m[1]), ['m', 'other'])
   assert.match(readFileSync(join(dir, 'docs/browse/other/index.html'), 'utf8'), />İstanbul</)
 })
+
+test('a hash arrival does not undo what the reader did while the list loaded, and focus keeps its exact link', async t => {
+  const many = Array.from({ length: 130 }, (_, i) => ({ ...mod(i), stars: 1000 - i }))
+  const dir = fixture(t, many)
+  render(dir)
+  const browser = await chromium.launch()
+  t.after(() => browser.close())
+  let release
+  const page = await browser.newPage()
+  await page.goto(`${serve(t, join(dir, 'docs'), { hold: new Promise(resolve => { release = resolve }) })}/#example--mods--mod-129`)
+  await page.fill('#q', 'mod-7')
+  release()
+  await page.waitForSelector('#t[data-loaded]')
+  assert.equal(await page.inputValue('#q'), 'mod-7', 'the pending jump to the hash row does not clear the search')
+  assert.equal(await page.evaluate(() => document.activeElement.id), 'q', 'focus stays in the search box')
+  let releaseSecond
+  const second = await browser.newPage()
+  await second.goto(`${serve(t, join(dir, 'docs'), { hold: new Promise(resolve => { releaseSecond = resolve }) })}/`)
+  await second.locator('#example--mods--mod-5 .repo').focus()
+  releaseSecond()
+  await second.waitForSelector('#t[data-loaded]')
+  assert.equal(await second.evaluate(() => document.activeElement.classList.contains('repo') && document.activeElement.closest('tr').id), 'example--mods--mod-5', 'the repository link keeps focus, not the mod name')
+})
