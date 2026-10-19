@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-18T14:44:13.018Z",
   "claudeVersion": "2.1.302",
-  "repos": 2687,
+  "repos": 2688,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -630925,6 +630925,325 @@
       "stars": 1,
       "pushedAt": "2026-10-18T19:47:24Z",
       "createdAt": "2026-10-16T19:32:52Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "e950280/hudlite:.",
+      "repo": "e950280/hudlite",
+      "path": ".",
+      "sourceCommit": "47390aa15998df24e59b1ba51b6a22ee2f16fddb",
+      "name": "hudlite",
+      "description": "Lean claude-hud: clickable 5h / 7d / context, cache and cost rows. Multilingual (English, 繁中, 简中, 日本語...)",
+      "author": "that_handsome",
+      "homepage": "https://github.com/e950280/hudlite",
+      "url": "https://github.com/e950280/hudlite",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "hud"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "SessionMode"
+          }
+        },
+        {
+          "event": "ui.focus",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "session.attach",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {}
+        },
+        {
+          "event": "session.receive",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "session.compact",
+          "matcher": {}
+        },
+        {
+          "event": "state.set",
+          "matcher": {
+            "plugin": "spinner",
+            "key": "dock"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {}
+        },
+        {
+          "event": "session.detach",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "/\"^mcp__hudlite__hud_debug$\"/"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.edit",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "PromptHint"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "hud-detail"
+          }
+        }
+      ],
+      "calls": [
+        "$.audio.play",
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.config.set",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.fs.write",
+        "$.model.fork",
+        "$.process.run",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.model",
+        "$.session.repo",
+        "$.session.root",
+        "$.session.usage",
+        "$.session.version",
+        "$.settings.read",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.set",
+        "$.tool.register",
+        "$.ui.close",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [
+        "hooks/kit/pet-player.tsx"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.302",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "hudlite",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": [
+          {
+            "code": "ui-control-characters",
+            "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+            "evidence": [
+              {
+                "file": "hooks/extras.ts",
+                "line": 167
+              },
+              {
+                "file": "hooks/extras.ts",
+                "line": 168
+              },
+              {
+                "file": "hooks/hud/git.ts",
+                "line": 164
+              },
+              {
+                "file": "hooks/hud/git.ts",
+                "line": 213
+              },
+              {
+                "file": "hooks/hud/jj.ts",
+                "line": 13
+              },
+              {
+                "file": "hooks/hud/jj.ts",
+                "line": 14
+              },
+              {
+                "file": "hooks/hud/render/ansi.ts",
+                "line": 7
+              },
+              {
+                "file": "hooks/hud/render/ansi.ts",
+                "line": 19
+              },
+              {
+                "file": "hooks/hud/render/ansi.ts",
+                "line": 24
+              },
+              {
+                "file": "hooks/hud/render/ansi.ts",
+                "line": 30
+              },
+              {
+                "file": "hooks/hud/render/colors.ts",
+                "line": 5
+              },
+              {
+                "file": "hooks/hud/render/colors.ts",
+                "line": 7
+              },
+              {
+                "file": "hooks/hud/render/colors.ts",
+                "line": 8
+              },
+              {
+                "file": "hooks/hud/render/colors.ts",
+                "line": 9
+              },
+              {
+                "file": "hooks/hud/render/colors.ts",
+                "line": 10
+              },
+              {
+                "file": "hooks/hud/render/colors.ts",
+                "line": 11
+              },
+              {
+                "file": "hooks/hud/render/colors.ts",
+                "line": 12
+              },
+              {
+                "file": "hooks/hud/render/colors.ts",
+                "line": 13
+              },
+              {
+                "file": "hooks/hud/render/colors.ts",
+                "line": 14
+              },
+              {
+                "file": "hooks/hud/render/colors.ts",
+                "line": 15
+              },
+              {
+                "file": "hooks/hud/render/colors.ts",
+                "line": 33
+              },
+              {
+                "file": "hooks/hud/render/colors.ts",
+                "line": 45
+              },
+              {
+                "file": "hooks/hud/utils/hyperlinks.ts",
+                "line": 20
+              },
+              {
+                "file": "hooks/stdin.ts",
+                "line": 273
+              }
+            ]
+          }
+        ]
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "writes files",
+          "changes config",
+          "drives Claude",
+          "reads files",
+          "reads settings",
+          "reads mod state",
+          "plays audio",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt",
+        "compaction",
+        "/\"^mcp__hudlite__hud_debug$\"/ calls",
+        "every tool call"
+      ],
+      "draws": [
+        "SessionMode",
+        "AbovePrompt",
+        "PromptHint",
+        "Pane"
+      ],
+      "stars": 2,
+      "pushedAt": "2026-10-19T02:45:53Z",
+      "createdAt": "2026-10-16T06:01:20Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

@@ -696,6 +696,7 @@ dwain-barnes/clef-model-router
 DXMHXR/usage-band
 dylan-chalkboard/helix-spinner
 dyoung418/claude-mods
+e950280/hudlite
 eascendco/workbench
 Eason412/codex-flow
 EasyAIHenry/henry-mods

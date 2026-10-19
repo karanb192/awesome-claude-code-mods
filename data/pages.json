@@ -2522,6 +2522,7 @@
   "dwain-barnes--clef-model-router--clef-model-router": {"id":"dwain-barnes/clef-model-router:."},
   "dylan-chalkboard--helix-spinner--helix-spinner": {"id":"dylan-chalkboard/helix-spinner:plugins/helix-spinner"},
   "dyoung418--claude-mods--quiet-output": {"id":"dyoung418/claude-mods:quiet-output"},
+  "e950280--hudlite--hudlite": {"id":"e950280/hudlite:."},
   "eascendco--workbench--workbench": {"id":"eascendco/workbench:."},
   "echo724--echo-claude-mod--echo-widget": {"id":"echo724/echo-claude-mod:mods/echo-widget"},
   "eddiezhan--xhs-count-mod--xhs-count": {"id":"eddiezhan/xhs-count-mod:."},
