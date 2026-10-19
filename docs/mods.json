@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-18T14:44:13.018Z",
   "claudeVersion": "2.1.302",
-  "repos": 2685,
+  "repos": 2686,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -630540,6 +630540,129 @@
       "stars": 0,
       "pushedAt": "2026-10-17T02:40:48Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "karanb192/time-blame:.",
+      "repo": "karanb192/time-blame",
+      "path": ".",
+      "sourceCommit": "482072626df584c986f423316a29399402d05fcf",
+      "name": "time-blame",
+      "description": "Splits each Claude Code turn's time into Claude, tools, you and other, and prints a /blame receipt for the session. Nothing leaves the machine. Claude Code 2.1.302+.",
+      "author": "Karan Bansal",
+      "homepage": "https://github.com/karanb192/time-blame",
+      "url": "https://github.com/karanb192/time-blame",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "blame"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "TurnDuration"
+          }
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "classic.PermissionRequest",
+          "matcher": {}
+        },
+        {
+          "event": "classic.PostToolUse",
+          "matcher": {}
+        },
+        {
+          "event": "classic.PostToolUseFailure",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.session.surfaces",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.302",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "time-blame",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks",
+        "every tool call"
+      ],
+      "draws": [
+        "Pane",
+        "TurnDuration"
+      ],
+      "stars": 5,
+      "pushedAt": "2026-10-17T15:45:40Z",
+      "createdAt": "2026-10-17T11:56:03Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

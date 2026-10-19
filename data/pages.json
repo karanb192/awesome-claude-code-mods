@@ -3199,6 +3199,7 @@
   "karanb192--claude-code-mods--image-peek": {"id":"karanb192/claude-code-mods:plugins/image-peek"},
   "karanb192--claude-code-redact--redact": {"id":"karanb192/claude-code-redact:plugins/redact"},
   "karanb192--jev-skill-scout--jev-skill-scout": {"id":"karanb192/jev-skill-scout:."},
+  "karanb192--time-blame--time-blame": {"id":"karanb192/time-blame:."},
   "kargarisaac--subagent-band--subagent-band": {"id":"kargarisaac/subagent-band:."},
   "karimdjaafar--jc-hud-mod--jc-hud-mod": {"id":"karimdjaafar/jc-hud-mod:."},
   "karrot0--claude-buddy--progress-buddy": {"id":"karrot0/claude-buddy:plugins/progress-buddy"},

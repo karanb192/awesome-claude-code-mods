@@ -1267,6 +1267,7 @@ karanb192/jev-skill-scout
 karanb192/kb-claude-data
 karanb192/kb-claude-skills
 karanb192/kb-homepage
+karanb192/time-blame
 kargarisaac/subagent-band
 karimdjaafar/jc-hud-mod
 karrot0/claude-buddy
