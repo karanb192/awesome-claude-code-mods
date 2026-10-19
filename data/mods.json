@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-18T14:44:13.018Z",
   "claudeVersion": "2.1.302",
-  "repos": 2688,
+  "repos": 2689,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -631364,6 +631364,209 @@
       "stars": 2,
       "pushedAt": "2026-10-19T02:45:53Z",
       "createdAt": "2026-10-16T06:01:20Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "kushalBanda/claude-tldr:.",
+      "repo": "kushalBanda/claude-tldr",
+      "path": ".",
+      "sourceCommit": "07ca8e48e0d7a6d4b7a91f8019ef0fc3c5f31730",
+      "name": "tldr",
+      "description": "TL;DR for Claude Code: every turn as one card, with what to check.",
+      "author": "Kushal Banda",
+      "homepage": "https://github.com/kushalBanda/claude-tldr",
+      "url": "https://github.com/kushalBanda/claude-tldr",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "tldr"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolGroup"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolUse"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolResult"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AssistantMessage"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Spinner"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "session.compact",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "?"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "?"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "?"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "?"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "TurnDuration"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.fs.read",
+        "$.session.id",
+        "$.session.root",
+        "$.session.usage",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.blit",
+        "$.ui.close",
+        "$.ui.copy",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.302",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-tldr",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": [
+          {
+            "code": "ui-control-characters",
+            "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+            "evidence": [
+              {
+                "file": "hooks/classify.ts",
+                "line": 91
+              }
+            ]
+          }
+        ]
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "writes the clipboard",
+          "reads files",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call",
+        "compaction"
+      ],
+      "draws": [
+        "ToolGroup",
+        "ToolUse",
+        "ToolResult",
+        "AssistantMessage",
+        "Spinner",
+        "AbovePrompt",
+        "Pane",
+        "TurnDuration"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-19T13:36:26Z",
+      "createdAt": "2026-10-16T17:57:43Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

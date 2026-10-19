@@ -1350,6 +1350,7 @@ kulovema2012/calm-mode
 kunchenguid/compact-adviser
 kunchenguid/firstmate
 kurushiba/claude-mods
+kushalBanda/claude-tldr
 Kvadratni/claude-mods
 Kyo1M/claude-mods
 KyoMio/zcode-executor
