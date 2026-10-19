@@ -854,3 +854,30 @@ test('a hash arrival does not undo what the reader did while the list loaded, an
   await second.waitForSelector('#t[data-loaded]')
   assert.equal(await second.evaluate(() => document.activeElement.classList.contains('repo') && document.activeElement.closest('tr').id), 'example--mods--mod-5', 'the repository link keeps focus, not the mod name')
 })
+
+test('section and built-in arrivals land after the full list loads, and a failed load explains itself', async t => {
+  const many = [...Array.from({ length: 130 }, (_, i) => ({ ...mod(i), stars: 1000 - i })), { ...mod(131, 'passed', 'builtin'), name: 'builtin-one' }]
+  const dir = fixture(t, many)
+  render(dir)
+  const base = serve(t, join(dir, 'docs'))
+  const browser = await chromium.launch()
+  t.after(() => browser.close())
+  const builtin = readFileSync(join(dir, 'docs/index.html'), 'utf8').match(/<details class="builtins"[\s\S]*?<tr id="([^"]+)"/)[1]
+  let page
+  for (const [hash, check] of [['about', '#about'], [builtin, `[id="${builtin}"]`]]) {
+    page = await browser.newPage({ viewport: { width: 1280, height: 900 } })
+    await page.goto(`${base}/#${hash}`)
+    await page.waitForSelector('#t[data-loaded]')
+    const { top, bottom } = await page.locator(check).evaluate(el => el.getBoundingClientRect().toJSON())
+    assert.ok(top >= 0 && bottom <= 900, `${hash} is in view after the list loads`)
+  }
+  assert.equal(await page.locator('#built-in-mods').evaluate(el => el.open), true, 'a built-in arrival opens its section')
+  rmSync(join(dir, 'docs/directory.json'))
+  const failed = await browser.newPage()
+  await failed.goto(`${base}/?q=mod-129`)
+  await failed.waitForSelector('#t[data-loaded]')
+  assert.equal(await failed.locator('#n').textContent(), '0 of 100 mods', 'counts cover the rows that loaded')
+  assert.match(await failed.locator('#empty').innerText(), /The full list did not load/)
+  assert.equal(await failed.locator('#strip-note').isVisible(), true)
+  assert.match(readFileSync(join(dir, 'docs/index.html'), 'utf8'), /<noscript><p class="notice">The marks need JavaScript\./)
+})

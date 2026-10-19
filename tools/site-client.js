@@ -28,6 +28,7 @@
   let level = ''
   let listed = false
   let loaded = false
+  let failed = false
   let order = null
   // A #slug arrival jumps to its row once the list loads, unless the reader has already started using the directory.
   let used = false
@@ -41,7 +42,7 @@
       if (!row.hidden) visible++
     }
     // Until directory.json arrives only the first rows are on the page, so counts are out of the full catalogue.
-    const total = loaded ? rows.length : Number(table.dataset.total)
+    const total = loaded || failed ? rows.length : Number(table.dataset.total)
     count.textContent = visible === total ? `${total} mods` : `${visible} of ${total} mods`
     for (const filter of filters) filter.setAttribute('aria-pressed', String(filter.dataset.level === level))
     listedFilter.setAttribute('aria-pressed', String(listed))
@@ -127,7 +128,15 @@
     if (scroll) row.scrollIntoView({ block: 'center' })
     row.querySelector('.mod-name').focus({ preventScroll: true })
   }
-  window.addEventListener('hashchange', () => reveal(location.hash.slice(1)))
+  window.addEventListener('hashchange', () => arrive(location.hash.slice(1)))
+
+  // The full list moves everything below the table, so a #section or built-in arrival scrolls again once it is in.
+  function arrive(id) {
+    const target = document.getElementById(id)
+    if (!target || rows.includes(target)) return reveal(id)
+    for (let details = target.closest('details'); details; details = details.parentElement.closest('details')) details.open = true
+    target.scrollIntoView({ block: target.closest('tbody') ? 'center' : 'start', behavior: 'instant' })
+  }
 
   function start() {
     for (const segment of document.querySelectorAll('.seg')) segment.addEventListener('click', event => {
@@ -136,7 +145,7 @@
       reveal(segment.hash.slice(1))
     })
     apply()
-    if (!used && location.hash) reveal(location.hash.slice(1))
+    if (!used && location.hash) arrive(location.hash.slice(1))
     else if (!used && query) document.getElementById('directory').scrollIntoView({ block: 'start', behavior: 'instant' })
     table.dataset.loaded = 'true'
   }
@@ -160,6 +169,13 @@
       if (focused) document.getElementById(focused.id)?.querySelectorAll('a, button')[at]?.focus({ preventScroll: true })
       document.querySelector('.strip').innerHTML = data.strip
     })
-    .catch(() => { document.getElementById('load-note').hidden = false })
+    .catch(() => {
+      failed = true
+      document.getElementById('load-note').hidden = false
+      document.getElementById('strip-note').hidden = false
+      const empty = document.getElementById('empty')
+      empty.querySelector('h3').textContent = 'No match among the mods on this page.'
+      empty.querySelector('p').textContent = 'The full list did not load, so search covers the most-starred mods only. Browse every mod from A to Z.'
+    })
     .finally(start)
 })()
