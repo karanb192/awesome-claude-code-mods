@@ -77,7 +77,7 @@ The scan also reads the catalogue of Anthropic's plugin directory (`claude plugi
 
 Merging a seed submission also starts a separate publication check. New repositories with passing checks appear automatically after their generated update is merged by the workflow and the website deploys. Existing listings stay unchanged. A seed with validation failures or new review warnings stays unpublished and is reported in the workflow run; other seeds still publish. [Seed publication details](contributing.md#open-a-pull-request).
 
-Discovery depends on GitHub's index and our search patterns, so a new mod may not appear immediately. A scan usually picks up a repository with the `claude-code-mod` topic within a few hours of its next push, and the mod appears once that scan's pull request is merged. [How discovery and validation work](SCANNING.md) covers access levels, warnings, retry handling and removal reviews.
+Discovery depends on GitHub's index and our search patterns, so a new mod may not appear immediately. A scan usually picks up a repository with the `claude-code-mod` topic within a few hours of its next push, and the mod appears once that scan's pull request is merged. [How discovery and validation work](SCANNING.md) covers access levels, warnings, retry handling and removal reviews. [What can a Claude Code mod access?](https://mods.aidojo.si/access/) sums up what the scan found across the catalogue.
 
 <a id="contribute"></a>
 

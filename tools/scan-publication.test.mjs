@@ -294,6 +294,7 @@ if(args[0]==='api'){
   const pages = JSON.parse(git('--git-dir', remote, 'show', 'nightly-scan:data/pages.json'))
   assert.deepEqual(Object.keys(pages), ['o--discovered--discovered', 'o--old--old', 'o--published--published'], 'every mod in the reconciled scan gets a page')
   assert.match(git('--git-dir', remote, 'show', 'nightly-scan:docs/mods/o--discovered--discovered/index.html'), /<h1>discovered<\/h1>/)
+  assert.match(git('--git-dir', remote, 'show', 'nightly-scan:docs/access/index.html'), /catalogue of 3 counted mods/, 'the access page is published with the scan')
   assert.match(git('--git-dir', remote, 'show', 'nightly-scan:README.md'), /Merged after PR creation/)
   const published = proposed().mods.find(m => m.repo === 'o/published')
   assert.equal(published.validate.claudeVersion, scanned.claudeVersion)

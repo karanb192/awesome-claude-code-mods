@@ -1,4 +1,4 @@
-// Tells IndexNow (Amazon, Bing, Naver, Seznam.cz, Yandex, Yep; not Google) which pages changed, so a new or removed mod page is
+// Tells IndexNow (Amazon, Bing, Naver, Seznam.cz, Yandex, Yep; not Google) which pages changed, so a new or removed page is
 // recrawled within hours instead of waiting for the sitemap. The key file docs/<KEY>.txt proves the
 // site owns the key; it is public by design.
 //
@@ -20,6 +20,7 @@ export function urlsForPaths(paths) {
   const urls = new Set()
   for (const path of paths) {
     if (path === 'docs/index.html') urls.add(site)
+    if (path === 'docs/access/index.html') urls.add(`${site}access/`)
     const page = path.match(/^docs\/mods\/([^/]+)\/index\.html$/)
     if (page) urls.add(`${site}mods/${page[1]}/`)
   }
@@ -38,7 +39,7 @@ export const payload = urlList => ({ host: new URL(site).host, key: KEY, keyLoca
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const { values } = parseArgs({ options: { base: { type: 'string' }, head: { type: 'string' }, all: { type: 'boolean' }, 'dry-run': { type: 'boolean' } } })
-  const changed = values.base ? urlsForPaths(execFileSync('git', ['diff', '--name-only', '--no-renames', values.base, values.head ?? 'HEAD', '--', 'docs/index.html', 'docs/mods'], { encoding: 'utf8' }).split('\n').filter(Boolean)) : []
+  const changed = values.base ? urlsForPaths(execFileSync('git', ['diff', '--name-only', '--no-renames', values.base, values.head ?? 'HEAD', '--', 'docs/index.html', 'docs/access', 'docs/mods'], { encoding: 'utf8' }).split('\n').filter(Boolean)) : []
   // --all with a base also sends removed pages, which the sitemap no longer lists.
   const urls = values.all ? [...new Set([...sitemapUrls(readFileSync('docs/sitemap.xml', 'utf8')), ...changed])].sort() : changed
   console.log(`${urls.length} URLs`)

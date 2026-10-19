@@ -101,7 +101,7 @@ const jsonLd = value => JSON.stringify(value).replace(/</g, '\\u003c')
 const clip = (text, n) => { text = String(text ?? '').replace(/\s+/g, ' ').trim(); return text.length > n ? text.slice(0, n - 1).trimEnd() + '…' : text }
 const sourceOf = mod => /^https?:\/\//i.test(String(mod.url)) ? mod.url : `https://github.com/${mod.repo}`
 
-function shell({ title, description, canonical, robots, head = '', body }) {
+export function shell({ title, description, canonical, robots, head = '', body }) {
   return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title>
@@ -229,7 +229,7 @@ ${installBlock(mod)}
 <p class="actions"><a class="source" href="${esc(sourceOf(mod))}">View the source on GitHub ${arrow}</a><a href="/#${esc(anchor)}">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 ${recordDetails(mod, claudeVersion)}
-<p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="${repo}/blob/main/SCANNING.md">How the scan works</a>.</p></section>
+<p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 ${shown.length ? `<section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from ${esc(mod.repo)}</h2><ul>${shown.map(({ mod: other, slug: path }) => `<li><a href="/mods/${esc(path)}/">${esc(other.name)}</a>${String(other.description ?? '').trim() ? `<span>${esc(clip(other.description, 110))}</span>` : ''}</li>`).join('')}</ul>${siblings.length > shown.length ? `<p><a href="/?q=${encodeURIComponent(mod.repo)}#directory">See all ${siblings.length + 1} mods from ${esc(mod.repo)}</a></p>` : ''}</section>` : ''}
 ${mod.kind === 'builtin' ? '' : `<section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/${esc(anchor)}-reach.svg" alt="Reach badge for ${esc(mod.name)}"> <img src="/badges/${esc(anchor)}-validates.svg" alt="Validation badge for ${esc(mod.name)}"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>${esc(snippet)}</code></pre></section>`}
 </main>`,

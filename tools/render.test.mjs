@@ -616,13 +616,19 @@ test('every mod gets a page linked from its row, and the sitemap lists only inde
   }
   assert.doesNotMatch(home, /<details><summary>Access/, 'the full record lives on the page')
   const sitemap = readFileSync(join(dir, 'docs/sitemap.xml'), 'utf8')
-  assert.deepEqual([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]), ['https://mods.aidojo.si/', ...[0, 1, 4].map(i => `https://mods.aidojo.si/mods/example--mods--mod-${i}/`)])
+  assert.deepEqual([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]), ['https://mods.aidojo.si/', 'https://mods.aidojo.si/access/', ...[0, 1, 4].map(i => `https://mods.aidojo.si/mods/example--mods--mod-${i}/`)])
   assert.match(modPage(dir, 'example--mods--mod-2'), /<meta name="robots" content="noindex">/)
   assert.match(modPage(dir, 'example--mods--mod-3'), /<meta name="robots" content="noindex">/)
   assert.doesNotMatch(modPage(dir, 'example--mods--mod-1'), /noindex/)
   assert.match(modPage(dir, 'example--mods--mod-0'), /<a href="\/mods\/example--mods--mod-1\/">mod-1<\/a>/, 'pages link to other mods from the same repository')
   assert.deepEqual(Object.keys(JSON.parse(readFileSync(join(dir, 'data/pages.json'), 'utf8'))).length, 5)
   assert.ok(existsSync(join(dir, 'docs/404.html')) && existsSync(join(dir, 'docs/site.css')))
+  for (const i of [0, 1, 4]) assert.match(modPage(dir, `example--mods--mod-${i}`), /<a href="\/access\/">What a mod can access and how the scan works<\/a>/)
+  assert.match(home, /<a class="text-link" href="access\/">What can a mod access\?/)
+  assert.match(readFileSync(join(dir, 'docs/llms.txt'), 'utf8'), /\]\(https:\/\/mods\.aidojo\.si\/access\/\)/)
+  const access = readFileSync(join(dir, 'docs/access/index.html'), 'utf8')
+  render(dir)
+  assert.equal(readFileSync(join(dir, 'docs/access/index.html'), 'utf8'), access, 'a second render changes nothing')
 })
 
 test('a rescan that only moves stars and dates leaves every page and the registry untouched', t => {
@@ -664,7 +670,7 @@ test('retired mods lose their page, renamed ones leave a redirect, and their pat
   assert.match(modPage(dir, 'example--mods--mod-2'), /url=\/mods\/example--renamed--mod-2\//, 'the redirect survives retirement of the old record')
 })
 
-test('mod pages load every asset over HTTP, fit a phone, need no script and show a 404 for removed mods', async t => {
+test('mod pages and the access page load every asset over HTTP, fit a phone, need no script, and removed mods get a 404', async t => {
   const hostile = { ...mod(1), name: 'x<b>bold</b>', description: 'Closes </script> early & "quotes" stay text.' }
   const dir = fixture(t, [mod(0), hostile])
   render(dir)
@@ -679,6 +685,11 @@ test('mod pages load every asset over HTTP, fit a phone, need no script and show
     const failed = []
     page.on('requestfailed', request => failed.push(request.url()))
     page.on('response', response => { if (response.status() >= 400) failed.push(`${response.status()} ${response.url()}`) })
+    await page.goto(`${base}/access/`)
+    await page.waitForLoadState('networkidle')
+    assert.equal(await page.locator('h1').innerText(), 'What can a Claude Code mod access?')
+    assert.equal(await page.locator('link[rel=canonical]').getAttribute('href'), 'https://mods.aidojo.si/access/')
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true)
     await page.goto(`${base}/mods/${slug}/`)
     await page.waitForLoadState('networkidle')
     assert.deepEqual(failed, [])

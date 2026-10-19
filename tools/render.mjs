@@ -8,6 +8,7 @@ import { LEVEL_NAMES, grade, hasFootprint } from './grade.mjs'
 import { renderSite, renderSitemap, renderRobots, renderLlms, reviewNotes, css } from './site.mjs'
 import { assignPages, formatRegistry, idOf, indexable, readRegistry, renderModPage, renderNotFound, renderRedirect } from './pages.mjs'
 import { siteAnchors } from './slug.mjs'
+import { ACCESS_PATH, renderAccessPage } from './access.mjs'
 
 const data = JSON.parse(readFileSync('data/mods.json', 'utf8'))
 for (const m of data.mods) {
@@ -122,8 +123,10 @@ for (const [from, to] of identity.redirects) {
 }
 writeFileSync('docs/site.css', css + readFileSync(new URL('./page.css', import.meta.url), 'utf8'))
 writeFileSync('docs/404.html', renderNotFound())
+mkdirSync('docs/access', { recursive: true })
+writeFileSync('docs/access/index.html', renderAccessPage(data))
 writeFileSync('data/pages.json', formatRegistry(identity.registry))
-writeFileSync('docs/sitemap.xml', renderSitemap(records.filter(indexable).map(m => `mods/${pageOf(m)}/`).sort()))
+writeFileSync('docs/sitemap.xml', renderSitemap([ACCESS_PATH, ...records.filter(indexable).map(m => `mods/${pageOf(m)}/`).sort()]))
 writeFileSync('docs/robots.txt', renderRobots())
 writeFileSync('docs/llms.txt', renderLlms(data))
-console.log(`rendered ${mods.length} mods and ${builtins.length} built-ins into README.md, catalogue.md, badges/, docs/, docs/badges/ and docs/mods/`)
+console.log(`rendered ${mods.length} mods and ${builtins.length} built-ins into README.md, catalogue.md, badges/, docs/, docs/badges/, docs/mods/ and docs/access/`)
