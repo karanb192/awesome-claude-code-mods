@@ -18,7 +18,7 @@
   const q = document.getElementById('q')
   const count = document.getElementById('n')
   const tbody = document.querySelector('#t tbody')
-  const rows = [...tbody.rows]
+  let rows = [...tbody.rows]
   const filters = [...document.querySelectorAll('.lv[data-level]')]
   const listedFilter = document.querySelector('.listed-filter')
   const reset = document.getElementById('reset')
@@ -116,15 +116,31 @@
     if (scroll) row.scrollIntoView({ block: 'center' })
     row.querySelector('.mod-name').focus({ preventScroll: true })
   }
-  for (const segment of document.querySelectorAll('.seg')) segment.addEventListener('click', event => {
-    event.preventDefault()
-    history.replaceState(null, '', segment.getAttribute('href'))
-    reveal(segment.hash.slice(1))
-  })
   window.addEventListener('hashchange', () => reveal(location.hash.slice(1)))
-  const query = new URLSearchParams(location.search).get('q')
-  if (query) q.value = query
-  apply()
-  if (location.hash) reveal(location.hash.slice(1))
-  else if (query) document.getElementById('directory').scrollIntoView({ block: 'start', behavior: 'instant' })
+
+  function start() {
+    for (const segment of document.querySelectorAll('.seg')) segment.addEventListener('click', event => {
+      event.preventDefault()
+      history.replaceState(null, '', segment.getAttribute('href'))
+      reveal(segment.hash.slice(1))
+    })
+    const query = new URLSearchParams(location.search).get('q')
+    if (query) q.value = query
+    apply()
+    if (location.hash) reveal(location.hash.slice(1))
+    else if (query) document.getElementById('directory').scrollIntoView({ block: 'start', behavior: 'instant' })
+    table.dataset.loaded = 'true'
+  }
+
+  // The page ships the first rows only; the full list and the access strip arrive as directory.json. If that
+  // fails, search covers the rows on the page and a note points to the A to Z pages.
+  fetch('directory.json')
+    .then(response => { if (!response.ok) throw new Error(String(response.status)); return response.json() })
+    .then(data => {
+      tbody.innerHTML = data.rows.join('\n')
+      rows = [...tbody.rows]
+      document.querySelector('.strip').innerHTML = data.strip
+    })
+    .catch(() => { document.getElementById('load-note').hidden = false })
+    .finally(start)
 })()

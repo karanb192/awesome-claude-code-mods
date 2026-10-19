@@ -49,6 +49,16 @@ export function recordDetails(mod, claudeVersion) {
 }
 
 // pages maps each record to its page folder under mods/; the homepage links each name there.
+// The homepage carries the first rows only; the browser loads the rest from directory.json. Googlebot reads only
+// the first 2 MB of a page, so the full list inline would hide most links and everything below the table.
+export const INITIAL_ROWS = 100
+// The A to Z pages that link every mod with ordinary HTML, grouped by the first character of its name.
+export const browseKey = name => { const c = String(name ?? '').trim().charAt(0).toLowerCase(); return /[a-z]/.test(c) ? c : /[0-9]/.test(c) ? '0-9' : 'other' }
+const BROWSE_ORDER = [...'abcdefghijklmnopqrstuvwxyz', '0-9', 'other']
+export const browseKeys = records => BROWSE_ORDER.filter(key => records.some(mod => browseKey(mod.name) === key))
+export const browseNav = (records, current) => `<div class="browse" role="navigation" aria-label="Browse all mods from A to Z"><span>Browse A to Z</span>${browseKeys(records).map(key => key === current ? `<b aria-current="page">${key.toUpperCase()}</b>` : `<a href="/browse/${key}/">${key === 'other' ? 'Other' : key.toUpperCase()}</a>`).join('')}</div>`
+
+// Returns the homepage and the full rows and strip it loads as directory.json.
 export function renderSite(data, pages) {
   const mods = data.mods.filter(mod => mod.kind === 'mod')
   const builtins = data.mods.filter(mod => mod.kind === 'builtin')
@@ -82,7 +92,7 @@ export function renderSite(data, pages) {
         ] },
     ],
   }).replace(/</g, '\\u003c')
-  return `<!doctype html>
+  const html = `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}"><meta name="theme-color" content="#f0eee6" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1c1c1a" media="(prefers-color-scheme: dark)">
@@ -102,22 +112,25 @@ export function renderSite(data, pages) {
 <details class="finder-setup"><summary>Set up mod-finder</summary><p>Install in a Claude Code terminal session and complete the installation prompts.</p><div class="finder-command"><div class="finder-command-actions" hidden><span id="finder-copy-status" role="status"></span><button id="finder-copy" type="button" aria-label="Copy install command">Copy</button></div><pre><code id="finder-command"><span>/plugin</span> <span>install</span> <span>mod-finder</span> <span>--marketplace</span> <span>karanb192/</span><wbr><span>awesome-claude-code-mods</span></code></pre></div><p>Then run <code>/reload-plugins</code> before asking for a mod. Requires Node 18 or later.</p><p>The plugin runs a local MCP server that downloads this catalogue from GitHub and caches it on your computer. It gives Claude two read-only tools to search the catalogue and look up individual mods.</p><p><a href="${repo}/blob/main/finder/README.md#in-claude-code-mcp">Setup and Desktop instructions</a></p></details></section>
 </section></div>
 <section class="directory shell" id="directory" aria-labelledby="directory-title"><div class="section-heading"><div><h2 id="directory-title">The collection<span class="total">${mods.length}</span></h2><p>Find something useful. See what it can access.</p></div><a href="${repo}/blob/main/contributing.md">Submit a mod ${arrow}</a></div>
+${browseNav([...mods, ...builtins])}
 <div class="catalog-search"><form class="search" role="search" action="#directory"><label class="sr-only" for="q">Search mods by name, repo or description</label><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="q" name="q" type="search" placeholder="Search by name or what it does" autocomplete="off" aria-controls="t"><button id="clear-search" class="clear-search" type="button" aria-label="Clear search" hidden><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></form>
 <div class="result-bar"><span id="n" role="status" aria-live="polite">${mods.length} mods</span><div><button id="reset" type="button" hidden>Clear filters</button><span>Scanned <time datetime="${esc(date)}">${dateLabel}</time></span></div></div></div>
 <div class="filter-heading"><span>Filter by access</span><a href="#method">How we check ${arrow}</a></div><div class="legend" role="group" aria-label="Filter by reach level or directory listing"><button type="button" class="lv all" data-level="" aria-pressed="true">All mods</button>${accessGroups(mods).map(({ label, level, count }) => `<button type="button" class="lv" data-level="${level}" aria-pressed="false"><i class="l${level}"></i><span>${label}</span><b>${count}</b></button>`).join('')}<button type="button" class="lv listed-filter" aria-pressed="false"><span>In Anthropic directory</span><b>${mods.filter(mod => mod.directory).length}</b></button></div>
-<noscript><p class="notice">Search and sorting need JavaScript. All mods are listed below, and each name opens its page.</p></noscript>
-<table id="t"><caption class="sr-only">Claude Code community mods. Sort by mod name, access level or hosting repository stars.</caption>${heading(true)}<tbody>${mods.map(row).join('\n')}</tbody></table>
+<noscript><p class="notice">Search and sorting need JavaScript. The ${Math.min(INITIAL_ROWS, mods.length)} most-starred mods are listed below, and each name opens its page. Browse all ${mods.length} from A to Z.</p></noscript>
+<p id="load-note" class="notice" hidden>Showing the ${Math.min(INITIAL_ROWS, mods.length)} most-starred mods. The full list did not load, so browse every mod from A to Z instead.</p>
+<table id="t" data-total="${mods.length}"><caption class="sr-only">Claude Code community mods. Sort by mod name, access level or hosting repository stars.</caption>${heading(true)}<tbody>${mods.slice(0, INITIAL_ROWS).map(row).join('\n')}</tbody></table>
 <div id="empty" class="empty" hidden><h3>No mods found.</h3><p>Try a broader search or clear the access filter.</p><button type="button" data-reset>Show all mods ${arrow}</button></div>
 <div class="directory-end"><p>Stars belong to the hosting repository, not the individual mod. Recorded with this scan.</p><a href="#directory">Back to search ${arrow}</a></div>
 </section>
 <div class="info"><section class="about" id="about"><div class="shell about-grid"><h2>Your session.<br>A few new tricks.</h2><div><p>Mods are Claude Code plugins that run JavaScript or TypeScript hooks inside your session. They can add a dashboard, open a pane, change tool behavior, or bring context into the conversation.</p><p>Mods are on by default in Claude Code 2.1.287 and later. Choose a mod, open its repository, and follow the author’s setup instructions. The API can change between releases.</p><a class="text-link" href="${repo}#use-mods">How to use mods ${arrow}</a><a class="text-link" href="access/">What can a mod access? ${arrow}</a><a class="text-link" href="https://claude.dev/blog/getting-started-with-claude-code-mods/">Build your first mod ${arrow}</a></div></div></section>
-<section class="method shell" id="method" aria-labelledby="method-title"><div class="section-heading"><div><h2 id="method-title">A closer look at access.</h2><p>One mark per mod, colored by its widest recorded access. Select a mark to find its entry.</p></div><a href="./mods.json">Download the data ${arrow}</a></div><div class="strip" role="group" aria-label="Mods by recorded access, including unknown access">${strip}</div><ul class="strip-legend" aria-label="Access color legend">${accessGroups(mods).map(({ label, level, count }) => `<li><i class="l${level}" aria-hidden="true"></i><span>${esc(label)}</span><span class="legend-count">${count} ${count === 1 ? 'mod' : 'mods'}</span></li>`).join('')}</ul>
+<section class="method shell" id="method" aria-labelledby="method-title"><div class="section-heading"><div><h2 id="method-title">A closer look at access.</h2><p>One mark per mod, colored by its widest recorded access. Select a mark to find its entry.</p></div><a href="./mods.json">Download the data ${arrow}</a></div><div class="strip" role="group" aria-label="Mods by recorded access, including unknown access"></div><ul class="strip-legend" aria-label="Access color legend">${accessGroups(mods).map(({ label, level, count }) => `<li><i class="l${level}" aria-hidden="true"></i><span>${esc(label)}</span><span class="legend-count">${count} ${count === 1 ? 'mod' : 'mods'}</span></li>`).join('')}</ul>
 <div class="method-copy"><p>Each entry records the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls. They are not safety ratings. Unknown access means the footprint is unavailable or incomplete; recorded calls may show only part of its access.</p><p>Validation is a static check, not a runtime compatibility test. A passing result does not prove that a mod works or is safe. Marketplace results describe that install route separately. “Review UI rewrite” flags control-character strings in UI source or local imports; it does not prove those strings reach a text rewrite. Each mod’s page lists its hooks, API calls, validator output and source links. See the <a href="${repo}/issues/21">2.1.287 compatibility report</a>.</p></div>
 <div class="scan-note"><p>This scan used Claude Code ${esc(data.claudeVersion)} on ${dateLabel}. <a href="${repo}/blob/main/SCANNING.md">Read the method</a> or <a href="${rawCatalogue}">download the catalogue as raw Markdown</a>.</p>${catalogs.length ? `<p>Repackaged catalogs are excluded from the mod count: ${catalogs.map(name => `<a href="https://github.com/${esc(name)}">${esc(name)}</a>`).join(', ')}.</p>` : ''}</div>
 ${builtins.length ? `<details class="builtins" id="built-in-mods"><summary>Also built into Claude Code <span>${builtins.length} mods</span></summary><p>These ship inside the binary. sec-default seats outermost only on managed machines and Team or Enterprise plans.</p><table><caption class="sr-only">Built-in Claude Code mods</caption>${heading(false)}<tbody>${builtins.map(row).join('\n')}</tbody></table></details>` : ''}
 </section></div></main>
 <footer class="shell"><a href="./" class="brand">${mark}<span>claude<span class="brand-light">mods</span></span></a><p>An independent community scan.<br>Not an official Anthropic directory.</p><a href="${repo}">Awesome Claude Code Mods on GitHub ${arrow}</a></footer>
 <script>${script}</script></body></html>`.replace(/[ \t]+\n/g, '\n') + '\n'
+  return { html, directory: JSON.stringify({ rows: mods.map(row), strip }) }
 }
 
 export function renderSitemap(paths = []) {

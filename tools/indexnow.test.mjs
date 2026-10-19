@@ -12,12 +12,14 @@ test('changed page files map to their public URLs, and other files are ignored',
     'docs/mods/a--b--c/index.html',
     'docs/index.html',
     'docs/access/index.html',
+    'docs/browse/c/index.html',
+    'docs/directory.json',
     'docs/mods/gone--repo--tool/index.html',
     'docs/site.css',
     'docs/sitemap.xml',
     'docs/mods.json',
     'docs/mods/a--b--c/extra.txt',
-  ]), ['https://mods.aidojo.si/', 'https://mods.aidojo.si/access/', 'https://mods.aidojo.si/mods/a--b--c/', 'https://mods.aidojo.si/mods/gone--repo--tool/'])
+  ]), ['https://mods.aidojo.si/', 'https://mods.aidojo.si/access/', 'https://mods.aidojo.si/browse/c/', 'https://mods.aidojo.si/mods/a--b--c/', 'https://mods.aidojo.si/mods/gone--repo--tool/'])
 })
 
 test('the sitemap gives every listed URL', () => {

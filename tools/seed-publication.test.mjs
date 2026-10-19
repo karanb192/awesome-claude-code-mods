@@ -335,6 +335,8 @@ if(args[0]==='api'){
   assert.match(git('--git-dir', remote, 'show', 'main:docs/mods/new--repo--new/index.html'), /<h1>new<\/h1>/)
   assert.match(git('--git-dir', remote, 'show', 'main:docs/sitemap.xml'), /mods\/new--repo--new\//)
   assert.doesNotMatch(git('--git-dir', remote, 'ls-tree', '-r', '--name-only', 'main', 'docs/mods'), /retired--repo--gone/, 'publication commits removed pages')
+  assert.match(git('--git-dir', remote, 'show', 'main:docs/browse/o/index.html'), /<a href="\/mods\//, 'the A to Z pages are published')
+  assert.ok(JSON.parse(git('--git-dir', remote, 'show', 'main:docs/directory.json')).rows.length, 'the directory data is published')
   assert.match(git('--git-dir', remote, 'show', 'main:docs/access/index.html'), /catalogue of 3 counted mods/, 'the access page is published with the new mod')
   assert.deepEqual(pendingSeeds(['existing/repo', 'new/repo', 'later/repo', 'broken/repo'], published), ['broken/repo', 'later/repo'])
   assert.match(readFileSync(join(runner, 'seed-skipped.md'), 'utf8'), /^- broken\/repo: no validating mod plugins/)
