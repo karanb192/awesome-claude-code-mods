@@ -1,5 +1,19 @@
 [
   {
+    "id": "kushalBanda/claude-tldr:.",
+    "sourceCommit": "07ca8e48e0d7a6d4b7a91f8019ef0fc3c5f31730",
+    "claudeVersion": "2.1.302",
+    "warnings": [
+      {
+        "code": "ui-control-characters",
+        "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+        "evidence": [{ "file": "hooks/classify.ts", "line": 91 }]
+      }
+    ],
+    "reason": "The control characters delimit temporary quoted-word placeholders inside the shell command parser. rmTargets, bashWrites and bashReads restore those words through unquote before returning paths. These internal placeholders are not forwarded as rewritten props.text or rendered by the UI hooks.",
+    "source": "https://github.com/kushalBanda/claude-tldr/blob/07ca8e48e0d7a6d4b7a91f8019ef0fc3c5f31730/hooks/classify.ts#L87-L98"
+  },
+  {
     "id": "e950280/hudlite:.",
     "sourceCommit": "47390aa15998df24e59b1ba51b6a22ee2f16fddb",
     "claudeVersion": "2.1.302",
