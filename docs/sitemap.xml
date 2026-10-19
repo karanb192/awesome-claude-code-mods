@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://mods.aidojo.si/</loc><changefreq>daily</changefreq></url>
+<url><loc>https://mods.aidojo.si/access/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/000ts--dopagaki-claude-code--dopagaki/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/0010aor--claude-paste-preview--paste-preview/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/0NE-C0DEMAN--deskbar--deskbar/</loc></url>

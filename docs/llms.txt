@@ -9,6 +9,7 @@ Mods are Claude Code plugins whose JavaScript or TypeScript hooks run inside a s
 - [Browse the mods](https://mods.aidojo.si/): searchable directory with access and validation details for every mod
 - [mods.json](https://mods.aidojo.si/mods.json): every mod with its hooks, API calls, access level, stars and validation result
 - [catalogue.md](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/catalogue.md): the same catalogue as Markdown tables
+- [What can a Claude Code mod access?](https://mods.aidojo.si/access/): how mods get access, what the four levels mean and what the scan found across the catalogue
 - [README](https://github.com/karanb192/awesome-claude-code-mods#readme): Featured picks, how to use mods, how the scan works
 
 ## Ask Claude to find a mod
