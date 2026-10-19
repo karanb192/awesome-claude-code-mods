@@ -103,6 +103,7 @@ scasella/claude-flightdeck
 scaso01/claude-risk-guardrails
 shimo4228/harness-scope
 Shuffzord/RoadRaven
+Sma1lboy/agent-hub
 somethingwentwell/cc-mod-banana-game
 Sumit189/explain-claude-mod
 SummerRiversound/review-inbox
