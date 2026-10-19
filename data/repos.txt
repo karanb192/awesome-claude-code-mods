@@ -1726,7 +1726,6 @@ nakadaharuki/multichat
 nakadaharuki/parallel-pacer
 nalpari/claude-mods
 nalyk/nalyk-skills
-naniiluja/ccf
 nankris/claude-code-mods
 nanosite-ai/nanoflow
 naoanao/agent-cross-check
@@ -1879,7 +1878,6 @@ OrihuelaConde/cozy-clawd
 orvn/justchat-claude-mod
 oryuuuuuuAI/inmu-king
 oshnilia/claude-plugins
-oter/bruh
 ottho-nocode/claude-mod-pokemon
 Oualid0/claude-mods
 ozansozuozgit/clawd-mods
