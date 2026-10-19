@@ -53,13 +53,14 @@ export function recordDetails(mod, claudeVersion) {
 // the first 2 MB of a page, so the full list inline would hide most links and everything below the table.
 export const INITIAL_ROWS = 100
 // The A to Z pages that link every mod with ordinary HTML, grouped by the first character of its name.
-export const browseKey = name => { const c = String(name ?? '').trim().charAt(0).toLowerCase(); return /[a-z]/.test(c) ? c : /[0-9]/.test(c) ? '0-9' : 'other' }
+export const browseKey = name => { const c = String(name ?? '').trim().charAt(0).toLowerCase(); return /^[a-z]$/.test(c) ? c : /^[0-9]$/.test(c) ? '0-9' : 'other' }
 const BROWSE_ORDER = [...'abcdefghijklmnopqrstuvwxyz', '0-9', 'other']
 export const browseKeys = records => BROWSE_ORDER.filter(key => records.some(mod => browseKey(mod.name) === key))
-export const browseNav = (records, current) => `<div class="browse" role="navigation" aria-label="Browse all mods from A to Z"><span>Browse A to Z</span>${browseKeys(records).map(key => key === current ? `<b aria-current="page">${key.toUpperCase()}</b>` : `<a href="/browse/${key}/">${key === 'other' ? 'Other' : key.toUpperCase()}</a>`).join('')}</div>`
+// letters: the browse keys that have a page, from browseKeys over the records the A to Z pages list.
+export const browseNav = (letters, current) => `<div class="browse" role="navigation" aria-label="Browse all mods from A to Z"><span>Browse A to Z</span>${letters.map(key => key === current ? `<b aria-current="page">${key.toUpperCase()}</b>` : `<a href="/browse/${key}/">${key === 'other' ? 'Other' : key.toUpperCase()}</a>`).join('')}</div>`
 
-// Returns the homepage and the full rows and strip it loads as directory.json.
-export function renderSite(data, pages) {
+// Returns the homepage and the full rows and strip it loads as directory.json. letters: the A to Z pages to link.
+export function renderSite(data, pages, letters = []) {
   const mods = data.mods.filter(mod => mod.kind === 'mod')
   const builtins = data.mods.filter(mod => mod.kind === 'builtin')
   const keys = siteAnchors(data.mods)
@@ -112,7 +113,7 @@ export function renderSite(data, pages) {
 <details class="finder-setup"><summary>Set up mod-finder</summary><p>Install in a Claude Code terminal session and complete the installation prompts.</p><div class="finder-command"><div class="finder-command-actions" hidden><span id="finder-copy-status" role="status"></span><button id="finder-copy" type="button" aria-label="Copy install command">Copy</button></div><pre><code id="finder-command"><span>/plugin</span> <span>install</span> <span>mod-finder</span> <span>--marketplace</span> <span>karanb192/</span><wbr><span>awesome-claude-code-mods</span></code></pre></div><p>Then run <code>/reload-plugins</code> before asking for a mod. Requires Node 18 or later.</p><p>The plugin runs a local MCP server that downloads this catalogue from GitHub and caches it on your computer. It gives Claude two read-only tools to search the catalogue and look up individual mods.</p><p><a href="${repo}/blob/main/finder/README.md#in-claude-code-mcp">Setup and Desktop instructions</a></p></details></section>
 </section></div>
 <section class="directory shell" id="directory" aria-labelledby="directory-title"><div class="section-heading"><div><h2 id="directory-title">The collection<span class="total">${mods.length}</span></h2><p>Find something useful. See what it can access.</p></div><a href="${repo}/blob/main/contributing.md">Submit a mod ${arrow}</a></div>
-${browseNav([...mods, ...builtins])}
+${browseNav(letters)}
 <div class="catalog-search"><form class="search" role="search" action="#directory"><label class="sr-only" for="q">Search mods by name, repo or description</label><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="q" name="q" type="search" placeholder="Search by name or what it does" autocomplete="off" aria-controls="t"><button id="clear-search" class="clear-search" type="button" aria-label="Clear search" hidden><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></form>
 <div class="result-bar"><span id="n" role="status" aria-live="polite">${mods.length} mods</span><div><button id="reset" type="button" hidden>Clear filters</button><span>Scanned <time datetime="${esc(date)}">${dateLabel}</time></span></div></div></div>
 <div class="filter-heading"><span>Filter by access</span><a href="#method">How we check ${arrow}</a></div><div class="legend" role="group" aria-label="Filter by reach level or directory listing"><button type="button" class="lv all" data-level="" aria-pressed="true">All mods</button>${accessGroups(mods).map(({ label, level, count }) => `<button type="button" class="lv" data-level="${level}" aria-pressed="false"><i class="l${level}"></i><span>${label}</span><b>${count}</b></button>`).join('')}<button type="button" class="lv listed-filter" aria-pressed="false"><span>In Anthropic directory</span><b>${mods.filter(mod => mod.directory).length}</b></button></div>

@@ -27,6 +27,8 @@
   const clearSearch = document.getElementById('clear-search')
   let level = ''
   let listed = false
+  let loaded = false
+  let order = null
 
   function apply() {
     const search = q.value.trim().toLowerCase()
@@ -35,7 +37,9 @@
       row.hidden = !((level === '' || row.dataset.level === level) && (!listed || row.dataset.listed === '1') && (!search || row.dataset.name.toLowerCase().includes(search)))
       if (!row.hidden) visible++
     }
-    count.textContent = visible === rows.length ? `${rows.length} mods` : `${visible} of ${rows.length} mods`
+    // Until directory.json arrives only the first rows are on the page, so counts are out of the full catalogue.
+    const total = loaded ? rows.length : Number(table.dataset.total)
+    count.textContent = visible === total ? `${total} mods` : `${visible} of ${total} mods`
     for (const filter of filters) filter.setAttribute('aria-pressed', String(filter.dataset.level === level))
     listedFilter.setAttribute('aria-pressed', String(listed))
     reset.hidden = !search && !level && !listed
@@ -95,18 +99,22 @@
     if (target !== q) target.tabIndex = -1
     target.focus({ preventScroll: true })
   })
-  for (const button of document.querySelectorAll('#t th button')) button.addEventListener('click', () => {
-    const key = button.dataset.k
-    const direction = button.dataset.dir === 'asc' ? 'desc' : 'asc'
-    document.querySelectorAll('#t th').forEach(th => th.removeAttribute('aria-sort'))
-    button.dataset.dir = direction
-    button.closest('th').setAttribute('aria-sort', direction === 'asc' ? 'ascending' : 'descending')
+  function sortRows() {
+    const { key, direction } = order
     rows.sort((a, b) => {
       if (key === 'level' && (a.dataset.level === 'unknown') !== (b.dataset.level === 'unknown')) return a.dataset.level === 'unknown' ? 1 : -1
       const comparison = key === 'stars' ? Number(a.dataset.stars) - Number(b.dataset.stars) : key === 'level' ? Number(a.dataset.level) - Number(b.dataset.level) || Number(b.dataset.stars) - Number(a.dataset.stars) : a.dataset.name.localeCompare(b.dataset.name)
       return direction === 'asc' ? comparison : -comparison
     })
     tbody.append(...rows)
+  }
+  for (const button of document.querySelectorAll('#t th button')) button.addEventListener('click', () => {
+    const direction = button.dataset.dir === 'asc' ? 'desc' : 'asc'
+    document.querySelectorAll('#t th').forEach(th => th.removeAttribute('aria-sort'))
+    button.dataset.dir = direction
+    button.closest('th').setAttribute('aria-sort', direction === 'asc' ? 'ascending' : 'descending')
+    order = { key: button.dataset.k, direction }
+    sortRows()
   })
 
   function reveal(id, scroll = true) {
@@ -124,21 +132,27 @@
       history.replaceState(null, '', segment.getAttribute('href'))
       reveal(segment.hash.slice(1))
     })
-    const query = new URLSearchParams(location.search).get('q')
-    if (query) q.value = query
     apply()
     if (location.hash) reveal(location.hash.slice(1))
-    else if (query) document.getElementById('directory').scrollIntoView({ block: 'start', behavior: 'instant' })
+    else if (query && q.value === query) document.getElementById('directory').scrollIntoView({ block: 'start', behavior: 'instant' })
     table.dataset.loaded = 'true'
   }
+
+  // Read the URL's search before loading, so anything typed while the list loads is not replaced by it.
+  const query = new URLSearchParams(location.search).get('q')
+  if (query) q.value = query
 
   // The page ships the first rows only; the full list and the access strip arrive as directory.json. If that
   // fails, search covers the rows on the page and a note points to the A to Z pages.
   fetch('directory.json')
     .then(response => { if (!response.ok) throw new Error(String(response.status)); return response.json() })
     .then(data => {
+      const focused = document.activeElement?.closest('#t tbody tr')?.id
       tbody.innerHTML = data.rows.join('\n')
       rows = [...tbody.rows]
+      loaded = true
+      if (order) sortRows()
+      if (focused) document.getElementById(focused)?.querySelector('.mod-name').focus({ preventScroll: true })
       document.querySelector('.strip').innerHTML = data.strip
     })
     .catch(() => { document.getElementById('load-note').hidden = false })

@@ -104,7 +104,9 @@ const pageOf = mod => identity.pages.get(mod)
 const byRepo = new Map()
 for (const m of [...records].sort((a, b) => a.name.localeCompare(b.name, 'en') || (idOf(a) < idOf(b) ? -1 : 1))) byRepo.set(m.repo, [...(byRepo.get(m.repo) ?? []), m])
 
-const { html: site, directory } = renderSite(data, identity.pages)
+const browsable = records.filter(m => !identity.redirects.has(pageOf(m)))
+const letters = browseKeys(browsable)
+const { html: site, directory } = renderSite(data, identity.pages, letters)
 // Googlebot reads the first 2 MB of a page; this ceiling keeps every generated page well inside it.
 const MAX_PAGE_BYTES = 1_000_000
 const checkSize = (file, html) => { if (Buffer.byteLength(html) > MAX_PAGE_BYTES) throw new Error(`${file} is ${Buffer.byteLength(html)} bytes, over the ${MAX_PAGE_BYTES} byte page ceiling`) }
@@ -128,13 +130,11 @@ for (const [from, to] of identity.redirects) {
   writeFileSync(`docs/mods/${from}/index.html`, renderRedirect(to))
 }
 writeFileSync('docs/site.css', css + readFileSync(new URL('./page.css', import.meta.url), 'utf8'))
-const browsable = records.filter(m => !identity.redirects.has(pageOf(m)))
-const letters = browseKeys(browsable)
 mkdirSync('docs/browse', { recursive: true })
 for (const entry of readdirSync('docs/browse')) if (!letters.includes(entry)) rmSync(`docs/browse/${entry}`, { recursive: true, force: true })
 const entries = browsable.map(mod => ({ mod, slug: pageOf(mod) }))
 for (const key of letters) {
-  const html = renderBrowsePage(key, entries, browsable)
+  const html = renderBrowsePage(key, entries, letters)
   checkSize(`docs/browse/${key}/index.html`, html)
   mkdirSync(`docs/browse/${key}`, { recursive: true })
   writeFileSync(`docs/browse/${key}/index.html`, html)

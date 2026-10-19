@@ -33,14 +33,16 @@ const modPage = (dir, slug) => readFileSync(join(dir, 'docs/mods', slug, 'index.
 const tree = folder => Object.fromEntries(readdirSync(folder, { recursive: true }).sort().map(path => [path, existsSync(join(folder, path, 'index.html')) ? readFileSync(join(folder, path, 'index.html'), 'utf8') : null]))
 
 // Mod pages use root-relative asset paths, so they are checked through a server that answers like GitHub Pages.
-function serve(t, root) {
+// hold: a promise that directory.json waits for, to test what happens while the full list is still loading.
+function serve(t, root, { hold } = {}) {
   const types = { '.html': 'text/html', '.css': 'text/css', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.json': 'application/json' }
   const server = createServer((req, res) => {
     let file = join(root, decodeURIComponent(new URL(req.url, 'http://x').pathname))
     if (existsSync(join(file, 'index.html'))) file = join(file, 'index.html')
     if (!existsSync(file) || !extname(file)) { res.writeHead(404, { 'content-type': 'text/html' }); return res.end(readFileSync(join(root, '404.html'))) }
-    res.writeHead(200, { 'content-type': types[extname(file)] ?? 'application/octet-stream' })
-    res.end(readFileSync(file))
+    const send = () => { res.writeHead(200, { 'content-type': types[extname(file)] ?? 'application/octet-stream' }); res.end(readFileSync(file)) }
+    if (hold && file.endsWith('directory.json')) hold.then(send)
+    else send()
   }).listen(0)
   t.after(() => server.close())
   return `http://127.0.0.1:${server.address().port}`
@@ -791,4 +793,41 @@ test('render refuses a homepage over the page ceiling', t => {
   const heavy = Array.from({ length: 100 }, (_, i) => ({ ...mod(i), description: 'x'.repeat(11000) }))
   const dir = fixture(t, heavy)
   assert.throws(() => render(dir), /docs\/index\.html is \d+ bytes, over the 1000000 byte page ceiling/)
+})
+
+test('searching, sorting and focus made while the full list loads survive it', async t => {
+  const many = Array.from({ length: 130 }, (_, i) => ({ ...mod(i), stars: 1000 - i }))
+  const dir = fixture(t, many)
+  render(dir)
+  let release
+  const base = serve(t, join(dir, 'docs'), { hold: new Promise(resolve => { release = resolve }) })
+  const browser = await chromium.launch()
+  t.after(() => browser.close())
+  const page = await browser.newPage()
+  await page.goto(`${base}/?q=mod-1`)
+  assert.equal(await page.locator('#n').textContent(), '130 mods', 'before loading, counts are out of the whole catalogue')
+  await page.fill('#q', 'mod-12')
+  await page.locator('#t th button[data-k="name"]').click()
+  await page.locator('#example--mods--mod-12 .mod-name').focus()
+  assert.equal(await page.evaluate(() => document.activeElement.closest('tr')?.id), 'example--mods--mod-12')
+  release()
+  await page.waitForSelector('#t[data-loaded]')
+  assert.equal(await page.inputValue('#q'), 'mod-12', 'the URL search does not replace what was typed')
+  assert.equal(await page.locator('#n').textContent(), '11 of 130 mods')
+  assert.equal(await page.locator('#t th[aria-sort]').getAttribute('aria-sort'), 'ascending')
+  const names = await page.locator('#t tbody tr').evaluateAll(rows => rows.map(row => row.dataset.name))
+  assert.deepEqual(names, [...names].sort((a, b) => a.localeCompare(b)), 'the chosen sort is applied to the loaded rows')
+  assert.equal(await page.evaluate(() => document.activeElement.closest('tr')?.id), 'example--mods--mod-12', 'focus stays on the same row')
+})
+
+test('the homepage links only letters that have a page, and unusual initials fall under other', t => {
+  const zulu = { ...mod(1, 'unknown'), name: 'zulu', id: 'example/mods:plugins/zulu', path: 'plugins/zulu' }
+  const dir = fixture(t, [mod(0), zulu, { ...mod(2), name: 'İstanbul' }])
+  writeFileSync(join(dir, 'data/pages.json'), JSON.stringify({ 'example--mods--zulu': { id: zulu.id, to: 'example--mods--mod-0' } }))
+  render(dir)
+  assert.match(modPage(dir, 'example--mods--zulu'), /url=\/mods\/example--mods--mod-0\//, 'the retained record redirects')
+  assert.deepEqual(readdirSync(join(dir, 'docs/browse')).sort(), ['m', 'other'])
+  const home = readFileSync(join(dir, 'docs/index.html'), 'utf8')
+  assert.deepEqual([...home.matchAll(/href="\/browse\/([^/]+)\/"/g)].map(m => m[1]), ['m', 'other'])
+  assert.match(readFileSync(join(dir, 'docs/browse/other/index.html'), 'utf8'), />İstanbul</)
 })
