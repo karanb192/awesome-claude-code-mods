@@ -286,6 +286,8 @@ for (const concurrentPublication of [false, true]) test(`publication handles a c
   execFileSync(process.execPath, ['tools/render.mjs'], { cwd: checkout, env })
   mkdirSync(join(checkout, 'docs/mods/retired--repo--gone'))
   writeFileSync(join(checkout, 'docs/mods/retired--repo--gone/index.html'), 'stale page')
+  // One run starts before the access page existed, so publication covers creating it as well as updating it.
+  if (concurrentPublication) rmSync(join(checkout, 'docs/access'), { recursive: true })
   git('add', '.')
   git('commit', '-m', 'Fixture inventory')
   git('push', 'origin', 'HEAD:main')

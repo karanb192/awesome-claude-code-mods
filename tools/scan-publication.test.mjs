@@ -233,6 +233,8 @@ for (const mixedVersion of [false, true]) test(`scan publication retries concurr
   writeFileSync(join(checkout, 'README.md'), 'Curated original.\n<!-- stats:start -->\n<!-- stats:end -->\n')
   writeFileSync(join(checkout, 'catalogue.md'), ['stats', 'scan', 'builtin'].map(name => `<!-- ${name}:start -->\n<!-- ${name}:end -->`).join('\n'))
   execFileSync(process.execPath, ['tools/render.mjs'], { cwd: checkout, env })
+  // One run starts before the access page existed, so publication covers creating it as well as updating it.
+  if (mixedVersion) rmSync(join(checkout, 'docs/access'), { recursive: true })
   git('add', '.')
   git('commit', '-m', 'Fixture inventory')
   git('push', 'origin', 'HEAD:main')
