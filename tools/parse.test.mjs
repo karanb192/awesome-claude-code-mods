@@ -367,6 +367,21 @@ test('qualification helpers stay out while the product and unrelated repositorie
   assert.equal(kindOf(repo, paths[0], { description: 'Not a plugin to install.' }, new Set(), exceptions), 'fixture')
 })
 
+test('Foreman development probes stay out while its product and unrelated paths count', () => {
+  const repo = 'andrey342/foreman'
+  for (const path of ['spike/mod', 'spike/v02', 'spike/mod/nested']) {
+    assert.equal(kindOf(repo, path, {}), 'fixture', path)
+    assert.equal(kindOf('Andrey342/Foreman', path, {}), 'fixture', path)
+    assert.equal(kindOf('another/foreman', path, {}), 'mod', path)
+  }
+  for (const path of ['.', 'plugins/foreman', 'spike/model', 'spike/v020', 'spike/other']) {
+    assert.equal(kindOf(repo, path, {}), 'mod', path)
+  }
+  const exceptions = new Set([`${repo}:spike/mod`])
+  assert.equal(kindOf(repo, 'spike/mod', {}, new Set(), exceptions), 'mod')
+  assert.equal(kindOf(repo, 'spike/mod', { description: 'A test fixture.' }, new Set(), exceptions), 'fixture')
+})
+
 test('benchmark fixtures stay out without excluding usable evaluation mods', () => {
   for (const path of ['lab/bench', 'benchmarks/baseline', 'benchmark/no-trace']) {
     assert.equal(kindOf('a/b', path, { name: 'baseline' }), 'fixture')

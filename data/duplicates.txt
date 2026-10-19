@@ -105,3 +105,4 @@ vivi-0124/me:mermaid-live vivi-0124/me:projects/mermaid-live
 lakmadev/claude-mods:plugins/pixel-pet lakmadev/pixel-pet:.
 lakmadev/claude-mods:plugins/code-wrapped lakmadev/code-wrapped:.
 lakmadev/claude-mods:plugins/repo-radar lakmadev/repo-radar:.
+azoof-ahmed/claude-heavy-job-guard:. azoof-ahmed/claude-mods:heavy-job-guard
