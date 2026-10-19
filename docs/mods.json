@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-18T14:44:13.018Z",
   "claudeVersion": "2.1.302",
-  "repos": 2686,
+  "repos": 2687,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -630663,6 +630663,268 @@
       "stars": 5,
       "pushedAt": "2026-10-17T15:45:40Z",
       "createdAt": "2026-10-17T11:56:03Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "qualixar/modstage:.",
+      "repo": "qualixar/modstage",
+      "path": ".",
+      "sourceCommit": "5c6da0093ba87737ea25e41c757646d215a4168f",
+      "name": "modstage",
+      "description": "Claude Code mod: run Codex, Grok, Muse, Antigravity and Claude subagents side by side, watch every step, steer them mid-run",
+      "author": "Varun Pratap Bhardwaj",
+      "homepage": "https://github.com/qualixar/modstage",
+      "url": "https://github.com/qualixar/modstage",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "agent.spawn",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "classic.SessionStart",
+          "matcher": {}
+        },
+        {
+          "event": "classic.UserPromptSubmit",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "modstage"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__modstage__stage_start"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__modstage__stage_send"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__modstage__stage_wait"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__modstage__stage_status"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__modstage__stage_board"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__modstage__stage_post"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__modstage__stage_claim"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__modstage__stage_release"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "?"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__modstage__stage_decide"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__modstage__stage_interrupt"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__modstage__stage_close"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__modstage__stage_agents"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Read"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {}
+        },
+        {
+          "event": "ui.fault",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.scroll",
+          "matcher": {
+            "requestId": "modstage"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "modstage"
+          }
+        }
+      ],
+      "calls": [
+        "$.agent.spawn",
+        "$.clock.every",
+        "$.clock.sleep",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.read",
+        "$.http.fetch",
+        "$.process.run",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.send",
+        "$.state.get",
+        "$.state.set",
+        "$.tool.register",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.scroll",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [
+        "hooks/ui/stage.tsx"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.302",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "modstage",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "network",
+          "runs processes",
+          "drives Claude",
+          "reads files",
+          "reads env vars",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "subagent spawns",
+        "every tool call",
+        "classic hooks",
+        "every prompt",
+        "mcp__modstage__stage_start calls",
+        "mcp__modstage__stage_send calls",
+        "mcp__modstage__stage_wait calls",
+        "mcp__modstage__stage_status calls",
+        "mcp__modstage__stage_board calls",
+        "mcp__modstage__stage_post calls",
+        "mcp__modstage__stage_claim calls",
+        "mcp__modstage__stage_release calls",
+        "? calls",
+        "mcp__modstage__stage_decide calls",
+        "mcp__modstage__stage_interrupt calls",
+        "mcp__modstage__stage_close calls",
+        "mcp__modstage__stage_agents calls",
+        "Bash calls",
+        "Read calls"
+      ],
+      "draws": [
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-18T19:47:24Z",
+      "createdAt": "2026-10-16T19:32:52Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

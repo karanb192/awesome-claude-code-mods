@@ -1903,6 +1903,7 @@ putraridho/sonar-dock
 qingyashizi/claude-usage-mod
 qodfathr/ccwhoami
 qrxcodes/qrx-mcp
+qualixar/modstage
 quango2304/leo_claude_mod
 r0charm/claude-session-cleaner
 r3al1tym/claude-review
