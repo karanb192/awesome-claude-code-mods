@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-19T15:52:14.610Z",
   "claudeVersion": "2.1.303",
-  "repos": 2806,
+  "repos": 2807,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -653716,6 +653716,126 @@
       "stars": 0,
       "pushedAt": "2026-10-20T00:40:38Z",
       "createdAt": "2026-10-18T16:21:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "Mucida/critical-decisions:.",
+      "repo": "Mucida/critical-decisions",
+      "path": ".",
+      "sourceCommit": "d7011ad52228ec6c51a6ba2bbb07b8728fff152f",
+      "name": "critical-decisions",
+      "description": "Tell it what is critical in your project with /alert-config. When the agent touches it, you get warned, and the agent records the decision, why it made it and what it ruled out, in a band that stays until you dismiss it.",
+      "author": "Mucida",
+      "homepage": "https://github.com/Mucida/critical-decisions",
+      "url": "https://github.com/Mucida/critical-decisions",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "critical-areas"
+          }
+        },
+        {
+          "event": "prompt.compose",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "critical-list"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "critical-ok"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "?"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.model.complete",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.set",
+        "$.tool.register",
+        "$.ui.invalidate",
+        "$.ui.resolve",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.303",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "critical-decisions",
+          "status": "warnings",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "drives Claude",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "? calls",
+        "every tool call"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-17T18:55:14Z",
+      "createdAt": "2026-10-17T18:54:19Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

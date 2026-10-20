@@ -1690,6 +1690,7 @@ mtalhasahin/claude-runner
 mtami/terminal-tab-title
 mthli/cc-shorts
 mtmtian/cc-mods
+Mucida/critical-decisions
 muctebadikmen/claude-code-araclari
 muellerei/enable-todo-tools
 muellerei/sweet-spot
