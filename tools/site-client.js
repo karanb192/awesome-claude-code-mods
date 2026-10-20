@@ -99,11 +99,12 @@
     event.preventDefault()
     const section = document.getElementById(link.hash.slice(1))
     history.replaceState(null, '', link.hash)
+    if (!loaded && !failed) { target = section.id; used = false }
     const top = window.scrollY + section.getBoundingClientRect().top
     window.scrollTo({ top, behavior: 'instant' })
-    const target = section.id === 'directory' ? q : section.querySelector('h2')
-    if (target !== q) target.tabIndex = -1
-    target.focus({ preventScroll: true })
+    const heading = section.id === 'directory' ? q : section.querySelector('h2')
+    if (heading !== q) heading.tabIndex = -1
+    heading.focus({ preventScroll: true })
   })
   function sortRows() {
     const { key, direction } = order
@@ -163,11 +164,14 @@
 
   // The page ships the first rows only; the full list and the access strip arrive in parts. If any part fails,
   // search covers the rows on the page and a note points to the A to Z pages.
-  Promise.all(Array.from({ length: Number(table.dataset.parts) }, (_, i) => fetch(`directory/${i + 1}.json`)
-    .then(response => { if (!response.ok) throw new Error(String(response.status)); return response.json() })))
+  const snapshot = table.dataset.snapshot
+  Promise.all(Array.from({ length: Number(table.dataset.parts) }, (_, i) => fetch(`directory/${i + 1}.json?v=${snapshot}`)
+    .then(response => { if (!response.ok) throw new Error(String(response.status)); return response.json() })
+    .then(part => { if (part.snapshot !== snapshot) throw new Error('mixed directory versions'); return part })))
     .then(list => ({ rows: list.flatMap(part => part.rows), strip: list.map(part => part.strip).join('') }))
     .then(data => {
-      const active = document.activeElement
+      // A pending navigation takes focus after loading, so only restore focus when there is none.
+      const active = !used && target ? null : document.activeElement
       const focused = active?.closest('#t tbody tr')
       const at = focused ? [...focused.querySelectorAll('a, button')].indexOf(active) : -1
       tbody.innerHTML = data.rows.join('\n')

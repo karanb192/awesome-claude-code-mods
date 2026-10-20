@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs'
+import { createHash } from 'node:crypto'
 import { siteAnchors } from './slug.mjs'
 import { hasFootprint } from './grade.mjs'
 
@@ -54,8 +55,9 @@ export function recordDetails(mod, claudeVersion) {
 export const INITIAL_ROWS = 100
 const PART_BYTES = 900_000
 
-// Splits the rows and strip marks, in order, into parts under PART_BYTES each.
-function directoryParts(rows, segments) {
+// Splits the rows and strip marks, in order, into parts under PART_BYTES each. Every part carries the snapshot id the
+// page asks for, so a browser never combines parts cached from different publications.
+function directoryParts(rows, segments, snapshot) {
   const parts = [{ rows: [], strip: [] }]
   let size = 0
   for (const [kind, html] of [...rows.map(row => ['rows', row]), ...segments.map(segment => ['strip', segment])]) {
@@ -64,7 +66,7 @@ function directoryParts(rows, segments) {
     parts.at(-1)[kind].push(html)
     size += bytes
   }
-  return parts.map(part => JSON.stringify({ rows: part.rows, strip: part.strip.join('') }))
+  return parts.map(part => JSON.stringify({ snapshot, rows: part.rows, strip: part.strip.join('') }))
 }
 // The A to Z pages that link every mod with ordinary HTML, grouped by the first character of its name.
 export const browseKey = name => { const c = String(name ?? '').trim().charAt(0).toLowerCase(); return /^[a-z]$/.test(c) ? c : /^[0-9]$/.test(c) ? '0-9' : 'other' }
@@ -107,7 +109,8 @@ export function renderSite(data, pages, letters = []) {
         ] },
     ],
   }).replace(/</g, '\\u003c')
-  const parts = directoryParts(mods.map(row), segments)
+  const snapshot = createHash('sha256').update(JSON.stringify([mods.map(row), segments])).digest('hex').slice(0, 12)
+  const parts = directoryParts(mods.map(row), segments, snapshot)
   const html = `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title>
@@ -134,7 +137,7 @@ ${browseNav(letters)}
 <div class="filter-heading"><span>Filter by access</span><a href="#method">How we check ${arrow}</a></div><div class="legend" role="group" aria-label="Filter by reach level or directory listing"><button type="button" class="lv all" data-level="" aria-pressed="true">All mods</button>${accessGroups(mods).map(({ label, level, count }) => `<button type="button" class="lv" data-level="${level}" aria-pressed="false"><i class="l${level}"></i><span>${label}</span><b>${count}</b></button>`).join('')}<button type="button" class="lv listed-filter" aria-pressed="false"><span>In Anthropic directory</span><b>${mods.filter(mod => mod.directory).length}</b></button></div>
 <noscript><p class="notice">Search and sorting need JavaScript. The ${Math.min(INITIAL_ROWS, mods.length)} most-starred mods are listed below, and each name opens its page. Browse all ${mods.length} from A to Z.</p></noscript>
 <p id="load-note" class="notice" hidden>Showing the ${Math.min(INITIAL_ROWS, mods.length)} most-starred mods. The full list did not load, so browse every mod from A to Z instead.</p>
-<table id="t" data-total="${mods.length}" data-parts="${parts.length}"><caption class="sr-only">Claude Code community mods. Sort by mod name, access level or hosting repository stars.</caption>${heading(true)}<tbody>${mods.slice(0, INITIAL_ROWS).map(row).join('\n')}</tbody></table>
+<table id="t" data-total="${mods.length}" data-parts="${parts.length}" data-snapshot="${snapshot}"><caption class="sr-only">Claude Code community mods. Sort by mod name, access level or hosting repository stars.</caption>${heading(true)}<tbody>${mods.slice(0, INITIAL_ROWS).map(row).join('\n')}</tbody></table>
 <div id="empty" class="empty" hidden><h3>No mods found.</h3><p>Try a broader search or clear the access filter.</p><button type="button" data-reset>Show all mods ${arrow}</button></div>
 <div class="directory-end"><p>Stars belong to the hosting repository, not the individual mod. Recorded with this scan.</p><a href="#directory">Back to search ${arrow}</a></div>
 </section>
