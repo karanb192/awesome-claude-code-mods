@@ -75,6 +75,7 @@ magiclin99/buddy-go
 ManuelWarland/claude-codex-pane
 MarcoCarnevali/claude-code-mods
 mertkayacs/ultramod
+mingfeng6684/claude-todo-panel
 moduvoice/claude-code-ko-ui
 MohammedSaud404/rtl-terminal
 muellerei/enable-todo-tools
