@@ -115,3 +115,4 @@ satoramoto/awesome-claude:mods/lab satoramoto/awesome-claude:plugins/lab
 satoramoto/awesome-claude:mods/launcher satoramoto/awesome-claude:plugins/launcher
 satoramoto/awesome-claude:mods/overview satoramoto/awesome-claude:plugins/overview
 Abdallah-Abdelazim/usage-limits-cc-mod:. Abdallah-Abdelazim/usage-limits-cc-mod:plugins/usage-limits
+HMarzban/claude-mod:plugins/session-usage-band HMarzban/claude-mod:plugins/nextcost
