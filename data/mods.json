@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-20T07:21:42.147Z",
   "claudeVersion": "2.1.304",
-  "repos": 2920,
+  "repos": 2921,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -684167,6 +684167,144 @@
       "stars": 0,
       "pushedAt": "2026-10-17T02:40:48Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "shohamtal/cc-mod-opensearch-console:.",
+      "repo": "shohamtal/cc-mod-opensearch-console",
+      "path": ".",
+      "sourceCommit": "f11007dcc9d1f6d734398b7c09b4e0f40584b580",
+      "name": "opensearch-console",
+      "description": "OpenSearch & Elasticsearch Dev Tools-style console in a Claude Code side pane: Claude injects queries, you edit and run them (read-only).",
+      "author": "shohamtal",
+      "homepage": "https://github.com/shohamtal/cc-mod-opensearch-console",
+      "url": "https://github.com/shohamtal/cc-mod-opensearch-console",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__opensearch-console__console"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "opensearch"
+          }
+        },
+        {
+          "event": "ui.scroll",
+          "matcher": {
+            "requestId": "opensearch"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "opensearch"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.fs.write",
+        "$.process.run",
+        "$.state.get",
+        "$.state.set",
+        "$.tool.register",
+        "$.ui.close",
+        "$.ui.copy",
+        "$.ui.focus",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [
+        "hooks/editor.tsx",
+        "hooks/viewer.tsx"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.304",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "cc-mod-opensearch-console",
+          "status": "warnings",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": [
+          {
+            "code": "ui-control-characters",
+            "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+            "evidence": [
+              {
+                "file": "hooks/lib.ts",
+                "line": 167
+              },
+              {
+                "file": "hooks/register.tsx",
+                "line": 158
+              }
+            ]
+          }
+        ]
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "writes files",
+          "drives Claude",
+          "writes the clipboard",
+          "reads files",
+          "reads env vars",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "mcp__opensearch-console__console calls"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-20T07:21:44Z",
+      "createdAt": "2026-10-19T20:20:10Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

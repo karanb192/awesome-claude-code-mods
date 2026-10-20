@@ -2355,6 +2355,7 @@ shijieli708-ship-it/claude-mods
 shimo4228/harness-scope
 shiran-yu/keyfob
 shissncg/claude-mods
+shohamtal/cc-mod-opensearch-console
 shou6/claude-mods
 shoujiki-panman/claude-code-mods
 Showrin/claude-mods

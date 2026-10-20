@@ -4913,6 +4913,7 @@
   "shissncg--claude-mods--sisomewhere-reply": {"id":"shissncg/claude-mods:mods/sisomewhere-reply"},
   "shissncg--claude-mods--sisomewhere-usage": {"id":"shissncg/claude-mods:mods/sisomewhere-usage"},
   "shissncg--claude-mods--turn-timestamp": {"id":"shissncg/claude-mods:mods/turn-timestamp"},
+  "shohamtal--cc-mod-opensearch-console--opensearch-console": {"id":"shohamtal/cc-mod-opensearch-console:."},
   "shou6--claude-mods--compact-tools": {"id":"shou6/claude-mods:compact-tools"},
   "shou6--claude-mods--mermaid-view": {"id":"shou6/claude-mods:mermaid-view"},
   "shou6--claude-mods--pr-watch": {"id":"shou6/claude-mods:pr-watch"},
