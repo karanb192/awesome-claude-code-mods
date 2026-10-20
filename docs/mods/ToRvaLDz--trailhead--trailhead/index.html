@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, Bash calls, every prompt, compaction</dd>
-    <dt>Hooks</dt><dd><code>session.start {isInteractive=true|false}, turn.complete {reason=answer|aborted|refusal|error}, session.end {reason=clear}, classic.SessionStart {source=clear}, tool.call {tool=Bash, command=/&quot;\\bgh\\b[^\\n;&amp;|]*\\bissue\\s+(edit|close|create|comment|reopen)\\b&quot;/}, command.run {command=trailhead:panel}, ui.render {component=AbovePrompt, viewport has {isFullscreen=true}, ui.close {id=trailhead-map}, ui.render {component=Pane, requestId=trailhead-map}, session.start, prompt.compose, prompt.submit, session.compact, turn.start, turn.complete, tool.call {tool=Bash}, session.end, classic.SessionStart {source=clear}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start {isInteractive=true|false}, turn.complete {reason=answer|aborted|refusal|error}, session.end {reason=clear}, classic.SessionStart {source=clear}, tool.call {tool=Bash, command=?}, command.run {command=trailhead:panel}, ui.render {component=AbovePrompt, viewport has {isFullscreen=true}, ui.close {id=trailhead-map}, ui.render {component=Pane, requestId=trailhead-map}, session.start, prompt.compose, prompt.submit, session.compact, turn.start, turn.complete, tool.call {tool=Bash}, session.end, classic.SessionStart {source=clear}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.run, $.fs.list, $.fs.read, $.process.run, $.session.cwd, $.session.id, $.session.repo, $.state.get, $.state.set, $.ui.close, $.ui.log, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation on 2.1.304</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/ToRvaLDz/trailhead/tree/24ea9f8eafb0809b4a4e23a406dd43fd7d20d5d6"><code>24ea9f8eafb0</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/ToRvaLDz/trailhead/blob/24ea9f8eafb0809b4a4e23a406dd43fd7d20d5d6/.claude-plugin/marketplace.json">trailhead</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/ToRvaLDz/trailhead/tree/25669dad7cc14713d8094efe5cc3711d225bb0f2"><code>25669dad7cc1</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/ToRvaLDz/trailhead/blob/25669dad7cc14713d8094efe5cc3711d225bb0f2/.claude-plugin/marketplace.json">trailhead</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/ToRvaLDz--trailhead--trailhead-reach.svg" alt="Reach badge for trailhead"> <img src="/badges/ToRvaLDz--trailhead--trailhead-validates.svg" alt="Validation badge for trailhead"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/ToRvaLDz--trailhead--trailhead-reach.svg)](https://mods.aidojo.si/mods/ToRvaLDz--trailhead--trailhead/)

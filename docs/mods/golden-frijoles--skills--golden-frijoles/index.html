@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/golden-frijoles/skills">golden-frijoles/skills</a></p>
 <p class="lede">Golden Frijoles: the planning, build and operate skills (5): refine, report, setup, smoke, strategy.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">golden-frijoles reaches L2 (writes or runs) and passed <code>claude plugin validate</code> on Claude Code 2.1.304.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 18</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, writes the prompt box, reads files, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">golden-frijoles reaches L2 (writes or runs) and passed <code>claude plugin validate</code> on Claude Code 2.1.304.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 18</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, writes the prompt box, reads files, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install golden-frijoles --marketplace golden-frijoles/skills</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, writes the prompt box, reads files, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed on Claude Code 2.1.304</span></div></div>
@@ -23,15 +23,15 @@
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>Bash calls, AskUserQuestion calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.start, tool.call {tool=Bash}, command.run {command=build}, session.measure, tool.call {tool=AskUserQuestion}, ui.render {component=AbovePrompt}, ui.render {component=PromptHint}</code></dd>
+    <dt>Observed events</dt><dd>every prompt, Bash calls, AskUserQuestion calls</dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, prompt.edit, prompt.submit, command.run {command=screensaver}, tool.call {tool=Bash}, command.run {command=build}, session.measure, tool.call {tool=AskUserQuestion}, ui.render {component=AbovePrompt}, ui.render {component=PromptHint}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.fs.exists, $.fs.list, $.fs.read, $.fs.write, $.process.run, $.prompt.fill, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.status</code></dd>
-
+    <dt>Surface modules</dt><dd><code>hooks/screensaver-view.mjs</code></dd>
     <dt>Validation on 2.1.304</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/golden-frijoles/skills/tree/cd5914cb987791fb37004fba2eec35b00364edd7"><code>cd5914cb9877</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/golden-frijoles/skills/blob/cd5914cb987791fb37004fba2eec35b00364edd7/.claude-plugin/marketplace.json">golden-frijoles</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/golden-frijoles/skills/tree/5821915730be7131e0dea63cbdaafb9f6d2b1da2"><code>5821915730be</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/golden-frijoles/skills/blob/5821915730be7131e0dea63cbdaafb9f6d2b1da2/.claude-plugin/marketplace.json">golden-frijoles</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/golden-frijoles--skills--golden-frijoles-reach.svg" alt="Reach badge for golden-frijoles"> <img src="/badges/golden-frijoles--skills--golden-frijoles-validates.svg" alt="Validation badge for golden-frijoles"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/golden-frijoles--skills--golden-frijoles-reach.svg)](https://mods.aidojo.si/mods/golden-frijoles--skills--golden-frijoles/)
