@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-19T15:52:14.610Z",
   "claudeVersion": "2.1.303",
-  "repos": 2805,
+  "repos": 2806,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -653616,6 +653616,106 @@
       "stars": 0,
       "pushedAt": "2026-10-17T02:40:48Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "ajwann/next-context:.",
+      "repo": "ajwann/next-context",
+      "path": ".",
+      "sourceCommit": "40ab12d42f44bbfb1488820debd601cf1b6ab658",
+      "name": "next-context",
+      "description": "Answers 'what's next for my context?' in a live band above the Claude Code prompt: turns until auto-compaction, overhead and MCP cost before the first message, growth per turn, and warnings at thresholds you set. All 16 items are configurable.",
+      "author": "ajwann",
+      "homepage": "https://github.com/ajwann/next-context",
+      "url": "https://github.com/ajwann/next-context",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "session.compact",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "next-context"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.session.usage",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.303",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "next-context",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "compaction"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-20T00:40:38Z",
+      "createdAt": "2026-10-18T16:21:37Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

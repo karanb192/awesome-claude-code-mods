@@ -1729,6 +1729,7 @@
   "aislam23--secret-drop--secret-drop": {"id":"aislam23/secret-drop:."},
   "ajbarea--keryx--keryx": {"id":"ajbarea/keryx:."},
   "ajbarea--techne--phylax": {"id":"ajbarea/techne:plugins/phylax"},
+  "ajwann--next-context--next-context": {"id":"ajwann/next-context:."},
   "ak110--dotfiles--agent-toolkit": {"id":"ak110/dotfiles:agent-toolkit"},
   "akagaya--claude-code-mods--context-pane": {"id":"akagaya/claude-code-mods:plugins/context-pane"},
   "akagaya--claude-code-mods--title-bar": {"id":"akagaya/claude-code-mods:plugins/title-bar"},
