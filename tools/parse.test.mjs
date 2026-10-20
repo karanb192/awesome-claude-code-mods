@@ -382,6 +382,22 @@ test('Foreman development probes stay out while its product and unrelated paths 
   assert.equal(kindOf(repo, 'spike/mod', { description: 'A test fixture.' }, new Set(), exceptions), 'fixture')
 })
 
+test('Ostrakon development plugins stay out without excluding its installable plugin', () => {
+  const repo = 'gaius-codius/ostrakon'
+  const paths = ['tools/experiments/spc', 'tools/experiments/spw', 'tools/experiments/spx', 'tools/experiments/spx0', 'tools/gallery', 'tools/mockups']
+  for (const path of paths) {
+    assert.equal(kindOf(repo, path, {}), 'fixture', path)
+    assert.equal(kindOf('Gaius-Codius/Ostrakon', path, {}), 'fixture', path)
+    assert.equal(kindOf('another/ostrakon', path, {}), 'mod', path)
+  }
+  for (const path of ['plugin', 'tools/gallery-mod', 'tools/mockups-live', 'tools/experiments/spx01', 'tools/experiments/other']) {
+    assert.equal(kindOf(repo, path, {}), 'mod', path)
+  }
+  const exceptions = new Set([`${repo}:tools/gallery`])
+  assert.equal(kindOf(repo, 'tools/gallery', {}, new Set(), exceptions), 'mod')
+  assert.equal(kindOf(repo, 'tools/gallery', { description: 'A test fixture.' }, new Set(), exceptions), 'fixture')
+})
+
 test('benchmark fixtures stay out without excluding usable evaluation mods', () => {
   for (const path of ['lab/bench', 'benchmarks/baseline', 'benchmark/no-trace']) {
     assert.equal(kindOf('a/b', path, { name: 'baseline' }), 'fixture')

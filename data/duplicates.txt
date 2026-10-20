@@ -108,3 +108,10 @@ lakmadev/claude-mods:plugins/repo-radar lakmadev/repo-radar:.
 azoof-ahmed/claude-heavy-job-guard:. azoof-ahmed/claude-mods:heavy-job-guard
 kk5190/context-meter:. kk5190/claude-code-mods:context-meter
 bhargava-gumpula/usage-band:. bhargava-gumpula/claude-mods:usage-band
+satoramoto/awesome-claude:mods/blast-radius satoramoto/awesome-claude:plugins/blast-radius
+satoramoto/awesome-claude:mods/filetree satoramoto/awesome-claude:plugins/filetree
+satoramoto/awesome-claude:mods/issues satoramoto/awesome-claude:plugins/issues
+satoramoto/awesome-claude:mods/lab satoramoto/awesome-claude:plugins/lab
+satoramoto/awesome-claude:mods/launcher satoramoto/awesome-claude:plugins/launcher
+satoramoto/awesome-claude:mods/overview satoramoto/awesome-claude:plugins/overview
+Abdallah-Abdelazim/usage-limits-cc-mod:. Abdallah-Abdelazim/usage-limits-cc-mod:plugins/usage-limits
