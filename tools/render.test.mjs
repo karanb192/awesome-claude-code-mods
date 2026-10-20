@@ -577,7 +577,7 @@ test('the site ships its crawl and agent files with the catalogue facts', t => {
   render(dir)
   const page = readFileSync(join(dir, 'docs/index.html'), 'utf8')
   assert.match(page, /<title>Awesome Claude Code Mods \| 4 mods and what each can access<\/title>/)
-  assert.match(page, /<meta name="description" content="4 Claude Code mods, with what each one can access before you install it\. Context meters, status lines, guards and more, with install hints\.">/)
+  assert.match(page, /<meta name="description" content="4 Claude Code mods, with what each one can access before you install it\. Context and usage meters, prompt cache warmers, status lines, guards and more, with install hints\.">/)
   assert.match(page, /<meta property="og:description" content="4 Claude Code mods, with what each one can access before you install it\./)
   assert.match(page, /<h1 id="title">Awesome<br><span>Claude Code Mods<\/span><\/h1>/)
   const ld = JSON.parse(page.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])
