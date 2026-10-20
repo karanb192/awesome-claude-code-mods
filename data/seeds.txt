@@ -86,6 +86,7 @@ ManuelWarland/claude-codex-pane
 MarcoCarnevali/claude-code-mods
 mertkayacs/ultramod
 MikeGT4/agent-tree
+mingfeng6684/claude-todo-panel
 moduvoice/claude-code-ko-ui
 MohammedSaud404/rtl-terminal
 MrMirhan/claude-buddy-chat
