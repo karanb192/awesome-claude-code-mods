@@ -49,9 +49,23 @@ export function recordDetails(mod, claudeVersion) {
 }
 
 // pages maps each record to its page folder under mods/; the homepage links each name there.
-// The homepage carries the first rows only; the browser loads the rest from directory.json. Googlebot reads only
-// the first 2 MB of a page, so the full list inline would hide most links and everything below the table.
+// The homepage carries the first rows only; the browser loads the rest from docs/directory/<n>.json. Googlebot reads
+// only the first 2 MB of each page or fetched resource, so the full list in one file would be cut short.
 export const INITIAL_ROWS = 100
+const PART_BYTES = 900_000
+
+// Splits the rows and strip marks, in order, into parts under PART_BYTES each.
+function directoryParts(rows, segments) {
+  const parts = [{ rows: [], strip: [] }]
+  let size = 0
+  for (const [kind, html] of [...rows.map(row => ['rows', row]), ...segments.map(segment => ['strip', segment])]) {
+    const bytes = Buffer.byteLength(JSON.stringify(html)) + 1
+    if (size + bytes > PART_BYTES && size) { parts.push({ rows: [], strip: [] }); size = 0 }
+    parts.at(-1)[kind].push(html)
+    size += bytes
+  }
+  return parts.map(part => JSON.stringify({ rows: part.rows, strip: part.strip.join('') }))
+}
 // The A to Z pages that link every mod with ordinary HTML, grouped by the first character of its name.
 export const browseKey = name => { const c = String(name ?? '').trim().charAt(0).toLowerCase(); return /^[a-z]$/.test(c) ? c : /^[0-9]$/.test(c) ? '0-9' : 'other' }
 const BROWSE_ORDER = [...'abcdefghijklmnopqrstuvwxyz', '0-9', 'other']
@@ -59,7 +73,7 @@ export const browseKeys = records => BROWSE_ORDER.filter(key => records.some(mod
 // letters: the browse keys that have a page, from browseKeys over the records the A to Z pages list.
 export const browseNav = (letters, current) => `<div class="browse" role="navigation" aria-label="Browse all mods from A to Z"><span>Browse A to Z</span>${letters.map(key => key === current ? `<b aria-current="page">${key.toUpperCase()}</b>` : `<a href="/browse/${key}/">${key === 'other' ? 'Other' : key.toUpperCase()}</a>`).join('')}</div>`
 
-// Returns the homepage and the full rows and strip it loads as directory.json. letters: the A to Z pages to link.
+// Returns the homepage and the parts of the full rows and strip it loads. letters: the A to Z pages to link.
 export function renderSite(data, pages, letters = []) {
   const mods = data.mods.filter(mod => mod.kind === 'mod')
   const builtins = data.mods.filter(mod => mod.kind === 'builtin')
@@ -75,7 +89,7 @@ export function renderSite(data, pages, letters = []) {
     <td class="reach">${track(mod)}<span class="labels">${esc(reachText(mod))}</span>${mod.validate.status === 'failed' || !['passed', 'warnings'].includes(mod.validate.status) ? `<span class="status bad">${esc(status(mod))}</span>` : mod.validate.status === 'warnings' ? '<span class="status">Validator warnings</span>' : ''}</td>
     <td class="num"><span class="mobile-label">Repository stars </span>${mod.stars == null ? 'Unknown' : Number(mod.stars).toLocaleString('en')}</td></tr>`
   const heading = sortable => `<thead><tr><th scope="col">${sortable ? '<button type="button" data-k="name">Mod <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 12V3L2 6m3-3 3 3m3-2v9l-3-3m3 3 3-3"/></svg></button>' : 'Mod'}</th><th scope="col">What it does</th><th scope="col">${sortable ? '<button type="button" data-k="level">Access <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 12V3L2 6m3-3 3 3m3-2v9l-3-3m3 3 3-3"/></svg></button>' : 'Access'}</th><th scope="col" class="num">${sortable ? '<button type="button" data-k="stars">Repo stars <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 12V3L2 6m3-3 3 3m3-2v9l-3-3m3 3 3-3"/></svg></button>' : 'Repo stars'}</th></tr></thead>`
-  const strip = [...mods].sort((a, b) => (hasFootprint(a) ? a.reach.level : 4) - (hasFootprint(b) ? b.reach.level : 4)).map(mod => `<a class="seg l${levelOf(mod)}" href="#${esc(slug(mod))}" title="${esc(mod.name)}: ${hasFootprint(mod) ? 'L' + mod.reach.level + ' ' : ''}${esc(reachText(mod))}" aria-label="${esc(mod.name)}: ${esc(hasFootprint(mod) ? levels[mod.reach.level] : 'Unknown access')}" data-level="${levelOf(mod)}"></a>`).join('')
+  const segments = [...mods].sort((a, b) => (hasFootprint(a) ? a.reach.level : 4) - (hasFootprint(b) ? b.reach.level : 4)).map(mod => `<a class="seg l${levelOf(mod)}" href="#${esc(slug(mod))}" title="${esc(mod.name)}: ${hasFootprint(mod) ? 'L' + mod.reach.level + ' ' : ''}${esc(reachText(mod))}" aria-label="${esc(mod.name)}: ${esc(hasFootprint(mod) ? levels[mod.reach.level] : 'Unknown access')}" data-level="${levelOf(mod)}"></a>`)
   const title = `Awesome Claude Code Mods | ${mods.length} Claude Code mods, scanned`
   const description = `An awesome list of ${mods.length} Claude Code mods built with function hooks. Browse public plugins scanned from GitHub and see what each can access.`
   const jsonLd = JSON.stringify({
@@ -93,6 +107,7 @@ export function renderSite(data, pages, letters = []) {
         ] },
     ],
   }).replace(/</g, '\\u003c')
+  const parts = directoryParts(mods.map(row), segments)
   const html = `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title>
@@ -119,7 +134,7 @@ ${browseNav(letters)}
 <div class="filter-heading"><span>Filter by access</span><a href="#method">How we check ${arrow}</a></div><div class="legend" role="group" aria-label="Filter by reach level or directory listing"><button type="button" class="lv all" data-level="" aria-pressed="true">All mods</button>${accessGroups(mods).map(({ label, level, count }) => `<button type="button" class="lv" data-level="${level}" aria-pressed="false"><i class="l${level}"></i><span>${label}</span><b>${count}</b></button>`).join('')}<button type="button" class="lv listed-filter" aria-pressed="false"><span>In Anthropic directory</span><b>${mods.filter(mod => mod.directory).length}</b></button></div>
 <noscript><p class="notice">Search and sorting need JavaScript. The ${Math.min(INITIAL_ROWS, mods.length)} most-starred mods are listed below, and each name opens its page. Browse all ${mods.length} from A to Z.</p></noscript>
 <p id="load-note" class="notice" hidden>Showing the ${Math.min(INITIAL_ROWS, mods.length)} most-starred mods. The full list did not load, so browse every mod from A to Z instead.</p>
-<table id="t" data-total="${mods.length}"><caption class="sr-only">Claude Code community mods. Sort by mod name, access level or hosting repository stars.</caption>${heading(true)}<tbody>${mods.slice(0, INITIAL_ROWS).map(row).join('\n')}</tbody></table>
+<table id="t" data-total="${mods.length}" data-parts="${parts.length}"><caption class="sr-only">Claude Code community mods. Sort by mod name, access level or hosting repository stars.</caption>${heading(true)}<tbody>${mods.slice(0, INITIAL_ROWS).map(row).join('\n')}</tbody></table>
 <div id="empty" class="empty" hidden><h3>No mods found.</h3><p>Try a broader search or clear the access filter.</p><button type="button" data-reset>Show all mods ${arrow}</button></div>
 <div class="directory-end"><p>Stars belong to the hosting repository, not the individual mod. Recorded with this scan.</p><a href="#directory">Back to search ${arrow}</a></div>
 </section>
@@ -131,7 +146,7 @@ ${builtins.length ? `<details class="builtins" id="built-in-mods"><summary>Also 
 </section></div></main>
 <footer class="shell"><a href="./" class="brand">${mark}<span>claude<span class="brand-light">mods</span></span></a><p>An independent community scan.<br>Not an official Anthropic directory.</p><a href="${repo}">Awesome Claude Code Mods on GitHub ${arrow}</a></footer>
 <script>${script}</script></body></html>`.replace(/[ \t]+\n/g, '\n') + '\n'
-  return { html, directory: JSON.stringify({ rows: mods.map(row), strip }) }
+  return { html, parts }
 }
 
 export function renderSitemap(paths = []) {

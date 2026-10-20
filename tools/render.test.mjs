@@ -33,7 +33,7 @@ const modPage = (dir, slug) => readFileSync(join(dir, 'docs/mods', slug, 'index.
 const tree = folder => Object.fromEntries(readdirSync(folder, { recursive: true }).sort().map(path => [path, existsSync(join(folder, path, 'index.html')) ? readFileSync(join(folder, path, 'index.html'), 'utf8') : null]))
 
 // Mod pages use root-relative asset paths, so they are checked through a server that answers like GitHub Pages.
-// hold: a promise that directory.json waits for, to test what happens while the full list is still loading.
+// hold: a promise the directory parts wait for, to test what happens while the full list is still loading.
 function serve(t, root, { hold } = {}) {
   const types = { '.html': 'text/html', '.css': 'text/css', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.json': 'application/json' }
   const server = createServer((req, res) => {
@@ -41,7 +41,7 @@ function serve(t, root, { hold } = {}) {
     if (existsSync(join(file, 'index.html'))) file = join(file, 'index.html')
     if (!existsSync(file) || !extname(file)) { res.writeHead(404, { 'content-type': 'text/html' }); return res.end(readFileSync(join(root, '404.html'))) }
     const send = () => { res.writeHead(200, { 'content-type': types[extname(file)] ?? 'application/octet-stream' }); res.end(readFileSync(file)) }
-    if (hold && file.endsWith('directory.json')) hold.then(send)
+    if (hold && file.includes('/directory/')) hold.then(send)
     else send()
   }).listen(0)
   t.after(() => server.close())
@@ -726,8 +726,9 @@ test('the homepage carries the first rows, loads the rest, and keeps deep links 
   render(dir)
   const home = readFileSync(join(dir, 'docs/index.html'), 'utf8')
   assert.equal(home.match(/<tr id="example--mods--mod-/g).length, 100, 'the page ships the 100 most-starred rows')
-  assert.doesNotMatch(home, /class="seg /, 'the access strip comes from directory.json')
-  const directory = JSON.parse(readFileSync(join(dir, 'docs/directory.json'), 'utf8'))
+  assert.doesNotMatch(home, /class="seg /, 'the access strip comes from the directory parts')
+  assert.match(home, /data-parts="1"/)
+  const directory = JSON.parse(readFileSync(join(dir, 'docs/directory/1.json'), 'utf8'))
   assert.equal(directory.rows.length, 130)
   assert.match(directory.strip, /class="seg l/)
   const base = serve(t, join(dir, 'docs'))
@@ -741,7 +742,7 @@ test('the homepage carries the first rows, loads the rest, and keeps deep links 
   assert.equal(await page.locator('.seg').count(), 130)
   await page.fill('#q', 'mod-12')
   assert.equal(await page.locator('#n').textContent(), '11 of 130 mods')
-  rmSync(join(dir, 'docs/directory.json'))
+  rmSync(join(dir, 'docs/directory'), { recursive: true })
   const offline = await browser.newPage()
   await offline.goto(`${base}/`)
   await offline.waitForSelector('#t[data-loaded]')
@@ -805,7 +806,10 @@ test('searching, sorting and focus made while the full list loads survive it', a
   t.after(() => browser.close())
   const page = await browser.newPage()
   await page.goto(`${base}/?q=mod-1`)
-  assert.equal(await page.locator('#n').textContent(), '130 mods', 'before loading, counts are out of the whole catalogue')
+  assert.equal(await page.locator('#n').textContent(), '11 of the first 100 mods, loading the rest', 'a URL search applies at once and says it is partial')
+  await page.fill('#q', 'mod-129')
+  assert.equal(await page.locator('#n').textContent(), '0 of the first 100 mods, loading the rest')
+  assert.equal(await page.locator('#empty').isVisible(), false, 'no empty result is claimed before the list loads')
   await page.fill('#q', 'mod-12')
   await page.locator('#t th button[data-k="name"]').click()
   await page.locator('#example--mods--mod-12 .mod-name').focus()
@@ -872,7 +876,7 @@ test('section and built-in arrivals land after the full list loads, and a failed
     assert.ok(top >= 0 && bottom <= 900, `${hash} is in view after the list loads`)
   }
   assert.equal(await page.locator('#built-in-mods').evaluate(el => el.open), true, 'a built-in arrival opens its section')
-  rmSync(join(dir, 'docs/directory.json'))
+  rmSync(join(dir, 'docs/directory'), { recursive: true })
   const failed = await browser.newPage()
   await failed.goto(`${base}/?q=mod-129`)
   await failed.waitForSelector('#t[data-loaded]')
@@ -880,4 +884,27 @@ test('section and built-in arrivals land after the full list loads, and a failed
   assert.match(await failed.locator('#empty').innerText(), /The full list did not load/)
   assert.equal(await failed.locator('#strip-note').isVisible(), true)
   assert.match(readFileSync(join(dir, 'docs/index.html'), 'utf8'), /<noscript><p class="notice">The marks need JavaScript\./)
+})
+
+test('a hash navigation made while the list loads lands after an earlier search, and large lists load in parts under the ceiling', async t => {
+  const many = Array.from({ length: 130 }, (_, i) => ({ ...mod(i), stars: 1000 - i, description: `Example mod ${i} ${'x'.repeat(4000)}` }))
+  const dir = fixture(t, many)
+  render(dir)
+  const parts = readdirSync(join(dir, 'docs/directory')).sort()
+  assert.ok(parts.length > 1, 'a large list is split into parts')
+  for (const part of parts) assert.ok(readFileSync(join(dir, 'docs/directory', part)).length <= 1_000_000, `${part} stays under the ceiling`)
+  assert.equal(parts.flatMap(part => JSON.parse(readFileSync(join(dir, 'docs/directory', part), 'utf8')).rows).length, 130)
+  let release
+  const base = serve(t, join(dir, 'docs'), { hold: new Promise(resolve => { release = resolve }) })
+  const browser = await chromium.launch()
+  t.after(() => browser.close())
+  const page = await browser.newPage()
+  await page.goto(`${base}/`)
+  await page.fill('#q', 'mod-12')
+  await page.evaluate(() => { location.hash = 'example--mods--mod-129' })
+  release()
+  await page.waitForSelector('#t[data-loaded]')
+  assert.equal(await page.locator('#t tbody tr').count(), 130)
+  assert.equal(await page.locator('.seg').count(), 130)
+  assert.equal(await page.evaluate(() => document.activeElement.closest('tr')?.id), 'example--mods--mod-129', 'the later hash navigation wins over the earlier search')
 })

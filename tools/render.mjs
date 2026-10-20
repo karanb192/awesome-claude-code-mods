@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Renders data/mods.json into the README count, catalogue, one SVG badge pair
-// per mod under badges/ and docs/badges/, the directory under docs/ (its full rows in docs/directory.json), A to Z
+// per mod under badges/ and docs/badges/, the directory under docs/ (its full rows in docs/directory/), A to Z
 // pages under docs/browse/ and one page per mod under docs/mods/, whose paths are kept in data/pages.json.
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync, rmSync, existsSync } from 'node:fs'
@@ -106,14 +106,16 @@ for (const m of [...records].sort((a, b) => a.name.localeCompare(b.name, 'en') |
 
 const browsable = records.filter(m => !identity.redirects.has(pageOf(m)))
 const letters = browseKeys(browsable)
-const { html: site, directory } = renderSite(data, identity.pages, letters)
+const { html: site, parts } = renderSite(data, identity.pages, letters)
 // Googlebot reads the first 2 MB of a page; this ceiling keeps every generated page well inside it.
 const MAX_PAGE_BYTES = 1_000_000
 const checkSize = (file, html) => { if (Buffer.byteLength(html) > MAX_PAGE_BYTES) throw new Error(`${file} is ${Buffer.byteLength(html)} bytes, over the ${MAX_PAGE_BYTES} byte page ceiling`) }
 checkSize('docs/index.html', site)
 mkdirSync('docs/mods', { recursive: true })
 writeFileSync('docs/index.html', site)
-writeFileSync('docs/directory.json', directory + '\n')
+rmSync('docs/directory', { recursive: true, force: true })
+mkdirSync('docs/directory')
+parts.forEach((part, i) => { checkSize(`docs/directory/${i + 1}.json`, part); writeFileSync(`docs/directory/${i + 1}.json`, part + '\n') })
 writeFileSync('docs/mods.json', JSON.stringify(data, null, 2) + '\n')
 // Everything under docs/mods/ is generated, so a folder this render does not write belongs to a retired mod.
 const pageFolders = new Set([...identity.pages.values(), ...identity.redirects.keys()])

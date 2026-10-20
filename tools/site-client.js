@@ -30,7 +30,8 @@
   let loaded = false
   let failed = false
   let order = null
-  // A #slug arrival jumps to its row once the list loads, unless the reader has already started using the directory.
+  // The latest #slug navigation lands once the list loads, unless the reader used the directory after it.
+  let target = location.hash.slice(1)
   let used = false
   for (const type of ['input', 'click', 'focusin']) document.getElementById('directory').addEventListener(type, () => { used = true }, true)
 
@@ -41,14 +42,15 @@
       row.hidden = !((level === '' || row.dataset.level === level) && (!listed || row.dataset.listed === '1') && (!search || row.dataset.name.toLowerCase().includes(search)))
       if (!row.hidden) visible++
     }
-    // Until directory.json arrives only the first rows are on the page, so counts are out of the full catalogue.
-    const total = loaded || failed ? rows.length : Number(table.dataset.total)
-    count.textContent = visible === total ? `${total} mods` : `${visible} of ${total} mods`
+    // While the rest of the list loads only the first rows are on the page: say so, and do not claim an empty result.
+    const pending = !loaded && !failed
+    if (pending) count.textContent = search || level || listed ? `${visible} of the first ${rows.length} mods, loading the rest` : `${table.dataset.total} mods`
+    else count.textContent = visible === rows.length ? `${rows.length} mods` : `${visible} of ${rows.length} mods`
     for (const filter of filters) filter.setAttribute('aria-pressed', String(filter.dataset.level === level))
     listedFilter.setAttribute('aria-pressed', String(listed))
     reset.hidden = !search && !level && !listed
     clearSearch.hidden = q.value.length === 0
-    document.getElementById('empty').hidden = visible !== 0
+    document.getElementById('empty').hidden = visible !== 0 || pending
   }
 
   function clear() {
@@ -128,7 +130,11 @@
     if (scroll) row.scrollIntoView({ block: 'center' })
     row.querySelector('.mod-name').focus({ preventScroll: true })
   }
-  window.addEventListener('hashchange', () => arrive(location.hash.slice(1)))
+  window.addEventListener('hashchange', () => {
+    if (loaded || failed) return arrive(location.hash.slice(1))
+    target = location.hash.slice(1)
+    used = false
+  })
 
   // The full list moves everything below the table, so a #section or built-in arrival scrolls again once it is in.
   function arrive(id) {
@@ -145,7 +151,7 @@
       reveal(segment.hash.slice(1))
     })
     apply()
-    if (!used && location.hash) arrive(location.hash.slice(1))
+    if (!used && target) arrive(target)
     else if (!used && query) document.getElementById('directory').scrollIntoView({ block: 'start', behavior: 'instant' })
     table.dataset.loaded = 'true'
   }
@@ -153,11 +159,13 @@
   // Read the URL's search before loading, so anything typed while the list loads is not replaced by it.
   const query = new URLSearchParams(location.search).get('q')
   if (query) q.value = query
+  apply()
 
-  // The page ships the first rows only; the full list and the access strip arrive as directory.json. If that
-  // fails, search covers the rows on the page and a note points to the A to Z pages.
-  fetch('directory.json')
-    .then(response => { if (!response.ok) throw new Error(String(response.status)); return response.json() })
+  // The page ships the first rows only; the full list and the access strip arrive in parts. If any part fails,
+  // search covers the rows on the page and a note points to the A to Z pages.
+  Promise.all(Array.from({ length: Number(table.dataset.parts) }, (_, i) => fetch(`directory/${i + 1}.json`)
+    .then(response => { if (!response.ok) throw new Error(String(response.status)); return response.json() })))
+    .then(list => ({ rows: list.flatMap(part => part.rows), strip: list.map(part => part.strip).join('') }))
     .then(data => {
       const active = document.activeElement
       const focused = active?.closest('#t tbody tr')
