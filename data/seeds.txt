@@ -64,6 +64,7 @@ joshuatonga/mini-claude-mods
 karanb192/cache-tax
 karanb192/claude-code-mods
 karanb192/time-blame
+khaosdoctor/claude-pr-list-mod
 kiankhooban/open-paths
 kongyo2/context-view
 Kruhlikau/subagent-tuner
