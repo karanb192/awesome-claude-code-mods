@@ -199,3 +199,15 @@ test('two renders are identical and input order is ignored', () => {
   assert.equal(page(mods), first)
   assert.equal(page([...mods].reverse()), first)
 })
+
+test('each entry sits on its own line, so an added member leaves every other entry line unchanged', () => {
+  const mods = [record('o/r', 'a'), record('o/r', 'c'), record('x/y', 'z', { stars: 50 })]
+  const before = page(mods).split('\n')
+  const after = page([...mods, record('o/r', 'b')]).split('\n')
+  const entries = lines => lines.filter(line => line.startsWith('<li><a class="name"'))
+  assert.equal(entries(before).length, 3)
+  assert.equal(entries(after).length, 4)
+  for (const line of entries(before)) assert.ok(after.includes(line), line.slice(0, 60))
+  assert.equal(entries(after).filter(line => !before.includes(line)).length, 1)
+  assert.ok(after.includes('<ul class="topic-list">') && after.includes('</ul></section>'), 'group wrappers sit on their own lines')
+})

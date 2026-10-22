@@ -124,6 +124,7 @@ const entry = ({ mod, slug }, version) => {
   return `<li><a class="name" href="/mods/${esc(slug)}/">${esc(mod.name)}</a><span class="repo">${esc(mod.repo)}</span>${owner.toLowerCase() === MAINTAINER ? '<span class="maintainer">Built by the catalogue maintainer</span>' : ''}${described ? `<p class="what">${esc(described)}</p>` : ''}<p class="scan">${accessLine(mod).html}${mod.validate.status === 'failed' ? ` Fails validation on Claude Code ${esc(mod.validate.claudeVersion ?? version)}.` : ''}</p><p class="scan">${installLine(mod)}</p></li>`
 }
 
+// One entry per line, so an added or edited member is a one-line change in a scan PR diff.
 // entries: { mod, slug } for every listed member, in any order. topics: the topic pages to link, as { slug, short },
 // including this one; letters: the A to Z pages; version: the scan's Claude Code version for failures.
 export function renderTopicPage(topic, entries, { topics = [], letters = [], version } = {}) {
@@ -163,7 +164,10 @@ export function renderTopicPage(topic, entries, { topics = [], letters = [], ver
 ${browseNav(letters)}${topicNav(topics, topic.slug)}
 ${prose.sections(figures(listed))}
 ${groups.map(group => `
-<section class="group" aria-labelledby="group-${group.i}"><h2 id="group-${group.i}">${group.heading}</h2><ul class="topic-list">${group.entries.map(item => entry(item, version)).join('')}</ul></section>`).join('')}
+<section class="group" aria-labelledby="group-${group.i}"><h2 id="group-${group.i}">${group.heading}</h2>
+<ul class="topic-list">
+${group.entries.map(item => entry(item, version)).join('\n')}
+</ul></section>`).join('')}
 ${listed.length ? '' : '<p class="empty-topic">No mods in this topic in the latest scan.</p>'}
 <section aria-labelledby="see-also"><h2 id="see-also">See also</h2><p class="actions">${seeAlso.join('')}</p></section>
 </main>`,
