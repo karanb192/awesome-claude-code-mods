@@ -444,6 +444,7 @@ test('the transcript layout spike stays out without excluding the reply mod', ()
 test('acceptance drivers and uninstalled hook sources do not count as separate mods', () => {
   for (const [repo, path, product] of [
     ['CyclopsEyeTeam/cyclops-fresheye', 'acceptance/driver', '.'],
+    ['ninondev/cc-coco', 'source', 'plugin'],
     ['ninondev/claude-sama', 'source', 'plugin'],
   ]) {
     assert.equal(kindOf(repo, path, {}), 'fixture')
