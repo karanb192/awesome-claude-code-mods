@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://mods.aidojo.si/</loc><changefreq>daily</changefreq></url>
 <url><loc>https://mods.aidojo.si/access/</loc></url>
+<url><loc>https://mods.aidojo.si/topics/prompt-cache/</loc></url>
 <url><loc>https://mods.aidojo.si/browse/a/</loc></url>
 <url><loc>https://mods.aidojo.si/browse/b/</loc></url>
 <url><loc>https://mods.aidojo.si/browse/c/</loc></url>
