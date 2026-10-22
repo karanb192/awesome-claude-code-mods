@@ -27,6 +27,7 @@ BjoernSchotte/ccmod-amp
 candygoogy/notary
 chenyuxiaojin/cyxj-notch
 chrisluo5311/Pixel-Play
+cristi71000/limit-lens
 danilpavlov/telescope-claude-code
 danzerzine/claude-council
 DarkVelours/claude-code-galactic-battle
