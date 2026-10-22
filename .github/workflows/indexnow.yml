@@ -5,7 +5,7 @@ name: indexnow
 on:
   push:
     branches: [main]
-    paths: ["docs/index.html", "docs/access/**", "docs/browse/**", "docs/mods/**"]
+    paths: ["docs/index.html", "docs/access/**", "docs/topics/**", "docs/browse/**", "docs/mods/**"]
   workflow_run:
     workflows: [publish approved seeds]
     types: [completed]

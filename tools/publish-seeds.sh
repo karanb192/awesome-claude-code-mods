@@ -40,7 +40,7 @@ for attempt in {1..8}; do
   npm run test:render
   npm run lint
   git diff --check
-  git add data/repos.txt data/mods.json README.md catalogue.md badges/ docs/index.html docs/mods.json docs/sitemap.xml docs/robots.txt docs/llms.txt docs/badges/ docs/mods/ docs/404.html docs/site.css docs/access/ docs/browse/ docs/directory/ data/pages.json
+  git add data/repos.txt data/mods.json README.md catalogue.md badges/ docs/index.html docs/mods.json docs/sitemap.xml docs/robots.txt docs/llms.txt docs/badges/ docs/mods/ docs/404.html docs/site.css docs/access/ docs/topics/ docs/browse/ docs/directory/ data/pages.json
   git commit -m 'Publish approved seed mods'
   seed_head=$(git rev-parse HEAD)
   {

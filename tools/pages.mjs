@@ -11,7 +11,7 @@ import { slugs } from './slug.mjs'
 export const idOf = mod => mod.id ?? `${mod.repo}:${mod.path}`
 const byText = (a, b) => a < b ? -1 : a > b ? 1 : 0
 // GitHub matches repository names without case; plugin paths keep theirs.
-const identity = id => { const at = id.indexOf(':'); return at < 0 ? id : id.slice(0, at).toLowerCase() + id.slice(at) }
+export const identity = id => { const at = id.indexOf(':'); return at < 0 ? id : id.slice(0, at).toLowerCase() + id.slice(at) }
 const SLUG = /^[A-Za-z0-9_-][A-Za-z0-9._-]*$/
 
 export function readRegistry(text) {
@@ -98,7 +98,7 @@ export function assignPages(records, registry, all) {
 export const indexable = mod => ['passed', 'warnings', 'failed'].includes(mod.validate.status) && String(mod.description ?? '').trim() !== ''
 
 const jsonLd = value => JSON.stringify(value).replace(/</g, '\\u003c')
-const clip = (text, n) => { text = String(text ?? '').replace(/\s+/g, ' ').trim(); return text.length > n ? text.slice(0, n - 1).trimEnd() + '…' : text }
+export const clip = (text, n) => { text = String(text ?? '').replace(/\s+/g, ' ').trim(); return text.length > n ? text.slice(0, n - 1).trimEnd() + '…' : text }
 const sourceOf = mod => /^https?:\/\//i.test(String(mod.url)) ? mod.url : `https://github.com/${mod.repo}`
 
 export function shell({ title, description, canonical, robots, head = '', body }) {
@@ -120,12 +120,26 @@ const callList = calls => calls.slice(0, 6).map(call => `<code>${esc(call)}</cod
 const SPDX = /^[A-Za-z0-9][A-Za-z0-9.+-]*$/
 const licenseUrl = license => typeof license === 'string' && SPDX.test(license) && !['NOASSERTION', 'NONE', 'Other'].includes(license) ? `https://spdx.org/licenses/${license}.html` : null
 
+// The branches every access sentence follows, shared by the mod page summary and the compact line on topic
+// pages so the two cannot drift. The level comes from classified calls alone; an incomplete footprint names
+// no calls, because its partial list cannot establish what is absent.
+export function accessFacts(mod) {
+  const calls = [...new Set(mod.calls)]
+  const c = classified(calls)
+  const complete = hasFootprint(mod)
+  const kind = !complete ? 'incomplete' : !calls.length ? 'none' : c.graded ? 'graded' : 'unclassified'
+  const named = complete ? [...c.unclassified, ...c.foreign] : []
+  return { calls, c, complete, kind, ungraded: c.unclassified.length + c.foreign.length, level: kind === 'graded' ? c.level : null, labels: kind === 'graded' ? c.labels : [], named }
+}
+
+const FOREIGN = 'Calls in a namespace that is not in the Claude Code 2.1.302 core table'
+const STATE_NOTE = 'the scan does not record whose state, so this does not show that it reads another mod’s values'
+
 // What the scan recorded, as one sentence and a short list, built only from scan fields so it never repeats
 // author text. The level comes from classified calls alone; unclassified calls are named, not scored.
 // A retained record describes its last recorded footprint and why it was not rescanned.
 export function scanSummary(mod, version) {
   const name = esc(mod.name)
-  const calls = [...new Set(mod.calls)]
   const retained = mod.validate.status === 'unknown'
   const result = retained ? mod.lastKnownValidate : mod.validate
   const raw = result?.claudeVersion ?? version
@@ -135,18 +149,18 @@ export function scanSummary(mod, version) {
     : result?.status === 'failed' ? `fails <code>claude plugin validate</code> on Claude Code ${at}${result.errors?.length ? `: ${esc(firstLine(result.errors[0]))}` : ''}`
     : 'has no recorded validation result'
   const shortValidation = result?.status === 'passed' ? `passes validation on ${raw}` : result?.status === 'warnings' ? `passes validation with warnings on ${raw}` : result?.status === 'failed' ? `fails validation on ${raw}` : 'not validated'
-  const c = classified(calls)
-  const ungraded = c.unclassified.length + c.foreign.length
+  const facts = accessFacts(mod)
+  const { calls, c, complete, kind, ungraded } = facts
   let sentence, access, short
-  if (!hasFootprint(mod)) {
+  if (kind === 'incomplete') {
     sentence = `The scan could not record a complete footprint for ${name}, so its access is unknown; it ${validation}.`
     access = 'Access: unknown, the footprint is incomplete'
     short = `Scan: access unknown, ${shortValidation}.`
-  } else if (!calls.length) {
+  } else if (kind === 'none') {
     sentence = `The validator reported no API methods for ${name}; it ${validation}.`
     access = 'Access: no API methods recorded'
     short = `Scan: no API methods recorded, ${shortValidation}.`
-  } else if (c.graded) {
+  } else if (kind === 'graded') {
     sentence = `${name} reaches L${c.level} (${c.name})${ungraded ? ' by its classified calls' : ''} and ${validation}.`
     access = `Access from classified calls: L${c.level}, ${c.name}${c.labels.length ? ': ' + esc(c.labels.join(', ')) : ''}`
     short = `Scan: L${c.level} ${c.name}${ungraded ? ' by classified calls' : ''}, ${shortValidation}.`
@@ -157,18 +171,47 @@ export function scanSummary(mod, version) {
   }
   // An incomplete footprint can under-report both counts, so it shows neither.
   const items = [
-    ...(hasFootprint(mod) ? [`Events hooked: ${new Set(mod.hooks.map(hook => hook.event)).size}`, `API methods referenced: ${calls.length}`] : []),
+    ...(complete ? [`Events hooked: ${new Set(mod.hooks.map(hook => hook.event)).size}`, `API methods referenced: ${calls.length}`] : []),
     access,
-    ...(hasFootprint(mod) && c.unclassified.length ? [`Unclassified calls: ${c.unclassified.length} (${callList(c.unclassified)}), full access unknown`] : []),
-    ...(hasFootprint(mod) && c.foreign.length ? [`Calls in a namespace that is not in the Claude Code 2.1.302 core table: ${c.foreign.length} (${callList(c.foreign)}), full access unknown`] : []),
-    ...(hasFootprint(mod) && c.labels.includes('reads mod state') ? ['Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values'] : []),
+    ...(complete && c.unclassified.length ? [`Unclassified calls: ${c.unclassified.length} (${callList(c.unclassified)}), full access unknown`] : []),
+    ...(complete && c.foreign.length ? [`${FOREIGN}: ${c.foreign.length} (${callList(c.foreign)}), full access unknown`] : []),
+    ...(complete && c.labels.includes('reads mod state') ? [`Reads mod state: ${STATE_NOTE}`] : []),
     ...(retained ? [`Last recorded footprint${mod.sourceCommit ? `, revision <code>${esc(mod.sourceCommit.slice(0, 7))}</code>` : ''}: ${esc(mod.validate.errors[0] ?? 'not rescanned in the latest scan.')}`] : []),
     'Static scan, not a runtime test',
   ]
   return {
     html: `<section class="summary" aria-label="Scan summary"><p class="summary-line">${retained ? 'In its last recorded footprint, ' + sentence.replace(/^The /, 'the ') : sentence}</p><ul>${items.map(item => `<li>${item}</li>`).join('')}</ul></section>`,
     short: (retained ? 'Last recorded scan. ' : '') + short,
+    level: facts.level, labels: facts.labels, named: facts.named,
   }
+}
+
+// The same facts in one line, for lists that show many mods at once. A "reads mod state" label carries the
+// owner qualification inline, because a list has no room for the summary's extra item.
+export function accessLine(mod) {
+  const facts = accessFacts(mod)
+  const { c, kind, ungraded } = facts
+  const label = name => name === 'reads mod state' ? 'reads mod state (owner not recorded)' : name
+  const parts = kind === 'incomplete' ? ['Access unknown, the footprint is incomplete.']
+    : kind === 'none' ? ['No API methods recorded.']
+    : kind === 'graded' ? [`L${c.level} ${esc(c.name)}${ungraded ? ' by classified calls' : ''}${c.labels.length ? ': ' + esc(c.labels.map(label).join(', ')) : ''}.`]
+    : ['Access unknown, no call could be classified.']
+  if (kind !== 'incomplete' && c.unclassified.length) parts.push(`Unclassified calls: ${callList(c.unclassified)}, full access unknown.`)
+  if (kind !== 'incomplete' && c.foreign.length) parts.push(`${FOREIGN}: ${callList(c.foreign)}, full access unknown.`)
+  return { html: parts.join(' '), level: facts.level, labels: facts.labels, named: facts.named }
+}
+
+const INSTALL_FALLBACK = 'To install it, open the repository and follow the author’s setup instructions.'
+const INSTALL_BUILTIN = 'It ships inside Claude Code, so there is nothing to install.'
+const INSTALL_VERSION = 'Mods need Claude Code 2.1.287 or later.'
+const installCaution = mod => mod.validate.status === 'failed' ? ' It fails validation in the latest scan, so it may not install.' : mod.validate.status === 'unknown' ? ' The latest scan could not confirm this mod, so the command may be out of date.' : ''
+
+// The install hint as one line, for lists: the same command, origin and name-check note as the mod page.
+export function installLine(mod) {
+  if (mod.kind === 'builtin') return INSTALL_BUILTIN
+  const hint = install(mod)
+  if (!hint) return INSTALL_FALLBACK
+  return `Install hint: <code>${esc(hint.command)}</code>, from ${esc(hint.from)}.${hint.check ? ' ' + esc(hint.check) : ''}${installCaution(mod)}`
 }
 
 const COPY = `<script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>`
@@ -176,15 +219,15 @@ const COPY = `<script>for(const b of document.querySelectorAll('[data-copy]')){b
 // How to install the mod: built-ins ship with Claude Code; otherwise the finder's install hint, labelled as
 // a hint because the scan reads the manifest's plugin name, not the marketplace entry's.
 function installBlock(mod) {
-  if (mod.kind === 'builtin') return '<p class="install">It ships inside Claude Code, so there is nothing to install.</p>'
+  if (mod.kind === 'builtin') return `<p class="install">${INSTALL_BUILTIN}</p>`
   const hint = install(mod)
-  if (!hint) return '<p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>'
-  const caution = mod.validate.status === 'failed' ? ' It fails validation in the latest scan, so it may not install.' : mod.validate.status === 'unknown' ? ' The latest scan could not confirm this mod, so the command may be out of date.' : ''
-  return `<section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>${esc(hint.command)}</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From ${esc(hint.from)}.${hint.check ? ' ' + esc(hint.check) : ''} Mods need Claude Code 2.1.287 or later.${caution}</p></section>${COPY}`
+  if (!hint) return `<p class="install">${INSTALL_FALLBACK} ${INSTALL_VERSION}</p>`
+  return `<section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>${esc(hint.command)}</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From ${esc(hint.from)}.${hint.check ? ' ' + esc(hint.check) : ''} ${INSTALL_VERSION}${installCaution(mod)}</p></section>${COPY}`
 }
 
 // siblings: other mods from the same repository with their page paths, already in display order.
-export function renderModPage(mod, { slug, anchor, claudeVersion, siblings = [] }) {
+// topics: the topic pages that list this mod, as { slug, title }, so each member links its parent page.
+export function renderModPage(mod, { slug, anchor, claudeVersion, siblings = [], topics = [] }) {
   const url = `${site}mods/${slug}/`
   const owner = mod.repo.split('/')[0]
   const described = String(mod.description ?? '').trim()
@@ -225,7 +268,7 @@ ${reviewNotes(mod).length ? `<p class="compatibility">${esc(reviewNotes(mod).joi
 ${summary.html}
 ${installBlock(mod)}
 <div class="facts"><div><h2>Access</h2><span class="level">${esc(hasFootprint(mod) ? `L${mod.reach.level} ${levels[mod.reach.level]}` : 'Unknown access')}</span>${track(mod)}<span class="labels">${esc(hasFootprint(mod) ? reachText(mod) : 'The footprint is unavailable or incomplete.')}</span></div>
-<div><h2>Validation</h2><span class="status${statusClass}">${esc(status)}${mod.validate.status === 'passed' || mod.validate.status === 'warnings' ? ` on Claude Code ${esc(version)}` : ''}</span></div></div>
+<div><h2>Validation</h2><span class="status${statusClass}">${esc(status)}${mod.validate.status === 'passed' || mod.validate.status === 'warnings' ? ` on Claude Code ${esc(version)}` : ''}</span></div></div>${topics.length ? `\n<p class="topics-line">Listed under ${topics.map(topic => `<a href="/topics/${esc(topic.slug)}/">${esc(topic.title)}</a>`).join(', ')}.</p>` : ''}
 <p class="actions"><a class="source" href="${esc(sourceOf(mod))}">View the source on GitHub ${arrow}</a><a href="/#${esc(anchor)}">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 ${recordDetails(mod, claudeVersion)}

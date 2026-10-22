@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Renders data/mods.json into the README count, catalogue, one SVG badge pair
 // per mod under badges/ and docs/badges/, the directory under docs/ (its full rows in docs/directory/), A to Z
-// pages under docs/browse/ and one page per mod under docs/mods/, whose paths are kept in data/pages.json.
+// pages under docs/browse/, topic pages under docs/topics/ (membership from data/topics.json) and one page per
+// mod under docs/mods/, whose paths are kept in data/pages.json.
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync, rmSync, existsSync } from 'node:fs'
 import { LEVEL_NAMES, grade, hasFootprint } from './grade.mjs'
@@ -10,6 +11,7 @@ import { renderBrowsePage } from './browse.mjs'
 import { assignPages, formatRegistry, idOf, indexable, readRegistry, renderModPage, renderNotFound, renderRedirect } from './pages.mjs'
 import { siteAnchors } from './slug.mjs'
 import { ACCESS_PATH, renderAccessPage } from './access.mjs'
+import { TOPICS_PATH, listedMembers, readTopics, renderTopicPage, topicMembers, topicSummary } from './topics.mjs'
 
 const data = JSON.parse(readFileSync('data/mods.json', 'utf8'))
 for (const m of data.mods) {
@@ -106,7 +108,18 @@ for (const m of [...records].sort((a, b) => a.name.localeCompare(b.name, 'en') |
 
 const browsable = records.filter(m => !identity.redirects.has(pageOf(m)))
 const letters = browseKeys(browsable)
-const { html: site, parts } = renderSite(data, identity.pages, letters)
+// A topic lists the members of its rule that have an indexable page of their own. A stale id in the rule is
+// reported and tolerated, so a retirement never breaks the render.
+const topics = existsSync(TOPICS_PATH) ? readTopics(readFileSync(TOPICS_PATH, 'utf8')) : []
+const listedIn = new Map(topics.map(topic => {
+  const { members, stale } = topicMembers(topic, data.mods)
+  for (const id of stale) console.warn(`topic ${topic.slug}: ${id} names no counted mod`)
+  return [topic, listedMembers(members).filter(m => browsable.includes(m)).map(m => ({ mod: m, slug: pageOf(m) }))]
+}))
+const shownTopics = topics.filter(topic => listedIn.get(topic).length)
+const topicsOf = new Map()
+for (const topic of shownTopics) for (const { mod } of listedIn.get(topic)) topicsOf.set(mod, [...(topicsOf.get(mod) ?? []), topic])
+const { html: site, parts } = renderSite(data, identity.pages, letters, shownTopics)
 // Googlebot reads the first 2 MB of a page; this ceiling keeps every generated page well inside it.
 const MAX_PAGE_BYTES = 1_000_000
 const checkSize = (file, html) => { if (Buffer.byteLength(html) > MAX_PAGE_BYTES) throw new Error(`${file} is ${Buffer.byteLength(html)} bytes, over the ${MAX_PAGE_BYTES} byte page ceiling`) }
@@ -125,7 +138,7 @@ for (const m of records) {
   if (identity.redirects.has(pageOf(m))) continue
   mkdirSync(`docs/mods/${pageOf(m)}`, { recursive: true })
   const siblings = byRepo.get(m.repo).filter(other => other !== m).map(other => ({ mod: other, slug: pageOf(other) }))
-  writeFileSync(`docs/mods/${pageOf(m)}/index.html`, renderModPage(m, { slug: pageOf(m), anchor: slug(m), claudeVersion: data.claudeVersion, siblings }))
+  writeFileSync(`docs/mods/${pageOf(m)}/index.html`, renderModPage(m, { slug: pageOf(m), anchor: slug(m), claudeVersion: data.claudeVersion, siblings, topics: topicsOf.get(m) ?? [] }))
 }
 for (const [from, to] of identity.redirects) {
   mkdirSync(`docs/mods/${from}`, { recursive: true })
@@ -136,16 +149,25 @@ mkdirSync('docs/browse', { recursive: true })
 for (const entry of readdirSync('docs/browse')) if (!letters.includes(entry)) rmSync(`docs/browse/${entry}`, { recursive: true, force: true })
 const entries = browsable.map(mod => ({ mod, slug: pageOf(mod) }))
 for (const key of letters) {
-  const html = renderBrowsePage(key, entries, letters)
+  const html = renderBrowsePage(key, entries, letters, shownTopics)
   checkSize(`docs/browse/${key}/index.html`, html)
   mkdirSync(`docs/browse/${key}`, { recursive: true })
   writeFileSync(`docs/browse/${key}/index.html`, html)
+}
+// Everything under docs/topics/ is generated, so a folder whose slug left the data file is removed.
+mkdirSync('docs/topics', { recursive: true })
+for (const entry of readdirSync('docs/topics')) if (!topics.some(topic => topic.slug === entry)) rmSync(`docs/topics/${entry}`, { recursive: true, force: true })
+for (const topic of topics) {
+  const html = renderTopicPage(topic, listedIn.get(topic), { topics: topics.filter(other => shownTopics.includes(other) || other === topic), letters, version: data.claudeVersion })
+  checkSize(`docs/topics/${topic.slug}/index.html`, html)
+  mkdirSync(`docs/topics/${topic.slug}`, { recursive: true })
+  writeFileSync(`docs/topics/${topic.slug}/index.html`, html)
 }
 writeFileSync('docs/404.html', renderNotFound())
 mkdirSync('docs/access', { recursive: true })
 writeFileSync('docs/access/index.html', renderAccessPage(data))
 writeFileSync('data/pages.json', formatRegistry(identity.registry))
-writeFileSync('docs/sitemap.xml', renderSitemap([ACCESS_PATH, ...letters.map(key => `browse/${key}/`), ...records.filter(indexable).map(m => `mods/${pageOf(m)}/`).sort()]))
+writeFileSync('docs/sitemap.xml', renderSitemap([ACCESS_PATH, ...shownTopics.map(topic => `topics/${topic.slug}/`), ...letters.map(key => `browse/${key}/`), ...records.filter(indexable).map(m => `mods/${pageOf(m)}/`).sort()]))
 writeFileSync('docs/robots.txt', renderRobots())
-writeFileSync('docs/llms.txt', renderLlms(data))
-console.log(`rendered ${mods.length} mods and ${builtins.length} built-ins into README.md, catalogue.md, badges/, docs/, docs/badges/, docs/mods/, docs/browse/ and docs/access/`)
+writeFileSync('docs/llms.txt', renderLlms(data, shownTopics.map(topic => ({ slug: topic.slug, short: topic.short, summary: topicSummary(topic, listedIn.get(topic).length) }))))
+console.log(`rendered ${mods.length} mods and ${builtins.length} built-ins into README.md, catalogue.md, badges/, docs/, docs/badges/, docs/mods/, docs/browse/, docs/topics/ and docs/access/`)
