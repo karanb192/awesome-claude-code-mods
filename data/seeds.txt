@@ -104,6 +104,7 @@ SARTHAK2511/claude-combo
 scasella/claude-flightdeck
 scaso01/claude-risk-guardrails
 shimo4228/harness-scope
+shohamtal/cc-mod-mysql-client
 shohamtal/cc-mod-opensearch-console
 Shuffzord/RoadRaven
 somethingwentwell/cc-mod-banana-game
