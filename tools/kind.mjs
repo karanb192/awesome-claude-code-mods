@@ -17,6 +17,7 @@ const REPO_FIXTURES = new Map([
   ['milocosmopolitan/redacton', /^qualification(?:\/|$)/],
   ['ninondev/cc-coco', /^source(?:\/|$)/],
   ['ninondev/claude-sama', /^source(?:\/|$)/],
+  ['robgruhl/claude-mod-learnings', /^experiments\/(?:e[1-7]-[^/]+|claude-lookalike|latency|live-probe)(?:\/|$)/],
 ])
 
 const readList = path => {

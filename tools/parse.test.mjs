@@ -346,6 +346,30 @@ test('fixtures never count', () => {
   assert.equal(fingerprint(base), fingerprint(after))
 })
 
+test('field experiments stay out while finished guards and unrelated repositories count', () => {
+  const repo = 'RobGruhl/claude-mod-learnings'
+  const paths = [
+    'experiments/claude-lookalike', 'experiments/e1-fail-open', 'experiments/e2-order',
+    'experiments/e3-moves', 'experiments/e4-alias', 'experiments/e4-computed',
+    'experiments/e4-destructure', 'experiments/e4-dynamic-import', 'experiments/e4-pass-arrow',
+    'experiments/e4-static-ok', 'experiments/e5-after-next', 'experiments/e6-mention',
+    'experiments/e7-twice', 'experiments/e7-twice-matcher', 'experiments/latency',
+    'experiments/live-probe',
+  ]
+  for (const path of paths) {
+    assert.equal(kindOf(repo, path, {}), 'fixture', path)
+    assert.equal(kindOf('another/claude-mod-learnings', path, {}), 'mod', path)
+  }
+  for (const path of ['experiments/cascade-guard', 'tutorial/.reference/skeleton-guard', 'experiments/e10-product', 'experiments/latency-meter', 'plugins/live-probe']) {
+    assert.equal(kindOf(repo, path, {}), 'mod', path)
+  }
+  assert.equal(kindOf(repo.toLowerCase(), paths[0], {}), 'fixture')
+  assert.equal(kindOf(repo, paths[0] + '/nested', {}), 'fixture')
+  const exceptions = new Set([`${repo}:${paths[0]}`])
+  assert.equal(kindOf(repo, paths[0], {}, new Set(), exceptions), 'mod')
+  assert.equal(kindOf(repo, paths[0], { description: 'A test fixture.' }, new Set(), exceptions), 'fixture')
+})
+
 test('course exercises stay out while finished mods and unrelated repositories count', () => {
   const paths = [
     '02-first-mod/broken/2-5-syntax-error',
