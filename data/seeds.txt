@@ -91,6 +91,7 @@ OneWave-AI/claude-code-mods
 paragpandyareal/lazy-panda-panel
 paragpandyareal/swear-slap
 pawandeepdhall/claude-mods
+PBJ-2/clauderipple
 plaxagoras/clawd-tales
 qualixar/modstage
 RadTech-Solutions/agent-pager
