@@ -110,6 +110,7 @@ somethingwentwell/cc-mod-banana-game
 Sumit189/explain-claude-mod
 SummerRiversound/review-inbox
 T-AI-Labs/claude-code-mods
+Th3-W6rst/claude-realce
 tozmoz/sparkmine
 twjackysu/claude-code-stock-ticker
 tyler4400/tyler-claude-mods
