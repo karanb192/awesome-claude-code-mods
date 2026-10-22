@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-22T06:15:55.147Z",
   "claudeVersion": "2.1.308",
-  "repos": 3163,
+  "repos": 3164,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -740452,6 +740452,189 @@
       "stars": 0,
       "pushedAt": "2026-10-17T02:40:48Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "Sma1lboy/claude-standup:.",
+      "repo": "Sma1lboy/claude-standup",
+      "path": ".",
+      "sourceCommit": "0203877cdfdfb79b3403815e1bf50adb97f63107",
+      "name": "standup",
+      "description": "One panel for every Claude Code session on this machine: what each agent needs from you, and what each one got done.",
+      "author": "Sma1lboy",
+      "homepage": "https://github.com/Sma1lboy/claude-standup",
+      "url": "https://github.com/Sma1lboy/claude-standup",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "classic.SessionStart",
+          "matcher": {}
+        },
+        {
+          "event": "classic.UserPromptSubmit",
+          "matcher": {}
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.compose",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "standup"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "standup-settings"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "?"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "?"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "?"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "session.compact",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "?"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "?"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {
+            "requestId": "?"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.model.complete",
+        "$.process.run",
+        "$.prompt.submit",
+        "$.session.append",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.messages",
+        "$.session.model",
+        "$.session.repo",
+        "$.session.surfaces",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.keys",
+        "$.store.set",
+        "$.tool.register",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status"
+      ],
+      "surfaceModules": [
+        "hooks/divider.tsx"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.308",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "standup",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "drives Claude",
+          "reads files",
+          "reads env vars",
+          "reads the transcript",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks",
+        "? calls",
+        "every tool call",
+        "compaction"
+      ],
+      "draws": [
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-21T23:46:38Z",
+      "createdAt": "2026-10-17T04:19:36Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

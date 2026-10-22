@@ -2594,6 +2594,7 @@ skysf/skylu-mods
 slocook/cartographer
 slorenzot/claude-plugins
 Sma1lboy/claude-mods
+Sma1lboy/claude-standup
 SmartAnalyticsAV/claude-sessions-panel
 smashandclash/plugin
 smhasan-yad/claude-mod-blast-radius-ps
