@@ -16,6 +16,7 @@ apolenkov/agent-compact-advisor
 apolenkov/agent-council
 apolenkov/agent-shell-watch
 Arjun0014/project-sentinel
+arturogarrido/claudinho
 Ashley-Pettit/lgtm-flash
 Ashley-Pettit/villager-hp
 atharv6f/headway
