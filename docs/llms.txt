@@ -1,8 +1,8 @@
 # Awesome Claude Code Mods
 
-> 6,092 Claude Code mods, with what each one can access before you install it. Context and usage meters, prompt cache warmers, status lines, guards and more, with install hints. Scanned from public GitHub repositories with claude plugin validate; an independent scan, not an official Anthropic directory. Last scanned 2026-10-22 on Claude Code 2.1.308.
+> 6,410 Claude Code mods, with what each one can access before you install it. Context and usage meters, prompt cache warmers, status lines, guards and more, with install hints. Scanned from public GitHub repositories with claude plugin validate; an independent scan, not an official Anthropic directory. Last scanned 2026-10-24 on Claude Code 2.1.310.
 
-Mods are Claude Code plugins whose JavaScript or TypeScript hooks run inside a session. They need Claude Code 2.1.287 or later and are on by default. Each entry records the hooks and API calls reported by `claude plugin validate`. Access levels describe the widest reach of those calls and are not safety ratings. An unavailable or incomplete footprint has unknown access, not L0; recorded calls may show only part of its access. Mods per level: L0 Draws & remembers: 511, L1 Reads: 1514, L2 Writes or runs: 3217, L3 Uses the network: 659, Unknown access: 191.
+Mods are Claude Code plugins whose JavaScript or TypeScript hooks run inside a session. They need Claude Code 2.1.287 or later and are on by default. Each entry records the hooks and API calls reported by `claude plugin validate`. Access levels describe the widest reach of those calls and are not safety ratings. An unavailable or incomplete footprint has unknown access, not L0; recorded calls may show only part of its access. Mods per level: L0 Draws & remembers: 527, L1 Reads: 1589, L2 Writes or runs: 3394, L3 Uses the network: 692, Unknown access: 208.
 
 ## Catalogue
 
@@ -14,7 +14,7 @@ Mods are Claude Code plugins whose JavaScript or TypeScript hooks run inside a s
 
 ## Topics
 
-- [Prompt cache mods](https://mods.aidojo.si/topics/prompt-cache/): 263 mods that show the cache timer, keep it warm or warn before a cold send.
+- [Prompt cache mods](https://mods.aidojo.si/topics/prompt-cache/): 284 mods that show the cache timer, keep it warm or warn before a cold send.
 
 ## Ask Claude to find a mod
 
