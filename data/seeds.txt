@@ -96,6 +96,9 @@ qualixar/modstage
 RadTech-Solutions/agent-pager
 RadTech-Solutions/modwall
 reporails/arcade
+Ron-Nefyodov/pet-mod
+Ron-Nefyodov/prompt-library-mod
+Ron-Nefyodov/wrapped-mod
 ruihe774/cc-micro-compaction
 saiharsha03/clawd-spinner
 samaphp/session-links
