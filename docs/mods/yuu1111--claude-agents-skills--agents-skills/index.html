@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>agents-skills, a Claude Code mod by yuu1111 | Awesome Claude Code Mods</title>
+<meta name="description" content="Load Agent Skills from the shared .agents/skills directories (project and user) into Claude Code Scan: L1 reads, passes validation on 2.1.310."><meta name="theme-color" content="#f0eee6" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1c1c1a" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://mods.aidojo.si/mods/yuu1111--claude-agents-skills--agents-skills/"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/site.css">
+<meta property="og:type" content="website"><meta property="og:title" content="agents-skills, a Claude Code mod"><meta property="og:description" content="Load Agent Skills from the shared .agents/skills directories (project and user) into Claude Code Scan: L1 reads, passes validation on 2.1.310."><meta property="og:url" content="https://mods.aidojo.si/mods/yuu1111--claude-agents-skills--agents-skills/">
+<meta property="og:image" content="https://mods.aidojo.si/social-preview.png?v=2"><meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareSourceCode","@id":"https://mods.aidojo.si/mods/yuu1111--claude-agents-skills--agents-skills/#mod","name":"agents-skills","url":"https://mods.aidojo.si/mods/yuu1111--claude-agents-skills--agents-skills/","codeRepository":"https://github.com/yuu1111/claude-agents-skills","runtimePlatform":"Claude Code","license":"https://spdx.org/licenses/MIT.html","description":"Load Agent Skills from the shared .agents/skills directories (project and user) into Claude Code","author":{"@type":"Person","name":"yuu1111","url":"https://github.com/yuu1111"},"isPartOf":{"@id":"https://mods.aidojo.si/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Claude Code mods","item":"https://mods.aidojo.si/"},{"@type":"ListItem","position":2,"name":"agents-skills","item":"https://mods.aidojo.si/mods/yuu1111--claude-agents-skills--agents-skills/"}]}]}</script></head><body>
+<div class="mast"><header class="shell"><a href="/" class="brand" aria-label="Claude Mods home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11 5H5v22h6M21 5h6v22h-6M16 10v12M10 16h12"/></svg><span>claude<span class="brand-light">mods</span></span></a><nav aria-label="Main navigation"><a href="/#directory">The collection</a><a href="/#about">About mods</a><a class="github-link" href="https://github.com/karanb192/awesome-claude-code-mods" aria-label="Star the Claude Code mods list on GitHub"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 2.8 5.7 6.3.9-4.5 4.4 1.1 6.2-5.7-3-5.7 3 1.1-6.2L2.9 9.6l6.3-.9Z"/></svg>Star on GitHub</a></nav></header></div>
+<main class="shell mod-page" id="main">
+<p class="crumbs"><a href="/#yuu1111--claude-agents-skills--agents-skills">All Claude Code mods</a><span aria-hidden="true">/</span><span>yuu1111/claude-agents-skills</span></p>
+<h1>agents-skills</h1>
+<p class="byline">A Claude Code mod in <a href="https://github.com/yuu1111/claude-agents-skills">yuu1111/claude-agents-skills</a></p>
+<p class="lede">Load Agent Skills from the shared .agents/skills directories (project and user) into Claude Code</p>
+
+<section class="summary" aria-label="Scan summary"><p class="summary-line">agents-skills reaches L1 (reads) and passed <code>claude plugin validate</code> on Claude Code 2.1.310.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 7</li><li>Access from classified calls: L1, reads: reads files, reads env vars</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install agents-skills --marketplace yuu1111/claude-agents-skills</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
+<div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads files, reads env vars</span></div>
+<div><h2>Validation</h2><span class="status">Passed on Claude Code 2.1.310</span></div></div>
+<p class="actions"><a class="source" href="https://github.com/yuu1111/claude-agents-skills/tree/main/plugins/agents-skills">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#yuu1111--claude-agents-skills--agents-skills">Back to the list</a></p>
+<section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
+<dl>
+
+    <dt>Observed events</dt><dd>Skill calls</dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.compose, command.run, tool.call {tool=Skill}</code></dd>
+    <dt>API calls</dt><dd><code>$.command.list, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.session.cwd</code></dd>
+
+    <dt>Validation on 2.1.310</dt><dd>Passed</dd>
+
+
+    <dt>Scanned revision</dt><dd><a href="https://github.com/yuu1111/claude-agents-skills/tree/77bacbb3ece323919e6da7973e5a90908db2b5bb"><code>77bacbb3ece3</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/yuu1111/claude-agents-skills/blob/77bacbb3ece323919e6da7973e5a90908db2b5bb/.claude-plugin/marketplace.json">claude-agents-skills</a></dd></dl>
+<p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
+
+<section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/yuu1111--claude-agents-skills--agents-skills-reach.svg" alt="Reach badge for agents-skills"> <img src="/badges/yuu1111--claude-agents-skills--agents-skills-validates.svg" alt="Validation badge for agents-skills"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/yuu1111--claude-agents-skills--agents-skills-reach.svg)](https://mods.aidojo.si/mods/yuu1111--claude-agents-skills--agents-skills/)
+[![validates](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/yuu1111--claude-agents-skills--agents-skills-validates.svg)](https://mods.aidojo.si/mods/yuu1111--claude-agents-skills--agents-skills/)</code></pre></section>
+</main>
+<footer class="shell"><a href="/" class="brand"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M11 5H5v22h6M21 5h6v22h-6M16 10v12M10 16h12"/></svg><span>claude<span class="brand-light">mods</span></span></a><p>An independent community scan.<br>Not an official Anthropic directory.</p><a href="https://github.com/karanb192/awesome-claude-code-mods">Awesome Claude Code Mods on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a></footer>
+</body></html>
