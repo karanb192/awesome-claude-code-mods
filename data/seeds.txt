@@ -92,6 +92,7 @@ paragpandyareal/lazy-panda-panel
 paragpandyareal/swear-slap
 pawandeepdhall/claude-mods
 plaxagoras/clawd-tales
+plaxagoras/jungle-run
 qualixar/modstage
 RadTech-Solutions/agent-pager
 RadTech-Solutions/modwall
