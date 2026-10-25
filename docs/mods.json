@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-22T06:15:55.147Z",
   "claudeVersion": "2.1.308",
-  "repos": 3165,
+  "repos": 3166,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -740611,6 +740611,122 @@
       "stars": 33,
       "pushedAt": "2026-10-24T05:14:40Z",
       "createdAt": "2026-06-06T20:38:12Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "dophamine/claude-suggest:.",
+      "repo": "dophamine/claude-suggest",
+      "path": ".",
+      "sourceCommit": "ca35c920fab89da237eae19bf607f7605df649c0",
+      "name": "suggest",
+      "description": "Clickable suggested replies under Claude's last message",
+      "author": "Alex Pakhaliuk",
+      "homepage": "https://github.com/dophamine/claude-suggest",
+      "url": "https://github.com/dophamine/claude-suggest",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "suggest"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.suggest",
+          "matcher": {
+            "origin has {kind": "suggestion}"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "PromptHint"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AssistantMessage"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.command.register",
+        "$.command.run",
+        "$.config.set",
+        "$.model.complete",
+        "$.prompt.fill",
+        "$.prompt.read",
+        "$.prompt.submit",
+        "$.prompt.suggest",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.resolve",
+        "$.ui.status"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.308",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-suggest",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "changes config",
+          "drives Claude",
+          "writes the prompt box",
+          "reads the prompt box",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt"
+      ],
+      "draws": [
+        "PromptHint",
+        "AssistantMessage"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-24T11:10:53Z",
+      "createdAt": "2026-10-23T12:16:21Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

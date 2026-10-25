@@ -773,6 +773,7 @@ DominickGiordano/claude-mods
 dominicrico/jev-router
 DonMecha/tool-tape
 dontcallmejames/claude-usage-meter
+dophamine/claude-suggest
 Dos2Locos/claude-code-mods
 dot-agi/arrester
 dot-agi/downrange
