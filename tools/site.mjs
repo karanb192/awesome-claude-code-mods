@@ -176,7 +176,7 @@ Sitemap: ${site}sitemap.xml
 }
 
 // llms.txt (llmstxt.org): what an agent needs to describe or query the list without parsing the page.
-// topics: the topic pages with listed mods, as { slug, short, summary }.
+// topics: the topic pages with listed mods, as { slug, title, summary }.
 export function renderLlms(data, topics = []) {
   const mods = data.mods.filter(mod => mod.kind === 'mod')
   const date = data.generated.slice(0, 10)
@@ -200,7 +200,7 @@ Mods are Claude Code plugins whose JavaScript or TypeScript hooks run inside a s
 ${topics.length ? `
 ## Topics
 
-${topics.map(topic => `- [${topic.short} mods](${site}topics/${topic.slug}/): ${topic.summary}`).join('\n')}
+${topics.map(topic => `- [${topic.title}](${site}topics/${topic.slug}/): ${topic.summary}`).join('\n')}
 ` : ''}
 ## Ask Claude to find a mod
 

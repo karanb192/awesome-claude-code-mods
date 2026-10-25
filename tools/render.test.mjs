@@ -969,7 +969,7 @@ test('topic pages list their members, are linked from the homepage, A to Z pages
   const home = readFileSync(join(dir, 'docs/index.html'), 'utf8')
   assert.match(home, /<div class="browse topics" role="navigation" aria-label="Browse mods by topic"><span>Browse by topic<\/span><a href="\/topics\/prompt-cache\/">Prompt cache<\/a><\/div>/)
   assert.match(readFileSync(join(dir, 'docs/browse/m/index.html'), 'utf8'), /<a href="\/topics\/prompt-cache\/">Prompt cache<\/a>/)
-  assert.match(readFileSync(join(dir, 'docs/llms.txt'), 'utf8'), /## Topics\n\n- \[Prompt cache mods\]\(https:\/\/mods\.aidojo\.si\/topics\/prompt-cache\/\): 2 mods that show the cache timer, keep it warm or warn before a cold send\.\n/)
+  assert.match(readFileSync(join(dir, 'docs/llms.txt'), 'utf8'), /## Topics\n\n- \[Prompt cache mods for Claude Code\]\(https:\/\/mods\.aidojo\.si\/topics\/prompt-cache\/\): 2 mods that show the cache timer, keep it warm or warn before a cold send\.\n/)
   const sitemap = xml => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1].replace('https://mods.aidojo.si/', '/'))
   assert.deepEqual(sitemap(readFileSync(join(dir, 'docs/sitemap.xml'), 'utf8')), ['/', '/access/', '/topics/prompt-cache/', '/browse/m/', '/mods/example--mods--mod-0/', '/mods/example--mods--mod-1/', '/mods/example--mods--mod-4/', '/mods/example--mods--mod-5/'])
   for (const i of [1, 5]) assert.match(modPage(dir, `example--mods--mod-${i}`), /<p class="topics-line">Listed under <a href="\/topics\/prompt-cache\/">Prompt cache mods for Claude Code<\/a>\.<\/p>/)
