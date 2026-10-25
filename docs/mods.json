@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-22T06:15:55.147Z",
   "claudeVersion": "2.1.308",
-  "repos": 3166,
+  "repos": 3167,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -740727,6 +740727,132 @@
       "stars": 1,
       "pushedAt": "2026-10-24T11:10:53Z",
       "createdAt": "2026-10-23T12:16:21Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "sairam0424/claude-prompt-lift:.",
+      "repo": "sairam0424/claude-prompt-lift",
+      "path": ".",
+      "sourceCommit": "531cac6c00e4b544c972b915277eb4c25d33f188",
+      "name": "prompt-lift",
+      "description": "Enhance your prompts using project instructions and skills",
+      "author": "Sairam Ugge",
+      "homepage": "https://github.com/sairam0424/claude-prompt-lift",
+      "url": "https://github.com/sairam0424/claude-prompt-lift",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "classic.SessionStart",
+          "matcher": {
+            "source": "clear|resume|fork"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "prompt-lift"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.command.list",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.model.complete",
+        "$.prompt.fill",
+        "$.prompt.read",
+        "$.prompt.submit",
+        "$.session.messages",
+        "$.session.model",
+        "$.session.root",
+        "$.session.usage",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.keys",
+        "$.store.set",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.308",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-prompt-lift",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "drives Claude",
+          "writes the prompt box",
+          "reads files",
+          "reads env vars",
+          "reads the transcript",
+          "reads the prompt box",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks",
+        "every prompt"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-22T17:48:39Z",
+      "createdAt": "2026-10-17T06:34:07Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
