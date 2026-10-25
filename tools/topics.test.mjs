@@ -10,8 +10,9 @@ const record = (repo, name, extra = {}) => ({
 })
 const json = (extra = {}) => JSON.stringify([{ slug: 'prompt-cache', title: 'Prompt cache mods for Claude Code', short: 'Prompt cache', description: 'Mods about the cache.', patterns: ['prompt[ -]cache', 'cache[ -]warm'], include: [], exclude: [], related: [], ...extra }])
 const topic = extra => readTopics(json(extra))[0]
+const topicFor = slug => readTopics(json({ slug, title: `${slug} mods`, short: slug }))[0]
 const entries = mods => mods.map(mod => ({ mod, slug: `${mod.repo.replace('/', '--')}--${mod.name}` }))
-const nav = [{ slug: 'prompt-cache', short: 'Prompt cache' }]
+const nav = [{ slug: 'prompt-cache', short: 'Prompt cache', title: 'Prompt cache mods for Claude Code' }]
 const page = (mods, extra, options) => renderTopicPage(topic(extra), entries(mods), { topics: nav, letters: ['c'], version: '2.1.302', ...options })
 const order = (html, names) => names.map(name => html.indexOf(`>${name}</a>`))
 const BANNED = /\b(safe|vetted|secure|best|top|recommended|endorsed)\b/i
@@ -41,7 +42,7 @@ test('the data file is checked: slugs, prose, patterns and related slugs', () =>
   assert.throws(() => readTopics(json({ patterns: ['prompt[ -cache'] })), /invalid pattern "prompt\[ -cache"/)
   assert.throws(() => readTopics(json({ slug: 'Prompt_Cache' })), /invalid or repeated slug/)
   assert.throws(() => readTopics(JSON.stringify([JSON.parse(json())[0], JSON.parse(json())[0]])), /invalid or repeated slug/)
-  assert.throws(() => readTopics(json({ slug: 'usage-meters' })), /has no prose/)
+  assert.throws(() => readTopics(json({ slug: 'guards' })), /has no prose/)
   assert.throws(() => readTopics(json({ related: ['usage-meters'] })), /relates to "usage-meters", which is not another topic/)
   assert.throws(() => readTopics(json({ related: ['prompt-cache'] })), /relates to "prompt-cache"/)
   assert.throws(() => readTopics(json({ title: ' ' })), /needs a title/)
@@ -49,6 +50,8 @@ test('the data file is checked: slugs, prose, patterns and related slugs', () =>
   assert.throws(() => readTopics('{}'), /must be an array/)
   const real = readTopics(readFileSync(new URL(`../${TOPICS_PATH}`, import.meta.url), 'utf8'))
   assert.deepEqual(real.map(t => t.slug).sort(), [...PROSE_SLUGS].sort(), 'every slug in the data file has prose and every prose block has a slug')
+  assert.deepEqual(real.map(t => [t.slug, t.related]), [['prompt-cache', ['usage-meters']], ['usage-meters', ['prompt-cache']]], 'the two topics relate to each other')
+  for (const t of real) for (const id of [...t.include, ...t.exclude]) assert.match(id, /^[^:]+\/[^:]+:.+$/, `${t.slug} id ${id}`)
 })
 
 test('retained records and empty descriptions are not listed, and a failed mod is listed with its status', () => {
@@ -118,9 +121,12 @@ test('catalogue prose carries no banned word and no dash, checked before any dat
     sentinel(6, { name: 'cache-timer', footprint: { status: 'unavailable' }, hooks: [{ event: 'prompt.submit', matcher: {} }] }),
     sentinel(7, { repo: 'karanb192/zq7', directory: { plugin: 'zq7l' } }),
   ]
-  for (const html of [page(mods), page([]), page(mods, {}, { letters: [] })]) {
-    assert.doesNotMatch(html, BANNED)
-    assert.doesNotMatch(html, /[–—]/)
+  for (const slug of PROSE_SLUGS) {
+    const t = topicFor(slug)
+    for (const html of [renderTopicPage(t, entries(mods), { topics: [t], letters: ['c'], version: '2.1.302' }), renderTopicPage(t, [], { topics: [t], letters: [], version: '2.1.302' })]) {
+      assert.doesNotMatch(html, BANNED, slug)
+      assert.doesNotMatch(html, /[–—]/, slug)
+    }
   }
   const html = page(mods)
   assert.ok(html.includes('zq1e') && html.includes('/plugin install zq1c --marketplace zq1a/zq1b') && html.includes('$.zq1f.zq1g'), 'the sentinels reached the page')
@@ -169,9 +175,9 @@ test('the page carries its canonical, title, description, breadcrumbs and Collec
 
 test('related topics link only when they are in the nav', () => {
   const related = { ...topic(), related: ['usage-meters'] }
-  const other = { slug: 'usage-meters', short: 'Usage meters' }
+  const other = { slug: 'usage-meters', short: 'Usage meters', title: 'Context and usage meters for Claude Code' }
   const linked = renderTopicPage(related, entries([record('o/r', 'a')]), { topics: [...nav, other], letters: [], version: '2.1.302' })
-  assert.match(linked, /<a href="\/topics\/usage-meters\/">Usage meters mods<\/a>/)
+  assert.match(linked, /<a href="\/topics\/usage-meters\/">Context and usage meters for Claude Code<\/a>/)
   assert.match(linked, /<a href="\/topics\/usage-meters\/">Usage meters<\/a>/, 'the nav row links it too')
   assert.doesNotMatch(renderTopicPage(related, entries([record('o/r', 'a')]), { topics: nav, letters: [], version: '2.1.302' }), /usage-meters/)
 })
@@ -210,4 +216,21 @@ test('each entry sits on its own line, so an added member leaves every other ent
   for (const line of entries(before)) assert.ok(after.includes(line), line.slice(0, 60))
   assert.equal(entries(after).filter(line => !before.includes(line)).length, 1)
   assert.ok(after.includes('<ul class="topic-list">') && after.includes('</ul></section>'), 'group wrappers sit on their own lines')
+})
+
+test('the usage meters prose counts the recorded calls over the reported footprints and reads the file figures', () => {
+  const t = topicFor('usage-meters')
+  const mods = [
+    record('o/r', 'usage-band', { calls: ['$.session.usage', '$.http.fetch', '$.ui.notice'], hooks: [{ event: 'prompt.submit', matcher: {} }] }),
+    record('p/r', 'cost-meter', { calls: ['$.session.usage', '$.process.run', '$.model.fork'] }),
+    record('q/r', 'context-bar', { footprint: { status: 'unavailable' }, calls: ['$.session.usage'] }),
+  ]
+  const html = renderTopicPage(t, entries(mods), { topics: [t], letters: ['u'], version: '2.1.302' })
+  assert.match(html, /<p class="lede">3 mods that show how full your context window is, how much of your plan’s 5-hour and weekly windows you have used or the session’s estimated cost so far, or warn you before a limit\./)
+  assert.match(html, /Of the 2 mods here with reported footprints, 2 record <code>\$\.session\.usage<\/code>, 1 records <code>\$\.http\.fetch<\/code>, 1 records a process call and 1 records a <code>\$\.model<\/code> method or <code>\$\.prompt\.submit<\/code>\./)
+  assert.match(html, /1 of the 3 mods here records a <code>prompt\.submit<\/code> hook\./)
+  for (const url of ['https://code.claude.com/docs/en/context-window#when-your-context-fills-up', 'https://support.claude.com/en/articles/11647753-how-do-usage-and-length-limits-work', 'https://code.claude.com/docs/en/costs#using-the-usage-command', 'https://platform.claude.com/docs/en/about-claude/pricing', 'https://code.claude.com/docs/en/plugins/mods/api#reach-files-processes-and-the-network']) assert.ok(html.includes(url), url)
+  assert.doesNotMatch(renderTopicPage(t, entries([mods[2]]), { topics: [t], letters: [], version: '2.1.302' }), /here with reported footprints/)
+  assert.equal(topicSummary(t, 889), '889 mods that show context fill, token use, plan limits or estimated cost, or warn before a limit.')
+  assert.equal(topicSummary(t, 1), '1 mod that shows context fill, token use, plan limits or estimated cost, or warns before a limit.')
 })

@@ -281,6 +281,7 @@ arthurglaizal/compact-token-bar
 arthurglaizal/quiet-token-bar
 arthurseredaa/clawdgotchi
 arthurseredaa/herdr-pane-peek
+arturogarrido/claudinho
 ArtyomITA/claude-plugins
 Arunjay4213/claude-mods
 arunkumar9t2/raven
@@ -772,6 +773,7 @@ DominickGiordano/claude-mods
 dominicrico/jev-router
 DonMecha/tool-tape
 dontcallmejames/claude-usage-meter
+dophamine/claude-suggest
 Dos2Locos/claude-code-mods
 dot-agi/arrester
 dot-agi/downrange
@@ -2427,6 +2429,7 @@ sahiltalwar88/claude-mods
 saidMounaim/snake-mod
 saiharsha03/clawd-spinner
 Saiharsharudra03/clawd-spinner
+sairam0424/claude-prompt-lift
 saita08/my-cc-mods
 Sajid-Rahman0126/claude-studio-mods
 saksham10arora-dotcom/claude-frugal
@@ -2747,6 +2750,7 @@ TerraNita/claude-mod-usage-band
 testy-cool/claude-agent-portraits
 testy-cool/mermaid-c4-zoom
 TFoxik/claude-model-router
+Th3-W6rst/claude-realce
 thangdo19/claude-code-mods
 thangvofastboy/claude-mods
 thanhnhoncntt/oxen-pet
