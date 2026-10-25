@@ -101,6 +101,7 @@ RadTech-Solutions/modwall
 reporails/arcade
 ruihe774/cc-micro-compaction
 saiharsha03/clawd-spinner
+sairam0424/claude-copy-back
 sairam0424/claude-prompt-lift
 samaphp/session-links
 samox73/claude-code-latex
