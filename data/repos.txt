@@ -2750,6 +2750,7 @@ TerraNita/claude-mod-usage-band
 testy-cool/claude-agent-portraits
 testy-cool/mermaid-c4-zoom
 TFoxik/claude-model-router
+Th3-W6rst/claude-realce
 thangdo19/claude-code-mods
 thangvofastboy/claude-mods
 thanhnhoncntt/oxen-pet

@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-22T06:15:55.147Z",
   "claudeVersion": "2.1.308",
-  "repos": 3167,
+  "repos": 3168,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -740853,6 +740853,276 @@
       "stars": 0,
       "pushedAt": "2026-10-22T17:48:39Z",
       "createdAt": "2026-10-17T06:34:07Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "Th3-W6rst/claude-realce:.",
+      "repo": "Th3-W6rst/claude-realce",
+      "path": ".",
+      "sourceCommit": "2a0d006a631c1bb44ad5e336618613f1d19e92af",
+      "name": "realce",
+      "description": "Colors Claude's replies by meaning and makes the session easier to follow, every aid behind its own flag",
+      "author": "Th3-W6rst",
+      "homepage": "https://github.com/Th3-W6rst/claude-realce",
+      "url": "https://github.com/Th3-W6rst/claude-realce",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "config.set",
+          "matcher": {
+            "key": "theme"
+          }
+        },
+        {
+          "event": "config.set",
+          "matcher": {
+            "key": "language"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "session.append",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "realce"
+          }
+        },
+        {
+          "event": "prompt.compose",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AssistantMessage"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolUse"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolGroup"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolResult"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolResult",
+            "props has {tool": "Edit|Write|NotebookEdit}"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "TurnDuration"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "UserMessage",
+            "props.origin has {kind": "task-notification}"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Spinner"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "realce-sessao"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "AskUserQuestion"
+          }
+        },
+        {
+          "event": "prompt.edit",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AskUserQuestion"
+          }
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "realce-flags"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "realce-sessao"
+          }
+        },
+        {
+          "event": "agent.offer",
+          "matcher": {
+            "agent": "realce:reader"
+          }
+        }
+      ],
+      "calls": [
+        "$.agent.list",
+        "$.agent.spawn",
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.config.list",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.fs.write",
+        "$.http.fetch",
+        "$.model.complete",
+        "$.model.fork",
+        "$.process.run",
+        "$.prompt.compose",
+        "$.prompt.fill",
+        "$.prompt.submit",
+        "$.session.id",
+        "$.session.messages",
+        "$.session.version",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.close",
+        "$.ui.copy",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.notify",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.scroll",
+        "$.ui.selection",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.308",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-realce",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "network",
+          "runs processes",
+          "writes files",
+          "drives Claude",
+          "writes the prompt box",
+          "writes the clipboard",
+          "reads files",
+          "reads env vars",
+          "reads settings",
+          "reads the transcript",
+          "reads the selection",
+          "reads the system prompt",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt",
+        "every tool call",
+        "AskUserQuestion calls"
+      ],
+      "draws": [
+        "AssistantMessage",
+        "ToolUse",
+        "ToolGroup",
+        "ToolResult",
+        "TurnDuration",
+        "UserMessage",
+        "Spinner",
+        "AbovePrompt",
+        "Pane",
+        "AskUserQuestion"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-22T14:08:09Z",
+      "createdAt": "2026-10-19T22:33:11Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
