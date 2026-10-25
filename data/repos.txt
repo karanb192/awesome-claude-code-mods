@@ -1242,7 +1242,6 @@ im-adarsh/claude-mods
 im-ksc/ks-claude-code-mods
 imakarov/claude-copy-blocks
 imgidedin/claude-mod-limits-left
-imMamdouhaboammar/get-fable
 imsalik/claude-mods
 imsungbin/quackpit-mod
 ImTBY/clawd-quest

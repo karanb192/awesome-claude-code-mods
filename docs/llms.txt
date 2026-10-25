@@ -1,8 +1,8 @@
 # Awesome Claude Code Mods
 
-> 6,097 Claude Code mods, with what each one can access before you install it. Context and usage meters, prompt cache warmers, status lines, guards and more, with install hints. Scanned from public GitHub repositories with claude plugin validate; an independent scan, not an official Anthropic directory. Last scanned 2026-10-22 on Claude Code 2.1.308.
+> 6,124 Claude Code mods, with what each one can access before you install it. Context and usage meters, prompt cache warmers, status lines, guards and more, with install hints. Scanned from public GitHub repositories with claude plugin validate; an independent scan, not an official Anthropic directory. Last scanned 2026-10-25 on Claude Code 2.1.310.
 
-Mods are Claude Code plugins whose JavaScript or TypeScript hooks run inside a session. They need Claude Code 2.1.287 or later and are on by default. Each entry records the hooks and API calls reported by `claude plugin validate`. Access levels describe the widest reach of those calls and are not safety ratings. An unavailable or incomplete footprint has unknown access, not L0; recorded calls may show only part of its access. Mods per level: L0 Draws & remembers: 511, L1 Reads: 1515, L2 Writes or runs: 3220, L3 Uses the network: 660, Unknown access: 191.
+Mods are Claude Code plugins whose JavaScript or TypeScript hooks run inside a session. They need Claude Code 2.1.287 or later and are on by default. Each entry records the hooks and API calls reported by `claude plugin validate`. Access levels describe the widest reach of those calls and are not safety ratings. An unavailable or incomplete footprint has unknown access, not L0; recorded calls may show only part of its access. Mods per level: L0 Draws & remembers: 512, L1 Reads: 1516, L2 Writes or runs: 3238, L3 Uses the network: 658, Unknown access: 200.
 
 ## Catalogue
 
@@ -14,8 +14,8 @@ Mods are Claude Code plugins whose JavaScript or TypeScript hooks run inside a s
 
 ## Topics
 
-- [Prompt cache mods for Claude Code](https://mods.aidojo.si/topics/prompt-cache/): 263 mods that show the cache timer, keep it warm or warn before a cold send.
-- [Context and usage meters for Claude Code](https://mods.aidojo.si/topics/usage-meters/): 889 mods that show context fill, token use, plan limits or estimated cost, or warn before a limit.
+- [Prompt cache mods for Claude Code](https://mods.aidojo.si/topics/prompt-cache/): 267 mods that show the cache timer, keep it warm or warn before a cold send.
+- [Context and usage meters for Claude Code](https://mods.aidojo.si/topics/usage-meters/): 892 mods that show context fill, token use, plan limits or estimated cost, or warn before a limit.
 
 ## Ask Claude to find a mod
 
@@ -27,7 +27,7 @@ Install mod-finder in a Claude Code terminal session with `/plugin install mod-f
 
 - [ruview-live](https://github.com/ruvnet/RuView/tree/main/harness/ruview/mod): RuView live sensing in Claude Code: /ruview opens a pane beside the transcript with three views: an overview of your CSI nodes (ESP32, Realtek) and 60 GHz rada…
 - [ruflo-adr](https://github.com/ruvnet/ruflo/tree/main/plugins/ruflo-adr): ADR lifecycle management: create, index, reconcile, supersede, check compliance, and link Architecture Decision Records to code via AgentDB hierarchical store…
-- [ruflo-agent](https://github.com/ruvnet/ruflo/tree/main/plugins/ruflo-agent): Agent runtimes for ruflo: local WASM-sandboxed agents (rvagent: 10 wasm_agent_*/wasm_gallery_* MCP tools, built on @ruvector/rvagent-wasm + @ruvector/ruvllm-wa…
+- [ruflo-agent](https://github.com/ruvnet/ruflo/tree/main/plugins/ruflo-agent): Local WASM and managed cloud runtimes with bounded dynamic workflows, live capability discovery and session-local mod policy.
 - [ruflo-agentdb](https://github.com/ruvnet/ruflo/tree/main/plugins/ruflo-agentdb): Substrate plugin for Ruflo memory: AgentDB controller bridge (15 agentdb_* MCP tools), RuVector ONNX embeddings (10 embeddings_* tools incl. RaBitQ 32x quantiz…
 - [ruflo-agntcy](https://github.com/ruvnet/ruflo/tree/main/plugins/ruflo-agntcy): AGNTCY/Outshift Internet-of-Cognition runtime integration for Ruflo: SLIM secure transport for cross-host agent coordination, CASA intent-scoped tool authoriza…
 - [ruflo-ai-team](https://github.com/ruvnet/ruflo/tree/main/plugins/ruflo-ai-team): Give Claude a tenant-isolated AI team that divides work, coordinates progress, recalls approved context, and returns evidence-backed results.
