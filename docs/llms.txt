@@ -1,8 +1,8 @@
 # Awesome Claude Code Mods
 
-> A community list of 5463 Claude Code mods (function hooks), scanned from public GitHub repositories with what each mod can read, write, run or send over the network. An independent scan, not an official Anthropic directory. Last scanned 2026-10-19 on Claude Code 2.1.303.
+> 6,092 Claude Code mods, with what each one can access before you install it. Context and usage meters, prompt cache warmers, status lines, guards and more, with install hints. Scanned from public GitHub repositories with claude plugin validate; an independent scan, not an official Anthropic directory. Last scanned 2026-10-22 on Claude Code 2.1.308.
 
-Mods are Claude Code plugins whose JavaScript or TypeScript hooks run inside a session. They need Claude Code 2.1.287 or later and are on by default. Each entry records the hooks and API calls reported by `claude plugin validate`. Access levels describe the widest reach of those calls and are not safety ratings. An unavailable or incomplete footprint has unknown access, not L0; recorded calls may show only part of its access. Mods per level: L0 Draws & remembers: 475, L1 Reads: 1366, L2 Writes or runs: 2851, L3 Uses the network: 611, Unknown access: 160.
+Mods are Claude Code plugins whose JavaScript or TypeScript hooks run inside a session. They need Claude Code 2.1.287 or later and are on by default. Each entry records the hooks and API calls reported by `claude plugin validate`. Access levels describe the widest reach of those calls and are not safety ratings. An unavailable or incomplete footprint has unknown access, not L0; recorded calls may show only part of its access. Mods per level: L0 Draws & remembers: 511, L1 Reads: 1514, L2 Writes or runs: 3217, L3 Uses the network: 659, Unknown access: 191.
 
 ## Catalogue
 
@@ -11,6 +11,10 @@ Mods are Claude Code plugins whose JavaScript or TypeScript hooks run inside a s
 - [catalogue.md](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/catalogue.md): the same catalogue as Markdown tables
 - [What can a Claude Code mod access?](https://mods.aidojo.si/access/): how mods get access, what the four levels mean and what the scan found across the catalogue
 - [README](https://github.com/karanb192/awesome-claude-code-mods#readme): Featured picks, how to use mods, how the scan works
+
+## Topics
+
+- [Prompt cache mods](https://mods.aidojo.si/topics/prompt-cache/): 263 mods that show the cache timer, keep it warm or warn before a cold send.
 
 ## Ask Claude to find a mod
 

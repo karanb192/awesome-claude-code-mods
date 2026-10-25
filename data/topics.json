@@ -1,0 +1,38 @@
+[
+  {
+    "slug": "prompt-cache",
+    "title": "Prompt cache mods for Claude Code",
+    "short": "Prompt cache",
+    "description": "Claude Code mods that show the prompt cache timer, keep the cache warm or warn before a cold send, each with what a static scan recorded it can access.",
+    "patterns": [
+      "prompt[ -]cache",
+      "cache[ -]warm|keep[ -]?warm|keepcachewarm",
+      "cold[ -](send|resume|restart|cache)",
+      "cache[ -](tax|expir|timer|clock|countdown|ttl|hit|miss|guard|keeper|alert|band|meter|status)"
+    ],
+    "include": [],
+    "exclude": [
+      "KilimcininKorOglu/claude-code-mods:plugins/effort-auto",
+      "trytofly94/handoff-compact:.",
+      "noash-xrc/claude-tools:auto-effort",
+      "mako-code/gobworks:mods/jev/jev-topic",
+      "joeldg/claude-mods:effort-router",
+      "moelahmady/jev-model-router:.",
+      "mephistopheles4/grimoire:.",
+      "amiralimardani-art/token-guardrails:effort-router",
+      "yinjs/claude-jev:.",
+      "blackmath88/routing-mod-claude:.",
+      "sofanaja44/slash:.",
+      "pradyb/claude-mods:handover",
+      "alexcz-a11y/claude-mods:dispatch-pilot",
+      "Hnquangg123/kessoku-ultimate-bocchi:.",
+      "drdickgraysonjr/chalkery:plugins/gate-meter",
+      "drdickgraysonjr/chalkery:plugins/handoff-relay",
+      "mako-code/gobworks:mods/tuning/autotune",
+      "Lunik/gmz-claude-marketplace:clawd-gotchi",
+      "boxiaolanya2008/claudecode-plus-mod:bundle",
+      "madolphe/skill-trace:plugins/skill-trace"
+    ],
+    "related": []
+  }
+]

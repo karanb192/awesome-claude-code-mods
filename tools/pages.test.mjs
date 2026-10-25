@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { assignPages, formatRegistry, indexable, readRegistry, renderModPage, renderRedirect, scanSummary } from './pages.mjs'
+import { accessLine, assignPages, formatRegistry, indexable, installLine, readRegistry, renderModPage, renderRedirect, scanSummary } from './pages.mjs'
 import { grade } from './grade.mjs'
 
 const mod = (repo, name, extra = {}) => ({
@@ -306,4 +306,45 @@ test('calls in other namespaces and mod state reads are stated apart from the le
   assert.match(text(foreignOnly.html), /^The scanner could not classify any of the 2 API methods tool references, so its access is unknown/)
   assert.doesNotMatch(foreignOnly.html, /reaches L/)
   assert.doesNotMatch(scanSummary(scanned(['$.store.get']), '2.1.300').html, /mod state/)
+})
+
+test('the compact access line follows the same branches as the scan summary', () => {
+  const line = (calls, extra) => accessLine(scanned(calls, extra)).html
+  assert.equal(line(['$.fs.write'], { footprint: { status: 'unavailable' } }), 'Access unknown, the footprint is incomplete.')
+  assert.equal(line([]), 'No API methods recorded.')
+  assert.equal(line(['$.prompt.steer', '$.fs.readFile']), 'Access unknown, no call could be classified. Unclassified calls: <code>$.prompt.steer</code>, <code>$.fs.readFile</code>, full access unknown.')
+  assert.equal(line(['$.env.get', '$.process.run']), 'L2 writes or runs: runs processes, reads env vars.')
+  assert.equal(line(['$.ui.open']), 'L0 draws and remembers: draws.')
+  assert.equal(line(['$.ui.open', '$.prompt.steer']), 'L0 draws and remembers by classified calls: draws. Unclassified calls: <code>$.prompt.steer</code>, full access unknown.', 'an unclassified core call never lifts the level')
+  assert.equal(line(['$.ui.open', '$.sidebar.set']), 'L0 draws and remembers by classified calls: draws. Calls in a namespace that is not in the Claude Code 2.1.302 core table: <code>$.sidebar.set</code>, full access unknown.')
+  assert.equal(line(['$.state.get', '$.store.get']), 'L1 reads: reads mod state (owner not recorded), persists state.')
+  assert.doesNotMatch(line(['$.store.get']), /mod state/)
+  for (const calls of [['$.fs.write'], [], ['$.prompt.steer'], ['$.ui.open', '$.prompt.steer', '$.mods.hello', '$.state.get'], ['$.http.fetch', '$.process.run']]) {
+    for (const extra of [{}, { footprint: { status: 'unavailable' } }, { validate: { status: 'unknown', errors: ['x'] }, lastKnownValidate: { status: 'passed' } }]) {
+      const record = scanned(calls, extra)
+      const summary = scanSummary(record, '2.1.300'), compact = accessLine(record)
+      assert.deepEqual({ level: compact.level, labels: compact.labels, named: compact.named }, { level: summary.level, labels: summary.labels, named: summary.named }, `${calls} ${JSON.stringify(extra)}`)
+      for (const call of compact.named) assert.ok(summary.html.includes(`<code>${call}</code>`) && compact.html.includes(`<code>${call}</code>`), call)
+    }
+  }
+})
+
+test('the install line prints the command, its origin and the name check as the mod page does', () => {
+  const root = { marketplaces: [{ path: '.claude-plugin/marketplace.json', name: 'b', status: 'passed', errors: [] }] }
+  assert.equal(installLine(mod('a/b', 'tool', root)), "Install hint: <code>/plugin install tool --marketplace a/b</code>, from the repository's own marketplace. Confirm the plugin name in the repository's README before installing.")
+  assert.equal(installLine(mod('a/b', 'tool', { directory: { plugin: 'tool' } })), "Install hint: <code>/plugin install tool</code>, from Anthropic's plugin directory.")
+  assert.equal(installLine(mod('a/b', 'tool', { ...root, validate: { status: 'failed', claudeVersion: '2.1.300', errors: ['x'] } })), "Install hint: <code>/plugin install tool --marketplace a/b</code>, from the repository's own marketplace. Confirm the plugin name in the repository's README before installing. It fails validation in the latest scan, so it may not install.")
+  assert.equal(installLine(mod('a/b', 'tool')), 'To install it, open the repository and follow the author’s setup instructions.')
+  assert.equal(installLine(mod('a/b', 'x<y', root)), "Install hint: <code>/plugin install x&lt;y --marketplace a/b</code>, from the repository's own marketplace. Confirm the plugin name in the repository's README before installing.")
+  assert.equal(installLine(mod('anthropics/claude-code', 'x', { kind: 'builtin' })), 'It ships inside Claude Code, so there is nothing to install.')
+  const page = renderModPage(mod('a/b', 'tool', root), { slug: 's', anchor: 's', claudeVersion: '2.1.300' })
+  assert.match(page, /From the repository's own marketplace\. Confirm the plugin name in the repository's README before installing\. Mods need Claude Code 2\.1\.287 or later\./)
+})
+
+test('a member mod page links its topic page, and a non-member page is unchanged', () => {
+  const options = { slug: 's', anchor: 's', claudeVersion: '2.1.300' }
+  const plain = renderModPage(mod('a/b', 'tool'), options)
+  assert.equal(renderModPage(mod('a/b', 'tool'), { ...options, topics: [] }), plain)
+  const listed = renderModPage(mod('a/b', 'tool'), { ...options, topics: [{ slug: 'prompt-cache', title: 'Prompt cache mods for Claude Code' }, { slug: 'x', title: 'X & <y>' }] })
+  assert.match(listed, /<\/div><\/div>\n<p class="topics-line">Listed under <a href="\/topics\/prompt-cache\/">Prompt cache mods for Claude Code<\/a>, <a href="\/topics\/x\/">X &amp; &lt;y&gt;<\/a>\.<\/p>\n<p class="actions">/)
 })

@@ -25,7 +25,7 @@ on:
         type: boolean
         default: false
   pull_request:
-    paths: ["tools/**", "finder/**", "data/seeds.txt", "data/duplicates.txt", "data/catalogs.txt", "data/fixture-exceptions.txt", "data/pages.json", "package.json", "package-lock.json", ".github/workflows/nightly.yml", ".github/workflows/weekly-retirement.yml", ".github/workflows/publish-seeds.yml"]
+    paths: ["tools/**", "finder/**", "data/seeds.txt", "data/duplicates.txt", "data/catalogs.txt", "data/fixture-exceptions.txt", "data/pages.json", "data/topics.json", "package.json", "package-lock.json", ".github/workflows/nightly.yml", ".github/workflows/weekly-retirement.yml", ".github/workflows/publish-seeds.yml"]
 
 permissions:
   contents: read

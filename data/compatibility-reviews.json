@@ -197,5 +197,22 @@
     ],
     "reason": "The null character marks quoted spans inside the shell-command classifier. Quoted command heads are rejected and displayed labels use matched command, subcommand and flag words; this private marker is not rendered or passed to next() as rewritten text.",
     "source": "https://github.com/muellerei/sweet-spot/blob/8750a5390d58c52919973453efed63a330d5f4f9/hooks/standing.ts#L131"
+  },
+  {
+    "id": "shohamtal/cc-mod-opensearch-console:.",
+    "sourceCommit": "f11007dcc9d1f6d734398b7c09b4e0f40584b580",
+    "claudeVersion": "2.1.304",
+    "warnings": [
+      {
+        "code": "ui-control-characters",
+        "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+        "evidence": [
+          { "file": "hooks/lib.ts", "line": 167 },
+          { "file": "hooks/register.tsx", "line": 158 }
+        ]
+      }
+    ],
+    "reason": "The null characters distinguish JSON-tree closing-row paths and separate a response ID from the search term in an internal cache key. The viewer receives highlighted display segments, not those paths or cache keys. Neither sentinel is passed to next() as rewritten props.text.",
+    "source": "https://github.com/shohamtal/cc-mod-opensearch-console/blob/f11007dcc9d1f6d734398b7c09b4e0f40584b580/hooks/register.tsx#L638-L642"
   }
 ]
