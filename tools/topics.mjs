@@ -59,7 +59,7 @@ const PROSE = {
   },
   'usage-meters': {
     summary: n => `${mods(n)} that ${verb(n, 'show')} context fill, token use, plan limits or estimated cost, or ${verb(n, 'warn')} before a limit.`,
-    lede: n => `${mods(n)} that ${verb(n, 'show')} how full your context window is, how much of your plan’s 5-hour and weekly windows you have used or what the session has cost so far, or ${verb(n, 'warn')} you before a limit. Each name opens the mod’s page with its hooks, API calls, access and installation guidance.`,
+    lede: n => `${mods(n)} that ${verb(n, 'show')} how full your context window is, how much of your plan’s 5-hour and weekly windows you have used or the session’s estimated cost so far, or ${verb(n, 'warn')} you before a limit. Each name opens the mod’s page with its hooks, API calls, access and installation guidance.`,
     sections: f => {
       const callSentence = f.reported ? ` Of the ${mods(f.reported)} here with reported footprints, ${f.usageCalls} ${verb(f.usageCalls, 'record')} <code>$.session.usage</code>, ${f.fetchCalls} ${verb(f.fetchCalls, 'record')} <code>$.http.fetch</code>, ${f.processCalls} ${verb(f.processCalls, 'record')} a process call and ${f.modelCalls} ${verb(f.modelCalls, 'record')} a <code>$.model</code> method or <code>$.prompt.submit</code>.` : ''
       const hookSentence = f.promptHooks ? ` ${f.promptHooks} of the ${mods(f.n)} here ${verb(f.promptHooks, 'record')} a <code>prompt.submit</code> hook${f.promptHooksIncomplete ? `, ${f.promptHooksIncomplete} of them with an incomplete footprint, where coverage is unknown` : ''}.` : ''

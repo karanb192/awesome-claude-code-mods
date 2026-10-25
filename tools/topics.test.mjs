@@ -226,7 +226,7 @@ test('the usage meters prose counts the recorded calls over the reported footpri
     record('q/r', 'context-bar', { footprint: { status: 'unavailable' }, calls: ['$.session.usage'] }),
   ]
   const html = renderTopicPage(t, entries(mods), { topics: [t], letters: ['u'], version: '2.1.302' })
-  assert.match(html, /<p class="lede">3 mods that show how full your context window is, how much of your plan’s 5-hour and weekly windows you have used or what the session has cost so far, or warn you before a limit\./)
+  assert.match(html, /<p class="lede">3 mods that show how full your context window is, how much of your plan’s 5-hour and weekly windows you have used or the session’s estimated cost so far, or warn you before a limit\./)
   assert.match(html, /Of the 2 mods here with reported footprints, 2 record <code>\$\.session\.usage<\/code>, 1 records <code>\$\.http\.fetch<\/code>, 1 records a process call and 1 records a <code>\$\.model<\/code> method or <code>\$\.prompt\.submit<\/code>\./)
   assert.match(html, /1 of the 3 mods here records a <code>prompt\.submit<\/code> hook\./)
   for (const url of ['https://code.claude.com/docs/en/context-window#when-your-context-fills-up', 'https://support.claude.com/en/articles/11647753-how-do-usage-and-length-limits-work', 'https://code.claude.com/docs/en/costs#using-the-usage-command', 'https://platform.claude.com/docs/en/about-claude/pricing', 'https://code.claude.com/docs/en/plugins/mods/api#reach-files-processes-and-the-network']) assert.ok(html.includes(url), url)
