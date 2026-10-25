@@ -95,6 +95,7 @@ plaxagoras/clawd-tales
 qualixar/modstage
 RadTech-Solutions/agent-pager
 RadTech-Solutions/modwall
+rapha-rodrigues/cc-esol
 reporails/arcade
 ruihe774/cc-micro-compaction
 saiharsha03/clawd-spinner
