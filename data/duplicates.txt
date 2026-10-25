@@ -121,3 +121,4 @@ tyree88/tempered_plugins:lessons tyree88/tempered_plugins:mods/lessons
 tyree88/tempered_plugins:limit-resume tyree88/tempered_plugins:mods/limit-resume
 tyree88/tempered_plugins:ship-state tyree88/tempered_plugins:mods/ship-state
 tyree88/tempered_plugins:timeline tyree88/tempered_plugins:mods/timeline
+pompeitech/affreschi:plugins/context-map pompeitech/affreschi:plugins/pulcinella
