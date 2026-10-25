@@ -3,6 +3,7 @@
 <url><loc>https://mods.aidojo.si/</loc><changefreq>daily</changefreq></url>
 <url><loc>https://mods.aidojo.si/access/</loc></url>
 <url><loc>https://mods.aidojo.si/topics/prompt-cache/</loc></url>
+<url><loc>https://mods.aidojo.si/topics/usage-meters/</loc></url>
 <url><loc>https://mods.aidojo.si/browse/a/</loc></url>
 <url><loc>https://mods.aidojo.si/browse/b/</loc></url>
 <url><loc>https://mods.aidojo.si/browse/c/</loc></url>
@@ -280,6 +281,7 @@
 <url><loc>https://mods.aidojo.si/mods/Boom-Vitt--boombignose-mods--agents-panel/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Boom-Vitt--boombignose-mods--context-bar/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Boom-Vitt--boombignose-mods--pdpa-thai/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/BordyV--brainrot-break--brainrot-break/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/BorjaGM1--token-printer--token-printer/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/BrainRev--claude-session-panels--session-switcher/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/BrainRev--claude-session-panels--token-usage-panel/</loc></url>

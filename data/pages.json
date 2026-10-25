@@ -255,6 +255,7 @@
   "Boom-Vitt--claude-mods-boombignose--agents-panel": {"id":"Boom-Vitt/claude-mods-boombignose:agents-panel","to":"Boom-Vitt--boombignose-mods--agents-panel"},
   "Boom-Vitt--claude-mods-boombignose--context-bar": {"id":"Boom-Vitt/claude-mods-boombignose:context-bar","to":"Boom-Vitt--boombignose-mods--context-bar"},
   "Boom-Vitt--claude-mods-boombignose--pdpa-thai": {"id":"Boom-Vitt/claude-mods-boombignose:pdpa-thai","to":"Boom-Vitt--boombignose-mods--pdpa-thai"},
+  "BordyV--brainrot-break--brainrot-break": {"id":"BordyV/brainrot-break:plugin"},
   "Borgerod--claude-files-office--code-modernization": {"id":"Borgerod/claude-files-office:plugins/marketplaces/claude-plugins-official/plugins/code-modernization"},
   "BorjaGM1--token-printer--token-printer": {"id":"BorjaGM1/token-printer:."},
   "BrainRev--claude-session-panels--session-switcher": {"id":"BrainRev/claude-session-panels:session-switcher"},

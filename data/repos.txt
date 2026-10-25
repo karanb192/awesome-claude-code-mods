@@ -418,6 +418,7 @@ bogdanbatranut/bog-mods
 Boom-Vitt/boombignose-mods
 Boom-Vitt/claude-mods-boombignose
 borabiricik/claude-mods
+BordyV/brainrot-break
 Borgerod/claude-files-office
 BorjaGM1/token-printer
 bostonaholic/claude-mods

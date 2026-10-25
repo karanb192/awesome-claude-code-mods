@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-22T06:15:55.147Z",
   "claudeVersion": "2.1.308",
-  "repos": 3168,
+  "repos": 3169,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -741278,6 +741278,132 @@
       "stars": 1,
       "pushedAt": "2026-10-22T14:08:09Z",
       "createdAt": "2026-10-19T22:33:11Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "BordyV/brainrot-break:plugin",
+      "repo": "BordyV/brainrot-break",
+      "path": "plugin",
+      "sourceCommit": "0aca22edd7cf3b88fc90a05ae44858b01e5791f9",
+      "name": "brainrot-break",
+      "description": "A TikTok-style feed of pixel art mini-videos to scroll while Claude is answering: like, scroll, and watch Claude finish.",
+      "author": "BordyV",
+      "homepage": "https://github.com/BordyV/brainrot-break",
+      "url": "https://github.com/BordyV/brainrot-break/tree/main/plugin",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "brainrot"
+          }
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "brainrot-break"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {}
+        },
+        {
+          "event": "ui.scroll",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "brainrot-break"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.command.register",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.blit",
+        "$.ui.close",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.scroll",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [
+        "hooks/controls.tsx",
+        "hooks/tap.tsx"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.308",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "brainrot-break",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Pane",
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-25T09:08:29Z",
+      "createdAt": "2026-10-19T20:15:27Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
