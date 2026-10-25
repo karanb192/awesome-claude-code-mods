@@ -64,6 +64,7 @@ Read the mod's source and access details before installing. Validation checks th
 - [mod-builder by noeltock](https://github.com/noeltock/mod-builder) - A skill that mocks up, builds and tests a mod so it looks native in the terminal and the desktop app.
 - [mod-builder by karanb192](https://github.com/karanb192/claude-code-mods/tree/main/plugins/mod-builder) - A skill that plans, builds and checks mods in an isolated session, with evidence of what passed and what remains unverified. Built by the maintainer.
 - [awesome-claude-code-function-hooks](https://github.com/ray-amjad/awesome-claude-code-function-hooks) - The first list, from before the rename, with two plugins and a clean tsconfig recipe.
+- [Mode VC Radar MCP](https://modevc.com/api/mcp) - Read-only venture capital & AI market research MCP server (39 empirical AI charts, 3,650 VC firms, SEC Form D filings, and 18 founder financial calculators; free Streamable HTTP at https://modevc.com/api/mcp).
 
 ## Every mod the scanner found
 
