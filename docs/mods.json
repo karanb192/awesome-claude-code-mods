@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-22T06:15:55.147Z",
   "claudeVersion": "2.1.308",
-  "repos": 3164,
+  "repos": 3165,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -740480,6 +740480,137 @@
       "stars": 0,
       "pushedAt": "2026-10-21T23:46:38Z",
       "createdAt": "2026-10-17T04:19:36Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "arturogarrido/claudinho:packages/plugin",
+      "repo": "arturogarrido/claudinho",
+      "path": "packages/plugin",
+      "sourceCommit": "77de9da356840b9642c74e0a04e1b7450d256884",
+      "name": "claudinho",
+      "description": "Live football in Claude Code for the competition you follow: the score or the countdown above the prompt (the same line on demand with /claudinho), a toast that says what happened (a goal and its scorer, full time and the result), a goal celebration with the Claude mascot, the live score beside your prompt for the model, all from the installed claudinho CLI's local cache, and a match pane with the match you follow, its goals and cards (/claudinho match, read by the CLI). Live data: ESPN. Not affiliated with FIFA, any confederation, league or club, or Anthropic.",
+      "author": "Arturo Garrido",
+      "homepage": "https://github.com/arturogarrido/claudinho/tree/main/packages/plugin",
+      "url": "https://github.com/arturogarrido/claudinho/tree/main/packages/plugin",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.attach",
+          "matcher": {}
+        },
+        {
+          "event": "session.detach",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "claudinho"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "match"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "match"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.clock.sleep",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.process.run",
+        "$.session.surfaces",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.308",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claudinho",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "reads files",
+          "reads env vars",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt"
+      ],
+      "draws": [
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 33,
+      "pushedAt": "2026-10-24T05:14:40Z",
+      "createdAt": "2026-06-06T20:38:12Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
