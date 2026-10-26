@@ -122,3 +122,14 @@ tyree88/tempered_plugins:limit-resume tyree88/tempered_plugins:mods/limit-resume
 tyree88/tempered_plugins:ship-state tyree88/tempered_plugins:mods/ship-state
 tyree88/tempered_plugins:timeline tyree88/tempered_plugins:mods/timeline
 pompeitech/affreschi:plugins/context-map pompeitech/affreschi:plugins/pulcinella
+LupusMalusDeviant/claude-mods:plugins/blast-radius LupusMalusDeviant/mod-box:plugins/blast-radius
+LupusMalusDeviant/claude-mods:plugins/cache-meter LupusMalusDeviant/mod-box:plugins/cache-meter
+LupusMalusDeviant/claude-mods:plugins/ci-watch LupusMalusDeviant/mod-box:plugins/ci-watch
+LupusMalusDeviant/claude-mods:plugins/handoff LupusMalusDeviant/mod-box:plugins/handoff
+LupusMalusDeviant/claude-mods:plugins/package-guard LupusMalusDeviant/mod-box:plugins/package-guard
+LupusMalusDeviant/claude-mods:plugins/pet LupusMalusDeviant/mod-box:plugins/pet
+LupusMalusDeviant/claude-mods:plugins/read-guard LupusMalusDeviant/mod-box:plugins/read-guard
+LupusMalusDeviant/claude-mods:plugins/screen-mask LupusMalusDeviant/mod-box:plugins/screen-mask
+LupusMalusDeviant/claude-mods:plugins/secret-guard LupusMalusDeviant/mod-box:plugins/secret-guard
+LupusMalusDeviant/claude-mods:plugins/sign-guard LupusMalusDeviant/mod-box:plugins/sign-guard
+LupusMalusDeviant/claude-mods:plugins/subagent-saver LupusMalusDeviant/mod-box:plugins/subagent-saver
