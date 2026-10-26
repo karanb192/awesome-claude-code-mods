@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-25T21:32:51.486Z",
   "claudeVersion": "2.1.310",
-  "repos": 3168,
+  "repos": 3169,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -744488,6 +744488,135 @@
       "stars": 0,
       "pushedAt": "2026-10-17T02:40:48Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "MikeGT4/agent-tree:.",
+      "repo": "MikeGT4/agent-tree",
+      "path": ".",
+      "sourceCommit": "06c2b18397df7ace279aebf589188839c4a90836",
+      "name": "agent-tree",
+      "description": "Side pane that draws the session's agents as boxes: main session, sub-agents, the way back, advisor and session log.",
+      "author": "Mike Pollow, Digitalroots",
+      "homepage": "https://github.com/MikeGT4/agent-tree",
+      "url": "https://github.com/MikeGT4/agent-tree",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "agent-tree"
+          }
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "agent.spawn",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "agent-tree"
+          }
+        },
+        {
+          "event": "ui.press",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "agent-tree"
+          }
+        }
+      ],
+      "calls": [
+        "$.agent.list",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.session.messages",
+        "$.settings.read",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.close",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.310",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "agent-tree",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads settings",
+          "reads the transcript",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "subagent spawns",
+        "every tool call"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-25T21:42:24Z",
+      "createdAt": "2026-10-22T11:34:58Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

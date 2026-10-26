@@ -1834,6 +1834,7 @@ midudev/after-for-claude-code
 MiguelMachado-dev/miguel-mods
 MiguelProz/claude-loose-ends
 miguelrisero/better-shunt
+MikeGT4/agent-tree
 mikejhill/claude-usage-status
 mikekuo0725/usage-band
 mikhin/claude-shot-preview
