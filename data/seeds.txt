@@ -54,6 +54,7 @@ hellosverre/mod-store
 hellosverre/redgreen
 hellosverre/smart-compact
 hoobnn/hoobnn-agent-mods
+HuliLulu46/cc-commit-command
 HuliLulu46/cc-effort-switch
 HuliLulu46/pending-decisions
 HuliLulu46/polish
