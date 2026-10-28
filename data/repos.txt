@@ -648,6 +648,7 @@ crebot51/jack-mods
 Creeperprol/claude-mods
 Crinitys/copy-list
 crisguitar/claude-mods
+cristi71000/limit-lens
 cristianduro/claude-botones-commit
 crockalet/claude-mods
 cskwork/claude-code-mods

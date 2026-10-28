@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-28T11:47:38.509Z",
   "claudeVersion": "2.1.312",
-  "repos": 3295,
+  "repos": 3296,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -787075,6 +787075,122 @@
       "stars": 0,
       "pushedAt": "2026-10-17T02:40:48Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "cristi71000/limit-lens:.",
+      "repo": "cristi71000/limit-lens",
+      "path": ".",
+      "sourceCommit": "e30c8c47f91468661cabef1dfac9e87a0bac2159",
+      "name": "limit-lens",
+      "description": "A band above the prompt showing this session's share of your usage limits, its API-equivalent cost, and what the same work would cost on each Claude model",
+      "author": "cristi71000",
+      "homepage": "https://github.com/cristi71000/limit-lens",
+      "url": "https://github.com/cristi71000/limit-lens",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "limits"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "limit-lens"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.http.fetch",
+        "$.process.run",
+        "$.session.id",
+        "$.session.model",
+        "$.session.usage",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.312",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "limit-lens",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "network",
+          "runs processes",
+          "reads files",
+          "reads env vars",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-26T10:52:19Z",
+      "createdAt": "2026-10-16T18:32:48Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
