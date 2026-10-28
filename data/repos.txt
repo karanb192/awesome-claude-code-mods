@@ -315,6 +315,7 @@ Atanur/deskfit
 atarazevich/session-orchestra
 atharv6f/headway
 atharv6f/waypoint
+Atoll92/agent-standup
 atomashevic/claude-latex-math
 atsusta/workspace-guard-mod
 attentionfarm/mod
@@ -1309,6 +1310,7 @@ isandrel/redact-restore
 ishuagrawal/cache-watch
 ishuagrawal/clawdhouse
 Iskandeur/session-board
+ismoil77/claude-paste-thumb
 isr431/desk-pet
 IT-BAER/claude-forge
 IT-Shelter-Labs/Claude-Mods
@@ -1582,6 +1584,7 @@ kevinfactor/claude-kit
 kevinmedeiros/claude-mods
 KevinYu1580/jev-cc-model-router
 KevinZai/commander
+kevlar10x/quiet-transcript
 KeygripGit/claude-mods
 kgaidev/kgai
 kgrvGRECO/woo-mods
@@ -2373,6 +2376,7 @@ RamSen-IT/claude-code-pins
 ramtinJ95/claude-mods
 RanaRauff/claude-dev-dashboard
 raoofaltaher/claude-code-mods
+rapha-rodrigues/cc-esol
 raresmun/claude-mods
 rasa-mrankovic/agent-dash
 rashedInt32/glass
@@ -3189,6 +3193,7 @@ y-hirakaw/claude-code-mods
 y20061018y-collab/Claude-Mods
 ya8282/claude-code-mods
 Yacolate0519-cmd/cc-mod-todo-board
+yadava5/unramble
 yahyabedirhan/claude-mods
 yahyashareef48/claude-mods
 yai333/autonomous-loop

@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-28T11:47:38.509Z",
   "claudeVersion": "2.1.312",
-  "repos": 3296,
+  "repos": 3301,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -787362,6 +787362,563 @@
       "stars": 0,
       "pushedAt": "2026-10-26T10:52:19Z",
       "createdAt": "2026-10-16T18:32:48Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "Atoll92/agent-standup:plugin-band",
+      "repo": "Atoll92/agent-standup",
+      "path": "plugin-band",
+      "sourceCommit": "2c000166fd8694f6e741cee3a2ca1a7ba979c161",
+      "name": "agent-standup-band",
+      "description": "A line above your Claude Code prompt when another Claude Code session on this computer needs you (an approval, an answer), and a toast when one finishes its turn. Reads only the status files Claude Code keeps for its sessions; sends nothing.",
+      "author": "Double Geste",
+      "homepage": "https://agent-standup.com",
+      "url": "https://github.com/Atoll92/agent-standup/tree/main/plugin-band",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.env.get",
+        "$.fs.list",
+        "$.fs.read",
+        "$.process.run",
+        "$.session.id",
+        "$.ui.invalidate",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.312",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "double-geste",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "reads files",
+          "reads env vars",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 331,
+      "pushedAt": "2026-10-28T11:02:14Z",
+      "createdAt": "2026-10-10T07:48:17Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "ismoil77/claude-paste-thumb:.",
+      "repo": "ismoil77/claude-paste-thumb",
+      "path": ".",
+      "sourceCommit": "54f70b2e88178e2371cd0f13a9928e759c0a89aa",
+      "name": "paste-thumb",
+      "description": "A thumbnail above the Claude Code prompt for every image you paste",
+      "author": "Ismoil",
+      "homepage": "https://github.com/ismoil77/claude-paste-thumb",
+      "url": "https://github.com/ismoil77/claude-paste-thumb",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.process.run",
+        "$.prompt.read",
+        "$.session.cwd",
+        "$.session.id",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.log",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.312",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-paste-thumb",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "reads files",
+          "reads env vars",
+          "reads the prompt box",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-28T06:43:51Z",
+      "createdAt": "2026-10-28T06:21:40Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "kevlar10x/quiet-transcript:.",
+      "repo": "kevlar10x/quiet-transcript",
+      "path": ".",
+      "sourceCommit": "041204ea3e25cb2f3f17950e8ff35b06890dbb28",
+      "name": "quiet-transcript",
+      "description": "Quiets everything in the transcript except Claude's answers: narration, tool calls and command output draw in a faint tinted italic.",
+      "author": "kevlar10x",
+      "homepage": "https://github.com/kevlar10x/quiet-transcript",
+      "url": "https://github.com/kevlar10x/quiet-transcript",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.append",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AssistantMessage"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolUse"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolResult"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolGroup"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "CommandOutput"
+          }
+        }
+      ],
+      "calls": [
+        "$.session.messages",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.312",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "kevlar10x-quiet-transcript",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads the transcript",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AssistantMessage",
+        "ToolUse",
+        "ToolResult",
+        "ToolGroup",
+        "CommandOutput"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-27T16:27:26Z",
+      "createdAt": "2026-10-25T20:23:20Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "rapha-rodrigues/cc-esol:plugins/cc-esol",
+      "repo": "rapha-rodrigues/cc-esol",
+      "path": "plugins/cc-esol",
+      "sourceCommit": "048fb3c648807c996fdedce23a59d0066c73c59a",
+      "name": "cc-esol",
+      "description": "Learn English from your daily Claude Code use: an ESOL coach that logs nativized corrections of your English prompts to a local learning log, with a review of your patterns and a voice dictation toggle.",
+      "author": "Rapha Rodrigues",
+      "homepage": "https://github.com/rapha-rodrigues/cc-esol",
+      "url": "https://github.com/rapha-rodrigues/cc-esol/tree/main/plugins/cc-esol",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "tool.describe",
+          "matcher": {
+            "tool": "mcp__cc-esol__english_log"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__cc-esol__english_log"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "voice"
+          }
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "esol"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "?"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "?"
+          }
+        },
+        {
+          "event": "ui.open",
+          "matcher": {}
+        },
+        {
+          "event": "ui.scroll",
+          "matcher": {
+            "requestId": "?"
+          }
+        },
+        {
+          "event": "ui.focus",
+          "matcher": {
+            "requestId": "?"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "PromptHint"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.command.run",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.fs.write",
+        "$.model.complete",
+        "$.process.run",
+        "$.session.cwd",
+        "$.session.model",
+        "$.settings.read",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.tool.register",
+        "$.ui.close",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.312",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "esol",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "writes files",
+          "drives Claude",
+          "reads files",
+          "reads env vars",
+          "reads settings",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "mcp__cc-esol__english_log calls",
+        "every prompt"
+      ],
+      "draws": [
+        "Pane",
+        "PromptHint"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-27T00:20:49Z",
+      "createdAt": "2026-10-23T22:37:39Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "yadava5/unramble:plugin",
+      "repo": "yadava5/unramble",
+      "path": "plugin",
+      "sourceCommit": "21715e2c3e40a619aafcf5749e869e8690e831c9",
+      "name": "unramble",
+      "description": "Ctrl+G turns a rambling, dictated prompt into a clean, ordered one, in place, on your own Claude Code plan.",
+      "author": "Ayush Yadav",
+      "homepage": "https://yadava5.github.io/unramble/",
+      "url": "https://github.com/yadava5/unramble/tree/main/plugin",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "unramble"
+          }
+        },
+        {
+          "event": "prompt.edit",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.fs.write",
+        "$.model.complete",
+        "$.prompt.fill",
+        "$.prompt.read",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.312",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "unramble",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "writes files",
+          "drives Claude",
+          "writes the prompt box",
+          "reads files",
+          "reads env vars",
+          "reads the prompt box",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-27T13:00:09Z",
+      "createdAt": "2026-10-22T13:38:37Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
