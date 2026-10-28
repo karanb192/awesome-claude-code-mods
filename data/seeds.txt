@@ -44,6 +44,7 @@ edtrackai/claude-code-guardrails-lite
 errhythm/ccswap
 FunJim/claude-code-add-to-chat
 gerricchaplin/pr-pulse
+gorkamb/claude-session-outputs
 griches/buildpane
 griches/installguard
 halluton/Mindful-Claude
