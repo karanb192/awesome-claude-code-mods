@@ -134,3 +134,4 @@ LupusMalusDeviant/claude-mods:plugins/secret-guard LupusMalusDeviant/mod-box:plu
 LupusMalusDeviant/claude-mods:plugins/sign-guard LupusMalusDeviant/mod-box:plugins/sign-guard
 LupusMalusDeviant/claude-mods:plugins/subagent-saver LupusMalusDeviant/mod-box:plugins/subagent-saver
 arifamir/nukey-kit:plugins/nukey arifamir/nukey:plugins/nukey
+cpeaustriajc/cj-stack:mods/usage-pace cpeaustriajc/cj-stack:mods/archived/usage-pace
