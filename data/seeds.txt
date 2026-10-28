@@ -138,3 +138,4 @@ xuanji86/claude-agentpane
 xuanji86/claude-mdview
 xuanji86/claude-statuspane
 yash-gadodia/claude-mods
+zigansh1n/claude-focus-sidebar
