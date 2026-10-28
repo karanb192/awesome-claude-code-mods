@@ -60,6 +60,7 @@ HuliLulu46/polish
 i-harsha-reddy/naruto-mod
 iamumeransari/claude-show-your-work
 icedevil2001/auto-continue
+ismoil77/claude-paste-thumb
 jarrodwatts/intermission
 Jarvizx/hablo
 jiangnanquan/claude-code-zh
