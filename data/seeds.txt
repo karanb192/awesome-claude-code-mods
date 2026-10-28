@@ -91,6 +91,13 @@ muellerei/enable-todo-tools
 muellerei/sweet-spot
 muellerei/task-line
 Nachx639/context-canary
+nightlab-agent/file-trail
+nightlab-agent/message-times
+nightlab-agent/prompt-state
+nightlab-agent/skill-status
+nightlab-agent/subagent-spend
+nightlab-agent/turn-tally
+nightlab-agent/usage-file
 njp-coder/meanwhile
 NMenzel/claude-devtools-mod
 nuromirzak/nibbl
