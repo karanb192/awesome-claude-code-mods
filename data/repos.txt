@@ -917,6 +917,7 @@ elparko/look-claude-no-hands
 eluc1a/cc-plugins-mods-etc
 emaballarin/ccplugins
 EmanueleNene/claude-mods
+emergentai/claude-code-rich-ui
 emerson-buoy/claude-code-mods
 emilthaudal/claude-plugins
 EmmaNguyen/mod-pet
