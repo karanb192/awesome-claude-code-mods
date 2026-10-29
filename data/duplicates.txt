@@ -146,3 +146,5 @@ bahaospanov/skills:close-countdown bahaospanov/skills:herdr-rules
 lifeofgurpreet/glanceline:legacy/glanceline lifeofgurpreet/glanceline:.
 MrValraven/pulse-mods:pulse-blast-radius StarHawkMK1/cc-mods:mods/blast-radius
 StarHawkMK1/cc-mods:mods/token-weather nalpari/claude-mods:token-weather
+ellis0207/ellis-claude-mods:plugins/savvy-progress JohnnyVizz/claude-kit:plugins/savvy-progress
+ellis0207/ellis-claude-mods:plugins/skins hellosverre/claude-skins:.
