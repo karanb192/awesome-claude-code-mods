@@ -231,5 +231,25 @@
     ],
     "reason": "The null characters distinguish JSON-tree closing-row paths and separate a response ID from the search term in an internal cache key. The viewer receives highlighted display segments, not those paths or cache keys. Neither sentinel is passed to next() as rewritten props.text.",
     "source": "https://github.com/shohamtal/cc-mod-opensearch-console/blob/f11007dcc9d1f6d734398b7c09b4e0f40584b580/hooks/register.tsx#L638-L642"
+  },
+  {
+    "id": "emergentai/claude-code-rich-ui:.",
+    "sourceCommit": "4f4a848f5252d62b778db0a92868d74446349389",
+    "claudeVersion": "2.1.312",
+    "warnings": [
+      {
+        "code": "ui-control-characters",
+        "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+        "evidence": [
+          { "file": "hooks/vendor/zombie-mermaid.js", "line": 14 },
+          { "file": "hooks/vendor/zombie-mermaid.js", "line": 15 },
+          { "file": "hooks/vendor/zombie-mermaid.js", "line": 19 },
+          { "file": "hooks/vendor/zombie-mermaid.js", "line": 22 },
+          { "file": "hooks/vendor/zombie-mermaid.js", "line": 24 }
+        ]
+      }
+    ],
+    "reason": "The bundled renderer contains escape decoding, optional ANSI/hyperlink output and internal class-compartment separators. The Mermaid caller selects colorMode none and leaves hyperlinks disabled. It draws diagram lines as Text elements; its fallthrough calls pass the original event to next(), without rewriting props.text with these literals.",
+    "source": "https://github.com/emergentai/claude-code-rich-ui/blob/4f4a848f5252d62b778db0a92868d74446349389/hooks/features/mermaid/render.ts#L19-L23"
   }
 ]
