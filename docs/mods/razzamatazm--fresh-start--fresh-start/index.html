@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/razzamatazm/fresh-start">razzamatazm/fresh-start</a></p>
 <p class="lede">One press: write a handoff doc, /clear, and pre-fill a prompt to continue from it.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">fresh-start reaches L2 (writes or runs) and passed <code>claude plugin validate</code> on Claude Code 2.1.312.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">fresh-start reaches L2 (writes or runs) and passed <code>claude plugin validate</code> on Claude Code 2.1.312.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install fresh-start --marketplace razzamatazm/fresh-start</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, writes the prompt box, reads files, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed on Claude Code 2.1.312</span></div></div>
@@ -25,13 +25,13 @@
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
     <dt>Hooks</dt><dd><code>session.start, command.run {command=fresh}, turn.complete, ui.render {component=SessionMode}</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.command.run, $.fs.exists, $.prompt.fill, $.prompt.submit, $.session.id, $.state.get, $.state.set, $.ui.resolve, $.ui.toast</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.command.run, $.fs.exists, $.fs.read, $.prompt.fill, $.prompt.submit, $.session.id, $.state.get, $.state.set, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation on 2.1.312</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/razzamatazm/fresh-start/tree/5464836bf98680b7adcdf2451424886713891908"><code>5464836bf986</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/razzamatazm/fresh-start/blob/5464836bf98680b7adcdf2451424886713891908/.claude-plugin/marketplace.json">fresh-start</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/razzamatazm/fresh-start/tree/fed9471d1f01267d1d0fe99ded277393def30a3e"><code>fed9471d1f01</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/razzamatazm/fresh-start/blob/fed9471d1f01267d1d0fe99ded277393def30a3e/.claude-plugin/marketplace.json">fresh-start</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/razzamatazm--fresh-start--fresh-start-reach.svg" alt="Reach badge for fresh-start"> <img src="/badges/razzamatazm--fresh-start--fresh-start-validates.svg" alt="Validation badge for fresh-start"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/razzamatazm--fresh-start--fresh-start-reach.svg)](https://mods.aidojo.si/mods/razzamatazm--fresh-start--fresh-start/)

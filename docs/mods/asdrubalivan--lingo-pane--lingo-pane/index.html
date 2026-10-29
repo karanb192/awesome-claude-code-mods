@@ -14,8 +14,8 @@
 <h1>lingo-pane</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/asdrubalivan/lingo-pane">asdrubalivan/lingo-pane</a></p>
 <p class="lede">Learn a language live in your terminal: a lesson split that opens while Claude works, conversation, role-play and reading with a tutor.</p>
-
-<section class="summary" aria-label="Scan summary"><p class="summary-line">lingo-pane reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings on Claude Code 2.1.312.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<p class="compatibility">review UI rewrite</p>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">lingo-pane reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings on Claude Code 2.1.312.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 17</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings on Claude Code 2.1.312</span></div></div>
@@ -25,13 +25,13 @@
 
     <dt>Observed events</dt><dd>classic hooks, every prompt, every tool call</dd>
     <dt>Hooks</dt><dd><code>session.start, classic.SessionStart, command.run {command=lingo}, turn.start, turn.complete, prompt.submit, tool.check, tool.call, ui.close {id=lingo}, ui.render {component=Spinner}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=lingo}</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.model.complete, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.close, $.ui.focus, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.model.complete, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.set, $.ui.close, $.ui.focus, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation on 2.1.312</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/asdrubalivan/lingo-pane/tree/c86056baa4f4aa031b5a0b8d194c8b70602b7012"><code>c86056baa4f4</code></a></dd>
-    </dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/asdrubalivan/lingo-pane/tree/e12a20e5253814b81ea3e719b081efb36b810e24"><code>e12a20e52538</code></a></dd>
+    <dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/asdrubalivan/lingo-pane/blob/e12a20e5253814b81ea3e719b081efb36b810e24/src/sanitize.ts#L53">src/sanitize.ts:53</a>, <a href="https://github.com/asdrubalivan/lingo-pane/blob/e12a20e5253814b81ea3e719b081efb36b810e24/src/sanitize.ts#L57">src/sanitize.ts:57</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/asdrubalivan--lingo-pane--lingo-pane-reach.svg" alt="Reach badge for lingo-pane"> <img src="/badges/asdrubalivan--lingo-pane--lingo-pane-validates.svg" alt="Validation badge for lingo-pane"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/asdrubalivan--lingo-pane--lingo-pane-reach.svg)](https://mods.aidojo.si/mods/asdrubalivan--lingo-pane--lingo-pane/)
