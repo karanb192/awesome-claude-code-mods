@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/arslan-charyyev/claude-mods">arslan-charyyev/claude-mods</a></p>
 <p class="lede">Turkish practice from the daily lesson files: a line under each answer, a band above the prompt, and a /tr drill pane</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">turkish-practice reaches L2 (writes or runs) and passed <code>claude plugin validate</code> on Claude Code 2.1.312.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: writes files, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">turkish-practice reaches L2 (writes or runs) and passed <code>claude plugin validate</code> on Claude Code 2.1.312.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: writes files, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">writes files, reads files, reads env vars, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed on Claude Code 2.1.312</span></div></div>
@@ -25,12 +25,12 @@
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
     <dt>Hooks</dt><dd><code>session.start, turn.complete, command.run {command=tr}, ui.close, ui.render {component=AbovePrompt}, ui.render {component=Pane}</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.write, $.store.get, $.store.set, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.write, $.store.get, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation on 2.1.312</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/arslan-charyyev/claude-mods/tree/14636c033e98f00685c3ae04f3ef3be40258130f"><code>14636c033e98</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/arslan-charyyev/claude-mods/tree/141dbe48ed3b08f13ebf5f481ab765c7a1b7107a"><code>141dbe48ed3b</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
