@@ -14,6 +14,8 @@ const REPO_FIXTURES = new Map([
   ['cyclopseyeteam/cyclops-fresheye', /^acceptance\/driver(?:\/|$)/],
   ['danielpg95/modster-hunter', /^spikes\/p5-39-desktop-art\/mod(?:\/|$)/],
   ['gaius-codius/ostrakon', /^tools\/(?:experiments\/(?:spc|spw|spx|spx0)|gallery|mockups)(?:\/|$)/],
+  ['ivokund/claude-account-rotator', /^demo\/harness(?:\/|$)/],
+  ['jetsongdev/jet-router', /^eval\/cache-measure(?:\/|$)/],
   ['kopylow/wobbly-volley', /^prototypes\/(?:p1-band|p2-client-court|p4-key-helper)(?:\/|$)/],
   ['kurushiba/claude-mods', /^(?:02-first-mod\/broken|03-events|04-test-pilot|05-ui\/broken|08-testing\/errors|09-distribution)(?:\/|$)/],
   ['malkiz/claude-reply-comments', /^spikes\/transcript-layouts(?:\/|$)/],

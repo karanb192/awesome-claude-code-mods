@@ -143,3 +143,6 @@ kcsujeet/kc-claude-kit:plugins/usage-band kcsujeet/kc-claude-kit:plugins/kc-usag
 tartinerlabs/claude-code-mods:plugins/pr-pilot tartinerlabs/claude-code-mods:plugins/git-status
 bahaospanov/claude-mods:close-countdown bahaospanov/skills:herdr-rules
 bahaospanov/skills:close-countdown bahaospanov/skills:herdr-rules
+lifeofgurpreet/glanceline:legacy/glanceline lifeofgurpreet/glanceline:.
+MrValraven/pulse-mods:pulse-blast-radius StarHawkMK1/cc-mods:mods/blast-radius
+StarHawkMK1/cc-mods:mods/token-weather nalpari/claude-mods:token-weather

@@ -444,6 +444,18 @@ test('Transceiver measurement probe stays out while its product and unrelated pa
   assert.equal(kindOf(repo, path, {}, new Set(), new Set([`${repo}:${path}`])), 'mod')
 })
 
+test('account-rotator recording harness and jet-router eval probe stay out while their products count', () => {
+  const cases = [['ivokund/claude-account-rotator', 'demo/harness', ['.', 'demo', 'demo/harness-extra']], ['jetsongdev/jet-router', 'eval/cache-measure/b1/effort-probe', ['.', 'eval', 'eval/cache-measure-extra']]]
+  for (const [repo, path, others] of cases) {
+    assert.equal(kindOf(repo, path, {}), 'fixture', path)
+    assert.equal(kindOf(repo.toUpperCase(), path, {}), 'fixture', path)
+    assert.equal(kindOf(repo, `${path}/nested`, {}), 'fixture', path)
+    for (const other of others) assert.equal(kindOf(repo, other, {}), 'mod', other)
+    assert.equal(kindOf(`other/${repo.split('/')[1]}`, path, {}), 'mod', path)
+    assert.equal(kindOf(repo, path, {}, new Set(), new Set([`${repo}:${path}`])), 'mod', path)
+  }
+})
+
 test('Foreman development probes stay out while its product and unrelated paths count', () => {
   const repo = 'andrey342/foreman'
   for (const path of ['spike/mod', 'spike/v02', 'spike/mod/nested']) {
