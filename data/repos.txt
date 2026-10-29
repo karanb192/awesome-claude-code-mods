@@ -2466,6 +2466,7 @@ ray-amjad/claude-code-mods
 ray-manaloto/dotfiles
 ray-manaloto/knowledge-base
 RaySu/usage-glance
+razorback16/cc-intelligent-ui
 razzamatazm/cache-keeper
 razzamatazm/fresh-start
 rb17080/trek-band

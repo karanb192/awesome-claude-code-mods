@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-29T06:07:36.945Z",
   "claudeVersion": "2.1.312",
-  "repos": 3407,
+  "repos": 3408,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -812262,6 +812262,251 @@
       "stars": 3,
       "pushedAt": "2026-10-29T03:42:31Z",
       "createdAt": "2026-10-22T23:19:04Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "razorback16/cc-intelligent-ui:.",
+      "repo": "razorback16/cc-intelligent-ui",
+      "path": ".",
+      "sourceCommit": "18f2e67b1765f2abffc05e8daa4a7039f669de38",
+      "name": "cc-intelligent-ui",
+      "description": "Draws Claude's answers as rendered Markdown pictures in the terminal, with live Typst for diagrams, charts and math",
+      "author": "razorback16",
+      "homepage": "https://github.com/razorback16/cc-intelligent-ui",
+      "url": "https://github.com/razorback16/cc-intelligent-ui",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "ui.copy",
+          "matcher": {}
+        },
+        {
+          "event": "ui.message",
+          "matcher": {}
+        },
+        {
+          "event": "ui.fault",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.edit",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.change",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.autocomplete",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "iui"
+          }
+        },
+        {
+          "event": "config.set",
+          "matcher": {
+            "key": "theme"
+          }
+        },
+        {
+          "event": "prompt.compose",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "turn.abort",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AssistantMessage"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolResult"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "iui-page"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "UserMessage"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolUse",
+            "props has {tool": "ExitPlanMode}"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolResult",
+            "props has {tool": "ExitPlanMode}"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AskUserQuestion"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Write|Edit"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "ExitPlanMode"
+          }
+        },
+        {
+          "event": "classic.PermissionRequest",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.command.run",
+        "$.config.list",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.fs.write",
+        "$.http.fetch",
+        "$.process.run",
+        "$.process.spawn",
+        "$.prompt.submit",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.root",
+        "$.session.surfaces",
+        "$.session.version",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.turn.abort",
+        "$.ui.ask",
+        "$.ui.blit",
+        "$.ui.close",
+        "$.ui.copy",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.selection",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [
+        "hooks/sel.tsx"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.312",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "razorback16",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "network",
+          "runs processes",
+          "writes files",
+          "drives Claude",
+          "writes the clipboard",
+          "reads files",
+          "reads env vars",
+          "reads settings",
+          "reads the selection",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "Write|Edit calls",
+        "ExitPlanMode calls",
+        "classic hooks"
+      ],
+      "draws": [
+        "AssistantMessage",
+        "ToolResult",
+        "Pane",
+        "UserMessage",
+        "AbovePrompt",
+        "ToolUse",
+        "AskUserQuestion"
+      ],
+      "stars": 90,
+      "pushedAt": "2026-10-26T07:15:56Z",
+      "createdAt": "2026-10-16T18:32:13Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
