@@ -1,6 +1,6 @@
 {
   "name": "mod-finder",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Ask Claude for a Claude Code mod and get matches from 3,000+ community mods, with what each one can read, write, run or send over the network and a link to its source.",
   "author": { "name": "Karan Bansal", "url": "https://karanbansal.in" },
   "homepage": "https://mods.aidojo.si",

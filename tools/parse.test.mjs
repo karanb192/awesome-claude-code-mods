@@ -36,6 +36,22 @@ test('nothing on $ means no calls', () => {
   assert.deepEqual(parseHooks('tool.call'), [{ event: 'tool.call', matcher: {} }])
 })
 
+test('nested matchers and quoted punctuation remain inside their hook', () => {
+  assert.deepEqual(parseHooks('command.run{origin={kind=composer}|{kind=bridge}}, prompt.submit{origin={kind=composer, source=[one,two]}}, tool.call{tool=/"^(a,b|x=y|[}])$"/}, session.end'), [
+    { event: 'command.run', matcher: { origin: '{kind=composer}|{kind=bridge}' } },
+    { event: 'prompt.submit', matcher: { origin: '{kind=composer, source=[one,two]}' } },
+    { event: 'tool.call', matcher: { tool: '/"^(a,b|x=y|[}])$"/' } },
+    { event: 'session.end', matcher: {} },
+  ])
+  assert.deepEqual(parseHooks('session.start, command.run{origin={kind=bridge}'), [{ event: 'session.start', matcher: {} }])
+  const parsed = parseValidateOutput('  ❯ ./a.ts hooks: session.start, tool.call{tool=/"[}]"/}, command.run{origin={kind=bridge}[+10 chars]}\n  ❯ ./a.ts calls: nothing on $\n✔ Validation passed')
+  assert.deepEqual(parsed.modules[0].hooks, [
+    { event: 'session.start', matcher: {} },
+    { event: 'tool.call', matcher: { tool: '/"[}]"/' } },
+  ])
+  assert.equal(footprintStatus(parsed, ['./a.ts']).status, 'unavailable')
+})
+
 test('footprint coverage requires hooks and explicit calls for every declared module', () => {
   const read = text => parseValidateOutput(text + '\n✘ Validation failed')
   const full = '  ❯ ./a.ts hooks: session.start\n  ❯ ./a.ts calls: $.http.fetch'
@@ -318,7 +334,7 @@ test('kindOf files built-ins, fixtures, mirrors and catalogue copies, and counts
   assert.equal(kindOf('cat/templates', 'components/mods/games/tetris', { name: 'tetris' }, catalogs), 'catalog')
   assert.equal(kindOf('cat/templates', 'tests/fixtures/x', { name: 'x' }, catalogs), 'fixture')
   assert.equal(kindOf('a/b', 'plugins/x', { name: 'x' }, catalogs), 'mod')
-  assert.deepEqual([...readCatalogs('data/catalogs.txt')], ['davila7/claude-code-templates', 'DrishtantKaushal/AwesomeClaudeCodeMods'])
+  assert.deepEqual([...readCatalogs('data/catalogs.txt')], ['Dandeppert/Claude-mods', 'davila7/claude-code-templates', 'DrishtantKaushal/AwesomeClaudeCodeMods'])
   assert.deepEqual([...readCatalogs('data/no-such-file.txt')], [])
   const after = clone()
   after.mods.push({ ...clone().mods[0], id: 'cat/templates:mods/x', repo: 'cat/templates', kind: 'catalog' })
@@ -328,6 +344,57 @@ test('kindOf files built-ins, fixtures, mirrors and catalogue copies, and counts
 test('fixtures never count', () => {
   const after = clone(); after.mods[1].calls = ['$.http.fetch']
   assert.equal(fingerprint(base), fingerprint(after))
+})
+
+test('development probes stay out while their products and unrelated paths count', () => {
+  const probes = [
+    ['capibara-html/GuildFlow', 'poc/plugin'],
+    ['danielpg95/modster-hunter', 'spikes/p5-39-desktop-art/mod'],
+    ['kopylow/wobbly-volley', 'prototypes/p1-band'],
+    ['kopylow/wobbly-volley', 'prototypes/p2-client-court'],
+    ['kopylow/wobbly-volley', 'prototypes/p4-key-helper'],
+    ['partalemre/MODZ', 'tools/kit-gallery'],
+  ]
+  for (const [repo, path] of probes) {
+    assert.equal(kindOf(repo, path, {}), 'fixture')
+    assert.equal(kindOf(repo.toUpperCase(), path, {}), 'fixture')
+    assert.equal(kindOf(repo, path + '/nested', {}), 'fixture')
+    assert.equal(kindOf('another/product', path, {}), 'mod')
+    assert.equal(kindOf(repo, path + '-product', {}), 'mod')
+    assert.equal(kindOf(repo, path, {}, new Set(), new Set([`${repo}:${path}`])), 'mod')
+  }
+  assert.equal(kindOf('capibara-html/GuildFlow', 'guildflow', {}), 'mod')
+  assert.equal(kindOf('kopylow/wobbly-volley', '.', {}), 'mod')
+  assert.equal(kindOf('kopylow/wobbly-volley', 'prototypes/new-game', {}), 'mod')
+  assert.equal(kindOf('fran343/claude-mods', 'pruebas-e2e', {}), 'mod')
+  assert.equal(kindOf('danielpg95/modster-hunter', 'modster-hunter', {}), 'mod')
+  assert.equal(kindOf('danielpg95/modster-hunter', 'spikes/finished-game', {}), 'mod')
+  assert.equal(kindOf('partalemre/MODZ', 'mods/filetree', {}), 'mod')
+  assert.equal(kindOf('partalemre/MODZ', 'tools/new-product', {}), 'mod')
+})
+
+test('field experiments stay out while finished guards and unrelated repositories count', () => {
+  const repo = 'RobGruhl/claude-mod-learnings'
+  const paths = [
+    'experiments/claude-lookalike', 'experiments/e1-fail-open', 'experiments/e2-order',
+    'experiments/e3-moves', 'experiments/e4-alias', 'experiments/e4-computed',
+    'experiments/e4-destructure', 'experiments/e4-dynamic-import', 'experiments/e4-pass-arrow',
+    'experiments/e4-static-ok', 'experiments/e5-after-next', 'experiments/e6-mention',
+    'experiments/e7-twice', 'experiments/e7-twice-matcher', 'experiments/latency',
+    'experiments/live-probe',
+  ]
+  for (const path of paths) {
+    assert.equal(kindOf(repo, path, {}), 'fixture', path)
+    assert.equal(kindOf('another/claude-mod-learnings', path, {}), 'mod', path)
+  }
+  for (const path of ['experiments/cascade-guard', 'tutorial/.reference/skeleton-guard', 'experiments/e10-product', 'experiments/latency-meter', 'plugins/live-probe']) {
+    assert.equal(kindOf(repo, path, {}), 'mod', path)
+  }
+  assert.equal(kindOf(repo.toLowerCase(), paths[0], {}), 'fixture')
+  assert.equal(kindOf(repo, paths[0] + '/nested', {}), 'fixture')
+  const exceptions = new Set([`${repo}:${paths[0]}`])
+  assert.equal(kindOf(repo, paths[0], {}, new Set(), exceptions), 'mod')
+  assert.equal(kindOf(repo, paths[0], { description: 'A test fixture.' }, new Set(), exceptions), 'fixture')
 })
 
 test('course exercises stay out while finished mods and unrelated repositories count', () => {
@@ -365,6 +432,89 @@ test('qualification helpers stay out while the product and unrelated repositorie
   const exceptions = new Set([`${repo}:${paths[0]}`])
   assert.equal(kindOf(repo, paths[0], {}, new Set(), exceptions), 'mod')
   assert.equal(kindOf(repo, paths[0], { description: 'Not a plugin to install.' }, new Set(), exceptions), 'fixture')
+})
+
+test('Transceiver measurement probe stays out while its product and unrelated paths count', () => {
+  const repo = 'partalemre/transceiver', path = 'spike/tx-probe'
+  assert.equal(kindOf(repo, path, {}), 'fixture')
+  assert.equal(kindOf('PartalEmre/Transceiver', path, {}), 'fixture')
+  assert.equal(kindOf(repo, `${path}/nested`, {}), 'fixture')
+  for (const other of ['.', 'spike/tx-probe-extra', 'spike/product']) assert.equal(kindOf(repo, other, {}), 'mod')
+  assert.equal(kindOf('other/transceiver', path, {}), 'mod')
+  assert.equal(kindOf(repo, path, {}, new Set(), new Set([`${repo}:${path}`])), 'mod')
+})
+
+test('Foreman development probes stay out while its product and unrelated paths count', () => {
+  const repo = 'andrey342/foreman'
+  for (const path of ['spike/mod', 'spike/v02', 'spike/mod/nested']) {
+    assert.equal(kindOf(repo, path, {}), 'fixture', path)
+    assert.equal(kindOf('Andrey342/Foreman', path, {}), 'fixture', path)
+    assert.equal(kindOf('another/foreman', path, {}), 'mod', path)
+  }
+  for (const path of ['.', 'plugins/foreman', 'spike/model', 'spike/v020', 'spike/other']) {
+    assert.equal(kindOf(repo, path, {}), 'mod', path)
+  }
+  const exceptions = new Set([`${repo}:spike/mod`])
+  assert.equal(kindOf(repo, 'spike/mod', {}, new Set(), exceptions), 'mod')
+  assert.equal(kindOf(repo, 'spike/mod', { description: 'A test fixture.' }, new Set(), exceptions), 'fixture')
+})
+
+test('Ostrakon development plugins stay out without excluding its installable plugin', () => {
+  const repo = 'gaius-codius/ostrakon'
+  const paths = ['tools/experiments/spc', 'tools/experiments/spw', 'tools/experiments/spx', 'tools/experiments/spx0', 'tools/gallery', 'tools/mockups']
+  for (const path of paths) {
+    assert.equal(kindOf(repo, path, {}), 'fixture', path)
+    assert.equal(kindOf('Gaius-Codius/Ostrakon', path, {}), 'fixture', path)
+    assert.equal(kindOf('another/ostrakon', path, {}), 'mod', path)
+  }
+  for (const path of ['plugin', 'tools/gallery-mod', 'tools/mockups-live', 'tools/experiments/spx01', 'tools/experiments/other']) {
+    assert.equal(kindOf(repo, path, {}), 'mod', path)
+  }
+  const exceptions = new Set([`${repo}:tools/gallery`])
+  assert.equal(kindOf(repo, 'tools/gallery', {}, new Set(), exceptions), 'mod')
+  assert.equal(kindOf(repo, 'tools/gallery', { description: 'A test fixture.' }, new Set(), exceptions), 'fixture')
+})
+
+test('the dispatch replay harness does not count as a shipped mod', () => {
+  const repo = 'cdeust/claude-mods'
+  assert.equal(kindOf(repo, 'scripts/replay-dispatch', {}), 'fixture')
+  assert.equal(kindOf(repo, 'scripts/replay-dispatch/probe', {}), 'fixture')
+  assert.equal(kindOf('Cdeust/Claude-Mods', 'scripts/replay-dispatch', {}), 'fixture')
+  for (const path of ['scripts/replay-dispatcher', 'mods/zetetic-autopilot', 'mods/replay-dispatch']) {
+    assert.equal(kindOf(repo, path, {}), 'mod', path)
+  }
+  assert.equal(kindOf('another/claude-mods', 'scripts/replay-dispatch', {}), 'mod')
+  const exceptions = new Set([`${repo}:scripts/replay-dispatch`])
+  assert.equal(kindOf(repo, 'scripts/replay-dispatch', {}, new Set(), exceptions), 'mod')
+})
+
+test('the transcript layout spike stays out without excluding the reply mod', () => {
+  const repo = 'Malkiz/claude-reply-comments'
+  for (const path of ['spikes/transcript-layouts', 'spikes/transcript-layouts/probe']) {
+    assert.equal(kindOf(repo, path, {}), 'fixture', path)
+    assert.equal(kindOf(repo.toLowerCase(), path, {}), 'fixture', path)
+  }
+  for (const path of ['.', 'spikes/transcript-layouts-live', 'spikes/other']) {
+    assert.equal(kindOf(repo, path, {}), 'mod', path)
+  }
+  assert.equal(kindOf('another/claude-reply-comments', 'spikes/transcript-layouts', {}), 'mod')
+  const exceptions = new Set([`${repo}:spikes/transcript-layouts`])
+  assert.equal(kindOf(repo, 'spikes/transcript-layouts', {}, new Set(), exceptions), 'mod')
+})
+
+test('acceptance drivers and uninstalled hook sources do not count as separate mods', () => {
+  for (const [repo, path, product] of [
+    ['CyclopsEyeTeam/cyclops-fresheye', 'acceptance/driver', '.'],
+    ['ninondev/cc-coco', 'source', 'plugin'],
+    ['ninondev/claude-sama', 'source', 'plugin'],
+  ]) {
+    assert.equal(kindOf(repo, path, {}), 'fixture')
+    assert.equal(kindOf(repo.toLowerCase(), `${path}/hooks`, {}), 'fixture')
+    assert.equal(kindOf(repo, product, {}), 'mod')
+    assert.equal(kindOf(repo, `${path}-tools`, {}), 'mod')
+    assert.equal(kindOf('other/repo', path, {}), 'mod')
+    assert.equal(kindOf(repo, path, {}, new Set(), new Set([`${repo}:${path}`])), 'mod')
+  }
 })
 
 test('benchmark fixtures stay out without excluding usable evaluation mods', () => {

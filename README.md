@@ -1,6 +1,6 @@
 # Awesome Claude Code Mods [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-A community list of Claude Code mods (function hooks) for **Claude Code 2.1.287+**. A mod is a plugin that uses JavaScript or TypeScript functions to change Claude Code's interface or behavior. [Browse the catalogue](https://mods.aidojo.si/).
+6,000+ Claude Code mods, with what each one can access before you install it. Context and usage meters, prompt cache warmers, status lines, guards and more, with install hints. A mod is a plugin that uses JavaScript or TypeScript functions to change Claude Code's interface or behavior, on **Claude Code 2.1.287+**. [Browse the catalogue](https://mods.aidojo.si/).
 
 Add a browser beside your conversation, keep usage in view, or check a command before it runs. Install a community mod or [ask Claude to build one](https://claude.dev/blog/getting-started-with-claude-code-mods/#the-shortcut-let-claude-build-it).
 
@@ -15,7 +15,7 @@ Find a mod in the [full catalogue][catalogue] by name or task and filter by acce
 Then run `/reload-plugins` to activate it before asking “Find a mod that helps with code reviews”. Requires Node 18 or later. For Desktop Code local sessions, use the [setup instructions](finder/README.md#in-claude-code-mcp).
 
 <!-- stats:start -->
-**5274 mods** · Last scanned 2026-10-18.
+**6606 mods** · Last scanned 2026-10-29.
 <!-- stats:end -->
 
 ![Browsing a GitHub pull request beside a Claude Code conversation using terminal-browser](assets/terminal-browser-demo.gif)
@@ -77,7 +77,7 @@ The scan also reads the catalogue of Anthropic's plugin directory (`claude plugi
 
 Merging a seed submission also starts a separate publication check. New repositories with passing checks appear automatically after their generated update is merged by the workflow and the website deploys. Existing listings stay unchanged. A seed with validation failures or new review warnings stays unpublished and is reported in the workflow run; other seeds still publish. [Seed publication details](contributing.md#open-a-pull-request).
 
-Discovery depends on GitHub's index and our search patterns, so a new mod may not appear immediately. A scan usually picks up a repository with the `claude-code-mod` topic within a few hours of its next push, and the mod appears once that scan's pull request is merged. [How discovery and validation work](SCANNING.md) covers access levels, warnings, retry handling and removal reviews.
+Discovery depends on GitHub's index and our search patterns, so a new mod may not appear immediately. A scan usually picks up a repository with the `claude-code-mod` topic within a few hours of its next push, and the mod appears once that scan's pull request is merged. [How discovery and validation work](SCANNING.md) covers access levels, warnings, retry handling and removal reviews. [What can a Claude Code mod access?](https://mods.aidojo.si/access/) sums up what the scan found across the catalogue.
 
 <a id="contribute"></a>
 

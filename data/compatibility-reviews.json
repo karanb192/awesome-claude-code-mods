@@ -1,5 +1,147 @@
 [
   {
+    "id": "gorkamb/claude-session-outputs:.",
+    "sourceCommit": "d228640dabc1c05d4a2e4152c0c1eef0879fdd39",
+    "claudeVersion": "2.1.312",
+    "warnings": [
+      {
+        "code": "ui-control-characters",
+        "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+        "evidence": [
+          { "file": "hooks/register.tsx", "line": 321 },
+          { "file": "hooks/register.tsx", "line": 325 }
+        ]
+      }
+    ],
+    "reason": "Both findings are String.raw regular-expression patterns used by the command-risk classifier. Their raw word-boundary escapes remain literal backslash-b sequences, not backspace characters. Pattern strings are tested internally and are not rendered. The pane hook returns its own component tree and does not call next() with rewritten props.text.",
+    "source": "https://github.com/gorkamb/claude-session-outputs/blob/d228640dabc1c05d4a2e4152c0c1eef0879fdd39/hooks/register.tsx#L319-L325"
+  },
+  {
+    "id": "kushalBanda/claude-tldr:.",
+    "sourceCommit": "07ca8e48e0d7a6d4b7a91f8019ef0fc3c5f31730",
+    "claudeVersion": "2.1.302",
+    "warnings": [
+      {
+        "code": "ui-control-characters",
+        "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+        "evidence": [{ "file": "hooks/classify.ts", "line": 91 }]
+      }
+    ],
+    "reason": "The control characters delimit temporary quoted-word placeholders inside the shell command parser. rmTargets, bashWrites and bashReads restore those words through unquote before returning paths. These internal placeholders are not forwarded as rewritten props.text or rendered by the UI hooks.",
+    "source": "https://github.com/kushalBanda/claude-tldr/blob/07ca8e48e0d7a6d4b7a91f8019ef0fc3c5f31730/hooks/classify.ts#L87-L98"
+  },
+  {
+    "id": "e950280/hudlite:.",
+    "sourceCommit": "47390aa15998df24e59b1ba51b6a22ee2f16fddb",
+    "claudeVersion": "2.1.302",
+    "warnings": [
+      {
+        "code": "ui-control-characters",
+        "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+        "evidence": [
+          {
+            "file": "hooks/extras.ts",
+            "line": 167
+          },
+          {
+            "file": "hooks/extras.ts",
+            "line": 168
+          },
+          {
+            "file": "hooks/hud/git.ts",
+            "line": 164
+          },
+          {
+            "file": "hooks/hud/git.ts",
+            "line": 213
+          },
+          {
+            "file": "hooks/hud/jj.ts",
+            "line": 13
+          },
+          {
+            "file": "hooks/hud/jj.ts",
+            "line": 14
+          },
+          {
+            "file": "hooks/hud/render/ansi.ts",
+            "line": 7
+          },
+          {
+            "file": "hooks/hud/render/ansi.ts",
+            "line": 19
+          },
+          {
+            "file": "hooks/hud/render/ansi.ts",
+            "line": 24
+          },
+          {
+            "file": "hooks/hud/render/ansi.ts",
+            "line": 30
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 5
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 7
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 8
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 9
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 10
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 11
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 12
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 13
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 14
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 15
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 33
+          },
+          {
+            "file": "hooks/hud/render/colors.ts",
+            "line": 45
+          },
+          {
+            "file": "hooks/hud/utils/hyperlinks.ts",
+            "line": 20
+          },
+          {
+            "file": "hooks/stdin.ts",
+            "line": 273
+          }
+        ]
+      }
+    ],
+    "reason": "The NUL literals split Git and environment output. ANSI and OSC literals in the bundled HUD formatter are parsed by hooks/ansi.ts into styled spans before hooks/draw.tsx creates Text and Link elements. The render hooks call next(e) with unchanged props and retain its result; they do not forward these strings as rewritten props.text.",
+    "source": "https://github.com/e950280/hudlite/blob/47390aa15998df24e59b1ba51b6a22ee2f16fddb/hooks/render.ts#L53"
+  },
+  {
     "id": "FunJim/claude-code-add-to-chat:add-to-chat",
     "sourceCommit": "c1797d334705dae6fe12ff427d76227bbec15ed7",
     "claudeVersion": "2.1.302",
@@ -72,5 +214,42 @@
     ],
     "reason": "The null character marks quoted spans inside the shell-command classifier. Quoted command heads are rejected and displayed labels use matched command, subcommand and flag words; this private marker is not rendered or passed to next() as rewritten text.",
     "source": "https://github.com/muellerei/sweet-spot/blob/8750a5390d58c52919973453efed63a330d5f4f9/hooks/standing.ts#L131"
+  },
+  {
+    "id": "shohamtal/cc-mod-opensearch-console:.",
+    "sourceCommit": "f11007dcc9d1f6d734398b7c09b4e0f40584b580",
+    "claudeVersion": "2.1.304",
+    "warnings": [
+      {
+        "code": "ui-control-characters",
+        "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+        "evidence": [
+          { "file": "hooks/lib.ts", "line": 167 },
+          { "file": "hooks/register.tsx", "line": 158 }
+        ]
+      }
+    ],
+    "reason": "The null characters distinguish JSON-tree closing-row paths and separate a response ID from the search term in an internal cache key. The viewer receives highlighted display segments, not those paths or cache keys. Neither sentinel is passed to next() as rewritten props.text.",
+    "source": "https://github.com/shohamtal/cc-mod-opensearch-console/blob/f11007dcc9d1f6d734398b7c09b4e0f40584b580/hooks/register.tsx#L638-L642"
+  },
+  {
+    "id": "emergentai/claude-code-rich-ui:.",
+    "sourceCommit": "4f4a848f5252d62b778db0a92868d74446349389",
+    "claudeVersion": "2.1.312",
+    "warnings": [
+      {
+        "code": "ui-control-characters",
+        "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+        "evidence": [
+          { "file": "hooks/vendor/zombie-mermaid.js", "line": 14 },
+          { "file": "hooks/vendor/zombie-mermaid.js", "line": 15 },
+          { "file": "hooks/vendor/zombie-mermaid.js", "line": 19 },
+          { "file": "hooks/vendor/zombie-mermaid.js", "line": 22 },
+          { "file": "hooks/vendor/zombie-mermaid.js", "line": 24 }
+        ]
+      }
+    ],
+    "reason": "The bundled renderer contains escape decoding, optional ANSI/hyperlink output and internal class-compartment separators. The Mermaid caller selects colorMode none and leaves hyperlinks disabled. It draws diagram lines as Text elements; its fallthrough calls pass the original event to next(), without rewriting props.text with these literals.",
+    "source": "https://github.com/emergentai/claude-code-rich-ui/blob/4f4a848f5252d62b778db0a92868d74446349389/hooks/features/mermaid/render.ts#L19-L23"
   }
 ]

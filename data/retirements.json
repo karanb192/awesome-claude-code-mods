@@ -1,375 +1,245 @@
 {
-  "checkedAt": "2026-10-16T16:05:17.183Z",
+  "checkedAt": "2026-10-25T21:32:49.507Z",
   "plugins": [
     {
-      "id": "bendrucker/claude:plugins/classifier-telemetry",
-      "repo": "bendrucker/claude",
-      "revision": "175715b7d74f39f3d0cb39e8d6ef6ea925ade3cc",
+      "id": "HMarzban/claude-mod:plugins/session-usage-band",
+      "repo": "HMarzban/claude-mod",
+      "revision": "93c60c4beb0e3b9e77c542bf593b443817987571",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "crenshawdev/cadence:.",
-      "repo": "crenshawdev/cadence",
-      "revision": "4715425b38145cc13580eccaf32cc2436ffd3818",
-      "reason": "hook module no longer present in a fresh checkout"
-    },
-    {
-      "id": "matthlh/claude-cat-mod:plugins/limit-note",
-      "repo": "matthlh/claude-cat-mod",
-      "revision": "49ef4ad620dd260f6eaa7c5b63458f069cd5eeb5",
-      "reason": "hook module no longer present in a fresh checkout"
-    },
-    {
-      "id": "tractorjuice/arckit-claude:plugins/arckit",
-      "repo": "tractorjuice/arckit-claude",
-      "revision": "3c29654d12017dc7c16322835e299f942f132727",
-      "reason": "hook module no longer present in a fresh checkout"
-    },
-    {
-      "id": "matthlh/claude-cat-mod:.",
-      "repo": "matthlh/claude-cat-mod",
-      "revision": "49ef4ad620dd260f6eaa7c5b63458f069cd5eeb5",
-      "reason": "hook module no longer present in a fresh checkout"
-    },
-    {
-      "id": "ray-amjad/awesome-claude-code-function-hooks:plugins/secret-redactor",
-      "repo": "ray-amjad/awesome-claude-code-function-hooks",
-      "revision": "dd77ace1dc3313e8ddedb1064c18cf59a217de4f",
-      "reason": "hook module no longer present in a fresh checkout"
-    },
-    {
-      "id": "savinofiore/lexi:jev",
-      "repo": "savinofiore/lexi",
-      "revision": "6e68597757745c9de26749e491a2647d14c35c53",
-      "reason": "hook module no longer present in a fresh checkout"
-    },
-    {
-      "id": "ashafizullah/claude-code-muslim-mods:adhkar",
-      "repo": "ashafizullah/claude-code-muslim-mods",
-      "revision": "0a23c8d333daafc8b937f2526f5b4205044e5b6d",
-      "reason": "hook module no longer present in a fresh checkout"
-    },
-    {
-      "id": "ashafizullah/claude-code-muslim-mods:daily-ayah",
-      "repo": "ashafizullah/claude-code-muslim-mods",
-      "revision": "0a23c8d333daafc8b937f2526f5b4205044e5b6d",
-      "reason": "hook module no longer present in a fresh checkout"
-    },
-    {
-      "id": "ashafizullah/claude-code-muslim-mods:prayer-times",
-      "repo": "ashafizullah/claude-code-muslim-mods",
-      "revision": "0a23c8d333daafc8b937f2526f5b4205044e5b6d",
-      "reason": "hook module no longer present in a fresh checkout"
-    },
-    {
-      "id": "MongLong0214/jev-gate:mods/output",
-      "repo": "MongLong0214/jev-gate",
-      "revision": "bde33a2dab61d6aa7e2b5451bedb40354a6b2e1f",
-      "reason": "hook module no longer present in a fresh checkout"
-    },
-    {
-      "id": "xsyetopz/dotclaude:plugins/dotclaude-jev",
+      "id": "xsyetopz/dotclaude:plugins/claudetto-browser",
       "repo": "xsyetopz/dotclaude",
-      "revision": "44e74425b00593561c4d1d39248a3a1d277ca669",
+      "revision": "cbadbdc204bb139270b8d6f5b2cbc7d51643e024",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "xsyetopz/dotclaude:plugins/dotclaude-modder",
+      "id": "xsyetopz/dotclaude:plugins/claudetto-codegraph",
       "repo": "xsyetopz/dotclaude",
-      "revision": "44e74425b00593561c4d1d39248a3a1d277ca669",
+      "revision": "cbadbdc204bb139270b8d6f5b2cbc7d51643e024",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "herman925/925-cc-plugins:clean-view",
-      "repo": "herman925/925-cc-plugins",
-      "revision": "dd81420f2092156e5bbf6df2bd309f7333f39862",
+      "id": "xsyetopz/dotclaude:plugins/claudetto-sessions",
+      "repo": "xsyetopz/dotclaude",
+      "revision": "cbadbdc204bb139270b8d6f5b2cbc7d51643e024",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "riethmayer/dotfiles:stow/claude/.claude/skills/websearch-perplexity",
-      "repo": "riethmayer/dotfiles",
-      "revision": "70743d4b0687c70a2977580a3718e010991c876c",
+      "id": "xsyetopz/dotclaude:plugins/claudetto-you-should-know",
+      "repo": "xsyetopz/dotclaude",
+      "revision": "cbadbdc204bb139270b8d6f5b2cbc7d51643e024",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "Sennjen/claude-sdlc:plugins/sdlc",
-      "repo": "Sennjen/claude-sdlc",
-      "revision": "311fbcea979f7e5155be81f99766ba5d9a16769c",
+      "id": "xsyetopz/dotclaude:src/plugins/claudetto-browser",
+      "repo": "xsyetopz/dotclaude",
+      "revision": "cbadbdc204bb139270b8d6f5b2cbc7d51643e024",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "crebot51/jack-mods:plugins/translate-en",
-      "repo": "crebot51/jack-mods",
-      "revision": "46f74053cac7e9c2fa222f5336acbb221f1b7a00",
+      "id": "Abdallah-Abdelazim/usage-limits-cc-mod:.",
+      "repo": "Abdallah-Abdelazim/usage-limits-cc-mod",
+      "revision": "fe03ff7b183d88f57ce965b6ba0cc1c8032200e8",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "Fazzani/claude-mods:plugins/subagents-monitor",
-      "repo": "Fazzani/claude-mods",
-      "revision": "d05c4a7783d397a82b3a15f01b0ed91d626ff666",
+      "id": "Abdallah-Abdelazim/usage-limits-cc-mod:plugins/recording-mode",
+      "repo": "Abdallah-Abdelazim/usage-limits-cc-mod",
+      "revision": "fe03ff7b183d88f57ce965b6ba0cc1c8032200e8",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "IT-BAER/claude-forge:mods/cache-status",
-      "repo": "IT-BAER/claude-forge",
-      "revision": "4a08c54ef4ab30674e87290c7be04c1312eefd0c",
+      "id": "Agulhas-Labs/claude-plugins:plugins/logbook",
+      "repo": "Agulhas-Labs/claude-plugins",
+      "revision": "efaa5c7032072541dc89ffe8421adcf32549d4ae",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "midudev/after-for-claude-code:after",
-      "repo": "midudev/after-for-claude-code",
-      "revision": "c2eb914b70329e9757fc981f36631ee88c8fd4b1",
+      "id": "musingfox/cc-plugins:context-flow",
+      "repo": "musingfox/cc-plugins",
+      "revision": "e0f33e7edc271c11b0cc553497f802c85a5542b4",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "midudev/after-for-claude-code:image-preview",
-      "repo": "midudev/after-for-claude-code",
-      "revision": "c2eb914b70329e9757fc981f36631ee88c8fd4b1",
+      "id": "revenantworks/claude-skills:mods/dash",
+      "repo": "revenantworks/claude-skills",
+      "revision": "ba4fdc2cebb6191502771f052aa77f620f252f70",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "midudev/after-for-claude-code:sub-meter",
-      "repo": "midudev/after-for-claude-code",
-      "revision": "c2eb914b70329e9757fc981f36631ee88c8fd4b1",
+      "id": "revenantworks/claude-skills:mods/privacy",
+      "repo": "revenantworks/claude-skills",
+      "revision": "ba4fdc2cebb6191502771f052aa77f620f252f70",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "midudev/after-for-claude-code:think-hard",
-      "repo": "midudev/after-for-claude-code",
-      "revision": "c2eb914b70329e9757fc981f36631ee88c8fd4b1",
+      "id": "Tamircohen28/tamirs-superpowers:.",
+      "repo": "Tamircohen28/tamirs-superpowers",
+      "revision": "6f49709c84e47c68fc805fb27d35d8c4789fae45",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "midudev/after-for-claude-code:token-meter",
-      "repo": "midudev/after-for-claude-code",
-      "revision": "c2eb914b70329e9757fc981f36631ee88c8fd4b1",
+      "id": "imMamdouhaboammar/get-fable:docs/get-fable-jev-integration-spec-v1/fast-jev-compaction",
+      "repo": "imMamdouhaboammar/get-fable",
+      "revision": "36920932251ffc619da6073eb02cb35a9a2f2dbf",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "midudev/after-for-claude-code:use-haiku",
-      "repo": "midudev/after-for-claude-code",
-      "revision": "c2eb914b70329e9757fc981f36631ee88c8fd4b1",
+      "id": "Spardutti/claude-mods:plugins/handoff-pickup",
+      "repo": "Spardutti/claude-mods",
+      "revision": "b9a099c2d4ee49a31e978a80353b4d443370d6e8",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "SeongGwangJu/k-mods:mods/skins",
-      "repo": "SeongGwangJu/k-mods",
-      "revision": "0c1d290131810346092ec132151e8a7a0ba41fde",
+      "id": "zchee/claude-code-mods:mods/model-gateway-rc",
+      "repo": "zchee/claude-code-mods",
+      "revision": "30a1a13b5f82be1021a46558e86ca17aa8aa656f",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "SeongGwangJu/k-mods:mods/status-ko",
-      "repo": "SeongGwangJu/k-mods",
-      "revision": "0c1d290131810346092ec132151e8a7a0ba41fde",
+      "id": "anderson-spider/claude-mods:plugins/spider-team",
+      "repo": "anderson-spider/claude-mods",
+      "revision": "d50fb7444ee7e8c29ebbcc8f7e137bbb4e5ed506",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "AbhiramDwivedi/claude-mods:plugins/pit-stop",
-      "repo": "AbhiramDwivedi/claude-mods",
-      "revision": "0d24bcb00c45a1d7ebddbc29a0620cafcc2cf00a",
+      "id": "cdeust/claude-mods:mods/cortex-cockpit",
+      "repo": "cdeust/claude-mods",
+      "revision": "66c78acb00fef8b0cb95aa75347dec01ae0a5a59",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "afterever/claude-mods:savvy-progress",
-      "repo": "afterever/claude-mods",
-      "revision": "d46531ea98895c9f98893937855025e6b06e08ff",
+      "id": "Creeperprol/claude-mods:session-link",
+      "repo": "Creeperprol/claude-mods",
+      "revision": "cdb69f2b2aff089057056ccf200ecc7b8d911ba1",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "BastienTeissier/watch-tower:mods/buddy",
-      "repo": "BastienTeissier/watch-tower",
-      "revision": "ac3054dae866e322781bfa8b33dcce288218c8e4",
+      "id": "jidhra/claude-mods:plugins/buffer-pane/plugin",
+      "repo": "jidhra/claude-mods",
+      "revision": "8104b96b2f9187684cd037a242f5700b1291269e",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "brianbrinley/ClaudeMods:boomi-standards",
-      "repo": "brianbrinley/ClaudeMods",
-      "revision": "b0693df3a74b7afebea80c8603454dea89d306b1",
+      "id": "jidhra/claude-mods:plugins/pinboard",
+      "repo": "jidhra/claude-mods",
+      "revision": "8104b96b2f9187684cd037a242f5700b1291269e",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "cpeaustriajc/cj-stack:mods/work-pane",
-      "repo": "cpeaustriajc/cj-stack",
-      "revision": "b517fc6f0fc145cda418a8cd3533e71d57e123de",
+      "id": "kurushiba/claude-mods:final/model-router",
+      "repo": "kurushiba/claude-mods",
+      "revision": "88bb162e06b45f530d790aa68f1a0d6269c2a0db",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "DazzleML/claude-bookmarks:.",
-      "repo": "DazzleML/claude-bookmarks",
-      "revision": "116a97c9074ca32bd284b6fc333f2fbbe2ee5e7c",
+      "id": "LorcanChinnock/claude-desk-neighbours:plugins/closing-time",
+      "repo": "LorcanChinnock/claude-desk-neighbours",
+      "revision": "24f239aea9ebfa801a265d9adfae5ed044336d0c",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "dgsantana/claude-mods:plugins/agent-switchboard",
-      "repo": "dgsantana/claude-mods",
-      "revision": "c532409cc3cf2870f00d7d6627ccce492dd13294",
+      "id": "LorcanChinnock/claude-desk-neighbours:plugins/grudge",
+      "repo": "LorcanChinnock/claude-desk-neighbours",
+      "revision": "24f239aea9ebfa801a265d9adfae5ed044336d0c",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "drnic/claude-mods:mods/bamboo",
-      "repo": "drnic/claude-mods",
-      "revision": "8aaaf1499b92a1bddba9882c3bcab61d35c89c18",
+      "id": "LorcanChinnock/claude-desk-neighbours:plugins/name-tag",
+      "repo": "LorcanChinnock/claude-desk-neighbours",
+      "revision": "24f239aea9ebfa801a265d9adfae5ed044336d0c",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "dvakatsiienko/frame:home/.claude/plugin-x/mods/breather",
-      "repo": "dvakatsiienko/frame",
-      "revision": "11af7a095dea235ac34b02c9dfdfe3761c4d1392",
+      "id": "LorcanChinnock/claude-desk-neighbours:plugins/previously-on",
+      "repo": "LorcanChinnock/claude-desk-neighbours",
+      "revision": "24f239aea9ebfa801a265d9adfae5ed044336d0c",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "dvakatsiienko/frame:home/.claude/plugin-x/mods/guard",
-      "repo": "dvakatsiienko/frame",
-      "revision": "11af7a095dea235ac34b02c9dfdfe3761c4d1392",
+      "id": "LorcanChinnock/claude-plugins:plugins/closing-time",
+      "repo": "LorcanChinnock/claude-plugins",
+      "revision": "24f239aea9ebfa801a265d9adfae5ed044336d0c",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "dvakatsiienko/frame:home/.claude/plugin-x/mods/redact",
-      "repo": "dvakatsiienko/frame",
-      "revision": "11af7a095dea235ac34b02c9dfdfe3761c4d1392",
+      "id": "LorcanChinnock/claude-plugins:plugins/grudge",
+      "repo": "LorcanChinnock/claude-plugins",
+      "revision": "24f239aea9ebfa801a265d9adfae5ed044336d0c",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "dvakatsiienko/frame:home/.claude/plugin-x/mods/stash",
-      "repo": "dvakatsiienko/frame",
-      "revision": "11af7a095dea235ac34b02c9dfdfe3761c4d1392",
+      "id": "LorcanChinnock/claude-plugins:plugins/name-tag",
+      "repo": "LorcanChinnock/claude-plugins",
+      "revision": "24f239aea9ebfa801a265d9adfae5ed044336d0c",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "dvakatsiienko/frame:home/.claude/plugin-x/mods/x-mod-breather",
-      "repo": "dvakatsiienko/frame",
-      "revision": "11af7a095dea235ac34b02c9dfdfe3761c4d1392",
+      "id": "LorcanChinnock/claude-plugins:plugins/previously-on",
+      "repo": "LorcanChinnock/claude-plugins",
+      "revision": "24f239aea9ebfa801a265d9adfae5ed044336d0c",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "midudev/after-for-claude-code:.",
-      "repo": "midudev/after-for-claude-code",
-      "revision": "c2eb914b70329e9757fc981f36631ee88c8fd4b1",
+      "id": "pompeitech/affreschi:plugins/context-map",
+      "repo": "pompeitech/affreschi",
+      "revision": "72f03be08b247e00eb84b253624c06aebdc04640",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "Miracle0x0/CCometixLine:mods/agents",
-      "repo": "Miracle0x0/CCometixLine",
-      "revision": "f5ec2a1cbedb48b06a6bd2ea69a7ec1da57cf3a6",
+      "id": "pompeitech/affreschi:plugins/touched-files",
+      "repo": "pompeitech/affreschi",
+      "revision": "72f03be08b247e00eb84b253624c06aebdc04640",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "mtmtian/cc-mods:mods/cache-timer/plugins/cache-timer",
-      "repo": "mtmtian/cc-mods",
-      "revision": "22198fb8769bbef2e1eb8f1ddb720074aa15cef8",
+      "id": "rezzminator/sub-agent-compact:plugins/sub-agent-compact",
+      "repo": "rezzminator/sub-agent-compact",
+      "revision": "05575e59c357207dcb5b85a2c227b9cf2513886e",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "natsume-777/claude-mods:plugins/token-ledger",
-      "repo": "natsume-777/claude-mods",
-      "revision": "35b1395bccafd4cd4472f57493ff277437dd06ba",
+      "id": "robinalexandre/claude-code-kit:mods/wave-check",
+      "repo": "robinalexandre/claude-code-kit",
+      "revision": "19229631679385bf8e99a456486df93803137b22",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "Oualid0/claude-mods:plugins/session-board",
-      "repo": "Oualid0/claude-mods",
-      "revision": "a0447e89b05c2e19954a61d96f9aad3d3c6a4cb4",
+      "id": "tyree88/tempered_plugins:followups",
+      "repo": "tyree88/tempered_plugins",
+      "revision": "6c48f1892c27404e4a83b4336fb0f35483d3598a",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "RomanHotsiy/claude-mods:pr-approvals",
-      "repo": "RomanHotsiy/claude-mods",
-      "revision": "017dd69fb407e933abb9b93bb80dfec570077a0f",
+      "id": "tyree88/tempered_plugins:lessons",
+      "repo": "tyree88/tempered_plugins",
+      "revision": "6c48f1892c27404e4a83b4336fb0f35483d3598a",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "seanmars/my-agent-plugins:plugins/pet",
-      "repo": "seanmars/my-agent-plugins",
-      "revision": "9695a6701a31335c6002d4abaaf4a28ae170b29d",
+      "id": "tyree88/tempered_plugins:limit-resume",
+      "repo": "tyree88/tempered_plugins",
+      "revision": "6c48f1892c27404e4a83b4336fb0f35483d3598a",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "SeKondBrainAILabs/kemory-plugin:plugin",
-      "repo": "SeKondBrainAILabs/kemory-plugin",
-      "revision": "50806887b7980fac9d04b5c9c17bcfca0a150dc2",
+      "id": "tyree88/tempered_plugins:ship-state",
+      "repo": "tyree88/tempered_plugins",
+      "revision": "6c48f1892c27404e4a83b4336fb0f35483d3598a",
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "sr-gene/claude-mod:.",
-      "repo": "sr-gene/claude-mod",
-      "revision": "c3c7de354074a37cd8e5d226a34a0df6fb4d86ae",
-      "reason": "hook module no longer present in a fresh checkout"
-    },
-    {
-      "id": "theishandubey/claude-mods:plugins/auto-handoff",
-      "repo": "theishandubey/claude-mods",
-      "revision": "b6b9e3aa984c7c1ea3d0292e243333439329a87a",
-      "reason": "hook module no longer present in a fresh checkout"
-    },
-    {
-      "id": "TrulyNotMalware/skills:mods/infra-pane",
-      "repo": "TrulyNotMalware/skills",
-      "revision": "484691e87d8bf85ec77edb0967a3f7ed4d2be90b",
-      "reason": "hook module no longer present in a fresh checkout"
-    },
-    {
-      "id": "TrulyNotMalware/skills:mods/infra-preflight",
-      "repo": "TrulyNotMalware/skills",
-      "revision": "484691e87d8bf85ec77edb0967a3f7ed4d2be90b",
-      "reason": "hook module no longer present in a fresh checkout"
-    },
-    {
-      "id": "TrulyNotMalware/skills:mods/wiki-guard",
-      "repo": "TrulyNotMalware/skills",
-      "revision": "484691e87d8bf85ec77edb0967a3f7ed4d2be90b",
-      "reason": "hook module no longer present in a fresh checkout"
-    },
-    {
-      "id": "Vatsa10/Meta-Harness:.",
-      "repo": "Vatsa10/Meta-Harness",
-      "revision": "bb552302e9745cf31003eac9ccb8f6ac17d8cc55",
+      "id": "tyree88/tempered_plugins:timeline",
+      "repo": "tyree88/tempered_plugins",
+      "revision": "6c48f1892c27404e4a83b4336fb0f35483d3598a",
       "reason": "hook module no longer present in a fresh checkout"
     }
   ],
   "repos": [
     {
-      "repo": "3DMolier/3D-Models",
-      "revision": "1a9b5a8cad9eb3d22909b6e23aecccfb6d5f19d7",
-      "reason": "no hook modules in a fresh checkout"
-    },
-    {
-      "repo": "crenshawdev/cadence",
-      "revision": "4715425b38145cc13580eccaf32cc2436ffd3818",
-      "reason": "no hook modules in a fresh checkout"
-    },
-    {
-      "repo": "Miracle0x0/CCometixLine",
-      "revision": "f5ec2a1cbedb48b06a6bd2ea69a7ec1da57cf3a6",
-      "reason": "no hook modules in a fresh checkout"
-    },
-    {
-      "repo": "riethmayer/dotfiles",
-      "revision": "70743d4b0687c70a2977580a3718e010991c876c",
-      "reason": "no hook modules in a fresh checkout"
-    },
-    {
-      "repo": "SeKondBrainAILabs/kemory-plugin",
-      "revision": "50806887b7980fac9d04b5c9c17bcfca0a150dc2",
-      "reason": "no hook modules in a fresh checkout"
-    },
-    {
-      "repo": "SSFSKIM/designer",
-      "revision": "697ae8af7f85da0f55f692b161186ce747a66d8c",
-      "reason": "no hook modules in a fresh checkout"
-    },
-    {
-      "repo": "tractorjuice/arckit-claude",
-      "revision": "3c29654d12017dc7c16322835e299f942f132727",
-      "reason": "no hook modules in a fresh checkout"
-    },
-    {
-      "repo": "TrulyNotMalware/skills",
-      "revision": "484691e87d8bf85ec77edb0967a3f7ed4d2be90b",
-      "reason": "no hook modules in a fresh checkout"
-    },
-    {
-      "repo": "Vatsa10/Meta-Harness",
-      "revision": "bb552302e9745cf31003eac9ccb8f6ac17d8cc55",
+      "repo": "imMamdouhaboammar/get-fable",
+      "revision": "36920932251ffc619da6073eb02cb35a9a2f2dbf",
       "reason": "no hook modules in a fresh checkout"
     }
   ]

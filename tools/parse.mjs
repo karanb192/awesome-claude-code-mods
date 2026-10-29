@@ -7,14 +7,26 @@ import { posix } from 'node:path'
 const LINE = /^\s*❯\s+(\S+)\s+(hooks|calls|surface modules):\s*(.*)$/
 const TRUNCATED = /(?:…|\.{3})?\s*\[\+\d+ chars?\]/
 
-function completePrefix(text) {
-  let depth = 0, end = 0
+function splitList(text, includeLast = true) {
+  const entries = [], stack = []
+  let start = 0, quoted = false, escaped = false
   for (let i = 0; i < text.length; i++) {
-    if ('({'.includes(text[i])) depth++
-    else if (')}'.includes(text[i])) depth--
-    else if (text[i] === ',' && depth === 0) end = i
+    const char = text[i]
+    if (quoted) {
+      if (escaped) escaped = false
+      else if (char === '\\') escaped = true
+      else if (char === '"') quoted = false
+    } else if (char === '"') quoted = true
+    else if ('({['.includes(char)) stack.push(char)
+    else if (')}]'.includes(char)) {
+      if (stack.pop() !== '({['[')}]'.indexOf(char)]) return entries
+    } else if (char === ',' && stack.length === 0) {
+      entries.push(text.slice(start, i).trim())
+      start = i + 1
+    }
   }
-  return text.slice(0, end)
+  if (includeLast && !quoted && stack.length === 0) entries.push(text.slice(start).trim())
+  return entries.filter(Boolean)
 }
 
 export function parseValidateOutput(text) {
@@ -26,7 +38,7 @@ export function parseValidateOutput(text) {
     const mod = modules.get(file) ?? { file, hooks: [], calls: [], surfaceModules: [], reported: [] }
     const truncated = output.match(TRUNCATED)
     // A cut can split a matcher or a helper annotation; retain only whole list entries.
-    const rest = truncated ? completePrefix(output.slice(0, truncated.index)) : output
+    const rest = truncated ? splitList(output.slice(0, truncated.index), false).join(', ') : output
     if (truncated) mod.truncated = true
     if (kind === 'hooks') {
       mod.hooks = parseHooks(rest)
@@ -66,12 +78,16 @@ export function footprintStatus(parsed, declared) {
 // "session.start, tool.call{tool=Bash}, ui.render{component=Pane, surface=terminal}"
 export function parseHooks(s) {
   const out = []
-  for (const m of s.matchAll(/([\w.*-]+)(\{[^}]*\})?/g)) {
+  for (const entry of splitList(s)) {
+    const m = entry.match(/^([\w.*-]+)(?:\{(.*)\})?$/s)
+    if (!m) continue
     const event = m[1]
     if (!event || event === 'nothing') continue
     const matcher = {}
-    if (m[2]) for (const kv of m[2].slice(1, -1).split(',')) {
-      const [k, v] = kv.split('=').map(x => x.trim())
+    if (m[2]) for (const kv of splitList(m[2])) {
+      const separator = kv.indexOf('=')
+      const k = (separator < 0 ? kv : kv.slice(0, separator)).trim()
+      const v = separator < 0 ? undefined : kv.slice(separator + 1).trim()
       if (k) matcher[k] = v
     }
     out.push({ event, matcher })
