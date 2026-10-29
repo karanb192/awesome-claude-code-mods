@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-28T11:47:38.509Z",
   "claudeVersion": "2.1.312",
-  "repos": 3301,
+  "repos": 3302,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -787748,6 +787748,212 @@
       "stars": 0,
       "pushedAt": "2026-10-27T13:00:09Z",
       "createdAt": "2026-10-22T13:38:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "MrMirhan/claude-buddy-chat:.",
+      "repo": "MrMirhan/claude-buddy-chat",
+      "path": ".",
+      "sourceCommit": "9b18f8303ad4d3ceb0365b410f570221701c4b96",
+      "name": "buddy-chat",
+      "description": "End-to-end encrypted, quantum-resistant chat between Claude Code users: direct messages and groups, relayed through ntfy.sh with no server of its own",
+      "author": "MrMirhan",
+      "homepage": "https://github.com/MrMirhan/claude-buddy-chat",
+      "url": "https://github.com/MrMirhan/claude-buddy-chat",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "buddy"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "buddy-chat"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "buddy-id"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "buddy-name"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "buddy-username"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "buddy-add"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "buddy-lang"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "buddy-link"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "buddy-backup"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "buddy-list"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "buddy-send"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "buddy-group"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__buddy-chat__send_to_buddy"
+          }
+        },
+        {
+          "event": "ui.scroll",
+          "matcher": {
+            "requestId": "buddy-chat"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {
+            "requestId": "buddy-chat"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "buddy-chat"
+          }
+        }
+      ],
+      "calls": [
+        "$.audio.play",
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.clock.sleep",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.fs.write",
+        "$.http.fetch",
+        "$.process.run",
+        "$.process.spawn",
+        "$.prompt.submit",
+        "$.session.id",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.keys",
+        "$.store.set",
+        "$.tool.register",
+        "$.ui.ask",
+        "$.ui.copy",
+        "$.ui.focus",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.notify",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.scroll",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [
+        "hooks/chat-row.tsx"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.312",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-buddy-chat",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "network",
+          "runs processes",
+          "writes files",
+          "drives Claude",
+          "writes the clipboard",
+          "reads files",
+          "reads env vars",
+          "plays audio",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "mcp__buddy-chat__send_to_buddy calls"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-28T12:47:57Z",
+      "createdAt": "2026-10-24T18:30:37Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
