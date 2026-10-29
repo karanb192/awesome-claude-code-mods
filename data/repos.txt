@@ -1084,6 +1084,7 @@ gonzalonicolasr/claude-code-forge
 gonzalonicolasr/claude-code-nerv
 gonzaloserrano/cc-prompt-stash
 Gooner44/ClaudeMods
+gorkamb/claude-session-outputs
 Gorossy/task-planner
 gotzastory/my-mods
 govlog/claude-darkroom

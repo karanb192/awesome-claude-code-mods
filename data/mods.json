@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-28T11:47:38.509Z",
   "claudeVersion": "2.1.312",
-  "repos": 3302,
+  "repos": 3303,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -788125,6 +788125,130 @@
       "stars": 1,
       "pushedAt": "2026-10-28T12:47:57Z",
       "createdAt": "2026-10-24T18:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "gorkamb/claude-session-outputs:.",
+      "repo": "gorkamb/claude-session-outputs",
+      "path": ".",
+      "sourceCommit": "d228640dabc1c05d4a2e4152c0c1eef0879fdd39",
+      "name": "session-outputs",
+      "description": "A side pane listing what a session made for you: files, Artifacts, PRs, CI runs and the commands it hands you to run",
+      "author": "gorkamb",
+      "homepage": "https://github.com/gorkamb/claude-session-outputs",
+      "url": "https://github.com/gorkamb/claude-session-outputs",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "outputs"
+          }
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "session-outputs"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.session.cwd",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.copy",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.312",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "session-outputs",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": [
+          {
+            "code": "ui-control-characters",
+            "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+            "evidence": [
+              {
+                "file": "hooks/register.tsx",
+                "line": 321
+              },
+              {
+                "file": "hooks/register.tsx",
+                "line": 325
+              }
+            ]
+          }
+        ]
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "writes the clipboard",
+          "reads files",
+          "reads env vars",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt",
+        "every tool call"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-28T14:12:48Z",
+      "createdAt": "2026-10-27T14:00:16Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
