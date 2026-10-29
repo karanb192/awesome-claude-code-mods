@@ -5400,6 +5400,7 @@
   "ray-manaloto--dotfiles--session-start": {"id":"ray-manaloto/dotfiles:.claude/skills/session-start"},
   "ray-manaloto--knowledge-base--kb-settings-guard": {"id":"ray-manaloto/knowledge-base:.claude/mods/kb-settings-guard"},
   "ray-manaloto--knowledge-base--model-registry": {"id":"ray-manaloto/knowledge-base:.claude/skills/model-registry"},
+  "razorback16--cc-intelligent-ui--cc-intelligent-ui": {"id":"razorback16/cc-intelligent-ui:."},
   "razzamatazm--cache-keeper--cache-keeper": {"id":"razzamatazm/cache-keeper:."},
   "razzamatazm--fresh-start--fresh-start": {"id":"razzamatazm/fresh-start:."},
   "rb17080--trek-band--trek-band": {"id":"rb17080/trek-band:plugins/trek-band"},
