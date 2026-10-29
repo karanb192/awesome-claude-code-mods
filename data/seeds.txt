@@ -43,6 +43,7 @@ dot-agi/sandbox-tuner
 e950280/hudlite
 edsoncantuaria/cc-cost
 edtrackai/claude-code-guardrails-lite
+emergentai/claude-code-rich-ui
 errhythm/ccswap
 FunJim/claude-code-add-to-chat
 gerricchaplin/pr-pulse
