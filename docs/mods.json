@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-29T06:07:36.945Z",
   "claudeVersion": "2.1.312",
-  "repos": 3406,
+  "repos": 3407,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -812016,6 +812016,252 @@
       "stars": 0,
       "pushedAt": "2026-10-17T02:40:48Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "emergentai/claude-code-rich-ui:.",
+      "repo": "emergentai/claude-code-rich-ui",
+      "path": ".",
+      "sourceCommit": "4f4a848f5252d62b778db0a92868d74446349389",
+      "name": "rich-ui",
+      "description": "The Claude Code interface I wished for, as add-ons you can switch on one at a time.",
+      "author": "Emergent AI",
+      "homepage": "https://github.com/emergentai/claude-code-rich-ui",
+      "url": "https://github.com/emergentai/claude-code-rich-ui",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "rich-ui"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "rich-ui"
+          }
+        },
+        {
+          "event": "ui.focus",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "rich-ui"
+          }
+        },
+        {
+          "event": "ui.scroll",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "rich-ui"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AssistantMessage"
+          }
+        },
+        {
+          "event": "prompt.compose",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AssistantMessage"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "rich-ui-preview"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Spinner"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "TurnDuration"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolProgress"
+          }
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "PromptHint"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "InfoNotice"
+          }
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.clock.sleep",
+        "$.command.register",
+        "$.config.list",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.process.run",
+        "$.prompt.read",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.turns",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.blit",
+        "$.ui.focus",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.312",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-code-rich-ui",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": [
+          {
+            "code": "ui-control-characters",
+            "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+            "evidence": [
+              {
+                "file": "hooks/vendor/zombie-mermaid.js",
+                "line": 14
+              },
+              {
+                "file": "hooks/vendor/zombie-mermaid.js",
+                "line": 15
+              },
+              {
+                "file": "hooks/vendor/zombie-mermaid.js",
+                "line": 19
+              },
+              {
+                "file": "hooks/vendor/zombie-mermaid.js",
+                "line": 22
+              },
+              {
+                "file": "hooks/vendor/zombie-mermaid.js",
+                "line": 24
+              }
+            ]
+          }
+        ]
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "reads files",
+          "reads env vars",
+          "reads settings",
+          "reads the prompt box",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call",
+        "every prompt"
+      ],
+      "draws": [
+        "Pane",
+        "AssistantMessage",
+        "AbovePrompt",
+        "Spinner",
+        "TurnDuration",
+        "ToolProgress",
+        "PromptHint",
+        "InfoNotice"
+      ],
+      "stars": 3,
+      "pushedAt": "2026-10-29T03:42:31Z",
+      "createdAt": "2026-10-22T23:19:04Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

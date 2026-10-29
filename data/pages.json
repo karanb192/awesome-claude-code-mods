@@ -3207,6 +3207,7 @@
   "eluc1a--cc-plugins-mods-etc--relay": {"id":"eluc1a/cc-plugins-mods-etc:relay"},
   "eluc1a--cc-plugins-mods-etc--workbench": {"id":"eluc1a/cc-plugins-mods-etc:workbench"},
   "emaballarin--ccplugins--ccbar": {"id":"emaballarin/ccplugins:plugins/ccbar"},
+  "emergentai--claude-code-rich-ui--rich-ui": {"id":"emergentai/claude-code-rich-ui:."},
   "emerson-buoy--claude-code-mods--model-badge": {"id":"emerson-buoy/claude-code-mods:."},
   "emilthaudal--claude-plugins--gh-account": {"id":"emilthaudal/claude-plugins:gh-account"},
   "emilthaudal--claude-plugins--pr-card": {"id":"emilthaudal/claude-plugins:pr-card"},
