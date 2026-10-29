@@ -1,5 +1,22 @@
 [
   {
+    "id": "gorkamb/claude-session-outputs:.",
+    "sourceCommit": "d228640dabc1c05d4a2e4152c0c1eef0879fdd39",
+    "claudeVersion": "2.1.312",
+    "warnings": [
+      {
+        "code": "ui-control-characters",
+        "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+        "evidence": [
+          { "file": "hooks/register.tsx", "line": 321 },
+          { "file": "hooks/register.tsx", "line": 325 }
+        ]
+      }
+    ],
+    "reason": "Both findings are String.raw regular-expression patterns used by the command-risk classifier. Their raw word-boundary escapes remain literal backslash-b sequences, not backspace characters. Pattern strings are tested internally and are not rendered. The pane hook returns its own component tree and does not call next() with rewritten props.text.",
+    "source": "https://github.com/gorkamb/claude-session-outputs/blob/d228640dabc1c05d4a2e4152c0c1eef0879fdd39/hooks/register.tsx#L319-L325"
+  },
+  {
     "id": "kushalBanda/claude-tldr:.",
     "sourceCommit": "07ca8e48e0d7a6d4b7a91f8019ef0fc3c5f31730",
     "claudeVersion": "2.1.302",
