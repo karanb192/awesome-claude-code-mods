@@ -57,6 +57,9 @@ hellosverre/claude-skins
 hellosverre/mod-store
 hellosverre/redgreen
 hellosverre/smart-compact
+hematteo/anki-band
+hematteo/run-suggested
+hematteo/run-watcher
 hoobnn/hoobnn-agent-mods
 HuliLulu46/cc-effort-switch
 HuliLulu46/pending-decisions
