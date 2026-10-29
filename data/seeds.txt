@@ -107,6 +107,7 @@ qualixar/modstage
 RadTech-Solutions/agent-pager
 RadTech-Solutions/modwall
 rapha-rodrigues/cc-esol
+razorback16/cc-intelligent-ui
 reporails/arcade
 ruihe774/cc-micro-compaction
 saiharsha03/clawd-spinner
