@@ -9,14 +9,18 @@ const NOT_A_MOD = [/\/tests?\//, /\/fixtures?\//, /\/probes?\//, /\/examples?\//
 // These repositories keep test material outside conventional fixture folders alongside installable mods.
 const REPO_FIXTURES = new Map([
   ['andrey342/foreman', /^spike\/(?:mod|v02)(?:\/|$)/],
+  ['capibara-html/guildflow', /^poc\/plugin(?:\/|$)/],
   ['cdeust/claude-mods', /^scripts\/replay-dispatch(?:\/|$)/],
   ['cyclopseyeteam/cyclops-fresheye', /^acceptance\/driver(?:\/|$)/],
+  ['danielpg95/modster-hunter', /^spikes\/p5-39-desktop-art\/mod(?:\/|$)/],
   ['gaius-codius/ostrakon', /^tools\/(?:experiments\/(?:spc|spw|spx|spx0)|gallery|mockups)(?:\/|$)/],
+  ['kopylow/wobbly-volley', /^prototypes\/(?:p1-band|p2-client-court|p4-key-helper)(?:\/|$)/],
   ['kurushiba/claude-mods', /^(?:02-first-mod\/broken|03-events|04-test-pilot|05-ui\/broken|08-testing\/errors|09-distribution)(?:\/|$)/],
   ['malkiz/claude-reply-comments', /^spikes\/transcript-layouts(?:\/|$)/],
   ['milocosmopolitan/redacton', /^qualification(?:\/|$)/],
   ['ninondev/cc-coco', /^source(?:\/|$)/],
   ['ninondev/claude-sama', /^source(?:\/|$)/],
+  ['partalemre/modz', /^tools\/kit-gallery(?:\/|$)/],
   ['robgruhl/claude-mod-learnings', /^experiments\/(?:e[1-7]-[^/]+|claude-lookalike|latency|live-probe)(?:\/|$)/],
 ])
 

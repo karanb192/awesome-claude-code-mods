@@ -346,6 +346,33 @@ test('fixtures never count', () => {
   assert.equal(fingerprint(base), fingerprint(after))
 })
 
+test('development probes stay out while their products and unrelated paths count', () => {
+  const probes = [
+    ['capibara-html/GuildFlow', 'poc/plugin'],
+    ['danielpg95/modster-hunter', 'spikes/p5-39-desktop-art/mod'],
+    ['kopylow/wobbly-volley', 'prototypes/p1-band'],
+    ['kopylow/wobbly-volley', 'prototypes/p2-client-court'],
+    ['kopylow/wobbly-volley', 'prototypes/p4-key-helper'],
+    ['partalemre/MODZ', 'tools/kit-gallery'],
+  ]
+  for (const [repo, path] of probes) {
+    assert.equal(kindOf(repo, path, {}), 'fixture')
+    assert.equal(kindOf(repo.toUpperCase(), path, {}), 'fixture')
+    assert.equal(kindOf(repo, path + '/nested', {}), 'fixture')
+    assert.equal(kindOf('another/product', path, {}), 'mod')
+    assert.equal(kindOf(repo, path + '-product', {}), 'mod')
+    assert.equal(kindOf(repo, path, {}, new Set(), new Set([`${repo}:${path}`])), 'mod')
+  }
+  assert.equal(kindOf('capibara-html/GuildFlow', 'guildflow', {}), 'mod')
+  assert.equal(kindOf('kopylow/wobbly-volley', '.', {}), 'mod')
+  assert.equal(kindOf('kopylow/wobbly-volley', 'prototypes/new-game', {}), 'mod')
+  assert.equal(kindOf('fran343/claude-mods', 'pruebas-e2e', {}), 'mod')
+  assert.equal(kindOf('danielpg95/modster-hunter', 'modster-hunter', {}), 'mod')
+  assert.equal(kindOf('danielpg95/modster-hunter', 'spikes/finished-game', {}), 'mod')
+  assert.equal(kindOf('partalemre/MODZ', 'mods/filetree', {}), 'mod')
+  assert.equal(kindOf('partalemre/MODZ', 'tools/new-product', {}), 'mod')
+})
+
 test('field experiments stay out while finished guards and unrelated repositories count', () => {
   const repo = 'RobGruhl/claude-mod-learnings'
   const paths = [
