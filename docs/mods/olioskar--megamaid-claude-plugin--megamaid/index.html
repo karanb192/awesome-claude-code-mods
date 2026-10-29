@@ -15,22 +15,22 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/olioskar/megamaid-claude-plugin">olioskar/megamaid-claude-plugin</a></p>
 <p class="lede">megamaid: a review → plan → fix pipeline for code review with configurable agents and authoritative project directives.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">megamaid reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings on Claude Code 2.1.312.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 9</li><li>Access from classified calls: L2, writes or runs: writes files, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">megamaid reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings on Claude Code 2.1.312.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 10</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
-<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">writes files, reads files, reads mod state, draws</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, reads files, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings on Claude Code 2.1.312</span></div></div>
 <p class="actions"><a class="source" href="https://github.com/olioskar/megamaid-claude-plugin">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#olioskar--megamaid-claude-plugin--megamaid">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>the /&quot;^megamaid:&quot;/ skill, Read calls, subagent spawns, Write calls</dd>
-    <dt>Hooks</dt><dd><code>skill.prompt {skill=/&quot;^megamaid:&quot;/}, tool.call {tool=Read}, agent.spawn, turn.complete, tool.call {tool=Write}, session.start, session.end</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.now, $.fs.exists, $.fs.stat, $.fs.write, $.session.usage, $.session.version, $.state.get, $.state.set, $.ui.log</code></dd>
+    <dt>Observed events</dt><dd>the /&quot;^megamaid:&quot;/ skill, Read calls, subagent spawns, Edit calls, Write calls, Bash calls</dd>
+    <dt>Hooks</dt><dd><code>skill.prompt {skill=/&quot;^megamaid:&quot;/}, tool.call {tool=Read}, agent.spawn, tool.call {tool=Edit}, tool.call {tool=Write}, tool.call {tool=Bash}, turn.complete, tool.call {tool=Write}, session.start, session.end</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.now, $.fs.exists, $.fs.stat, $.fs.write, $.process.run, $.session.usage, $.session.version, $.state.get, $.state.set, $.ui.log</code></dd>
 
     <dt>Validation on 2.1.312</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/olioskar/megamaid-claude-plugin/tree/5138e7d4b47be84e75a4a1ad8993355fe492efe6"><code>5138e7d4b47b</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/olioskar/megamaid-claude-plugin/tree/02ceb3af766bf4fd34dd8f713e0656496e4eb5a5"><code>02ceb3af766b</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
