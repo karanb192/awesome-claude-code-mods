@@ -434,6 +434,16 @@ test('qualification helpers stay out while the product and unrelated repositorie
   assert.equal(kindOf(repo, paths[0], { description: 'Not a plugin to install.' }, new Set(), exceptions), 'fixture')
 })
 
+test('Transceiver measurement probe stays out while its product and unrelated paths count', () => {
+  const repo = 'partalemre/transceiver', path = 'spike/tx-probe'
+  assert.equal(kindOf(repo, path, {}), 'fixture')
+  assert.equal(kindOf('PartalEmre/Transceiver', path, {}), 'fixture')
+  assert.equal(kindOf(repo, `${path}/nested`, {}), 'fixture')
+  for (const other of ['.', 'spike/tx-probe-extra', 'spike/product']) assert.equal(kindOf(repo, other, {}), 'mod')
+  assert.equal(kindOf('other/transceiver', path, {}), 'mod')
+  assert.equal(kindOf(repo, path, {}, new Set(), new Set([`${repo}:${path}`])), 'mod')
+})
+
 test('Foreman development probes stay out while its product and unrelated paths count', () => {
   const repo = 'andrey342/foreman'
   for (const path of ['spike/mod', 'spike/v02', 'spike/mod/nested']) {

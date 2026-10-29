@@ -21,6 +21,7 @@ const REPO_FIXTURES = new Map([
   ['ninondev/cc-coco', /^source(?:\/|$)/],
   ['ninondev/claude-sama', /^source(?:\/|$)/],
   ['partalemre/modz', /^tools\/kit-gallery(?:\/|$)/],
+  ['partalemre/transceiver', /^spike\/tx-probe(?:\/|$)/],
   ['robgruhl/claude-mod-learnings', /^experiments\/(?:e[1-7]-[^/]+|claude-lookalike|latency|live-probe)(?:\/|$)/],
 ])
 
