@@ -135,3 +135,9 @@ LupusMalusDeviant/claude-mods:plugins/sign-guard LupusMalusDeviant/mod-box:plugi
 LupusMalusDeviant/claude-mods:plugins/subagent-saver LupusMalusDeviant/mod-box:plugins/subagent-saver
 arifamir/nukey-kit:plugins/nukey arifamir/nukey:plugins/nukey
 cpeaustriajc/cj-stack:mods/usage-pace cpeaustriajc/cj-stack:mods/archived/usage-pace
+bracyw/claude-mods:plugins/cache-tax karanb192/cache-tax:.
+bracyw/claude-mods:plugins/filetree data-goblin/claude-code-filetree:.
+finalpantasy/claude-mod-hider:. finalpantasy/claude-mod-pack:claude-mod-hider
+kcsujeet/kc-claude-kit:plugins/image-preview kcsujeet/kc-claude-kit:plugins/kc-image-preview
+kcsujeet/kc-claude-kit:plugins/usage-band kcsujeet/kc-claude-kit:plugins/kc-usage-band
+tartinerlabs/claude-code-mods:plugins/pr-pilot tartinerlabs/claude-code-mods:plugins/git-status
