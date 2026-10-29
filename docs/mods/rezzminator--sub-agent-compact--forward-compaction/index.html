@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/rezzminator/sub-agent-compact">rezzminator/sub-agent-compact</a></p>
 <p class="lede">The model writes its own frontier through one tool and the plugin installs it at Claude Code's compaction, with facts recorded from typed events and every later message kept verbatim.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">forward-compaction reaches L2 (writes or runs) and passed <code>claude plugin validate</code> on Claude Code 2.1.312.</p><ul><li>Events hooked: 13</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads files, reads env vars, reads the transcript, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">forward-compaction reaches L2 (writes or runs) and passed <code>claude plugin validate</code> on Claude Code 2.1.312.</p><ul><li>Events hooked: 14</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads files, reads env vars, reads the transcript, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, reads files, reads env vars, reads the transcript, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed on Claude Code 2.1.312</span></div></div>
@@ -24,13 +24,13 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, compaction, every prompt, every skill, subagent spawns, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call, session.compact, turn.step, turn.start, turn.complete, prompt.submit, session.receive, skill.prompt, agent.spawn, classic.Stop, classic.SubagentStop, session.end</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, tool.call, session.compact, turn.step, turn.start, turn.complete, prompt.submit, session.receive, prompt.attachment, skill.prompt, agent.spawn, classic.Stop, classic.SubagentStop, session.end</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.now, $.env.get, $.fs.read, $.fs.stat, $.process.run, $.session.compact, $.session.id, $.session.messages, $.session.usage, $.state.get, $.state.set, $.tool.register, $.ui.log</code></dd>
 
     <dt>Validation on 2.1.312</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/rezzminator/sub-agent-compact/tree/d22c07a50ee80e5c382eef3b8d7ef03de6cac16c"><code>d22c07a50ee8</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/rezzminator/sub-agent-compact/tree/dc23e98b5315805d4692737f6f95efa9cb72cdb5"><code>dc23e98b5315</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 

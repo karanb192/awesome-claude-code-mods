@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/dblanken-yale/cache-buster">dblanken-yale/cache-buster</a></p>
 <p class="lede">Band above the prompt showing prompt-cache age, hit rate, and a Compact button before the cache expires.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">cache-buster reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings on Claude Code 2.1.312.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">cache-buster reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings on Claude Code 2.1.312.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install cache-buster --marketplace dblanken-yale/cache-buster</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings on Claude Code 2.1.312</span></div></div>
@@ -24,15 +24,15 @@
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>compaction</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, session.compact, turn.complete, turn.step, ui.render {component=AbovePrompt}</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.session.compact, $.session.usage, $.state.get, $.state.set, $.ui.resolve, $.ui.toast</code></dd>
+    <dt>Observed events</dt><dd>compaction, classic hooks</dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, session.compact, classic.Stop, turn.complete, turn.step, ui.render {component=AbovePrompt}</code></dd>
+    <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.clock.now, $.prompt.submit, $.session.compact, $.session.usage, $.state.get, $.state.set, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation on 2.1.312</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/dblanken-yale/cache-buster/tree/eec172fee80a3b1f4ce5ad546add1b83d6079859"><code>eec172fee80a</code></a></dd>
-    <dt>Marketplace warnings</dt><dd><a href="https://github.com/dblanken-yale/cache-buster/blob/eec172fee80a3b1f4ce5ad546add1b83d6079859/.claude-plugin/marketplace.json">cache-buster</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/dblanken-yale/cache-buster/tree/2ce170fe8d1863b20937c742c713c10a1f6dcf6f"><code>2ce170fe8d18</code></a></dd>
+    <dt>Marketplace warnings</dt><dd><a href="https://github.com/dblanken-yale/cache-buster/blob/2ce170fe8d1863b20937c742c713c10a1f6dcf6f/.claude-plugin/marketplace.json">cache-buster</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/dblanken-yale--cache-buster--cache-buster-reach.svg" alt="Reach badge for cache-buster"> <img src="/badges/dblanken-yale--cache-buster--cache-buster-validates.svg" alt="Validation badge for cache-buster"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/dblanken-yale--cache-buster--cache-buster-reach.svg)](https://mods.aidojo.si/mods/dblanken-yale--cache-buster--cache-buster/)

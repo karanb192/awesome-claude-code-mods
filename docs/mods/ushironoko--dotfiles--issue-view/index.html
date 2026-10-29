@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/ushironoko/dotfiles">ushironoko/dotfiles</a></p>
 <p class="lede">A pane listing the project root repository's open issues with titles; click one to open it in the browser.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">issue-view reaches L2 (writes or runs) and passed <code>claude plugin validate</code> on Claude Code 2.1.312.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: runs processes, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">issue-view reaches L2 (writes or runs) and passed <code>claude plugin validate</code> on Claude Code 2.1.312.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 9</li><li>Access from classified calls: L2, writes or runs: runs processes, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed on Claude Code 2.1.312</span></div></div>
@@ -25,12 +25,12 @@
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
     <dt>Hooks</dt><dd><code>session.start, command.run {command=issues}, ui.render {component=Pane}, ui.close {id=issue-view}</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.process.run, $.session.root, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.process.run, $.session.root, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation on 2.1.312</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/ushironoko/dotfiles/tree/1ae413578c900fe84fcc2eda5257aa1373b2158f"><code>1ae413578c90</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/ushironoko/dotfiles/tree/1c9470526c788681341882415f7d3d5268a6dd7f"><code>1c9470526c78</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from ushironoko/dotfiles</h2><ul><li><a href="/mods/ushironoko--dotfiles--agents-view/">agents-view</a><span>A pane listing this session's subagents (Agent tool and workflow agents) with their status; select one to see…</span></li><li><a href="/mods/ushironoko--dotfiles--file-view/">file-view</a><span>Click a file path under a Read, Edit or Write row to show that file's contents in a pane beside the transcrip…</span></li><li><a href="/mods/ushironoko--dotfiles--pr-view/">pr-view</a><span>A pane listing the project root repository's open pull requests with titles; click one to open it in the brow…</span></li></ul></section>

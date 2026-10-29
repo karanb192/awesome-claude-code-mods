@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/procoders/superpowers-v">procoders/superpowers-v</a></p>
 <p class="lede">Senior-engineer habits for Claude Code: a one-question-at-a-time brainstorm, one builder that researches, plans and codes (with a DESIGN.md design pass for UIs), then verification with tests, a real browser, an independent reviewer and a scope check, each a signed receipt bound to the working tree.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">compound-v reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings on Claude Code 2.1.312.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">compound-v reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings on Claude Code 2.1.312.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install compound-v --marketplace procoders/superpowers-v</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, reads env vars, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings on Claude Code 2.1.312</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, ui.render {component=AbovePrompt}</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.env.get, $.fs.stat, $.process.run, $.session.cwd, $.session.id, $.session.usage, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.resolve</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.measure, ui.render {component=AbovePrompt}</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.env.get, $.fs.stat, $.process.run, $.session.cwd, $.session.id, $.session.usage, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.resolve</code></dd>
 
     <dt>Validation on 2.1.312</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/procoders/superpowers-v/tree/8f9990bee18acdd1f5d320d466021d4734613481"><code>8f9990bee18a</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/procoders/superpowers-v/blob/8f9990bee18acdd1f5d320d466021d4734613481/.claude-plugin/marketplace.json">procoders</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/procoders/superpowers-v/tree/f98429e56d4af3a9de18e14861811a80ff30aab4"><code>f98429e56d4a</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/procoders/superpowers-v/blob/f98429e56d4af3a9de18e14861811a80ff30aab4/.claude-plugin/marketplace.json">procoders</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/procoders--superpowers-v--compound-v-reach.svg" alt="Reach badge for compound-v"> <img src="/badges/procoders--superpowers-v--compound-v-validates.svg" alt="Validation badge for compound-v"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/procoders--superpowers-v--compound-v-reach.svg)](https://mods.aidojo.si/mods/procoders--superpowers-v--superpowers-v/)
