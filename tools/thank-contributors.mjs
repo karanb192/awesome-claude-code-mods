@@ -59,7 +59,8 @@ function badgeLines(mods, snippetOf, label) {
 // theirs inline, a larger pack is pointed at its pages so the comment stays short.
 export const INLINE_BADGES = 3
 export function thanksBody(pr, author, repos, mods, linkOf, askStar, snippetOf) {
-  const label = name => String(name).replace(/[[\]\\]/g, '\\$&')
+  // Every character GitHub's inline Markdown or HTML would act on, so a name renders as written.
+  const label = name => String(name).replace(/[[\]\\`*_~|<>]/g, '\\$&')
   return [
     `<!-- publication-thanks pr=${pr} author=${author}${askStar ? ' star-asked' : ''} -->`,
     `Thanks for submitting ${list(repos)}. ${mods.length === 1 ? 'Its mod is' : `${repos.length === 1 ? 'Its' : 'Their'} ${mods.length} mods are`} now in the catalogue, with the access the scan recorded:`,

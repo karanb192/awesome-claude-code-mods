@@ -98,3 +98,13 @@ test('a pack of more than three mods is pointed at its pages, and a call without
   const one = mod('x/y', 'z')
   assert.match(thanksBody(1, 'x', ['x/y'], [one], () => 'https://mods.aidojo.si/', false), /The page has a README badge you can copy/)
 })
+
+test('mod names are escaped in the badge labels and links, so Markdown and HTML in a name render as text', () => {
+  const odd = [mod('q/r', 'a*b*'), mod('q/r', '<i>x</i>_y')]
+  const plans = planThanks({ published: ['q/r'], inventory: { mods: odd }, prs: new Map([['q/r', { number: 31, author: 'q', bot: false }]]), owner: 'owner', stargazers: new Set(), thanked: new Set(), asked: new Set() })
+  const body = plans[0].body
+  assert.match(body, /\*\*a\\\*b\\\*\*\*/)
+  assert.match(body, /\*\*\\<i\\>x\\<\/i\\>\\_y\*\*/)
+  assert.match(body, /- \[a\\\*b\\\*\]\(/)
+  assert.equal((body.match(/```markdown/g) ?? []).length, 2)
+})
