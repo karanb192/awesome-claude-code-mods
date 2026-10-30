@@ -9,7 +9,7 @@ import { join } from 'node:path'
 import { parseArgs } from 'node:util'
 import { readRepos } from './candidates.mjs'
 import { siteAnchors } from './slug.mjs'
-import { idOf, readRegistry } from './pages.mjs'
+import { badgeSnippet, idOf, readRegistry } from './pages.mjs'
 
 const SITE = 'https://mods.aidojo.si/'
 const BOT = 'github-actions[bot]'
@@ -46,8 +46,19 @@ export function readMarkers(comments, owner) {
 
 const list = items => items.length < 2 ? items.join('') : `${items.slice(0, -1).join(', ')} and ${items.at(-1)}`
 
-// linkOf: each mod's page on the website.
-export function thanksBody(pr, author, repos, mods, linkOf, askStar) {
+const fence = snippet => ['```markdown', snippet, '```']
+
+function badgeLines(mods, snippetOf, label) {
+  if (!snippetOf || mods.length > INLINE_BADGES) return [`${mods.length === 1 ? 'The page has' : 'Each page has'} a README badge you can copy, which links back to it.`]
+  if (mods.length === 1) return ['To show the latest scan result in your README, paste this badge. It links back to the page.', '', ...fence(snippetOf(mods[0]))]
+  return ['To show the latest scan result in your README, paste the badge under each mod\'s name. Each one links back to its page.',
+    ...mods.flatMap(mod => ['', `**${label(mod.name)}**`, '', ...fence(snippetOf(mod))])]
+}
+
+// linkOf: each mod's page on the website. snippetOf: the README badge pair for a mod; up to three mods get
+// theirs inline, a larger pack is pointed at its pages so the comment stays short.
+export const INLINE_BADGES = 3
+export function thanksBody(pr, author, repos, mods, linkOf, askStar, snippetOf) {
   const label = name => String(name).replace(/[[\]\\]/g, '\\$&')
   return [
     `<!-- publication-thanks pr=${pr} author=${author}${askStar ? ' star-asked' : ''} -->`,
@@ -55,7 +66,7 @@ export function thanksBody(pr, author, repos, mods, linkOf, askStar) {
     '',
     ...mods.map(mod => `- [${label(mod.name)}](${linkOf(mod)})`),
     '',
-    `${mods.length === 1 ? 'The page has' : 'Each page has'} a README badge you can copy, which links back to it.`,
+    ...badgeLines(mods, snippetOf, label),
     ...(askStar ? ['', 'If the catalogue is useful to you, a star on this repository helps other people find it.'] : []),
   ].join('\n') + '\n'
 }
@@ -83,7 +94,7 @@ export function planThanks({ published, inventory, prs, owner, stargazers, thank
   return [...byPr.values()].map(({ pr, repos, mods }) => {
     const askStar = !stargazers.has(key(pr.author)) && !askedNow.has(key(pr.author))
     if (askStar) askedNow.add(key(pr.author))
-    return { pr: pr.number, body: thanksBody(pr.number, pr.author, repos, mods, linkOf, askStar) }
+    return { pr: pr.number, body: thanksBody(pr.number, pr.author, repos, mods, linkOf, askStar, mod => badgeSnippet(anchors.get(mod), linkOf(mod))) }
   })
 }
 
