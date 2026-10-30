@@ -24,6 +24,7 @@ Atoll92/agent-standup
 augbastos/afkswitch
 augiefra/claude-mods
 BatuhanCakmakk/wavy-usage
+beasaltfish/idle-arcade
 ben-rogerson/claude-counter-strike
 BjoernSchotte/ccmod-amp
 BordyV/brainrot-break
