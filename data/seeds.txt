@@ -122,6 +122,7 @@ shohamtal/cc-mod-opensearch-console
 Shuffzord/RoadRaven
 Sma1lboy/claude-standup
 somethingwentwell/cc-mod-banana-game
+SSS135/claude-code-codex-plugin
 Sumit189/explain-claude-mod
 SummerRiversound/review-inbox
 T-AI-Labs/claude-code-mods
