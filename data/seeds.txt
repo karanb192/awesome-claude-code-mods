@@ -88,6 +88,7 @@ mertkayacs/ultramod
 MikeGT4/agent-tree
 moduvoice/claude-code-ko-ui
 MohammedSaud404/rtl-terminal
+mralexivy/AutoMode
 MrMirhan/claude-buddy-chat
 Mucida/critical-decisions
 muellerei/enable-todo-tools
