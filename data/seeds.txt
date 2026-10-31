@@ -7,6 +7,7 @@ ajwann/next-context
 AlexeyHRDesign/colorwheel
 alexjacobs08/guided-mr
 alexlifexyz/p3c-guard
+AmberWJL/live-claude-notebook
 amsultan2010/clawd-minecraft
 andrej-kolic/claude-mods
 Anerco/effort-cycle-mod
