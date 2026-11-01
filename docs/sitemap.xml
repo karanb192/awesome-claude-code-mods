@@ -3564,7 +3564,6 @@
 <url><loc>https://mods.aidojo.si/mods/diwakersurya--flowpane--flowpane/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/dixonSolutions--ClaudeKeys--claudekeys/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/djbrandl--claude-mods--agenda/</loc></url>
-<url><loc>https://mods.aidojo.si/mods/djnsty23--claude-auto-dev--autodev-core/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/dkoh0207--compact-usage-meter--compact-usage-meter/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/dodofk--jojo-sbr-token-usage--jojo-sbr-token-usage/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/domain-centric-development--dca-marketplace--dca-factory-cockpit/</loc></url>
@@ -4357,6 +4356,7 @@
 <url><loc>https://mods.aidojo.si/mods/jidhra--claude-mods--flightdeck/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/jidhra--claude-mods--kindex-modern/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/jidhra--claude-mods--mod-tools/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/jidhra--claude-mods--plan-gate/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/jidhra--claude-mods--secret-redactor/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/jidhra--claude-mods--usage-pane/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/jiikko--dotfiles--desktop-statusline/</loc></url>
@@ -4601,6 +4601,7 @@
 <url><loc>https://mods.aidojo.si/mods/korengast--cache-battery--cache-battery/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/korenka--claude-harness--agent-dock/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/korenka--claude-harness--blind-spots/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/korenka--claude-harness--context/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/korenka--claude-harness--diagram/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/korenka--claude-harness--help-offers/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/korenka--claude-harness--rephrase/</loc></url>
@@ -5404,6 +5405,7 @@
 <url><loc>https://mods.aidojo.si/mods/oakoss--claude-plugins--pr-watch/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/oakoss--claude-plugins--review-cycle/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/oakoss--claude-plugins--session/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/oaustegard--claude-code-mods--effort-escalator/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/oaustegard--claude-code-mods--model-advisor/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/oaustegard--claude-code-mods--tripwire/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/oaustegard--claude-code-mods--usage-dollars/</loc></url>
@@ -5643,10 +5645,6 @@
 <url><loc>https://mods.aidojo.si/mods/pradyb--claude-mods--worktree-hints/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/prakash-rai--usage-meter--usage-meter/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/praveendhawan--mod-dev-flow-claude--dev-flow/</loc></url>
-<url><loc>https://mods.aidojo.si/mods/primelogiclabio--claude-tools--context-bar--2/</loc></url>
-<url><loc>https://mods.aidojo.si/mods/primelogiclabio--claude-tools--project-progress/</loc></url>
-<url><loc>https://mods.aidojo.si/mods/primelogiclabio--claude-tools--project-tracker--2/</loc></url>
-<url><loc>https://mods.aidojo.si/mods/primelogiclabio--claude-tools--resource-monitor--2/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/proagent-ai--claude-hangul--hangul/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/procoders--superpowers-v--superpowers-v/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/promptadvisers--claude-mods-computer-use-threads--codex-computer-use/</loc></url>
@@ -6333,6 +6331,7 @@
 <url><loc>https://mods.aidojo.si/mods/tartinerlabs--claude-code-mods--resource-watch/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/tartinerlabs--claude-code-mods--smart-compact/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/tartinerlabs--claude-code-mods--token-weather/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/tartinerlabs--claude-code-mods--youtube/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/tauantcamargo--claude-mods--huginn/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/tauantcamargo--claude-mods--muninn/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/tc3oliver--claude-team-kit--ctk/</loc></url>

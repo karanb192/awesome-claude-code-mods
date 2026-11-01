@@ -1428,7 +1428,6 @@ iosifnicolae2/claude-away-keep-running
 ipartington/claude-mods
 ippoan/gh-actions-live
 irfanfaraaz/claude-kit
-iroha924/sphica
 IrvingAguilar/claude-agent-todos
 isaac-pathlab/claude-monitor
 isaac-pathlab/claude-shell-monitor
@@ -1467,7 +1466,6 @@ J-M-Pineapple-Express/repo-radar
 jaaaackieLai/claude-mods
 jack21/claude-mod-usage
 jackboykin/hermit
-jackboykin/quarry
 jackmel030/claude-session-notes
 jacobomatadev/sancho
 jaencarrodine/ccsr-mod
@@ -2054,7 +2052,6 @@ maximemarc/Claude-mods
 maxp-riot/mermaid-render
 maxsoldev/pstash
 maxturazzini/bubble-contesto
-mberto10/applied-systems
 mboisvertdupras/hud
 mcpysup-netizen/claude-ai-accounts
 mcs-dave/mcs-fusion-playwright-test-progress-mod
@@ -2552,7 +2549,6 @@ pradyb/claude-mods
 prakash-rai/usage-meter
 PRANAY-CHAPLOT/replaycast
 praveendhawan/mod-dev-flow-claude
-primelogiclabio/claude-tools
 proagent-ai/claude-hangul
 Probst1nator/clawd
 procoders/superpowers-v
@@ -2627,7 +2623,6 @@ raven-clown/neuro-path
 ravipatel7/claude-mods
 ray-amjad/awesome-claude-code-function-hooks
 ray-amjad/claude-code-mods
-ray-manaloto/dotfiles
 ray-manaloto/knowledge-base
 RaySu/usage-glance
 razorback16/cc-intelligent-ui

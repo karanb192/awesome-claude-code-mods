@@ -15,23 +15,23 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/EgonLeitner/dashband">EgonLeitner/dashband</a></p>
 <p class="lede">Prompt cache, context and plan limits at a glance, in the prompt footer and above the prompt</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">dashband reaches L2 (writes or runs) and passed <code>claude plugin validate</code> on Claude Code 2.1.316.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, reads files, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">dashband reaches L2 (writes or runs) and passed <code>claude plugin validate</code> on Claude Code 2.1.316.</p><ul><li>Events hooked: 12</li><li>API methods referenced: 17</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, reads files, reads mod state, plays audio, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
-<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, reads files, reads mod state, persists state, draws</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, reads files, reads mod state, plays audio, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed on Claude Code 2.1.316</span></div></div>
 <p class="topics-line">Listed under <a href="/topics/prompt-cache/">Prompt cache mods for Claude Code</a>, <a href="/topics/usage-meters/">Context and usage meters for Claude Code</a>.</p>
 <p class="actions"><a class="source" href="https://github.com/EgonLeitner/dashband">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#EgonLeitner--dashband--dashband">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>classic hooks</dd>
-    <dt>Hooks</dt><dd><code>classic.SessionStart, session.start, session.attach, session.detach, session.measure, turn.start, turn.step, turn.complete, ui.render {component=SessionMode}, ui.render {component=AbovePrompt}, ui.press {plugin=dashband}</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.fs.exists, $.fs.write, $.process.run, $.session.id, $.session.surfaces, $.session.usage, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
+    <dt>Observed events</dt><dd>classic hooks, every prompt</dd>
+    <dt>Hooks</dt><dd><code>classic.SessionStart, session.start, session.attach, session.detach, prompt.edit, prompt.submit, session.measure, turn.start, turn.step, turn.complete, ui.render {component=SessionMode}, ui.render {component=AbovePrompt}, ui.press {plugin=dashband}</code></dd>
+    <dt>API calls</dt><dd><code>$.audio.play, $.clock.after, $.clock.every, $.clock.now, $.fs.exists, $.fs.write, $.process.run, $.session.id, $.session.surfaces, $.session.usage, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation on 2.1.316</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/EgonLeitner/dashband/tree/ba47fabd87d8968986648bf26692f8c9c03334f3"><code>ba47fabd87d8</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/EgonLeitner/dashband/tree/abc37c108124f1b06f18f2b7a358d3ac00c0e3ba"><code>abc37c108124</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
