@@ -152,3 +152,4 @@ primelogiclabio/claude-tools:mods/context-bar primelogiclabio/claude-tools:plugi
 primelogiclabio/claude-tools:mods/project-tracker primelogiclabio/claude-tools:plugins/project-tracker
 primelogiclabio/claude-tools:mods/resource-monitor primelogiclabio/claude-tools:plugins/resource-monitor
 rezzminator/auto-effort:plugins/auto-effort-control rezzminator/auto-effort:plugins/auto-effort
+Kiy-K/oxide:.agents/skills/jev-model-router Kiy-K/oxide:.claude/skills/jev-model-router
