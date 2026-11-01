@@ -148,3 +148,7 @@ MrValraven/pulse-mods:pulse-blast-radius StarHawkMK1/cc-mods:mods/blast-radius
 StarHawkMK1/cc-mods:mods/token-weather nalpari/claude-mods:token-weather
 ellis0207/ellis-claude-mods:plugins/savvy-progress JohnnyVizz/claude-kit:plugins/savvy-progress
 ellis0207/ellis-claude-mods:plugins/skins hellosverre/claude-skins:.
+primelogiclabio/claude-tools:mods/context-bar primelogiclabio/claude-tools:plugins/context-bar
+primelogiclabio/claude-tools:mods/project-tracker primelogiclabio/claude-tools:plugins/project-tracker
+primelogiclabio/claude-tools:mods/resource-monitor primelogiclabio/claude-tools:plugins/resource-monitor
+rezzminator/auto-effort:plugins/auto-effort-control rezzminator/auto-effort:plugins/auto-effort

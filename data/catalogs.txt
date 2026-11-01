@@ -5,3 +5,4 @@
 Dandeppert/Claude-mods
 davila7/claude-code-templates
 DrishtantKaushal/AwesomeClaudeCodeMods
+hyonnie-t/claude-mods
