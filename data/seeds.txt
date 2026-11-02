@@ -148,3 +148,5 @@ xuanji86/claude-mdview
 xuanji86/claude-statuspane
 yadava5/unramble
 yash-gadodia/claude-mods
+zirkelc/agent-journal
+zirkelc/claude-quick-actions
