@@ -104,6 +104,7 @@ paragpandyareal/swear-slap
 pawandeepdhall/claude-mods
 plaxagoras/clawd-tales
 qualixar/modstage
+Quinnod345/ponder
 RadTech-Solutions/agent-pager
 RadTech-Solutions/modwall
 rapha-rodrigues/cc-esol
