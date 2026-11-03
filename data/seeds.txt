@@ -33,6 +33,7 @@ chrisluo5311/Pixel-Play
 cristi71000/limit-lens
 danilpavlov/telescope-claude-code
 danzerzine/claude-council
+darjss/claude-code-codemode
 DarkVelours/claude-code-galactic-battle
 dominicrico/jev-router
 dophamine/claude-suggest
