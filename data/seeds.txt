@@ -69,6 +69,7 @@ jarrodwatts/intermission
 Jarvizx/hablo
 jiangnanquan/claude-code-zh
 joshuatonga/mini-claude-mods
+JoxoAI/joxo
 karanb192/cache-tax
 karanb192/claude-code-mods
 karanb192/time-blame
