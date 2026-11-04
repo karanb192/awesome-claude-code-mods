@@ -2197,6 +2197,7 @@ mthli/cc-shorts
 mtmtian/cc-mods
 Mucida/critical-decisions
 muctebadikmen/claude-code-araclari
+muellerei/diff-fold
 muellerei/enable-todo-tools
 muellerei/sweet-spot
 muellerei/task-line

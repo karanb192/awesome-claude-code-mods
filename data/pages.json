@@ -5421,6 +5421,7 @@
   "mtmtian--cc-mods--plan-progress": {"id":"mtmtian/cc-mods:mods/plan-progress/plugins/plan-progress"},
   "muctebadikmen--claude-code-araclari--ilerleme-cubugu": {"id":"muctebadikmen/claude-code-araclari:modlar/ilerleme-cubugu"},
   "muctebadikmen--claude-code-araclari--otomatik-devir": {"id":"muctebadikmen/claude-code-araclari:modlar/otomatik-devir"},
+  "muellerei--diff-fold--diff-fold": {"id":"muellerei/diff-fold:."},
   "muellerei--enable-todo-tools--enable-todo-tools": {"id":"muellerei/enable-todo-tools:."},
   "muellerei--sweet-spot--sweet-spot": {"id":"muellerei/sweet-spot:."},
   "muellerei--task-line--task-line": {"id":"muellerei/task-line:."},
