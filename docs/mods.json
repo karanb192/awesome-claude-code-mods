@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-01T11:41:29.104Z",
   "claudeVersion": "2.1.316",
-  "repos": 3622,
+  "repos": 3623,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -917519,6 +917519,126 @@
       "stars": 0,
       "pushedAt": "2026-10-31T14:28:19Z",
       "createdAt": "2026-10-31T07:56:07Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "JunSeo99/prompt-ladder:.",
+      "repo": "JunSeo99/prompt-ladder",
+      "path": ".",
+      "sourceCommit": "211438af8b4e5680156e7bd13da6ce48c88c496c",
+      "name": "prompt-ladder",
+      "description": "Claude does what you ask, so ask well. Press ctrl+q on a rough draft and prompt-ladder writes a well-built prompt from your session's own context, at the cost you pick: quick, balanced or deep.",
+      "author": "JunSeo99",
+      "homepage": "https://github.com/JunSeo99/prompt-ladder",
+      "url": "https://github.com/JunSeo99/prompt-ladder",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "prompt-ladder"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.list",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.write",
+        "$.model.complete",
+        "$.model.fork",
+        "$.prompt.fill",
+        "$.prompt.read",
+        "$.session.cwd",
+        "$.session.messages",
+        "$.session.model",
+        "$.session.root",
+        "$.session.usage",
+        "$.settings.read",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.tool.list",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.316",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "prompt-ladder",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "writes files",
+          "drives Claude",
+          "writes the prompt box",
+          "reads files",
+          "reads env vars",
+          "reads settings",
+          "reads the transcript",
+          "reads the prompt box",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-11-03T08:53:54Z",
+      "createdAt": "2026-11-03T03:23:55Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

@@ -831,6 +831,7 @@
   "JuanjoFuchs--ccburn-mod--ccburn": {"id":"JuanjoFuchs/ccburn-mod:."},
   "Jump-High-Kid--claude-mods--done-chime": {"id":"Jump-High-Kid/claude-mods:plugins/done-chime"},
   "Jump-High-Kid--claude-mods--usage-status": {"id":"Jump-High-Kid/claude-mods:plugins/usage-status"},
+  "JunSeo99--prompt-ladder--prompt-ladder": {"id":"JunSeo99/prompt-ladder:."},
   "Junhan2--oh-my-fable--oh-my-fable": {"id":"Junhan2/oh-my-fable:."},
   "JustAzul--agent-cli-sdk--msgate-agents": {"id":"JustAzul/agent-cli-sdk:plugin"},
   "JustAzul--agentcli--agentcli": {"id":"JustAzul/agentcli:plugin","to":"JustAzul--agent-cli-sdk--msgate-agents"},
