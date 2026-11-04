@@ -1644,6 +1644,7 @@ Junhan2/oh-my-fable
 juninmd/cc-litellm
 juniormartinxo/claude-mod-session-radar
 juniormartinxo/jm-claude-mods
+JunSeo99/prompt-ladder
 juro-mont/claude-ev-charging
 just-every/12ui-claude-plugin
 just-every/12ui-plugin
