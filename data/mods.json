@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-01T11:41:29.104Z",
   "claudeVersion": "2.1.316",
-  "repos": 3621,
+  "repos": 3622,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -917625,6 +917625,91 @@
       "stars": 0,
       "pushedAt": "2026-10-17T02:40:48Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "muellerei/diff-fold:.",
+      "repo": "muellerei/diff-fold",
+      "path": ".",
+      "sourceCommit": "3b989dddc9686d40ba60c3f5feef48fc2dedd2d5",
+      "name": "diff-fold",
+      "description": "Shows one summary line per file instead of the diff under Edit, Write, NotebookEdit and file-changing Bash calls",
+      "author": "Patrick Müller",
+      "homepage": "https://github.com/muellerei/diff-fold",
+      "url": "https://github.com/muellerei/diff-fold",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "diff-fold"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolResult"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.session.root",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.log",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.316",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "muellerei-diff-fold",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "ToolResult"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-31T14:28:19Z",
+      "createdAt": "2026-10-31T07:56:07Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
