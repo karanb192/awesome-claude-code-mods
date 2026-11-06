@@ -122,6 +122,7 @@ scaso01/claude-risk-guardrails
 shimo4228/harness-scope
 shohamtal/cc-mod-opensearch-console
 Shuffzord/RoadRaven
+SimakovIgor/pixel-buddy
 Sma1lboy/claude-standup
 somethingwentwell/cc-mod-banana-game
 Sumit189/explain-claude-mod
