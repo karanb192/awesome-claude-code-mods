@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-07T11:52:20.805Z",
   "claudeVersion": "2.1.319",
-  "repos": 3744,
+  "repos": 3745,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -955084,6 +955084,138 @@
       "stars": 0,
       "pushedAt": "2026-10-17T02:40:48Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "SimakovIgor/pixel-buddy:pixel-buddy",
+      "repo": "SimakovIgor/pixel-buddy",
+      "path": "pixel-buddy",
+      "sourceCommit": "7b6bc881a46995c59946681219e2d6fc0b2e404d",
+      "name": "pixel-buddy",
+      "description": "A pixel pet for your Claude Code footer: it hatches, eats what your work drops, levels up, earns rare trophies, does tricks, naps when you are away and plays on clicks",
+      "author": "Igor Simakov",
+      "homepage": "https://github.com/SimakovIgor/pixel-buddy",
+      "url": "https://github.com/SimakovIgor/pixel-buddy/tree/main/pixel-buddy",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "buddy"
+          }
+        },
+        {
+          "event": "prompt.edit",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "ui.message",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "SessionMode"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.agent.list",
+        "$.clock.every",
+        "$.clock.now",
+        "$.clock.sleep",
+        "$.command.register",
+        "$.config.list",
+        "$.config.set",
+        "$.session.id",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.keys",
+        "$.store.set",
+        "$.ui.copy",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [
+        "hooks/band-client.tsx"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "simakovigor",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "changes config",
+          "writes the clipboard",
+          "reads settings",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt",
+        "every tool call"
+      ],
+      "draws": [
+        "SessionMode",
+        "AbovePrompt"
+      ],
+      "stars": 5,
+      "pushedAt": "2026-11-07T09:07:25Z",
+      "createdAt": "2026-11-04T17:29:59Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
