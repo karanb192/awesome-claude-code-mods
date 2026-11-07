@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-07T11:52:20.805Z",
   "claudeVersion": "2.1.319",
-  "repos": 3752,
+  "repos": 3753,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -955965,6 +955965,162 @@
       "stars": 0,
       "pushedAt": "2026-10-29T18:50:17Z",
       "createdAt": "2026-10-28T18:54:56Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "SSS135/claude-code-codex-plugin:.",
+      "repo": "SSS135/claude-code-codex-plugin",
+      "path": ".",
+      "sourceCommit": "81d194b7011d743a26f4891e522e8a09c488b880",
+      "name": "codex",
+      "description": "Run OpenAI Codex jobs as native background subagents (codex:luna, codex:sol, codex:astra, codex:terra): the native task list, SendMessage, TaskStop and finish notifications, with Codex approval requests as Claude Code dialogs.",
+      "author": "SSS135",
+      "homepage": "https://github.com/SSS135/claude-code-codex-plugin",
+      "url": "https://github.com/SSS135/claude-code-codex-plugin",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "agent.spawn",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "session.send",
+          "matcher": {}
+        },
+        {
+          "event": "tool.check",
+          "matcher": {
+            "tool": "SendMessage"
+          }
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "?"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "?"
+          }
+        },
+        {
+          "event": "tool.describe",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolUse",
+            "props has {tool": "?}"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolResult",
+            "props has {tool": "?}"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "PromptHint"
+          }
+        }
+      ],
+      "calls": [
+        "$.agent.list",
+        "$.agent.register",
+        "$.clock.now",
+        "$.clock.sleep",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.http.fetch",
+        "$.process.run",
+        "$.process.spawn",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.messages",
+        "$.session.root",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.tool.register",
+        "$.ui.ask",
+        "$.ui.log",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "codex-plugin",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "network",
+          "runs processes",
+          "drives Claude",
+          "reads files",
+          "reads env vars",
+          "reads the transcript",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "subagent spawns",
+        "? calls"
+      ],
+      "draws": [
+        "ToolUse",
+        "ToolResult",
+        "PromptHint"
+      ],
+      "stars": 12,
+      "pushedAt": "2026-11-04T11:08:51Z",
+      "createdAt": "2026-10-06T09:23:42Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
