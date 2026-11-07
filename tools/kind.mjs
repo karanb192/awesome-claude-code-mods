@@ -9,6 +9,7 @@ const NOT_A_MOD = [/\/tests?\//, /\/fixtures?\//, /\/probes?\//, /\/examples?\//
 // These repositories keep test material outside conventional fixture folders alongside installable mods.
 const REPO_FIXTURES = new Map([
   ['andrey342/foreman', /^spike\/(?:mod|v02)(?:\/|$)/],
+  ['beasaltfish/idle-arcade', /^plugins\/(?:_probe|_shared-tests)(?:\/|$)/],
   ['capibara-html/guildflow', /^poc\/plugin(?:\/|$)/],
   ['cdeust/claude-mods', /^scripts\/replay-dispatch(?:\/|$)/],
   ['cyclopseyeteam/cyclops-fresheye', /^acceptance\/driver(?:\/|$)/],
