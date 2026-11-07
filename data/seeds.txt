@@ -46,6 +46,7 @@ e950280/hudlite
 edsoncantuaria/cc-cost
 edtrackai/claude-code-guardrails-lite
 emergentai/claude-code-rich-ui
+ennovative-solutions/gitlab-pipeline-claude-mod
 errhythm/ccswap
 FunJim/claude-code-add-to-chat
 gerricchaplin/pr-pulse
