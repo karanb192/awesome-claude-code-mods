@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-07T11:52:20.805Z",
   "claudeVersion": "2.1.319",
-  "repos": 3755,
+  "repos": 3766,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -956957,6 +956957,1315 @@
       "stars": 0,
       "pushedAt": "2026-10-28T18:21:43Z",
       "createdAt": "2026-10-28T13:11:27Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "AmberWJL/live-claude-notebook:.",
+      "repo": "AmberWJL/live-claude-notebook",
+      "path": ".",
+      "sourceCommit": "d7c32534197c9cceb32636e32c23e51954db7a58",
+      "name": "live-notebook",
+      "description": "Save replies from your Claude Code conversations as Markdown notes on your own computer, then browse, search and edit them in a pane or the web notebook. Local-first: no account, no cloud.",
+      "author": "Amber Wang",
+      "homepage": "https://amberwjl.github.io/live-claude-notebook/",
+      "url": "https://github.com/AmberWJL/live-claude-notebook",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.append",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "save"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "notebook"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {
+            "element": "?"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {
+            "element": "?"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {
+            "element": "?"
+          }
+        },
+        {
+          "event": "ui.scroll",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "live-notebook"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AssistantMessage"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "live-notebook"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.config.list",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.fs.write",
+        "$.model.complete",
+        "$.process.run",
+        "$.session.id",
+        "$.session.messages",
+        "$.session.root",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.keys",
+        "$.store.set",
+        "$.ui.copy",
+        "$.ui.focus",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.scroll",
+        "$.ui.selection",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [
+        "hooks/ui/editor.ts"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "live-notebook",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "writes files",
+          "drives Claude",
+          "writes the clipboard",
+          "reads files",
+          "reads env vars",
+          "reads settings",
+          "reads the transcript",
+          "reads the selection",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AssistantMessage",
+        "Pane"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-31T21:30:19Z",
+      "createdAt": "2026-10-22T19:39:25Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "shohamtal/cc-mod-mysql-client:.",
+      "repo": "shohamtal/cc-mod-mysql-client",
+      "path": ".",
+      "sourceCommit": "5ccbfb0b7d5f8b0d5111938a22afb9f1747cddee",
+      "name": "mysql-client",
+      "description": "MySQL client and SQL editor in a Claude Code side pane: Claude writes the query, you run it and see the results as a table. A database client with schema-aware autocomplete and a server menu. Read-only by default; writes run only after you approve them.",
+      "author": "shohamtal",
+      "homepage": "https://github.com/shohamtal/cc-mod-mysql-client",
+      "url": "https://github.com/shohamtal/cc-mod-mysql-client",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__mysql-client__console"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "sql"
+          }
+        },
+        {
+          "event": "ui.scroll",
+          "matcher": {
+            "requestId": "sql"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "sql"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.fs.write",
+        "$.process.run",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.tool.register",
+        "$.ui.close",
+        "$.ui.copy",
+        "$.ui.focus",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [
+        "hooks/editor.tsx",
+        "hooks/viewer.tsx"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "cc-mod-mysql-client",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "writes files",
+          "drives Claude",
+          "writes the clipboard",
+          "reads files",
+          "reads env vars",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "mcp__mysql-client__console calls"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-29T11:04:02Z",
+      "createdAt": "2026-10-20T09:22:28Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hematteo/anki-band:.",
+      "repo": "hematteo/anki-band",
+      "path": ".",
+      "sourceCommit": "c22203d118cba1c26ac2d85f20dbb40679974a3f",
+      "name": "anki-band",
+      "description": "Review your Anki cards in a band above the prompt while Claude works: one key shows the answer, one grades it, and the due count sits in the status line",
+      "author": "hematteo",
+      "homepage": "https://github.com/hematteo/anki-band",
+      "url": "https://github.com/hematteo/anki-band",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "anki"
+          }
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.http.fetch",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.resolve",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "anki-band",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "network",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-22T21:48:09Z",
+      "createdAt": "2026-10-22T21:48:02Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hematteo/run-suggested:.",
+      "repo": "hematteo/run-suggested",
+      "path": ".",
+      "sourceCommit": "a4cbf5030769438c2e6aafddb8b4f28e069b4f25",
+      "name": "run-suggested",
+      "description": "Turns the shell commands Claude suggests into numbered shortcuts above the prompt: one key runs a command, with live output, a stop key, and your permission rules deciding what needs a second press",
+      "author": "hematteo",
+      "homepage": "https://github.com/hematteo/run-suggested",
+      "url": "https://github.com/hematteo/run-suggested",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "prompt.compose",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.clock.sleep",
+        "$.process.spawn",
+        "$.prompt.submit",
+        "$.session.cwd",
+        "$.session.root",
+        "$.settings.read",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "run-suggested",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "drives Claude",
+          "reads settings",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-22T20:13:06Z",
+      "createdAt": "2026-10-22T17:11:47Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hematteo/run-watcher:.",
+      "repo": "hematteo/run-watcher",
+      "path": ".",
+      "sourceCommit": "d72dd9a5364cdb687bb71bf81480f467fdb7fdc8",
+      "name": "run-watcher",
+      "description": "Watches training logs, local or over ssh, in a pane: loss sparkline, and alerts when the loss goes NaN or spikes, a run crashes, or its output stalls",
+      "author": "hematteo",
+      "homepage": "https://github.com/hematteo/run-watcher",
+      "url": "https://github.com/hematteo/run-watcher",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "watch"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "unwatch"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "runs"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.stat",
+        "$.process.run",
+        "$.session.cwd",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.notify",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "run-watcher",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "reads files",
+          "reads env vars",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "Bash calls"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-22T21:48:00Z",
+      "createdAt": "2026-10-22T21:47:54Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "nightlab-agent/file-trail:.",
+      "repo": "nightlab-agent/file-trail",
+      "path": ".",
+      "sourceCommit": "24c5b36e6754a29bb260c8bebe80a31e430b9c7e",
+      "name": "file-trail",
+      "description": "Shows which file each Read, Edit and Write touched (Glob and Grep too, where the build has them as tools), with the time and whether it was blocked, in a side pane, the status line and a local file.",
+      "author": "Nightlab",
+      "homepage": "https://github.com/nightlab-agent/file-trail#readme",
+      "url": "https://github.com/nightlab-agent/file-trail",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolGroup"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "file-trail"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "file-trail"
+          }
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "classic.PreToolUse",
+          "matcher": {}
+        },
+        {
+          "event": "classic.PostToolUseFailure",
+          "matcher": {}
+        },
+        {
+          "event": "tool.check",
+          "matcher": {
+            "tool": "?"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.fs.exists",
+        "$.fs.write",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.root",
+        "$.state.get",
+        "$.state.set",
+        "$.tool.check",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "nightlab-file-trail",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "writes files",
+          "reads files",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks",
+        "every tool call"
+      ],
+      "draws": [
+        "ToolGroup",
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-11-07T05:20:42Z",
+      "createdAt": "2026-10-28T07:58:10Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "nightlab-agent/message-times:.",
+      "repo": "nightlab-agent/message-times",
+      "path": ".",
+      "sourceCommit": "cfeb808cf9a3bba5e80dc3135c4befd3e6537251",
+      "name": "message-times",
+      "description": "Puts the time on each prompt and each reply in Claude Code's main transcript view, and keeps the times across a resume.",
+      "author": "Nightlab",
+      "homepage": "https://github.com/nightlab-agent/message-times#readme",
+      "url": "https://github.com/nightlab-agent/message-times",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "session.append",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "UserMessage"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AssistantMessage"
+          }
+        }
+      ],
+      "calls": [
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.write",
+        "$.session.id",
+        "$.session.root",
+        "$.state.get",
+        "$.state.set"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "nightlab-message-times",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "writes files",
+          "reads files",
+          "reads mod state"
+        ]
+      },
+      "sees": [
+        "every prompt"
+      ],
+      "draws": [
+        "UserMessage",
+        "AssistantMessage"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-11-03T07:29:36Z",
+      "createdAt": "2026-10-28T08:44:10Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "nightlab-agent/prompt-state:.",
+      "repo": "nightlab-agent/prompt-state",
+      "path": ".",
+      "sourceCommit": "4eb8dee9dc8ff004574525dedd10e629d7757577",
+      "name": "prompt-state",
+      "description": "Shows under the prompt what Claude Code is doing (working, done, asking you, needs permission) and which skill it loaded last.",
+      "author": "Nightlab",
+      "homepage": "https://github.com/nightlab-agent/prompt-state#readme",
+      "url": "https://github.com/nightlab-agent/prompt-state",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "tool.check",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "PromptHint"
+          }
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "skills-used"
+          }
+        },
+        {
+          "event": "skill.prompt",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.status"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "nightlab-prompt-state",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call",
+        "every skill"
+      ],
+      "draws": [
+        "PromptHint"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-11-02T19:11:43Z",
+      "createdAt": "2026-10-28T17:56:27Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "nightlab-agent/subagent-spend:.",
+      "repo": "nightlab-agent/subagent-spend",
+      "path": ".",
+      "sourceCommit": "54bc6b8d3627c2d7ed29dc96bb328512193a58cb",
+      "name": "subagent-spend",
+      "description": "A spend cap for interactive sessions, and per-subagent tokens, rate-limit windows, context fill, cost, steps, tool calls and tool errors of a Claude Code session, in a notice under the prompt, local files and panes (the usage pane not yet seen on a screen).",
+      "author": "Nightlab",
+      "homepage": "https://github.com/nightlab-agent/subagent-spend",
+      "url": "https://github.com/nightlab-agent/subagent-spend",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "spend-cap"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "subagent-spend"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "usage-file"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "subagent-spend"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "usage-file"
+          }
+        },
+        {
+          "event": "agent.spawn",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.fs.exists",
+        "$.fs.write",
+        "$.session.id",
+        "$.session.usage",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "nightlab",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "writes files",
+          "reads files",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "subagent spawns",
+        "every tool call"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-11-07T03:41:55Z",
+      "createdAt": "2026-10-27T11:11:57Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "plaxagoras/jungle-run:.",
+      "repo": "plaxagoras/jungle-run",
+      "path": ".",
+      "sourceCommit": "6969b8e17ec00bbdd4cfc128b2e39cee5b8d2f94",
+      "name": "jungle-run",
+      "description": "A flip-screen jungle run above the prompt, drawn in octant blocks. Each tool call lays the next screen's hazard, finished tasks are treasure, and the explorer crosses it all on autopilot.",
+      "author": "plaxagoras",
+      "homepage": "https://github.com/plaxagoras/jungle-run",
+      "url": "https://github.com/plaxagoras/jungle-run",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "jungle"
+          }
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "classic.PermissionRequest",
+          "matcher": {}
+        },
+        {
+          "event": "classic.TaskCreated",
+          "matcher": {}
+        },
+        {
+          "event": "classic.TaskCompleted",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "jungle-run",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks",
+        "every tool call"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-20T16:54:50Z",
+      "createdAt": "2026-10-20T16:54:45Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "sairam0424/claude-copy-back:.",
+      "repo": "sairam0424/claude-copy-back",
+      "path": ".",
+      "sourceCommit": "17d919cfcfdc75f3c2d8c0fe3297deb3cb0917b4",
+      "name": "copy-back",
+      "description": "Type /cc after copying text from the terminal to put Claude's own text for it back on the clipboard, without the margin and the hard line breaks (experimental, macOS only).",
+      "author": "Sairam Ugge",
+      "homepage": "https://github.com/sairam0424/claude-copy-back",
+      "url": "https://github.com/sairam0424/claude-copy-back",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "cc"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.process.run",
+        "$.session.messages",
+        "$.ui.copy",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-copy-back",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "writes the clipboard",
+          "reads the transcript",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-05T14:41:22Z",
+      "createdAt": "2026-10-24T12:57:54Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "sairam0424/claude-copy-back:realrender/probe",
+      "repo": "sairam0424/claude-copy-back",
+      "path": "realrender/probe",
+      "sourceCommit": "17d919cfcfdc75f3c2d8c0fe3297deb3cb0917b4",
+      "name": "rows-probe",
+      "description": "Rig-only probe: /probe shows counts about the session rows the engine hands a mod (never their text).",
+      "author": "Sairam Ugge",
+      "homepage": "https://github.com/sairam0424/claude-copy-back",
+      "url": "https://github.com/sairam0424/claude-copy-back/tree/main/realrender/probe",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "probe"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.session.messages",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads the transcript",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-05T14:41:22Z",
+      "createdAt": "2026-10-24T12:57:54Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

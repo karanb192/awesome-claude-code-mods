@@ -209,6 +209,7 @@
 <url><loc>https://mods.aidojo.si/mods/Alyan-khattak--Claude-Code-Mods--session-journal/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Alyan-khattak--Claude-Code-Mods--token-weather/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Alyan-khattak--Claude-Code-Mods--waypoint/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/AmberWJL--live-claude-notebook--live-notebook/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Amel-DZRV--claude-code-auto-handoff--auto-handoff/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Amnesiac9--claude-mods--account-badge/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Amnesiac9--claude-mods--context-bar/</loc></url>
@@ -4268,6 +4269,9 @@
 <url><loc>https://mods.aidojo.si/mods/hemanth--claude-code-youtube-mod--youtube-side-player/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/hemanth--spotify-mod--spotify-mod/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/hemanth--voice-mod--voice/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/hematteo--anki-band--anki-band/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/hematteo--run-suggested--run-suggested/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/hematteo--run-watcher--run-watcher/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/hemichaeli--hebrew-rtl--hebrew-rtl/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/henrik-thevibe--Claude-Fables--fables/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/hereshecodes--claude-mods--agent-watch/</loc></url>
@@ -5475,6 +5479,10 @@
 <url><loc>https://mods.aidojo.si/mods/nicopalazzo--pin-mods--pin-ask/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/nicopalazzo--pin-mods--pin/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/nigelramsay--nigels-plugins--usage-bar/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/nightlab-agent--file-trail--file-trail/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/nightlab-agent--message-times--message-times/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/nightlab-agent--prompt-state--prompt-state/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/nightlab-agent--subagent-spend--subagent-spend/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/niijoey--prompter-mod--prompter/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/nike2lim--token-mod-meter--token-meter/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/niksavis--handily--handily-board/</loc></url>
@@ -5839,6 +5847,7 @@
 <url><loc>https://mods.aidojo.si/mods/plasdigital--mods-claude-code-kit-aluno--proximos-passos/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/plasdigital--mods-claude-code-kit-aluno--raio-de-explosao/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/plaxagoras--clawd-tales--clawd-tales/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/plaxagoras--jungle-run--jungle-run/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/pleaseai--honmoon--honmoon-redact/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/pleaseai--shunt--shunt/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/plopaur--claude-mod-session-meter--session-meter/</loc></url>
@@ -6211,6 +6220,7 @@
 <url><loc>https://mods.aidojo.si/mods/sahiltalwar88--claude-mods--session-ledger/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/saidMounaim--snake-mod--snake/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/saiharsha03--clawd-spinner--clawd-spinner/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/sairam0424--claude-copy-back--copy-back/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/sairam0424--claude-prompt-lift--prompt-lift/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/saita08--my-cc-mods--agent-office/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/saksham10arora-dotcom--claude-frugal--frugal/</loc></url>
@@ -6393,6 +6403,7 @@
 <url><loc>https://mods.aidojo.si/mods/shissncg--claude-mods--sisomewhere-usage/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/shissncg--claude-mods--turn-timestamp/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/shloksrivastava2509--Tuneup--token-info/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/shohamtal--cc-mod-mysql-client--mysql-client/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/shohamtal--cc-mod-opensearch-console--opensearch-console/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/shou6--claude-mods--compact-tools/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/shou6--claude-mods--mermaid-view/</loc></url>
