@@ -609,3 +609,42 @@ test('the change check reads a committed scan larger than the default output buf
   const broken = spawnSync(process.execPath, [fileURLToPath(new URL('./changed.mjs', import.meta.url)), join(root, 'missing.json')], { cwd: root, encoding: 'utf8' })
   assert.equal(broken.status, 2)
 })
+
+test('confirmed November moves and copies count their keeper only while it exists', () => {
+  const pairs = [
+    ['NahumLitvin/prismantis:.', 'NahumLitvin/prismantis:plugin'],
+    ['LupusMalusDeviant/desktop-pet:plugins/pet', 'LupusMalusDeviant/mod-box:plugins/pet'],
+    ['MichaelDaenzer/claude-mod-session-stats:.', 'MichaelDaenzer/claude-mod-usage-band:session-summary'],
+    ['hex/claude-sessions:mods/cs-feed', 'hex/claude-sessions:mods/cs-filter-chat'],
+    ['111vandit111/ai-dev-team:plugins/ai-dev-team', '111vandit111/ai-dev-team:plugins/ai-dev-team-office'],
+    ['mmacedok/claude-mods:plugins/medidor', 'mmacedok/claude-mods:plugins/funmeter'],
+    ['t968rs/operator-straps:plugins/pr-review-watch', 't968rs/operator-straps:plugins/agent-watcher'],
+  ]
+  const list = readDuplicates('data/duplicates.txt')
+  for (const [copy, keeper] of pairs) {
+    assert.equal(list.get(copy), keeper, copy)
+    const mods = [{ id: copy, kind: 'mod' }, { id: keeper, kind: 'mod' }]
+    const result = applyDuplicates(mods, list)
+    assert.equal(result[0].kind, 'duplicate', copy)
+    assert.equal(result[0].duplicateOf, keeper, copy)
+    assert.equal(result[1].kind, 'mod', keeper)
+    for (const kind of [null, 'fixture', 'catalog', 'duplicate']) {
+      const unavailable = [{ id: copy, kind: 'mod' }]
+      if (kind) unavailable.push({ id: keeper, kind })
+      assert.equal(applyDuplicates(unavailable, list)[0].kind, 'mod', `${copy}: ${kind}`)
+    }
+  }
+})
+
+test('the crew API spike stays out without excluding installable mods or unrelated spikes', () => {
+  const repo = 'PeterTing/claude-mod'
+  for (const path of ['spikes/crew', 'spikes/crew/nested']) {
+    assert.equal(kindOf(repo, path, {}), 'fixture', path)
+    assert.equal(kindOf(repo.toLowerCase(), path, {}), 'fixture', path)
+  }
+  for (const path of ['.', 'mods/crew', 'mods/zh-reply', 'plugins/crew', 'spikes/crew-live', 'spikes/other']) {
+    assert.equal(kindOf(repo, path, {}), 'mod', path)
+  }
+  assert.equal(kindOf('other/claude-mod', 'spikes/crew', {}), 'mod')
+  assert.equal(kindOf(repo, 'spikes/crew', {}, new Set(), new Set([`${repo}:spikes/crew`])), 'mod')
+})
