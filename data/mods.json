@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-07T11:52:20.805Z",
   "claudeVersion": "2.1.319",
-  "repos": 3754,
+  "repos": 3755,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -957072,6 +957072,93 @@
       "stars": 0,
       "pushedAt": "2026-10-30T03:42:41Z",
       "createdAt": "2026-10-28T15:05:30Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "vancityAyush/mcp-list:.",
+      "repo": "vancityAyush/mcp-list",
+      "path": ".",
+      "sourceCommit": "aea92b80bf21126014ef96ea5f2e20009b3969ba",
+      "name": "mcp-list",
+      "description": "A sidebar pane that lists your MCP servers with live connection status; click a server for its target and error detail.",
+      "author": "vancityAyush",
+      "homepage": "https://github.com/vancityAyush/mcp-list",
+      "url": "https://github.com/vancityAyush/mcp-list",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "mcp-list"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "mcp-list"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.command.list",
+        "$.command.register",
+        "$.process.run",
+        "$.state.get",
+        "$.state.set",
+        "$.tool.list",
+        "$.ui.open",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "mcp-list",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-28T18:21:43Z",
+      "createdAt": "2026-10-28T13:11:27Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
