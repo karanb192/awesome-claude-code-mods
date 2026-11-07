@@ -9,6 +9,8 @@ alexjacobs08/guided-mr
 alexlifexyz/p3c-guard
 amsultan2010/clawd-minecraft
 andrej-kolic/claude-mods
+AndreySukhanov/memento
+AndreySukhanov/summarix-telegram
 Anerco/effort-cycle-mod
 anthropics/claude-code
 Antreas-Strb/glanceflow
