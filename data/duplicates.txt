@@ -153,3 +153,18 @@ primelogiclabio/claude-tools:mods/project-tracker primelogiclabio/claude-tools:p
 primelogiclabio/claude-tools:mods/resource-monitor primelogiclabio/claude-tools:plugins/resource-monitor
 rezzminator/auto-effort:plugins/auto-effort-control rezzminator/auto-effort:plugins/auto-effort
 Kiy-K/oxide:.agents/skills/jev-model-router Kiy-K/oxide:.claude/skills/jev-model-router
+# Root plugin moved into plugin/ in upstream commit ad9fbe137699ef90e28e7ff07050e16996d871bf.
+NahumLitvin/prismantis:. NahumLitvin/prismantis:plugin
+# Standalone pet has identical hook/runtime files and is generated from mod-box
+# (ac4c9e749db10f6a7c7eef8b90fe2ee476e5decd); keep the published pack identity.
+LupusMalusDeviant/desktop-pet:plugins/pet LupusMalusDeviant/mod-box:plugins/pet
+# Standalone session-summary is also shipped in usage-band at 49454e755d22ca64e908720dc7c805c9e2049ace.
+MichaelDaenzer/claude-mod-session-stats:. MichaelDaenzer/claude-mod-usage-band:session-summary
+# cs-feed became clean-chat, chat-only, then filter-chat (7a962eaceb2d4ca28a0b115b080d725077aed856).
+hex/claude-sessions:mods/cs-feed hex/claude-sessions:mods/cs-filter-chat
+# Office hooks moved into ai-dev-team-office in 776b6531eb39538b29a48dc4f685ac3fbc8a0035.
+111vandit111/ai-dev-team:plugins/ai-dev-team 111vandit111/ai-dev-team:plugins/ai-dev-team-office
+# README at d886c0a33fd4ed1726062909c0d99f5234051e94 calls funmeter the renamed medidor.
+mmacedok/claude-mods:plugins/medidor mmacedok/claude-mods:plugins/funmeter
+# pr-review-watch became agent-watcher in f163fe4d0f93be304b60259e520fab7d5ceb18a4.
+t968rs/operator-straps:plugins/pr-review-watch t968rs/operator-straps:plugins/agent-watcher
