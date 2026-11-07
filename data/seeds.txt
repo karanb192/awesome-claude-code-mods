@@ -58,6 +58,7 @@ gorkamb/claude-session-outputs
 griches/buildpane
 griches/installguard
 halluton/Mindful-Claude
+hashswingingslasher/model-hint
 helenkwok/gsd-status-mod
 helenkwok/open-links
 hellosverre/claude-skins
