@@ -200,6 +200,8 @@
   "AndreasOA--claude-code-mods--usage-bars": {"id":"AndreasOA/claude-code-mods:plugins/usage-bars"},
   "AndrewDongminYoo--cc-agents-kit--context-meter": {"id":"AndrewDongminYoo/cc-agents-kit:plugins/context-meter"},
   "AndrewDongminYoo--cc-agents-kit--quick-look": {"id":"AndrewDongminYoo/cc-agents-kit:plugins/quick-look"},
+  "AndreySukhanov--memento--memento-panel": {"id":"AndreySukhanov/memento:mods/memento-panel"},
+  "AndreySukhanov--summarix-telegram--summarix-panel": {"id":"AndreySukhanov/summarix-telegram:mods/summarix-panel"},
   "Anerco--claude-code-effort-cycle--effort-cycle": {"id":"Anerco/claude-code-effort-cycle:."},
   "Ankitrai97--rai-claude-mods--codex-computer-use": {"id":"Ankitrai97/rai-claude-mods:plugins/codex-computer-use"},
   "Ankitrai97--rai-claude-mods--context-handoff": {"id":"Ankitrai97/rai-claude-mods:plugins/context-handoff"},

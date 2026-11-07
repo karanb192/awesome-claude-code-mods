@@ -245,6 +245,8 @@ andrewbakercloudscale/claude-code-cost-sidebar
 AndrewDongminYoo/cc-agents-kit
 andrewstephenson-v1/mod-claude-tasks
 andrey342/foreman
+AndreySukhanov/memento
+AndreySukhanov/summarix-telegram
 androidZzT/claude-trading-mods
 andykimdev/mods
 andytw366/claude-mods

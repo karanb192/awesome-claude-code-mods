@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-07T11:52:20.805Z",
   "claudeVersion": "2.1.319",
-  "repos": 3745,
+  "repos": 3747,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -955015,6 +955015,203 @@
       "pushedAt": "2026-11-07T09:07:25Z",
       "createdAt": "2026-11-04T17:29:59Z",
       "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "AndreySukhanov/memento:mods/memento-panel",
+      "repo": "AndreySukhanov/memento",
+      "path": "mods/memento-panel",
+      "sourceCommit": "9524d2d7ff1ee5a7ebc45484a3b224467dee9935",
+      "name": "memento-panel",
+      "description": "Memento task memory beside the chat: a band when memory falls behind, and a pane with active tasks, next steps, checkpoints and unverified insights. Needs Claude Code 2.1.287+.",
+      "author": "Andrey Sukhanov",
+      "homepage": "https://github.com/AndreySukhanov/memento/tree/master/mods/memento-panel",
+      "url": "https://github.com/AndreySukhanov/memento/tree/master/mods/memento-panel",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "memento-panel"
+          }
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "memento"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.command.register",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.prompt.submit",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.open",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "memento",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "drives Claude",
+          "reads files",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-11-05T20:30:54Z",
+      "createdAt": "2026-07-04T14:11:41Z",
+      "license": "NOASSERTION",
+      "archived": false,
+      "defaultBranch": "master",
+      "directory": null
+    },
+    {
+      "id": "AndreySukhanov/summarix-telegram:mods/summarix-panel",
+      "repo": "AndreySukhanov/summarix-telegram",
+      "path": "mods/summarix-panel",
+      "sourceCommit": "819befdfe52deaf5c9c2223fa78184048c7cf8d1",
+      "name": "summarix-panel",
+      "description": "Your Telegram channel digest in a pane beside the chat: every point linked to its post, earlier digests a click away, a new one in one press. Needs Claude Code 2.1.287+.",
+      "author": "Andrey Sukhanov",
+      "homepage": "https://github.com/AndreySukhanov/summarix-telegram/tree/main/mods/summarix-panel",
+      "url": "https://github.com/AndreySukhanov/summarix-telegram/tree/main/mods/summarix-panel",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "summarix-panel"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__summarix-panel__show_digest"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "summarix"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.command.register",
+        "$.prompt.submit",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.tool.register",
+        "$.ui.open",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "summarix-telegram",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "drives Claude",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "mcp__summarix-panel__show_digest calls"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-11-06T00:07:39Z",
+      "createdAt": "2026-07-04T14:21:48Z",
+      "license": "NOASSERTION",
       "archived": false,
       "defaultBranch": "main",
       "directory": null
