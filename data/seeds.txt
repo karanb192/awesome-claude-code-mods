@@ -122,6 +122,7 @@ paragpandyareal/lazy-panda-panel
 paragpandyareal/swear-slap
 pawandeepdhall/claude-mods
 plaxagoras/clawd-tales
+plaxagoras/jungle-run
 qualixar/modstage
 Quinnod345/ponder
 RadTech-Solutions/agent-pager
