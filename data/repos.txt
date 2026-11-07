@@ -3053,6 +3053,7 @@ Siigari/usage-panel
 siller/supermod
 sillss1/brain-dash
 Silvertree2010/diffspider
+SimakovIgor/pixel-buddy
 simplecore-inc/claude-mods
 SimplicityGuy/claude-mods
 simplybychris/claude-code-mods
