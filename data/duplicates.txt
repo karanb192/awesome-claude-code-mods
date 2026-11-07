@@ -168,3 +168,8 @@ hex/claude-sessions:mods/cs-feed hex/claude-sessions:mods/cs-filter-chat
 mmacedok/claude-mods:plugins/medidor mmacedok/claude-mods:plugins/funmeter
 # pr-review-watch became agent-watcher in f163fe4d0f93be304b60259e520fab7d5ceb18a4.
 t968rs/operator-straps:plugins/pr-review-watch t968rs/operator-straps:plugins/agent-watcher
+# Codex replaces chatgpt in 5d4baf4ba3b0d626523c56179ce906d9e0968390 and incorporates
+# codex-computer-use (README at b89e552c3bdc8a4935a472dfe66a5c3b52c3c063).
+# Keep retained inventory IDs; repository-rename handling resolves the codex keeper.
+anderson-spider/claude-mods:plugins/chatgpt anderson-spider/claude-mods:plugins/codex
+anderson-spider/claude-mods:plugins/codex-computer-use anderson-spider/claude-mods:plugins/codex
