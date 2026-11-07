@@ -90,6 +90,7 @@ lorenzh/rabe
 magiclin99/buddy-go
 ManuelWarland/claude-codex-pane
 MarcoCarnevali/claude-code-mods
+Marius-Adam/claude-files-pane
 mertkayacs/ultramod
 MikeGT4/agent-tree
 mksadoughi/standby
