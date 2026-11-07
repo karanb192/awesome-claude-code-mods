@@ -419,6 +419,7 @@ bbarney7/claude-code-mods
 bbeygel/claude-code-tama
 bcanozgur/cc-side-context
 Bearisbug/cc-mods
+beasaltfish/idle-arcade
 BedirYilmaz/claude-crt-hud-mod
 beerbox/rmod
 bekhruzbekswe/modme
