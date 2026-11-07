@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-07T11:52:20.805Z",
   "claudeVersion": "2.1.319",
-  "repos": 3753,
+  "repos": 3754,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -955919,6 +955919,957 @@
       "stars": 12,
       "pushedAt": "2026-11-04T11:08:51Z",
       "createdAt": "2026-10-06T09:23:42Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "beasaltfish/idle-arcade:plugins/_probe",
+      "repo": "beasaltfish/idle-arcade",
+      "path": "plugins/_probe",
+      "sourceCommit": "728bef3ad14714aefd0e0c8baadc2456aeb7a8f6",
+      "name": "_probe",
+      "description": "Throwaway linkage probe: shows in a pane what events reach a plugin. Open it with /probe.",
+      "author": "beasaltfish",
+      "homepage": "https://github.com/beasaltfish/idle-arcade",
+      "url": "https://github.com/beasaltfish/idle-arcade/tree/main/plugins/_probe",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "probe"
+          }
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "tool.check",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "ui.focus",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "probe"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.notify",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [
+        "hooks/probe.tsx"
+      ],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-30T03:42:41Z",
+      "createdAt": "2026-10-28T15:05:30Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "beasaltfish/idle-arcade:plugins/_shared-tests",
+      "repo": "beasaltfish/idle-arcade",
+      "path": "plugins/_shared-tests",
+      "sourceCommit": "728bef3ad14714aefd0e0c8baadc2456aeb7a8f6",
+      "name": "_shared-tests",
+      "description": "Test host for shared/ code: carries the bundled copy so the shared tests run under claude plugin test. Not published.",
+      "author": "beasaltfish",
+      "homepage": "https://github.com/beasaltfish/idle-arcade",
+      "url": "https://github.com/beasaltfish/idle-arcade/tree/main/plugins/_shared-tests",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "ui.message",
+          "matcher": {}
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "?"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {
+            "data has {type": "save}"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "?"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.notify",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [
+        "hooks/game.tsx"
+      ],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-30T03:42:41Z",
+      "createdAt": "2026-10-28T15:05:30Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "beasaltfish/idle-arcade:plugins/brick-breaker",
+      "repo": "beasaltfish/idle-arcade",
+      "path": "plugins/brick-breaker",
+      "sourceCommit": "728bef3ad14714aefd0e0c8baadc2456aeb7a8f6",
+      "name": "brick-breaker",
+      "description": "An original arcade brick-breaker game for Claude Code. Bounce the ball and burst every brick. Pauses when Claude finishes; Claude's tool calls drop power-up capsules.",
+      "author": "beasaltfish",
+      "homepage": "https://github.com/beasaltfish/idle-arcade",
+      "url": "https://github.com/beasaltfish/idle-arcade/tree/main/plugins/brick-breaker",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "ui.message",
+          "matcher": {}
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "?"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {
+            "data has {type": "save}"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "?"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.notify",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [
+        "hooks/game.tsx"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "idle-arcade",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-30T03:42:41Z",
+      "createdAt": "2026-10-28T15:05:30Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "beasaltfish/idle-arcade:plugins/fish-shooter",
+      "repo": "beasaltfish/idle-arcade",
+      "path": "plugins/fish-shooter",
+      "sourceCommit": "728bef3ad14714aefd0e0c8baadc2456aeb7a8f6",
+      "name": "fish-shooter",
+      "description": "An original arcade fish-shooter game for Claude Code. Aim a net cannon and catch fish. Pauses when Claude finishes; Claude's tool calls drop golden fish.",
+      "author": "beasaltfish",
+      "homepage": "https://github.com/beasaltfish/idle-arcade",
+      "url": "https://github.com/beasaltfish/idle-arcade/tree/main/plugins/fish-shooter",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "ui.message",
+          "matcher": {}
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "?"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {
+            "data has {type": "save}"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "?"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.notify",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [
+        "hooks/game.tsx"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "idle-arcade",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-30T03:42:41Z",
+      "createdAt": "2026-10-28T15:05:30Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "beasaltfish/idle-arcade:plugins/idle-arcade",
+      "repo": "beasaltfish/idle-arcade",
+      "path": "plugins/idle-arcade",
+      "sourceCommit": "728bef3ad14714aefd0e0c8baadc2456aeb7a8f6",
+      "name": "idle-arcade",
+      "description": "Every Idle Arcade game in one install, and /idle to pick one. Games pause when Claude finishes; Claude's tool calls drop bonuses.",
+      "author": "beasaltfish",
+      "homepage": "https://github.com/beasaltfish/idle-arcade",
+      "url": "https://github.com/beasaltfish/idle-arcade/tree/main/plugins/idle-arcade",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "idle"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "idle"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.list",
+        "$.command.register",
+        "$.prompt.fill",
+        "$.ui.close",
+        "$.ui.copy",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "idle-arcade",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "writes the prompt box",
+          "writes the clipboard",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-30T03:42:41Z",
+      "createdAt": "2026-10-28T15:05:30Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "beasaltfish/idle-arcade:plugins/jump-runner",
+      "repo": "beasaltfish/idle-arcade",
+      "path": "plugins/jump-runner",
+      "sourceCommit": "728bef3ad14714aefd0e0c8baadc2456aeb7a8f6",
+      "name": "jump-runner",
+      "description": "An original endless runner for Claude Code. Jump over crates and under drones as the pace climbs. Pauses when Claude finishes; Claude's tool calls drop glowing coins.",
+      "author": "beasaltfish",
+      "homepage": "https://github.com/beasaltfish/idle-arcade",
+      "url": "https://github.com/beasaltfish/idle-arcade/tree/main/plugins/jump-runner",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "ui.message",
+          "matcher": {}
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "?"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {
+            "data has {type": "save}"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "?"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.notify",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [
+        "hooks/game.tsx"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "idle-arcade",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-30T03:42:41Z",
+      "createdAt": "2026-10-28T15:05:30Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "beasaltfish/idle-arcade:plugins/snake",
+      "repo": "beasaltfish/idle-arcade",
+      "path": "plugins/snake",
+      "sourceCommit": "728bef3ad14714aefd0e0c8baadc2456aeb7a8f6",
+      "name": "snake",
+      "description": "An original snake game for Claude Code. Eat to grow and stay off the walls and your tail. Pauses when Claude finishes; Claude's tool calls drop glowing bonus food.",
+      "author": "beasaltfish",
+      "homepage": "https://github.com/beasaltfish/idle-arcade",
+      "url": "https://github.com/beasaltfish/idle-arcade/tree/main/plugins/snake",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "ui.message",
+          "matcher": {}
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "?"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {
+            "data has {type": "save}"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "?"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.notify",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [
+        "hooks/game.tsx"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "idle-arcade",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-30T03:42:41Z",
+      "createdAt": "2026-10-28T15:05:30Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "beasaltfish/idle-arcade:plugins/space-shooter",
+      "repo": "beasaltfish/idle-arcade",
+      "path": "plugins/space-shooter",
+      "sourceCommit": "728bef3ad14714aefd0e0c8baadc2456aeb7a8f6",
+      "name": "space-shooter",
+      "description": "An original side-scrolling space shooter for Claude Code. Fly through waves and beat a boss every fifth wave. Pauses when Claude finishes; Claude's tool calls drop supply pods.",
+      "author": "beasaltfish",
+      "homepage": "https://github.com/beasaltfish/idle-arcade",
+      "url": "https://github.com/beasaltfish/idle-arcade/tree/main/plugins/space-shooter",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "ui.message",
+          "matcher": {}
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "?"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {
+            "data has {type": "save}"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "?"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.notify",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [
+        "hooks/game.tsx"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "idle-arcade",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-30T03:42:41Z",
+      "createdAt": "2026-10-28T15:05:30Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "beasaltfish/idle-arcade:plugins/tap-flyer",
+      "repo": "beasaltfish/idle-arcade",
+      "path": "plugins/tap-flyer",
+      "sourceCommit": "728bef3ad14714aefd0e0c8baadc2456aeb7a8f6",
+      "name": "tap-flyer",
+      "description": "An original tap-to-fly game for Claude Code. Thread your ember through gaps in scrolling pillars. Pauses when Claude finishes; Claude's tool calls drop glowing coins.",
+      "author": "beasaltfish",
+      "homepage": "https://github.com/beasaltfish/idle-arcade",
+      "url": "https://github.com/beasaltfish/idle-arcade/tree/main/plugins/tap-flyer",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "ui.message",
+          "matcher": {}
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "?"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {
+            "data has {type": "save}"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "?"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.notify",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [
+        "hooks/game.tsx"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "idle-arcade",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-30T03:42:41Z",
+      "createdAt": "2026-10-28T15:05:30Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
