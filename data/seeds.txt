@@ -2,6 +2,7 @@
 3dnow/claude-mods
 404Mayank/cachebeat
 accodev/hairline
+Actera-AI/actera-claude-code
 adamholter/claude-subway-surfers
 agentic-workbench/agent-quick-menu
 ajwann/next-context
