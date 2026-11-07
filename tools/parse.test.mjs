@@ -619,6 +619,8 @@ test('confirmed November moves and copies count their keeper only while it exist
     ['111vandit111/ai-dev-team:plugins/ai-dev-team', '111vandit111/ai-dev-team:plugins/ai-dev-team-office'],
     ['mmacedok/claude-mods:plugins/medidor', 'mmacedok/claude-mods:plugins/funmeter'],
     ['t968rs/operator-straps:plugins/pr-review-watch', 't968rs/operator-straps:plugins/agent-watcher'],
+    ['anderson-spider/claude-mods:plugins/chatgpt', 'anderson-spider/claude-mods:plugins/codex'],
+    ['anderson-spider/claude-mods:plugins/codex-computer-use', 'anderson-spider/claude-mods:plugins/codex'],
   ]
   const list = readDuplicates('data/duplicates.txt')
   for (const [copy, keeper] of pairs) {
@@ -647,4 +649,23 @@ test('the crew API spike stays out without excluding installable mods or unrelat
   }
   assert.equal(kindOf('other/claude-mod', 'spikes/crew', {}), 'mod')
   assert.equal(kindOf(repo, 'spikes/crew', {}, new Set(), new Set([`${repo}:spikes/crew`])), 'mod')
+})
+
+test('retained Anderson plugins resolve to Codex after repository discovery follows its rename', () => {
+  const oldRepo = 'anderson-spider/claude-mods'
+  const currentRepo = 'anderson-spider/spider-claude-mods'
+  const at = (repo, path, sourceCommit = 'b89e552c3bdc8a4935a472dfe66a5c3b52c3c063') => ({ id: `${repo}:${path}`, repo, path, kind: 'mod', sourceCommit })
+  const copies = ['plugins/chatgpt', 'plugins/codex-computer-use'].map(path => at(oldRepo, path, '392293a851aedd46627aed506a2ddd6dfb3fd8a9'))
+  const oldKeeper = at(oldRepo, 'plugins/codex')
+  const keeper = at(currentRepo, 'plugins/codex')
+  const mods = [...copies, oldKeeper, keeper]
+  const renames = renamePairs(mods, new Map([[oldRepo, currentRepo]]), new Set([oldKeeper.id, keeper.id]))
+  applyDuplicatesWithRenames(mods, readDuplicates('data/duplicates.txt'), renames)
+  assert.equal(renames.get(oldKeeper.id), keeper.id)
+  for (const copy of [...copies, oldKeeper]) {
+    assert.equal(copy.kind, 'duplicate', copy.id)
+    assert.equal(copy.duplicateOf, keeper.id, copy.id)
+  }
+  assert.equal(keeper.kind, 'mod')
+  assert.equal(mods.filter(mod => mod.kind === 'mod').length, 1)
 })
