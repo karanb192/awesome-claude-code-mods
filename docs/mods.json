@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-07T11:52:20.805Z",
   "claudeVersion": "2.1.319",
-  "repos": 3747,
+  "repos": 3752,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -955212,6 +955212,558 @@
       "pushedAt": "2026-11-06T00:07:39Z",
       "createdAt": "2026-07-04T14:21:48Z",
       "license": "NOASSERTION",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "Quinnod345/ponder:.",
+      "repo": "Quinnod345/ponder",
+      "path": ".",
+      "sourceCommit": "400d4ccb345cf2b3d5421e2da4a1d298f9c4f7fe",
+      "name": "ponder",
+      "description": "Convergent deliberation loop for coding agents - multi-pass, coverage-gated, append-only ledger review and planning.",
+      "author": "Quinn O'Donnell",
+      "homepage": "https://github.com/Quinnod345/ponder",
+      "url": "https://github.com/Quinnod345/ponder",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.mjs"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "ponder-status"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.read",
+        "$.session.root",
+        "$.ui.status"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "ponder",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads files",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 4,
+      "pushedAt": "2026-11-06T16:03:45Z",
+      "createdAt": "2026-10-27T21:48:29Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "accodev/hairline:.",
+      "repo": "accodev/hairline",
+      "path": ".",
+      "sourceCommit": "870eff73bbb146c08cb4a8cf5e67e56957cc32cc",
+      "name": "hairline",
+      "description": "A status line mod for Claude Code.",
+      "author": null,
+      "homepage": "https://github.com/accodev/hairline",
+      "url": "https://github.com/accodev/hairline",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "hairline-fonts"
+          }
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "ui.message",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "PromptHint"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.config.list",
+        "$.config.set",
+        "$.env.get",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.http.fetch",
+        "$.process.run",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.model",
+        "$.session.usage",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.copy",
+        "$.ui.invalidate",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [
+        "hooks/chip.tsx",
+        "hooks/slot.tsx",
+        "hooks/speed.tsx",
+        "hooks/spinner.tsx"
+      ],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "hairline",
+          "status": "warnings",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "network",
+          "runs processes",
+          "changes config",
+          "writes the clipboard",
+          "reads files",
+          "reads env vars",
+          "reads settings",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "PromptHint",
+        "AbovePrompt"
+      ],
+      "stars": 2,
+      "pushedAt": "2026-11-06T14:54:01Z",
+      "createdAt": "2026-10-29T12:56:57Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "mksadoughi/standby:lite",
+      "repo": "mksadoughi/standby",
+      "path": "lite",
+      "sourceCommit": "55ad3c69ab5814929bcee0c91dbb97df5f814f0b",
+      "name": "standby",
+      "description": "Standby inside Claude Code: listen to a meeting or talk by voice, with Claude in this session hearing it all. Needs the free Standby app for Mac",
+      "author": "Standby",
+      "homepage": "https://mksadoughi.github.io/standby/",
+      "url": "https://github.com/mksadoughi/standby/tree/main/lite",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.js"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "standby"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "/\"^mcp__standby__\"/"
+          }
+        },
+        {
+          "event": "classic.PermissionRequest",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "AskUserQuestion"
+          }
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "UserMessage"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.clock.sleep",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.read",
+        "$.http.fetch",
+        "$.process.run",
+        "$.process.spawn",
+        "$.prompt.submit",
+        "$.session.append",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.surfaces",
+        "$.tool.register",
+        "$.turn.abort",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "standby",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "network",
+          "runs processes",
+          "drives Claude",
+          "reads files",
+          "reads env vars",
+          "draws"
+        ]
+      },
+      "sees": [
+        "/\"^mcp__standby__\"/ calls",
+        "classic hooks",
+        "AskUserQuestion calls",
+        "every tool call",
+        "every prompt"
+      ],
+      "draws": [
+        "AbovePrompt",
+        "UserMessage"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-11-04T07:55:14Z",
+      "createdAt": "2026-10-25T15:57:19Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "darjss/claude-code-codemode:.",
+      "repo": "darjss/claude-code-codemode",
+      "path": ".",
+      "sourceCommit": "57334d4fd9173fcee0dd8bcd09c3373532fc77ec",
+      "name": "cc-codemod",
+      "description": "Code mode for Claude Code: one tool that runs a JavaScript script over Claude's own tools and returns only the answer",
+      "author": "darjss",
+      "homepage": "https://github.com/darjss/claude-code-codemode",
+      "url": "https://github.com/darjss/claude-code-codemode",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "tool.check",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "/\"^mcp__cc-codemod__run$\"/"
+          }
+        }
+      ],
+      "calls": [
+        "$.env.get",
+        "$.fs.read",
+        "$.state.get",
+        "$.state.set",
+        "$.tool.call",
+        "$.tool.check",
+        "$.tool.list",
+        "$.tool.register",
+        "$.ui.status"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "cc-codemod",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "drives Claude",
+          "reads files",
+          "reads env vars",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call",
+        "/\"^mcp__cc-codemod__run$\"/ calls"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-04T03:23:23Z",
+      "createdAt": "2026-10-23T12:05:01Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "ennovative-solutions/gitlab-pipeline-claude-mod:.",
+      "repo": "ennovative-solutions/gitlab-pipeline-claude-mod",
+      "path": ".",
+      "sourceCommit": "304c03fcfa517b05b529bf3ae7d785cddba881fc",
+      "name": "ci-pipeline-status",
+      "description": "Shows the progress of GitLab CI pipelines in the status line",
+      "author": "Ennovative Solutions",
+      "homepage": "https://github.com/ennovative-solutions/gitlab-pipeline-claude-mod",
+      "url": "https://github.com/ennovative-solutions/gitlab-pipeline-claude-mod",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "pipeline"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__ci-pipeline-status__watch_pipeline"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "/\"^(Edit|Write|NotebookEdit)$\"/"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.stat",
+        "$.process.run",
+        "$.state.get",
+        "$.state.set",
+        "$.tool.register",
+        "$.ui.notify",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "ennovative-solutions",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "drives Claude",
+          "reads files",
+          "reads env vars",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "mcp__ci-pipeline-status__watch_pipeline calls",
+        "/\"^(Edit|Write|NotebookEdit)$\"/ calls",
+        "Bash calls"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-10-29T18:50:17Z",
+      "createdAt": "2026-10-28T18:54:56Z",
+      "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
       "directory": null
