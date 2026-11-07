@@ -73,6 +73,7 @@ abyigiter/claude-usage-bar
 AbysmalBiscuit/dotfiles
 abyss464/claude-gitlogue
 AbyssCN/claude-lead-harness
+accodev/hairline
 achapla/cc-mods
 achimala/claude-toons
 achiurizo/dreeft
@@ -781,6 +782,7 @@ danyuchn/claude-mods
 danyuchn/pii-guard
 danzerzine/claude-council
 DarioFontanel/claude-code-mods
+darjss/claude-code-codemode
 darkautism/ext-agent
 DarkisuSu/Jev-Claude-Router
 darkomarijaan/nexus-mod
@@ -1014,6 +1016,7 @@ endless-fr/claude-mods
 enes/proctree
 enginahmetbodur/subagent-monitor
 enhki/claude-mods
+ennovative-solutions/gitlab-pipeline-claude-mod
 enpixeles-ai/mods-claude
 enriquesanchez-elastic/git-gud
 Entwining/mods
@@ -2211,6 +2214,7 @@ mkhaytman87/tandem-split
 mkiselyow/claude-code-token-usage
 mkiselyow/diff-lens
 mkpvishnu/claude-mods
+mksadoughi/standby
 mlab-sh/mlab-claude-mod
 mlabo-org/context-git-band
 mlardier/foosball-claude-mod
@@ -2685,6 +2689,7 @@ qualixar/modstage
 quango2304/leo_claude_mod
 quangtm0404/claude-pets
 QuantiCZ/claude-code-mods
+Quinnod345/ponder
 qwang07/milestone-mod
 r0charm/claude-session-cleaner
 r1305/claude-mods
