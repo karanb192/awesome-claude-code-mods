@@ -2122,6 +2122,7 @@
   "SApplefeld--claude-kit--personas": {"id":"SApplefeld/claude-kit:plugins/personas"},
   "SID-Technologies--ci-invaders--ci-invaders": {"id":"SID-Technologies/ci-invaders:."},
   "SID-Technologies--gh-pulse--ci-invaders": {"id":"SID-Technologies/gh-pulse:.","to":"SID-Technologies--ci-invaders--ci-invaders"},
+  "SSS135--claude-code-codex-plugin--codex": {"id":"SSS135/claude-code-codex-plugin:."},
   "ST-byte441--stWorkflow--stworkflow": {"id":"ST-byte441/stWorkflow:."},
   "SaGgaSsa--claude-mods--opencode-delegation": {"id":"SaGgaSsa/claude-mods:opencode-delegation"},
   "SaGgaSsa--claude-mods--sudoku": {"id":"SaGgaSsa/claude-mods:sudoku"},

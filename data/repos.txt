@@ -3145,6 +3145,7 @@ srwiseman/claude-mods
 ssc327/prompt-nav
 ssenge/ClaudeVideoMod
 sshamilton/claude-mods
+SSS135/claude-code-codex-plugin
 sstani-bgv/claude-blast-radius
 sstani-bgv/claude-crew
 ST-byte441/stWorkflow
