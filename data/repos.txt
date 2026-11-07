@@ -221,6 +221,7 @@ amaezey/task-list
 amahmood561/tripwire
 ambareeshav/prs
 ambervdberg/smartcompact
+AmberWJL/live-claude-notebook
 Amel-DZRV/claude-code-auto-handoff
 amigoer/ccprogress
 amiralimardani-art/token-guardrails
@@ -1339,6 +1340,9 @@ hellosverre/smart-compact
 hemanth/claude-code-youtube-mod
 hemanth/spotify-mod
 hemanth/voice-mod
+hematteo/anki-band
+hematteo/run-suggested
+hematteo/run-watcher
 hemichaeli/hebrew-rtl
 henrik-thevibe/Claude-Fables
 hereshecodes/claude-mods
@@ -2407,6 +2411,10 @@ Niedvin/ClauDiscombobulating
 Niedvin/prompt-bar
 nigelramsay/claude-mods
 nigelramsay/nigels-plugins
+nightlab-agent/file-trail
+nightlab-agent/message-times
+nightlab-agent/prompt-state
+nightlab-agent/subagent-spend
 niijoey/prompter-mod
 nike2lim/token-mod-meter
 NikodemJachec99/Programming-learner-MODE
@@ -2623,6 +2631,7 @@ pkkid/claude-mods
 Plagemes/claude-mods
 plasdigital/mods-claude-code-kit-aluno
 plaxagoras/clawd-tales
+plaxagoras/jungle-run
 pleaseai/honmoon
 pleaseai/shunt
 plopaur/claude-mod-session-meter
@@ -2894,6 +2903,7 @@ sahiltalwar88/claude-mods
 saidMounaim/snake-mod
 saiharsha03/clawd-spinner
 Saiharsharudra03/clawd-spinner
+sairam0424/claude-copy-back
 sairam0424/claude-prompt-lift
 saita08/my-cc-mods
 Sajid-Rahman0126/claude-studio-mods
@@ -3039,6 +3049,7 @@ shimo4228/harness-scope
 shiran-yu/keyfob
 shissncg/claude-mods
 shloksrivastava2509/Tuneup
+shohamtal/cc-mod-mysql-client
 shohamtal/cc-mod-opensearch-console
 shou6/claude-mods
 shoujiki-panman/claude-code-mods
