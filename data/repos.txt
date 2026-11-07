@@ -3451,6 +3451,7 @@ utsavpaudellf/lane-pane
 VaitaR/claude-code-limits
 valeryia-piatrova/token-hamster
 VAlux/claude-session-progress
+vancityAyush/mcp-list
 Vansitha/clawd-watch
 VardhanKirti/claude-code-mods
 varunmoka7/disk-sweep
