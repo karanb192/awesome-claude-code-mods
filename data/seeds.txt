@@ -172,7 +172,6 @@ vicmpen/mokkan
 vihrea1337/headroom
 vinkdc/roclaude
 vynnlee/mods
-webdevnerdstuff/claude-loadout
 webdevnerdstuff/claude-session-mover
 wjsekrud/motive-mem
 Xabilimon1/emcc-claude-code-mods
