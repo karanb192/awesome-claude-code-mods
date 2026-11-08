@@ -227,6 +227,12 @@ function installBlock(mod) {
 
 // siblings: other mods from the same repository with their page paths, already in display order.
 // topics: the topic pages that list this mod, as { slug, title }, so each member links its parent page.
+// The README badge pair an author pastes: both images link to the mod's page.
+export const badgeSnippet = (anchor, url) => {
+  const badgeUrl = kind => `https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/${anchor}-${kind}.svg`
+  return `[![reach](${badgeUrl('reach')})](${url})\n[![validates](${badgeUrl('validates')})](${url})`
+}
+
 export function renderModPage(mod, { slug, anchor, claudeVersion, siblings = [], topics = [] }) {
   const url = `${site}mods/${slug}/`
   const owner = mod.repo.split('/')[0]
@@ -250,8 +256,7 @@ export function renderModPage(mod, { slug, anchor, claudeVersion, siblings = [],
     ],
   })
   const status = validationStatus(mod, version)
-  const badgeUrl = kind => `https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/${anchor}-${kind}.svg`
-  const snippet = `[![reach](${badgeUrl('reach')})](${url})\n[![validates](${badgeUrl('validates')})](${url})`
+  const snippet = badgeSnippet(anchor, url)
   const statusClass = mod.validate.status === 'passed' || mod.validate.status === 'warnings' ? '' : ' bad'
   return shell({
     title, description, canonical: url, robots: indexable(mod) ? '' : 'noindex',
