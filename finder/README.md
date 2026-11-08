@@ -23,6 +23,44 @@ claude plugin install mod-finder@aidojo --scope user
 
 Then open a new local session in Desktop's Code tab. Installing through Desktop's own plugin browser has not been tested here.
 
+To update an existing install:
+
+```sh
+claude plugin marketplace update aidojo
+claude plugin update mod-finder@aidojo
+```
+
+Restart Claude Code, or open a new local session in Desktop, to load the updated plugin.
+
+## One server for multiple sessions
+
+The plugin uses stdio by default, so each session starts a process. To share one process and catalogue index, run the server with Streamable HTTP:
+
+```sh
+export MOD_FINDER_API_KEY="$(openssl rand -hex 32)"
+MOD_FINDER_PORT=18763 node finder/server.mjs --http
+```
+
+Keep the key in your service manager's environment and give clients the same value. The server listens only on `127.0.0.1`. It requires a key of at least 32 characters, rejects foreign Host and Origin headers, and accepts authenticated JSON-RPC POST requests at `/mcp`. It does not open an event stream or keep client sessions.
+
+Configure each MCP client with this connection, using its supported environment-variable expansion:
+
+```json
+{
+  "mcpServers": {
+    "mods": {
+      "type": "http",
+      "url": "http://127.0.0.1:18763/mcp",
+      "headers": { "Authorization": "Bearer ${MOD_FINDER_API_KEY}" }
+    }
+  }
+}
+```
+
+Disable the stdio plugin when using the shared connection, or both copies will run. In Claude Code, run `claude plugin disable mod-finder@aidojo --scope user`. Load the new configuration in each session. Manage the shared process with your operating system's service manager if it must survive terminal exits.
+
+HTTP calls use the same tools, GitHub downloads, cache and refresh rules as stdio. The transport follows the [MCP Streamable HTTP specification](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports).
+
 ## From a shell
 
 `find-mods.mjs` gives the same answers as the MCP tools, because both call `search.mjs`.
@@ -59,7 +97,9 @@ Output is JSON. Add `--pretty` to indent it.
 
 ## What the access fields mean
 
-Access comes from the static footprint that `claude plugin validate` reports for the source at `source_commit`. A pass is not a runtime test or a safety guarantee. No reported network access means the validator found no network API call, not that the mod never reaches the network. `unclassified_calls` lists API calls the grader has no rule for yet; the access labels and level do not account for them.
+Access comes from the static footprint that `claude plugin validate` reports for the source at `source_commit`. A pass is not a runtime test or a safety guarantee. For a complete reported footprint, no reported network access means the validator found no network API call, not that the mod never reaches the network. `unclassified_calls` lists API calls the grader has no rule for yet; the access labels and level do not account for them. `other_namespace_calls` lists the ones in a namespace that is not in the Claude Code 2.1.302 core table; such a call could be an API another mod adds, a method from a different Claude Code version or a typo, so its access is unknown. Mods that call `$.state.get` carry `reads mod state`, because any mod can read another mod's state; the scan does not record whose state a call reads.
+
+When the footprint is unavailable or incomplete, `validation.footprint` is `unavailable` and `access.level` is `null`. Recorded calls and labels may be partial. `access.minimum_level` only bounds the calls that were reported. Any `--max-reach` limit, including 3, and any `--without` filter leave out these results unless `include_unverified` is true; that option still cannot override a known access label or minimum level. Older failed records without coverage metadata also use this unknown representation until rescanned.
 
 `--without` and `--max-reach` below 3 leave out the mods they cannot vouch for, and say how many:
 

@@ -1,7 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { parseValidateOutput, parseHooks, parseCalls } from './parse.mjs'
-import { grade, visibility, drawsOn } from './grade.mjs'
+import { parseValidateOutput, parseHooks, parseCalls, footprintStatus } from './parse.mjs'
+import { grade, visibility, drawsOn, hasFootprint } from './grade.mjs'
 import { validate, validateAsync, spawnAsync, relativePaths } from './validate.mjs'
 import { mkdtempSync, mkdirSync, writeFileSync, chmodSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
@@ -34,6 +34,83 @@ test('parses hooks, matchers, calls and surface modules', () => {
 test('nothing on $ means no calls', () => {
   assert.deepEqual(parseCalls('nothing on $'), [])
   assert.deepEqual(parseHooks('tool.call'), [{ event: 'tool.call', matcher: {} }])
+})
+
+test('nested matchers and quoted punctuation remain inside their hook', () => {
+  assert.deepEqual(parseHooks('command.run{origin={kind=composer}|{kind=bridge}}, prompt.submit{origin={kind=composer, source=[one,two]}}, tool.call{tool=/"^(a,b|x=y|[}])$"/}, session.end'), [
+    { event: 'command.run', matcher: { origin: '{kind=composer}|{kind=bridge}' } },
+    { event: 'prompt.submit', matcher: { origin: '{kind=composer, source=[one,two]}' } },
+    { event: 'tool.call', matcher: { tool: '/"^(a,b|x=y|[}])$"/' } },
+    { event: 'session.end', matcher: {} },
+  ])
+  assert.deepEqual(parseHooks('session.start, command.run{origin={kind=bridge}'), [{ event: 'session.start', matcher: {} }])
+  const parsed = parseValidateOutput('  ❯ ./a.ts hooks: session.start, tool.call{tool=/"[}]"/}, command.run{origin={kind=bridge}[+10 chars]}\n  ❯ ./a.ts calls: nothing on $\n✔ Validation passed')
+  assert.deepEqual(parsed.modules[0].hooks, [
+    { event: 'session.start', matcher: {} },
+    { event: 'tool.call', matcher: { tool: '/"[}]"/' } },
+  ])
+  assert.equal(footprintStatus(parsed, ['./a.ts']).status, 'unavailable')
+})
+
+test('footprint coverage requires hooks and explicit calls for every declared module', () => {
+  const read = text => parseValidateOutput(text + '\n✘ Validation failed')
+  const full = '  ❯ ./a.ts hooks: session.start\n  ❯ ./a.ts calls: $.http.fetch'
+  assert.equal(footprintStatus(read(full), ['./a.ts']).status, 'reported')
+  assert.equal(footprintStatus(read(full), ['./a.ts', './b.ts']).status, 'unavailable')
+  for (const text of ['', '  ❯ ./a.ts hooks: session.start', '  ❯ ./a.ts calls: $.http.fetch',
+    '  ❯ ./a.ts hooks: session.start\n  ❯ ./a.ts calls:', '  ❯ ./a.ts hooks: session.start\n  ❯ ./a.ts calls: unknown']) {
+    assert.equal(footprintStatus(read(text), ['./a.ts']).status, 'unavailable', text)
+  }
+  const empty = read('  ❯ ./a.ts hooks: nothing\n  ❯ ./a.ts calls: nothing on $')
+  assert.equal(footprintStatus(empty, ['a.ts']).status, 'reported')
+  assert.equal(grade(empty.modules[0].calls).level, 0)
+  assert.equal(footprintStatus(empty, [null]).status, 'unavailable')
+})
+
+test('unknown access retains a lower bound and treats legacy failures conservatively', () => {
+  assert.deepEqual(grade(['$.http.fetch'], false), { level: null, name: 'unknown', labels: ['network'], minimumLevel: 3 })
+  for (const calls of [[], ['$.http.fetch']]) assert.equal(hasFootprint({ calls, validate: { status: 'failed' } }), false)
+  assert.equal(hasFootprint({ calls: [], validate: { status: 'passed' } }), true)
+  assert.equal(hasFootprint({ calls: [], validate: { status: 'unknown' }, lastKnownValidate: { status: 'warnings' } }), true)
+  assert.equal(hasFootprint({ footprint: { status: 'reported' }, validate: { status: 'failed' } }), true)
+  assert.equal(hasFootprint({ footprint: { status: 'unavailable' }, validate: { status: 'passed' } }), false)
+})
+
+test('truncated validator lists retain whole entries but never establish a complete footprint', () => {
+  const read = (hooks, calls, surfaces = '') => parseValidateOutput(`  ❯ ./register.ts hooks: ${hooks}\n  ❯ ./register.ts calls: ${calls}\n${surfaces && `  ❯ ./register.ts surface modules: ${surfaces}`}\n✔ Validation passed`)
+  const cut = read('session.start, ui.render{component=Pane, r… [+281 chars]', '$.http.fetch (via first, second), $.ui.clos… [+250 chars]')
+  assert.equal(cut.status, 'passed')
+  assert.deepEqual(cut.modules[0].hooks, [{ event: 'session.start', matcher: {} }])
+  assert.deepEqual(cut.modules[0].calls, ['$.http.fetch'])
+  assert.equal(footprintStatus(cut, ['./register.ts']).status, 'unavailable')
+  assert.equal(grade(cut.modules[0].calls, false).level, null)
+  assert.equal(grade(cut.modules[0].calls, false).minimumLevel, 3)
+  for (const r of [
+    read('session.st… [+1 char]', 'nothing on $'),
+    read('session.start', '$.ui.log (via first, seco… [+20 chars]'),
+    read('session.start', '$.http.fetch, $.ui.clos... [+250 chars]'),
+    read('session.start', 'nothing on $', 'hooks/a.tsx, hooks/par… [+10 chars]'),
+  ]) {
+    assert.equal(footprintStatus(r, ['./register.ts']).status, 'unavailable')
+    assert.ok(!JSON.stringify(r.modules[0].hooks).includes('chars'))
+  }
+  assert.deepEqual(read('session.start', '$.ui.log (via first, seco… [+20 chars]').modules[0].calls, [])
+  assert.deepEqual(read('session.start', 'nothing on $', 'hooks/a.tsx, hooks/par… [+10 chars]').modules[0].surfaceModules, ['hooks/a.tsx'])
+  const mixed = parseValidateOutput(SAMPLE + '  ❯ ./b.ts hooks: nothing\n  ❯ ./b.ts calls: $.fs.wri… [+2 chars]')
+  assert.equal(footprintStatus(mixed, ['./register.tsx', './b.ts']).status, 'unavailable')
+})
+
+test('embedded character-count markers discard the affected matcher before parsing it', () => {
+  for (const suffix of ['', ', ui.render{component=Pane, r… [+248 chars]']) {
+    const parsed = parseValidateOutput(`  ❯ ./register.ts hooks: session.start, command.run{command=status}, tool.call{tool=/"^mcp__(?:service|[0-9a-fA-F]{8})__"[+47 chars]/}, session.end${suffix}\n  ❯ ./register.ts calls: $.http.fetch\n✔ Validation passed`)
+    assert.equal(parsed.status, 'passed')
+    assert.deepEqual(parsed.modules[0].hooks, [
+      { event: 'session.start', matcher: {} },
+      { event: 'command.run', matcher: { command: 'status' } },
+    ])
+    assert.deepEqual(footprintStatus(parsed, ['./register.ts']), { status: 'unavailable', reason: 'Validator output was truncated' })
+    assert.deepEqual(parsed.modules[0].calls, ['$.http.fetch'])
+  }
 })
 
 test('failed validation carries the error line', () => {
@@ -90,7 +167,7 @@ test('a new mod, a footprint change, a validate flip and a version bump are chan
   assert.notEqual(fingerprint(base), fingerprint(after))
   assert.deepEqual(describeChange(base, after), ['Claude Code 2.1.272 to 2.1.280', 'new: e/f:.', 'a/b:.: reach L0 to L3'])
   const broken = clone(); broken.mods[0].validate.status = 'failed'
-  assert.deepEqual(describeChange(base, broken), ['a/b:.: validate passed to failed'])
+  assert.deepEqual(describeChange(base, broken), ['a/b:.: validate passed to failed', 'a/b:.: reach L0 to unknown'])
 })
 
 test('a listed duplicate collapses onto its successor; an unlisted same-owner same-name pair is only flagged', () => {
@@ -112,6 +189,26 @@ test('a listed duplicate collapses onto its successor; an unlisted same-owner sa
   assert.deepEqual(listed[0], ['galElmalah/claude-queue-plugin:.', 'galElmalah/claude-mods:claude-queue'])
   for (const pair of listed) assert.ok(pair.length === 2 && pair.every(id => /^[\w.-]+\/[\w.-]+:\S+$/.test(id)) && pair[0] !== pair[1], pair.join(' '))
   assert.deepEqual([...readDuplicates('data/no-such-file.txt')], [])
+})
+
+test('a retained duplicate follows an explicit keeper move only when the new keeper is counted', () => {
+  const records = [
+    { id: 'o/repo:.', kind: 'duplicate', duplicateOf: 'o/repo:old' },
+    { id: 'o/repo:old', kind: 'mod' },
+    { id: 'o/repo:new', kind: 'mod' },
+  ]
+  const rules = new Map([['o/repo:.', 'o/repo:new'], ['o/repo:old', 'o/repo:new']])
+  const retained = reconcile(records.map(m => ({ ...m, repo: 'o/repo', validate: { status: 'passed', claudeVersion: '1' } })), [], new Map()).mods
+  const result = applyDuplicates(structuredClone(retained), rules)
+  assert.deepEqual(result.map(m => [m.kind, m.duplicateOf]), [
+    ['duplicate', 'o/repo:new'], ['duplicate', 'o/repo:new'], ['mod', undefined],
+  ])
+  assert.deepEqual(applyDuplicates(structuredClone(result), rules), result)
+  for (const kind of [null, 'fixture', 'catalog', 'duplicate']) {
+    const unavailable = retained.filter(m => m.id !== 'o/repo:new')
+    if (kind) unavailable.push({ id: 'o/repo:new', kind })
+    assert.deepEqual(applyDuplicates(structuredClone(unavailable), rules), unavailable)
+  }
 })
 
 test('only an appended pair between counted mods skips the PR rescan', () => {
@@ -237,7 +334,7 @@ test('kindOf files built-ins, fixtures, mirrors and catalogue copies, and counts
   assert.equal(kindOf('cat/templates', 'components/mods/games/tetris', { name: 'tetris' }, catalogs), 'catalog')
   assert.equal(kindOf('cat/templates', 'tests/fixtures/x', { name: 'x' }, catalogs), 'fixture')
   assert.equal(kindOf('a/b', 'plugins/x', { name: 'x' }, catalogs), 'mod')
-  assert.deepEqual([...readCatalogs('data/catalogs.txt')], ['davila7/claude-code-templates', 'DrishtantKaushal/AwesomeClaudeCodeMods'])
+  assert.deepEqual([...readCatalogs('data/catalogs.txt')], ['Dandeppert/Claude-mods', 'davila7/claude-code-templates', 'DrishtantKaushal/AwesomeClaudeCodeMods', 'hyonnie-t/claude-mods'])
   assert.deepEqual([...readCatalogs('data/no-such-file.txt')], [])
   const after = clone()
   after.mods.push({ ...clone().mods[0], id: 'cat/templates:mods/x', repo: 'cat/templates', kind: 'catalog' })
@@ -247,6 +344,57 @@ test('kindOf files built-ins, fixtures, mirrors and catalogue copies, and counts
 test('fixtures never count', () => {
   const after = clone(); after.mods[1].calls = ['$.http.fetch']
   assert.equal(fingerprint(base), fingerprint(after))
+})
+
+test('development probes stay out while their products and unrelated paths count', () => {
+  const probes = [
+    ['capibara-html/GuildFlow', 'poc/plugin'],
+    ['danielpg95/modster-hunter', 'spikes/p5-39-desktop-art/mod'],
+    ['kopylow/wobbly-volley', 'prototypes/p1-band'],
+    ['kopylow/wobbly-volley', 'prototypes/p2-client-court'],
+    ['kopylow/wobbly-volley', 'prototypes/p4-key-helper'],
+    ['partalemre/MODZ', 'tools/kit-gallery'],
+  ]
+  for (const [repo, path] of probes) {
+    assert.equal(kindOf(repo, path, {}), 'fixture')
+    assert.equal(kindOf(repo.toUpperCase(), path, {}), 'fixture')
+    assert.equal(kindOf(repo, path + '/nested', {}), 'fixture')
+    assert.equal(kindOf('another/product', path, {}), 'mod')
+    assert.equal(kindOf(repo, path + '-product', {}), 'mod')
+    assert.equal(kindOf(repo, path, {}, new Set(), new Set([`${repo}:${path}`])), 'mod')
+  }
+  assert.equal(kindOf('capibara-html/GuildFlow', 'guildflow', {}), 'mod')
+  assert.equal(kindOf('kopylow/wobbly-volley', '.', {}), 'mod')
+  assert.equal(kindOf('kopylow/wobbly-volley', 'prototypes/new-game', {}), 'mod')
+  assert.equal(kindOf('fran343/claude-mods', 'pruebas-e2e', {}), 'mod')
+  assert.equal(kindOf('danielpg95/modster-hunter', 'modster-hunter', {}), 'mod')
+  assert.equal(kindOf('danielpg95/modster-hunter', 'spikes/finished-game', {}), 'mod')
+  assert.equal(kindOf('partalemre/MODZ', 'mods/filetree', {}), 'mod')
+  assert.equal(kindOf('partalemre/MODZ', 'tools/new-product', {}), 'mod')
+})
+
+test('field experiments stay out while finished guards and unrelated repositories count', () => {
+  const repo = 'RobGruhl/claude-mod-learnings'
+  const paths = [
+    'experiments/claude-lookalike', 'experiments/e1-fail-open', 'experiments/e2-order',
+    'experiments/e3-moves', 'experiments/e4-alias', 'experiments/e4-computed',
+    'experiments/e4-destructure', 'experiments/e4-dynamic-import', 'experiments/e4-pass-arrow',
+    'experiments/e4-static-ok', 'experiments/e5-after-next', 'experiments/e6-mention',
+    'experiments/e7-twice', 'experiments/e7-twice-matcher', 'experiments/latency',
+    'experiments/live-probe',
+  ]
+  for (const path of paths) {
+    assert.equal(kindOf(repo, path, {}), 'fixture', path)
+    assert.equal(kindOf('another/claude-mod-learnings', path, {}), 'mod', path)
+  }
+  for (const path of ['experiments/cascade-guard', 'tutorial/.reference/skeleton-guard', 'experiments/e10-product', 'experiments/latency-meter', 'plugins/live-probe']) {
+    assert.equal(kindOf(repo, path, {}), 'mod', path)
+  }
+  assert.equal(kindOf(repo.toLowerCase(), paths[0], {}), 'fixture')
+  assert.equal(kindOf(repo, paths[0] + '/nested', {}), 'fixture')
+  const exceptions = new Set([`${repo}:${paths[0]}`])
+  assert.equal(kindOf(repo, paths[0], {}, new Set(), exceptions), 'mod')
+  assert.equal(kindOf(repo, paths[0], { description: 'A test fixture.' }, new Set(), exceptions), 'fixture')
 })
 
 test('course exercises stay out while finished mods and unrelated repositories count', () => {
@@ -268,6 +416,117 @@ test('course exercises stay out while finished mods and unrelated repositories c
   const exceptions = new Set([`kurushiba/claude-mods:${paths[0]}`])
   assert.equal(kindOf('kurushiba/claude-mods', paths[0], {}, new Set(), exceptions), 'mod')
   assert.equal(kindOf('kurushiba/claude-mods', paths[0], { description: 'A test fixture.' }, new Set(), exceptions), 'fixture')
+})
+
+test('qualification helpers stay out while the product and unrelated repositories count', () => {
+  const repo = 'milocosmopolitan/redacton'
+  const paths = ['authority-companion', 'config-race-companion', 'helper-counter', 'race-companion', 'ui-companion'].map(name => `qualification/${name}`)
+  for (const path of paths) {
+    assert.equal(kindOf(repo, path, {}), 'fixture', path)
+    assert.equal(kindOf('another/redacton', path, {}), 'mod', path)
+  }
+  for (const path of ['.', 'plugins/redacton', 'qualification-dashboard']) {
+    assert.equal(kindOf(repo, path, {}), 'mod', path)
+  }
+  assert.equal(kindOf('Milocosmopolitan/Redacton', paths[0], {}), 'fixture')
+  const exceptions = new Set([`${repo}:${paths[0]}`])
+  assert.equal(kindOf(repo, paths[0], {}, new Set(), exceptions), 'mod')
+  assert.equal(kindOf(repo, paths[0], { description: 'Not a plugin to install.' }, new Set(), exceptions), 'fixture')
+})
+
+test('Transceiver measurement probe stays out while its product and unrelated paths count', () => {
+  const repo = 'partalemre/transceiver', path = 'spike/tx-probe'
+  assert.equal(kindOf(repo, path, {}), 'fixture')
+  assert.equal(kindOf('PartalEmre/Transceiver', path, {}), 'fixture')
+  assert.equal(kindOf(repo, `${path}/nested`, {}), 'fixture')
+  for (const other of ['.', 'spike/tx-probe-extra', 'spike/product']) assert.equal(kindOf(repo, other, {}), 'mod')
+  assert.equal(kindOf('other/transceiver', path, {}), 'mod')
+  assert.equal(kindOf(repo, path, {}, new Set(), new Set([`${repo}:${path}`])), 'mod')
+})
+
+test('account-rotator recording harness and jet-router eval probe stay out while their products count', () => {
+  const cases = [['ivokund/claude-account-rotator', 'demo/harness', ['.', 'demo', 'demo/harness-extra']], ['jetsongdev/jet-router', 'eval/cache-measure/b1/effort-probe', ['.', 'eval', 'eval/cache-measure-extra']]]
+  for (const [repo, path, others] of cases) {
+    assert.equal(kindOf(repo, path, {}), 'fixture', path)
+    assert.equal(kindOf(repo.toUpperCase(), path, {}), 'fixture', path)
+    assert.equal(kindOf(repo, `${path}/nested`, {}), 'fixture', path)
+    for (const other of others) assert.equal(kindOf(repo, other, {}), 'mod', other)
+    assert.equal(kindOf(`other/${repo.split('/')[1]}`, path, {}), 'mod', path)
+    assert.equal(kindOf(repo, path, {}, new Set(), new Set([`${repo}:${path}`])), 'mod', path)
+  }
+})
+
+test('Foreman development probes stay out while its product and unrelated paths count', () => {
+  const repo = 'andrey342/foreman'
+  for (const path of ['spike/mod', 'spike/v02', 'spike/mod/nested']) {
+    assert.equal(kindOf(repo, path, {}), 'fixture', path)
+    assert.equal(kindOf('Andrey342/Foreman', path, {}), 'fixture', path)
+    assert.equal(kindOf('another/foreman', path, {}), 'mod', path)
+  }
+  for (const path of ['.', 'plugins/foreman', 'spike/model', 'spike/v020', 'spike/other']) {
+    assert.equal(kindOf(repo, path, {}), 'mod', path)
+  }
+  const exceptions = new Set([`${repo}:spike/mod`])
+  assert.equal(kindOf(repo, 'spike/mod', {}, new Set(), exceptions), 'mod')
+  assert.equal(kindOf(repo, 'spike/mod', { description: 'A test fixture.' }, new Set(), exceptions), 'fixture')
+})
+
+test('Ostrakon development plugins stay out without excluding its installable plugin', () => {
+  const repo = 'gaius-codius/ostrakon'
+  const paths = ['tools/experiments/spc', 'tools/experiments/spw', 'tools/experiments/spx', 'tools/experiments/spx0', 'tools/gallery', 'tools/mockups']
+  for (const path of paths) {
+    assert.equal(kindOf(repo, path, {}), 'fixture', path)
+    assert.equal(kindOf('Gaius-Codius/Ostrakon', path, {}), 'fixture', path)
+    assert.equal(kindOf('another/ostrakon', path, {}), 'mod', path)
+  }
+  for (const path of ['plugin', 'tools/gallery-mod', 'tools/mockups-live', 'tools/experiments/spx01', 'tools/experiments/other']) {
+    assert.equal(kindOf(repo, path, {}), 'mod', path)
+  }
+  const exceptions = new Set([`${repo}:tools/gallery`])
+  assert.equal(kindOf(repo, 'tools/gallery', {}, new Set(), exceptions), 'mod')
+  assert.equal(kindOf(repo, 'tools/gallery', { description: 'A test fixture.' }, new Set(), exceptions), 'fixture')
+})
+
+test('the dispatch replay harness does not count as a shipped mod', () => {
+  const repo = 'cdeust/claude-mods'
+  assert.equal(kindOf(repo, 'scripts/replay-dispatch', {}), 'fixture')
+  assert.equal(kindOf(repo, 'scripts/replay-dispatch/probe', {}), 'fixture')
+  assert.equal(kindOf('Cdeust/Claude-Mods', 'scripts/replay-dispatch', {}), 'fixture')
+  for (const path of ['scripts/replay-dispatcher', 'mods/zetetic-autopilot', 'mods/replay-dispatch']) {
+    assert.equal(kindOf(repo, path, {}), 'mod', path)
+  }
+  assert.equal(kindOf('another/claude-mods', 'scripts/replay-dispatch', {}), 'mod')
+  const exceptions = new Set([`${repo}:scripts/replay-dispatch`])
+  assert.equal(kindOf(repo, 'scripts/replay-dispatch', {}, new Set(), exceptions), 'mod')
+})
+
+test('the transcript layout spike stays out without excluding the reply mod', () => {
+  const repo = 'Malkiz/claude-reply-comments'
+  for (const path of ['spikes/transcript-layouts', 'spikes/transcript-layouts/probe']) {
+    assert.equal(kindOf(repo, path, {}), 'fixture', path)
+    assert.equal(kindOf(repo.toLowerCase(), path, {}), 'fixture', path)
+  }
+  for (const path of ['.', 'spikes/transcript-layouts-live', 'spikes/other']) {
+    assert.equal(kindOf(repo, path, {}), 'mod', path)
+  }
+  assert.equal(kindOf('another/claude-reply-comments', 'spikes/transcript-layouts', {}), 'mod')
+  const exceptions = new Set([`${repo}:spikes/transcript-layouts`])
+  assert.equal(kindOf(repo, 'spikes/transcript-layouts', {}, new Set(), exceptions), 'mod')
+})
+
+test('acceptance drivers and uninstalled hook sources do not count as separate mods', () => {
+  for (const [repo, path, product] of [
+    ['CyclopsEyeTeam/cyclops-fresheye', 'acceptance/driver', '.'],
+    ['ninondev/cc-coco', 'source', 'plugin'],
+    ['ninondev/claude-sama', 'source', 'plugin'],
+  ]) {
+    assert.equal(kindOf(repo, path, {}), 'fixture')
+    assert.equal(kindOf(repo.toLowerCase(), `${path}/hooks`, {}), 'fixture')
+    assert.equal(kindOf(repo, product, {}), 'mod')
+    assert.equal(kindOf(repo, `${path}-tools`, {}), 'mod')
+    assert.equal(kindOf('other/repo', path, {}), 'mod')
+    assert.equal(kindOf(repo, path, {}, new Set(), new Set([`${repo}:${path}`])), 'mod')
+  }
 })
 
 test('benchmark fixtures stay out without excluding usable evaluation mods', () => {
@@ -349,4 +608,64 @@ test('the change check reads a committed scan larger than the default output buf
   assert.equal(run.stdout.trim(), 'no meaningful change')
   const broken = spawnSync(process.execPath, [fileURLToPath(new URL('./changed.mjs', import.meta.url)), join(root, 'missing.json')], { cwd: root, encoding: 'utf8' })
   assert.equal(broken.status, 2)
+})
+
+test('confirmed November moves and copies count their keeper only while it exists', () => {
+  const pairs = [
+    ['NahumLitvin/prismantis:.', 'NahumLitvin/prismantis:plugin'],
+    ['LupusMalusDeviant/desktop-pet:plugins/pet', 'LupusMalusDeviant/mod-box:plugins/pet'],
+    ['MichaelDaenzer/claude-mod-session-stats:.', 'MichaelDaenzer/claude-mod-usage-band:session-summary'],
+    ['hex/claude-sessions:mods/cs-feed', 'hex/claude-sessions:mods/cs-filter-chat'],
+    ['111vandit111/ai-dev-team:plugins/ai-dev-team', '111vandit111/ai-dev-team:plugins/ai-dev-team-office'],
+    ['mmacedok/claude-mods:plugins/medidor', 'mmacedok/claude-mods:plugins/funmeter'],
+    ['t968rs/operator-straps:plugins/pr-review-watch', 't968rs/operator-straps:plugins/agent-watcher'],
+    ['anderson-spider/claude-mods:plugins/chatgpt', 'anderson-spider/claude-mods:plugins/codex'],
+    ['anderson-spider/claude-mods:plugins/codex-computer-use', 'anderson-spider/claude-mods:plugins/codex'],
+  ]
+  const list = readDuplicates('data/duplicates.txt')
+  for (const [copy, keeper] of pairs) {
+    assert.equal(list.get(copy), keeper, copy)
+    const mods = [{ id: copy, kind: 'mod' }, { id: keeper, kind: 'mod' }]
+    const result = applyDuplicates(mods, list)
+    assert.equal(result[0].kind, 'duplicate', copy)
+    assert.equal(result[0].duplicateOf, keeper, copy)
+    assert.equal(result[1].kind, 'mod', keeper)
+    for (const kind of [null, 'fixture', 'catalog', 'duplicate']) {
+      const unavailable = [{ id: copy, kind: 'mod' }]
+      if (kind) unavailable.push({ id: keeper, kind })
+      assert.equal(applyDuplicates(unavailable, list)[0].kind, 'mod', `${copy}: ${kind}`)
+    }
+  }
+})
+
+test('the crew API spike stays out without excluding installable mods or unrelated spikes', () => {
+  const repo = 'PeterTing/claude-mod'
+  for (const path of ['spikes/crew', 'spikes/crew/nested']) {
+    assert.equal(kindOf(repo, path, {}), 'fixture', path)
+    assert.equal(kindOf(repo.toLowerCase(), path, {}), 'fixture', path)
+  }
+  for (const path of ['.', 'mods/crew', 'mods/zh-reply', 'plugins/crew', 'spikes/crew-live', 'spikes/other']) {
+    assert.equal(kindOf(repo, path, {}), 'mod', path)
+  }
+  assert.equal(kindOf('other/claude-mod', 'spikes/crew', {}), 'mod')
+  assert.equal(kindOf(repo, 'spikes/crew', {}, new Set(), new Set([`${repo}:spikes/crew`])), 'mod')
+})
+
+test('retained Anderson plugins resolve to Codex after repository discovery follows its rename', () => {
+  const oldRepo = 'anderson-spider/claude-mods'
+  const currentRepo = 'anderson-spider/spider-claude-mods'
+  const at = (repo, path, sourceCommit = 'b89e552c3bdc8a4935a472dfe66a5c3b52c3c063') => ({ id: `${repo}:${path}`, repo, path, kind: 'mod', sourceCommit })
+  const copies = ['plugins/chatgpt', 'plugins/codex-computer-use'].map(path => at(oldRepo, path, '392293a851aedd46627aed506a2ddd6dfb3fd8a9'))
+  const oldKeeper = at(oldRepo, 'plugins/codex')
+  const keeper = at(currentRepo, 'plugins/codex')
+  const mods = [...copies, oldKeeper, keeper]
+  const renames = renamePairs(mods, new Map([[oldRepo, currentRepo]]), new Set([oldKeeper.id, keeper.id]))
+  applyDuplicatesWithRenames(mods, readDuplicates('data/duplicates.txt'), renames)
+  assert.equal(renames.get(oldKeeper.id), keeper.id)
+  for (const copy of [...copies, oldKeeper]) {
+    assert.equal(copy.kind, 'duplicate', copy.id)
+    assert.equal(copy.duplicateOf, keeper.id, copy.id)
+  }
+  assert.equal(keeper.kind, 'mod')
+  assert.equal(mods.filter(mod => mod.kind === 'mod').length, 1)
 })

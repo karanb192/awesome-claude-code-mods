@@ -6,9 +6,26 @@
 import { readFileSync } from 'node:fs'
 
 const NOT_A_MOD = [/\/tests?\//, /\/fixtures?\//, /\/probes?\//, /\/examples?\//, /\/upstreams?\//, /\/docs?\//, /\/templates?\//, /\/canary\//, /\/bench(?:marks?)?\//, /\/stubs?\//]
-// This course keeps exercises and deliberate failures outside conventional fixture folders; final/ contains finished mods.
-const COURSE_FIXTURES = new Map([
+// These repositories keep test material outside conventional fixture folders alongside installable mods.
+const REPO_FIXTURES = new Map([
+  ['andrey342/foreman', /^spike\/(?:mod|v02)(?:\/|$)/],
+  ['capibara-html/guildflow', /^poc\/plugin(?:\/|$)/],
+  ['cdeust/claude-mods', /^scripts\/replay-dispatch(?:\/|$)/],
+  ['cyclopseyeteam/cyclops-fresheye', /^acceptance\/driver(?:\/|$)/],
+  ['danielpg95/modster-hunter', /^spikes\/p5-39-desktop-art\/mod(?:\/|$)/],
+  ['gaius-codius/ostrakon', /^tools\/(?:experiments\/(?:spc|spw|spx|spx0)|gallery|mockups)(?:\/|$)/],
+  ['ivokund/claude-account-rotator', /^demo\/harness(?:\/|$)/],
+  ['jetsongdev/jet-router', /^eval\/cache-measure(?:\/|$)/],
+  ['kopylow/wobbly-volley', /^prototypes\/(?:p1-band|p2-client-court|p4-key-helper)(?:\/|$)/],
   ['kurushiba/claude-mods', /^(?:02-first-mod\/broken|03-events|04-test-pilot|05-ui\/broken|08-testing\/errors|09-distribution)(?:\/|$)/],
+  ['malkiz/claude-reply-comments', /^spikes\/transcript-layouts(?:\/|$)/],
+  ['milocosmopolitan/redacton', /^qualification(?:\/|$)/],
+  ['ninondev/cc-coco', /^source(?:\/|$)/],
+  ['ninondev/claude-sama', /^source(?:\/|$)/],
+  ['partalemre/modz', /^tools\/kit-gallery(?:\/|$)/],
+  ['partalemre/transceiver', /^spike\/tx-probe(?:\/|$)/],
+  ['peterting/claude-mod', /^spikes\/crew(?:\/|$)/],
+  ['robgruhl/claude-mod-learnings', /^experiments\/(?:e[1-7]-[^/]+|claude-lookalike|latency|live-probe)(?:\/|$)/],
 ])
 
 const readList = path => {
@@ -20,7 +37,7 @@ export const readFixtureExceptions = (path = 'data/fixture-exceptions.txt') => r
 
 export function kindOf(repo, rel, manifest, catalogs = new Set(), exceptions = new Set()) {
   if (repo === 'anthropics/claude-code') return 'builtin'
-  if (!exceptions.has(`${repo}:${rel}`) && (NOT_A_MOD.some(re => re.test('/' + rel + '/')) || COURSE_FIXTURES.get(repo.toLowerCase())?.test(rel))) return 'fixture'
+  if (!exceptions.has(`${repo}:${rel}`) && (NOT_A_MOD.some(re => re.test('/' + rel + '/')) || REPO_FIXTURES.get(repo.toLowerCase())?.test(rel))) return 'fixture'
   if (/not a product mod|not a (?:plugin|mod) to install|not an? installable plugin|measurement instrument|test fixture|^\s*(?:for )?development only\b/i.test(manifest?.description ?? '')) return 'fixture'
   if (catalogs.has(repo)) return 'catalog'
   if (/\/mods\/(diff|sec-default|telemetry)$/.test('/' + rel) || ['diff', 'sec-default', 'telemetry'].includes(manifest?.name) && rel.includes('mods/')) return 'mirror'

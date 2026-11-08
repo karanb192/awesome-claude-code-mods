@@ -1,10 +1,8 @@
 #!/usr/bin/env node
-// MCP server for the mods catalogue over stdio: newline-delimited JSON-RPC, no dependencies, so the plugin
-// works straight from a git checkout without an install step. search_mods and get_mod are thin wrappers
-// over search.mjs and return exactly what find-mods.mjs prints.
 
 import { readFileSync } from 'node:fs'
 import { createInterface } from 'node:readline'
+import { serveHttp } from './http.mjs'
 import { loadSnapshot, buildIndex, search, getMod, InputError, ACCESS, SEES, MAX_LIMIT, REFRESH_AFTER_MS } from './search.mjs'
 
 const { version } = JSON.parse(readFileSync(new URL('./.claude-plugin/plugin.json', import.meta.url), 'utf8'))
@@ -23,9 +21,9 @@ const TOOLS = [
       properties: {
         query: { type: 'string', description: 'What the mod should do, in plain words: "code review", "prompt cache meter", "sound when a turn ends". Leave empty to list by repository stars.' },
         without: { type: 'array', items: { type: 'string', enum: [...ACCESS, ...SEES] }, description: 'Leave out mods with any of this access, or that see these events.' },
-        max_reach: { type: 'integer', enum: [0, 1, 2, 3], description: 'Leave out mods above this level: 0 draws and remembers, 1 reads, 2 writes or runs, 3 network.' },
+        max_reach: { type: 'integer', enum: [0, 1, 2, 3], description: 'Leave out mods above this level: 0 draws and remembers, 1 reads, 2 writes or runs, 3 network. Any limit excludes unavailable footprints unless include_unverified is true; known lower bounds still apply.' },
         verified_only: { type: 'boolean', description: 'Only mods that pass validation on the scanned Claude Code version.' },
-        include_unverified: { type: 'boolean', description: 'Let filters keep the mods they cannot vouch for: validation did not pass, calls the scan could not classify, or tool hooks with dynamic matchers. They may do more than their labels say.' },
+        include_unverified: { type: 'boolean', description: 'Let filters keep the mods they cannot vouch for: unavailable footprints, validation did not pass, calls the scan could not classify, or tool hooks with dynamic matchers. Known access labels and lower bounds still apply. They may do more than their labels say.' },
         in_anthropic_directory: { type: 'boolean', description: "Only mods that Anthropic's plugin directory installs." },
         repo: { type: 'string', description: 'Only mods from this GitHub repository, as owner/repo.' },
         limit: { type: 'integer', minimum: 1, maximum: MAX_LIMIT, description: 'Results per page, default 8.' },
@@ -107,7 +105,13 @@ async function handle(message) {
 
 const send = message => process.stdout.write(JSON.stringify({ jsonrpc: '2.0', ...message }) + '\n')
 
-createInterface({ input: process.stdin, crlfDelay: Infinity }).on('line', async line => {
+if (process.argv.length > 2 && (process.argv.length !== 3 || process.argv[2] !== '--http')) {
+  throw new Error('Usage: node server.mjs [--http]')
+}
+
+if (process.argv[2] === '--http') {
+  serveHttp(handle, PROTOCOLS)
+} else createInterface({ input: process.stdin, crlfDelay: Infinity }).on('line', async line => {
   if (!line.trim()) return
   let message
   try { message = JSON.parse(line) } catch { return send({ id: null, error: { code: -32700, message: 'parse error' } }) }
