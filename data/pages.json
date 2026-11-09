@@ -103,6 +103,7 @@
   "AbyssCN--claude-lead-harness--prompt-guard": {"id":"AbyssCN/claude-lead-harness:mods/prompt-guard"},
   "AbyssCN--claude-lead-harness--relay": {"id":"AbyssCN/claude-lead-harness:mods/relay"},
   "AbyssCN--claude-lead-harness--savvy-progress": {"id":"AbyssCN/claude-lead-harness:mods/savvy-progress"},
+  "Actera-AI--actera-claude-code--actera": {"id":"Actera-AI/actera-claude-code:plugins/actera"},
   "Adalink-ai--ada-mods--adaflow-governance": {"id":"Adalink-ai/ada-mods:adaflow-governance"},
   "Adalink-ai--ada-mods--adaflow-guard": {"id":"Adalink-ai/ada-mods:adaflow-guard"},
   "Adalink-ai--ada-mods--model-router": {"id":"Adalink-ai/ada-mods:model-router"},

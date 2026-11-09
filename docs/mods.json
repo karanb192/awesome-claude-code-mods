@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-09T06:54:13.743Z",
   "claudeVersion": "2.1.319",
-  "repos": 3757,
+  "repos": 3758,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -949676,6 +949676,72 @@
       "pushedAt": "2026-11-08T22:29:10Z",
       "createdAt": "2026-11-02T16:54:03Z",
       "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "Actera-AI/actera-claude-code:plugins/actera",
+      "repo": "Actera-AI/actera-claude-code",
+      "path": "plugins/actera",
+      "sourceCommit": "a321c3b59c30a3243f6a32672c639f8408cc8471",
+      "name": "actera",
+      "description": "Check every Claude Code tool call against your Actera policies, hold risky calls for approval, and record what happened",
+      "author": "Actera",
+      "homepage": "https://github.com/Actera-AI/actera-claude-code",
+      "url": "https://github.com/Actera-AI/actera-claude-code/tree/main/plugins/actera",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.js"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "tool.call",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.process.run",
+        "$.ui.ask"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "actera",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-06T23:02:36Z",
+      "createdAt": "2026-10-22T10:37:16Z",
+      "license": "Apache-2.0",
       "archived": false,
       "defaultBranch": "main",
       "directory": null
