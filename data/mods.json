@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-09T06:54:13.743Z",
   "claudeVersion": "2.1.319",
-  "repos": 3764,
+  "repos": 3765,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -950473,6 +950473,117 @@
       "pushedAt": "2026-10-29T03:43:57Z",
       "createdAt": "2026-10-23T20:02:34Z",
       "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "JoxoAI/joxo:plugins/joxo",
+      "repo": "JoxoAI/joxo",
+      "path": "plugins/joxo",
+      "sourceCommit": "09109b0805eff20c176596728bbf93c0e5736b62",
+      "name": "joxo",
+      "description": "Joxo for Claude Code: the setup skill, a live channel for teammates' messages and handoffs, and a mod that shows your team's work as it happens.",
+      "author": "Joxo",
+      "homepage": "https://joxo.ai",
+      "url": "https://github.com/JoxoAI/joxo/tree/main/plugins/joxo",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "team"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "joxo"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.now",
+        "$.command.register",
+        "$.mcp.call",
+        "$.session.cwd",
+        "$.session.surfaces",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.close",
+        "$.ui.copy",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "joxo",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "MCP servers",
+          "writes the clipboard",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt"
+      ],
+      "draws": [
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 57,
+      "pushedAt": "2026-11-08T13:47:34Z",
+      "createdAt": "2026-09-16T10:21:00Z",
+      "license": "NOASSERTION",
       "archived": false,
       "defaultBranch": "main",
       "directory": null

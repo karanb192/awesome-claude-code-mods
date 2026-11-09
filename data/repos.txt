@@ -1663,6 +1663,7 @@ joshhornby/dotfiles
 joshkerr/claude-mods
 joshuatonga/mini-claude-mods
 Jovan1666/claude-code-runway
+JoxoAI/joxo
 Joxtacy/claude-code-mods
 JoyceGu/apple-tree-mod
 joydeep-pm/agent-theater
