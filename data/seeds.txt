@@ -107,6 +107,12 @@ moduvoice/claude-code-ko-ui
 MohammedSaud404/rtl-terminal
 mralexivy/AutoMode
 MrMirhan/claude-buddy-chat
+mucida-claude-mods/faixa-de-terreno
+mucida-claude-mods/indicador-de-contexto
+mucida-claude-mods/novo-chat-ou-aqui
+mucida-claude-mods/pendencias
+mucida-claude-mods/telinha-mcp
+mucida-claude-mods/warm-me
 Mucida/critical-decisions
 muellerei/diff-fold
 muellerei/enable-todo-tools
