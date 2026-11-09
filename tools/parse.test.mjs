@@ -334,7 +334,7 @@ test('kindOf files built-ins, fixtures, mirrors and catalogue copies, and counts
   assert.equal(kindOf('cat/templates', 'components/mods/games/tetris', { name: 'tetris' }, catalogs), 'catalog')
   assert.equal(kindOf('cat/templates', 'tests/fixtures/x', { name: 'x' }, catalogs), 'fixture')
   assert.equal(kindOf('a/b', 'plugins/x', { name: 'x' }, catalogs), 'mod')
-  assert.deepEqual([...readCatalogs('data/catalogs.txt')], ['Dandeppert/Claude-mods', 'davila7/claude-code-templates', 'DrishtantKaushal/AwesomeClaudeCodeMods'])
+  assert.deepEqual([...readCatalogs('data/catalogs.txt')], ['Dandeppert/Claude-mods', 'davila7/claude-code-templates', 'DrishtantKaushal/AwesomeClaudeCodeMods', 'hyonnie-t/claude-mods'])
   assert.deepEqual([...readCatalogs('data/no-such-file.txt')], [])
   const after = clone()
   after.mods.push({ ...clone().mods[0], id: 'cat/templates:mods/x', repo: 'cat/templates', kind: 'catalog' })
@@ -344,6 +344,56 @@ test('kindOf files built-ins, fixtures, mirrors and catalogue copies, and counts
 test('fixtures never count', () => {
   const after = clone(); after.mods[1].calls = ['$.http.fetch']
   assert.equal(fingerprint(base), fingerprint(after))
+})
+
+// Internal plugins at beasaltfish/idle-arcade@728bef3ad14714aefd0e0c8baadc2456aeb7a8f6.
+for (const [name, description] of [
+  ['_probe', 'Throwaway linkage probe: shows in a pane what events reach a plugin. Open it with /probe.'],
+  ['_shared-tests', 'Test host for shared/ code: carries the bundled copy so the shared tests run under claude plugin test. Not published.'],
+]) {
+  test(`idle-arcade ${name} is test material, scoped to its repository and directory`, () => {
+    const repo = 'beasaltfish/idle-arcade', path = `plugins/${name}`, manifest = { name, description }
+    assert.equal(kindOf(repo, path, manifest), 'fixture')
+    assert.equal(kindOf(repo, path, {}), 'fixture', 'the path rule does not depend on description wording')
+    assert.equal(kindOf(repo.toUpperCase(), path, manifest), 'fixture')
+    assert.equal(kindOf(repo, `${path}/nested`, {}), 'fixture')
+    assert.equal(kindOf(repo, `${path}-product`, {}), 'mod')
+    assert.equal(kindOf('another/idle-arcade', path, {}), 'mod')
+    assert.equal(kindOf(repo, path, manifest, new Set(), new Set([`${repo}:${path}`])), 'mod')
+  })
+}
+
+test('idle-arcade keeps all seven marketplace mods and unrelated private-looking names', () => {
+  for (const name of ['idle-arcade', 'fish-shooter', 'brick-breaker', 'snake', 'space-shooter', 'tap-flyer', 'jump-runner', '_new-game']) {
+    assert.equal(kindOf('beasaltfish/idle-arcade', `plugins/${name}`, { name }), 'mod', name)
+  }
+})
+
+test('development probes stay out while their products and unrelated paths count', () => {
+  const probes = [
+    ['capibara-html/GuildFlow', 'poc/plugin'],
+    ['danielpg95/modster-hunter', 'spikes/p5-39-desktop-art/mod'],
+    ['kopylow/wobbly-volley', 'prototypes/p1-band'],
+    ['kopylow/wobbly-volley', 'prototypes/p2-client-court'],
+    ['kopylow/wobbly-volley', 'prototypes/p4-key-helper'],
+    ['partalemre/MODZ', 'tools/kit-gallery'],
+  ]
+  for (const [repo, path] of probes) {
+    assert.equal(kindOf(repo, path, {}), 'fixture')
+    assert.equal(kindOf(repo.toUpperCase(), path, {}), 'fixture')
+    assert.equal(kindOf(repo, path + '/nested', {}), 'fixture')
+    assert.equal(kindOf('another/product', path, {}), 'mod')
+    assert.equal(kindOf(repo, path + '-product', {}), 'mod')
+    assert.equal(kindOf(repo, path, {}, new Set(), new Set([`${repo}:${path}`])), 'mod')
+  }
+  assert.equal(kindOf('capibara-html/GuildFlow', 'guildflow', {}), 'mod')
+  assert.equal(kindOf('kopylow/wobbly-volley', '.', {}), 'mod')
+  assert.equal(kindOf('kopylow/wobbly-volley', 'prototypes/new-game', {}), 'mod')
+  assert.equal(kindOf('fran343/claude-mods', 'pruebas-e2e', {}), 'mod')
+  assert.equal(kindOf('danielpg95/modster-hunter', 'modster-hunter', {}), 'mod')
+  assert.equal(kindOf('danielpg95/modster-hunter', 'spikes/finished-game', {}), 'mod')
+  assert.equal(kindOf('partalemre/MODZ', 'mods/filetree', {}), 'mod')
+  assert.equal(kindOf('partalemre/MODZ', 'tools/new-product', {}), 'mod')
 })
 
 test('field experiments stay out while finished guards and unrelated repositories count', () => {
@@ -405,6 +455,28 @@ test('qualification helpers stay out while the product and unrelated repositorie
   const exceptions = new Set([`${repo}:${paths[0]}`])
   assert.equal(kindOf(repo, paths[0], {}, new Set(), exceptions), 'mod')
   assert.equal(kindOf(repo, paths[0], { description: 'Not a plugin to install.' }, new Set(), exceptions), 'fixture')
+})
+
+test('Transceiver measurement probe stays out while its product and unrelated paths count', () => {
+  const repo = 'partalemre/transceiver', path = 'spike/tx-probe'
+  assert.equal(kindOf(repo, path, {}), 'fixture')
+  assert.equal(kindOf('PartalEmre/Transceiver', path, {}), 'fixture')
+  assert.equal(kindOf(repo, `${path}/nested`, {}), 'fixture')
+  for (const other of ['.', 'spike/tx-probe-extra', 'spike/product']) assert.equal(kindOf(repo, other, {}), 'mod')
+  assert.equal(kindOf('other/transceiver', path, {}), 'mod')
+  assert.equal(kindOf(repo, path, {}, new Set(), new Set([`${repo}:${path}`])), 'mod')
+})
+
+test('account-rotator recording harness and jet-router eval probe stay out while their products count', () => {
+  const cases = [['ivokund/claude-account-rotator', 'demo/harness', ['.', 'demo', 'demo/harness-extra']], ['jetsongdev/jet-router', 'eval/cache-measure/b1/effort-probe', ['.', 'eval', 'eval/cache-measure-extra']]]
+  for (const [repo, path, others] of cases) {
+    assert.equal(kindOf(repo, path, {}), 'fixture', path)
+    assert.equal(kindOf(repo.toUpperCase(), path, {}), 'fixture', path)
+    assert.equal(kindOf(repo, `${path}/nested`, {}), 'fixture', path)
+    for (const other of others) assert.equal(kindOf(repo, other, {}), 'mod', other)
+    assert.equal(kindOf(`other/${repo.split('/')[1]}`, path, {}), 'mod', path)
+    assert.equal(kindOf(repo, path, {}, new Set(), new Set([`${repo}:${path}`])), 'mod', path)
+  }
 })
 
 test('Foreman development probes stay out while its product and unrelated paths count', () => {
@@ -559,4 +631,133 @@ test('the change check reads a committed scan larger than the default output buf
   assert.equal(run.stdout.trim(), 'no meaningful change')
   const broken = spawnSync(process.execPath, [fileURLToPath(new URL('./changed.mjs', import.meta.url)), join(root, 'missing.json')], { cwd: root, encoding: 'utf8' })
   assert.equal(broken.status, 2)
+})
+
+test('confirmed November moves and copies count their keeper only while it exists', () => {
+  const pairs = [
+    ['NahumLitvin/prismantis:.', 'NahumLitvin/prismantis:plugin'],
+    ['LupusMalusDeviant/desktop-pet:plugins/pet', 'LupusMalusDeviant/mod-box:plugins/pet'],
+    ['MichaelDaenzer/claude-mod-session-stats:.', 'MichaelDaenzer/claude-mod-usage-band:session-summary'],
+    ['hex/claude-sessions:mods/cs-feed', 'hex/claude-sessions:mods/cs-filter-chat'],
+    ['111vandit111/ai-dev-team:plugins/ai-dev-team', '111vandit111/ai-dev-team:plugins/ai-dev-team-office'],
+    ['mmacedok/claude-mods:plugins/medidor', 'mmacedok/claude-mods:plugins/funmeter'],
+    ['t968rs/operator-straps:plugins/pr-review-watch', 't968rs/operator-straps:plugins/agent-watcher'],
+    ['anderson-spider/claude-mods:plugins/chatgpt', 'anderson-spider/claude-mods:plugins/codex'],
+    ['anderson-spider/claude-mods:plugins/codex-computer-use', 'anderson-spider/claude-mods:plugins/codex'],
+  ]
+  const list = readDuplicates('data/duplicates.txt')
+  for (const [copy, keeper] of pairs) {
+    assert.equal(list.get(copy), keeper, copy)
+    const mods = [{ id: copy, kind: 'mod' }, { id: keeper, kind: 'mod' }]
+    const result = applyDuplicates(mods, list)
+    assert.equal(result[0].kind, 'duplicate', copy)
+    assert.equal(result[0].duplicateOf, keeper, copy)
+    assert.equal(result[1].kind, 'mod', keeper)
+    for (const kind of [null, 'fixture', 'catalog', 'duplicate']) {
+      const unavailable = [{ id: copy, kind: 'mod' }]
+      if (kind) unavailable.push({ id: keeper, kind })
+      assert.equal(applyDuplicates(unavailable, list)[0].kind, 'mod', `${copy}: ${kind}`)
+    }
+  }
+})
+
+test('the crew API spike stays out without excluding installable mods or unrelated spikes', () => {
+  const repo = 'PeterTing/claude-mod'
+  for (const path of ['spikes/crew', 'spikes/crew/nested']) {
+    assert.equal(kindOf(repo, path, {}), 'fixture', path)
+    assert.equal(kindOf(repo.toLowerCase(), path, {}), 'fixture', path)
+  }
+  for (const path of ['.', 'mods/crew', 'mods/zh-reply', 'plugins/crew', 'spikes/crew-live', 'spikes/other']) {
+    assert.equal(kindOf(repo, path, {}), 'mod', path)
+  }
+  assert.equal(kindOf('other/claude-mod', 'spikes/crew', {}), 'mod')
+  assert.equal(kindOf(repo, 'spikes/crew', {}, new Set(), new Set([`${repo}:spikes/crew`])), 'mod')
+})
+
+test('retained Anderson plugins resolve to Codex after repository discovery follows its rename', () => {
+  const oldRepo = 'anderson-spider/claude-mods'
+  const currentRepo = 'anderson-spider/spider-claude-mods'
+  const at = (repo, path, sourceCommit = 'b89e552c3bdc8a4935a472dfe66a5c3b52c3c063') => ({ id: `${repo}:${path}`, repo, path, kind: 'mod', sourceCommit })
+  const copies = ['plugins/chatgpt', 'plugins/codex-computer-use'].map(path => at(oldRepo, path, '392293a851aedd46627aed506a2ddd6dfb3fd8a9'))
+  const oldKeeper = at(oldRepo, 'plugins/codex')
+  const keeper = at(currentRepo, 'plugins/codex')
+  const mods = [...copies, oldKeeper, keeper]
+  const renames = renamePairs(mods, new Map([[oldRepo, currentRepo]]), new Set([oldKeeper.id, keeper.id]))
+  applyDuplicatesWithRenames(mods, readDuplicates('data/duplicates.txt'), renames)
+  assert.equal(renames.get(oldKeeper.id), keeper.id)
+  for (const copy of [...copies, oldKeeper]) {
+    assert.equal(copy.kind, 'duplicate', copy.id)
+    assert.equal(copy.duplicateOf, keeper.id, copy.id)
+  }
+  assert.equal(keeper.kind, 'mod')
+  assert.equal(mods.filter(mod => mod.kind === 'mod').length, 1)
+})
+
+test('claudetto release evidence probes are fixtures, not shipped mods', () => {
+  const root = 'openspec/changes/release-2-1-319/evidence/tmp/'
+  const probes = ['probe-141/arm-reorder', 'probe-17-1-lab', 'probe-tui/plug']
+  for (const repo of ['xsyetopz/dotclaude', 'xsyetopz/claudetto', 'XSYETOPZ/Claudetto']) {
+    for (const path of probes) {
+      assert.equal(kindOf(repo, root + path, {}), 'fixture')
+      assert.equal(kindOf(repo, root + path + '/nested', {}), 'fixture')
+      assert.equal(kindOf(repo, root + path + '-released', {}), 'mod')
+      assert.equal(kindOf(repo, root + path, {}, new Set(), new Set([`${repo}:${root + path}`])), 'mod')
+    }
+    for (const path of ['plugins/claudetto', 'plugins/claudetto-openspec', root + 'unrelated']) {
+      assert.equal(kindOf(repo, path, {}), 'mod')
+    }
+  }
+  assert.equal(kindOf('other/repo', root + probes[0], {}), 'mod')
+})
+
+
+test('retirement renames count current keepers and preserve the historical runtime fallback', () => {
+  const pairs = [
+    ['ucsandman/claude-harness:engine/mods/harness-runtime', 'ucsandman/Agnostic-AI:engine/mods/harness-runtime'],
+    ['ucsandman/Agnostic-AI:engine/mods/claude-runtime', 'ucsandman/Agnostic-AI:engine/mods/harness-runtime'],
+    ['DiogoHSM/claude-mods:agentes-pixel', 'DiogoHSM/claude-mods:pixel-agents'],
+    ['DiogoHSM/claude-mods:polimento-visual', 'DiogoHSM/claude-mods:visual-polish'],
+  ]
+  const rules = readDuplicates('data/duplicates.txt')
+  const keepers = [...new Set(pairs.map(([, keeper]) => keeper))]
+  for (const [copy, keeper] of pairs) {
+    assert.equal(rules.get(copy), keeper)
+    assert.equal(rules.has(keeper), false, 'keepers must be terminal, not stale rename chains')
+    for (const kind of [null, 'fixture', 'catalog', 'duplicate', 'builtin']) {
+      const records = [{ id: copy, kind: 'mod' }]
+      if (kind) records.push({ id: keeper, kind })
+      assert.equal(applyDuplicates(records, rules)[0].kind, 'mod')
+    }
+  }
+  const oldCopy = 'ucsandman/claude-harness:engine/mods/claude-runtime'
+  const oldKeeper = 'ucsandman/Agnostic-AI:engine/mods/claude-runtime'
+  assert.equal(rules.get(oldCopy), oldKeeper)
+  const historical = applyDuplicates([oldCopy, oldKeeper].map(id => ({ id, kind: 'mod' })), rules)
+  assert.deepEqual(historical.filter(m => m.kind === 'mod').map(m => m.id), [oldKeeper])
+  const records = [oldCopy, ...pairs.map(([id]) => id), ...keepers].map(id => ({ id, kind: 'mod' }))
+  assert.deepEqual(applyDuplicates(records, rules).filter(m => m.kind === 'mod').map(m => m.id), keepers)
+})
+
+test('confirmed aidan copies count their original keepers without excluding unrelated products', () => {
+  const pairs = [
+    ['aidan-nunn-sys/claude-config:mods/review-watch', 'hamzafer/claude-code-mods:mods/review-watch'],
+    ['aidan-nunn-sys/claude-config:mods/secret-box', 'ray-amjad/claude-code-mods:plugins/secret-box'],
+  ]
+  const rules = readDuplicates('data/duplicates.txt')
+  const unrelated = ['agent-radar', 'blast-radius', 'handoff', 'hud', 'mission-control', 'rulebook', 'tps', 'where-am-i', 'xagent']
+    .map(name => `aidan-nunn-sys/claude-config:mods/${name}`)
+  // A same-named product in another repository is not a confirmed copy.
+  unrelated.push('other/mods:review-watch', 'other/mods:secret-box')
+  for (const [copy, keeper] of pairs) {
+    assert.equal(rules.get(copy), keeper)
+    const result = applyDuplicates([copy, keeper, ...unrelated].map(id => ({ id, kind: 'mod' })), rules)
+    assert.equal(result[0].kind, 'duplicate')
+    assert.equal(result[0].duplicateOf, keeper)
+    assert.deepEqual(result.filter(m => m.kind === 'mod').map(m => m.id), [keeper, ...unrelated])
+    for (const kind of [null, 'fixture', 'catalog', 'duplicate', 'builtin']) {
+      const records = [{ id: copy, kind: 'mod' }]
+      if (kind) records.push({ id: keeper, kind })
+      assert.equal(applyDuplicates(records, rules)[0].kind, 'mod', `${copy}: ${kind}`)
+    }
+  }
 })

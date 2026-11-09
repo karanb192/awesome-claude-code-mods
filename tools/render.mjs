@@ -10,6 +10,7 @@ import { renderSite, renderSitemap, renderRobots, renderLlms, reviewNotes, css, 
 import { renderBrowsePage } from './browse.mjs'
 import { assignPages, formatRegistry, idOf, indexable, readRegistry, renderModPage, renderNotFound, renderRedirect } from './pages.mjs'
 import { siteAnchors } from './slug.mjs'
+import { readDuplicates } from './dedupe.mjs'
 import { ACCESS_PATH, renderAccessPage } from './access.mjs'
 import { TOPICS_PATH, listedMembers, readTopics, renderTopicPage, topicMembers, topicSummary } from './topics.mjs'
 
@@ -101,7 +102,7 @@ updateBlocks('README.md', { stats: `**${mods.length} mods** · Last scanned ${as
 updateBlocks('catalogue.md', { stats, scan: table(mods), builtin: table(builtins) })
 
 const records = [...mods, ...builtins]
-const identity = assignPages(records, readRegistry(existsSync('data/pages.json') ? readFileSync('data/pages.json', 'utf8') : ''), data.mods)
+const identity = assignPages(records, readRegistry(existsSync('data/pages.json') ? readFileSync('data/pages.json', 'utf8') : ''), data.mods, readDuplicates())
 const pageOf = mod => identity.pages.get(mod)
 const byRepo = new Map()
 for (const m of [...records].sort((a, b) => a.name.localeCompare(b.name, 'en') || (idOf(a) < idOf(b) ? -1 : 1))) byRepo.set(m.repo, [...(byRepo.get(m.repo) ?? []), m])
