@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-09T06:54:13.743Z",
   "claudeVersion": "2.1.319",
-  "repos": 3758,
+  "repos": 3764,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -949742,6 +949742,535 @@
       "pushedAt": "2026-11-06T23:02:36Z",
       "createdAt": "2026-10-22T10:37:16Z",
       "license": "Apache-2.0",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "mucida-claude-mods/faixa-de-terreno:.",
+      "repo": "mucida-claude-mods/faixa-de-terreno",
+      "path": ".",
+      "sourceCommit": "6d45b3db8e499cf3741497125056d96aa3dcd919",
+      "name": "faixa-de-terreno",
+      "description": "Band above the prompt with the git branch, the issue number taken from the branch name, dirty files and commits ahead of main; turns red when you edit main directly or work on a branch with no issue number.",
+      "author": "Lucas Mucida",
+      "homepage": "https://github.com/mucida-claude-mods/faixa-de-terreno",
+      "url": "https://github.com/mucida-claude-mods/faixa-de-terreno",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.process.run",
+        "$.ui.invalidate",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "faixa-de-terreno",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-11-08T03:44:21Z",
+      "createdAt": "2026-10-29T03:36:34Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "mucida-claude-mods/indicador-de-contexto:.",
+      "repo": "mucida-claude-mods/indicador-de-contexto",
+      "path": ".",
+      "sourceCommit": "f34fc7d5623255f1602720b41c88d0f319f148e7",
+      "name": "indicador-de-contexto",
+      "description": "Watches the chat's context size: shows it from 200k; at 250k asks the model to propose splitting the rest of the work at the next transition point if something big and separable is left; at 400k, to propose a focused /compact, a new chat or carrying on. Each warning fires once per level and resets after /compact. /foco-compact hands you the compact text.",
+      "author": "Lucas Mucida",
+      "homepage": "https://github.com/mucida-claude-mods/indicador-de-contexto",
+      "url": "https://github.com/mucida-claude-mods/indicador-de-contexto",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "foco-compact"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.process.run",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "indicador-de-contexto",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call",
+        "every prompt"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-08T03:44:23Z",
+      "createdAt": "2026-10-29T03:18:39Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "mucida-claude-mods/novo-chat-ou-aqui:.",
+      "repo": "mucida-claude-mods/novo-chat-ou-aqui",
+      "path": ".",
+      "sourceCommit": "b98cfa81cc8d199765c9ddd9f965fcb49ee599b6",
+      "name": "novo-chat-ou-aqui",
+      "description": "Gives the agent a propor_desvio tool: when an extra step shows up mid-task, it compares the token cost of doing it in this chat or in a new one and recommends, with a ready handoff text.",
+      "author": "Lucas Mucida",
+      "homepage": "https://github.com/mucida-claude-mods/novo-chat-ou-aqui",
+      "url": "https://github.com/mucida-claude-mods/novo-chat-ou-aqui",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__novo-chat-ou-aqui__propor_desvio"
+          }
+        }
+      ],
+      "calls": [
+        "$.tool.register",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "novo-chat-ou-aqui",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "drives Claude",
+          "draws"
+        ]
+      },
+      "sees": [
+        "mcp__novo-chat-ou-aqui__propor_desvio calls"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-10-29T03:36:46Z",
+      "createdAt": "2026-10-29T03:36:42Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "mucida-claude-mods/pendencias:.",
+      "repo": "mucida-claude-mods/pendencias",
+      "path": ".",
+      "sourceCommit": "383e98b6e2feebacc6ab7b3b473b6af3314e42ee",
+      "name": "pendencias",
+      "description": "A pane listing, per project, the chats that ended waiting on you (asking for an OK, a test or a decision), with how long ago and whether their cache is still warm; dismiss each one.",
+      "author": "Lucas Mucida",
+      "homepage": "https://github.com/mucida-claude-mods/pendencias",
+      "url": "https://github.com/mucida-claude-mods/pendencias",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "pendencias"
+          }
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "pendencias"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.command.register",
+        "$.process.run",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.root",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.keys",
+        "$.store.set",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "pendencias",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-11-08T03:44:20Z",
+      "createdAt": "2026-10-29T03:36:49Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "mucida-claude-mods/telinha-mcp:.",
+      "repo": "mucida-claude-mods/telinha-mcp",
+      "path": ".",
+      "sourceCommit": "0f1e1f7fa54fe767bcb726bc65c6e5bff5cc7839",
+      "name": "telinha-mcp",
+      "description": "A pane that opens whenever the agent or a subagent calls an MCP tool, saying in plain words which MCP was called, what it was asked and whether it finished.",
+      "author": "Lucas Mucida",
+      "homepage": "https://github.com/mucida-claude-mods/telinha-mcp",
+      "url": "https://github.com/mucida-claude-mods/telinha-mcp",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "telinha-mcp"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "telinha-mcp"
+          }
+        }
+      ],
+      "calls": [
+        "$.agent.list",
+        "$.command.register",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "telinha-mcp",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-29T03:37:03Z",
+      "createdAt": "2026-10-29T03:36:57Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "mucida-claude-mods/warm-me:.",
+      "repo": "mucida-claude-mods/warm-me",
+      "path": ".",
+      "sourceCommit": "92458f1deb270324741b0f19b67f46603861ca59",
+      "name": "warm-me",
+      "description": "Shows whether the session's prompt cache is warm or cold: a pixel-art fire that shrinks each quarter of the TTL, a countdown, and a sparkling snowflake once it expires.",
+      "author": "Lucas Mucida",
+      "homepage": "https://github.com/mucida-claude-mods/warm-me",
+      "url": "https://github.com/mucida-claude-mods/warm-me",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "warm-me"
+          }
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "model.fork",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "warm-me",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-29T03:43:57Z",
+      "createdAt": "2026-10-23T20:02:34Z",
+      "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
       "directory": null
