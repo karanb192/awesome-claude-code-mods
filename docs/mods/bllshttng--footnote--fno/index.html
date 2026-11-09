@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/bllshttng/footnote">bllshttng/footnote</a></p>
 <p class="lede">Set the targets. Your agents do the rest. Say F[no] to mostly done.</p>
 <p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">fno reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings on Claude Code 2.1.319.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 9</li><li>Access from classified calls: L2, writes or runs: runs processes, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">fno reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings on Claude Code 2.1.319.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 9</li><li>Access from classified calls: L2, writes or runs: runs processes, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads env vars, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings on Claude Code 2.1.319</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, ui.close, ui.render {component=UserMessage}, ui.render {component=Pane}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, ui.close, ui.render {component=UserMessage}, ui.render {component=Pane}, ui.render {component=UserMessage}, turn.complete, ui.render {component=TurnDuration}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.env.get, $.process.run, $.session.version, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve</code></dd>
 
     <dt>Validation on 2.1.319</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/bllshttng/footnote/tree/b308d0973a7a23a0ff554d3a86ac392a9c316ddb"><code>b308d0973a7a</code></a></dd>
-    <dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/bllshttng/footnote/blob/b308d0973a7a23a0ff554d3a86ac392a9c316ddb/hooks/mail-pane.mjs#L69">hooks/mail-pane.mjs:69</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/bllshttng/footnote/tree/3b0ea5b3128212bebbd97eed648f66b655da1d8f"><code>3b0ea5b31282</code></a></dd>
+    <dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/bllshttng/footnote/blob/3b0ea5b3128212bebbd97eed648f66b655da1d8f/hooks/mail-pane.mjs#L69">hooks/mail-pane.mjs:69</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from bllshttng/footnote</h2><ul><li><a href="/mods/bllshttng--footnote--buddy/">buddy</a><span>A Claude Code mod (claude-mod-buddy). Bring back buddy: a terminal companion beside your status line that wat…</span></li></ul></section>
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/bllshttng--footnote--fno-reach.svg" alt="Reach badge for fno"> <img src="/badges/bllshttng--footnote--fno-validates.svg" alt="Validation badge for fno"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/bllshttng--footnote--fno-reach.svg)](https://mods.aidojo.si/mods/bllshttng--footnote--fno/)

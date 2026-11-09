@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/DarthSonic/cache-weather-and-pause-resume">DarthSonic/cache-weather-and-pause-resume</a></p>
 <p class="lede">A band above the Claude Code prompt: prompt-cache countdown and bar with the hit rate, keep-warm (on by default) that refreshes the cache before it runs out, context weather with the auto-compact threshold, a Compact button, a Pause / Resume button that has Claude finish running work, save its state and wait, and a Shutdown button that pauses and then shuts the computer down. German and English.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">cache-weather-and-pause-resume reaches L2 (writes or runs) and passed <code>claude plugin validate</code> on Claude Code 2.1.319.</p><ul><li>Events hooked: 14</li><li>API methods referenced: 24</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">cache-weather-and-pause-resume reaches L2 (writes or runs) and passed <code>claude plugin validate</code> on Claude Code 2.1.319.</p><ul><li>Events hooked: 14</li><li>API methods referenced: 26</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, drives Claude, reads files, reads env vars, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed on Claude Code 2.1.319</span></div></div>
@@ -24,14 +24,14 @@
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>classic hooks, mcp__cache-weather-and-pause-resume__pause_state calls, every tool call, every prompt, compaction</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart, turn.step, session.measure, classic.Stop, turn.start, turn.complete, classic.Notification, tool.call {tool=mcp__cache-weather-and-pause-resume__pause_state}, tool.call, session.end, prompt.submit, classic.PostModelSwitch, session.compact, ui.render {component=AbovePrompt}</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.run, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.fs.write, $.model.fork, $.process.run, $.prompt.submit, $.session.append, $.session.compact, $.session.id, $.session.usage, $.state.get, $.state.set, $.store.set, $.tool.register, $.ui.log, $.ui.resolve, $.ui.toast</code></dd>
+    <dt>Observed events</dt><dd>classic hooks, mcp__cache-weather-and-pause-resume__pause_state calls, mcp__cache-weather-and-pause-resume__pause_sessions calls, every tool call, every prompt, compaction</dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart, turn.step, session.measure, classic.Stop, turn.start, turn.complete, classic.Notification, tool.call {tool=mcp__cache-weather-and-pause-resume__pause_state}, tool.call {tool=mcp__cache-weather-and-pause-resume__pause_sessions}, tool.call, session.end, prompt.submit, classic.PostModelSwitch, session.compact, ui.render {component=AbovePrompt}</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.run, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.fs.write, $.model.fork, $.process.run, $.prompt.submit, $.session.append, $.session.compact, $.session.cwd, $.session.id, $.session.usage, $.state.get, $.state.set, $.store.set, $.tool.register, $.ui.log, $.ui.notify, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation on 2.1.319</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/DarthSonic/cache-weather-and-pause-resume/tree/42009fa61bc59f4e6518cc30c84e3135ecbabd54"><code>42009fa61bc5</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/DarthSonic/cache-weather-and-pause-resume/tree/ee7a4485996b94d247c3664cd36ee78144348399"><code>ee7a4485996b</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
