@@ -737,3 +737,27 @@ test('retirement renames count current keepers and preserve the historical runti
   const records = [oldCopy, ...pairs.map(([id]) => id), ...keepers].map(id => ({ id, kind: 'mod' }))
   assert.deepEqual(applyDuplicates(records, rules).filter(m => m.kind === 'mod').map(m => m.id), keepers)
 })
+
+test('confirmed aidan copies count their original keepers without excluding unrelated products', () => {
+  const pairs = [
+    ['aidan-nunn-sys/claude-config:mods/review-watch', 'hamzafer/claude-code-mods:mods/review-watch'],
+    ['aidan-nunn-sys/claude-config:mods/secret-box', 'ray-amjad/claude-code-mods:plugins/secret-box'],
+  ]
+  const rules = readDuplicates('data/duplicates.txt')
+  const unrelated = ['agent-radar', 'blast-radius', 'handoff', 'hud', 'mission-control', 'rulebook', 'tps', 'where-am-i', 'xagent']
+    .map(name => `aidan-nunn-sys/claude-config:mods/${name}`)
+  // A same-named product in another repository is not a confirmed copy.
+  unrelated.push('other/mods:review-watch', 'other/mods:secret-box')
+  for (const [copy, keeper] of pairs) {
+    assert.equal(rules.get(copy), keeper)
+    const result = applyDuplicates([copy, keeper, ...unrelated].map(id => ({ id, kind: 'mod' })), rules)
+    assert.equal(result[0].kind, 'duplicate')
+    assert.equal(result[0].duplicateOf, keeper)
+    assert.deepEqual(result.filter(m => m.kind === 'mod').map(m => m.id), [keeper, ...unrelated])
+    for (const kind of [null, 'fixture', 'catalog', 'duplicate', 'builtin']) {
+      const records = [{ id: copy, kind: 'mod' }]
+      if (kind) records.push({ id: keeper, kind })
+      assert.equal(applyDuplicates(records, rules)[0].kind, 'mod', `${copy}: ${kind}`)
+    }
+  }
+})
