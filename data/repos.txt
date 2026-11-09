@@ -3560,6 +3560,7 @@ wdsewdser-bit/claude-code-mods
 wdtjr2653-cpu/claude-spinner-cat
 we-are-digital-architects/moodcode
 WeaponizedLego/claude-code-mods
+webdevnerdstuff/claude-session-mover
 wellavelino/mystique
 wellbrained/status-deck
 wellbrained/usage-meter-mod
