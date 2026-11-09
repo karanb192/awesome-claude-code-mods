@@ -26,6 +26,7 @@ const REPO_FIXTURES = new Map([
   ['partalemre/transceiver', /^spike\/tx-probe(?:\/|$)/],
   ['peterting/claude-mod', /^spikes\/crew(?:\/|$)/],
   ['robgruhl/claude-mod-learnings', /^experiments\/(?:e[1-7]-[^/]+|claude-lookalike|latency|live-probe)(?:\/|$)/],
+  ...['xsyetopz/dotclaude', 'xsyetopz/claudetto'].map(repo => [repo, /^openspec\/changes\/release-2-1-319\/evidence\/tmp\/(?:probe-141\/arm-reorder|probe-17-1-lab|probe-tui\/plug)(?:\/|$)/]),
 ])
 
 const readList = path => {
