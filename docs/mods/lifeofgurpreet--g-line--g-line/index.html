@@ -25,15 +25,15 @@
 <dl>
 
     <dt>Footprint</dt><dd>Unavailable or incomplete. Recorded events and calls below may omit access.</dd>
-    <dt>Observed events</dt><dd>/&quot;^mcp__g-line__status$&quot;/ calls, every tool call, subagent spawns, compaction, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, session.measure, turn.start, tool.check, turn.step, tool.call {tool=/&quot;^mcp__g-line__status$&quot;/}, tool.call, agent.spawn, turn.complete, session.append {door=notice}, session.compact, prompt.submit, command.run, command.run {command=g-line}, command.run {command=glanceline}, ui.render {component=PromptHint}, ui.render {component=SessionMode}, ui.render {component=Spinner}, ui.render {component=TurnDuration}, ui.render {component=Pane, requestId=g-line}</code></dd>
+    <dt>Observed events</dt><dd>/&quot;^mcp__g-line__status$&quot;/ calls, every tool call, subagent spawns, every prompt</dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, session.measure, turn.start, tool.check, turn.step, tool.call {tool=/&quot;^mcp__g-line__status$&quot;/}, tool.call, agent.spawn, turn.complete, session.append {door=notice}, prompt.submit, command.run, command.run {command=g-line}, command.run {command=glanceline}, ui.render {component=PromptHint}, ui.render {component=SessionMode}, ui.render {component=Spinner}, ui.render {component=TurnDuration}, ui.render {component=Pane, requestId=g-line}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.env.get, $.env.set, $.fs.read, $.fs.stat, $.fs.write, $.http.fetch, $.model.fork, $.process.run, $.prompt.fill, $.prompt.read, $.prompt.submit, $.prompt.suggest, $.session.compact, $.session.id, $.session.messages</code></dd>
 
     <dt>Validation on 2.1.319</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/lifeofgurpreet/g-line/tree/6a36c2e497cc4c08d55739521ab8026bad7dccb7"><code>6a36c2e497cc</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/lifeofgurpreet/g-line/blob/6a36c2e497cc4c08d55739521ab8026bad7dccb7/.claude-plugin/marketplace.json">g-line</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/lifeofgurpreet/g-line/tree/ff69e373b9f966a313f379fb262cca5a964521ae"><code>ff69e373b9f9</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/lifeofgurpreet/g-line/blob/ff69e373b9f966a313f379fb262cca5a964521ae/.claude-plugin/marketplace.json">g-line</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/lifeofgurpreet--g-line--g-line-reach.svg" alt="Reach badge for g-line"> <img src="/badges/lifeofgurpreet--g-line--g-line-validates.svg" alt="Validation badge for g-line"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/lifeofgurpreet--g-line--g-line-reach.svg)](https://mods.aidojo.si/mods/lifeofgurpreet--g-line--g-line/)

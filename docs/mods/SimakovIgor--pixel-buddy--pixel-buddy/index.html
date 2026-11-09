@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/SimakovIgor/pixel-buddy">SimakovIgor/pixel-buddy</a></p>
 <p class="lede">A pixel pet for your Claude Code footer: it hatches, eats what your work drops, levels up, earns rare trophies, does tricks, naps when you are away and plays on clicks</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">pixel-buddy reaches L2 (writes or runs) and passed <code>claude plugin validate</code> on Claude Code 2.1.319.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 17</li><li>Access from classified calls: L2, writes or runs: changes config, writes the clipboard, reads settings, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">pixel-buddy reaches L2 (writes or runs) and passed <code>claude plugin validate</code> on Claude Code 2.1.319.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 19</li><li>Access from classified calls: L2, writes or runs: changes config, writes the clipboard, reads settings, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install pixel-buddy --marketplace SimakovIgor/pixel-buddy</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">changes config, writes the clipboard, reads settings, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed on Claude Code 2.1.319</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=buddy}, prompt.edit, prompt.submit, turn.start, turn.complete, tool.call, ui.message, ui.render {component=SessionMode}, ui.render {component=AbovePrompt}</code></dd>
-    <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.config.list, $.config.set, $.session.id, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.copy, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.toast</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=buddy}, session.attach, ui.render {component=Pane, requestId=pixel-buddy}, prompt.edit, prompt.submit, turn.start, turn.complete, tool.call, ui.message, ui.render {component=SessionMode}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.config.list, $.config.set, $.session.id, $.session.surfaces, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.copy, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/band-client.tsx</code></dd>
     <dt>Validation on 2.1.319</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/SimakovIgor/pixel-buddy/tree/7b6bc881a46995c59946681219e2d6fc0b2e404d"><code>7b6bc881a469</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/SimakovIgor/pixel-buddy/blob/7b6bc881a46995c59946681219e2d6fc0b2e404d/.claude-plugin/marketplace.json">simakovigor</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/SimakovIgor/pixel-buddy/tree/e38e448bae4ab93290fb54abd8d2b0c76acaaed8"><code>e38e448bae4a</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/SimakovIgor/pixel-buddy/blob/e38e448bae4ab93290fb54abd8d2b0c76acaaed8/.claude-plugin/marketplace.json">simakovigor</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/SimakovIgor--pixel-buddy--pixel-buddy-reach.svg" alt="Reach badge for pixel-buddy"> <img src="/badges/SimakovIgor--pixel-buddy--pixel-buddy-validates.svg" alt="Validation badge for pixel-buddy"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/SimakovIgor--pixel-buddy--pixel-buddy-reach.svg)](https://mods.aidojo.si/mods/SimakovIgor--pixel-buddy--pixel-buddy/)
