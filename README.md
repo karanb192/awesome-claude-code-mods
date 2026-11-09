@@ -1,6 +1,6 @@
 # Awesome Claude Code Mods [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-6,000+ Claude Code mods, with what each one can access before you install it. Context and usage meters, prompt cache warmers, status lines, guards and more, with install hints. A mod is a plugin that uses JavaScript or TypeScript functions to change Claude Code's interface or behavior, on **Claude Code 2.1.287+**. [Browse the catalogue](https://mods.aidojo.si/).
+Claude Code mods, with what each one can access before you install it. Context and usage meters, prompt cache warmers, status lines, guards and more, with install hints. A mod is a plugin that uses JavaScript or TypeScript functions to change Claude Code's interface or behavior, on **Claude Code 2.1.287+**. [Browse the catalogue](https://mods.aidojo.si/).
 
 Add a browser beside your conversation, keep usage in view, or check a command before it runs. Install a community mod or [ask Claude to build one](https://claude.dev/blog/getting-started-with-claude-code-mods/#the-shortcut-let-claude-build-it).
 
@@ -13,6 +13,8 @@ Find a mod in the [full catalogue][catalogue] by name or task and filter by acce
 ```
 
 Then run `/reload-plugins` to activate it before asking “Find a mod that helps with code reviews”. Requires Node 18 or later. For Desktop Code local sessions, use the [setup instructions](finder/README.md#in-claude-code-mcp).
+
+Maintained by [Karan Bansal](https://karanbansal.in/). For more of his work, explore [AI Dojo's hands-on AI lessons](https://aidojo.si/) or read his [engineering articles](https://karanbansal.in/blog/). Individual mods remain credited to their authors in the catalogue.
 
 <!-- stats:start -->
 **7848 mods** · Last scanned 2026-11-09.
