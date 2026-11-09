@@ -346,6 +346,29 @@ test('fixtures never count', () => {
   assert.equal(fingerprint(base), fingerprint(after))
 })
 
+// Internal plugins at beasaltfish/idle-arcade@728bef3ad14714aefd0e0c8baadc2456aeb7a8f6.
+for (const [name, description] of [
+  ['_probe', 'Throwaway linkage probe: shows in a pane what events reach a plugin. Open it with /probe.'],
+  ['_shared-tests', 'Test host for shared/ code: carries the bundled copy so the shared tests run under claude plugin test. Not published.'],
+]) {
+  test(`idle-arcade ${name} is test material, scoped to its repository and directory`, () => {
+    const repo = 'beasaltfish/idle-arcade', path = `plugins/${name}`, manifest = { name, description }
+    assert.equal(kindOf(repo, path, manifest), 'fixture')
+    assert.equal(kindOf(repo, path, {}), 'fixture', 'the path rule does not depend on description wording')
+    assert.equal(kindOf(repo.toUpperCase(), path, manifest), 'fixture')
+    assert.equal(kindOf(repo, `${path}/nested`, {}), 'fixture')
+    assert.equal(kindOf(repo, `${path}-product`, {}), 'mod')
+    assert.equal(kindOf('another/idle-arcade', path, {}), 'mod')
+    assert.equal(kindOf(repo, path, manifest, new Set(), new Set([`${repo}:${path}`])), 'mod')
+  })
+}
+
+test('idle-arcade keeps all seven marketplace mods and unrelated private-looking names', () => {
+  for (const name of ['idle-arcade', 'fish-shooter', 'brick-breaker', 'snake', 'space-shooter', 'tap-flyer', 'jump-runner', '_new-game']) {
+    assert.equal(kindOf('beasaltfish/idle-arcade', `plugins/${name}`, { name }), 'mod', name)
+  }
+})
+
 test('development probes stay out while their products and unrelated paths count', () => {
   const probes = [
     ['capibara-html/GuildFlow', 'poc/plugin'],
