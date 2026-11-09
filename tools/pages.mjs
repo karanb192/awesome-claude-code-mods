@@ -32,7 +32,7 @@ const retained = mod => mod.validate?.status === 'unknown'
 // records: the mods and built-ins that get pages. all: every scanned record, for duplicateOf links.
 // A maintainer can point a retired path at another page by setting its "to" in data/pages.json; a record
 // the scan only retained follows that redirect until a fresh scan finds it again.
-export function assignPages(records, registry, all) {
+export function assignPages(records, registry, all, confirmedMoves = new Map()) {
   const entries = new Map(Object.entries(registry).sort(([a], [b]) => byText(a, b)))
   // macOS checkouts are case-insensitive, so two paths differing only in case would overwrite each other.
   const taken = new Set([...entries.keys()].map(slug => slug.toLowerCase()))
@@ -61,6 +61,22 @@ export function assignPages(records, registry, all) {
   const pageOf = new Map()
   for (const [mod, slug] of pages) if (!pageOf.has(identity(idOf(mod)))) pageOf.set(identity(idOf(mod)), slug)
   const duplicateOf = new Map(all.filter(mod => mod.kind === 'duplicate' && mod.duplicateOf).map(mod => [identity(idOf(mod)), identity(mod.duplicateOf)]))
+  // Retirement removes old records before duplicate classification. Keep confirmed moves usable
+  // for those absent IDs, but never override a live record or point at an uncounted keeper.
+  const inventory = new Map(all.map(mod => [identity(idOf(mod)), mod]))
+  const moves = new Map([...confirmedMoves].map(([copy, keeper]) => [identity(copy), identity(keeper)]))
+  for (const copy of moves.keys()) {
+    if (inventory.has(copy)) continue
+    const seen = new Set([copy])
+    let keeper = moves.get(copy)
+    while (keeper && !inventory.has(keeper) && !seen.has(keeper)) {
+      seen.add(keeper)
+      keeper = moves.get(keeper)
+    }
+    if (keeper && !seen.has(keeper) && inventory.get(keeper)?.kind === 'mod') {
+      duplicateOf.set(copy, keeper)
+    }
+  }
   const resolve = (slug, seen = new Set()) => {
     const entry = entries.get(slug)
     if (!entry || seen.has(slug)) return

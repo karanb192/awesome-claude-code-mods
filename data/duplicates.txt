@@ -173,3 +173,7 @@ t968rs/operator-straps:plugins/pr-review-watch t968rs/operator-straps:plugins/ag
 # Keep retained inventory IDs; repository-rename handling resolves the codex keeper.
 anderson-spider/claude-mods:plugins/chatgpt anderson-spider/claude-mods:plugins/codex
 anderson-spider/claude-mods:plugins/codex-computer-use anderson-spider/claude-mods:plugins/codex
+ucsandman/claude-harness:engine/mods/harness-runtime ucsandman/Agnostic-AI:engine/mods/harness-runtime
+ucsandman/Agnostic-AI:engine/mods/claude-runtime ucsandman/Agnostic-AI:engine/mods/harness-runtime
+DiogoHSM/claude-mods:agentes-pixel DiogoHSM/claude-mods:pixel-agents
+DiogoHSM/claude-mods:polimento-visual DiogoHSM/claude-mods:visual-polish
