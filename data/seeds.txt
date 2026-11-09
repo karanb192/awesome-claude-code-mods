@@ -176,6 +176,7 @@ varunmoka7/image-shrinker
 varunmoka7/next-steps-autopilot
 varunmoka7/reddit-watch
 vcdim/claude-code-sciplot
+vedant-shah/clawd-hq
 verdantran/code-city
 vicmpen/mokkan
 vihrea1337/headroom
