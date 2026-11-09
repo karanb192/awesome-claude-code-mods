@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-09T06:54:13.743Z",
   "claudeVersion": "2.1.319",
-  "repos": 3756,
+  "repos": 3757,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -949587,6 +949587,94 @@
       "stars": 0,
       "pushedAt": "2026-10-17T02:40:48Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "webdevnerdstuff/claude-session-mover:.",
+      "repo": "webdevnerdstuff/claude-session-mover",
+      "path": ".",
+      "sourceCommit": "3493c34d53d4481027152d855976022130d0af95",
+      "name": "session-mover",
+      "description": "Move Claude desktop Code sessions between sidebar workspaces from a pane. /move-sessions opens it.",
+      "author": "WebDevNerdStuff & Bunnies... lots and lots of bunnies!",
+      "homepage": "https://github.com/webdevnerdstuff/claude-session-mover",
+      "url": "https://github.com/webdevnerdstuff/claude-session-mover",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "move-sessions"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "session-mover"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.process.run",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-session-mover",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-11-08T22:29:10Z",
+      "createdAt": "2026-11-02T16:54:03Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
