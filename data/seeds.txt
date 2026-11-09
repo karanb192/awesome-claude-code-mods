@@ -69,6 +69,7 @@ hellosverre/smart-compact
 hematteo/anki-band
 hematteo/run-suggested
 hematteo/run-watcher
+hnikoloski/rixflow
 hoobnn/hoobnn-agent-mods
 HuliLulu46/cc-commit-command
 HuliLulu46/cc-effort-switch
