@@ -90,6 +90,8 @@ karanb192/claude-code-mods
 karanb192/time-blame
 kevlar10x/quiet-transcript
 kiankhooban/open-paths
+KitTran1307/kit-claude-mods
+KitTran1307/kit-cloud-pilot
 kongyo2/context-view
 Kruhlikau/subagent-tuner
 kushalBanda/claude-tldr
