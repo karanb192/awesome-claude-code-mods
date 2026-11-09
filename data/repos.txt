@@ -525,7 +525,6 @@ brunolca/claude-plugins
 bruw/workflow-conductor
 Brxerq/claude-cockpit
 bryanlin850/claudefishing
-bsamiee/Rasm
 BuddyLim/claude-code-mod-ledger
 BuddyLim/claude-code-mod-lens
 BuddyLim/claude-code-mod-parked
@@ -1477,7 +1476,6 @@ iosifnicolae2/claude-away-keep-running
 ipartington/claude-mods
 ippoan/gh-actions-live
 irfanfaraaz/claude-kit
-iroha924/sphica
 IrvingAguilar/claude-agent-todos
 isaac-pathlab/claude-monitor
 isaac-pathlab/claude-shell-monitor
@@ -1517,7 +1515,6 @@ J-M-Pineapple-Express/repo-radar
 jaaaackieLai/claude-mods
 jack21/claude-mod-usage
 jackboykin/hermit
-jackboykin/quarry
 jackmel030/claude-session-notes
 jacksonlin-infra/twinline
 jacobomatadev/sancho
@@ -1565,7 +1562,6 @@ jeffyfung/claude-mods
 jeffzi/cc-heads-up
 jemsley06/reels-while-you-wait
 Jenwein/claude-mods
-jeon-jihyeon/meetproxy
 Jeong-Jae-Hun/en-coach
 JeongJaeSoon/claude-vimium
 JeongJaeSoon/hintvim
@@ -2011,7 +2007,6 @@ LudovicLaloux/agent-crew
 luisdonginseo/claude-mods
 luisfmontes/rainforest-mind
 LuisPCFialho/claude-fuel-gauge
-lukecameron/dotfiles
 Luma-Sa/claude-mods
 lumberroom/lumberroom-claude-code
 Luminous13/claude-mods
@@ -2132,7 +2127,6 @@ maximemarc/Claude-mods
 maxp-riot/mermaid-render
 maxsoldev/pstash
 maxturazzini/bubble-contesto
-mberto10/applied-systems
 mboisvertdupras/hud
 mcpysup-netizen/claude-ai-accounts
 mcs-dave/mcs-fusion-playwright-test-progress-mod
@@ -2655,7 +2649,6 @@ potterdigital/plan-usage-mod
 potto007/ottomation
 pourya7/claude-code-mods
 powerofjinbo/claude-code-spell-bar
-powerpratik/point-and-speak
 PowerSchill/pretty_claude
 Prabal-Singh/claude-mods
 prabowosd/clawd-buddy
@@ -2663,7 +2656,6 @@ pradyb/claude-mods
 prakash-rai/usage-meter
 PRANAY-CHAPLOT/replaycast
 praveendhawan/mod-dev-flow-claude
-primelogiclabio/claude-tools
 proagent-ai/claude-hangul
 Probst1nator/clawd
 procoders/superpowers-v
@@ -2744,7 +2736,6 @@ raven-clown/neuro-path
 ravipatel7/claude-mods
 ray-amjad/awesome-claude-code-function-hooks
 ray-amjad/claude-code-mods
-ray-manaloto/dotfiles
 ray-manaloto/knowledge-base
 RaySu/usage-glance
 razorback16/cc-intelligent-ui
@@ -3275,7 +3266,6 @@ testy-cool/mermaid-c4-zoom
 TFoxik/claude-model-router
 tgralex/claude-mods
 Th3-W6rst/claude-realce
-thaithienvanid/aidd
 thangdo19/claude-code-mods
 thangnguyen-69/claude-mods
 thangvofastboy/claude-mods
