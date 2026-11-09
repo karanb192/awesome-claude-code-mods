@@ -2276,6 +2276,12 @@ mtalhasahin/claude-runner
 mtami/terminal-tab-title
 mthli/cc-shorts
 mtmtian/cc-mods
+mucida-claude-mods/faixa-de-terreno
+mucida-claude-mods/indicador-de-contexto
+mucida-claude-mods/novo-chat-ou-aqui
+mucida-claude-mods/pendencias
+mucida-claude-mods/telinha-mcp
+mucida-claude-mods/warm-me
 Mucida/critical-decisions
 muctebadikmen/claude-code-araclari
 muellerei/diff-fold
