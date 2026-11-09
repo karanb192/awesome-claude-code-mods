@@ -709,3 +709,31 @@ test('claudetto release evidence probes are fixtures, not shipped mods', () => {
   }
   assert.equal(kindOf('other/repo', root + probes[0], {}), 'mod')
 })
+
+
+test('retirement renames count current keepers and preserve the historical runtime fallback', () => {
+  const pairs = [
+    ['ucsandman/claude-harness:engine/mods/harness-runtime', 'ucsandman/Agnostic-AI:engine/mods/harness-runtime'],
+    ['ucsandman/Agnostic-AI:engine/mods/claude-runtime', 'ucsandman/Agnostic-AI:engine/mods/harness-runtime'],
+    ['DiogoHSM/claude-mods:agentes-pixel', 'DiogoHSM/claude-mods:pixel-agents'],
+    ['DiogoHSM/claude-mods:polimento-visual', 'DiogoHSM/claude-mods:visual-polish'],
+  ]
+  const rules = readDuplicates('data/duplicates.txt')
+  const keepers = [...new Set(pairs.map(([, keeper]) => keeper))]
+  for (const [copy, keeper] of pairs) {
+    assert.equal(rules.get(copy), keeper)
+    assert.equal(rules.has(keeper), false, 'keepers must be terminal, not stale rename chains')
+    for (const kind of [null, 'fixture', 'catalog', 'duplicate', 'builtin']) {
+      const records = [{ id: copy, kind: 'mod' }]
+      if (kind) records.push({ id: keeper, kind })
+      assert.equal(applyDuplicates(records, rules)[0].kind, 'mod')
+    }
+  }
+  const oldCopy = 'ucsandman/claude-harness:engine/mods/claude-runtime'
+  const oldKeeper = 'ucsandman/Agnostic-AI:engine/mods/claude-runtime'
+  assert.equal(rules.get(oldCopy), oldKeeper)
+  const historical = applyDuplicates([oldCopy, oldKeeper].map(id => ({ id, kind: 'mod' })), rules)
+  assert.deepEqual(historical.filter(m => m.kind === 'mod').map(m => m.id), [oldKeeper])
+  const records = [oldCopy, ...pairs.map(([id]) => id), ...keepers].map(id => ({ id, kind: 'mod' }))
+  assert.deepEqual(applyDuplicates(records, rules).filter(m => m.kind === 'mod').map(m => m.id), keepers)
+})

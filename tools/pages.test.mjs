@@ -348,3 +348,46 @@ test('a member mod page links its topic page, and a non-member page is unchanged
   const listed = renderModPage(mod('a/b', 'tool'), { ...options, topics: [{ slug: 'prompt-cache', title: 'Prompt cache mods for Claude Code' }, { slug: 'x', title: 'X & <y>' }] })
   assert.match(listed, /<\/div><\/div>\n<p class="topics-line">Listed under <a href="\/topics\/prompt-cache\/">Prompt cache mods for Claude Code<\/a>, <a href="\/topics\/x\/">X &amp; &lt;y&gt;<\/a>\.<\/p>\n<p class="actions">/)
 })
+
+
+test('explicit moves resolve retired pages only to counted keepers without overriding live records', () => {
+  const old = mod('o/r', 'old'), keeper = mod('o/r', 'new'), unrelated = mod('o/r', 'other')
+  const rules = new Map([[old.id, keeper.id]])
+  const registry = assign([old, unrelated]).registry
+  const live = assignPages([old, keeper, unrelated], registry, [old, keeper, unrelated], rules)
+  assert.equal(live.redirects.size, 0)
+  const retired = assignPages([keeper, unrelated], live.registry, [keeper, unrelated], rules)
+  assert.deepEqual([...retired.redirects], [['o--r--old', 'o--r--new']])
+  assert.equal(retired.registry['o--r--old'].id, old.id)
+  assert.equal(retired.registry['o--r--other'].to, undefined)
+  for (const kind of [null, 'fixture', 'catalog', 'duplicate', 'builtin']) {
+    const all = [unrelated, ...(kind ? [{ ...keeper, kind }] : [])]
+    const records = all.filter(m => ['mod', 'builtin'].includes(m.kind))
+    assert.equal(assignPages(records, registry, all, rules).redirects.size, 0, String(kind))
+  }
+  const cycle = new Map([[old.id, keeper.id], [keeper.id, old.id]])
+  assert.equal(assignPages([unrelated], registry, [unrelated], cycle).redirects.size, 0)
+  for (const kind of ['fixture', 'catalog']) {
+    const present = { ...old, kind }
+    assert.equal(assignPages([keeper, unrelated], registry, [present, keeper, unrelated], rules).redirects.size, 0)
+  }
+})
+
+test('confirmed retired move chains cross only absent intermediates and stop at live authority', () => {
+  const old = mod('o/r', 'old'), middle = mod('o/r', 'middle'), keeper = mod('o/r', 'new')
+  const registry = assign([old]).registry
+  const rules = new Map([[old.id, middle.id], [middle.id, keeper.id]])
+  const moved = assignPages([keeper], registry, [keeper], rules)
+  assert.deepEqual([...moved.redirects], [['o--r--old', 'o--r--new']])
+  assert.equal(moved.registry['o--r--old'].id, old.id)
+  for (const kind of ['fixture', 'catalog', 'duplicate', 'builtin']) {
+    const present = { ...middle, kind, duplicateOf: keeper.id }
+    const records = [keeper, ...(kind === 'builtin' ? [present] : [])]
+    assert.equal(assignPages(records, registry, [present, keeper], rules).redirects.size, 0, kind)
+  }
+  const live = assignPages([middle, keeper], registry, [middle, keeper], rules)
+  assert.deepEqual([...live.redirects], [['o--r--old', 'o--r--middle']], 'a counted intermediate wins over its move rule')
+  const cycle = new Map([[old.id, middle.id], [middle.id, old.id]])
+  assert.equal(assignPages([keeper], registry, [keeper], cycle).redirects.size, 0)
+  assert.equal(assignPages([keeper], registry, [keeper], new Map([[old.id, middle.id]])).redirects.size, 0)
+})
