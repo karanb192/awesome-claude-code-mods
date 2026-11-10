@@ -267,7 +267,7 @@ test('compatibility warnings stay distinct from validation failures and link to 
   assert.equal(await source.isVisible(), true)
   assert.equal(await source.getAttribute('href'), `https://github.com/example/mods/blob/${'a'.repeat(40)}/plugins/mod-0/hooks/colour.ts#L12`)
   assert.match(await tab.locator('dl').innerText(), /Marketplace failed/)
-  assert.match(await tab.locator('dl').innerText(), /Validation on 2.1.287\nPassed/)
+  assert.match(await tab.locator('dl').innerText(), /Validation\nPassed/)
   assert.match(await tab.locator('.compatibility').innerText(), /marketplace fails; review UI rewrite/)
 })
 
@@ -662,6 +662,19 @@ test('a rescan that only moves stars and dates leaves every page and the registr
   assert.deepEqual(tree(join(dir, 'docs/mods')), pages)
   assert.equal(readFileSync(join(dir, 'data/pages.json'), 'utf8'), registry)
   assert.equal(readFileSync(join(dir, 'docs/sitemap.xml'), 'utf8'), sitemap)
+})
+
+test('a rescan on a newer validator that changes no result leaves every mod page untouched', t => {
+  const dir = fixture(t, [mod(0), mod(1, 'failed'), mod(2, 'passed', 'builtin')])
+  render(dir)
+  const pages = tree(join(dir, 'docs/mods'))
+  const data = JSON.parse(readFileSync(join(dir, 'data/mods.json'), 'utf8'))
+  data.claudeVersion = '2.9.999'
+  data.mods = data.mods.map(m => ({ ...m, validate: { ...m.validate, claudeVersion: '2.9.999' } }))
+  writeFileSync(join(dir, 'data/mods.json'), JSON.stringify(data))
+  render(dir)
+  assert.deepEqual(tree(join(dir, 'docs/mods')), pages)
+  assert.doesNotMatch(Object.values(tree(join(dir, 'docs/mods'))).join(''), /2\.9\.999/)
 })
 
 test('retired mods lose their page, renamed ones leave a redirect, and their paths stay reserved', t => {
