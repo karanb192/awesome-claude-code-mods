@@ -12,7 +12,8 @@ export const idOf = mod => mod.id ?? `${mod.repo}:${mod.path}`
 const byText = (a, b) => a < b ? -1 : a > b ? 1 : 0
 // GitHub matches repository names without case; plugin paths keep theirs.
 export const identity = id => { const at = id.indexOf(':'); return at < 0 ? id : id.slice(0, at).toLowerCase() + id.slice(at) }
-const SLUG = /^[A-Za-z0-9_-][A-Za-z0-9._-]*$/
+// A page path is one folder name, with no leading dot and no trailing dot, which Windows cannot check out.
+const SLUG = /^[A-Za-z0-9_-]([A-Za-z0-9._-]*[A-Za-z0-9_-])?$/
 
 export function readRegistry(text) {
   const registry = text ? JSON.parse(text) : {}
