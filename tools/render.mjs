@@ -6,7 +6,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync, rmSync, existsSync } from 'node:fs'
 import { LEVEL_NAMES, grade, hasFootprint } from './grade.mjs'
-import { renderSite, renderSitemap, renderRobots, renderLlms, reviewNotes, css, browseKeys } from './site.mjs'
+import { renderSite, renderSitemap, renderRobots, renderLlms, reviewNotes, css, browseKeys, lowerBound } from './site.mjs'
 import { renderBrowsePage } from './browse.mjs'
 import { assignPages, formatRegistry, idOf, indexable, readRegistry, renderModPage, renderNotFound, renderRedirect } from './pages.mjs'
 import { siteAnchors } from './slug.mjs'
@@ -36,7 +36,7 @@ const short = (s, n = 110) => { s = String(s ?? '').replace(/\s+/g, ' ').replace
 // Anthropic palette (olive, clay, deep clay, plum, error red) with ivory text, matching claude.com and claude.dev.
 const LEVEL_COLORS = ['#788c5d', '#c96442', '#a94e2f', '#827dbd']
 const FAIL_COLOR = '#b53333'
-const reachText = m => !hasFootprint(m) ? 'unknown access' : m.reach.labels.length ? m.reach.labels.join(', ') : 'draws only'
+const reachText = m => !hasFootprint(m) ? ['unknown access', lowerBound(m)].filter(Boolean).join(', ') : m.reach.labels.length ? m.reach.labels.join(', ') : 'draws only'
 const validates = m => ['passed', 'warnings'].includes(m.validate.status)
 const validationText = m => validates(m) ? data.claudeVersion : m.validate.status === 'failed' ? `fails on ${data.claudeVersion}` : 'not verified'
 const scanText = m => [validationText(m), ...reviewNotes(m)].join('; ')
