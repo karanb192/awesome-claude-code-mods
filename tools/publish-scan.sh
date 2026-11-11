@@ -33,7 +33,7 @@ for attempt in {1..8}; do
   git branch --set-upstream-to=origin/main "$branch"
   node tools/scan-publication.mjs --snapshot "$snapshot" --cache "$RUNNER_TEMP/scan-revalidation.json"
   set +e
-  node tools/changed.mjs > "$RUNNER_TEMP/scan-changes.txt"
+  node tools/changed.mjs --title "$RUNNER_TEMP/scan-title.txt" --summary "$RUNNER_TEMP/scan-summary.md" > "$RUNNER_TEMP/scan-changes.txt"
   rc=$?
   set -e
   if [ "$rc" -gt 1 ]; then exit "$rc"; fi
@@ -53,8 +53,11 @@ for attempt in {1..8}; do
     if [ -n "$pr" ] && [ "$(gh pr view "$pr" --json state --jq .state)" = OPEN ]; then gh pr close "$pr"; fi
     exit 0
   fi
-  git commit -m 'Scan: refresh footprints and badges'
+  title=$(cat "$RUNNER_TEMP/scan-title.txt")
+  git commit -m "$title"
   {
+    cat "$RUNNER_TEMP/scan-summary.md"
+    echo
     echo 'Completed scan reconciled with current main. Newer published repository records and curated README edits are preserved. Review the inventory changes before merging.'
     echo
     echo "Verification run: https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
@@ -71,10 +74,10 @@ for attempt in {1..8}; do
   git push "--force-with-lease=refs/heads/$branch:$remote_head" origin "HEAD:refs/heads/$branch"
   remote_head=$(git rev-parse HEAD)
   if [ -z "$pr" ]; then
-    gh pr create --base main --head "$branch" --title 'Scan: refresh footprints and badges' --body-file "$body" --label scan
+    gh pr create --base main --head "$branch" --title "$title" --body-file "$body" --label scan
     pr=$(gh pr list --head "$branch" --base main --state open --json number --jq '.[0].number')
   else
-    gh pr edit "$pr" --title 'Scan: refresh footprints and badges' --body-file "$body"
+    gh pr edit "$pr" --title "$title" --body-file "$body"
   fi
   if [ "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)" = "$base" ]; then exit 0; fi
 done

@@ -8,9 +8,11 @@
 //
 //   node tools/changed.mjs            # compares data/mods.json to git HEAD
 //   node tools/changed.mjs old new    # compares two files
+//   --title FILE --summary FILE       # also write the scan pull request's title and opening lines
 
 import { execFileSync } from 'node:child_process'
-import { readFileSync } from 'node:fs'
+import { readFileSync, writeFileSync } from 'node:fs'
+import { parseArgs } from 'node:util'
 import { suspectDuplicates } from './dedupe.mjs'
 import { hasFootprint } from './grade.mjs'
 
@@ -64,10 +66,50 @@ export function describeChange(before, after) {
   return lines
 }
 
+// The scan pull request's title and opening lines: how the counted total moved, and the few
+// changes that need a person's call before the list below them is worth reading. A record that is
+// gone, a mod that moved inside its repository and now counts beside its retained old path (or
+// lost its fixture filing in the move), and a same-owner same-name pair this scan introduced.
+export function summarize(before, after) {
+  const counted = data => data.mods.filter(m => m.kind === 'mod').length
+  const n = value => value.toLocaleString('en-US')
+  const old = new Map(before.mods.map(m => [m.id, m]))
+  const now = new Map(after.mods.map(m => [m.id, m]))
+  const added = after.mods.filter(m => !old.has(m.id)), gone = before.mods.filter(m => !now.has(m.id))
+  const missing = m => (m.validate?.errors ?? []).some(error => error.startsWith('Not found in this scan'))
+  const decisions = gone.map(m => `gone: ${m.id} (${m.kind}) is no longer in the inventory`)
+  const moved = new Set()
+  for (const fresh of added) {
+    if (fresh.kind !== 'mod') continue
+    for (const left of after.mods) {
+      if (left.id === fresh.id || !missing(left) || left.name !== fresh.name || left.repo.toLowerCase() !== fresh.repo.toLowerCase()) continue
+      moved.add(left.id).add(fresh.id)
+      decisions.push(left.kind === 'mod'
+        ? `counted twice: ${left.id} moved to ${fresh.id}; add the pair to data/duplicates.txt`
+        : `filing lost in a move: ${left.id} is a ${left.kind}, but its new path ${fresh.id} counts as a mod`)
+    }
+  }
+  const known = new Set(suspectDuplicates(before.mods).map(group => group.join(' ')))
+  for (const group of suspectDuplicates(after.mods)) {
+    if (known.has(group.join(' ')) || group.every(id => moved.has(id))) continue
+    decisions.push(`possible duplicate: ${group.join(' and ')} share an owner and a name; if they are one mod, add the pair to data/duplicates.txt`)
+  }
+  const was = counted(before), is = counted(after)
+  const title = was === is ? `Scan: ${n(is)} mods, footprints refreshed` : `Scan: ${n(was)} to ${n(is)} mods (${n(added.length)} new, ${n(gone.length)} gone)`
+  const reclassified = after.mods.filter(m => old.has(m.id) && old.get(m.id).kind !== m.kind).length
+  const lines = [
+    `**${was === is ? `${n(is)} counted mods, unchanged` : `${n(was)} to ${n(is)} counted mods`}.** ${n(added.length)} new records (${n(added.filter(m => m.kind === 'mod').length)} counted), ${n(gone.length)} gone, ${n(reclassified)} reclassified.`,
+    '',
+    '## Needs a decision',
+    ...(decisions.length ? decisions.map(line => `- ${line}`) : ['Nothing. No record is gone, moved inside its repository or newly suspected as a copy.']),
+  ]
+  return { title, lines, decisions }
+}
+
 // Exit 1 means "nothing changed" to the workflow, so a crash must not end with it.
 if (import.meta.url === `file://${process.argv[1]}`) {
   process.on('uncaughtException', error => { console.error(error); process.exit(2) })
-  const [oldPath, newPath] = process.argv.slice(2)
+  const { values: options, positionals: [oldPath, newPath] } = parseArgs({ allowPositionals: true, options: { title: { type: 'string' }, summary: { type: 'string' } } })
   const after = JSON.parse(readFileSync(newPath ?? 'data/mods.json', 'utf8'))
   const before = JSON.parse(oldPath ? readFileSync(oldPath, 'utf8') : execFileSync('git', ['show', 'HEAD:data/mods.json'], { encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 }))
   const partial = looksPartial(before, after)
@@ -76,6 +118,9 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     process.exit(2)
   }
   const lines = describeChange(before, after)
+  const summary = summarize(before, after)
+  if (options.title) writeFileSync(options.title, summary.title + '\n')
+  if (options.summary) writeFileSync(options.summary, summary.lines.join('\n') + '\n')
   const changed = fingerprint(before) !== fingerprint(after)
   console.log(changed ? lines.join('\n') || 'changed' : 'no meaningful change')
   process.exit(changed ? 0 : 1)

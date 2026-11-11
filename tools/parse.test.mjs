@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { parseValidateOutput, parseHooks, parseCalls, footprintStatus } from './parse.mjs'
 import { grade, visibility, drawsOn, hasFootprint } from './grade.mjs'
 import { validate, validateAsync, spawnAsync, relativePaths } from './validate.mjs'
-import { mkdtempSync, mkdirSync, writeFileSync, chmodSync, rmSync } from 'node:fs'
+import { mkdtempSync, readFileSync, mkdirSync, writeFileSync, chmodSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { spawnSync } from 'node:child_process'
@@ -142,7 +142,7 @@ test('visibility names what a hook can observe', () => {
   assert.deepEqual(drawsOn([{ event: 'ui.render', matcher: { component: 'Pane' } }, { event: 'turn.start', matcher: {} }]), ['Pane'])
 })
 
-import { fingerprint, describeChange, looksPartial } from './changed.mjs'
+import { fingerprint, describeChange, looksPartial, summarize } from './changed.mjs'
 import { applyDuplicates, applyDuplicatesWithRenames, suspectDuplicates, readDuplicates, renamePairs, appliesWithoutRescan } from './dedupe.mjs'
 import { reconcile } from './inventory.mjs'
 import { kindOf, readCatalogs } from './kind.mjs'
@@ -311,6 +311,34 @@ test('the change list names a collapse and a suspected pair', () => {
   assert.notEqual(fingerprint(base), fingerprint(flipped))
   const twins = clone(); twins.mods.push({ ...clone().mods[0], id: 'a/c:.', repo: 'a/c' })
   assert.deepEqual(describeChange(base, twins), ['new: a/c:.', 'possible duplicate: a/b:. and a/c:. share an owner and a name; if they are one mod, add the pair to data/duplicates.txt'])
+})
+
+test('the scan summary titles the count and lists only what needs a decision', () => {
+  const one = (id, extra = {}) => ({ ...clone().mods[0], id, repo: id.split(':')[0], ...extra })
+  const quiet = clone(); quiet.mods[0].stars = 9
+  assert.equal(summarize(base, quiet).title, 'Scan: 1 mods, footprints refreshed')
+  assert.deepEqual(summarize(base, quiet).decisions, [])
+  assert.match(summarize(base, quiet).lines.join('\n'), /## Needs a decision\nNothing\./)
+
+  const missing = { status: 'unknown', errors: ['Not found in this scan; retained pending weekly retirement review.'] }
+  const before = { mods: [one('o/r:plugins/t', { name: 't' }), one('o/r:probe-1/p', { name: 'p', kind: 'fixture' }), one('o/twin:.', { name: 'w' }), one('o/twin2:.', { name: 'w' }), one('x/gone:.', { name: 'g' })] }
+  const after = { mods: [
+    one('o/r:plugins/t', { name: 't', validate: missing }), one('o/r:archive/t', { name: 't' }),
+    one('o/r:probe-1/p', { name: 'p', kind: 'fixture', validate: missing }), one('O/R:old/probe-1/p', { name: 'p' }),
+    one('o/twin:.', { name: 'w' }), one('o/twin2:.', { name: 'w' }),
+    one('o/copy:.', { name: 'c' }), one('o/copy2:.', { name: 'c' }), one('n/new:.', { name: 'n' }),
+  ] }
+  const summary = summarize(before, after)
+  assert.equal(summary.title, 'Scan: 4 to 8 mods (5 new, 1 gone)')
+  assert.deepEqual(summary.decisions, [
+    'gone: x/gone:. (mod) is no longer in the inventory',
+    'counted twice: o/r:plugins/t moved to o/r:archive/t; add the pair to data/duplicates.txt',
+    'filing lost in a move: o/r:probe-1/p is a fixture, but its new path O/R:old/probe-1/p counts as a mod',
+    'possible duplicate: o/copy2:. and o/copy:. share an owner and a name; if they are one mod, add the pair to data/duplicates.txt',
+  ])
+  assert.equal(summary.lines[0], '**4 to 8 counted mods.** 5 new records (5 counted), 1 gone, 0 reclassified.')
+  const big = { mods: Array.from({ length: 1234 }, (_, i) => one(`o/r${i}:.`, { name: `m${i}` })) }
+  assert.equal(summarize(base, big).title, 'Scan: 1 to 1,234 mods (1,234 new, 2 gone)')
 })
 
 test('kindOf files built-ins, fixtures, mirrors and catalogue copies, and counts the rest', () => {
@@ -629,6 +657,10 @@ test('the change check reads a committed scan larger than the default output buf
   const run = spawnSync(process.execPath, [fileURLToPath(new URL('./changed.mjs', import.meta.url))], { cwd: root, encoding: 'utf8' })
   assert.equal(run.status, 1, run.stderr)
   assert.equal(run.stdout.trim(), 'no meaningful change')
+  const titled = spawnSync(process.execPath, [fileURLToPath(new URL('./changed.mjs', import.meta.url)), '--title', join(root, 'title.txt'), '--summary', join(root, 'summary.md')], { cwd: root, encoding: 'utf8' })
+  assert.equal(titled.status, 1, titled.stderr)
+  assert.equal(readFileSync(join(root, 'title.txt'), 'utf8'), 'Scan: 800 mods, footprints refreshed\n')
+  assert.match(readFileSync(join(root, 'summary.md'), 'utf8'), /^\*\*800 counted mods, unchanged\.\*\*/)
   const broken = spawnSync(process.execPath, [fileURLToPath(new URL('./changed.mjs', import.meta.url)), join(root, 'missing.json')], { cwd: root, encoding: 'utf8' })
   assert.equal(broken.status, 2)
 })
