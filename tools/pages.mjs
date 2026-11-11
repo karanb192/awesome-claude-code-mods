@@ -120,22 +120,21 @@ const noticed = mod => mod.kind === 'builtin' || Boolean(mod.directory) || (mod.
 
 // The pages search engines are asked to index; every other page stays live and linked, with noindex. A page
 // qualifies when its repository has two stars or more, is in Anthropic's directory or is built in, and its description is
-// long enough to tell it apart. Mods that repeat one description share one indexed page: the oldest repository's.
-// The registry remembers a page that qualified, so neither a lost star nor an older copy qualifying later turns
-// it back.
+// long enough to tell it apart. A page with a description an indexed page already has stays out, and among new
+// pages the oldest repository's goes in. The registry remembers a page that went in, and from then on only its
+// own record can take it out: not a lost star, and not another mod arriving at the same description.
 export function indexedPages(records, pages, registry) {
   const entries = { ...registry }
-  const eligible = records.filter(mod => describable(mod) && wording(mod).length >= MIN_DESCRIPTION && (noticed(mod) || entries[pages.get(mod)]?.indexed))
-  const keepers = new Map()
-  const kept = mod => entries[pages.get(mod)]?.indexed ? 0 : 1
-  for (const mod of eligible.sort((a, b) => kept(a) - kept(b) || byText(a.createdAt ?? '', b.createdAt ?? '') || byText(idOf(a), idOf(b)))) {
+  const remembered = mod => Boolean(entries[pages.get(mod)]?.indexed)
+  const eligible = records.filter(mod => describable(mod) && wording(mod).length >= MIN_DESCRIPTION && (noticed(mod) || remembered(mod)))
+  const indexed = new Set(eligible.filter(remembered))
+  const taken = new Set([...indexed].map(mod => wording(mod).toLowerCase()))
+  for (const mod of eligible.filter(mod => !remembered(mod)).sort((a, b) => byText(a.createdAt ?? '', b.createdAt ?? '') || byText(idOf(a), idOf(b)))) {
     const key = wording(mod).toLowerCase()
-    if (!keepers.has(key)) keepers.set(key, mod)
-  }
-  const indexed = new Set(keepers.values())
-  for (const mod of indexed) {
-    const slug = pages.get(mod)
-    if (!entries[slug]?.indexed) entries[slug] = { ...entries[slug], indexed: true }
+    if (taken.has(key)) continue
+    taken.add(key)
+    indexed.add(mod)
+    entries[pages.get(mod)] = { ...entries[pages.get(mod)], indexed: true }
   }
   return { indexed, registry: entries }
 }

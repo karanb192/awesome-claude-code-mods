@@ -196,6 +196,18 @@ test('search engines are asked to index a page with outside interest and a descr
   const third = indexedPages(withOriginal, new Map(withOriginal.map(record => [record, record.name])), { ...first.registry, original: { id: original.id } })
   assert.equal(third.indexed.has(original), false, 'an older copy that qualifies later does not take the place of the indexed page')
   assert.deepEqual([...third.indexed].map(record => record.name).sort(), [...first.indexed].map(record => record.name).sort())
+
+  const pair = [noticed('first', { description: long, createdAt: '2025-01-01T00:00:00Z' }), noticed('second', { description: long, createdAt: '2025-06-01T00:00:00Z' })]
+  const names = result => [...result.indexed].map(record => record.name).sort()
+  const run = (list, known) => indexedPages(list, new Map(list.map(record => [record, record.name])), known)
+  const start = run(pair, { first: { id: 'a/b:first' }, second: { id: 'a/b:second' } })
+  assert.deepEqual(names(start), ['first'])
+  const away = run([{ ...pair[0], validate: { status: 'unknown', errors: [] } }, pair[1]], start.registry)
+  assert.deepEqual(names(away), ['second'], 'the copy goes in while the first page is only retained')
+  assert.deepEqual(names(run(pair, away.registry)), ['first', 'second'], 'the first page coming back does not take the second out')
+  const apart = run([pair[0], { ...pair[1], description: `${long} With a second line.` }], { first: { id: 'a/b:first' }, second: { id: 'a/b:second' } })
+  assert.deepEqual(names(apart), ['first', 'second'])
+  assert.deepEqual(names(run(pair, apart.registry)), ['first', 'second'], 'an indexed page that edits its description to match another takes neither out')
   assert.equal(formatRegistry({ a: { id: 'x', indexed: true } }), '{\n  "a": {"id":"x","indexed":true}\n}\n')
   assert.throws(() => readRegistry('{"a": {"id": "x", "indexed": "yes"}}'), /invalid entry/)
 })
