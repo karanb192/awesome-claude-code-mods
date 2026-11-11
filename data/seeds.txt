@@ -106,6 +106,7 @@ MarcoCarnevali/claude-code-mods
 Marius-Adam/claude-files-pane
 mertkayacs/ultramod
 MikeGT4/agent-tree
+mingfeng6684/claude-todo-panel
 mksadoughi/standby
 moduvoice/claude-code-ko-ui
 MohammedSaud404/rtl-terminal
