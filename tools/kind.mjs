@@ -9,14 +9,25 @@ const NOT_A_MOD = [/\/tests?\//, /\/fixtures?\//, /\/probes?\//, /\/examples?\//
 // These repositories keep test material outside conventional fixture folders alongside installable mods.
 const REPO_FIXTURES = new Map([
   ['andrey342/foreman', /^spike\/(?:mod|v02)(?:\/|$)/],
+  ['beasaltfish/idle-arcade', /^plugins\/(?:_probe|_shared-tests)(?:\/|$)/],
+  ['capibara-html/guildflow', /^poc\/plugin(?:\/|$)/],
   ['cdeust/claude-mods', /^scripts\/replay-dispatch(?:\/|$)/],
   ['cyclopseyeteam/cyclops-fresheye', /^acceptance\/driver(?:\/|$)/],
+  ['danielpg95/modster-hunter', /^spikes\/p5-39-desktop-art\/mod(?:\/|$)/],
   ['gaius-codius/ostrakon', /^tools\/(?:experiments\/(?:spc|spw|spx|spx0)|gallery|mockups)(?:\/|$)/],
+  ['ivokund/claude-account-rotator', /^demo\/harness(?:\/|$)/],
+  ['jetsongdev/jet-router', /^eval\/cache-measure(?:\/|$)/],
+  ['kopylow/wobbly-volley', /^prototypes\/(?:p1-band|p2-client-court|p4-key-helper)(?:\/|$)/],
   ['kurushiba/claude-mods', /^(?:02-first-mod\/broken|03-events|04-test-pilot|05-ui\/broken|08-testing\/errors|09-distribution)(?:\/|$)/],
   ['malkiz/claude-reply-comments', /^spikes\/transcript-layouts(?:\/|$)/],
   ['milocosmopolitan/redacton', /^qualification(?:\/|$)/],
   ['ninondev/cc-coco', /^source(?:\/|$)/],
   ['ninondev/claude-sama', /^source(?:\/|$)/],
+  ['partalemre/modz', /^tools\/kit-gallery(?:\/|$)/],
+  ['partalemre/transceiver', /^spike\/tx-probe(?:\/|$)/],
+  ['peterting/claude-mod', /^spikes\/crew(?:\/|$)/],
+  ['robgruhl/claude-mod-learnings', /^experiments\/(?:e[1-7]-[^/]+|claude-lookalike|latency|live-probe)(?:\/|$)/],
+  ...['xsyetopz/dotclaude', 'xsyetopz/claudetto'].map(repo => [repo, /^openspec\/changes\/release-2-1-319\/evidence\/tmp\/(?:probe-141\/arm-reorder|probe-17-1-lab|probe-tui\/plug)(?:\/|$)/]),
 ])
 
 const readList = path => {

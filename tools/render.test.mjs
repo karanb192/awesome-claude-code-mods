@@ -7,6 +7,8 @@ import { tmpdir } from 'node:os'
 import { join, extname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright'
+import { reconcile } from './inventory.mjs'
+import { applyDuplicates, readDuplicates } from './dedupe.mjs'
 
 const renderer = fileURLToPath(new URL('./render.mjs', import.meta.url))
 // Render grades from recorded calls, so each fixture level comes from a call that produces it.
@@ -265,7 +267,7 @@ test('compatibility warnings stay distinct from validation failures and link to 
   assert.equal(await source.isVisible(), true)
   assert.equal(await source.getAttribute('href'), `https://github.com/example/mods/blob/${'a'.repeat(40)}/plugins/mod-0/hooks/colour.ts#L12`)
   assert.match(await tab.locator('dl').innerText(), /Marketplace failed/)
-  assert.match(await tab.locator('dl').innerText(), /Validation on 2.1.287\nPassed/)
+  assert.match(await tab.locator('dl').innerText(), /Validation\nPassed/)
   assert.match(await tab.locator('.compatibility').innerText(), /marketplace fails; review UI rewrite/)
 })
 
@@ -662,6 +664,19 @@ test('a rescan that only moves stars and dates leaves every page and the registr
   assert.equal(readFileSync(join(dir, 'docs/sitemap.xml'), 'utf8'), sitemap)
 })
 
+test('a rescan on a newer validator that changes no result leaves every mod page untouched', t => {
+  const dir = fixture(t, [mod(0), mod(1, 'failed'), mod(2, 'passed', 'builtin')])
+  render(dir)
+  const pages = tree(join(dir, 'docs/mods'))
+  const data = JSON.parse(readFileSync(join(dir, 'data/mods.json'), 'utf8'))
+  data.claudeVersion = '2.9.999'
+  data.mods = data.mods.map(m => ({ ...m, validate: { ...m.validate, claudeVersion: '2.9.999' } }))
+  writeFileSync(join(dir, 'data/mods.json'), JSON.stringify(data))
+  render(dir)
+  assert.deepEqual(tree(join(dir, 'docs/mods')), pages)
+  assert.doesNotMatch(Object.values(tree(join(dir, 'docs/mods'))).join(''), /2\.9\.999/)
+})
+
 test('retired mods lose their page, renamed ones leave a redirect, and their paths stay reserved', t => {
   const dir = fixture(t, [mod(0), mod(1), mod(2)])
   render(dir)
@@ -969,7 +984,7 @@ test('topic pages list their members, are linked from the homepage, A to Z pages
   const home = readFileSync(join(dir, 'docs/index.html'), 'utf8')
   assert.match(home, /<div class="browse topics" role="navigation" aria-label="Browse mods by topic"><span>Browse by topic<\/span><a href="\/topics\/prompt-cache\/">Prompt cache<\/a><\/div>/)
   assert.match(readFileSync(join(dir, 'docs/browse/m/index.html'), 'utf8'), /<a href="\/topics\/prompt-cache\/">Prompt cache<\/a>/)
-  assert.match(readFileSync(join(dir, 'docs/llms.txt'), 'utf8'), /## Topics\n\n- \[Prompt cache mods\]\(https:\/\/mods\.aidojo\.si\/topics\/prompt-cache\/\): 2 mods that show the cache timer, keep it warm or warn before a cold send\.\n/)
+  assert.match(readFileSync(join(dir, 'docs/llms.txt'), 'utf8'), /## Topics\n\n- \[Prompt cache mods for Claude Code\]\(https:\/\/mods\.aidojo\.si\/topics\/prompt-cache\/\): 2 mods that show the cache timer, keep it warm or warn before a cold send\.\n/)
   const sitemap = xml => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1].replace('https://mods.aidojo.si/', '/'))
   assert.deepEqual(sitemap(readFileSync(join(dir, 'docs/sitemap.xml'), 'utf8')), ['/', '/access/', '/topics/prompt-cache/', '/browse/m/', '/mods/example--mods--mod-0/', '/mods/example--mods--mod-1/', '/mods/example--mods--mod-4/', '/mods/example--mods--mod-5/'])
   for (const i of [1, 5]) assert.match(modPage(dir, `example--mods--mod-${i}`), /<p class="topics-line">Listed under <a href="\/topics\/prompt-cache\/">Prompt cache mods for Claude Code<\/a>\.<\/p>/)
@@ -1063,4 +1078,49 @@ test('the topic page loads every asset over HTTP, fits a phone and needs no scri
     assert.notEqual(await page.evaluate(() => getComputedStyle(document.body).backgroundColor), 'rgba(0, 0, 0, 0)')
     await page.close()
   }
+})
+
+
+test('confirmed retirement renames redirect through the normal renderer after reconciliation removes old IDs', t => {
+  const pairIds = [
+    ['ucsandman/Agnostic-AI:engine/mods/claude-runtime', 'ucsandman/Agnostic-AI:engine/mods/harness-runtime'],
+    ['DiogoHSM/claude-mods:agentes-pixel', 'DiogoHSM/claude-mods:pixel-agents'],
+    ['DiogoHSM/claude-mods:polimento-visual', 'DiogoHSM/claude-mods:visual-polish'],
+  ]
+  const record = id => {
+    const [repo, path] = id.split(':')
+    return { ...mod(0), id, repo, path, name: path.split('/').at(-1) }
+  }
+  // The old cross-repository alias reaches the new keeper through an absent old keeper.
+  pairIds.push(['ucsandman/claude-harness:engine/mods/claude-runtime', 'ucsandman/Agnostic-AI:engine/mods/harness-runtime'])
+  const previous = pairIds.map(([id]) => record(id))
+  const dir = fixture(t, previous)
+  cpSync(fileURLToPath(new URL('../data/duplicates.txt', import.meta.url)), join(dir, 'data/duplicates.txt'))
+  render(dir)
+  const registry = JSON.parse(readFileSync(join(dir, 'data/pages.json'), 'utf8'))
+  assert.ok(Object.values(registry).every(entry => !entry.to), 'main before retirement keeps live pages')
+  const current = [...new Set(pairIds.map(([, id]) => id))].map(record)
+  current.push(record('ucsandman/claude-harness:engine/mods/harness-runtime'))
+  const checked = new Map(previous.map(m => [m.repo.toLowerCase(), 'a'.repeat(40)]))
+  const retired = reconcile(previous, current, checked, true)
+  assert.equal(retired.retired.length, 4)
+  assert.ok(previous.every(old => !retired.mods.some(m => m.id === old.id)))
+  const mods = applyDuplicates(retired.mods, readDuplicates(join(dir, 'data/duplicates.txt')))
+  assert.equal(mods.filter(m => m.kind === 'mod').length, 3)
+  const data = JSON.parse(readFileSync(join(dir, 'data/mods.json'), 'utf8'))
+  writeFileSync(join(dir, 'data/mods.json'), JSON.stringify({ ...data, mods }))
+  render(dir)
+  const after = JSON.parse(readFileSync(join(dir, 'data/pages.json'), 'utf8'))
+  for (const [old, keeper] of pairIds) {
+    const slug = Object.keys(registry).find(s => registry[s].id === old)
+    const target = Object.keys(after).find(s => after[s].id === keeper)
+    assert.equal(after[slug].id, old)
+    assert.equal(after[slug].to, target)
+    assert.ok(modPage(dir, slug).includes(`url=/mods/${target}/`))
+    assert.ok(existsSync(join(dir, 'docs/mods', target, 'index.html')))
+    assert.ok(!readFileSync(join(dir, 'docs/sitemap.xml'), 'utf8').includes(`/mods/${slug}/`))
+  }
+  const once = readFileSync(join(dir, 'data/pages.json'), 'utf8')
+  render(dir)
+  assert.equal(readFileSync(join(dir, 'data/pages.json'), 'utf8'), once)
 })

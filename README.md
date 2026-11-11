@@ -1,6 +1,6 @@
 # Awesome Claude Code Mods [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
-5,000+ Claude Code mods, with what each one can access before you install it. Context and usage meters, prompt cache warmers, status lines, guards and more, with install hints. A mod is a plugin that uses JavaScript or TypeScript functions to change Claude Code's interface or behavior, on **Claude Code 2.1.287+**. [Browse the catalogue](https://mods.aidojo.si/).
+Thousands of Claude Code mods, with what each one can access before you install it. Context and usage meters, prompt cache warmers, status lines, guards and more, with install hints. A mod is a plugin that uses JavaScript or TypeScript functions to change Claude Code's interface or behavior, on **Claude Code 2.1.287+**. [Browse the catalogue](https://mods.aidojo.si/).
 
 Add a browser beside your conversation, keep usage in view, or check a command before it runs. Install a community mod or [ask Claude to build one](https://claude.dev/blog/getting-started-with-claude-code-mods/#the-shortcut-let-claude-build-it).
 
@@ -15,7 +15,7 @@ Find a mod in the [full catalogue][catalogue] by name or task and filter by acce
 Then run `/reload-plugins` to activate it before asking “Find a mod that helps with code reviews”. Requires Node 18 or later. For Desktop Code local sessions, use the [setup instructions](finder/README.md#in-claude-code-mcp).
 
 <!-- stats:start -->
-**6092 mods** · Last scanned 2026-10-22.
+**7849 mods** · Last scanned 2026-11-09.
 <!-- stats:end -->
 
 ![Browsing a GitHub pull request beside a Claude Code conversation using terminal-browser](assets/terminal-browser-demo.gif)
@@ -37,7 +37,7 @@ Access reported by the latest scan (select the badge for details):
 
 ## Featured
 
-Six picks for everyday tasks. Check each mod's platform requirements and access before installing. [Nominate a mod](contributing.md#nominate-a-featured-mod) for a future selection.
+Seven picks for everyday tasks. Check each mod's platform requirements and access before installing. [Nominate a mod](contributing.md#nominate-a-featured-mod) for a future selection.
 
 - [cache-tax](https://github.com/karanb192/cache-tax) - Keeps the prompt cache warm during breaks and stops a cold send once to show its estimated cost. Warming uses tokens and needs a one-hour cache. Built by the maintainer. [Recording](https://github.com/karanb192/cache-tax/blob/main/site/assets/refusal.gif).
 - [image-view](https://github.com/jarrodwatts/claude-image-view) - Shows thumbnails of pasted images above the prompt so you can check each image before sending. Needs a kitty-graphics terminal such as Ghostty or kitty. [Screenshot](https://github.com/jarrodwatts/claude-image-view/blob/main/claude-image-view.png).
@@ -45,6 +45,7 @@ Six picks for everyday tasks. Check each mod's platform requirements and access 
 - [flightdeck](https://github.com/scasella/claude-flightdeck) - Shows context, cost, permission checks and subagents in a live dashboard, without changing tool calls. [Demo](https://github.com/scasella/claude-flightdeck/blob/main/docs/media/demo.gif).
 - [filetree](https://github.com/data-goblin/claude-code-filetree) - Shows a file tree with Git status and highlights files as Claude reads or edits them. Selecting a file passes its path to Claude; the terminal sidebar needs fullscreen and at least 110 columns. [Demo](https://github.com/data-goblin/claude-code-filetree/blob/main/media/filetree-shimmer.gif).
 - [prompt-rail](https://github.com/oikon48/prompt-rail) - Adds a strip of past prompts to hover over and reread, with click-to-jump navigation in the terminal. [Demo](https://github.com/oikon48/prompt-rail/blob/main/docs/demo.gif).
+- [lot-map](https://github.com/alexeyw/lot-map) - Draws a live map beside the chat where each tool call, model request and hook sends a pulse to one of ten stations, with a ring that fills as the context window does. The drawn map needs the desktop app or VS Code; a terminal shows the same activity as text. [Demo](https://github.com/alexeyw/lot-map/blob/main/docs/demo.gif).
 
 Flightdeck's README also links to this catalogue.
 

@@ -121,3 +121,61 @@ tyree88/tempered_plugins:lessons tyree88/tempered_plugins:mods/lessons
 tyree88/tempered_plugins:limit-resume tyree88/tempered_plugins:mods/limit-resume
 tyree88/tempered_plugins:ship-state tyree88/tempered_plugins:mods/ship-state
 tyree88/tempered_plugins:timeline tyree88/tempered_plugins:mods/timeline
+pompeitech/affreschi:plugins/context-map pompeitech/affreschi:plugins/pulcinella
+LupusMalusDeviant/claude-mods:plugins/blast-radius LupusMalusDeviant/mod-box:plugins/blast-radius
+LupusMalusDeviant/claude-mods:plugins/cache-meter LupusMalusDeviant/mod-box:plugins/cache-meter
+LupusMalusDeviant/claude-mods:plugins/ci-watch LupusMalusDeviant/mod-box:plugins/ci-watch
+LupusMalusDeviant/claude-mods:plugins/handoff LupusMalusDeviant/mod-box:plugins/handoff
+LupusMalusDeviant/claude-mods:plugins/package-guard LupusMalusDeviant/mod-box:plugins/package-guard
+LupusMalusDeviant/claude-mods:plugins/pet LupusMalusDeviant/mod-box:plugins/pet
+LupusMalusDeviant/claude-mods:plugins/read-guard LupusMalusDeviant/mod-box:plugins/read-guard
+LupusMalusDeviant/claude-mods:plugins/screen-mask LupusMalusDeviant/mod-box:plugins/screen-mask
+LupusMalusDeviant/claude-mods:plugins/secret-guard LupusMalusDeviant/mod-box:plugins/secret-guard
+LupusMalusDeviant/claude-mods:plugins/sign-guard LupusMalusDeviant/mod-box:plugins/sign-guard
+LupusMalusDeviant/claude-mods:plugins/subagent-saver LupusMalusDeviant/mod-box:plugins/subagent-saver
+arifamir/nukey-kit:plugins/nukey arifamir/nukey:plugins/nukey
+cpeaustriajc/cj-stack:mods/usage-pace cpeaustriajc/cj-stack:mods/archived/usage-pace
+bracyw/claude-mods:plugins/cache-tax karanb192/cache-tax:.
+bracyw/claude-mods:plugins/filetree data-goblin/claude-code-filetree:.
+finalpantasy/claude-mod-hider:. finalpantasy/claude-mod-pack:claude-mod-hider
+kcsujeet/kc-claude-kit:plugins/image-preview kcsujeet/kc-claude-kit:plugins/kc-image-preview
+kcsujeet/kc-claude-kit:plugins/usage-band kcsujeet/kc-claude-kit:plugins/kc-usage-band
+tartinerlabs/claude-code-mods:plugins/pr-pilot tartinerlabs/claude-code-mods:plugins/git-status
+bahaospanov/claude-mods:close-countdown bahaospanov/skills:herdr-rules
+bahaospanov/skills:close-countdown bahaospanov/skills:herdr-rules
+lifeofgurpreet/glanceline:legacy/glanceline lifeofgurpreet/glanceline:.
+MrValraven/pulse-mods:pulse-blast-radius StarHawkMK1/cc-mods:mods/blast-radius
+StarHawkMK1/cc-mods:mods/token-weather nalpari/claude-mods:token-weather
+ellis0207/ellis-claude-mods:plugins/savvy-progress JohnnyVizz/claude-kit:plugins/savvy-progress
+ellis0207/ellis-claude-mods:plugins/skins hellosverre/claude-skins:.
+primelogiclabio/claude-tools:mods/context-bar primelogiclabio/claude-tools:plugins/context-bar
+primelogiclabio/claude-tools:mods/project-tracker primelogiclabio/claude-tools:plugins/project-tracker
+primelogiclabio/claude-tools:mods/resource-monitor primelogiclabio/claude-tools:plugins/resource-monitor
+rezzminator/auto-effort:plugins/auto-effort-control rezzminator/auto-effort:plugins/auto-effort
+Kiy-K/oxide:.agents/skills/jev-model-router Kiy-K/oxide:.claude/skills/jev-model-router
+# Root plugin moved into plugin/ in upstream commit ad9fbe137699ef90e28e7ff07050e16996d871bf.
+NahumLitvin/prismantis:. NahumLitvin/prismantis:plugin
+# Standalone pet has identical hook/runtime files and is generated from mod-box
+# (ac4c9e749db10f6a7c7eef8b90fe2ee476e5decd); keep the published pack identity.
+LupusMalusDeviant/desktop-pet:plugins/pet LupusMalusDeviant/mod-box:plugins/pet
+# Standalone session-summary is also shipped in usage-band at 49454e755d22ca64e908720dc7c805c9e2049ace.
+MichaelDaenzer/claude-mod-session-stats:. MichaelDaenzer/claude-mod-usage-band:session-summary
+# cs-feed became clean-chat, chat-only, then filter-chat (7a962eaceb2d4ca28a0b115b080d725077aed856).
+hex/claude-sessions:mods/cs-feed hex/claude-sessions:mods/cs-filter-chat
+# Office hooks moved into ai-dev-team-office in 776b6531eb39538b29a48dc4f685ac3fbc8a0035.
+111vandit111/ai-dev-team:plugins/ai-dev-team 111vandit111/ai-dev-team:plugins/ai-dev-team-office
+# README at d886c0a33fd4ed1726062909c0d99f5234051e94 calls funmeter the renamed medidor.
+mmacedok/claude-mods:plugins/medidor mmacedok/claude-mods:plugins/funmeter
+# pr-review-watch became agent-watcher in f163fe4d0f93be304b60259e520fab7d5ceb18a4.
+t968rs/operator-straps:plugins/pr-review-watch t968rs/operator-straps:plugins/agent-watcher
+# Codex replaces chatgpt in 5d4baf4ba3b0d626523c56179ce906d9e0968390 and incorporates
+# codex-computer-use (README at b89e552c3bdc8a4935a472dfe66a5c3b52c3c063).
+# Keep retained inventory IDs; repository-rename handling resolves the codex keeper.
+anderson-spider/claude-mods:plugins/chatgpt anderson-spider/claude-mods:plugins/codex
+anderson-spider/claude-mods:plugins/codex-computer-use anderson-spider/claude-mods:plugins/codex
+ucsandman/claude-harness:engine/mods/harness-runtime ucsandman/Agnostic-AI:engine/mods/harness-runtime
+ucsandman/Agnostic-AI:engine/mods/claude-runtime ucsandman/Agnostic-AI:engine/mods/harness-runtime
+DiogoHSM/claude-mods:agentes-pixel DiogoHSM/claude-mods:pixel-agents
+DiogoHSM/claude-mods:polimento-visual DiogoHSM/claude-mods:visual-polish
+aidan-nunn-sys/claude-config:mods/review-watch hamzafer/claude-code-mods:mods/review-watch
+aidan-nunn-sys/claude-config:mods/secret-box ray-amjad/claude-code-mods:plugins/secret-box

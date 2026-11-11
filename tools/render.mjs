@@ -10,6 +10,7 @@ import { renderSite, renderSitemap, renderRobots, renderLlms, reviewNotes, css, 
 import { renderBrowsePage } from './browse.mjs'
 import { assignPages, formatRegistry, idOf, indexable, readRegistry, renderModPage, renderNotFound, renderRedirect } from './pages.mjs'
 import { siteAnchors } from './slug.mjs'
+import { readDuplicates } from './dedupe.mjs'
 import { ACCESS_PATH, renderAccessPage } from './access.mjs'
 import { TOPICS_PATH, listedMembers, readTopics, renderTopicPage, topicMembers, topicSummary } from './topics.mjs'
 
@@ -101,7 +102,7 @@ updateBlocks('README.md', { stats: `**${mods.length} mods** · Last scanned ${as
 updateBlocks('catalogue.md', { stats, scan: table(mods), builtin: table(builtins) })
 
 const records = [...mods, ...builtins]
-const identity = assignPages(records, readRegistry(existsSync('data/pages.json') ? readFileSync('data/pages.json', 'utf8') : ''), data.mods)
+const identity = assignPages(records, readRegistry(existsSync('data/pages.json') ? readFileSync('data/pages.json', 'utf8') : ''), data.mods, readDuplicates())
 const pageOf = mod => identity.pages.get(mod)
 const byRepo = new Map()
 for (const m of [...records].sort((a, b) => a.name.localeCompare(b.name, 'en') || (idOf(a) < idOf(b) ? -1 : 1))) byRepo.set(m.repo, [...(byRepo.get(m.repo) ?? []), m])
@@ -138,7 +139,7 @@ for (const m of records) {
   if (identity.redirects.has(pageOf(m))) continue
   mkdirSync(`docs/mods/${pageOf(m)}`, { recursive: true })
   const siblings = byRepo.get(m.repo).filter(other => other !== m).map(other => ({ mod: other, slug: pageOf(other) }))
-  writeFileSync(`docs/mods/${pageOf(m)}/index.html`, renderModPage(m, { slug: pageOf(m), anchor: slug(m), claudeVersion: data.claudeVersion, siblings, topics: topicsOf.get(m) ?? [] }))
+  writeFileSync(`docs/mods/${pageOf(m)}/index.html`, renderModPage(m, { slug: pageOf(m), anchor: slug(m), siblings, topics: topicsOf.get(m) ?? [] }))
 }
 for (const [from, to] of identity.redirects) {
   mkdirSync(`docs/mods/${from}`, { recursive: true })
@@ -169,5 +170,5 @@ writeFileSync('docs/access/index.html', renderAccessPage(data))
 writeFileSync('data/pages.json', formatRegistry(identity.registry))
 writeFileSync('docs/sitemap.xml', renderSitemap([ACCESS_PATH, ...shownTopics.map(topic => `topics/${topic.slug}/`), ...letters.map(key => `browse/${key}/`), ...records.filter(indexable).map(m => `mods/${pageOf(m)}/`).sort()]))
 writeFileSync('docs/robots.txt', renderRobots())
-writeFileSync('docs/llms.txt', renderLlms(data, shownTopics.map(topic => ({ slug: topic.slug, short: topic.short, summary: topicSummary(topic, listedIn.get(topic).length) }))))
+writeFileSync('docs/llms.txt', renderLlms(data, shownTopics.map(topic => ({ slug: topic.slug, title: topic.title, summary: topicSummary(topic, listedIn.get(topic).length) }))))
 console.log(`rendered ${mods.length} mods and ${builtins.length} built-ins into README.md, catalogue.md, badges/, docs/, docs/badges/, docs/mods/, docs/browse/, docs/topics/ and docs/access/`)

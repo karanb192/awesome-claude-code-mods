@@ -32,6 +32,35 @@ claude plugin update mod-finder@aidojo
 
 Restart Claude Code, or open a new local session in Desktop, to load the updated plugin.
 
+## One server for multiple sessions
+
+The plugin uses stdio by default, so each session starts a process. To share one process and catalogue index, run the server with Streamable HTTP:
+
+```sh
+export MOD_FINDER_API_KEY="$(openssl rand -hex 32)"
+MOD_FINDER_PORT=18763 node finder/server.mjs --http
+```
+
+Keep the key in your service manager's environment and give clients the same value. The server listens only on `127.0.0.1`. It requires a key of at least 32 characters, rejects foreign Host and Origin headers, and accepts authenticated JSON-RPC POST requests at `/mcp`. It does not open an event stream or keep client sessions.
+
+Configure each MCP client with this connection, using its supported environment-variable expansion:
+
+```json
+{
+  "mcpServers": {
+    "mods": {
+      "type": "http",
+      "url": "http://127.0.0.1:18763/mcp",
+      "headers": { "Authorization": "Bearer ${MOD_FINDER_API_KEY}" }
+    }
+  }
+}
+```
+
+Disable the stdio plugin when using the shared connection, or both copies will run. In Claude Code, run `claude plugin disable mod-finder@aidojo --scope user`. Load the new configuration in each session. Manage the shared process with your operating system's service manager if it must survive terminal exits.
+
+HTTP calls use the same tools, GitHub downloads, cache and refresh rules as stdio. The transport follows the [MCP Streamable HTTP specification](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports).
+
 ## From a shell
 
 `find-mods.mjs` gives the same answers as the MCP tools, because both call `search.mjs`.

@@ -16,6 +16,10 @@ const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 const MAINTAINER = 'karanb192'
 const DOCS = 'https://code.claude.com/docs/en/plugins/mods'
 const CACHING = 'https://platform.claude.com/docs/en/build-with-claude/prompt-caching'
+const CONTEXT = 'https://code.claude.com/docs/en/context-window#when-your-context-fills-up'
+const LIMITS = 'https://support.claude.com/en/articles/11647753-how-do-usage-and-length-limits-work'
+const COSTS = 'https://code.claude.com/docs/en/costs'
+const PRICING = 'https://platform.claude.com/docs/en/about-claude/pricing'
 // Three groups by repository stars, name order inside each, so a rescan that only moves stars changes nothing
 // while every repository stays inside its group. Unknown star counts sit in the lowest group.
 export const GROUPS = [
@@ -51,6 +55,24 @@ const PROSE = {
 <li>Read the hooks line. A <code>prompt.submit</code> hook sees matching prompts, or every prompt when no filter is recorded (<a href="${DOCS}/admin#review-what-a-mod-can-do">Anthropic: review what a mod can do</a>). When the footprint is incomplete, event coverage is unknown.${hookSentence}</li>
 <li>Check which lifetime the mod assumes. The API offers 5 minutes and 1 hour; what your session gets depends on how it is billed, and the README says what the mod assumes.</li>
 <li>The scan is static. It lists what the code references, not what it does at runtime. A level does not limit what a program the mod starts can do (<a href="${DOCS}/admin#know-which-controls-still-apply">Anthropic: which controls still apply</a>). “Reads mod state” means the scan saw a state read and does not record whose state. See <a href="/access/">what a mod can access</a>.</li></ul></section>`
+    },
+  },
+  'usage-meters': {
+    summary: n => `${mods(n)} that ${verb(n, 'show')} context fill, token use, plan limits or estimated cost, or ${verb(n, 'warn')} before a limit.`,
+    lede: n => `${mods(n)} that ${verb(n, 'show')} how full your context window is, how much of your plan’s 5-hour and weekly windows you have used or the session’s estimated cost so far, or ${verb(n, 'warn')} you before a limit. Each name opens the mod’s page with its hooks, API calls, access and installation guidance.`,
+    sections: f => {
+      const callSentence = f.reported ? ` Of the ${mods(f.reported)} here with reported footprints, ${f.usageCalls} ${verb(f.usageCalls, 'record')} <code>$.session.usage</code>, ${f.fetchCalls} ${verb(f.fetchCalls, 'record')} <code>$.http.fetch</code>, ${f.processCalls} ${verb(f.processCalls, 'record')} a process call and ${f.modelCalls} ${verb(f.modelCalls, 'record')} a <code>$.model</code> method or <code>$.prompt.submit</code>.` : ''
+      const hookSentence = f.promptHooks ? ` ${f.promptHooks} of the ${mods(f.n)} here ${verb(f.promptHooks, 'record')} a <code>prompt.submit</code> hook${f.promptHooksIncomplete ? `, ${f.promptHooksIncomplete} of them with an incomplete footprint, where coverage is unknown` : ''}.` : ''
+      return `<section aria-labelledby="what"><h2 id="what">What these mods do</h2>
+<p>Two different measures, in Anthropic’s words. The context window is what one session holds. When it fills, Claude Code compacts it, at a threshold that depends on the model and the configuration, and <code>/context</code> shows what fills it (<a href="${CONTEXT}">Anthropic: when your context fills up</a>). Account consumption is separate: a subscription has a 5-hour window and a weekly window, shared across Claude’s surfaces, plus model-specific windows where the plan has them, and <code>/usage</code> shows the ones the account reports (<a href="${LIMITS}">how usage and length limits work</a>, <a href="${COSTS}#when-a-developer-asks-about-a-limit">Claude Code: when a developer asks about a limit</a>). Cost is an estimate: Claude Code computes a session’s dollar figure locally from token counts and list or configured prices, on an API key as well as on a subscription, and the bill lives in the Console or at the provider (<a href="${COSTS}#using-the-usage-command">Claude Code: track your costs</a>, <a href="${PRICING}">API pricing</a>).</p>
+<p>A mod reads all three through <code>$.session.usage</code>, which returns the context fill, the account’s rate-limit windows and the estimated session cost, with readings the harness lacks left absent (<a href="${DOCS}/api#reach-files-processes-and-the-network">Anthropic: reach files, processes and the network</a>). Some mods fetch figures from elsewhere or compute their own. They draw them as a band above the prompt, a status line, a pane, a toast or a notification, as bars, rings, weather or a pet, and some warn or ask before a limit.</p></section>
+
+<section aria-labelledby="choose"><h2 id="choose">How to choose one</h2>
+<ul><li>Check what it measures: this session, the whole account, or one part of it such as subagents or one tool. The description says which, and the README says how it reads the figure.</li>
+<li>Read the calls line on the mod’s page, and the README, for the job each call does. A recorded <code>$.session.usage</code> reads the harness’s own figures. A recorded <code>$.http.fetch</code> can be a gateway’s figures coming in or figures going out. A recorded model method or <code>$.prompt.submit</code> is a request on your plan or API key, which may belong to a warmer, a compaction step or something else (<a href="${DOCS}/api#call-a-model">Anthropic: call a model</a>). A program the mod starts reaches the network with your own access, which network policy does not cover (<a href="${DOCS}/admin#know-which-controls-still-apply">Anthropic: which controls still apply</a>).${callSentence}</li>
+<li>A dollar figure is an estimate at API prices, and mods do not all use the same prices. A subscription’s allowance is not a bill.</li>
+<li>Read the hooks line. A <code>prompt.submit</code> hook sees matching prompts, or every prompt when no filter is recorded (<a href="${DOCS}/admin#review-what-a-mod-can-do">Anthropic: review what a mod can do</a>). When the footprint is incomplete, event coverage is unknown.${hookSentence}</li>
+<li>The scan is static. It lists what the code references, not what it does at runtime. A level does not limit what a program the mod starts can do. “Reads mod state” means the scan saw a state read and does not record whose state. See <a href="/access/">what a mod can access</a>.</li></ul></section>`
     },
   },
 }
@@ -109,6 +131,9 @@ function figures(entries) {
     n: entries.length,
     reported: reported.length,
     modelCalls: reported.filter(({ mod }) => mod.calls.some(call => /^\$\.model\./.test(call) || call === '$.prompt.submit')).length,
+    usageCalls: reported.filter(({ mod }) => mod.calls.includes('$.session.usage')).length,
+    fetchCalls: reported.filter(({ mod }) => mod.calls.includes('$.http.fetch')).length,
+    processCalls: reported.filter(({ mod }) => mod.calls.some(call => call === '$.process.run' || call === '$.process.spawn')).length,
     promptHooks: promptHooks.length,
     promptHooksIncomplete: promptHooks.filter(({ mod }) => !hasFootprint(mod)).length,
     named: pattern => {
@@ -125,7 +150,7 @@ const entry = ({ mod, slug }, version) => {
 }
 
 // One entry per line, so an added or edited member is a one-line change in a scan PR diff.
-// entries: { mod, slug } for every listed member, in any order. topics: the topic pages to link, as { slug, short },
+// entries: { mod, slug } for every listed member, in any order. topics: the topic pages to link, as { slug, short, title },
 // including this one; letters: the A to Z pages; version: the scan's Claude Code version for failures.
 export function renderTopicPage(topic, entries, { topics = [], letters = [], version } = {}) {
   const prose = PROSE[topic.slug]
@@ -146,7 +171,7 @@ export function renderTopicPage(topic, entries, { topics = [], letters = [], ver
     ],
   }).replace(/</g, '\\u003c')
   const seeAlso = [
-    ...related.map(other => `<a href="/topics/${esc(other.slug)}/">${esc(other.short)} mods</a>`),
+    ...related.map(other => `<a href="/topics/${esc(other.slug)}/">${esc(other.title)}</a>`),
     '<a href="/access/">What can a Claude Code mod access?</a>',
     `<a href="${letters.length ? `/browse/${esc(letters[0])}/` : '/#directory'}">Browse all mods A to Z</a>`,
     '<a href="/#directory">The collection</a>',
