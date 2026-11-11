@@ -146,6 +146,7 @@ import { fingerprint, describeChange, looksPartial, summarize } from './changed.
 import { applyDuplicates, applyDuplicatesWithRenames, suspectDuplicates, readDuplicates, renamePairs, appliesWithoutRescan } from './dedupe.mjs'
 import { reconcile } from './inventory.mjs'
 import { kindOf, readCatalogs } from './kind.mjs'
+import { reclassify, needsReview } from './reclassify.mjs'
 
 const base = { claudeVersion: '2.1.272', mods: [
   { id: 'a/b:.', repo: 'a/b', kind: 'mod', name: 'x', description: 'd', hooks: [], calls: ['$.ui.log'], reach: { level: 0 }, sees: [], validate: { status: 'passed' }, archived: false, stars: 5 },
@@ -791,4 +792,82 @@ test('confirmed aidan copies count their original keepers without excluding unre
       assert.equal(applyDuplicates(records, rules)[0].kind, 'mod', `${copy}: ${kind}`)
     }
   }
+})
+
+test('a rule change refiles only the committed records it explains', () => {
+  const rules = (extra = {}) => ({ kindOf, catalogs: new Set(), exceptions: new Set(), duplicates: new Map(), ...extra })
+  const rec = (id, kind = 'mod', extra = {}) => ({ id, repo: id.split(':')[0], path: id.split(':')[1], name: 'n', description: '', kind, ...extra })
+  const pair = new Map([['o/a:.', 'o/b:x']])
+
+  let mods = [rec('o/a:.'), rec('o/b:x'), rec('o/c:.')]
+  assert.deepEqual(reclassify(mods, rules(), rules()), [])
+  assert.deepEqual(reclassify(mods, rules(), rules({ duplicates: pair })), [{ id: 'o/a:.', from: 'mod', to: 'duplicate', duplicateOf: 'o/b:x' }])
+  assert.deepEqual(reclassify(mods, rules({ duplicates: pair }), rules({ duplicates: pair })), [])
+
+  // A removed pair counts again; a duplicate the list never named (a renamed repository) stays collapsed.
+  mods = [rec('o/a:.', 'duplicate', { duplicateOf: 'o/b:x' }), rec('o/b:x'), rec('o/old:.', 'duplicate', { duplicateOf: 'o/new:.' }), rec('o/new:.')]
+  assert.deepEqual(reclassify(mods, rules({ duplicates: pair }), rules()), [{ id: 'o/a:.', from: 'duplicate', to: 'mod' }])
+  assert.equal('duplicateOf' in mods[0], false)
+  assert.equal(mods[2].kind, 'duplicate')
+
+  // An older pair that never applied is not this change's business.
+  mods = [rec('o/a:.'), rec('o/b:x', 'fixture'), rec('o/c:.'), rec('o/d:.')]
+  assert.deepEqual(reclassify(mods, rules({ duplicates: pair }), rules({ duplicates: new Map([...pair, ['o/c:.', 'o/d:.']]) })), [{ id: 'o/c:.', from: 'mod', to: 'duplicate', duplicateOf: 'o/d:.' }])
+
+  mods = [rec('cat/r:mods/x'), rec('o/a:.'), rec('cat/r:plain', 'fixture')]
+  assert.deepEqual(reclassify(mods, rules(), rules({ catalogs: new Set(['cat/r']) })), [{ id: 'cat/r:mods/x', from: 'mod', to: 'catalog' }], 'a fixture the scan filed from its manifest is left as it is')
+
+  mods = [rec('o/a:bench/x', 'fixture'), rec('o/a:bench/y', 'fixture')]
+  assert.deepEqual(reclassify(mods, rules(), rules({ exceptions: new Set(['o/a:bench/x']) })), [{ id: 'o/a:bench/x', from: 'fixture', to: 'mod' }])
+
+  const stricter = rules({ kindOf: (repo, rel, ...rest) => rel.startsWith('archive/') ? 'fixture' : kindOf(repo, rel, ...rest) })
+  mods = [rec('o/a:archive/p'), rec('o/a:plugins/p'), rec('o/a:archive/q', 'duplicate', { duplicateOf: 'o/z:q' })]
+  assert.deepEqual(reclassify(mods, rules(), stricter), [{ id: 'o/a:archive/p', from: 'mod', to: 'fixture' }, { id: 'o/a:archive/q', from: 'duplicate', to: 'fixture' }])
+  assert.equal('duplicateOf' in mods[2], false)
+
+  // A keeper refiled as something that does not count releases its copy, and a person decides which one counts.
+  mods = [rec('o/a:.', 'duplicate', { duplicateOf: 'cat/r:b' }), rec('cat/r:b'), rec('o/c:.', 'duplicate', { duplicateOf: 'o/d:.' }), rec('o/d:.')]
+  const released = reclassify(mods, rules({ duplicates: new Map([['o/a:.', 'cat/r:b'], ['o/c:.', 'o/d:.']]) }), rules({ catalogs: new Set(['cat/r']), duplicates: new Map([['o/a:.', 'cat/r:b'], ['o/c:.', 'o/d:.'], ['o/d:.', 'o/e:.']]) }))
+  assert.deepEqual(released, [{ id: 'o/a:.', from: 'duplicate', to: 'mod', released: true }, { id: 'cat/r:b', from: 'mod', to: 'catalog' }])
+  assert.equal(needsReview(8000, 8000, released), true)
+  // A keeper that becomes a duplicate itself keeps its copy collapsed, as the scan's list order does.
+  mods = [rec('o/c:.', 'duplicate', { duplicateOf: 'o/d:.' }), rec('o/d:.'), rec('o/e:.')]
+  assert.deepEqual(reclassify(mods, rules({ duplicates: new Map([['o/c:.', 'o/d:.']]) }), rules({ duplicates: new Map([['o/c:.', 'o/d:.'], ['o/d:.', 'o/e:.']]) })), [{ id: 'o/d:.', from: 'mod', to: 'duplicate', duplicateOf: 'o/e:.' }])
+
+  // The middle of a chain refiled as a catalogue releases the copy that pointed at it.
+  mods = [rec('o/a:.', 'duplicate', { duplicateOf: 'cat/r:b' }), rec('cat/r:b', 'duplicate', { duplicateOf: 'o/c:.' }), rec('o/c:.'), rec('o/x:.', 'duplicate', { duplicateOf: 'o/y:.' }), rec('o/y:.', 'duplicate', { duplicateOf: 'o/c:.' })]
+  const chain = reclassify(mods, rules(), rules({ catalogs: new Set(['cat/r']) }))
+  assert.deepEqual(chain, [{ id: 'o/a:.', from: 'duplicate', to: 'mod', released: true }, { id: 'cat/r:b', from: 'duplicate', to: 'catalog' }], 'an untouched chain stays collapsed')
+  assert.equal(needsReview(8000, 8001, chain), true)
+  for (const m of mods) if (m.kind === 'duplicate') for (let k = m, hops = 0; k.kind === 'duplicate'; k = mods.find(x => x.id === k.duplicateOf)) assert.ok(++hops < 5 && mods.some(x => x.id === k.duplicateOf), m.id)
+  assert.equal(mods.find(m => m.id === 'o/x:.').kind, 'duplicate')
+
+  assert.equal(needsReview(8000, 7995, Array(5).fill({})), false)
+  assert.equal(needsReview(8000, 8000, Array(51).fill({})), true)
+  assert.equal(needsReview(8000, 7950, Array(50).fill({})), true)
+})
+
+test('the reclassify command reads the old rules from a commit and writes only refiled records', t => {
+  const root = mkdtempSync(join(tmpdir(), 'reclassify-'))
+  t.after(() => rmSync(root, { recursive: true, force: true }))
+  mkdirSync(join(root, 'data')); mkdirSync(join(root, 'tools'))
+  for (const name of ['kind.mjs', 'dedupe.mjs', 'reclassify.mjs']) writeFileSync(join(root, 'tools', name), readFileSync(new URL(`./${name}`, import.meta.url)))
+  const rec = (id, kind = 'mod') => ({ id, repo: id.split(':')[0], path: id.split(':')[1], name: 'n', description: '', kind })
+  writeFileSync(join(root, 'data/mods.json'), JSON.stringify({ claudeVersion: '1', repos: 3, mods: [rec('o/a:.'), rec('o/b:x'), rec('o/c:.')] }, null, 2) + '\n')
+  writeFileSync(join(root, 'data/duplicates.txt'), '# pairs\n')
+  const git = (...args) => spawnSync('git', args, { cwd: root, encoding: 'utf8' })
+  git('init', '-q'); git('add', '.'); git('-c', 'user.name=t', '-c', 'user.email=t@example.com', 'commit', '-qm', 'base')
+  const base = git('rev-parse', 'HEAD').stdout.trim()
+  const run = () => spawnSync(process.execPath, ['tools/reclassify.mjs', '--base', base, '--result', 'result.txt', '--changes', 'changes.txt'], { cwd: root, encoding: 'utf8' })
+  assert.equal(run().status, 0)
+  assert.equal(readFileSync(join(root, 'result.txt'), 'utf8'), 'unchanged\n')
+  assert.equal(git('status', '--porcelain', 'data').stdout, '')
+  writeFileSync(join(root, 'data/duplicates.txt'), '# pairs\no/a:. o/b:x\n')
+  const applied = run()
+  assert.equal(applied.status, 0, applied.stderr)
+  assert.equal(readFileSync(join(root, 'result.txt'), 'utf8'), 'review\n', 'one of three counted mods is far past the share that publishes unread')
+  assert.equal(readFileSync(join(root, 'changes.txt'), 'utf8'), '3 to 2 counted mods\no/a:.: mod to duplicate (duplicate of o/b:x)\n')
+  const mods = JSON.parse(readFileSync(join(root, 'data/mods.json'), 'utf8')).mods
+  assert.deepEqual(mods.map(m => [m.id, m.kind, m.duplicateOf]), [['o/a:.', 'duplicate', 'o/b:x'], ['o/b:x', 'mod', undefined], ['o/c:.', 'mod', undefined]])
+  assert.notEqual(spawnSync(process.execPath, ['tools/reclassify.mjs', '--base', 'main'], { cwd: root, encoding: 'utf8' }).status, 0)
 })

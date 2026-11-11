@@ -353,3 +353,86 @@ if(args[0]==='api'){
   assert.ok(!commands.some(command => command.includes('scan')))
   assert.equal(commands.some(command => command[0] === 'gh' && /\/commits\/[0-9a-f]{40}\/pulls$/.test(command[2] ?? '')), !concurrentPublication)
 })
+
+for (const scenario of ['changed', 'review', 'unchanged']) test(`a merged rule change is applied without a scan: ${scenario}`, t => {
+  const root = mkdtempSync(join(tmpdir(), 'apply-rules-'))
+  t.after(() => rmSync(root, { recursive: true, force: true }))
+  const remote = join(root, 'remote.git'), checkout = join(root, 'checkout'), bin = join(root, 'bin'), runner = join(root, 'runner')
+  for (const dir of [checkout, bin, runner]) mkdirSync(dir)
+  const env = { ...process.env, GIT_CONFIG_GLOBAL: '/dev/null', GIT_CONFIG_NOSYSTEM: '1', GIT_AUTHOR_NAME: 'Test', GIT_AUTHOR_EMAIL: 'test@example.com', GIT_COMMITTER_NAME: 'Test', GIT_COMMITTER_EMAIL: 'test@example.com' }
+  const git = (...args) => execFileSync('git', args, { cwd: checkout, env, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim()
+  git('init', '--bare', remote)
+  git('init', '-b', 'fixture')
+  git('remote', 'add', 'origin', remote)
+  cpSync(fileURLToPath(new URL('.', import.meta.url)), join(checkout, 'tools'), { recursive: true })
+  cpSync(fileURLToPath(new URL('../finder', import.meta.url)), join(checkout, 'finder'), { recursive: true })
+  cpSync(fileURLToPath(new URL('../.claude-plugin', import.meta.url)), join(checkout, '.claude-plugin'), { recursive: true })
+  mkdirSync(join(checkout, 'data'))
+  const renderable = (repo, name) => ({ ...mod(repo, name), path: name, description: name, url: `https://github.com/${repo}`, stars: 1, reach: { level: 0, name: 'draws and remembers', labels: [] }, sees: [], hooks: [], calls: [], surfaceModules: [] })
+  // One refiled record publishes unread only in a catalogue large enough that it moves the count by under 0.5%.
+  const size = scenario === 'review' ? 3 : 250
+  const mods = [renderable('o/moved', 'old'), renderable('o/moved', 'new'), ...Array.from({ length: size - 2 }, (_, i) => renderable(`o/r${i}`, 'm'))]
+  writeFileSync(join(checkout, 'data/mods.json'), JSON.stringify(inventory(mods), null, 2) + '\n')
+  writeFileSync(join(checkout, 'data/duplicates.txt'), '# pairs\n')
+  writeFileSync(join(checkout, 'data/topics.json'), '[]\n')
+  writeFileSync(join(checkout, 'README.md'), '<!-- count:start --><!-- count:end -->\n<!-- stats:start -->\n<!-- stats:end -->\n')
+  writeFileSync(join(checkout, 'catalogue.md'), ['stats', 'scan', 'builtin'].map(name => `<!-- ${name}:start -->\n<!-- ${name}:end -->`).join('\n'))
+  execFileSync(process.execPath, ['tools/render.mjs'], { cwd: checkout, env })
+  git('add', '.')
+  git('commit', '-m', 'Fixture inventory')
+  const rulesBase = git('rev-parse', 'HEAD')
+  if (scenario !== 'unchanged') writeFileSync(join(checkout, 'data/duplicates.txt'), '# pairs\no/moved:old o/moved:new\n')
+  writeFileSync(join(checkout, 'data/seeds.txt'), 'o/moved\n')
+  git('add', '.')
+  git('commit', '-m', 'Rule change')
+  git('push', 'origin', 'HEAD:main')
+  const log = join(root, 'commands.jsonl'), marker = join(root, 'advanced'), pr = join(root, 'pr'), output = join(root, 'output')
+  const prelude = `#!${process.execPath}\nconst fs=require('node:fs'),cp=require('node:child_process');const args=process.argv.slice(2);fs.appendFileSync(${JSON.stringify(log)},JSON.stringify([require('node:path').basename(process.argv[1]),...args])+'\\n');const git=(...a)=>cp.execFileSync('git',a,{encoding:'utf8'}).trim();\n`
+  writeFileSync(join(bin, 'npm'), prelude + `
+if(args.join(' ')==='run render')cp.execFileSync(process.execPath,['tools/render.mjs'],{stdio:'pipe'});
+if(args.join(' ')==='run lint')git('rev-parse','--abbrev-ref','@{upstream}');
+`, { mode: 0o755 })
+  // Main advances once while the first attempt is being prepared, so the script must rebuild on the newer main.
+  writeFileSync(join(bin, 'gh'), prelude + `
+if(args[0]==='api'){
+  if(!fs.existsSync(${JSON.stringify(marker)})){
+    fs.writeFileSync(${JSON.stringify(marker)},'yes');
+    const other=${JSON.stringify(join(root, 'contributor'))};
+    git('clone','--branch','main',${JSON.stringify(remote)},other);
+    fs.appendFileSync(other+'/data/seeds.txt','later/repo\\n');
+    git('-C',other,'switch','-c','contributor');git('-C',other,'add','.');git('-C',other,'commit','-m','Next approved seed');git('-C',other,'push','origin','HEAD:main');
+  }
+  console.log(git('--git-dir',${JSON.stringify(remote)},'rev-parse','main'));
+}else if(args[1]==='list'){if(fs.existsSync(${JSON.stringify(pr)}))console.log('1');
+}else if(args[1]==='create'||args[1]==='edit'){fs.copyFileSync(args[args.indexOf('--body-file')+1],${JSON.stringify(pr)});
+}else if(args[1]==='merge'){
+  const head=args[args.indexOf('--match-head-commit')+1];
+  const base=git('--git-dir',${JSON.stringify(remote)},'rev-parse','main');
+  if(git('rev-parse',head+'^')!==base)throw Error('Attempted stale merge');
+  if(!args.includes('--squash'))throw Error('Expected squash merge');
+  git('--git-dir',${JSON.stringify(remote)},'update-ref','refs/heads/main',head,base);
+}else if(args[1]!=='close'){throw Error('Unexpected gh call '+args.join(' '));}
+`, { mode: 0o755 })
+  const run = spawnSync('bash', ['tools/apply-rules.sh'], { cwd: checkout, env: { ...env, PATH: `${bin}:${process.env.PATH}`, RUNNER_TEMP: runner, GITHUB_REPOSITORY: 'example/mods', GITHUB_RUN_ID: '1', GITHUB_OUTPUT: output, RULES_BASE: rulesBase }, encoding: 'utf8' })
+  assert.equal(run.status, 0, run.stderr)
+  const commands = readFileSync(log, 'utf8').trim().split('\n').map(line => JSON.parse(line))
+  const merges = commands.filter(command => command[0] === 'gh' && command[2] === 'merge').length
+  const published = JSON.parse(git('--git-dir', remote, 'show', 'main:data/mods.json'))
+  const kinds = published.mods.slice(0, 2).map(m => [m.id, m.kind, m.duplicateOf])
+  if (scenario === 'changed') {
+    assert.deepEqual(kinds, [['o/moved:old', 'duplicate', 'o/moved:new'], ['o/moved:new', 'mod', undefined]])
+    assert.equal(merges, 1)
+    assert.equal(readFileSync(output, 'utf8'), 'merged=true\n')
+    assert.match(git('--git-dir', remote, 'show', 'main:data/seeds.txt'), /later\/repo/, 'the concurrent merge is kept')
+    assert.match(git('--git-dir', remote, 'show', 'main:README.md'), /249 mods/)
+    assert.equal(commands.filter(command => command.join(' ') === 'npm run render').length, 2, 'rebuilt once on the newer main')
+    assert.match(readFileSync(pr, 'utf8'), /squash-merged automatically[\s\S]*- 250 to 249 counted mods\n- o\/moved:old: mod to duplicate \(duplicate of o\/moved:new\)/)
+  } else {
+    assert.deepEqual(kinds, [['o/moved:old', 'mod', undefined], ['o/moved:new', 'mod', undefined]], 'main is untouched')
+    assert.equal(merges, 0)
+    assert.equal(spawnSync('test', ['-s', output]).status, 1, 'no merge is reported')
+    if (scenario === 'review') assert.match(readFileSync(pr, 'utf8'), /\*\*Not merged automatically:\*\*[\s\S]*- 3 to 2 counted mods/)
+    else assert.equal(commands.some(command => command[0] === 'gh' && command[2] === 'create'), false)
+  }
+  assert.ok(!commands.some(command => command.includes('scan')))
+})
