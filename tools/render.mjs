@@ -139,7 +139,7 @@ for (const m of records) {
   if (identity.redirects.has(pageOf(m))) continue
   mkdirSync(`docs/mods/${pageOf(m)}`, { recursive: true })
   const siblings = byRepo.get(m.repo).filter(other => other !== m).map(other => ({ mod: other, slug: pageOf(other) }))
-  writeFileSync(`docs/mods/${pageOf(m)}/index.html`, renderModPage(m, { slug: pageOf(m), anchor: slug(m), claudeVersion: data.claudeVersion, siblings, topics: topicsOf.get(m) ?? [] }))
+  writeFileSync(`docs/mods/${pageOf(m)}/index.html`, renderModPage(m, { slug: pageOf(m), anchor: slug(m), siblings, topics: topicsOf.get(m) ?? [] }))
 }
 for (const [from, to] of identity.redirects) {
   mkdirSync(`docs/mods/${from}`, { recursive: true })
