@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-09T12:19:42.925Z",
   "claudeVersion": "2.1.319",
-  "repos": 3885,
+  "repos": 3886,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -976510,6 +976510,96 @@
       "stars": 0,
       "pushedAt": "2026-11-04T21:27:37Z",
       "createdAt": "2026-10-27T13:16:41Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "zigansh1n/claude-focus-sidebar:.",
+      "repo": "zigansh1n/claude-focus-sidebar",
+      "path": ".",
+      "sourceCommit": "1118f9453fb7a897427886d634d88f952bbe4333",
+      "name": "focus-sidebar",
+      "description": "Claude Desktop sidebar that shows only what you work on: one section per project, busiest on top, folders idle a day or more hidden",
+      "author": "zigansh1n",
+      "homepage": "https://github.com/zigansh1n/claude-focus-sidebar",
+      "url": "https://github.com/zigansh1n/claude-focus-sidebar",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "show-folder"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.clock.sleep",
+        "$.command.register",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.fs.write",
+        "$.mcp.call",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.set"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "focus-sidebar",
+          "status": "warnings",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "MCP servers",
+          "writes files",
+          "reads files",
+          "persists state"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T06:13:40Z",
+      "createdAt": "2026-10-23T08:11:52Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

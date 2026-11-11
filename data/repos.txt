@@ -3857,6 +3857,7 @@ zhuobichen/zhaowen-claudemod
 zhuoxingzhang/pixel-at-work
 zhuzhu0710/claude-mods
 ziedgithub/claude-code-mods
+zigansh1n/claude-focus-sidebar
 Ziggedy/claude-auto-level
 Zimoholdijk/collapse-diffs
 Zinzan48/claude-mods
