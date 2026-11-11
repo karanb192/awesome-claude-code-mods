@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-09T12:19:42.925Z",
   "claudeVersion": "2.1.319",
-  "repos": 3886,
+  "repos": 3887,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -976393,6 +976393,152 @@
       "pushedAt": "2026-11-11T06:13:40Z",
       "createdAt": "2026-10-23T08:11:52Z",
       "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "mingfeng6684/claude-todo-panel:.",
+      "repo": "mingfeng6684/claude-todo-panel",
+      "path": ".",
+      "sourceCommit": "67627d7deef2bd45a3bf8fca417cdbdb02c3740a",
+      "name": "todo-panel",
+      "description": "A To Do pane of pending decisions and backlog tasks, kept in .claude/todo-panel.md and ordered by Claude.",
+      "author": "Frank",
+      "homepage": "https://github.com/mingfeng6684/claude-todo-panel",
+      "url": "https://github.com/mingfeng6684/claude-todo-panel",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "todo"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "decide-questions"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.compose",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__todo-panel__update"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "TodoWrite"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "TaskCreate"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "TaskUpdate"
+          }
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "todo-panel"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.read",
+        "$.fs.write",
+        "$.prompt.fill",
+        "$.prompt.submit",
+        "$.settings.read",
+        "$.state.get",
+        "$.state.set",
+        "$.tool.register",
+        "$.ui.close",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.319",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "todo-panel-local",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "writes files",
+          "drives Claude",
+          "writes the prompt box",
+          "reads files",
+          "reads env vars",
+          "reads settings",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "mcp__todo-panel__update calls",
+        "TodoWrite calls",
+        "TaskCreate calls",
+        "TaskUpdate calls"
+      ],
+      "draws": [
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-10-29T13:51:26Z",
+      "createdAt": "2026-10-20T01:46:42Z",
+      "license": null,
       "archived": false,
       "defaultBranch": "main",
       "directory": null

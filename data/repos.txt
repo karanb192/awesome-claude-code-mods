@@ -2256,6 +2256,7 @@ min050410/claude-mods-whats-agent-doing-ko
 mina-asham/claude-usage-stats
 minanyang/brain
 mindthink/zen-breath
+mingfeng6684/claude-todo-panel
 minhdevtree/claude-lens
 minhnhattonthat/claude-finish-notify
 minipai/claudecafe
