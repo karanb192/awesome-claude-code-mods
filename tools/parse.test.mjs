@@ -332,8 +332,8 @@ test('the scan summary titles the count and lists only what needs a decision', (
   assert.equal(summary.title, 'Scan: 4 to 8 mods (5 new, 1 gone)')
   assert.deepEqual(summary.decisions, [
     'gone: x/gone:. (mod) is no longer in the inventory',
-    'counted twice: o/r:plugins/t moved to o/r:archive/t; add the pair to data/duplicates.txt',
-    'filing lost in a move: o/r:probe-1/p is a fixture, but its new path O/R:old/probe-1/p counts as a mod',
+    'possible move: o/r:plugins/t was not found and o/r:archive/t is new in the same repository under the same name; if they are one mod, both count until the pair is in data/duplicates.txt',
+    'possible move: o/r:probe-1/p, a fixture, was not found and O/R:old/probe-1/p is new in the same repository under the same name and counts as a mod; if they are one plugin, its fixture rule needs the new path',
     'possible duplicate: o/copy2:. and o/copy:. share an owner and a name; if they are one mod, add the pair to data/duplicates.txt',
   ])
   assert.equal(summary.lines[0], '**4 to 8 counted mods.** 5 new records (5 counted), 1 gone, 0 reclassified.')

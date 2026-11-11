@@ -68,8 +68,9 @@ export function describeChange(before, after) {
 
 // The scan pull request's title and opening lines: how the counted total moved, and the few
 // changes that need a person's call before the list below them is worth reading. A record that is
-// gone, a mod that moved inside its repository and now counts beside its retained old path (or
-// lost its fixture filing in the move), and a same-owner same-name pair this scan introduced.
+// gone, a record that looks moved inside its repository (the old path was not found and a new one
+// carries the same name), and a same-owner same-name pair this scan introduced. The scan compares
+// names, not source, so each line states what to check.
 export function summarize(before, after) {
   const counted = data => data.mods.filter(m => m.kind === 'mod').length
   const n = value => value.toLocaleString('en-US')
@@ -85,8 +86,8 @@ export function summarize(before, after) {
       if (left.id === fresh.id || !missing(left) || left.name !== fresh.name || left.repo.toLowerCase() !== fresh.repo.toLowerCase()) continue
       moved.add(left.id).add(fresh.id)
       decisions.push(left.kind === 'mod'
-        ? `counted twice: ${left.id} moved to ${fresh.id}; add the pair to data/duplicates.txt`
-        : `filing lost in a move: ${left.id} is a ${left.kind}, but its new path ${fresh.id} counts as a mod`)
+        ? `possible move: ${left.id} was not found and ${fresh.id} is new in the same repository under the same name; if they are one mod, both count until the pair is in data/duplicates.txt`
+        : `possible move: ${left.id}, a ${left.kind}, was not found and ${fresh.id} is new in the same repository under the same name and counts as a mod; if they are one plugin, its ${left.kind} rule needs the new path`)
     }
   }
   const known = new Set(suspectDuplicates(before.mods).map(group => group.join(' ')))
@@ -101,7 +102,7 @@ export function summarize(before, after) {
     `**${was === is ? `${n(is)} counted mods, unchanged` : `${n(was)} to ${n(is)} counted mods`}.** ${n(added.length)} new records (${n(added.filter(m => m.kind === 'mod').length)} counted), ${n(gone.length)} gone, ${n(reclassified)} reclassified.`,
     '',
     '## Needs a decision',
-    ...(decisions.length ? decisions.map(line => `- ${line}`) : ['Nothing. No record is gone, moved inside its repository or newly suspected as a copy.']),
+    ...(decisions.length ? decisions.map(line => `- ${line}`) : ['Nothing. No record is gone, and none looks moved or newly copied.']),
   ]
   return { title, lines, decisions }
 }
