@@ -273,6 +273,8 @@ for (const concurrentPublication of [false, true]) test(`publication handles a c
   cpSync(fileURLToPath(new URL('.', import.meta.url)), join(checkout, 'tools'), { recursive: true })
   // Mod pages take their install hint from the finder's helper.
   cpSync(fileURLToPath(new URL('../finder', import.meta.url)), join(checkout, 'finder'), { recursive: true })
+  // The renderer writes the rounded count into the marketplace entry, and publication commits it.
+  cpSync(fileURLToPath(new URL('../.claude-plugin', import.meta.url)), join(checkout, '.claude-plugin'), { recursive: true })
   mkdirSync(join(checkout, 'data'))
   const renderable = (repo, name) => ({ ...mod(repo, name), path: name, description: name, url: `https://github.com/${repo}`, stars: 1, reach: { level: 0, name: 'draws and remembers', labels: [] }, sees: [], hooks: [], calls: [], surfaceModules: [] })
   const publishedBefore = [renderable('existing/repo', 'old'), renderable('existing/repo', 'copy')]
@@ -282,7 +284,7 @@ for (const concurrentPublication of [false, true]) test(`publication handles a c
   writeFileSync(join(checkout, 'data/repos.txt'), 'existing/repo\n')
   writeFileSync(join(checkout, 'data/seeds.txt'), 'existing/repo\nnew/repo\nbroken/repo\n')
   writeFileSync(join(checkout, 'data/topics.json'), JSON.stringify([{ slug: 'prompt-cache', title: 'Prompt cache mods for Claude Code', short: 'Prompt cache', description: 'Cache mods.', patterns: ['^new$'], include: [], exclude: [], related: [] }]))
-  writeFileSync(join(checkout, 'README.md'), '<!-- stats:start -->\n<!-- stats:end -->\n')
+  writeFileSync(join(checkout, 'README.md'), '<!-- count:start --><!-- count:end -->\n<!-- stats:start -->\n<!-- stats:end -->\n')
   writeFileSync(join(checkout, 'catalogue.md'), ['stats', 'scan', 'builtin'].map(name => `<!-- ${name}:start -->\n<!-- ${name}:end -->`).join('\n'))
   execFileSync(process.execPath, ['tools/render.mjs'], { cwd: checkout, env })
   mkdirSync(join(checkout, 'docs/mods/retired--repo--gone'))
