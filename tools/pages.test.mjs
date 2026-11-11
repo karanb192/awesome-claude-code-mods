@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { accessLine, assignPages, formatRegistry, indexable, installLine, readRegistry, renderModPage, renderRedirect, scanSummary } from './pages.mjs'
+import { accessLine, assignPages, describable, formatRegistry, indexedPages, installLine, readRegistry, renderModPage, renderRedirect, scanSummary } from './pages.mjs'
 import { grade } from './grade.mjs'
 
 const mod = (repo, name, extra = {}) => ({
@@ -162,16 +162,59 @@ test('the registry format is sorted, one entry per line, and rejects unsafe path
   assert.throws(() => readRegistry('{"ok": {}}'), /invalid entry/)
 })
 
-test('search engines index failed mods but not retained records or empty descriptions', () => {
-  assert.equal(indexable(mod('a/b', 'c')), true)
-  assert.equal(indexable(mod('a/b', 'c', { validate: { status: 'failed', errors: ['x'] } })), true)
-  assert.equal(indexable(mod('a/b', 'c', { validate: { status: 'unknown', errors: [] } })), false)
-  assert.equal(indexable(mod('a/b', 'c', { description: '  ' })), false)
+test('pages list failed mods but not retained records or empty descriptions', () => {
+  assert.equal(describable(mod('a/b', 'c')), true)
+  assert.equal(describable(mod('a/b', 'c', { validate: { status: 'failed', errors: ['x'] } })), true)
+  assert.equal(describable(mod('a/b', 'c', { validate: { status: 'unknown', errors: [] } })), false)
+  assert.equal(describable(mod('a/b', 'c', { description: '  ' })), false)
+})
+
+test('search engines are asked to index a page with outside interest and a description of its own', () => {
+  const long = 'Shows the context window and the weekly limit in one band.'
+  const noticed = (name, extra = {}) => mod('a/b', name, { description: `${long} ${name}`, stars: 2, createdAt: '2026-01-01T00:00:00Z', ...extra })
+  const records = [
+    noticed('two-stars'), noticed('one-star', { stars: 1 }), noticed('no-stars', { stars: null }),
+    noticed('listed', { stars: 0, directory: { plugin: 'listed' } }), noticed('built-in', { stars: 0, kind: 'builtin' }),
+    noticed('failed', { validate: { status: 'failed', errors: ['x'] } }), noticed('retained', { validate: { status: 'unknown', errors: [] } }),
+    noticed('short', { description: 'Shows the context window.' }),
+    noticed('copy-newer', { description: long, createdAt: '2026-03-01T00:00:00Z', stars: 900 }), noticed('copy-older', { description: `  ${long.toUpperCase()}`, createdAt: '2026-02-01T00:00:00Z' }),
+  ]
+  const pages = new Map(records.map(record => [record, record.name]))
+  const registry = Object.fromEntries(records.map(record => [record.name, { id: record.id }]))
+  const first = indexedPages(records, pages, registry)
+  assert.deepEqual([...first.indexed].map(record => record.name).sort(), ['built-in', 'copy-older', 'failed', 'listed', 'two-stars'])
+  assert.deepEqual(first.registry['two-stars'], { id: 'a/b:two-stars', indexed: true })
+  assert.deepEqual(first.registry['one-star'], { id: 'a/b:one-star' })
+  assert.deepEqual(registry['two-stars'], { id: 'a/b:two-stars' }, 'the registry passed in is left alone')
+
+  const fallen = records.map(record => ({ ...record, stars: 0 }))
+  const second = indexedPages(fallen, new Map(fallen.map(record => [record, record.name])), first.registry)
+  assert.deepEqual([...second.indexed].map(record => record.name).sort(), ['built-in', 'copy-older', 'failed', 'listed', 'two-stars'], 'a page that qualified stays indexed when its repository loses stars')
+  assert.deepEqual(second.registry, first.registry)
+  const original = noticed('original', { description: long, createdAt: '2025-01-01T00:00:00Z' })
+  const withOriginal = [...records, original]
+  const third = indexedPages(withOriginal, new Map(withOriginal.map(record => [record, record.name])), { ...first.registry, original: { id: original.id } })
+  assert.equal(third.indexed.has(original), false, 'an older copy that qualifies later does not take the place of the indexed page')
+  assert.deepEqual([...third.indexed].map(record => record.name).sort(), [...first.indexed].map(record => record.name).sort())
+
+  const pair = [noticed('first', { description: long, createdAt: '2025-01-01T00:00:00Z' }), noticed('second', { description: long, createdAt: '2025-06-01T00:00:00Z' })]
+  const names = result => [...result.indexed].map(record => record.name).sort()
+  const run = (list, known) => indexedPages(list, new Map(list.map(record => [record, record.name])), known)
+  const start = run(pair, { first: { id: 'a/b:first' }, second: { id: 'a/b:second' } })
+  assert.deepEqual(names(start), ['first'])
+  const away = run([{ ...pair[0], validate: { status: 'unknown', errors: [] } }, pair[1]], start.registry)
+  assert.deepEqual(names(away), ['second'], 'the copy goes in while the first page is only retained')
+  assert.deepEqual(names(run(pair, away.registry)), ['first', 'second'], 'the first page coming back does not take the second out')
+  const apart = run([pair[0], { ...pair[1], description: `${long} With a second line.` }], { first: { id: 'a/b:first' }, second: { id: 'a/b:second' } })
+  assert.deepEqual(names(apart), ['first', 'second'])
+  assert.deepEqual(names(run(pair, apart.registry)), ['first', 'second'], 'an indexed page that edits its description to match another takes neither out')
+  assert.equal(formatRegistry({ a: { id: 'x', indexed: true } }), '{\n  "a": {"id":"x","indexed":true}\n}\n')
+  assert.throws(() => readRegistry('{"a": {"id": "x", "indexed": "yes"}}'), /invalid entry/)
 })
 
 test('author text is escaped in the page body, metadata and structured data', () => {
   const hostile = mod('evil/repo', '<img src=x onerror=alert(1)>', { description: 'Ends the script </script><script>alert(1)</script> & "quotes"' })
-  const html = renderModPage(hostile, { slug: 'evil--repo--x', anchor: 'evil--repo--x' })
+  const html = renderModPage(hostile, { slug: 'evil--repo--x', anchor: 'evil--repo--x', indexed: true })
   assert.doesNotMatch(html, /<img src=x/)
   assert.doesNotMatch(html, /<script>alert/)
   assert.equal(html.match(/<\/script>/g).length, 1, 'only the JSON-LD block closes a script')
@@ -287,7 +330,7 @@ test('metadata keeps the purpose first, adds the scan, and the index gate does n
     assert.equal(JSON.parse(renderModPage(mod('a/b', 'tool', { license }), { slug: 's', anchor: 's' }).match(/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'][0].license, undefined)
   }
   const blank = mod('a/b', 'tool', { description: '' })
-  assert.equal(indexable(blank), false)
+  assert.equal(describable(blank), false)
   assert.match(renderModPage(blank, { slug: 's', anchor: 's' }), /<meta name="robots" content="noindex">/)
 })
 

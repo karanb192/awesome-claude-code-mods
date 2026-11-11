@@ -622,23 +622,27 @@ test('a mod listed in Anthropic\'s directory is marked in the catalogue and on t
   assert.equal(await tab.locator('#t tbody tr:not([hidden])').count(), 2)
 })
 
-test('every mod gets a page linked from its row, and the sitemap lists only indexable pages', t => {
+test('every mod gets a page linked from its row, and the sitemap lists only the pages search engines are asked to index', t => {
+  const described = (i, stars, ...rest) => ({ ...mod(i, ...rest), description: `Example mod ${i} shows one more thing in the band.`, stars, createdAt: '2026-01-01T00:00:00Z' })
   const empty = { ...mod(3), description: '' }
-  const dir = fixture(t, [mod(0), mod(1, 'failed'), mod(2, 'unknown'), empty, mod(4, 'passed', 'builtin')])
+  const copy = { ...described(6, 50), description: described(0, 2).description, createdAt: '2026-02-01T00:00:00Z' }
+  const dir = fixture(t, [described(0, 2), described(1, 5, 'failed'), described(2, 9, 'unknown'), empty, described(4, 0, 'passed', 'builtin'), described(5, 1), copy, { ...mod(7), stars: 40 }])
   render(dir)
   const home = readFileSync(join(dir, 'docs/index.html'), 'utf8')
-  for (const i of [0, 1, 2, 3, 4]) {
+  for (const i of [0, 1, 2, 3, 4, 5, 6, 7]) {
     assert.match(home, new RegExp(`<a class="mod-name" href="mods/example--mods--mod-${i}/">mod-${i}</a>`))
     assert.match(modPage(dir, `example--mods--mod-${i}`), new RegExp(`<a href="/#example--mods--mod-${i}">All Claude Code mods</a>`))
   }
   assert.doesNotMatch(home, /<details><summary>Access/, 'the full record lives on the page')
   const sitemap = readFileSync(join(dir, 'docs/sitemap.xml'), 'utf8')
   assert.deepEqual([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]), ['https://mods.aidojo.si/', 'https://mods.aidojo.si/access/', 'https://mods.aidojo.si/browse/m/', ...[0, 1, 4].map(i => `https://mods.aidojo.si/mods/example--mods--mod-${i}/`)])
-  assert.match(modPage(dir, 'example--mods--mod-2'), /<meta name="robots" content="noindex">/)
-  assert.match(modPage(dir, 'example--mods--mod-3'), /<meta name="robots" content="noindex">/)
-  assert.doesNotMatch(modPage(dir, 'example--mods--mod-1'), /noindex/)
+  const reasons = { 2: 'a retained record', 3: 'an empty description', 5: 'one star', 6: 'a description an older repository already has', 7: 'a description too short to tell it apart' }
+  for (const [i, reason] of Object.entries(reasons)) assert.match(modPage(dir, `example--mods--mod-${i}`), /<meta name="robots" content="noindex">/, reason)
+  for (const i of [0, 1, 4]) assert.doesNotMatch(modPage(dir, `example--mods--mod-${i}`), /noindex/)
+  const registry = JSON.parse(readFileSync(join(dir, 'data/pages.json'), 'utf8'))
+  assert.deepEqual(Object.keys(registry).filter(slug => registry[slug].indexed), [0, 1, 4].map(i => `example--mods--mod-${i}`))
   assert.match(modPage(dir, 'example--mods--mod-0'), /<a href="\/mods\/example--mods--mod-1\/">mod-1<\/a>/, 'pages link to other mods from the same repository')
-  assert.deepEqual(Object.keys(JSON.parse(readFileSync(join(dir, 'data/pages.json'), 'utf8'))).length, 5)
+  assert.equal(Object.keys(registry).length, 8)
   assert.ok(existsSync(join(dir, 'docs/404.html')) && existsSync(join(dir, 'docs/site.css')))
   for (const i of [0, 1, 4]) assert.match(modPage(dir, `example--mods--mod-${i}`), /<a href="\/access\/">What a mod can access and how the scan works<\/a>/)
   assert.match(home, /<a class="text-link" href="access\/">What can a mod access\?/)
@@ -693,6 +697,30 @@ test('a rescan on a newer validator that changes no result leaves every mod page
   render(dir)
   assert.deepEqual(tree(join(dir, 'docs/mods')), pages)
   assert.doesNotMatch(Object.values(tree(join(dir, 'docs/mods'))).join(''), /2\.9\.999/)
+})
+
+test('a repository reaching two stars changes only its own page, once, and losing them changes nothing', t => {
+  const described = (i, stars) => ({ ...mod(i), description: `Example mod ${i} shows one more thing in the band.`, stars })
+  const dir = fixture(t, [described(0, 7), described(1, 1), described(2, 0)])
+  render(dir)
+  const before = tree(join(dir, 'docs/mods')), registry = readFileSync(join(dir, 'data/pages.json'), 'utf8')
+  const rescan = stars => {
+    const data = JSON.parse(readFileSync(join(dir, 'data/mods.json'), 'utf8'))
+    data.mods = data.mods.map(m => m.name === 'mod-1' ? { ...m, stars } : m)
+    writeFileSync(join(dir, 'data/mods.json'), JSON.stringify(data))
+    render(dir)
+  }
+  rescan(2)
+  const after = tree(join(dir, 'docs/mods'))
+  assert.deepEqual(Object.keys(after).filter(file => after[file] !== before[file]), ['example--mods--mod-1'])
+  assert.equal(after['example--mods--mod-1'], before['example--mods--mod-1'].replace('<meta name="robots" content="noindex">', ''))
+  assert.equal(readFileSync(join(dir, 'data/pages.json'), 'utf8'), registry.replace('{"id":"example/mods:plugins/mod-1"}', '{"id":"example/mods:plugins/mod-1","indexed":true}'))
+  assert.match(readFileSync(join(dir, 'docs/sitemap.xml'), 'utf8'), /mods\/example--mods--mod-1\//)
+  const crossed = readFileSync(join(dir, 'data/pages.json'), 'utf8'), sitemap = readFileSync(join(dir, 'docs/sitemap.xml'), 'utf8')
+  rescan(0)
+  assert.deepEqual(tree(join(dir, 'docs/mods')), after)
+  assert.equal(readFileSync(join(dir, 'data/pages.json'), 'utf8'), crossed)
+  assert.equal(readFileSync(join(dir, 'docs/sitemap.xml'), 'utf8'), sitemap)
 })
 
 test('retired mods lose their page, renamed ones leave a redirect, and their paths stay reserved', t => {
@@ -1004,7 +1032,7 @@ test('topic pages list their members, are linked from the homepage, A to Z pages
   assert.match(readFileSync(join(dir, 'docs/browse/m/index.html'), 'utf8'), /<a href="\/topics\/prompt-cache\/">Prompt cache<\/a>/)
   assert.match(readFileSync(join(dir, 'docs/llms.txt'), 'utf8'), /## Topics\n\n- \[Prompt cache mods for Claude Code\]\(https:\/\/mods\.aidojo\.si\/topics\/prompt-cache\/\): 2 mods that show the cache timer, keep it warm or warn before a cold send\.\n/)
   const sitemap = xml => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1].replace('https://mods.aidojo.si/', '/'))
-  assert.deepEqual(sitemap(readFileSync(join(dir, 'docs/sitemap.xml'), 'utf8')), ['/', '/access/', '/topics/prompt-cache/', '/browse/m/', '/mods/example--mods--mod-0/', '/mods/example--mods--mod-1/', '/mods/example--mods--mod-4/', '/mods/example--mods--mod-5/'])
+  assert.deepEqual(sitemap(readFileSync(join(dir, 'docs/sitemap.xml'), 'utf8')), ['/', '/access/', '/topics/prompt-cache/', '/browse/m/'], 'a topic lists its members whether or not search engines are asked to index their pages')
   for (const i of [1, 5]) assert.match(modPage(dir, `example--mods--mod-${i}`), /<p class="topics-line">Listed under <a href="\/topics\/prompt-cache\/">Prompt cache mods for Claude Code<\/a>\.<\/p>/)
   for (const i of [0, 2, 3, 4]) assert.doesNotMatch(modPage(dir, `example--mods--mod-${i}`), /topics-line/)
   const pages = tree(join(dir, 'docs/mods'))

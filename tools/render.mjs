@@ -8,7 +8,7 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync, rmSync
 import { LEVEL_NAMES, grade, hasFootprint } from './grade.mjs'
 import { renderSite, renderSitemap, renderRobots, renderLlms, reviewNotes, css, browseKeys } from './site.mjs'
 import { renderBrowsePage } from './browse.mjs'
-import { assignPages, formatRegistry, idOf, indexable, readRegistry, renderModPage, renderNotFound, renderRedirect } from './pages.mjs'
+import { assignPages, formatRegistry, idOf, indexedPages, readRegistry, renderModPage, renderNotFound, renderRedirect } from './pages.mjs'
 import { siteAnchors } from './slug.mjs'
 import { readDuplicates } from './dedupe.mjs'
 import { ACCESS_PATH, renderAccessPage } from './access.mjs'
@@ -120,9 +120,10 @@ const pageOf = mod => identity.pages.get(mod)
 const byRepo = new Map()
 for (const m of [...records].sort((a, b) => a.name.localeCompare(b.name, 'en') || (idOf(a) < idOf(b) ? -1 : 1))) byRepo.set(m.repo, [...(byRepo.get(m.repo) ?? []), m])
 
+const index = indexedPages(records, identity.pages, identity.registry)
 const browsable = records.filter(m => !identity.redirects.has(pageOf(m)))
 const letters = browseKeys(browsable)
-// A topic lists the members of its rule that have an indexable page of their own. A stale id in the rule is
+// A topic lists the members of its rule that have a described page of their own. A stale id in the rule is
 // reported and tolerated, so a retirement never breaks the render.
 const topics = existsSync(TOPICS_PATH) ? readTopics(readFileSync(TOPICS_PATH, 'utf8')) : []
 const listedIn = new Map(topics.map(topic => {
@@ -152,7 +153,7 @@ for (const m of records) {
   if (identity.redirects.has(pageOf(m))) continue
   mkdirSync(`docs/mods/${pageOf(m)}`, { recursive: true })
   const siblings = byRepo.get(m.repo).filter(other => other !== m).map(other => ({ mod: other, slug: pageOf(other) }))
-  writeFileSync(`docs/mods/${pageOf(m)}/index.html`, renderModPage(m, { slug: pageOf(m), anchor: slug(m), siblings, topics: topicsOf.get(m) ?? [] }))
+  writeFileSync(`docs/mods/${pageOf(m)}/index.html`, renderModPage(m, { slug: pageOf(m), anchor: slug(m), siblings, topics: topicsOf.get(m) ?? [], indexed: index.indexed.has(m) }))
 }
 for (const [from, to] of identity.redirects) {
   mkdirSync(`docs/mods/${from}`, { recursive: true })
@@ -180,8 +181,8 @@ for (const topic of topics) {
 writeFileSync('docs/404.html', renderNotFound())
 mkdirSync('docs/access', { recursive: true })
 writeFileSync('docs/access/index.html', renderAccessPage(data))
-writeFileSync('data/pages.json', formatRegistry(identity.registry))
-writeFileSync('docs/sitemap.xml', renderSitemap([ACCESS_PATH, ...shownTopics.map(topic => `topics/${topic.slug}/`), ...letters.map(key => `browse/${key}/`), ...records.filter(indexable).map(m => `mods/${pageOf(m)}/`).sort()]))
+writeFileSync('data/pages.json', formatRegistry(index.registry))
+writeFileSync('docs/sitemap.xml', renderSitemap([ACCESS_PATH, ...shownTopics.map(topic => `topics/${topic.slug}/`), ...letters.map(key => `browse/${key}/`), ...records.filter(m => index.indexed.has(m)).map(m => `mods/${pageOf(m)}/`).sort()]))
 writeFileSync('docs/robots.txt', renderRobots())
 writeFileSync('docs/llms.txt', renderLlms(data, shownTopics.map(topic => ({ slug: topic.slug, title: topic.title, summary: topicSummary(topic, listedIn.get(topic).length) }))))
 console.log(`rendered ${mods.length} mods and ${builtins.length} built-ins into README.md, catalogue.md, badges/, docs/, docs/badges/, docs/mods/, docs/browse/, docs/topics/ and docs/access/`)
