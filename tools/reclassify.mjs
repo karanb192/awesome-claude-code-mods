@@ -37,12 +37,13 @@ export function reclassify(mods, before, after) {
     if (old === (m.kind === 'duplicate' ? 'mod' : m.kind) && now !== old) { m.kind = now; delete m.duplicateOf }
   }
   applyDuplicates(mods, new Map([...after.duplicates].filter(([copy, keeper]) => before.duplicates.get(copy) !== keeper)))
-  // A copy counts again once the mod it was collapsed onto is refiled as something that does not
-  // count, as it would in a scan. Which of the two should count is then a person's call.
+  // A copy counts again once the record it was collapsed onto is refiled as something that neither
+  // counts nor points on to a keeper, as it would in a scan. That record may itself have been a
+  // duplicate in a chain. Which record should count is then a person's call.
   const byId = new Map(mods.map(m => [m.id, m])), released = new Set()
   for (const m of mods) {
     const keeper = m.kind === 'duplicate' ? byId.get(m.duplicateOf) : null
-    if (!keeper || was.get(keeper.id).kind !== 'mod' || ['mod', 'duplicate'].includes(keeper.kind)) continue
+    if (!keeper || was.get(keeper.id).kind === keeper.kind || ['mod', 'duplicate'].includes(keeper.kind)) continue
     m.kind = filed(after, m); delete m.duplicateOf; released.add(m.id)
   }
   return mods.filter(m => was.get(m.id).kind !== m.kind || was.get(m.id).duplicateOf !== m.duplicateOf)

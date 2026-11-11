@@ -802,6 +802,14 @@ test('a rule change refiles only the committed records it explains', () => {
   mods = [rec('o/c:.', 'duplicate', { duplicateOf: 'o/d:.' }), rec('o/d:.'), rec('o/e:.')]
   assert.deepEqual(reclassify(mods, rules({ duplicates: new Map([['o/c:.', 'o/d:.']]) }), rules({ duplicates: new Map([['o/c:.', 'o/d:.'], ['o/d:.', 'o/e:.']]) })), [{ id: 'o/d:.', from: 'mod', to: 'duplicate', duplicateOf: 'o/e:.' }])
 
+  // The middle of a chain refiled as a catalogue releases the copy that pointed at it.
+  mods = [rec('o/a:.', 'duplicate', { duplicateOf: 'cat/r:b' }), rec('cat/r:b', 'duplicate', { duplicateOf: 'o/c:.' }), rec('o/c:.'), rec('o/x:.', 'duplicate', { duplicateOf: 'o/y:.' }), rec('o/y:.', 'duplicate', { duplicateOf: 'o/c:.' })]
+  const chain = reclassify(mods, rules(), rules({ catalogs: new Set(['cat/r']) }))
+  assert.deepEqual(chain, [{ id: 'o/a:.', from: 'duplicate', to: 'mod', released: true }, { id: 'cat/r:b', from: 'duplicate', to: 'catalog' }], 'an untouched chain stays collapsed')
+  assert.equal(needsReview(8000, 8001, chain), true)
+  for (const m of mods) if (m.kind === 'duplicate') for (let k = m, hops = 0; k.kind === 'duplicate'; k = mods.find(x => x.id === k.duplicateOf)) assert.ok(++hops < 5 && mods.some(x => x.id === k.duplicateOf), m.id)
+  assert.equal(mods.find(m => m.id === 'o/x:.').kind, 'duplicate')
+
   assert.equal(needsReview(8000, 7995, Array(5).fill({})), false)
   assert.equal(needsReview(8000, 8000, Array(51).fill({})), true)
   assert.equal(needsReview(8000, 7950, Array(50).fill({})), true)
