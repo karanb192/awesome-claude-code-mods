@@ -96,7 +96,7 @@ export function summarize(before, after) {
     decisions.push(`possible duplicate: ${group.join(' and ')} share an owner and a name; if they are one mod, add the pair to data/duplicates.txt`)
   }
   const was = counted(before), is = counted(after)
-  const title = was === is ? `Scan: ${n(is)} mods, footprints refreshed` : `Scan: ${n(was)} to ${n(is)} mods (${n(added.length)} new, ${n(gone.length)} gone)`
+  const title = was === is ? `Scan: ${n(is)} mods, footprints refreshed` : `Scan: ${n(was)} to ${n(is)} mods (${n(added.length)} new records, ${n(gone.length)} gone)`
   const reclassified = after.mods.filter(m => old.has(m.id) && old.get(m.id).kind !== m.kind).length
   const lines = [
     `**${was === is ? `${n(is)} counted mods, unchanged` : `${n(was)} to ${n(is)} counted mods`}.** ${n(added.length)} new records (${n(added.filter(m => m.kind === 'mod').length)} counted), ${n(gone.length)} gone, ${n(reclassified)} reclassified.`,

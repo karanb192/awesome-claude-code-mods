@@ -329,7 +329,7 @@ test('the scan summary titles the count and lists only what needs a decision', (
     one('o/copy:.', { name: 'c' }), one('o/copy2:.', { name: 'c' }), one('n/new:.', { name: 'n' }),
   ] }
   const summary = summarize(before, after)
-  assert.equal(summary.title, 'Scan: 4 to 8 mods (5 new, 1 gone)')
+  assert.equal(summary.title, 'Scan: 4 to 8 mods (5 new records, 1 gone)')
   assert.deepEqual(summary.decisions, [
     'gone: x/gone:. (mod) is no longer in the inventory',
     'possible move: o/r:plugins/t was not found and o/r:archive/t is new in the same repository under the same name; if they are one mod, both count until the pair is in data/duplicates.txt',
@@ -338,7 +338,7 @@ test('the scan summary titles the count and lists only what needs a decision', (
   ])
   assert.equal(summary.lines[0], '**4 to 8 counted mods.** 5 new records (5 counted), 1 gone, 0 reclassified.')
   const big = { mods: Array.from({ length: 1234 }, (_, i) => one(`o/r${i}:.`, { name: `m${i}` })) }
-  assert.equal(summarize(base, big).title, 'Scan: 1 to 1,234 mods (1,234 new, 2 gone)')
+  assert.equal(summarize(base, big).title, 'Scan: 1 to 1,234 mods (1,234 new records, 2 gone)')
 })
 
 test('kindOf files built-ins, fixtures, mirrors and catalogue copies, and counts the rest', () => {
