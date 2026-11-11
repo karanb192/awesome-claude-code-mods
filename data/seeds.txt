@@ -193,3 +193,4 @@ xuanji86/claude-statuspane
 yadava5/unramble
 yash-gadodia/claude-mods
 ynqa/claude-convey
+zigansh1n/claude-focus-sidebar
