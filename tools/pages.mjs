@@ -121,12 +121,14 @@ const noticed = mod => mod.kind === 'builtin' || Boolean(mod.directory) || (mod.
 // The pages search engines are asked to index; every other page stays live and linked, with noindex. A page
 // qualifies when its repository has two stars or more, is in Anthropic's directory or is built in, and its description is
 // long enough to tell it apart. Mods that repeat one description share one indexed page: the oldest repository's.
-// The registry remembers a page that qualified, so a repository losing a star never turns its page back.
+// The registry remembers a page that qualified, so neither a lost star nor an older copy qualifying later turns
+// it back.
 export function indexedPages(records, pages, registry) {
   const entries = { ...registry }
   const eligible = records.filter(mod => describable(mod) && wording(mod).length >= MIN_DESCRIPTION && (noticed(mod) || entries[pages.get(mod)]?.indexed))
   const keepers = new Map()
-  for (const mod of eligible.sort((a, b) => byText(a.createdAt ?? '', b.createdAt ?? '') || byText(idOf(a), idOf(b)))) {
+  const kept = mod => entries[pages.get(mod)]?.indexed ? 0 : 1
+  for (const mod of eligible.sort((a, b) => kept(a) - kept(b) || byText(a.createdAt ?? '', b.createdAt ?? '') || byText(idOf(a), idOf(b)))) {
     const key = wording(mod).toLowerCase()
     if (!keepers.has(key)) keepers.set(key, mod)
   }

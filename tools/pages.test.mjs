@@ -191,6 +191,11 @@ test('search engines are asked to index a page with outside interest and a descr
   const second = indexedPages(fallen, new Map(fallen.map(record => [record, record.name])), first.registry)
   assert.deepEqual([...second.indexed].map(record => record.name).sort(), ['built-in', 'copy-older', 'failed', 'listed', 'two-stars'], 'a page that qualified stays indexed when its repository loses stars')
   assert.deepEqual(second.registry, first.registry)
+  const original = noticed('original', { description: long, createdAt: '2025-01-01T00:00:00Z' })
+  const withOriginal = [...records, original]
+  const third = indexedPages(withOriginal, new Map(withOriginal.map(record => [record, record.name])), { ...first.registry, original: { id: original.id } })
+  assert.equal(third.indexed.has(original), false, 'an older copy that qualifies later does not take the place of the indexed page')
+  assert.deepEqual([...third.indexed].map(record => record.name).sort(), [...first.indexed].map(record => record.name).sort())
   assert.equal(formatRegistry({ a: { id: 'x', indexed: true } }), '{\n  "a": {"id":"x","indexed":true}\n}\n')
   assert.throws(() => readRegistry('{"a": {"id": "x", "indexed": "yes"}}'), /invalid entry/)
 })
