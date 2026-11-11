@@ -7,6 +7,7 @@ adamholter/claude-subway-surfers
 agentic-workbench/agent-quick-menu
 ajwann/next-context
 AlexeyHRDesign/colorwheel
+alexeyw/lot-map
 alexjacobs08/guided-mr
 alexlifexyz/p3c-guard
 AmberWJL/live-claude-notebook
