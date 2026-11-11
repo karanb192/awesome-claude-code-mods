@@ -43,13 +43,14 @@ jobs:
         if: steps.rules.outputs.result != 'unchanged'
         run: npm ci && npx playwright install --with-deps chromium
       - name: Refile, regenerate and publish against current main
+        id: publish
         if: steps.rules.outputs.result != 'unchanged'
         env:
           GH_TOKEN: ${{ github.token }}
           RULES_BASE: ${{ github.event.before }}
         run: bash tools/apply-rules.sh
       - name: Request publication when Pages is behind main
-        if: steps.rules.outputs.result == 'changed'
+        if: steps.publish.outputs.merged == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

@@ -40,7 +40,7 @@ for attempt in {1..8}; do
     echo "A classification rule changed on main. This refiles the committed records that change explains, without a scan, and regenerates the catalogue and website. Rendering, tests and lint passed in the producing run."
     echo
     if [ "$result" = review ]; then
-      echo '**Not merged automatically:** the change refiles more than 50 records or moves the counted total by more than 0.5%. Check that the rule does not match more than intended, then merge or close.'
+      echo '**Not merged automatically:** the change refiles more than 50 records, moves the counted total by more than 0.5%, or refiles a mod that other records were collapsed onto. Check that the rule does not match more than intended, then merge or close.'
     else
       echo 'This dedicated pull request is squash-merged automatically after the checks.'
     fi
@@ -65,7 +65,10 @@ for attempt in {1..8}; do
     exit 0
   fi
   if [ "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)" != "$base" ]; then continue; fi
-  if gh pr merge "$pr" --squash --delete-branch --match-head-commit "$head" --subject "$title" --body 'Refile committed records after a classification rule change.'; then exit 0; fi
+  if gh pr merge "$pr" --squash --delete-branch --match-head-commit "$head" --subject "$title" --body 'Refile committed records after a classification rule change.'; then
+    echo 'merged=true' >> "${GITHUB_OUTPUT:-/dev/null}"
+    exit 0
+  fi
   if [ "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)" = "$base" ]; then
     echo 'Merge failed without a main update; check repository permissions or branch rules.' >&2
     exit 1

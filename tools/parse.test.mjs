@@ -793,9 +793,18 @@ test('a rule change refiles only the committed records it explains', () => {
   assert.deepEqual(reclassify(mods, rules(), stricter), [{ id: 'o/a:archive/p', from: 'mod', to: 'fixture' }, { id: 'o/a:archive/q', from: 'duplicate', to: 'fixture' }])
   assert.equal('duplicateOf' in mods[2], false)
 
-  assert.equal(needsReview(8000, 7995, Array(5)), false)
-  assert.equal(needsReview(8000, 8000, Array(51)), true)
-  assert.equal(needsReview(8000, 7950, Array(50)), true)
+  // A keeper refiled as something that does not count releases its copy, and a person decides which one counts.
+  mods = [rec('o/a:.', 'duplicate', { duplicateOf: 'cat/r:b' }), rec('cat/r:b'), rec('o/c:.', 'duplicate', { duplicateOf: 'o/d:.' }), rec('o/d:.')]
+  const released = reclassify(mods, rules({ duplicates: new Map([['o/a:.', 'cat/r:b'], ['o/c:.', 'o/d:.']]) }), rules({ catalogs: new Set(['cat/r']), duplicates: new Map([['o/a:.', 'cat/r:b'], ['o/c:.', 'o/d:.'], ['o/d:.', 'o/e:.']]) }))
+  assert.deepEqual(released, [{ id: 'o/a:.', from: 'duplicate', to: 'mod', released: true }, { id: 'cat/r:b', from: 'mod', to: 'catalog' }])
+  assert.equal(needsReview(8000, 8000, released), true)
+  // A keeper that becomes a duplicate itself keeps its copy collapsed, as the scan's list order does.
+  mods = [rec('o/c:.', 'duplicate', { duplicateOf: 'o/d:.' }), rec('o/d:.'), rec('o/e:.')]
+  assert.deepEqual(reclassify(mods, rules({ duplicates: new Map([['o/c:.', 'o/d:.']]) }), rules({ duplicates: new Map([['o/c:.', 'o/d:.'], ['o/d:.', 'o/e:.']]) })), [{ id: 'o/d:.', from: 'mod', to: 'duplicate', duplicateOf: 'o/e:.' }])
+
+  assert.equal(needsReview(8000, 7995, Array(5).fill({})), false)
+  assert.equal(needsReview(8000, 8000, Array(51).fill({})), true)
+  assert.equal(needsReview(8000, 7950, Array(50).fill({})), true)
 })
 
 test('the reclassify command reads the old rules from a commit and writes only refiled records', t => {

@@ -10,7 +10,8 @@
 //
 //   node tools/reclassify.mjs --base <commit> [--result FILE] [--changes FILE]
 //
-// --result receives `unchanged`, `changed`, or `review` when the change is too large to publish unread.
+// --result receives `unchanged`, `changed`, or `review` when the change is too large to publish unread
+// or leaves a copy without the mod it duplicated.
 
 import { execFileSync } from 'node:child_process'
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
@@ -36,12 +37,20 @@ export function reclassify(mods, before, after) {
     if (old === (m.kind === 'duplicate' ? 'mod' : m.kind) && now !== old) { m.kind = now; delete m.duplicateOf }
   }
   applyDuplicates(mods, new Map([...after.duplicates].filter(([copy, keeper]) => before.duplicates.get(copy) !== keeper)))
+  // A copy counts again once the mod it was collapsed onto is refiled as something that does not
+  // count, as it would in a scan. Which of the two should count is then a person's call.
+  const byId = new Map(mods.map(m => [m.id, m])), released = new Set()
+  for (const m of mods) {
+    const keeper = m.kind === 'duplicate' ? byId.get(m.duplicateOf) : null
+    if (!keeper || was.get(keeper.id).kind !== 'mod' || ['mod', 'duplicate'].includes(keeper.kind)) continue
+    m.kind = filed(after, m); delete m.duplicateOf; released.add(m.id)
+  }
   return mods.filter(m => was.get(m.id).kind !== m.kind || was.get(m.id).duplicateOf !== m.duplicateOf)
-    .map(m => ({ id: m.id, from: was.get(m.id).kind, to: m.kind, ...(m.duplicateOf ? { duplicateOf: m.duplicateOf } : {}) }))
+    .map(m => ({ id: m.id, from: was.get(m.id).kind, to: m.kind, ...(m.duplicateOf ? { duplicateOf: m.duplicateOf } : {}), ...(released.has(m.id) ? { released: true } : {}) }))
 }
 
 export function needsReview(countedBefore, countedAfter, changes) {
-  return changes.length > REVIEW_RECORDS || Math.abs(countedAfter - countedBefore) > countedBefore * REVIEW_SHARE
+  return changes.length > REVIEW_RECORDS || Math.abs(countedAfter - countedBefore) > countedBefore * REVIEW_SHARE || changes.some(change => change.released)
 }
 
 const rulesIn = (module, dir) => ({
@@ -68,7 +77,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     is = counted()
     if (changes.length) writeFileSync('data/mods.json', JSON.stringify(data, null, 2) + '\n')
   } finally { rmSync(old, { recursive: true, force: true }) }
-  const lines = changes.map(c => `${c.id}: ${c.from} to ${c.to}${c.duplicateOf ? ` (duplicate of ${c.duplicateOf})` : ''}`)
+  const lines = changes.map(c => `${c.id}: ${c.from} to ${c.to}${c.duplicateOf ? ` (duplicate of ${c.duplicateOf})` : ''}${c.released ? ' (the mod it duplicated no longer counts)' : ''}`)
   const result = !changes.length ? 'unchanged' : needsReview(was, is, changes) ? 'review' : 'changed'
   console.log(changes.length ? `${was} to ${is} counted mods\n${lines.join('\n')}` : 'no record is refiled')
   if (values.result) writeFileSync(values.result, result + '\n')
