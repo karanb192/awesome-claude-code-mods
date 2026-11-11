@@ -70,7 +70,7 @@ for (const m of [...mods, ...builtins]) {
 
 const count = pred => mods.filter(pred).length
 const has = label => m => m.reach.labels.includes(label)
-const stats = `As of ${asOf}, scanned against Claude Code ${data.claudeVersion}: **${mods.length} mods** in **${data.repos} candidate repos**. `
+const stats = `As of ${asOf}, scanned against Claude Code ${data.claudeVersion}: **${mods.length.toLocaleString('en')} mods** in **${data.repos.toLocaleString('en')} candidate repos**. `
   + `${count(has('runs processes'))} run host processes, ${count(has('writes files'))} write files, ${count(has('reads files'))} read files, `
   + `${count(has('network'))} reach the network, ${count(m => m.sees.includes('every tool call'))} see every tool call, `
   + `${count(m => m.sees.includes('every prompt'))} see every prompt, ${count(m => m.validate.status === 'failed')} fail to validate on this version. `
@@ -98,7 +98,7 @@ function updateBlocks(file, blocks) {
   }
   writeFileSync(file, text)
 }
-updateBlocks('README.md', { stats: `**${mods.length} mods** · Last scanned ${asOf}.` })
+updateBlocks('README.md', { stats: `**${mods.length.toLocaleString('en')} mods** · Last scanned ${asOf}.` })
 
 // The count in hand-written copy, rounded down to the hundred so the sentence moves every few scans, not every one.
 const about = mods.length < 100 ? String(mods.length) : `${(Math.floor(mods.length / 100) * 100).toLocaleString('en')}+`

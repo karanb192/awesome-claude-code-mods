@@ -672,6 +672,7 @@ test('hand-written copy carries the count rounded down to the hundred, in the RE
   writeFileSync(join(dir, '.claude-plugin/marketplace.json'), '{ "description": "Search 3,000+ community Claude Code mods by task." }\n')
   render(dir)
   assert.match(readFileSync(join(dir, 'README.md'), 'utf8'), /^<!-- count:start -->100\+<!-- count:end --> mods\./)
+  assert.match(readFileSync(join(dir, 'README.md'), 'utf8'), /\*\*123 mods\*\*/)
   assert.match(readFileSync(join(dir, 'finder/.claude-plugin/plugin.json'), 'utf8'), /get matches from 100\+ community mods, with more/)
   assert.match(readFileSync(join(dir, '.claude-plugin/marketplace.json'), 'utf8'), /Search 100\+ community Claude Code mods by task\./)
   const readme = readFileSync(join(dir, 'README.md'), 'utf8')
