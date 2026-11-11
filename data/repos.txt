@@ -1843,6 +1843,8 @@ KevinYu1580/jcGearbox
 KevinYu1580/jev-cc-model-router
 KevinZai/commander
 kevlar10x/quiet-transcript
+kevlar10x/recent-sessions
+kevlar10x/status-dots
 KeygripGit/claude-mods
 kgaidev/kgai
 kgrvGRECO/woo-mods
