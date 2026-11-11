@@ -5106,6 +5106,8 @@
   "kevinmedeiros--claude-mods--unity-tools": {"id":"kevinmedeiros/claude-mods:plugins/unity-tools"},
   "kevinmedeiros--claude-mods--usage-limits": {"id":"kevinmedeiros/claude-mods:plugins/usage-limits"},
   "kevlar10x--quiet-transcript--quiet-transcript": {"id":"kevlar10x/quiet-transcript:."},
+  "kevlar10x--recent-sessions--recent-sessions": {"id":"kevlar10x/recent-sessions:."},
+  "kevlar10x--status-dots--status-dots": {"id":"kevlar10x/status-dots:."},
   "kgaidev--kgai--kgai-mod": {"id":"kgaidev/kgai:mods/kgai-mod"},
   "kgrvGRECO--woo-mods--pocket-pet": {"id":"kgrvGRECO/woo-mods:pocket-pet"},
   "kgrvGRECO--woo-mods--usage-band": {"id":"kgrvGRECO/woo-mods:usage-band"},
