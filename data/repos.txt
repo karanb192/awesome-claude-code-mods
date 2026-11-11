@@ -183,6 +183,7 @@ alexatennea/claude-mods
 alexbazu/turn-timer
 alexcz-a11y/claude-mods
 AlexeyHRDesign/colorwheel
+alexeyw/lot-map
 alexgreensh/token-optimizer
 alexisByron/mascota
 alexisByron/reglas
