@@ -668,6 +668,19 @@ test('a rescan that only moves stars and dates leaves every page and the registr
   assert.equal(readFileSync(join(dir, 'docs/sitemap.xml'), 'utf8'), sitemap)
 })
 
+test('a rescan on a newer validator that changes no result leaves every mod page untouched', t => {
+  const dir = fixture(t, [mod(0), mod(1, 'failed'), mod(2, 'passed', 'builtin')])
+  render(dir)
+  const pages = tree(join(dir, 'docs/mods'))
+  const data = JSON.parse(readFileSync(join(dir, 'data/mods.json'), 'utf8'))
+  data.claudeVersion = '2.9.999'
+  data.mods = data.mods.map(m => ({ ...m, validate: { ...m.validate, claudeVersion: '2.9.999' } }))
+  writeFileSync(join(dir, 'data/mods.json'), JSON.stringify(data))
+  render(dir)
+  assert.deepEqual(tree(join(dir, 'docs/mods')), pages)
+  assert.doesNotMatch(Object.values(tree(join(dir, 'docs/mods'))).join(''), /2\.9\.999/)
+})
+
 test('a repository reaching two stars changes only its own page, once, and losing them changes nothing', t => {
   const described = (i, stars) => ({ ...mod(i), description: `Example mod ${i} shows one more thing in the band.`, stars })
   const dir = fixture(t, [described(0, 7), described(1, 1), described(2, 0)])
@@ -690,19 +703,6 @@ test('a repository reaching two stars changes only its own page, once, and losin
   assert.deepEqual(tree(join(dir, 'docs/mods')), after)
   assert.equal(readFileSync(join(dir, 'data/pages.json'), 'utf8'), crossed)
   assert.equal(readFileSync(join(dir, 'docs/sitemap.xml'), 'utf8'), sitemap)
-})
-
-test('a rescan on a newer validator that changes no result leaves every mod page untouched', t => {
-  const dir = fixture(t, [mod(0), mod(1, 'failed'), mod(2, 'passed', 'builtin')])
-  render(dir)
-  const pages = tree(join(dir, 'docs/mods'))
-  const data = JSON.parse(readFileSync(join(dir, 'data/mods.json'), 'utf8'))
-  data.claudeVersion = '2.9.999'
-  data.mods = data.mods.map(m => ({ ...m, validate: { ...m.validate, claudeVersion: '2.9.999' } }))
-  writeFileSync(join(dir, 'data/mods.json'), JSON.stringify(data))
-  render(dir)
-  assert.deepEqual(tree(join(dir, 'docs/mods')), pages)
-  assert.doesNotMatch(Object.values(tree(join(dir, 'docs/mods'))).join(''), /2\.9\.999/)
 })
 
 test('retired mods lose their page, renamed ones leave a redirect, and their paths stay reserved', t => {
