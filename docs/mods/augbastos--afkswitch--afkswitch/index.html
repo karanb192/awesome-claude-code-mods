@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/augbastos/afkswitch">augbastos/afkswitch</a> <span class="listed" title="Listed in Anthropic's plugin directory as afkswitch@anthropic-plugin-directory">In Anthropic directory</span></p>
 <p class="lede">AFKSwitch by augbastos: Tell your agents when you're away and when you're back.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">afkswitch reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">afkswitch reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 10</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install afkswitch@anthropic-plugin-directory</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From Anthropic's plugin directory. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads files, reads env vars, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -25,13 +25,13 @@
     <dt>Anthropic directory</dt><dd>Listed as <code>afkswitch@anthropic-plugin-directory</code></dd>
     <dt>Observed events</dt><dd>every prompt</dd>
     <dt>Hooks</dt><dd><code>session.start, prompt.submit, command.run, turn.complete, ui.render {component=AbovePrompt}</code></dd>
-    <dt>API calls</dt><dd><code>$.command.run, $.env.get, $.fs.exists, $.fs.read, $.store.get, $.store.set, $.ui.invalidate, $.ui.resolve</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.command.run, $.env.get, $.fs.exists, $.fs.read, $.store.get, $.store.set, $.ui.invalidate, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/augbastos/afkswitch/tree/7e7571bc29eaf186bfc797fd53c6f78a2b407696"><code>7e7571bc29ea</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/augbastos/afkswitch/blob/7e7571bc29eaf186bfc797fd53c6f78a2b407696/.claude-plugin/marketplace.json">afkswitch</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/augbastos/afkswitch/tree/8c075685fdd6553f639edb0340486bb4472d0569"><code>8c075685fdd6</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/augbastos/afkswitch/blob/8c075685fdd6553f639edb0340486bb4472d0569/.claude-plugin/marketplace.json">afkswitch</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/augbastos--afkswitch--afkswitch-reach.svg" alt="Reach badge for afkswitch"> <img src="/badges/augbastos--afkswitch--afkswitch-validates.svg" alt="Validation badge for afkswitch"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/augbastos--afkswitch--afkswitch-reach.svg)](https://mods.aidojo.si/mods/augbastos--afkswitch--afkswitch/)
