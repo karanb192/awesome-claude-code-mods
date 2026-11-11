@@ -179,3 +179,5 @@ DiogoHSM/claude-mods:agentes-pixel DiogoHSM/claude-mods:pixel-agents
 DiogoHSM/claude-mods:polimento-visual DiogoHSM/claude-mods:visual-polish
 aidan-nunn-sys/claude-config:mods/review-watch hamzafer/claude-code-mods:mods/review-watch
 aidan-nunn-sys/claude-config:mods/secret-box ray-amjad/claude-code-mods:plugins/secret-box
+samuelbirocchi/ai-tools:plugins/pr-tracker samuelbirocchi/ai-tools:archive/pr-tracker
+marulimo/ask-codex:. marulimo/claude-code-mods:mods/ask-codex

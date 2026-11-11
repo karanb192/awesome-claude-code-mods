@@ -694,9 +694,8 @@ test('retained Anderson plugins resolve to Codex after repository discovery foll
 })
 
 test('claudetto release evidence probes are fixtures, not shipped mods', () => {
-  const root = 'openspec/changes/release-2-1-319/evidence/tmp/'
   const probes = ['probe-141/arm-reorder', 'probe-17-1-lab', 'probe-tui/plug']
-  for (const repo of ['xsyetopz/dotclaude', 'xsyetopz/claudetto', 'XSYETOPZ/Claudetto']) {
+  for (const root of ['openspec/changes/release-2-1-319/evidence/tmp/', 'openspec/changes/archive/2026-11-09-release-2-1-319/evidence/tmp/']) for (const repo of ['xsyetopz/dotclaude', 'xsyetopz/claudetto', 'XSYETOPZ/Claudetto']) {
     for (const path of probes) {
       assert.equal(kindOf(repo, root + path, {}), 'fixture')
       assert.equal(kindOf(repo, root + path + '/nested', {}), 'fixture')
@@ -707,7 +706,7 @@ test('claudetto release evidence probes are fixtures, not shipped mods', () => {
       assert.equal(kindOf(repo, path, {}), 'mod')
     }
   }
-  assert.equal(kindOf('other/repo', root + probes[0], {}), 'mod')
+  assert.equal(kindOf('other/repo', 'openspec/changes/release-2-1-319/evidence/tmp/' + probes[0], {}), 'mod')
 })
 
 
