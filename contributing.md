@@ -8,6 +8,8 @@ A daily scan searches GitHub code for repositories that mention `CLAUDE_CODE_ENA
 
 ## Open a pull request
 
+First search for your mod on [mods.aidojo.si](https://mods.aidojo.si/). If it is there, the scanner already tracks your repository and you do not need a seed: a seed PR for a listed repository changes nothing and is closed with a link to the mod's page. Your badges are at the bottom of that page.
+
 1. Add your `owner/repo` to `data/seeds.txt`, one per line, in alphabetical order ignoring case. A line appended at the end conflicts with every other open seed PR.
    If you renamed a repository on GitHub, nothing is needed: the scan reads the current name and counts each plugin once, under that name. If you moved a mod to a different repository and the table lists both, add the pair to `data/duplicates.txt` so the old copy stops counting.
    A repo that repackages other authors' mods as a catalogue goes in `data/catalogs.txt`: it is named once with its count rather than listed per copy.
