@@ -15,23 +15,23 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/declanbx/keepwarm">declanbx/keepwarm</a></p>
 <p class="lede">Keeps an idle interactive session's prompt cache warm with one tool-less fork just before the 1-hour cache lapses; /keepwarm on|off|status per session.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">keepwarm reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: writes files, drives Claude, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">keepwarm reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: writes files, drives Claude, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
-<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">writes files, drives Claude, reads env vars, reads mod state, draws</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">writes files, drives Claude, reads files, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
 <p class="topics-line">Listed under <a href="/topics/prompt-cache/">Prompt cache mods for Claude Code</a>.</p>
 <p class="actions"><a class="source" href="https://github.com/declanbx/keepwarm">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#declanbx--keepwarm--keepwarm">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, tool.call, command.run {command=keepwarm}</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.write, $.model.fork, $.session.id, $.state.get, $.state.set, $.ui.log, $.ui.status</code></dd>
+    <dt>Observed events</dt><dd>every prompt</dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.step, prompt.submit, command.run {command=keepwarm}</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.read, $.fs.write, $.model.fork, $.session.id, $.state.get, $.state.set, $.ui.log, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/declanbx/keepwarm/tree/414d14f25692cdfa8ee4206d3d7fba5214c4ad0b"><code>414d14f25692</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/declanbx/keepwarm/tree/c2bb739833946cb88900941432a567f7ba1350b5"><code>c2bb73983394</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 

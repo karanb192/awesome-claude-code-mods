@@ -14,7 +14,7 @@
 <h1>factory</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/zach-source/claude-factory">zach-source/claude-factory</a></p>
 <p class="lede">Run herdr software factories through this session: it ticks every run, runs a hidden patrol subagent as its manager, and draws a live console.</p>
-
+<p class="compatibility">review UI rewrite</p>
 <section class="summary" aria-label="Scan summary"><p class="summary-line">factory reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 21</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, drives Claude, reads files, reads mod state, draws</span></div>
@@ -23,15 +23,15 @@
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>Bash calls, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=factory}, tool.call {tool=Bash}, agent.offer {agent=factory:patrol}, agent.offer {agent=factory:pm}, agent.offer {agent=factory:briefer}, agent.offer {agent=factory:reviewer}, turn.complete, prompt.submit, prompt.compose, ui.render {component=Pane, requestId=factory}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Observed events</dt><dd>Monitor calls, Write calls, Bash calls, every prompt</dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=factory}, tool.call {tool=Monitor}, tool.call {tool=Write}, tool.call {tool=Bash}, agent.offer {agent=factory:patrol}, agent.offer {agent=factory:pm}, agent.offer {agent=factory:briefer}, agent.offer {agent=factory:reviewer}, turn.complete, prompt.submit, prompt.compose, ui.render {component=Pane, requestId=factory}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.agent.register, $.agent.spawn, $.clock.every, $.clock.now, $.command.register, $.fs.read, $.fs.stat, $.fs.write, $.process.run, $.prompt.submit, $.session.id, $.state.get, $.state.set, $.tool.list, $.ui.ask, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/zach-source/claude-factory/tree/26a5fbbe2574707c4ffcf282849496f94e0ea31d"><code>26a5fbbe2574</code></a></dd>
-    </dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/zach-source/claude-factory/tree/092621dd5d7a4a73b9f8677e0bb4be35f2aaeb47"><code>092621dd5d7a</code></a></dd>
+    <dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/zach-source/claude-factory/blob/092621dd5d7a4a73b9f8677e0bb4be35f2aaeb47/mod/hooks/register.tsx#L1458">mod/hooks/register.tsx:1458</a>, <a href="https://github.com/zach-source/claude-factory/blob/092621dd5d7a4a73b9f8677e0bb4be35f2aaeb47/mod/hooks/view.ts#L1186">mod/hooks/view.ts:1186</a>, <a href="https://github.com/zach-source/claude-factory/blob/092621dd5d7a4a73b9f8677e0bb4be35f2aaeb47/mod/hooks/view.ts#L1189">mod/hooks/view.ts:1189</a>, <a href="https://github.com/zach-source/claude-factory/blob/092621dd5d7a4a73b9f8677e0bb4be35f2aaeb47/mod/hooks/view.ts#L1193">mod/hooks/view.ts:1193</a>, <a href="https://github.com/zach-source/claude-factory/blob/092621dd5d7a4a73b9f8677e0bb4be35f2aaeb47/mod/hooks/view.ts#L1196">mod/hooks/view.ts:1196</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/zach-source--claude-factory--factory-reach.svg" alt="Reach badge for factory"> <img src="/badges/zach-source--claude-factory--factory-validates.svg" alt="Validation badge for factory"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/zach-source--claude-factory--factory-reach.svg)](https://mods.aidojo.si/mods/zach-source--claude-factory--factory/)

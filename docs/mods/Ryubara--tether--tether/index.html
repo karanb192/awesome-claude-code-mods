@@ -24,15 +24,15 @@
 <dl>
 
     <dt>Footprint</dt><dd>Unavailable or incomplete. Recorded events and calls below may omit access.</dd>
-    <dt>Observed events</dt><dd>SendMessage calls, Agent calls, subagent spawns, ? calls, classic hooks, Write calls, Edit calls, every prompt</dd>
-    <dt>Hooks</dt><dd><code>tool.call {tool=SendMessage}, tool.call {tool=Agent}, agent.spawn, command.run {command=?}, ui.render {component=Pane, requestId=tether}, turn.start, command.run {command=?}, session.start, session.append, tool.call {tool=?}, tool.call {tool=?}, command.run {command=?}, command.run {command=?}, classic.Stop, tool.call {tool=Write}, tool.call {tool=Edit}, classic.SessionEnd, session.end, classic.SessionStart, prompt.submit, classic.UserPromptSubmit, turn.complete, turn.step</code></dd>
-    <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.command.run, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.fs.write, $.process.run, $.prompt.read, $.prompt.submit, $.session.cwd</code></dd>
+    <dt>Observed events</dt><dd>SendMessage calls, Agent calls, subagent spawns, classic hooks, ? calls, Write calls, Edit calls, every prompt</dd>
+    <dt>Hooks</dt><dd><code>tool.call {tool=SendMessage}, tool.call {tool=Agent}, agent.spawn, command.run {command=?}, ui.render {component=Pane, requestId=tether}, turn.start, command.run {command=?}, session.start, session.append, classic.SubagentStop, tool.call {tool=?}, tool.call {tool=?}, command.run {command=?}, command.run {command=?}, classic.Stop, tool.call {tool=Write}, tool.call {tool=Edit}, classic.SessionEnd, session.end, classic.SessionStart, prompt.submit, classic.UserPromptSubmit, turn.complete, turn.step</code></dd>
+    <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.command.run, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.fs.write, $.process.run, $.prompt.read</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/Ryubara/tether/tree/05e76cbcbdf260028aedfcb3f570c062ef65887c"><code>05e76cbcbdf2</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/Ryubara/tether/blob/05e76cbcbdf260028aedfcb3f570c062ef65887c/.claude-plugin/marketplace.json">tether</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/Ryubara/tether/tree/65c9c39c8e181bcba6c5a59af2609821c7d8a2c1"><code>65c9c39c8e18</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/Ryubara/tether/blob/65c9c39c8e181bcba6c5a59af2609821c7d8a2c1/.claude-plugin/marketplace.json">tether</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/Ryubara--tether--tether-reach.svg" alt="Reach badge for tether"> <img src="/badges/Ryubara--tether--tether-validates.svg" alt="Validation badge for tether"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/Ryubara--tether--tether-reach.svg)](https://mods.aidojo.si/mods/Ryubara--tether--tether/)
