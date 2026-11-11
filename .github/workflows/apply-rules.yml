@@ -1,0 +1,60 @@
+name: apply rule changes
+
+# A change to a classification rule refiles the committed records it explains without waiting for
+# the next scan to be reviewed: tools/reclassify.mjs reads the rules before and after the push.
+on:
+  push:
+    branches: [main]
+    paths: ["tools/kind.mjs", "data/duplicates.txt", "data/catalogs.txt", "data/fixture-exceptions.txt"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: apply-rule-changes
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    if: github.event.before != '0000000000000000000000000000000000000000'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      pages: write
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - name: Check whether the rule change refiles any committed record
+        id: rules
+        env:
+          RULES_BASE: ${{ github.event.before }}
+        run: |
+          node tools/reclassify.mjs --base "$RULES_BASE" --result "$RUNNER_TEMP/rules-result.txt"
+          echo "result=$(cat "$RUNNER_TEMP/rules-result.txt")" >> "$GITHUB_OUTPUT"
+          git checkout -- data/mods.json
+      - name: Install browser checks
+        if: steps.rules.outputs.result != 'unchanged'
+        run: npm ci && npx playwright install --with-deps chromium
+      - name: Refile, regenerate and publish against current main
+        if: steps.rules.outputs.result != 'unchanged'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RULES_BASE: ${{ github.event.before }}
+        run: bash tools/apply-rules.sh
+      - name: Request publication when Pages is behind main
+        if: steps.rules.outputs.result == 'changed'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          main_sha=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)
+          build=$(gh api "repos/$GITHUB_REPOSITORY/pages/builds/latest")
+          if [ "$(jq -r .commit <<< "$build")" != "$main_sha" ] || [ "$(jq -r .status <<< "$build")" = "errored" ]; then
+            gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"
+          fi
