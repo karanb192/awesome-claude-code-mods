@@ -90,6 +90,8 @@ karanb192/cache-tax
 karanb192/claude-code-mods
 karanb192/time-blame
 kevlar10x/quiet-transcript
+kevlar10x/recent-sessions
+kevlar10x/status-dots
 kiankhooban/open-paths
 kongyo2/context-view
 Kruhlikau/subagent-tuner
