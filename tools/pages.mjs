@@ -18,7 +18,7 @@ export function readRegistry(text) {
   const registry = text ? JSON.parse(text) : {}
   const folded = new Set()
   for (const [slug, entry] of Object.entries(registry)) {
-    if (!SLUG.test(slug) || typeof entry?.id !== 'string' || (entry.to !== undefined && !SLUG.test(String(entry.to))) || folded.has(slug.toLowerCase())) throw new Error(`data/pages.json has an invalid entry for ${slug}`)
+    if (!SLUG.test(slug) || typeof entry?.id !== 'string' || (entry.to !== undefined && !SLUG.test(String(entry.to))) || (entry.indexed !== undefined && entry.indexed !== true) || folded.has(slug.toLowerCase())) throw new Error(`data/pages.json has an invalid entry for ${slug}`)
     folded.add(slug.toLowerCase())
   }
   return registry
@@ -109,9 +109,34 @@ export function assignPages(records, registry, all, confirmedMoves = new Map()) 
   return { pages, redirects, registry: Object.fromEntries(entries) }
 }
 
-// Failed mods stay indexable: "fails validation" answers a search for that mod. Retained records carry a
-// footprint from an older scan, and an empty description leaves nothing to tell one page from another.
-export const indexable = mod => ['passed', 'warnings', 'failed'].includes(mod.validate.status) && String(mod.description ?? '').trim() !== ''
+// A page worth listing: failed mods stay in, since "fails validation" answers a search for that mod. Retained
+// records carry a footprint from an older scan, and an empty description leaves nothing to tell one page
+// from another.
+export const describable = mod => ['passed', 'warnings', 'failed'].includes(mod.validate.status) && String(mod.description ?? '').trim() !== ''
+
+const MIN_STARS = 2, MIN_DESCRIPTION = 40
+const wording = mod => String(mod.description ?? '').replace(/\s+/g, ' ').trim()
+const noticed = mod => mod.kind === 'builtin' || Boolean(mod.directory) || (mod.stars ?? 0) >= MIN_STARS
+
+// The pages search engines are asked to index; every other page stays live and linked, with noindex. A page
+// qualifies when its repository has two stars or more, is in Anthropic's directory or is built in, and its description is
+// long enough to tell it apart. Mods that repeat one description share one indexed page: the oldest repository's.
+// The registry remembers a page that qualified, so a repository losing a star never turns its page back.
+export function indexedPages(records, pages, registry) {
+  const entries = { ...registry }
+  const eligible = records.filter(mod => describable(mod) && wording(mod).length >= MIN_DESCRIPTION && (noticed(mod) || entries[pages.get(mod)]?.indexed))
+  const keepers = new Map()
+  for (const mod of eligible.sort((a, b) => byText(a.createdAt ?? '', b.createdAt ?? '') || byText(idOf(a), idOf(b)))) {
+    const key = wording(mod).toLowerCase()
+    if (!keepers.has(key)) keepers.set(key, mod)
+  }
+  const indexed = new Set(keepers.values())
+  for (const mod of indexed) {
+    const slug = pages.get(mod)
+    if (!entries[slug]?.indexed) entries[slug] = { ...entries[slug], indexed: true }
+  }
+  return { indexed, registry: entries }
+}
 
 const jsonLd = value => JSON.stringify(value).replace(/</g, '\\u003c')
 export const clip = (text, n) => { text = String(text ?? '').replace(/\s+/g, ' ').trim(); return text.length > n ? text.slice(0, n - 1).trimEnd() + '…' : text }
@@ -252,7 +277,7 @@ export const badgeSnippet = (anchor, url) => {
   return `[![reach](${badgeUrl('reach')})](${url})\n[![validates](${badgeUrl('validates')})](${url})`
 }
 
-export function renderModPage(mod, { slug, anchor, siblings = [], topics = [] }) {
+export function renderModPage(mod, { slug, anchor, siblings = [], topics = [], indexed = false }) {
   const url = `${site}mods/${slug}/`
   const owner = mod.repo.split('/')[0]
   const described = String(mod.description ?? '').trim()
@@ -277,7 +302,7 @@ export function renderModPage(mod, { slug, anchor, siblings = [], topics = [] })
   const snippet = badgeSnippet(anchor, url)
   const statusClass = mod.validate.status === 'passed' || mod.validate.status === 'warnings' ? '' : ' bad'
   return shell({
-    title, description, canonical: url, robots: indexable(mod) ? '' : 'noindex',
+    title, description, canonical: url, robots: indexed ? '' : 'noindex',
     head: `
 <meta property="og:type" content="website"><meta property="og:title" content="${esc(`${mod.name}, a Claude Code mod`)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${esc(url)}">
 <meta property="og:image" content="${site}social-preview.png?v=2"><meta name="twitter:card" content="summary">
