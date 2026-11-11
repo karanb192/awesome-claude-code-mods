@@ -25,7 +25,7 @@ function fixture(t, mods) {
   t.after(() => rmSync(dir, { recursive: true, force: true }))
   mkdirSync(join(dir, 'data'))
   writeFileSync(join(dir, 'data/mods.json'), JSON.stringify({ generated: '2026-01-01T00:00:00Z', claudeVersion: '2.1.287', repos: 1, mods }))
-  writeFileSync(join(dir, 'README.md'), 'Curated picks stay here.\n<!-- stats:start -->\n<!-- stats:end -->\n')
+  writeFileSync(join(dir, 'README.md'), '<!-- count:start --><!-- count:end --> mods. Curated picks stay here.\n<!-- stats:start -->\n<!-- stats:end -->\n')
   writeFileSync(join(dir, 'catalogue.md'), ['stats', 'scan', 'builtin'].map(name => `<!-- ${name}:start -->\n<!-- ${name}:end -->`).join('\n'))
   return dir
 }
@@ -662,6 +662,23 @@ test('a rescan that only moves stars and dates leaves every page and the registr
   assert.deepEqual(tree(join(dir, 'docs/mods')), pages)
   assert.equal(readFileSync(join(dir, 'data/pages.json'), 'utf8'), registry)
   assert.equal(readFileSync(join(dir, 'docs/sitemap.xml'), 'utf8'), sitemap)
+})
+
+test('hand-written copy carries the count rounded down to the hundred, in the README and both finder descriptions', t => {
+  const dir = fixture(t, Array.from({ length: 123 }, (_, i) => mod(i)))
+  mkdirSync(join(dir, 'finder/.claude-plugin'), { recursive: true })
+  mkdirSync(join(dir, '.claude-plugin'), { recursive: true })
+  writeFileSync(join(dir, 'finder/.claude-plugin/plugin.json'), '{ "description": "get matches from thousands of community mods, with more" }\n')
+  writeFileSync(join(dir, '.claude-plugin/marketplace.json'), '{ "description": "Search 3,000+ community Claude Code mods by task." }\n')
+  render(dir)
+  assert.match(readFileSync(join(dir, 'README.md'), 'utf8'), /^<!-- count:start -->100\+<!-- count:end --> mods\./)
+  assert.match(readFileSync(join(dir, 'finder/.claude-plugin/plugin.json'), 'utf8'), /get matches from 100\+ community mods, with more/)
+  assert.match(readFileSync(join(dir, '.claude-plugin/marketplace.json'), 'utf8'), /Search 100\+ community Claude Code mods by task\./)
+  const readme = readFileSync(join(dir, 'README.md'), 'utf8')
+  render(dir)
+  assert.equal(readFileSync(join(dir, 'README.md'), 'utf8'), readme)
+  writeFileSync(join(dir, '.claude-plugin/marketplace.json'), '{ "description": "No count here." }\n')
+  assert.throws(() => render(dir))
 })
 
 test('a rescan on a newer validator that changes no result leaves every mod page untouched', t => {

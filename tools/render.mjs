@@ -99,6 +99,19 @@ function updateBlocks(file, blocks) {
   writeFileSync(file, text)
 }
 updateBlocks('README.md', { stats: `**${mods.length} mods** · Last scanned ${asOf}.` })
+
+// The count in hand-written copy, rounded down to the hundred so the sentence moves every few scans, not every one.
+const about = mods.length < 100 ? String(mods.length) : `${(Math.floor(mods.length / 100) * 100).toLocaleString('en')}+`
+// Rewrites the count between inline markers, or the one match of a pattern in a file that cannot carry markers.
+function updateCount(file, pattern) {
+  if (!existsSync(file)) return
+  const text = readFileSync(file, 'utf8')
+  if (!pattern.test(text)) throw new Error(`${file} has no count to update`)
+  writeFileSync(file, text.replace(pattern, (match, before, after) => `${before}${about}${after}`))
+}
+updateCount('README.md', /(<!-- count:start -->)[^<]*(<!-- count:end -->)/)
+updateCount('finder/.claude-plugin/plugin.json', /(get matches from )(?:[\d,]+\+?|thousands of)( community mods)/)
+updateCount('.claude-plugin/marketplace.json', /(Search )(?:[\d,]+\+?|thousands of)( community Claude Code mods)/)
 updateBlocks('catalogue.md', { stats, scan: table(mods), builtin: table(builtins) })
 
 const records = [...mods, ...builtins]
