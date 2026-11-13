@@ -3,7 +3,7 @@
 // describing another mod. When a mod is renamed or confirmed as a copy, its old path redirects to the page
 // of the mod that replaced it, and the registry remembers that target after the copy's record is retired.
 
-import { esc, arrow, mark, star, repo, site, levels, reachText, track, recordDetails, validationStatus, reviewNotes } from './site.mjs'
+import { esc, arrow, mark, star, repo, site, levels, reachText, track, recordDetails, validationResult, reviewNotes } from './site.mjs'
 import { hasFootprint, classified } from './grade.mjs'
 import { install } from '../finder/install.mjs'
 import { slugs } from './slug.mjs'
@@ -18,7 +18,7 @@ export function readRegistry(text) {
   const registry = text ? JSON.parse(text) : {}
   const folded = new Set()
   for (const [slug, entry] of Object.entries(registry)) {
-    if (!SLUG.test(slug) || typeof entry?.id !== 'string' || (entry.to !== undefined && !SLUG.test(String(entry.to))) || folded.has(slug.toLowerCase())) throw new Error(`data/pages.json has an invalid entry for ${slug}`)
+    if (!SLUG.test(slug) || typeof entry?.id !== 'string' || (entry.to !== undefined && !SLUG.test(String(entry.to))) || (entry.indexed !== undefined && entry.indexed !== true) || folded.has(slug.toLowerCase())) throw new Error(`data/pages.json has an invalid entry for ${slug}`)
     folded.add(slug.toLowerCase())
   }
   return registry
@@ -32,7 +32,7 @@ const retained = mod => mod.validate?.status === 'unknown'
 // records: the mods and built-ins that get pages. all: every scanned record, for duplicateOf links.
 // A maintainer can point a retired path at another page by setting its "to" in data/pages.json; a record
 // the scan only retained follows that redirect until a fresh scan finds it again.
-export function assignPages(records, registry, all) {
+export function assignPages(records, registry, all, confirmedMoves = new Map()) {
   const entries = new Map(Object.entries(registry).sort(([a], [b]) => byText(a, b)))
   // macOS checkouts are case-insensitive, so two paths differing only in case would overwrite each other.
   const taken = new Set([...entries.keys()].map(slug => slug.toLowerCase()))
@@ -61,6 +61,22 @@ export function assignPages(records, registry, all) {
   const pageOf = new Map()
   for (const [mod, slug] of pages) if (!pageOf.has(identity(idOf(mod)))) pageOf.set(identity(idOf(mod)), slug)
   const duplicateOf = new Map(all.filter(mod => mod.kind === 'duplicate' && mod.duplicateOf).map(mod => [identity(idOf(mod)), identity(mod.duplicateOf)]))
+  // Retirement removes old records before duplicate classification. Keep confirmed moves usable
+  // for those absent IDs, but never override a live record or point at an uncounted keeper.
+  const inventory = new Map(all.map(mod => [identity(idOf(mod)), mod]))
+  const moves = new Map([...confirmedMoves].map(([copy, keeper]) => [identity(copy), identity(keeper)]))
+  for (const copy of moves.keys()) {
+    if (inventory.has(copy)) continue
+    const seen = new Set([copy])
+    let keeper = moves.get(copy)
+    while (keeper && !inventory.has(keeper) && !seen.has(keeper)) {
+      seen.add(keeper)
+      keeper = moves.get(keeper)
+    }
+    if (keeper && !seen.has(keeper) && inventory.get(keeper)?.kind === 'mod') {
+      duplicateOf.set(copy, keeper)
+    }
+  }
   const resolve = (slug, seen = new Set()) => {
     const entry = entries.get(slug)
     if (!entry || seen.has(slug)) return
@@ -93,9 +109,35 @@ export function assignPages(records, registry, all) {
   return { pages, redirects, registry: Object.fromEntries(entries) }
 }
 
-// Failed mods stay indexable: "fails on <version>" answers a search for that mod. Retained records carry a
-// footprint from an older scan, and an empty description leaves nothing to tell one page from another.
-export const indexable = mod => ['passed', 'warnings', 'failed'].includes(mod.validate.status) && String(mod.description ?? '').trim() !== ''
+// A page worth listing: failed mods stay in, since "fails validation" answers a search for that mod. Retained
+// records carry a footprint from an older scan, and an empty description leaves nothing to tell one page
+// from another.
+export const describable = mod => ['passed', 'warnings', 'failed'].includes(mod.validate.status) && String(mod.description ?? '').trim() !== ''
+
+const MIN_STARS = 2, MIN_DESCRIPTION = 40
+const wording = mod => String(mod.description ?? '').replace(/\s+/g, ' ').trim()
+const noticed = mod => mod.kind === 'builtin' || Boolean(mod.directory) || (mod.stars ?? 0) >= MIN_STARS
+
+// The pages search engines are asked to index; every other page stays live and linked, with noindex. A page
+// qualifies when its repository has two stars or more, is in Anthropic's directory or is built in, and its description is
+// long enough to tell it apart. A page with a description an indexed page already has stays out, and among new
+// pages the oldest repository's goes in. The registry remembers a page that went in, and from then on only its
+// own record can take it out: not a lost star, and not another mod arriving at the same description.
+export function indexedPages(records, pages, registry) {
+  const entries = { ...registry }
+  const remembered = mod => Boolean(entries[pages.get(mod)]?.indexed)
+  const eligible = records.filter(mod => describable(mod) && wording(mod).length >= MIN_DESCRIPTION && (noticed(mod) || remembered(mod)))
+  const indexed = new Set(eligible.filter(remembered))
+  const taken = new Set([...indexed].map(mod => wording(mod).toLowerCase()))
+  for (const mod of eligible.filter(mod => !remembered(mod)).sort((a, b) => byText(a.createdAt ?? '', b.createdAt ?? '') || byText(idOf(a), idOf(b)))) {
+    const key = wording(mod).toLowerCase()
+    if (taken.has(key)) continue
+    taken.add(key)
+    indexed.add(mod)
+    entries[pages.get(mod)] = { ...entries[pages.get(mod)], indexed: true }
+  }
+  return { indexed, registry: entries }
+}
 
 const jsonLd = value => JSON.stringify(value).replace(/</g, '\\u003c')
 export const clip = (text, n) => { text = String(text ?? '').replace(/\s+/g, ' ').trim(); return text.length > n ? text.slice(0, n - 1).trimEnd() + '…' : text }
@@ -138,17 +180,20 @@ const STATE_NOTE = 'the scan does not record whose state, so this does not show 
 // What the scan recorded, as one sentence and a short list, built only from scan fields so it never repeats
 // author text. The level comes from classified calls alone; unclassified calls are named, not scored.
 // A retained record describes its last recorded footprint and why it was not rescanned.
-export function scanSummary(mod, version) {
+export function scanSummary(mod) {
   const name = esc(mod.name)
   const retained = mod.validate.status === 'unknown'
   const result = retained ? mod.lastKnownValidate : mod.validate
-  const raw = result?.claudeVersion ?? version
-  const at = esc(raw)
-  const validation = result?.status === 'passed' ? `passed <code>claude plugin validate</code> on Claude Code ${at}`
-    : result?.status === 'warnings' ? `passed <code>claude plugin validate</code> with warnings on Claude Code ${at}`
-    : result?.status === 'failed' ? `fails <code>claude plugin validate</code> on Claude Code ${at}${result.errors?.length ? `: ${esc(firstLine(result.errors[0]))}` : ''}`
+  // Only a retained record names a validator version: that version is fixed with its last footprint. A
+  // rescanned mod names none, so a new validator release does not rewrite every page.
+  const pinned = retained ? result?.claudeVersion : undefined
+  const at = pinned ? ` on Claude Code ${esc(pinned)}` : ''
+  const validation = result?.status === 'passed' ? `passed <code>claude plugin validate</code>${at}`
+    : result?.status === 'warnings' ? `passed <code>claude plugin validate</code> with warnings${at}`
+    : result?.status === 'failed' ? `fails <code>claude plugin validate</code>${at}${result.errors?.length ? `: ${esc(firstLine(result.errors[0]))}` : ''}`
     : 'has no recorded validation result'
-  const shortValidation = result?.status === 'passed' ? `passes validation on ${raw}` : result?.status === 'warnings' ? `passes validation with warnings on ${raw}` : result?.status === 'failed' ? `fails validation on ${raw}` : 'not validated'
+  const on = pinned ? ` on ${pinned}` : ''
+  const shortValidation = result?.status === 'passed' ? `passes validation${on}` : result?.status === 'warnings' ? `passes validation with warnings${on}` : result?.status === 'failed' ? `fails validation${on}` : 'not validated'
   const facts = accessFacts(mod)
   const { calls, c, complete, kind, ungraded } = facts
   let sentence, access, short
@@ -233,13 +278,12 @@ export const badgeSnippet = (anchor, url) => {
   return `[![reach](${badgeUrl('reach')})](${url})\n[![validates](${badgeUrl('validates')})](${url})`
 }
 
-export function renderModPage(mod, { slug, anchor, claudeVersion, siblings = [], topics = [] }) {
+export function renderModPage(mod, { slug, anchor, siblings = [], topics = [], indexed = false }) {
   const url = `${site}mods/${slug}/`
   const owner = mod.repo.split('/')[0]
   const described = String(mod.description ?? '').trim()
-  const version = mod.validate.claudeVersion ?? claudeVersion
   const title = `${mod.name}, a Claude Code mod by ${owner} | Awesome Claude Code Mods`
-  const summary = scanSummary(mod, version)
+  const summary = scanSummary(mod)
   const description = described
     ? `${clip(described, 154 - summary.short.length)} ${summary.short}`
     : `${mod.name} is a Claude Code mod in ${mod.repo}. See the hooks, API calls and access recorded by a static scan.`
@@ -255,11 +299,11 @@ export function renderModPage(mod, { slug, anchor, claudeVersion, siblings = [],
       ] },
     ],
   })
-  const status = validationStatus(mod, version)
+  const status = validationResult(mod.validate)
   const snippet = badgeSnippet(anchor, url)
   const statusClass = mod.validate.status === 'passed' || mod.validate.status === 'warnings' ? '' : ' bad'
   return shell({
-    title, description, canonical: url, robots: indexable(mod) ? '' : 'noindex',
+    title, description, canonical: url, robots: indexed ? '' : 'noindex',
     head: `
 <meta property="og:type" content="website"><meta property="og:title" content="${esc(`${mod.name}, a Claude Code mod`)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${esc(url)}">
 <meta property="og:image" content="${site}social-preview.png?v=2"><meta name="twitter:card" content="summary">
@@ -273,10 +317,10 @@ ${reviewNotes(mod).length ? `<p class="compatibility">${esc(reviewNotes(mod).joi
 ${summary.html}
 ${installBlock(mod)}
 <div class="facts"><div><h2>Access</h2><span class="level">${esc(hasFootprint(mod) ? `L${mod.reach.level} ${levels[mod.reach.level]}` : 'Unknown access')}</span>${track(mod)}<span class="labels">${esc(hasFootprint(mod) ? reachText(mod) : 'The footprint is unavailable or incomplete.')}</span></div>
-<div><h2>Validation</h2><span class="status${statusClass}">${esc(status)}${mod.validate.status === 'passed' || mod.validate.status === 'warnings' ? ` on Claude Code ${esc(version)}` : ''}</span></div></div>${topics.length ? `\n<p class="topics-line">Listed under ${topics.map(topic => `<a href="/topics/${esc(topic.slug)}/">${esc(topic.title)}</a>`).join(', ')}.</p>` : ''}
+<div><h2>Validation</h2><span class="status${statusClass}">${esc(status)}</span></div></div>${topics.length ? `\n<p class="topics-line">Listed under ${topics.map(topic => `<a href="/topics/${esc(topic.slug)}/">${esc(topic.title)}</a>`).join(', ')}.</p>` : ''}
 <p class="actions"><a class="source" href="${esc(sourceOf(mod))}">View the source on GitHub ${arrow}</a><a href="/#${esc(anchor)}">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
-${recordDetails(mod, claudeVersion)}
+${recordDetails(mod)}
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 ${shown.length ? `<section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from ${esc(mod.repo)}</h2><ul>${shown.map(({ mod: other, slug: path }) => `<li><a href="/mods/${esc(path)}/">${esc(other.name)}</a>${String(other.description ?? '').trim() ? `<span>${esc(clip(other.description, 110))}</span>` : ''}</li>`).join('')}</ul>${siblings.length > shown.length ? `<p><a href="/?q=${encodeURIComponent(mod.repo)}#directory">See all ${siblings.length + 1} mods from ${esc(mod.repo)}</a></p>` : ''}</section>` : ''}
 ${mod.kind === 'builtin' ? '' : `<section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/${esc(anchor)}-reach.svg" alt="Reach badge for ${esc(mod.name)}"> <img src="/badges/${esc(anchor)}-validates.svg" alt="Validation badge for ${esc(mod.name)}"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>${esc(snippet)}</code></pre></section>`}

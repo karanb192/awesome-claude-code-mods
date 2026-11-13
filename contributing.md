@@ -8,6 +8,8 @@ A daily scan searches GitHub code for repositories that mention `CLAUDE_CODE_ENA
 
 ## Open a pull request
 
+First search for your mod on [mods.aidojo.si](https://mods.aidojo.si/). If it is there, the scanner already tracks your repository and you do not need a seed: a seed PR for a listed repository changes nothing and is closed with a link to the mod's page. Your badges are at the bottom of that page.
+
 1. Add your `owner/repo` to `data/seeds.txt`, one per line, in alphabetical order ignoring case. A line appended at the end conflicts with every other open seed PR.
    If you renamed a repository on GitHub, nothing is needed: the scan reads the current name and counts each plugin once, under that name. If you moved a mod to a different repository and the table lists both, add the pair to `data/duplicates.txt` so the old copy stops counting.
    A repo that repackages other authors' mods as a catalogue goes in `data/catalogs.txt`: it is named once with its count rather than listed per copy.
@@ -18,11 +20,23 @@ A daily scan searches GitHub code for repositories that mention `CLAUDE_CODE_ENA
 
 PR checks scan newly added seeds. A new seed must clone successfully and contain mod plugins that validate; warnings are allowed. A pull request that changes `tools/` (tests aside), the package files, the workflows, `data/catalogs.txt` or `data/fixture-exceptions.txt` rescans every committed candidate alongside the seeds, so tooling and classification changes are checked against the whole collection. A change to `data/duplicates.txt` that only appends pairs between two counted mods, neither named elsewhere in the list, is applied to the committed inventory without a rescan; removing, reversing, reordering or chaining pairs rescans everything. Global search runs in scheduled scans, not in PR checks.
 
+### What can hold a seed PR
+
+A seed PR merges once its checks pass, unless merging it would make the listing wrong or misleading. A maintainer holds it only when:
+
+- a PR check above fails, or the seed hits a duplicate, catalogue or compatibility hold
+- the mod's README or the PR description claims less access than the scan records, for example "read-only" or "no network" beside file writes or network calls
+- the mod does harm the scan cannot show, such as sending session data off the machine without saying so or taking a destructive action without the user's consent
+
+Bugs in how a mod behaves do not hold a seed. A maintainer may still report them as a comment on the PR or an issue in your repository, and fixing them is your call. Being in the catalogue is not a quality review; Featured entries have their own bar, described below.
+
 After a seed PR is merged, the `publish approved seeds` workflow scans approved repositories that have no published inventory entries. It adds all their mod entries, regenerates the catalogue and website, checks the result, then opens and squash-merges a dedicated publication PR automatically. It requests a GitHub Pages build explicitly. No second maintainer merge is needed for successful additions. After that merge, the workflow comments once on each contributor seed PR it published, linking the new website entries. The comment asks for a star only when the author has not starred the repository and has not been asked before; a failed comment never fails publication. A repository already represented in the inventory follows the normal refresh workflow.
 
 This path preserves existing entries and the last full-scan date. It uses the published validator version, so adding a seed does not imply that the whole catalogue was revalidated. A seed whose repository fails to clone, cannot be fully inspected, fails validation, has a failing marketplace, carries a UI compatibility warning, looks like a duplicate of a listed mod or would change an existing duplicate decision is left out of that publication; the other seeds still publish. Left-out seeds are listed in the run summary and in the publication PR, and they stay pending: a scheduled retry runs every three hours at minute 23, and a later main push also retries them. Fix the repository or remove the seed to clear them. The workflow reads current main, so coalesced pushes do not lose earlier unpublished seeds.
 
-Duplicate rules involving a new seed are checked during publication. Rules between entries already published wait for a reviewed full scan; merging those rules does not block unrelated seed additions or silently change older listings. A new seed that would reclassify an existing mod still waits for review.
+A merged change to a classification rule (`data/duplicates.txt`, `data/catalogs.txt`, `data/fixture-exceptions.txt` or `tools/kind.mjs`) is applied to the published inventory by the `apply rule changes` workflow, without a scan. It refiles only the records the change explains, regenerates the catalogue and website, and squash-merges its own pull request. A change that refiles more than 50 records, moves the count by more than 0.5%, or refiles a mod that other records were collapsed onto is left open for review. A pair that names a repository's earlier name, and anything else the workflow cannot decide from the inventory, waits for the next scan.
+
+Duplicate rules involving a new seed are checked during publication. Rules between entries already published are applied by the workflow above when it can decide them from the inventory, and otherwise wait for a reviewed full scan; merging those rules does not block unrelated seed additions. A new seed that would reclassify an existing mod still waits for review.
 
 A maintainer can record a verified UI-warning false positive in `data/compatibility-reviews.json`, with its source link and reason, to clear that publication hold. Publication accepts it only for the exact plugin ID, upstream commit, validator version and complete warning records reviewed. A changed commit or warning requires another review. The original warning remains in the inventory, and validation, marketplace and duplicate checks still apply. Contributors do not add their own approvals to this file.
 

@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { accessLine, assignPages, formatRegistry, indexable, installLine, readRegistry, renderModPage, renderRedirect, scanSummary } from './pages.mjs'
+import { accessLine, assignPages, describable, formatRegistry, indexedPages, installLine, readRegistry, renderModPage, renderRedirect, scanSummary } from './pages.mjs'
 import { grade } from './grade.mjs'
 
 const mod = (repo, name, extra = {}) => ({
@@ -162,16 +162,59 @@ test('the registry format is sorted, one entry per line, and rejects unsafe path
   assert.throws(() => readRegistry('{"ok": {}}'), /invalid entry/)
 })
 
-test('search engines index failed mods but not retained records or empty descriptions', () => {
-  assert.equal(indexable(mod('a/b', 'c')), true)
-  assert.equal(indexable(mod('a/b', 'c', { validate: { status: 'failed', errors: ['x'] } })), true)
-  assert.equal(indexable(mod('a/b', 'c', { validate: { status: 'unknown', errors: [] } })), false)
-  assert.equal(indexable(mod('a/b', 'c', { description: '  ' })), false)
+test('pages list failed mods but not retained records or empty descriptions', () => {
+  assert.equal(describable(mod('a/b', 'c')), true)
+  assert.equal(describable(mod('a/b', 'c', { validate: { status: 'failed', errors: ['x'] } })), true)
+  assert.equal(describable(mod('a/b', 'c', { validate: { status: 'unknown', errors: [] } })), false)
+  assert.equal(describable(mod('a/b', 'c', { description: '  ' })), false)
+})
+
+test('search engines are asked to index a page with outside interest and a description of its own', () => {
+  const long = 'Shows the context window and the weekly limit in one band.'
+  const noticed = (name, extra = {}) => mod('a/b', name, { description: `${long} ${name}`, stars: 2, createdAt: '2026-01-01T00:00:00Z', ...extra })
+  const records = [
+    noticed('two-stars'), noticed('one-star', { stars: 1 }), noticed('no-stars', { stars: null }),
+    noticed('listed', { stars: 0, directory: { plugin: 'listed' } }), noticed('built-in', { stars: 0, kind: 'builtin' }),
+    noticed('failed', { validate: { status: 'failed', errors: ['x'] } }), noticed('retained', { validate: { status: 'unknown', errors: [] } }),
+    noticed('short', { description: 'Shows the context window.' }),
+    noticed('copy-newer', { description: long, createdAt: '2026-03-01T00:00:00Z', stars: 900 }), noticed('copy-older', { description: `  ${long.toUpperCase()}`, createdAt: '2026-02-01T00:00:00Z' }),
+  ]
+  const pages = new Map(records.map(record => [record, record.name]))
+  const registry = Object.fromEntries(records.map(record => [record.name, { id: record.id }]))
+  const first = indexedPages(records, pages, registry)
+  assert.deepEqual([...first.indexed].map(record => record.name).sort(), ['built-in', 'copy-older', 'failed', 'listed', 'two-stars'])
+  assert.deepEqual(first.registry['two-stars'], { id: 'a/b:two-stars', indexed: true })
+  assert.deepEqual(first.registry['one-star'], { id: 'a/b:one-star' })
+  assert.deepEqual(registry['two-stars'], { id: 'a/b:two-stars' }, 'the registry passed in is left alone')
+
+  const fallen = records.map(record => ({ ...record, stars: 0 }))
+  const second = indexedPages(fallen, new Map(fallen.map(record => [record, record.name])), first.registry)
+  assert.deepEqual([...second.indexed].map(record => record.name).sort(), ['built-in', 'copy-older', 'failed', 'listed', 'two-stars'], 'a page that qualified stays indexed when its repository loses stars')
+  assert.deepEqual(second.registry, first.registry)
+  const original = noticed('original', { description: long, createdAt: '2025-01-01T00:00:00Z' })
+  const withOriginal = [...records, original]
+  const third = indexedPages(withOriginal, new Map(withOriginal.map(record => [record, record.name])), { ...first.registry, original: { id: original.id } })
+  assert.equal(third.indexed.has(original), false, 'an older copy that qualifies later does not take the place of the indexed page')
+  assert.deepEqual([...third.indexed].map(record => record.name).sort(), [...first.indexed].map(record => record.name).sort())
+
+  const pair = [noticed('first', { description: long, createdAt: '2025-01-01T00:00:00Z' }), noticed('second', { description: long, createdAt: '2025-06-01T00:00:00Z' })]
+  const names = result => [...result.indexed].map(record => record.name).sort()
+  const run = (list, known) => indexedPages(list, new Map(list.map(record => [record, record.name])), known)
+  const start = run(pair, { first: { id: 'a/b:first' }, second: { id: 'a/b:second' } })
+  assert.deepEqual(names(start), ['first'])
+  const away = run([{ ...pair[0], validate: { status: 'unknown', errors: [] } }, pair[1]], start.registry)
+  assert.deepEqual(names(away), ['second'], 'the copy goes in while the first page is only retained')
+  assert.deepEqual(names(run(pair, away.registry)), ['first', 'second'], 'the first page coming back does not take the second out')
+  const apart = run([pair[0], { ...pair[1], description: `${long} With a second line.` }], { first: { id: 'a/b:first' }, second: { id: 'a/b:second' } })
+  assert.deepEqual(names(apart), ['first', 'second'])
+  assert.deepEqual(names(run(pair, apart.registry)), ['first', 'second'], 'an indexed page that edits its description to match another takes neither out')
+  assert.equal(formatRegistry({ a: { id: 'x', indexed: true } }), '{\n  "a": {"id":"x","indexed":true}\n}\n')
+  assert.throws(() => readRegistry('{"a": {"id": "x", "indexed": "yes"}}'), /invalid entry/)
 })
 
 test('author text is escaped in the page body, metadata and structured data', () => {
   const hostile = mod('evil/repo', '<img src=x onerror=alert(1)>', { description: 'Ends the script </script><script>alert(1)</script> & "quotes"' })
-  const html = renderModPage(hostile, { slug: 'evil--repo--x', anchor: 'evil--repo--x', claudeVersion: '2.1.300' })
+  const html = renderModPage(hostile, { slug: 'evil--repo--x', anchor: 'evil--repo--x', indexed: true })
   assert.doesNotMatch(html, /<img src=x/)
   assert.doesNotMatch(html, /<script>alert/)
   assert.equal(html.match(/<\/script>/g).length, 1, 'only the JSON-LD block closes a script')
@@ -183,11 +226,11 @@ test('author text is escaped in the page body, metadata and structured data', ()
 })
 
 test('pages carry no stars or scan dates, and noindex follows the gate', () => {
-  const page = renderModPage(mod('a/b', 'c', { stars: 4321, pushedAt: '2026-10-01T00:00:00Z' }), { slug: 's', anchor: 's', claudeVersion: '2.1.300' })
+  const page = renderModPage(mod('a/b', 'c', { stars: 4321, pushedAt: '2026-10-01T00:00:00Z' }), { slug: 's', anchor: 's' })
   assert.doesNotMatch(page, /4321|4,321|2026-10-01/)
-  const unknown = renderModPage(mod('a/b', 'c', { validate: { status: 'unknown', claudeVersion: '2.1.291', errors: ['Repository could not be scanned; showing the last known footprint.'] }, lastKnownValidate: { status: 'passed', claudeVersion: '2.1.291', errors: [] } }), { slug: 's', anchor: 's', claudeVersion: '2.1.300' })
+  const unknown = renderModPage(mod('a/b', 'c', { validate: { status: 'unknown', claudeVersion: '2.1.291', errors: ['Repository could not be scanned; showing the last known footprint.'] }, lastKnownValidate: { status: 'passed', claudeVersion: '2.1.291', errors: [] } }), { slug: 's', anchor: 's' })
   assert.match(unknown, /<meta name="robots" content="noindex">/)
-  assert.match(unknown, /Validation on 2\.1\.291/)
+  assert.match(unknown, /<dt>Validation<\/dt><dd>not verified<\/dd>/)
   assert.match(unknown, /Last known result<\/dt><dd>Passed on 2\.1\.291/)
 })
 
@@ -198,24 +241,24 @@ test('a redirect stub sends visitors and crawlers to the keeper', () => {
 })
 
 test('a mod page offers README badges that link back to it, and built-ins do not', () => {
-  const page = renderModPage(mod('a/b', 'c'), { slug: 'a--b--c', anchor: 'a--b--c', claudeVersion: '2.1.300' })
+  const page = renderModPage(mod('a/b', 'c'), { slug: 'a--b--c', anchor: 'a--b--c' })
   const snippet = page.match(/<pre><code>([\s\S]*?)<\/code><\/pre>/)[1].replace(/&#39;|&quot;|&amp;/g, m => ({ '&#39;': "'", '&quot;': '"', '&amp;': '&' })[m])
   assert.equal(snippet, '[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/a--b--c-reach.svg)](https://mods.aidojo.si/mods/a--b--c/)\n[![validates](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/a--b--c-validates.svg)](https://mods.aidojo.si/mods/a--b--c/)')
   assert.match(page, /<img src="\/badges\/a--b--c-reach\.svg"/)
-  assert.doesNotMatch(renderModPage(mod('anthropics/claude-code', 'x', { kind: 'builtin' }), { slug: 's', anchor: 's', claudeVersion: '2.1.300' }), /badge-snippet/)
+  assert.doesNotMatch(renderModPage(mod('anthropics/claude-code', 'x', { kind: 'builtin' }), { slug: 's', anchor: 's' }), /badge-snippet/)
 })
 
 const scanned = (calls, extra = {}) => mod('a/b', 'tool', { calls, reach: grade(calls), hooks: [{ event: 'session.start', matcher: {} }, { event: 'tool.call', matcher: { tool: 'Bash' } }, { event: 'tool.call', matcher: { tool: 'Edit' } }], ...extra })
 const text = html => html.replace(/<[^>]+>/g, ' ').replace(/&#39;/g, "'").replace(/\s+/g, ' ').trim()
 
 test('the scan summary states the level of classified calls and names the calls it cannot classify', () => {
-  const summary = scanSummary(scanned(['$.env.get', '$.process.run', '$.prompt.steer', '$.fs.readFile']), '2.1.300')
-  assert.match(text(summary.html), /^tool reaches L2 \(writes or runs\) by its classified calls and passed claude plugin validate on Claude Code 2\.1\.300\./)
+  const summary = scanSummary(scanned(['$.env.get', '$.process.run', '$.prompt.steer', '$.fs.readFile']))
+  assert.match(text(summary.html), /^tool reaches L2 \(writes or runs\) by its classified calls and passed claude plugin validate \./)
   assert.match(text(summary.html), /Events hooked: 2 API methods referenced: 4 Access from classified calls: L2, writes or runs: runs processes, reads env vars/)
   assert.match(summary.html, /Unclassified calls: 2 \(<code>\$\.prompt\.steer<\/code>, <code>\$\.fs\.readFile<\/code>\), full access unknown/)
   assert.match(text(summary.html), /Static scan, not a runtime test/)
-  assert.equal(summary.short, 'Scan: L2 writes or runs by classified calls, passes validation on 2.1.300.')
-  const clean = scanSummary(scanned(['$.ui.open']), '2.1.300')
+  assert.equal(summary.short, 'Scan: L2 writes or runs by classified calls, passes validation.')
+  const clean = scanSummary(scanned(['$.ui.open']))
   assert.match(text(clean.html), /^tool reaches L0 \(draws and remembers\) and passed/)
   assert.doesNotMatch(clean.html, /Unclassified/)
 })
@@ -223,42 +266,42 @@ test('the scan summary states the level of classified calls and names the calls 
 test('unclassified calls never lift the level a page states', () => {
   const calls = ['$.ui.open', '$.prompt.steer']
   assert.equal(grade(calls).level, 1, 'the stored level counts the unclassified call as 1')
-  assert.match(text(scanSummary(scanned(calls), '2.1.300').html), /reaches L0 \(draws and remembers\) by its classified calls/)
-  const none = scanSummary(scanned(['$.prompt.steer', '$.fs.readFile']), '2.1.300')
+  assert.match(text(scanSummary(scanned(calls)).html), /reaches L0 \(draws and remembers\) by its classified calls/)
+  const none = scanSummary(scanned(['$.prompt.steer', '$.fs.readFile']))
   assert.match(text(none.html), /^The scanner could not classify any of the 2 API methods tool references, so its access is unknown/)
   assert.match(none.html, /Unclassified calls: 2 \(<code>\$\.prompt\.steer<\/code>, <code>\$\.fs\.readFile<\/code>\), full access unknown/)
-  const empty = scanSummary(scanned([]), '2.1.300')
+  const empty = scanSummary(scanned([]))
   assert.match(text(empty.html), /^The validator reported no API methods for tool; it passed/)
   assert.match(text(empty.html), /Access: no API methods recorded/)
   assert.doesNotMatch(empty.html + empty.short, /none beyond|no API calls/)
-  assert.equal(empty.short, 'Scan: no API methods recorded, passes validation on 2.1.300.')
+  assert.equal(empty.short, 'Scan: no API methods recorded, passes validation.')
 })
 
 test('incomplete footprints, failures and retained records are worded for what the scan knows', () => {
-  const partial = scanSummary(scanned(['$.fs.write'], { footprint: { status: 'unavailable' } }), '2.1.300')
+  const partial = scanSummary(scanned(['$.fs.write'], { footprint: { status: 'unavailable' } }))
   assert.match(text(partial.html), /^The scan could not record a complete footprint for tool, so its access is unknown/)
   assert.doesNotMatch(partial.html, /L2|Events hooked|API methods referenced/)
-  const failed = scanSummary(scanned(['$.ui.open'], { validate: { status: 'failed', claudeVersion: '2.1.300', errors: ['manifest <bad>\nsecond line'] } }), '2.1.300')
-  assert.match(failed.html, /fails <code>claude plugin validate<\/code> on Claude Code 2\.1\.300: manifest &lt;bad&gt;\./)
+  const failed = scanSummary(scanned(['$.ui.open'], { validate: { status: 'failed', claudeVersion: '2.1.300', errors: ['manifest <bad>\nsecond line'] } }))
+  assert.match(failed.html, /fails <code>claude plugin validate<\/code>: manifest &lt;bad&gt;\./)
   assert.doesNotMatch(failed.html, /second line/)
   for (const reason of ['Not found in this scan; retained pending weekly retirement review.', 'Repository could not be scanned; showing the last known footprint.']) {
-    const kept = scanSummary(scanned(['$.ui.open'], { sourceCommit: 'abcdef1234567', validate: { status: 'unknown', claudeVersion: '2.1.291', errors: [reason] }, lastKnownValidate: { status: 'passed', claudeVersion: '2.1.291', errors: [] } }), '2.1.300')
+    const kept = scanSummary(scanned(['$.ui.open'], { sourceCommit: 'abcdef1234567', validate: { status: 'unknown', claudeVersion: '2.1.291', errors: [reason] }, lastKnownValidate: { status: 'passed', claudeVersion: '2.1.291', errors: [] } }))
     assert.match(text(kept.html), /^In its last recorded footprint, tool reaches L0 \(draws and remembers\) and passed claude plugin validate on Claude Code 2\.1\.291\./)
     assert.ok(kept.html.includes(`Last recorded footprint, revision <code>abcdef1</code>: ${reason}`))
     assert.doesNotMatch(kept.html, /last successful/i)
   }
-  const keptPartial = scanSummary(scanned(['$.ui.open'], { footprint: { status: 'unavailable' }, validate: { status: 'unknown', errors: ['Repository could not be scanned; showing the last known footprint.'] } }), '2.1.300')
+  const keptPartial = scanSummary(scanned(['$.ui.open'], { footprint: { status: 'unavailable' }, validate: { status: 'unknown', errors: ['Repository could not be scanned; showing the last known footprint.'] } }))
   assert.match(text(keptPartial.html), /^In its last recorded footprint, the scan could not record a complete footprint/)
 })
 
 test('events are counted once however many hooks share them, and generated copy has no dashes', () => {
-  const summary = scanSummary(scanned(['$.ui.open']), '2.1.300')
+  const summary = scanSummary(scanned(['$.ui.open']))
   assert.match(text(summary.html), /Events hooked: 2 /)
   assert.doesNotMatch(summary.html + summary.short, /[–—]/)
 })
 
 test('a mod page offers an install hint when the scan saw a marketplace or Anthropic directory entry', () => {
-  const page = (extra = {}) => renderModPage(mod('a/b', 'tool', extra), { slug: 's', anchor: 's', claudeVersion: '2.1.300' })
+  const page = (extra = {}) => renderModPage(mod('a/b', 'tool', extra), { slug: 's', anchor: 's' })
   const root = page({ marketplaces: [{ path: '.claude-plugin/marketplace.json', name: 'b', status: 'passed', errors: [] }] })
   assert.match(root, /<h2 id="install-title">Install hint<\/h2><div class="command"><pre><code>\/plugin install tool --marketplace a\/b<\/code><\/pre><button type="button" class="copy" data-copy hidden>Copy<\/button>/)
   assert.match(root, /From the repository's own marketplace\. Confirm the plugin name/)
@@ -268,44 +311,44 @@ test('a mod page offers an install hint when the scan saw a marketplace or Anthr
   assert.match(none, /follow the author’s setup instructions/)
   assert.doesNotMatch(none, /data-copy/)
   assert.match(page({ marketplaces: [{ path: '.claude-plugin/marketplace.json', name: 'b', status: 'passed', errors: [] }], validate: { status: 'failed', claudeVersion: '2.1.300', errors: ['x'] } }), /It fails validation in the latest scan, so it may not install\./)
-  const builtin = renderModPage(mod('anthropics/claude-code', 'x', { kind: 'builtin', directory: { plugin: 'x' } }), { slug: 's', anchor: 's', claudeVersion: '2.1.300' })
+  const builtin = renderModPage(mod('anthropics/claude-code', 'x', { kind: 'builtin', directory: { plugin: 'x' } }), { slug: 's', anchor: 's' })
   assert.match(builtin, /It ships inside Claude Code, so there is nothing to install\./)
   assert.doesNotMatch(builtin, /Install hint/)
 })
 
 test('metadata keeps the purpose first, adds the scan, and the index gate does not move', () => {
   const long = 'A very long purpose sentence that keeps going '.repeat(6)
-  const page = renderModPage(mod('a/b', 'tool', { description: long, license: 'MIT' }), { slug: 's', anchor: 's', claudeVersion: '2.1.300' })
+  const page = renderModPage(mod('a/b', 'tool', { description: long, license: 'MIT' }), { slug: 's', anchor: 's' })
   const meta = page.match(/<meta name="description" content="([^"]*)">/)[1]
   assert.ok(meta.startsWith('A very long purpose sentence'))
-  assert.ok(meta.endsWith('Scan: no API methods recorded, passes validation on 2.1.300.'))
+  assert.ok(meta.endsWith('Scan: no API methods recorded, passes validation.'))
   assert.ok(meta.length <= 160, `meta is ${meta.length} characters`)
   const ld = JSON.parse(page.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'][0]
   assert.equal(ld.runtimePlatform, 'Claude Code')
   assert.equal(ld.license, 'https://spdx.org/licenses/MIT.html')
   for (const license of ['NOASSERTION', null, undefined, 'Other']) {
-    assert.equal(JSON.parse(renderModPage(mod('a/b', 'tool', { license }), { slug: 's', anchor: 's', claudeVersion: '2.1.300' }).match(/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'][0].license, undefined)
+    assert.equal(JSON.parse(renderModPage(mod('a/b', 'tool', { license }), { slug: 's', anchor: 's' }).match(/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'][0].license, undefined)
   }
   const blank = mod('a/b', 'tool', { description: '' })
-  assert.equal(indexable(blank), false)
-  assert.match(renderModPage(blank, { slug: 's', anchor: 's', claudeVersion: '2.1.300' }), /<meta name="robots" content="noindex">/)
+  assert.equal(describable(blank), false)
+  assert.match(renderModPage(blank, { slug: 's', anchor: 's' }), /<meta name="robots" content="noindex">/)
 })
 
 test('a page changes when the scan changes', () => {
-  const opts = { slug: 's', anchor: 's', claudeVersion: '2.1.300' }
+  const opts = { slug: 's', anchor: 's' }
   assert.notEqual(renderModPage(scanned(['$.ui.open']), opts), renderModPage(scanned(['$.ui.open', '$.http.fetch']), opts))
 })
 
 test('calls in other namespaces and mod state reads are stated apart from the level', () => {
-  const mixed = scanSummary(scanned(['$.state.get', '$.mods.hello', '$.prompt.steer']), '2.1.300')
+  const mixed = scanSummary(scanned(['$.state.get', '$.mods.hello', '$.prompt.steer']))
   assert.match(text(mixed.html), /^tool reaches L1 \(reads\) by its classified calls/)
   assert.match(mixed.html, /Unclassified calls: 1 \(<code>\$\.prompt\.steer<\/code>\), full access unknown/)
   assert.match(mixed.html, /Calls in a namespace that is not in the Claude Code 2.1.302 core table: 1 \(<code>\$\.mods\.hello<\/code>\), full access unknown/)
   assert.match(mixed.html, /Reads mod state: the scan does not record whose state/)
-  const foreignOnly = scanSummary(scanned(['$.mods.hello', '$.widgets.card']), '2.1.300')
+  const foreignOnly = scanSummary(scanned(['$.mods.hello', '$.widgets.card']))
   assert.match(text(foreignOnly.html), /^The scanner could not classify any of the 2 API methods tool references, so its access is unknown/)
   assert.doesNotMatch(foreignOnly.html, /reaches L/)
-  assert.doesNotMatch(scanSummary(scanned(['$.store.get']), '2.1.300').html, /mod state/)
+  assert.doesNotMatch(scanSummary(scanned(['$.store.get'])).html, /mod state/)
 })
 
 test('the compact access line follows the same branches as the scan summary', () => {
@@ -322,7 +365,7 @@ test('the compact access line follows the same branches as the scan summary', ()
   for (const calls of [['$.fs.write'], [], ['$.prompt.steer'], ['$.ui.open', '$.prompt.steer', '$.mods.hello', '$.state.get'], ['$.http.fetch', '$.process.run']]) {
     for (const extra of [{}, { footprint: { status: 'unavailable' } }, { validate: { status: 'unknown', errors: ['x'] }, lastKnownValidate: { status: 'passed' } }]) {
       const record = scanned(calls, extra)
-      const summary = scanSummary(record, '2.1.300'), compact = accessLine(record)
+      const summary = scanSummary(record), compact = accessLine(record)
       assert.deepEqual({ level: compact.level, labels: compact.labels, named: compact.named }, { level: summary.level, labels: summary.labels, named: summary.named }, `${calls} ${JSON.stringify(extra)}`)
       for (const call of compact.named) assert.ok(summary.html.includes(`<code>${call}</code>`) && compact.html.includes(`<code>${call}</code>`), call)
     }
@@ -337,14 +380,57 @@ test('the install line prints the command, its origin and the name check as the 
   assert.equal(installLine(mod('a/b', 'tool')), 'To install it, open the repository and follow the author’s setup instructions.')
   assert.equal(installLine(mod('a/b', 'x<y', root)), "Install hint: <code>/plugin install x&lt;y --marketplace a/b</code>, from the repository's own marketplace. Confirm the plugin name in the repository's README before installing.")
   assert.equal(installLine(mod('anthropics/claude-code', 'x', { kind: 'builtin' })), 'It ships inside Claude Code, so there is nothing to install.')
-  const page = renderModPage(mod('a/b', 'tool', root), { slug: 's', anchor: 's', claudeVersion: '2.1.300' })
+  const page = renderModPage(mod('a/b', 'tool', root), { slug: 's', anchor: 's' })
   assert.match(page, /From the repository's own marketplace\. Confirm the plugin name in the repository's README before installing\. Mods need Claude Code 2\.1\.287 or later\./)
 })
 
 test('a member mod page links its topic page, and a non-member page is unchanged', () => {
-  const options = { slug: 's', anchor: 's', claudeVersion: '2.1.300' }
+  const options = { slug: 's', anchor: 's' }
   const plain = renderModPage(mod('a/b', 'tool'), options)
   assert.equal(renderModPage(mod('a/b', 'tool'), { ...options, topics: [] }), plain)
   const listed = renderModPage(mod('a/b', 'tool'), { ...options, topics: [{ slug: 'prompt-cache', title: 'Prompt cache mods for Claude Code' }, { slug: 'x', title: 'X & <y>' }] })
   assert.match(listed, /<\/div><\/div>\n<p class="topics-line">Listed under <a href="\/topics\/prompt-cache\/">Prompt cache mods for Claude Code<\/a>, <a href="\/topics\/x\/">X &amp; &lt;y&gt;<\/a>\.<\/p>\n<p class="actions">/)
+})
+
+
+test('explicit moves resolve retired pages only to counted keepers without overriding live records', () => {
+  const old = mod('o/r', 'old'), keeper = mod('o/r', 'new'), unrelated = mod('o/r', 'other')
+  const rules = new Map([[old.id, keeper.id]])
+  const registry = assign([old, unrelated]).registry
+  const live = assignPages([old, keeper, unrelated], registry, [old, keeper, unrelated], rules)
+  assert.equal(live.redirects.size, 0)
+  const retired = assignPages([keeper, unrelated], live.registry, [keeper, unrelated], rules)
+  assert.deepEqual([...retired.redirects], [['o--r--old', 'o--r--new']])
+  assert.equal(retired.registry['o--r--old'].id, old.id)
+  assert.equal(retired.registry['o--r--other'].to, undefined)
+  for (const kind of [null, 'fixture', 'catalog', 'duplicate', 'builtin']) {
+    const all = [unrelated, ...(kind ? [{ ...keeper, kind }] : [])]
+    const records = all.filter(m => ['mod', 'builtin'].includes(m.kind))
+    assert.equal(assignPages(records, registry, all, rules).redirects.size, 0, String(kind))
+  }
+  const cycle = new Map([[old.id, keeper.id], [keeper.id, old.id]])
+  assert.equal(assignPages([unrelated], registry, [unrelated], cycle).redirects.size, 0)
+  for (const kind of ['fixture', 'catalog']) {
+    const present = { ...old, kind }
+    assert.equal(assignPages([keeper, unrelated], registry, [present, keeper, unrelated], rules).redirects.size, 0)
+  }
+})
+
+test('confirmed retired move chains cross only absent intermediates and stop at live authority', () => {
+  const old = mod('o/r', 'old'), middle = mod('o/r', 'middle'), keeper = mod('o/r', 'new')
+  const registry = assign([old]).registry
+  const rules = new Map([[old.id, middle.id], [middle.id, keeper.id]])
+  const moved = assignPages([keeper], registry, [keeper], rules)
+  assert.deepEqual([...moved.redirects], [['o--r--old', 'o--r--new']])
+  assert.equal(moved.registry['o--r--old'].id, old.id)
+  for (const kind of ['fixture', 'catalog', 'duplicate', 'builtin']) {
+    const present = { ...middle, kind, duplicateOf: keeper.id }
+    const records = [keeper, ...(kind === 'builtin' ? [present] : [])]
+    assert.equal(assignPages(records, registry, [present, keeper], rules).redirects.size, 0, kind)
+  }
+  const live = assignPages([middle, keeper], registry, [middle, keeper], rules)
+  assert.deepEqual([...live.redirects], [['o--r--old', 'o--r--middle']], 'a counted intermediate wins over its move rule')
+  const cycle = new Map([[old.id, middle.id], [middle.id, old.id]])
+  assert.equal(assignPages([keeper], registry, [keeper], cycle).redirects.size, 0)
+  assert.equal(assignPages([keeper], registry, [keeper], new Map([[old.id, middle.id]])).redirects.size, 0)
 })
