@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-13T08:23:15.743Z",
   "claudeVersion": "2.1.323",
-  "repos": 4184,
+  "repos": 4187,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -922766,6 +922766,308 @@
       "stars": 0,
       "pushedAt": "2026-10-17T02:40:48Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "vampy/claude-last-turn-diff:.",
+      "repo": "vampy/claude-last-turn-diff",
+      "path": ".",
+      "sourceCommit": "e8bbdd1b7ed091cb0793c9114bf7cc5d5c1d9c7f",
+      "name": "last-turn-diff",
+      "description": "Shows every file Claude changed in the last turn as one diff pane (/turn-diff), with a summary band above the prompt.",
+      "author": "Daniel Butum",
+      "homepage": "https://github.com/vampy/claude-last-turn-diff",
+      "url": "https://github.com/vampy/claude-last-turn-diff",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "config.describe",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "session.compact",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "turn-diff"
+          }
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Edit|Write|NotebookEdit"
+          }
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.clock.sleep",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.fs.write",
+        "$.process.run",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.messages",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.close",
+        "$.ui.copy",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.scroll",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "last-turn-diff",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "writes files",
+          "writes the clipboard",
+          "reads files",
+          "reads env vars",
+          "reads the transcript",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "compaction",
+        "every tool call",
+        "Edit|Write|NotebookEdit calls"
+      ],
+      "draws": [],
+      "stars": 2,
+      "pushedAt": "2026-11-11T16:39:24Z",
+      "createdAt": "2026-10-07T10:04:51Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "araujo-eduardo/claude-usage-bar:.",
+      "repo": "araujo-eduardo/claude-usage-bar",
+      "path": ".",
+      "sourceCommit": "a98687b8cb400145f34bf375225dcf38ec5c2c9e",
+      "name": "usage-bar",
+      "description": "7-day token history pane with per-model totals, plus 5h/weekly limits, context and cost in the status line",
+      "author": "Eduardo Araújo",
+      "homepage": "https://github.com/araujo-eduardo/claude-usage-bar",
+      "url": "https://github.com/araujo-eduardo/claude-usage-bar",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "usage-bar"
+          }
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.session.usage",
+        "$.settings.read",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-usage-bar",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads env vars",
+          "reads settings",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 1,
+      "pushedAt": "2026-11-11T23:07:00Z",
+      "createdAt": "2026-11-10T03:37:35Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "suenot/claude-cache-timer:.",
+      "repo": "suenot/claude-cache-timer",
+      "path": ".",
+      "sourceCommit": "e375b72904adc5986cff44c7aa141d8b5454fe42",
+      "name": "cache-timer",
+      "description": "Band above the prompt: time since last reply, time left on the 1h prompt cache, and a button to keep the cache warm",
+      "author": "suenot",
+      "homepage": "https://github.com/suenot/claude-cache-timer",
+      "url": "https://github.com/suenot/claude-cache-timer",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.model.fork",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.invalidate",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-cache-timer",
+          "status": "warnings",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "drives Claude",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T22:35:28Z",
+      "createdAt": "2026-11-11T09:54:47Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

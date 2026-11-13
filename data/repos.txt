@@ -338,6 +338,7 @@ AraneaDev/knossos
 AraneaDev/timestamps
 aranylap-collab/kredit-figyelo
 arasovic/claude-code-mods
+araujo-eduardo/claude-usage-bar
 aravindputrevu/claude-code-mods
 aravindsriraj/claude-code-mods
 aravinth01/flightplan
@@ -3555,6 +3556,7 @@ stuinfla/ruvnet-brain
 stylusnexus/claude-mods
 su-record/claude-mods
 sudikama/forge
+suenot/claude-cache-timer
 Sumit189/explain-claude-mod
 SummerRiversound/review-inbox
 Sumo-99/claude_wordle_mod
@@ -3849,6 +3851,7 @@ utsavsingh899/claude-obsidian-bridge
 VaitaR/claude-code-limits
 valeryia-piatrova/token-hamster
 VAlux/claude-session-progress
+vampy/claude-last-turn-diff
 vancityAyush/mcp-list
 Vansitha/clawd-watch
 VardhanKirti/claude-code-mods
