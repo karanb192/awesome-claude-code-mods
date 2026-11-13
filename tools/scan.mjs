@@ -151,7 +151,9 @@ const checkedInOrder = repos.map(repo => repo.toLowerCase()).filter(key => check
 checkedRepos.clear()
 for (const [key, revision] of checkedInOrder) checkedRepos.set(key, revision)
 
-if (args.required) checkRequired(readRepos(args.required), mods, checkedRepos)
+if (args.required) {
+  for (const id of checkRequired(readRepos(args.required), mods, checkedRepos)) console.log(`new seed accepted with unknown access: ${id}: the validator shortened its output, so the footprint is incomplete`)
+}
 const freshIds = new Set(mods.map(mod => mod.id))
 const inventory = reconcile(previous, mods, checkedRepos, args.retire)
 mods = inventory.mods
