@@ -92,6 +92,5 @@ Maintained by [Karan Bansal](https://karanbansal.in/), who writes [engineering a
 
 - [claude-code-hooks](https://github.com/karanb192/claude-code-hooks) - Shell-hook plugins for safety, cost, observability and productivity, the layer mods are replacing.
 - [awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) - The general Claude Code list.
-- [statuslin.es](https://statuslin.es/mods) - A reviewed mod gallery with terminal and Claude Desktop previews, and installs pinned to reviewed commits.
 
 [catalogue]: https://mods.aidojo.si/#directory
