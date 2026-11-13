@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/speti4/doom-pane">speti4/doom-pane</a></p>
 <p class="lede">The original DOOM in a pane with nothing to install: id's engine (doomgeneric, GPL-2) compiled to JavaScript runs inside the mod, the shareware episode and Freedoom Phase 1 ship with the plugin, the picture is half-block pixels on a Raster. /doom opens it; w a s d move, q e strafe, f fires, u uses, m opens the menu. Your own IWAD plays too, split into 2 MiB parts. Saves live in the plugin store.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">doom-pane reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 17</li><li>Access from classified calls: L1, reads: reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">doom-pane reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 17</li><li>Access from classified calls: L1, reads: reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install doom-pane --marketplace speti4/doom-pane</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads files, reads env vars, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=doom}, ui.render {component=Pane, requestId=doom}, ui.close {id=doom}, session.end</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=doom}, ui.close {id=doom}, session.end</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.env.get, $.fs.list, $.fs.read, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.blit, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

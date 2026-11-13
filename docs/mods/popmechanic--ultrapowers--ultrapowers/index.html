@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/popmechanic/ultrapowers">popmechanic/ultrapowers</a></p>
 <p class="lede">The client for ultrapowers: /ultrapowers &lt;plan-path&gt; commits an approved plan and runs on an exe.dev fleet you provision: a disposable sandbox runs the plan as a pool of tasks, a pool of builders, the plan's own probes and checks as the proof, and opens its own PR. No local engine.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">ultrapowers reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads files, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">ultrapowers reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads files, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install ultrapowers --marketplace popmechanic/ultrapowers</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, reads files, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__ultrapowers__show_screen calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=tray}, command.run {command=note}, tool.call {tool=mcp__ultrapowers__show_screen}, ui.render {component=Pane, requestId=intent-tray}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=tray}, command.run {command=note}, tool.call {tool=mcp__ultrapowers__show_screen}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.fs.read, $.fs.stat, $.process.spawn, $.prompt.submit, $.store.get, $.store.set, $.tool.register, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/popmechanic/ultrapowers/tree/8c852f36ec34cc28ea899677c62666f8ffc949b5"><code>8c852f36ec34</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/popmechanic/ultrapowers/blob/8c852f36ec34cc28ea899677c62666f8ffc949b5/.claude-plugin/marketplace.json">ultrapowers</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/popmechanic/ultrapowers/tree/c36675dfed962bd28337e3fc0ea5d4cbfca443ea"><code>c36675dfed96</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/popmechanic/ultrapowers/blob/c36675dfed962bd28337e3fc0ea5d4cbfca443ea/.claude-plugin/marketplace.json">ultrapowers</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/popmechanic--ultrapowers--ultrapowers-reach.svg" alt="Reach badge for ultrapowers"> <img src="/badges/popmechanic--ultrapowers--ultrapowers-validates.svg" alt="Validation badge for ultrapowers"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/popmechanic--ultrapowers--ultrapowers-reach.svg)](https://mods.aidojo.si/mods/popmechanic--ultrapowers--ultrapowers/)

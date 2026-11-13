@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/icpmacdo/claude-mod-tldr-window">icpmacdo/claude-mod-tldr-window</a></p>
 <p class="lede">A side pane that keeps a TL;DR of what this Claude window is working on, refreshed after each turn from the cached transcript</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">tldr-window reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 20</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads the transcript, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">tldr-window reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 20</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads the transcript, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads the transcript, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=tldr}, turn.complete, session.end, ui.close {id=tldr}, classic.UserPromptSubmit, ui.render {component=Pane, requestId=tldr}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=tldr}, turn.complete, session.end, ui.close {id=tldr}, classic.UserPromptSubmit</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.model.complete, $.model.fork, $.session.cwd, $.session.id, $.session.messages, $.session.surfaces, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.log, $.ui.open, $.ui.panes, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

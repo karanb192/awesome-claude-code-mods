@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Albert-ycc/prompt-polish">Albert-ycc/prompt-polish</a></p>
 <p class="lede">提示词优化：点击输入框上方按钮或在草稿末尾输入 ;; 触发 · 结合会话上下文与记忆补全草稿，并按任务类型追加工作方式要求 · 结果写回输入框，发送前可编辑或还原</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">prompt-polish reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, writes the clipboard, reads files, reads env vars, reads the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">prompt-polish reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, writes the clipboard, reads files, reads env vars, reads the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, writes the prompt box, writes the clipboard, reads files, reads env vars, reads the prompt box, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>prompt.submit, prompt.edit, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>prompt.submit, prompt.edit</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.env.get, $.fs.ancestors, $.fs.read, $.model.complete, $.model.fork, $.prompt.fill, $.prompt.read, $.session.root, $.state.get, $.state.set, $.ui.copy, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

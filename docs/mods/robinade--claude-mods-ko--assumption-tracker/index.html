@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/robinade/claude-mods-ko">robinade/claude-mods-ko</a></p>
 <p class="lede">Claude가 작업하며 세운 가정을 기록해요. 옆 패널에서 맞음·틀림을 표시하면 정정이 Claude에게 전달돼요 (한국어판)</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">assumption-tracker reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">assumption-tracker reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install assumption-tracker --marketplace robinade/claude-mods-ko</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, /&quot;^mcp__assumption-tracker__log_assumption$&quot;/ calls, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.CwdChanged, prompt.compose, tool.call {tool=/&quot;^mcp__assumption-tracker__log_assumption$&quot;/}, tool.call, classic.Stop, turn.start, turn.complete, command.run {command=assumptions}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=assumptions}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.CwdChanged, prompt.compose, tool.call {tool=/&quot;^mcp__assumption-tracker__log_assumption$&quot;/}, tool.call, classic.Stop, turn.start, turn.complete, command.run {command=assumptions}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.prompt.submit, $.session.cwd, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.set, $.tool.register, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

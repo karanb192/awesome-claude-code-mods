@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/DarkSawOktay/claude-mods">DarkSawOktay/claude-mods</a></p>
 <p class="lede">Usage tracking for Claude Code: 5-hour and weekly quota left, context, session cost, run-out forecast, saving tips, 7-day history and shared themes for every mod. French or English.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">suivi-conso reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: writes files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">suivi-conso reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: writes files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">writes files, reads env vars, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.measure, turn.complete, tool.call, command.run {command=conso}, command.run {command=theme-mods}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=conso}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.measure, turn.complete, tool.call, command.run {command=conso}, command.run {command=theme-mods}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.env.get, $.fs.write, $.session.usage, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

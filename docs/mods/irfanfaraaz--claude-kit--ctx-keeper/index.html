@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/irfanfaraaz/claude-kit">irfanfaraaz/claude-kit</a></p>
 <p class="lede">Cache countdown, context, limits and cost band; past 350k it runs /re-fresh, copies it, compacts and pastes it back</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">ctx-keeper reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, writes the clipboard, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">ctx-keeper reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, writes the clipboard, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, drives Claude, writes the clipboard, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>compaction, /&quot;^TaskCreate$&quot;/ calls, /&quot;^TaskUpdate$&quot;/ calls</dd>
-    <dt>Hooks</dt><dd><code>session.compact, turn.start, session.start, session.measure, tool.call {tool=/&quot;^TaskCreate$&quot;/}, tool.call {tool=/&quot;^TaskUpdate$&quot;/}, turn.complete, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.compact, turn.start, session.start, session.measure, tool.call {tool=/&quot;^TaskCreate$&quot;/}, tool.call {tool=/&quot;^TaskUpdate$&quot;/}, turn.complete</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.clock.now, $.command.run, $.env.get, $.fs.write, $.process.run, $.prompt.submit, $.session.model, $.state.get, $.state.set, $.ui.copy, $.ui.invalidate, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

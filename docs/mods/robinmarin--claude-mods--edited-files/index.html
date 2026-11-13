@@ -14,8 +14,8 @@
 <h1>edited-files</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/robinmarin/claude-mods">robinmarin/claude-mods</a></p>
 <p class="lede">Sidebar listing files edited this session with +adds/-removals</p>
-<p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">edited-files reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: runs processes, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+
+<section class="summary" aria-label="Scan summary"><p class="summary-line">edited-files reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: runs processes, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, Edit calls, Write calls, Bash calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, command.run {command=edited-files}, tool.call {tool=Edit}, tool.call {tool=Write}, tool.call {tool=Bash}, ui.render {component=Pane, requestId=edited-files}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.submit, command.run {command=edited-files}, tool.call {tool=Edit}, tool.call {tool=Write}, tool.call {tool=Bash}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.process.run, $.session.cwd, $.state.get, $.state.set, $.ui.close, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/robinmarin/claude-mods/tree/3ef5e1d666efa53831272f4271a8304d9ed5cf04"><code>3ef5e1d666ef</code></a></dd>
-    <dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/robinmarin/claude-mods/blob/3ef5e1d666efa53831272f4271a8304d9ed5cf04/edited-files/hooks/register.tsx#L74">edited-files/hooks/register.tsx:74</a>, <a href="https://github.com/robinmarin/claude-mods/blob/3ef5e1d666efa53831272f4271a8304d9ed5cf04/edited-files/hooks/register.tsx#L77">edited-files/hooks/register.tsx:77</a></dd></dl>
+    </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/robinmarin--claude-mods--edited-files-reach.svg" alt="Reach badge for edited-files"> <img src="/badges/robinmarin--claude-mods--edited-files-validates.svg" alt="Validation badge for edited-files"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/robinmarin--claude-mods--edited-files-reach.svg)](https://mods.aidojo.si/mods/robinmarin--claude-mods--edited-files/)

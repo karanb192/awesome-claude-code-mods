@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/its-coughfee/pulse-file-tree">its-coughfee/pulse-file-tree</a></p>
 <p class="lede">Sidebar file tree that opens files in their default app and pulses a Claude mark on files edited in the latest turn</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">pulse reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: runs processes, writes the prompt box, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">pulse reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: runs processes, writes the prompt box, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install pulse --marketplace its-coughfee/pulse-file-tree</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes the prompt box, reads files, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=files}, turn.start, turn.complete, tool.call, ui.focus {requestId=pulse}, ui.message {requestId=pulse}, ui.render {component=Pane, requestId=pulse}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=files}, turn.start, turn.complete, tool.call, ui.message {requestId=pulse}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.sleep, $.command.register, $.fs.exists, $.fs.list, $.process.run, $.prompt.fill, $.session.cwd, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/file-row.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

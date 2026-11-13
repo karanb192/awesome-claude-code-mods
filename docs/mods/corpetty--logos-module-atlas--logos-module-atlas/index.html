@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/corpetty/logos-module-atlas">corpetty/logos-module-atlas</a></p>
 <p class="lede">Registry of every Logos module available in the latest Logos Basecamp release: cards, canonical LIDL contracts, annotated interfaces, stack and integration guides.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">logos-module-atlas reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 9</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads files, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">logos-module-atlas reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 9</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads files, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, writes the prompt box, reads files, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, mcp__logos-module-atlas__module calls, mcp__logos-module-atlas__method calls, mcp__logos-module-atlas__search calls, every prompt, Edit|Write calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart, tool.call {tool=mcp__logos-module-atlas__module}, tool.call {tool=mcp__logos-module-atlas__method}, tool.call {tool=mcp__logos-module-atlas__search}, prompt.submit, tool.call {tool=Edit|Write}, command.run {command=atlas}, ui.render {component=Pane}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart, tool.call {tool=mcp__logos-module-atlas__module}, tool.call {tool=mcp__logos-module-atlas__method}, tool.call {tool=mcp__logos-module-atlas__search}, prompt.submit, tool.call {tool=Edit|Write}, command.run {command=atlas}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.fs.read, $.prompt.fill, $.tool.register, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

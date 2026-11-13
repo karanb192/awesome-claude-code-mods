@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/pvjbuilds/crab-buddy">pvjbuilds/crab-buddy</a></p>
 <p class="lede">An animated pixel-art Claude crab above your prompt that acts out what Claude Code is doing: thinking, reading, building (ten scenes), testing, debugging, web, subagents, git, installs, long turns, compacting, idle, dozing and night owl. 25 moods, 110 takes, each a 14 s scene with beats and emotes; it walks a stage in the desktop app and draws in block characters in the terminal. A caption of one-liners scrolls beside it; each look holds 8 s, so nothing flashes. Light and dark themes, reduce-motion aware. 0 tokens.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">crab-buddy reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 5</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">crab-buddy reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 5</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install crab-buddy --marketplace pvjbuilds/crab-buddy</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, classic hooks, compaction</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, tool.call, classic.PermissionRequest, session.compact, classic.PreCompact, ui.status, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, tool.call, classic.PermissionRequest, session.compact, classic.PreCompact, ui.status</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.state.get, $.state.set, $.ui.resolve</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/term.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

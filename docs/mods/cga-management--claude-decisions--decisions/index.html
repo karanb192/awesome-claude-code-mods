@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/cga-management/claude-decisions">cga-management/claude-decisions</a></p>
 <p class="lede">Tracks open decisions Claude raises in a side pane so you can answer them against a reference while work continues</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">decisions reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">decisions reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install decisions --marketplace cga-management/claude-decisions</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__decisions__close_decision calls, mcp__decisions__raise_decision calls, every tool call, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, tool.call {tool=mcp__decisions__close_decision}, tool.call {tool=mcp__decisions__raise_decision}, tool.call, prompt.submit, command.run {command=decisions}, command.run {command=decide}, ui.render {component=Pane, requestId=decisions}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, tool.call {tool=mcp__decisions__close_decision}, tool.call {tool=mcp__decisions__raise_decision}, tool.call, prompt.submit, command.run {command=decisions}, command.run {command=decide}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.prompt.submit, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.register, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

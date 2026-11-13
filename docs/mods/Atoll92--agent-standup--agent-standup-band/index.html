@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Atoll92/agent-standup">Atoll92/agent-standup</a></p>
 <p class="lede">A line above your Claude Code prompt when another Claude Code session on this computer needs you (an approval, an answer), and a toast when one finishes its turn. Reads only the status files Claude Code keeps for its sessions; sends nothing.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">agent-standup-band reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 9</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">agent-standup-band reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 1</li><li>API methods referenced: 9</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install agent-standup-band --marketplace Atoll92/agent-standup</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, reads env vars, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.env.get, $.fs.list, $.fs.read, $.process.run, $.session.id, $.ui.invalidate, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/Atoll92/agent-standup/tree/2c54f8eeab9c63755e0a22d4b50de51bb2c054ad"><code>2c54f8eeab9c</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/Atoll92/agent-standup/blob/2c54f8eeab9c63755e0a22d4b50de51bb2c054ad/.claude-plugin/marketplace.json">double-geste</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/Atoll92/agent-standup/tree/3dc6075c403c8e620b8ba952213b578eeddfa7a5"><code>3dc6075c403c</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/Atoll92/agent-standup/blob/3dc6075c403c8e620b8ba952213b578eeddfa7a5/.claude-plugin/marketplace.json">double-geste</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/Atoll92--agent-standup--agent-standup-band-reach.svg" alt="Reach badge for agent-standup-band"> <img src="/badges/Atoll92--agent-standup--agent-standup-band-validates.svg" alt="Validation badge for agent-standup-band"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/Atoll92--agent-standup--agent-standup-band-reach.svg)](https://mods.aidojo.si/mods/Atoll92--agent-standup--agent-standup-band/)

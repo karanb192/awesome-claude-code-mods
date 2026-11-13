@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>/&quot;^mcp__xcpane__details$&quot;/ calls, Bash calls, /&quot;^mcp__.+__(BuildProject|RunAllTests|RunSomeTests)$&quot;/ calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=xcpane}, tool.call {tool=/&quot;^mcp__xcpane__details$&quot;/}, tool.call {tool=Bash}, tool.call {tool=/&quot;^mcp__.+__(BuildProject|RunAllTests|RunSomeTests)$&quot;/}, session.append {door=tool-result}, ui.render {component=ToolResult, props has {tool=Bash}}, ui.render {component=Pane, requestId=xcpane}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=xcpane}, tool.call {tool=/&quot;^mcp__xcpane__details$&quot;/}, tool.call {tool=Bash}, tool.call {tool=/&quot;^mcp__.+__(BuildProject|RunAllTests|RunSomeTests)$&quot;/}, session.append {door=tool-result}, ui.render {component=ToolResult, props has {tool=Bash}}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.read, $.mcp.call, $.process.run, $.state.get, $.state.set, $.tool.register, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

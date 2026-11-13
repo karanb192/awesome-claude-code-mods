@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/cfelipemoreira/claude-code-mods">cfelipemoreira/claude-code-mods</a></p>
 <p class="lede">Painel lateral com todas as sessões ativas: trabalhando, concluída ou esperando resposta. Abra com /sessoes.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">session-dashboard reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: writes files, reads files, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">session-dashboard reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: writes files, reads files, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">writes files, reads files, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, AskUserQuestion calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=sessoes}, prompt.submit, tool.call {tool=AskUserQuestion}, turn.complete, session.end, ui.render {component=Pane, requestId=sessions}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=sessoes}, prompt.submit, tool.call {tool=AskUserQuestion}, turn.complete, session.end</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.fs.list, $.fs.read, $.fs.write, $.session.cwd, $.session.id, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

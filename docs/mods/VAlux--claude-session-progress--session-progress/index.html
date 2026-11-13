@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__session-progress__progress calls, every tool call, subagent spawns</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.compose, tool.check {tool=mcp__session-progress__progress}, tool.call {tool=mcp__session-progress__progress}, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=Spinner}, turn.start, turn.step, tool.call, agent.spawn, turn.complete, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.compose, tool.check {tool=mcp__session-progress__progress}, tool.call {tool=mcp__session-progress__progress}, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=Spinner}, turn.start, turn.step, tool.call, agent.spawn, turn.complete</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.session.cwd, $.session.root, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.register, $.ui.blit, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

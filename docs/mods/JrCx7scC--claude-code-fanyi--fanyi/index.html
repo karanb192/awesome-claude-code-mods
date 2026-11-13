@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, AskUserQuestion calls, /&quot;^mcp__plugin_.+_translator__&quot;/ calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=fanyi}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=fanyi-settings}, prompt.submit, session.append, ui.render {component=AssistantMessage}, ui.render {component=UserMessage}, ui.render {component=AskUserQuestion}, ui.render {component=ToolUse}, ui.render {component=ToolResult}, tool.call {tool=AskUserQuestion}, tool.call {tool=/&quot;^mcp__plugin_.+_translator__&quot;/}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=fanyi}, prompt.submit, session.append, ui.render {component=AssistantMessage}, ui.render {component=UserMessage}, ui.render {component=AskUserQuestion}, ui.render {component=ToolUse}, ui.render {component=ToolResult}, tool.call {tool=AskUserQuestion}, tool.call {tool=/&quot;^mcp__plugin_.+_translator__&quot;/}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.command.register, $.mcp.call, $.mcp.connect, $.session.id, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

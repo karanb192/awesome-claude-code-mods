@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, AskUserQuestion calls, every prompt, Agent|Task calls, Bash|PowerShell calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, turn.step, classic.PermissionRequest, tool.call {tool=AskUserQuestion}, prompt.submit, command.run {command=quiet}, tool.call {tool=Agent|Task}, tool.call {tool=Bash|PowerShell}, command.run {command=read}, command.run {command=time}, ui.render {component=AbovePrompt}, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, turn.step, classic.PermissionRequest, tool.call {tool=AskUserQuestion}, prompt.submit, command.run {command=quiet}, tool.call {tool=Agent|Task}, tool.call {tool=Bash|PowerShell}, command.run {command=read}, command.run {command=time}, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.fs.write, $.process.run, $.session.messages, $.session.usage, $.store.get, $.store.set, $.ui.invalidate, $.ui.log, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

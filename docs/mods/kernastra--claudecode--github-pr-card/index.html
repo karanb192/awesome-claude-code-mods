@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/kernastra/claudecode">kernastra/claudecode</a></p>
 <p class="lede">GitHub pull requests in Claude Code: an inline card (/pr), a PR bar above the prompt (/pr-band), checks, reviews, unresolved threads and Fix with Claude.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">github-pr-card reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the clipboard, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">github-pr-card reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 1</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the clipboard, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, writes the clipboard, reads files, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -23,8 +23,8 @@
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>mcp__github-pr-card__show_pr_card calls, Bash calls, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=mcp__github-pr-card__show_pr_card}, tool.call {tool=Bash}, prompt.submit, turn.complete, command.run {command=pr}, ui.render {component=ToolResult, props has {tool=mcp__github-pr-card__show_pr_card}}, ui.render {component=ToolGroup}, ui.render {component=ToolUse}, ui.render {component=ToolResult, props has {tool=Bash}}, command.run {command=pr-details}, ui.render {component=Pane, requestId=pr-details}, command.run {command=pr-band}, ui.render {component=AbovePrompt}, command.run {command=pr-tiles}, ui.render {component=CommandOutput, props has {command=pr-tiles}}, ui.render {component=CommandOutput, props has {command=pr}}</code></dd>
+    <dt>Observed events</dt><dd>Only what it hooks</dd>
+    <dt>Hooks</dt><dd><code>ui.render {component=CommandOutput, props has {command=pr}}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.command.register, $.command.run, $.fs.read, $.process.run, $.prompt.submit, $.state.get, $.state.set, $.tool.register, $.ui.ask, $.ui.copy, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

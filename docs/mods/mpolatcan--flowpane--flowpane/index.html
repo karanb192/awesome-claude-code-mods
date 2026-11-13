@@ -14,8 +14,8 @@
 <h1>flowpane</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/mpolatcan/flowpane">mpolatcan/flowpane</a></p>
 <p class="lede">A live workflow pane: replaces the default Workflow progress list with a phase-by-phase graph or a timeline beside the transcript, showing each agent's state, timing, live token spend, tool calls, what it is saying, and prompt.</p>
-<p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">flowpane reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 16</li><li>Access from classified calls: L1, reads: reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+
+<section class="summary" aria-label="Scan summary"><p class="summary-line">flowpane reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 16</li><li>Access from classified calls: L1, reads: reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install flowpane --marketplace mpolatcan/flowpane</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads files, reads env vars, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -25,14 +25,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>Workflow calls, every tool call</dd>
-    <dt>Hooks</dt><dd><code>tool.call {tool=Workflow}, tool.call, turn.step, ui.render {component=Pane}, ui.press {plugin=flowpane}, ui.select {plugin=flowpane}, ui.scroll {requestId=flowpane}, ui.close {id=flowpane}, session.start, command.run {command=flowpane}</code></dd>
+    <dt>Hooks</dt><dd><code>tool.call {tool=Workflow}, tool.call, turn.step, ui.scroll {requestId=flowpane}, ui.close {id=flowpane}, session.start, command.run {command=flowpane}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.session.id, $.store.get, $.store.set, $.ui.blit, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/mpolatcan/flowpane/tree/2450ad4c8cabd693cfb64f9b96937d07c59f6225"><code>2450ad4c8cab</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/mpolatcan/flowpane/blob/2450ad4c8cabd693cfb64f9b96937d07c59f6225/.claude-plugin/marketplace.json">flowpane</a></dd><dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/mpolatcan/flowpane/blob/2450ad4c8cabd693cfb64f9b96937d07c59f6225/hooks/press.ts#L618">hooks/press.ts:618</a>, <a href="https://github.com/mpolatcan/flowpane/blob/2450ad4c8cabd693cfb64f9b96937d07c59f6225/hooks/shape.ts#L849">hooks/shape.ts:849</a>, <a href="https://github.com/mpolatcan/flowpane/blob/2450ad4c8cabd693cfb64f9b96937d07c59f6225/hooks/shape.ts#L1129">hooks/shape.ts:1129</a>, <a href="https://github.com/mpolatcan/flowpane/blob/2450ad4c8cabd693cfb64f9b96937d07c59f6225/hooks/shape.ts#L1138">hooks/shape.ts:1138</a></dd></dl>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/mpolatcan/flowpane/blob/2450ad4c8cabd693cfb64f9b96937d07c59f6225/.claude-plugin/marketplace.json">flowpane</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/mpolatcan--flowpane--flowpane-reach.svg" alt="Reach badge for flowpane"> <img src="/badges/mpolatcan--flowpane--flowpane-validates.svg" alt="Validation badge for flowpane"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/mpolatcan--flowpane--flowpane-reach.svg)](https://mods.aidojo.si/mods/mpolatcan--flowpane--flowpane/)

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Roberdinho/claude-mods">Roberdinho/claude-mods</a></p>
 <p class="lede">A Tamagotchi-style coding companion: it earns XP from edits, reads, passing tests and commits, levels up and evolves, and needs feeding, play and rest. /codepet</p>
 <p class="compatibility">marketplace fails</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">coding-pet reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 15</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">coding-pet reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 14</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads env vars, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, ? calls, every tool call</dd>
-    <dt>Hooks</dt><dd><code>engine.create, session.start, codingPet.get, codingPet.award, codingPet.act, codingPet.addSpecies, codingPet.addFood, codingPet.addActivity, codingPet.addAchievement, ui.close, command.run {command=codepet}, prompt.submit, turn.complete, tool.call {tool=?}, tool.call, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=coding-pet}</code></dd>
+    <dt>Hooks</dt><dd><code>engine.create, session.start, codingPet.get, codingPet.award, codingPet.act, codingPet.addSpecies, codingPet.addFood, codingPet.addActivity, codingPet.addAchievement, ui.close, command.run {command=codepet}, prompt.submit, turn.complete, tool.call {tool=?}, tool.call</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.register, $.ui.close, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

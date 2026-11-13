@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/m2ai-portfolio/claude-mods">m2ai-portfolio/claude-mods</a></p>
 <p class="lede">Writes a /next handoff automatically once a 1M-token session crosses 300k tokens and before every compaction, so the next session can /prime from it. Never blocks tool calls: goals and loops keep running (pair with autoCompactWindow: 300000). /auto-handoff on|off and threshold &lt;n&gt; are kept across sessions.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">auto-handoff reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 20</li><li>Access from classified calls: L3, network: MCP servers, runs processes, writes files, drives Claude, writes the clipboard, reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">auto-handoff reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 20</li><li>Access from classified calls: L3, network: MCP servers, runs processes, writes files, drives Claude, writes the clipboard, reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">MCP servers, runs processes, writes files, drives Claude, writes the clipboard, reads files, reads env vars, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>compaction</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.complete, session.compact, session.end, command.run {command=auto-handoff}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.complete, session.compact, session.end, command.run {command=auto-handoff}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.command.run, $.env.get, $.fs.read, $.fs.write, $.mcp.call, $.model.fork, $.process.run, $.session.cwd, $.session.id, $.session.model, $.session.usage, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.copy, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

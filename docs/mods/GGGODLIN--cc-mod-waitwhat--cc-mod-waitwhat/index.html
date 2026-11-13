@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/GGGODLIN/cc-mod-waitwhat">GGGODLIN/cc-mod-waitwhat</a></p>
 <p class="lede">Buttons above the prompt: retell recent turns in plain words, or open what a background check flagged that you might miss. Results go to Claude Code's own pane; nothing enters the transcript or the model's context.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">cc-mod-waitwhat reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 18</li><li>Access from classified calls: L3, network: network, runs processes, writes files, drives Claude, reads files, reads env vars, reads the transcript, reads the prompt box, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">cc-mod-waitwhat reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 18</li><li>Access from classified calls: L3, network: network, runs processes, writes files, drives Claude, reads files, reads env vars, reads the transcript, reads the prompt box, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install cc-mod-waitwhat --marketplace GGGODLIN/cc-mod-waitwhat</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, writes files, drives Claude, reads files, reads env vars, reads the transcript, reads the prompt box, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>turn.start, turn.complete, prompt.submit, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=waitwhat}</code></dd>
+    <dt>Hooks</dt><dd><code>turn.start, turn.complete, prompt.submit</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.clock.sleep, $.env.get, $.fs.exists, $.fs.read, $.fs.write, $.http.fetch, $.model.complete, $.process.run, $.prompt.read, $.session.id, $.session.messages, $.session.surfaces, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/GGGODLIN/cc-mod-waitwhat/tree/8bdfbef024b3a822577ca5be0f53789cb35cad34"><code>8bdfbef024b3</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/GGGODLIN/cc-mod-waitwhat/blob/8bdfbef024b3a822577ca5be0f53789cb35cad34/.claude-plugin/marketplace.json">cc-mod-waitwhat</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/GGGODLIN/cc-mod-waitwhat/tree/d7c7444085ca97690bfd3ceea3ab48ca236dd15e"><code>d7c7444085ca</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/GGGODLIN/cc-mod-waitwhat/blob/d7c7444085ca97690bfd3ceea3ab48ca236dd15e/.claude-plugin/marketplace.json">cc-mod-waitwhat</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/GGGODLIN--cc-mod-waitwhat--cc-mod-waitwhat-reach.svg" alt="Reach badge for cc-mod-waitwhat"> <img src="/badges/GGGODLIN--cc-mod-waitwhat--cc-mod-waitwhat-validates.svg" alt="Validation badge for cc-mod-waitwhat"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/GGGODLIN--cc-mod-waitwhat--cc-mod-waitwhat-reach.svg)](https://mods.aidojo.si/mods/GGGODLIN--cc-mod-waitwhat--cc-mod-waitwhat/)

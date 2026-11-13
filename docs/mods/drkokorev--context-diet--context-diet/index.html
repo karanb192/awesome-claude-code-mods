@@ -14,8 +14,8 @@
 <h1>context-diet</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/drkokorev/context-diet">drkokorev/context-diet</a></p>
 <p class="lede">Trims huge tool outputs (logs, JSON, diffs, grep, file lists) before they reach Claude's context, and saves the full text to a file Claude can read</p>
-<p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">context-diet reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: writes files, reads files, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+
+<section class="summary" aria-label="Scan summary"><p class="summary-line">context-diet reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: writes files, reads files, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install context-diet --marketplace drkokorev/context-diet</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">writes files, reads files, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call, session.append {door=tool-result}, command.run {command=diet}, ui.close {id=context-diet}, ui.render {component=Pane, requestId=context-diet}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, tool.call, session.append {door=tool-result}, command.run {command=diet}, ui.close {id=context-diet}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.fs.exists, $.fs.read, $.fs.write, $.session.cwd, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/drkokorev/context-diet/tree/1988532e2951200644b9ae793f47f12092d3cca6"><code>1988532e2951</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/drkokorev/context-diet/blob/1988532e2951200644b9ae793f47f12092d3cca6/.claude-plugin/marketplace.json">context-diet</a></dd><dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/drkokorev/context-diet/blob/1988532e2951200644b9ae793f47f12092d3cca6/plugins/context-diet/hooks/text.ts#L26">plugins/context-diet/hooks/text.ts:26</a></dd></dl>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/drkokorev/context-diet/blob/1988532e2951200644b9ae793f47f12092d3cca6/.claude-plugin/marketplace.json">context-diet</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/drkokorev--context-diet--context-diet-reach.svg" alt="Reach badge for context-diet"> <img src="/badges/drkokorev--context-diet--context-diet-validates.svg" alt="Validation badge for context-diet"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/drkokorev--context-diet--context-diet-reach.svg)](https://mods.aidojo.si/mods/drkokorev--context-diet--context-diet/)

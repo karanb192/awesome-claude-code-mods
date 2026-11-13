@@ -14,8 +14,8 @@
 <h1>praft</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/yarcod/praft">yarcod/praft</a></p>
 <p class="lede">Review a pull/merge request draft (title, description, commits) in a pane before it is opened</p>
-<p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">praft reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, writes the clipboard, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+
+<section class="summary" aria-label="Scan summary"><p class="summary-line">praft reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, writes the clipboard, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install praft --marketplace yarcod/praft</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, drives Claude, writes the clipboard, reads files, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.complete, tool.call, command.run {command=praft}, ui.render {component=Pane, requestId=praft}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.complete, tool.call, command.run {command=praft}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.fs.list, $.fs.read, $.fs.write, $.process.run, $.prompt.submit, $.state.get, $.state.set, $.ui.copy, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/yarcod/praft/tree/4fe4a1ec2327b123def2a912a81f4de9a7d36914"><code>4fe4a1ec2327</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/yarcod/praft/blob/4fe4a1ec2327b123def2a912a81f4de9a7d36914/.claude-plugin/marketplace.json">praft</a></dd><dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/yarcod/praft/blob/4fe4a1ec2327b123def2a912a81f4de9a7d36914/hooks/register.tsx#L77">hooks/register.tsx:77</a>, <a href="https://github.com/yarcod/praft/blob/4fe4a1ec2327b123def2a912a81f4de9a7d36914/hooks/register.tsx#L79">hooks/register.tsx:79</a>, <a href="https://github.com/yarcod/praft/blob/4fe4a1ec2327b123def2a912a81f4de9a7d36914/hooks/register.tsx#L81">hooks/register.tsx:81</a></dd></dl>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/yarcod/praft/blob/4fe4a1ec2327b123def2a912a81f4de9a7d36914/.claude-plugin/marketplace.json">praft</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/yarcod--praft--praft-reach.svg" alt="Reach badge for praft"> <img src="/badges/yarcod--praft--praft-validates.svg" alt="Validation badge for praft"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/yarcod--praft--praft-reach.svg)](https://mods.aidojo.si/mods/yarcod--praft--praft/)

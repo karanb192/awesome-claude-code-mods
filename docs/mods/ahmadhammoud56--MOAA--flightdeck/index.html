@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/ahmadhammoud56/MOAA">ahmadhammoud56/MOAA</a></p>
 <p class="lede">Flightdeck: a live agent dashboard for Claude Code. Main model vitals, an on-call architect, every permission check, subagent cards and swimlanes, a turn receipt and a session log, all from real session events</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">flightdeck reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 16</li><li>API methods referenced: 11</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">flightdeck reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 15</li><li>API methods referenced: 11</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install flightdeck --marketplace ahmadhammoud56/MOAA</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, compaction, every tool call, subagent spawns</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=flightdeck}, classic.UserPromptSubmit, agent.offer, turn.start, turn.step, session.measure, session.compact, tool.check, tool.call, session.append {door=response}, agent.spawn, turn.complete, ui.fault, ui.render {component=Pane, requestId=flightdeck}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=flightdeck}, classic.UserPromptSubmit, agent.offer, turn.start, turn.step, session.measure, session.compact, tool.check, tool.call, session.append {door=response}, agent.spawn, turn.complete, ui.fault</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.session.usage, $.state.get, $.state.set, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/elapsed.tsx, hooks/rail.tsx</code></dd>
     <dt>Validation</dt><dd>Passed</dd>

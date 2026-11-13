@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/mohi-devhub/claude-games">mohi-devhub/claude-games</a></p>
 <p class="lede">Arcade games above the Claude Code prompt (a dodge race, Breakout, a dino runner and a side-scrolling shooter) that pause when Claude finishes a turn and react to the edits, tests and commits Claude makes. Needs function hooks (early access) and an interactive terminal.</p>
 <p class="compatibility">marketplace fails</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">claude-games reaches L0 (draws and remembers) and fails <code>claude plugin validate</code>: name: Plugin name &quot;claude-games&quot; is reserved: it passes as one of Anthropic's own. A third party's plugin name cannot start with &quot;claude-&quot;, &quot;anthropic-&quot;, &quot;anth….</p><ul><li>Events hooked: 6</li><li>API methods referenced: 7</li><li>Access from classified calls: L0, draws and remembers: persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">claude-games reaches L0 (draws and remembers) and fails <code>claude plugin validate</code>: name: Plugin name &quot;claude-games&quot; is reserved: it passes as one of Anthropic's own. A third party's plugin name cannot start with &quot;claude-&quot;, &quot;anthropic-&quot;, &quot;anth….</p><ul><li>Events hooked: 5</li><li>API methods referenced: 7</li><li>Access from classified calls: L0, draws and remembers: persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L0 Draws &amp; remembers</span><span class="track" aria-label="Reach level 0: Draws & remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status bad">Fails</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=racer}, command.run {command=breakout}, command.run {command=dino}, command.run {command=shooter}, turn.complete, tool.call, ui.message, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=racer}, command.run {command=breakout}, command.run {command=dino}, command.run {command=shooter}, turn.complete, tool.call, ui.message</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.store.get, $.store.set, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/boards/breakout.tsx, hooks/boards/dino.tsx, hooks/boards/racer.tsx, hooks/boards/shooter.tsx</code></dd>
     <dt>Validation</dt><dd>Fails</dd>

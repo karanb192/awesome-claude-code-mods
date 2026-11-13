@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/NaokiIshimura/claude-code-mod-prompt-templates">NaokiIshimura/claude-code-mod-prompt-templates</a></p>
 <p class="lede">Insert prompt templates with number-key buttons above the prompt</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">prompt-templates reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 13</li><li>Access from classified calls: L1, reads: writes the prompt box, reads files, reads env vars, reads the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">prompt-templates reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 13</li><li>Access from classified calls: L1, reads: writes the prompt box, reads files, reads env vars, reads the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">writes the prompt box, reads files, reads env vars, reads the prompt box, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.edit, prompt.submit, command.run, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=prompt-templates}, command.run {command=tpl}, command.run {command=tpl-bar}, command.run {command=tpl-reload}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.edit, prompt.submit, command.run, command.run {command=tpl}, command.run {command=tpl-bar}, command.run {command=tpl-reload}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.env.get, $.fs.list, $.fs.read, $.prompt.fill, $.prompt.read, $.state.get, $.state.set, $.ui.close, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

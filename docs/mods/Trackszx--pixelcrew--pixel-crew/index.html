@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Trackszx/pixelcrew">Trackszx/pixelcrew</a></p>
 <p class="lede">Pixel-art progress bar with the Claude mascot and a side panel that turns your subagents into a crew of characters (developer, artist, researcher, tester, Codex...).</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">pixel-crew reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 11</li><li>Access from classified calls: L1, reads: reads env vars, reads settings, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">pixel-crew reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 11</li><li>Access from classified calls: L1, reads: reads env vars, reads settings, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install pixel-crew --marketplace Trackszx/pixelcrew</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads env vars, reads settings, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=crew}, command.run {command=crew-bar}, command.run {command=crew-clear}, agent.spawn, prompt.submit, turn.start, turn.step, turn.complete, tool.call, tool.check, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=pixel-crew-agents}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=crew}, command.run {command=crew-bar}, command.run {command=crew-clear}, agent.spawn, prompt.submit, turn.start, turn.step, turn.complete, tool.call, tool.check</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.command.register, $.env.get, $.settings.read, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

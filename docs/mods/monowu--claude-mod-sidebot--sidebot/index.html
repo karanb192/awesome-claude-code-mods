@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/monowu/claude-mod-sidebot">monowu/claude-mod-sidebot</a></p>
 <p class="lede">嗶嗶（Sidebot）：像素機器人旁路小助手，在側邊小窗回答問題，看得到主 session 的內容但不干擾它</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">sidebot reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the clipboard, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">sidebot reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the clipboard, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, writes the clipboard, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=buddy}, ui.render {component=Pane, requestId=sidebot}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=buddy}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.model.complete, $.model.fork, $.state.get, $.state.set, $.ui.close, $.ui.copy, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

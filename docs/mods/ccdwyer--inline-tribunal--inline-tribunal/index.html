@@ -14,8 +14,8 @@
 <h1>inline-tribunal</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/ccdwyer/inline-tribunal">ccdwyer/inline-tribunal</a></p>
 <p class="lede">A second_opinion tool and /tribunal command: your diff is reviewed by Codex and Grok side by side, read-only, inside the session</p>
-<p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">inline-tribunal reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+
+<section class="summary" aria-label="Scan summary"><p class="summary-line">inline-tribunal reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, drives Claude, reads files, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__inline-tribunal__second_opinion calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=mcp__inline-tribunal__second_opinion}, command.run {command=tribunal}, ui.render {component=Pane, requestId=tribunal}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=mcp__inline-tribunal__second_opinion}, command.run {command=tribunal}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.fs.read, $.fs.write, $.process.run, $.state.get, $.state.set, $.tool.register, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/ccdwyer/inline-tribunal/tree/b8821a195528c6058747916213dbc20eb1053cf5"><code>b8821a195528</code></a></dd>
-    <dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/ccdwyer/inline-tribunal/blob/b8821a195528c6058747916213dbc20eb1053cf5/hooks/register.tsx#L206">hooks/register.tsx:206</a>, <a href="https://github.com/ccdwyer/inline-tribunal/blob/b8821a195528c6058747916213dbc20eb1053cf5/hooks/register.tsx#L217">hooks/register.tsx:217</a></dd></dl>
+    </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/ccdwyer--inline-tribunal--inline-tribunal-reach.svg" alt="Reach badge for inline-tribunal"> <img src="/badges/ccdwyer--inline-tribunal--inline-tribunal-validates.svg" alt="Validation badge for inline-tribunal"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/ccdwyer--inline-tribunal--inline-tribunal-reach.svg)](https://mods.aidojo.si/mods/ccdwyer--inline-tribunal--inline-tribunal/)

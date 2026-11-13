@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/ClarvAI/job-search-hq">ClarvAI/job-search-hq</a></p>
 <p class="lede">Mock interview room: the interviewer speaks each question aloud, a clock runs while you answer out loud, and a live scorecard fills in.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">interview-room reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 18</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the prompt box, reads mod state, plays audio, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">interview-room reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 18</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the prompt box, reads mod state, plays audio, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, writes the prompt box, reads mod state, plays audio, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, mcp__interview-room__interview_start calls, mcp__interview-room__interview_say calls, mcp__interview-room__interview_score calls, mcp__interview-room__interview_end calls, every prompt</dd>
-    <dt>Hooks</dt><dd><code>classic.SessionStart, session.start, tool.call {tool=mcp__interview-room__interview_start}, tool.call {tool=mcp__interview-room__interview_say}, tool.call {tool=mcp__interview-room__interview_score}, tool.call {tool=mcp__interview-room__interview_end}, prompt.submit, command.run {command=interview-room}, ui.render {component=Pane, requestId=interview-room}</code></dd>
+    <dt>Hooks</dt><dd><code>classic.SessionStart, session.start, tool.call {tool=mcp__interview-room__interview_start}, tool.call {tool=mcp__interview-room__interview_say}, tool.call {tool=mcp__interview-room__interview_score}, tool.call {tool=mcp__interview-room__interview_end}, prompt.submit, command.run {command=interview-room}</code></dd>
     <dt>API calls</dt><dd><code>$.audio.play, $.audio.speak, $.clock.every, $.clock.now, $.command.register, $.process.run, $.prompt.fill, $.session.root, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.register, $.ui.close, $.ui.focus, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

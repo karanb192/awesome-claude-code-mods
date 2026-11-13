@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/refact0r/claude-surf">refact0r/claude-surf</a></p>
 <p class="lede">Play Subway Surfers (or watch any video) in a pane, rendered as glyphs with a foreground and a background color.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">subway-surfer reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 15</li><li>Access from classified calls: L3, network: network, runs processes, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">subway-surfer reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 15</li><li>Access from classified calls: L3, network: network, runs processes, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, reads files, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, ui.close {id=surf}, command.run {command=surf}, ui.render {component=Pane, requestId=surf}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, ui.close {id=surf}, command.run {command=surf}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.env.get, $.fs.stat, $.http.fetch, $.process.run, $.process.spawn, $.session.id, $.state.get, $.state.set, $.ui.blit, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

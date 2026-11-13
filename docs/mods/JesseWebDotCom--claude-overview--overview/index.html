@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/JesseWebDotCom/claude-overview">JesseWebDotCom/claude-overview</a></p>
 <p class="lede">Usage limits, system health (CPU, memory, disk, GPU), context breakdown with one-click compact, sessions blocked on you, folders with uncommitted changes, and every agent in one live pane. Polls tmux, session files and transcripts itself; no model writes anything.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">overview reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">overview reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install overview --marketplace JesseWebDotCom/claude-overview</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=overview}, ui.render {component=Pane, requestId=overview}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=overview}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.command.run, $.process.run, $.session.id, $.session.send, $.session.usage, $.tool.call, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

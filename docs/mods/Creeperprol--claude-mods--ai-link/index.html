@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Creeperprol/claude-mods">Creeperprol/claude-mods</a></p>
 <p class="lede">Side panes for Claude Code: a usage pane (context, limits, cost, tools) and session link (sessions message each other, host mode)</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">ai-link reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 12</li><li>API methods referenced: 19</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">ai-link reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 19</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,8 +24,8 @@
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>mcp__ai-link__peers calls, mcp__ai-link__assign calls, mcp__ai-link__command calls, mcp__ai-link__rename calls, mcp__ai-link__report calls, classic hooks, every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=host}, command.run {command=assign}, command.run {command=setname}, command.run {command=run}, command.run {command=board}, tool.call {tool=mcp__ai-link__peers}, tool.call {tool=mcp__ai-link__assign}, tool.call {tool=mcp__ai-link__command}, tool.call {tool=mcp__ai-link__rename}, tool.call {tool=mcp__ai-link__report}, command.run {command=link}, command.run {command=sessions}, command.run {command=tell}, command.run {command=tellall}, prompt.compose, session.receive, command.run {command=rename}, classic.UserPromptSubmit, turn.complete, session.end, ui.render {component=Pane, requestId=ai-link}, command.run {command=usage-bar}, classic.SessionStart, prompt.submit, session.measure, tool.call, ui.render {component=Pane, requestId=usage-bar}</code></dd>
+    <dt>Observed events</dt><dd>classic hooks, every prompt, every tool call</dd>
+    <dt>Hooks</dt><dd><code>classic.SessionStart, prompt.submit, session.measure, tool.call</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.command.run, $.prompt.submit, $.session.cwd, $.session.id, $.session.send, $.session.usage, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.tool.register, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

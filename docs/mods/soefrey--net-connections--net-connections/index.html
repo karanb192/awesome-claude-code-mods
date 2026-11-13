@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/soefrey/net-connections">soefrey/net-connections</a></p>
 <p class="lede">Pane listing every network connection this session made, traced back to the prompt and command that caused it</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">net-connections reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 15</li><li>Access from classified calls: L3, network: network, runs processes, writes the clipboard, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">net-connections reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 15</li><li>Access from classified calls: L3, network: network, runs processes, writes the clipboard, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, writes the clipboard, reads env vars, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=net}, command.run, turn.start, turn.step, tool.call, ui.render {component=Pane, requestId=net-connections}, ui.focus {component=Pane, requestId=net-connections}, ui.scroll {component=Pane, requestId=net-connections}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=net}, command.run, turn.start, turn.step, tool.call, ui.scroll {component=Pane, requestId=net-connections}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.http.fetch, $.process.run, $.process.spawn, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.copy, $.ui.focus, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

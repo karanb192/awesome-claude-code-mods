@@ -14,8 +14,8 @@
 <h1>cache-bar</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/TheTsungYing/claude-cache-bar">TheTsungYing/claude-cache-bar</a></p>
 <p class="lede">Shows prompt cache hit rate and TTL status in Claude Code</p>
-<p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">cache-bar reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 12</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: changes config, drives Claude, reads settings, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+
+<section class="summary" aria-label="Scan summary"><p class="summary-line">cache-bar reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 11</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: changes config, drives Claude, reads settings, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install cache-bar --marketplace TheTsungYing/claude-cache-bar</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">changes config, drives Claude, reads settings, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -25,14 +25,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>compaction, the system prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=cache}, command.run {command=?}, turn.start, turn.complete, turn.step, session.compact, prompt.section, prompt.context, tool.describe, ui.render {component=AbovePrompt}, ui.close, ui.render {component=Pane, requestId=cache-bar}, session.end</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=cache}, command.run {command=?}, turn.start, turn.complete, turn.step, session.compact, prompt.section, prompt.context, tool.describe, ui.close, session.end</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.config.list, $.config.set, $.model.fork, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/TheTsungYing/claude-cache-bar/tree/12c1b78d2c88665e63189c494e718117d632da8c"><code>12c1b78d2c88</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/TheTsungYing/claude-cache-bar/blob/12c1b78d2c88665e63189c494e718117d632da8c/.claude-plugin/marketplace.json">claude-cache-bar</a></dd><dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/TheTsungYing/claude-cache-bar/blob/12c1b78d2c88665e63189c494e718117d632da8c/plugins/cache-bar/hooks/register.tsx#L471">plugins/cache-bar/hooks/register.tsx:471</a></dd></dl>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/TheTsungYing/claude-cache-bar/blob/12c1b78d2c88665e63189c494e718117d632da8c/.claude-plugin/marketplace.json">claude-cache-bar</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/TheTsungYing--claude-cache-bar--cache-bar-reach.svg" alt="Reach badge for cache-bar"> <img src="/badges/TheTsungYing--claude-cache-bar--cache-bar-validates.svg" alt="Validation badge for cache-bar"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/TheTsungYing--claude-cache-bar--cache-bar-reach.svg)](https://mods.aidojo.si/mods/TheTsungYing--claude-cache-bar--cache-bar/)

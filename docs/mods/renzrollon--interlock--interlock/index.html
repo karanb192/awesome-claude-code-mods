@@ -14,8 +14,8 @@
 <h1>interlock</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/renzrollon/interlock">renzrollon/interlock</a></p>
 <p class="lede">Spec-driven development for Claude Code, layered on OpenSpec. You read one spec; parallel agents ship it to a tested commit.</p>
-<p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">interlock reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 11</li><li>API methods referenced: 19</li><li>Access from classified calls: L1, reads: writes the prompt box, writes the clipboard, reads files, reads the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+
+<section class="summary" aria-label="Scan summary"><p class="summary-line">interlock reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 19</li><li>Access from classified calls: L1, reads: writes the prompt box, writes the clipboard, reads files, reads the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">writes the prompt box, writes the clipboard, reads files, reads the prompt box, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -23,15 +23,15 @@
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>every prompt, Workflow calls, Bash calls, Skill calls, Read calls, Edit calls, Write calls, subagent spawns, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, session.receive {origin has {kind=task-notification}}, tool.call {tool=Workflow}, tool.call {tool=Bash}, tool.call {tool=Skill}, tool.call {tool=Read}, tool.call {tool=Edit}, tool.call {tool=Write}, turn.step, turn.complete, agent.spawn, classic.SessionStart, ui.render {component=Spinner}, ui.render {component=Pane, requestId=interlock-meter}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=interlock-preflight}, ui.render {component=Pane, requestId=interlock-handoff}, ui.render {component=Pane, requestId=interlock-spec}, ui.render {component=Pane, requestId=interlock-settle}, command.run {command=interlock-meter}, command.run {command=interlock-preflight}, command.run {command=interlock-handoff}, command.run {command=interlock-spec}, command.run {command=interlock-settle}, prompt.autocomplete</code></dd>
+    <dt>Observed events</dt><dd>Only what it hooks</dd>
+    <dt>Hooks</dt><dd><code>command.run {command=interlock-meter}, command.run {command=interlock-preflight}, command.run {command=interlock-handoff}, command.run {command=interlock-spec}, command.run {command=interlock-settle}, prompt.autocomplete</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.fs.read, $.prompt.fill, $.prompt.read, $.session.usage, $.session.version, $.state.get, $.state.set, $.ui.copy, $.ui.invalidate, $.ui.log, $.ui.notify, $.ui.open, $.ui.resolve, $.ui.scroll, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/renzrollon/interlock/tree/9bd053a32543e33e1bd29536f9e5f7fb40e375e1"><code>9bd053a32543</code></a></dd>
-    <dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/renzrollon/interlock/blob/9bd053a32543e33e1bd29536f9e5f7fb40e375e1/hooks/mod.mjs#L1187">hooks/mod.mjs:1187</a>, <a href="https://github.com/renzrollon/interlock/blob/9bd053a32543e33e1bd29536f9e5f7fb40e375e1/hooks/mod.mjs#L1220">hooks/mod.mjs:1220</a>, <a href="https://github.com/renzrollon/interlock/blob/9bd053a32543e33e1bd29536f9e5f7fb40e375e1/hooks/mod.mjs#L1290">hooks/mod.mjs:1290</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/renzrollon/interlock/tree/b6937dcd841b621ef3f0a00eae30a2933f44ab6e"><code>b6937dcd841b</code></a></dd>
+    </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/renzrollon--interlock--interlock-reach.svg" alt="Reach badge for interlock"> <img src="/badges/renzrollon--interlock--interlock-validates.svg" alt="Validation badge for interlock"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/renzrollon--interlock--interlock-reach.svg)](https://mods.aidojo.si/mods/renzrollon--interlock--interlock/)

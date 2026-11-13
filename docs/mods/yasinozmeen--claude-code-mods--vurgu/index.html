@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=vurgu}, ui.render {component=Pane, requestId=vurgu}, prompt.submit, tool.call, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=vurgu}, prompt.submit, tool.call, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.process.run, $.session.id, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.close, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

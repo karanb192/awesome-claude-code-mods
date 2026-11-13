@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, ui.render {component=AbovePrompt}, ui.render {component=ToolGroup}, ui.render {component=ToolResult}, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}, ui.render {component=Pane, requestId=?}, ui.render {component=Pane, requestId=?}, ui.scroll {requestId=?}, ui.close, command.run {command=media-view}, tool.call, prompt.submit</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, ui.render {component=ToolGroup}, ui.render {component=ToolResult}, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}, ui.scroll {requestId=?}, ui.close, command.run {command=media-view}, tool.call, prompt.submit</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.process.run, $.prompt.read, $.session.id, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.check, $.ui.blit, $.ui.close, $.ui.copy, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.scroll</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

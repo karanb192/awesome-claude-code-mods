@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Eliezir/elsewhere">Eliezir/elsewhere</a></p>
 <p class="lede">Ports pane for the folder a session runs in: see the dev servers, stop them, and keep the branch and ports in the status line</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">workbench reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 10</li><li>Access from classified calls: L2, writes or runs: runs processes, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">workbench reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 10</li><li>Access from classified calls: L2, writes or runs: runs processes, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install workbench --marketplace Eliezir/elsewhere</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=ports}, ui.render {component=Pane, requestId=workbench}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=ports}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.sleep, $.command.register, $.process.run, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/Eliezir/elsewhere/tree/ba271f6f1a4c119af64e6853893e1eca87d39ee2"><code>ba271f6f1a4c</code></a></dd>
-    <dt>Marketplace warnings</dt><dd><a href="https://github.com/Eliezir/elsewhere/blob/ba271f6f1a4c119af64e6853893e1eca87d39ee2/.claude-plugin/marketplace.json">elsewhere</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/Eliezir/elsewhere/tree/863c550544584b29146a5df66edaf5b185ee87e2"><code>863c55054458</code></a></dd>
+    <dt>Marketplace warnings</dt><dd><a href="https://github.com/Eliezir/elsewhere/blob/863c550544584b29146a5df66edaf5b185ee87e2/.claude-plugin/marketplace.json">elsewhere</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/Eliezir--elsewhere--workbench-reach.svg" alt="Reach badge for workbench"> <img src="/badges/Eliezir--elsewhere--workbench-validates.svg" alt="Validation badge for workbench"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/Eliezir--elsewhere--workbench-reach.svg)](https://mods.aidojo.si/mods/Eliezir--elsewhere--workbench/)

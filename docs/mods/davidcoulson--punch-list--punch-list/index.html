@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/davidcoulson/punch-list">davidcoulson/punch-list</a></p>
 <p class="lede">One to-do list of things waiting on you, shared by every Claude Code session: Claude adds an item whenever it tells you to do something, a band above the prompt shows what's open, and /todo lists, ticks off and snoozes them.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">punch-list reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 25</li><li>Access from classified calls: L3, network: MCP servers, runs processes, writes files, drives Claude, reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">punch-list reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 25</li><li>Access from classified calls: L3, network: MCP servers, runs processes, writes files, drives Claude, reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">MCP servers, runs processes, writes files, drives Claude, reads files, reads env vars, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, mcp__punch-list__add calls, mcp__punch-list__done calls, mcp__punch-list__update calls, mcp__punch-list__list calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, tool.call {tool=mcp__punch-list__add}, tool.call {tool=mcp__punch-list__done}, tool.call {tool=mcp__punch-list__update}, tool.call {tool=mcp__punch-list__list}, command.run {command=todo}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=punch-list}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.submit, tool.call {tool=mcp__punch-list__add}, tool.call {tool=mcp__punch-list__done}, tool.call {tool=mcp__punch-list__update}, tool.call {tool=mcp__punch-list__list}, command.run {command=todo}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.fs.write, $.mcp.call, $.process.run, $.session.cwd, $.session.id, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.register, $.ui.close, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

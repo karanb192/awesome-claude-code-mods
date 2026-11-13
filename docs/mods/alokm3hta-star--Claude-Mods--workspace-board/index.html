@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/alokm3hta-star/Claude-Mods">alokm3hta-star/Claude-Mods</a></p>
 <p class="lede">One board for what is waiting on you across your projects: sessions waiting for an answer or approval, proposals to review, blockers, action items and handoffs, each with a button to jump there or start it. Opened from the Board button on the context bar.</p>
 <p class="compatibility">marketplace fails</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">workspace-board reaches L2 (writes or runs) and fails <code>claude plugin validate</code>: types: Path not found: ./types/index.d.ts. The runtime loader will report this as a load failure..</p><ul><li>Events hooked: 8</li><li>API methods referenced: 18</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, writes the prompt box, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">workspace-board reaches L2 (writes or runs) and fails <code>claude plugin validate</code>: types: Path not found: ./types/index.d.ts. The runtime loader will report this as a load failure..</p><ul><li>Events hooked: 7</li><li>API methods referenced: 18</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, writes the prompt box, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, drives Claude, writes the prompt box, reads files, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status bad">Fails</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=board}, turn.start, turn.complete, tool.call, state.set, ui.render {component=Pane, requestId=workspace-board}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=board}, turn.start, turn.complete, tool.call, state.set</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.write, $.process.run, $.prompt.fill, $.prompt.submit, $.session.id, $.session.root, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Fails</dd>

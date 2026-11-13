@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Ascurse/bead-band">Ascurse/bead-band</a></p>
 <p class="lede">Shows the in-progress Beads task, its src/&lt;branch&gt; merge target and the current worktree/branch at the top of the flightdeck pane</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">bead-band reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 4</li><li>Access from classified calls: L2, writes or runs: runs processes, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">bead-band reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 4</li><li>Access from classified calls: L2, writes or runs: runs processes, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.complete, ui.render {component=Pane, requestId=flightdeck}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.complete</code></dd>
     <dt>API calls</dt><dd><code>$.process.run, $.state.get, $.state.set, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

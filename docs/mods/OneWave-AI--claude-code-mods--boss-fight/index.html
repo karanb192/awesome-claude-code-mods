@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/OneWave-AI/claude-code-mods">OneWave-AI/claude-code-mods</a></p>
 <p class="lede">Failing tests spawn a pixel boss; every run that fixes tests lands a hit, zero failures is a KO with loot</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">boss-fight reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 14</li><li>Access from classified calls: L1, reads: reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">boss-fight reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 14</li><li>Access from classified calls: L1, reads: reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install boss-fight --marketplace OneWave-AI/claude-code-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Bash calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=boss}, tool.call {tool=Bash}, ui.render {component=Pane, requestId=boss-fight}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=boss}, tool.call {tool=Bash}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.blit, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

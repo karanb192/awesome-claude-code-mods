@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/thanhnhoncntt/oxen-pet">thanhnhoncntt/oxen-pet</a></p>
 <p class="lede">Measures the prompt cache for a team, in Claude Code and, with its command-line companion, Codex CLI and Devin CLI: hit rate per session, subagent and model, a warning before a cold resume re-sends a whole context, the quota each session used, and an anonymized export to pool cost and quota data. Records token counts and timings only, never prompts, code or paths.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">oxen-meter reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 14</li><li>API methods referenced: 20</li><li>Access from classified calls: L2, writes or runs: writes files, reads files, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">oxen-meter reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 13</li><li>API methods referenced: 20</li><li>Access from classified calls: L2, writes or runs: writes files, reads files, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install oxen-meter --marketplace thanhnhoncntt/oxen-pet</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">writes files, reads files, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Bash calls, Agent calls, classic hooks, compaction</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.step, tool.call {tool=Bash}, tool.call {tool=Agent}, classic.SubagentStart, classic.SubagentStop, session.send, classic.SessionStart, classic.PostModelSwitch, session.compact, session.measure, turn.complete, session.end, command.run {command=meter}, ui.render {component=Pane}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.step, tool.call {tool=Bash}, tool.call {tool=Agent}, classic.SubagentStart, classic.SubagentStop, session.send, classic.SessionStart, classic.PostModelSwitch, session.compact, session.measure, turn.complete, session.end, command.run {command=meter}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.command.register, $.fs.list, $.fs.read, $.fs.stat, $.fs.write, $.session.id, $.session.root, $.session.usage, $.store.get, $.store.set, $.ui.ask, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

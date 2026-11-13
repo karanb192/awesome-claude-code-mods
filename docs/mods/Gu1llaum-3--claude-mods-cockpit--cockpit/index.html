@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Gu1llaum-3/claude-mods-cockpit">Gu1llaum-3/claude-mods-cockpit</a></p>
 <p class="lede">/cockpit: shell commands, skills, edited files, model, context and 5h / weekly limits</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">cockpit reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 11</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: runs processes, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">cockpit reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: runs processes, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=cockpit}, session.measure, classic.PermissionRequest, prompt.submit, turn.start, turn.complete, turn.step, ui.message, tool.call, ui.render {component=Pane, requestId=cockpit}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=cockpit}, session.measure, classic.PermissionRequest, prompt.submit, turn.start, turn.complete, turn.step, ui.message, tool.call</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.env.get, $.process.run, $.session.cwd, $.session.model, $.session.usage, $.state.get, $.state.set, $.ui.open, $.ui.resolve</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/clawd.tsx, hooks/snake.tsx, hooks/tetris.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

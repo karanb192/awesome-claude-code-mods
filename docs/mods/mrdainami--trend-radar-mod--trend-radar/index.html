@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/mrdainami/trend-radar-mod">mrdainami/trend-radar-mod</a></p>
 <p class="lede">/trend: ranked video ideas from competitor outliers, X launches and search demand, via treg</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">trend-radar reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 22</li><li>Access from classified calls: L3, network: MCP servers, runs processes, writes files, drives Claude, writes the prompt box, reads files, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">trend-radar reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 22</li><li>Access from classified calls: L3, network: MCP servers, runs processes, writes files, drives Claude, writes the prompt box, reads files, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install trend-radar --marketplace mrdainami/trend-radar-mod</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">MCP servers, runs processes, writes files, drives Claude, writes the prompt box, reads files, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__trend-radar__thumbnail calls, mcp__trend-radar__run calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=trend}, tool.call {tool=mcp__trend-radar__thumbnail}, tool.call {tool=mcp__trend-radar__run}, ui.render {component=Pane, requestId=trend-radar}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=trend}, tool.call {tool=mcp__trend-radar__thumbnail}, tool.call {tool=mcp__trend-radar__run}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.sleep, $.command.register, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.fs.write, $.mcp.call, $.model.complete, $.process.run, $.prompt.fill, $.prompt.submit, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.list, $.tool.register, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

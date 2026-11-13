@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/rjwittams/katzensteg">rjwittams/katzensteg</a></p>
 <p class="lede">Game and HTML panels backed by the headless Katzensteg WM. Needs CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">katzensteg reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 18</li><li>Access from classified calls: L3, network: network, runs processes, writes files, sets env vars, drives Claude, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">katzensteg reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 18</li><li>Access from classified calls: L3, network: network, runs processes, writes files, sets env vars, drives Claude, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, writes files, sets env vars, drives Claude, reads files, reads env vars, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>the system prompt, ? calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=katzensteg}, prompt.section {name=env_info_simple}, tool.call {tool=?}, tool.call {tool=?}, tool.call {tool=?}, tool.call {tool=?}, tool.call {tool=?}, ui.close {id=katzensteg}, ui.scroll, ui.message, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=katzensteg}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=katzensteg}, prompt.section {name=env_info_simple}, tool.call {tool=?}, tool.call {tool=?}, tool.call {tool=?}, tool.call {tool=?}, tool.call {tool=?}, ui.close {id=katzensteg}, ui.scroll, ui.message</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.sleep, $.command.register, $.env.get, $.env.set, $.fs.exists, $.fs.write, $.http.fetch, $.process.run, $.store.get, $.store.set, $.tool.register, $.ui.blit, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/panel.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

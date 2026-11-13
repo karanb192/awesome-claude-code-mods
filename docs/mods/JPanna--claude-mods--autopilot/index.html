@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/JPanna/claude-mods">JPanna/claude-mods</a></p>
 <p class="lede">Works through a GOALS.md goal tree turn after turn, with locked checks, its own check verdicts, lessons that carry over, safety guards and a progress band</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">autopilot reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, reads files, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">autopilot reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, reads files, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install autopilot --marketplace JPanna/claude-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, drives Claude, reads files, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, ReadNotifications calls, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=autopilot}, prompt.submit, tool.call {tool=ReadNotifications}, tool.call, turn.complete, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=autopilot}, prompt.submit, tool.call {tool=ReadNotifications}, tool.call, turn.complete</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.fs.read, $.fs.write, $.process.run, $.prompt.submit, $.session.cwd, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.call, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/itkrt2y/claude-plugins">itkrt2y/claude-plugins</a></p>
 <p class="lede">List the pull requests created in this session in a band above the prompt, and every recorded PR with the session that created it.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">session-prs reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 10</li><li>Access from classified calls: L2, writes or runs: runs processes, reads the transcript, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">session-prs reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 10</li><li>Access from classified calls: L2, writes or runs: runs processes, reads the transcript, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install session-prs --marketplace itkrt2y/claude-plugins</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads the transcript, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, every prompt</dd>
-    <dt>Hooks</dt><dd><code>tool.call, session.start, prompt.submit, command.run {command=session-prs}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>tool.call, session.start, prompt.submit, command.run {command=session-prs}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.process.run, $.session.cwd, $.session.id, $.session.messages, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -24,9 +24,9 @@
 <dl>
 
     <dt>Footprint</dt><dd>Unavailable or incomplete. Recorded events and calls below may omit access.</dd>
-    <dt>Observed events</dt><dd>/&quot;^(Read|Grep|Glob|NotebookRead|Bash|Write|Edit|NotebookEdit)$&quot;/ calls, Bash calls, Write|Edit calls, Read calls, WebFetch calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, tool.call {tool=/&quot;^(Read|Grep|Glob|NotebookRead|Bash|Write|Edit|NotebookEdit)$&quot;/}, tool.call {tool=Bash}, tool.call {tool=Write|Edit}, tool.call {tool=Read}, tool.call {tool=WebFetch}</code></dd>
-    <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.env.get, $.fs.read, $.fs.stat, $.fs.write, $.http.fetch, $.model.classify, $.model.complete, $.model.fork, $.process.run, $.prompt.submit, $.session.append, $.session.cwd, $.session.id, $.session.repo, $.session.turns, $.session.version, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.tool.register, $.ui.ask, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
+    <dt>Observed events</dt><dd>unknown</dd>
+    <dt>Hooks</dt><dd><code>turn.complete</code></dd>
+    <dt>API calls</dt><dd><code>$.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 

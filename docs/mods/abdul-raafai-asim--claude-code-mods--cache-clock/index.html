@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/abdul-raafai-asim/claude-code-mods">abdul-raafai-asim/claude-code-mods</a></p>
 <p class="lede">A one-line band above the prompt: context used, and a countdown until the prompt cache goes cold</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">cache-clock reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads env vars, plays audio, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">cache-clock reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads env vars, plays audio, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install cache-clock --marketplace abdul-raafai-asim/claude-code-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, reads env vars, plays audio, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart, turn.start, turn.complete, prompt.submit, turn.step, classic.Stop, session.measure, ui.render {component=AbovePrompt}, command.run {command=cache-clock}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart, turn.start, turn.complete, prompt.submit, turn.step, classic.Stop, session.measure, command.run {command=cache-clock}</code></dd>
     <dt>API calls</dt><dd><code>$.audio.play, $.clock.every, $.clock.now, $.command.register, $.env.get, $.process.run, $.prompt.submit, $.session.compact, $.session.id, $.session.root, $.session.usage, $.ui.invalidate, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/lemomo-ai/lemo-mod">lemomo-ai/lemo-mod</a></p>
 <p class="lede">朗读：超过 30 秒的任务完成时，朗读编号和用时 · 默认关闭，在「安全」页开启 / Speech: reads out the message number and time when a task over 30 s finishes · off by default, switch on in Safety</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">lemo-voice reaches L1 (reads) by its classified calls and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 7</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Calls in a namespace that is not in the Claude Code 2.1.302 core table: 5 (<code>$.lemo.join</code>, <code>$.lemo.lang</code>, <code>$.lemo.say</code>, <code>$.lemo.set</code>, <code>$.lemo.style</code>), full access unknown</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">lemo-voice reaches L1 (reads) by its classified calls and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 7</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Calls in a namespace that is not in the Claude Code 2.1.302 core table: 5 (<code>$.lemo.join</code>, <code>$.lemo.lang</code>, <code>$.lemo.say</code>, <code>$.lemo.set</code>, <code>$.lemo.style</code>), full access unknown</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install lemo-voice --marketplace lemomo-ai/lemo-mod</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads mod state, draws, other: $.lemo.join, other: $.lemo.lang, other: $.lemo.say, other: $.lemo.set, other: $.lemo.style</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.complete, lemo.command, ui.render {component=Pane, requestId=?}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.complete, lemo.command</code></dd>
     <dt>API calls</dt><dd><code>$.lemo.join, $.lemo.lang, $.lemo.say, $.lemo.set, $.lemo.style, $.state.get, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

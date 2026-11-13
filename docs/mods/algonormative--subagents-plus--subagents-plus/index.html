@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__subagents-plus__status calls, subagent spawns, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start {isInteractive=true|false}, session.end {reason=clear}, command.run {command=subagents}, tool.call {tool=mcp__subagents-plus__status}, ui.close {id=subagents}, agent.spawn, tool.call, session.append, turn.start, turn.complete, turn.step, ui.render {component=Pane, requestId=subagents}, ui.render {component=AbovePrompt}, ui.render {component=ToolUse, props has {tool=Workflow}}, ui.render {component=ToolUse, props has {tool=Agent}}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start {isInteractive=true|false}, session.end {reason=clear}, command.run {command=subagents}, tool.call {tool=mcp__subagents-plus__status}, ui.close {id=subagents}, agent.spawn, tool.call, session.append, turn.start, turn.complete, turn.step, ui.render {component=ToolUse, props has {tool=Workflow}}, ui.render {component=ToolUse, props has {tool=Agent}}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.command.register, $.fs.read, $.session.messages, $.session.usage, $.state.get, $.state.set, $.tool.register, $.ui.close, $.ui.open, $.ui.resolve, $.ui.scroll</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

@@ -14,8 +14,8 @@
 <h1>chudarin-context-mod</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/schudarin/chudarin-context-mod">schudarin/chudarin-context-mod</a></p>
 <p class="lede">A Claude Code mod: a side panel that shows what fills your context window, what your plan limits look like, what each kind of action costs and what the session's subagents processed, with plain-language help for every item.</p>
-<p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">chudarin-context-mod reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 24</li><li>Access from classified calls: L2, writes or runs: runs processes, writes the prompt box, reads files, reads settings, reads the transcript, reads the prompt box, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+
+<section class="summary" aria-label="Scan summary"><p class="summary-line">chudarin-context-mod reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 24</li><li>Access from classified calls: L2, writes or runs: runs processes, writes the prompt box, reads files, reads settings, reads the transcript, reads the prompt box, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes the prompt box, reads files, reads settings, reads the transcript, reads the prompt box, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -25,14 +25,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, classic hooks, every tool call, compaction</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run, command.run {command=ctx}, prompt.submit, classic.UserPromptSubmit, tool.call, turn.step, session.compact, session.measure, ui.render {component=Pane, requestId=chudarin-context-mod}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run, command.run {command=ctx}, prompt.submit, classic.UserPromptSubmit, tool.call, turn.step, session.compact, session.measure</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.fs.list, $.fs.read, $.process.spawn, $.prompt.fill, $.prompt.read, $.session.id, $.session.messages, $.session.usage, $.settings.read, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.close, $.ui.focus, $.ui.log, $.ui.open, $.ui.panes, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/schudarin/chudarin-context-mod/tree/7dc3ea82821113b521b63ef24c841f7d827d9266"><code>7dc3ea828211</code></a></dd>
-    <dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/schudarin/chudarin-context-mod/blob/7dc3ea82821113b521b63ef24c841f7d827d9266/hooks/model.ts#L65">hooks/model.ts:65</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/schudarin/chudarin-context-mod/tree/e617d7d24ca6b16f1e5321937de3ad766e6d348a"><code>e617d7d24ca6</code></a></dd>
+    </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/schudarin--chudarin-context-mod--chudarin-context-mod-reach.svg" alt="Reach badge for chudarin-context-mod"> <img src="/badges/schudarin--chudarin-context-mod--chudarin-context-mod-validates.svg" alt="Validation badge for chudarin-context-mod"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/schudarin--chudarin-context-mod--chudarin-context-mod-reach.svg)](https://mods.aidojo.si/mods/schudarin--chudarin-context-mod--chudarin-context-mod/)

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/void2610/dotfiles">void2610/dotfiles</a></p>
 <p class="lede">現セッションの scratchpad を Finder で開くボタンと /scratchpad コマンド</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">scratchpad-open reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 7</li><li>Access from classified calls: L2, writes or runs: runs processes, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">scratchpad-open reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 7</li><li>Access from classified calls: L2, writes or runs: runs processes, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,13 +24,13 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, command.run {command=scratchpad}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.submit, command.run {command=scratchpad}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.process.run, $.session.id, $.session.root, $.ui.invalidate, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/void2610/dotfiles/tree/f4d687ca5989670505da184012995f726132690b"><code>f4d687ca5989</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/void2610/dotfiles/tree/617154266f53d1be21724550a96399b1d7383619"><code>617154266f53</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from void2610/dotfiles</h2><ul><li><a href="/mods/void2610--dotfiles--artifact-archive/">artifact-archive</a><span>一時ディレクトリ (tmp/scratchpad) からの Artifact publish を拒否し ~/Documents/claude-artifacts への保存へ誘導する</span></li><li><a href="/mods/void2610--dotfiles--git-context/">git-context</a><span>会話の最初のメッセージに現在ブランチ・git status・main からの差分コミットを注入する</span></li><li><a href="/mods/void2610--dotfiles--guards/">guards</a><span>dotfiles のガード群 (git 操作のスキル強制・コメント規約・文脈注入)。機能ごとに hooks/ 配下の 1 ファイル</span></li><li><a href="/mods/void2610--dotfiles--ntfy-notify/">ntfy-notify</a><span>メインループのターン完了を notify.sh 経由で ntfy.sh へプッシュ通知する</span></li><li><a href="/mods/void2610--dotfiles--nvim-title-state/">nvim-title-state</a><span>nvim の内蔵ターミナルで動く Claude の状態を親 nvim のタブタイトルへ通知する</span></li><li><a href="/mods/void2610--dotfiles--pr-watch/">pr-watch</a><span>現在ブランチの OPEN PR を常駐監視し、CI fail / Copilot レビュー到着でセッションを起こす (pr-create の background スクリプト置き換え)</span></li><li><a href="/mods/void2610--dotfiles--ship-hud/">ship-hud</a><span>ship フローの状態機械をペインで可視化する。/ship-hud でトグル、進行中フローがあれば自動で開く。モデル向けに status ツールも提供</span></li><li><a href="/mods/void2610--dotfiles--turn-timer/">turn-timer</a><span>各ターンの所要時間とトークン消費をトーストで表示する</span></li></ul></section>

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/rjohnt/linear-claude-mod">rjohnt/linear-claude-mod</a></p>
 <p class="lede">A Claude Code pane of your assigned Linear tickets by status; click one to load it into the session, read its details, comment, or change its status and priority</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">linear-claude-mod reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 13</li><li>Access from classified calls: L3, network: MCP servers, runs processes, drives Claude, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">linear-claude-mod reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 13</li><li>Access from classified calls: L3, network: MCP servers, runs processes, drives Claude, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">MCP servers, runs processes, drives Claude, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=tickets}, ui.render {component=Pane, requestId=linear-tickets}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=tickets}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.mcp.call, $.process.run, $.prompt.submit, $.state.get, $.state.set, $.ui.focus, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

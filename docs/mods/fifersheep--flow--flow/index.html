@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear|resume|fork}, turn.complete, tool.call, ui.render {component=AbovePrompt}, command.run {command=flow-pane}, ui.render {component=Pane, requestId=flow}, ui.close {id=flow}, command.run {command=flow-status}, ui.render {component=CommandOutput}, command.run {command=flow-term}, command.run {command=flow-code}, ui.render {component=Spinner}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear|resume|fork}, turn.complete, tool.call, command.run {command=flow-pane}, ui.close {id=flow}, command.run {command=flow-status}, ui.render {component=CommandOutput}, command.run {command=flow-term}, command.run {command=flow-code}, command.run {command=flow-herdr}, ui.render {component=Spinner}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.process.run, $.prompt.fill, $.session.cwd, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/fifersheep/flow/tree/36e9e474727b3a2e7b427cee49e203c469a3bfb9"><code>36e9e474727b</code></a></dd>
-    <dt>Marketplace warnings</dt><dd><a href="https://github.com/fifersheep/flow/blob/36e9e474727b3a2e7b427cee49e203c469a3bfb9/.claude-plugin/marketplace.json">flow</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/fifersheep/flow/tree/4c53e7c69d7db487179b4416ad0784c3934f7be3"><code>4c53e7c69d7d</code></a></dd>
+    <dt>Marketplace warnings</dt><dd><a href="https://github.com/fifersheep/flow/blob/4c53e7c69d7db487179b4416ad0784c3934f7be3/.claude-plugin/marketplace.json">flow</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/fifersheep--flow--flow-reach.svg" alt="Reach badge for flow"> <img src="/badges/fifersheep--flow--flow-validates.svg" alt="Validation badge for flow"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/fifersheep--flow--flow-reach.svg)](https://mods.aidojo.si/mods/fifersheep--flow--flow/)

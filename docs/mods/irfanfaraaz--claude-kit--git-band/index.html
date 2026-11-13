@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/irfanfaraaz/claude-kit">irfanfaraaz/claude-kit</a></p>
 <p class="lede">Git state above the prompt: branch, upstream, ahead/behind, Claude vs your changes, PR and CI, worktree, stash; toasts where each commit landed</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">git-band reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 7</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">git-band reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 7</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>/&quot;^(Edit|Write|NotebookEdit)$&quot;/ calls, Bash calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.complete, tool.call {tool=/&quot;^(Edit|Write|NotebookEdit)$&quot;/}, tool.call {tool=Bash}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.complete, tool.call {tool=/&quot;^(Edit|Write|NotebookEdit)$&quot;/}, tool.call {tool=Bash}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.process.run, $.session.repo, $.state.get, $.state.set, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

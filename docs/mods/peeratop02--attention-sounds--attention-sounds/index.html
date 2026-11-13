@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/peeratop02/attention-sounds">peeratop02/attention-sounds</a></p>
 <p class="lede">Plays a sound when Claude finishes, needs permission, asks a question, or otherwise needs attention.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">attention-sounds reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 9</li><li>Access from classified calls: L1, reads: reads files, plays audio, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">attention-sounds reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 9</li><li>Access from classified calls: L1, reads: reads files, plays audio, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install attention-sounds --marketplace peeratop02/attention-sounds</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads files, plays audio, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, AskUserQuestion calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=sound}, ui.render {component=Pane, requestId=sounds}, turn.complete, classic.PermissionRequest, tool.call {tool=AskUserQuestion}, classic.Notification</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=sound}, turn.complete, classic.PermissionRequest, tool.call {tool=AskUserQuestion}, classic.Notification</code></dd>
     <dt>API calls</dt><dd><code>$.audio.play, $.command.register, $.fs.list, $.store.get, $.store.set, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

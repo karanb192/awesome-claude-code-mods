@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/drdickgraysonjr/chalkery">drdickgraysonjr/chalkery</a></p>
 <p class="lede">Progress of the /unlazy gates bound to this session, one quiet row above the prompt: cells per gate or a pie, met of total, and its state: waiting for a decision, regressed, paused, abandoned, all met. /gates lists them all. Joins handoff-relay, cache-meter and next-steps in one band.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">gate-meter reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 19</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, reads settings, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">gate-meter reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 19</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, reads settings, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, reads env vars, reads settings, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, Bash calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, config.set, classic.SessionStart {source=clear|resume|fork}, tool.call {tool=Bash}, turn.start, turn.complete, command.run {command=gates|gm-gates}, ui.render {component=Pane, requestId=gate-meter}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, config.set, classic.SessionStart {source=clear|resume|fork}, tool.call {tool=Bash}, turn.start, turn.complete, command.run {command=gates|gm-gates}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.config.list, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.process.run, $.session.cwd, $.session.id, $.session.root, $.state.get, $.state.set, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Magithar/agent-board">Magithar/agent-board</a></p>
 <p class="lede">A task board several agents share: Claude tools, a live pane and lease heartbeats over an agent-neutral CLI</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">agent-board reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">agent-board reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>? calls, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=?}, tool.call, session.measure, session.end, command.run {command=board}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=agent-board}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=?}, tool.call, session.measure, session.end, command.run {command=board}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.process.run, $.session.id, $.state.get, $.state.set, $.tool.register, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/parodiniccolo/claude-3dgs-view">parodiniccolo/claude-3dgs-view</a></p>
 <p class="lede">Preview 3D Gaussian splats (.ply, .spz, .splat, .ksplat, .sog) in a Claude Code pane: orbit with the mouse, rendered by Spark in headless Chrome</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">3dgs-view reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">3dgs-view reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install 3dgs-view --marketplace parodiniccolo/claude-3dgs-view</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, reads files, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=splat}, classic.SessionStart {source=clear|resume|fork}, prompt.submit, tool.call, ui.message {element=pad}, ui.scroll {requestId=splat}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=splat}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=splat}, classic.SessionStart {source=clear|resume|fork}, prompt.submit, tool.call, ui.message {element=pad}, ui.scroll {requestId=splat}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.command.run, $.env.get, $.fs.stat, $.process.run, $.process.spawn, $.session.cwd, $.state.get, $.state.set, $.ui.close, $.ui.open, $.ui.resolve</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/pad.tsx</code></dd>
     <dt>Validation</dt><dd>Passed</dd>

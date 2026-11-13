@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/vmlinuz82/claude-mods">vmlinuz82/claude-mods</a></p>
 <p class="lede">Shows the session's tasks as a CLI-style checklist above the prompt</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">task-list reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">task-list reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install task-list --marketplace vmlinuz82/claude-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads files, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, every tool call, mcp__task-list__todo_write calls, TaskCreate calls, TaskUpdate calls, TodoWrite calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, agent.spawn, tool.call, turn.complete, tool.call {tool=mcp__task-list__todo_write}, command.run {command=task-demo}, tool.call {tool=TaskCreate}, tool.call {tool=TaskUpdate}, tool.call {tool=TodoWrite}, command.run {command=task-tree}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=task-list}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, agent.spawn, tool.call, turn.complete, tool.call {tool=mcp__task-list__todo_write}, command.run {command=task-demo}, tool.call {tool=TaskCreate}, tool.call {tool=TaskUpdate}, tool.call {tool=TodoWrite}, command.run {command=task-tree}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.command.register, $.fs.exists, $.fs.list, $.fs.read, $.state.get, $.state.set, $.tool.list, $.tool.register, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

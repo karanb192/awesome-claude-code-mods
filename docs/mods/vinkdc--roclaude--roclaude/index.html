@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, /&quot;^mcp__.*(roblox|studio).*__[a-z_]+$&quot;/i calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, turn.complete, tool.describe {tool=/&quot;^mcp__.*(roblox|studio).*__[a-z_]+$&quot;/i}, tool.call {tool=/&quot;^mcp__.*(roblox|studio).*__[a-z_]+$&quot;/i}, tool.check {tool=/&quot;^mcp__.*(roblox|studio).*__[a-z_]+$&quot;/i}, command.run {command=roclaude}, ui.render {component=Pane, requestId=roclaude-remotes}, ui.render {component=Pane, requestId=roclaude-activity}, ui.render {component=CommandOutput, props has {command=roclaude}}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.submit, turn.complete, tool.describe {tool=/&quot;^mcp__.*(roblox|studio).*__[a-z_]+$&quot;/i}, tool.call {tool=/&quot;^mcp__.*(roblox|studio).*__[a-z_]+$&quot;/i}, tool.check {tool=/&quot;^mcp__.*(roblox|studio).*__[a-z_]+$&quot;/i}, command.run {command=roclaude}, ui.render {component=CommandOutput, props has {command=roclaude}}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.sleep, $.command.register, $.command.run, $.mcp.call, $.prompt.submit, $.session.append, $.state.get, $.state.set, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

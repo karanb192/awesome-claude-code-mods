@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/eshin087/claude-code-mods">eshin087/claude-code-mods</a></p>
 <p class="lede">Which of your chats, across every project on this computer, are waiting on you and why: 📥 in the footer, /inbox for the list, a notification when one starts waiting.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">inbox reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 14</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: writes files, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">inbox reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 13</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: writes files, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">writes files, reads files, reads env vars, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart, classic.UserPromptSubmit, command.run {command=inbox}, ui.close {id=inbox}, turn.start, turn.complete, tool.call, classic.PermissionRequest, classic.Notification, classic.Elicitation, classic.ElicitationResult, session.end, ui.render {component=Pane, requestId=inbox}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart, classic.UserPromptSubmit, command.run {command=inbox}, ui.close {id=inbox}, turn.start, turn.complete, tool.call, classic.PermissionRequest, classic.Notification, classic.Elicitation, classic.ElicitationResult, session.end</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.list, $.fs.read, $.fs.write, $.session.cwd, $.session.id, $.ui.close, $.ui.invalidate, $.ui.notify, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

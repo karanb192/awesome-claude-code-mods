@@ -14,8 +14,8 @@
 <h1>speckit-companion</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/alfredoperez/speckit-companion-claude-mod">alfredoperez/speckit-companion-claude-mod</a></p>
 <p class="lede">Follow a Spec Kit run from inside Claude Code: a band above the prompt with where the run stands, a pane with the steps, their times, the documents and the tasks ticking off, and /speckit-tracker to switch specs. Press Enter to read a step's document, o to open it in your editor. Works with stock Spec Kit. Read only.</p>
-<p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">speckit-companion reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 18</li><li>Access from classified calls: L2, writes or runs: runs processes, writes the clipboard, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+
+<section class="summary" aria-label="Scan summary"><p class="summary-line">speckit-companion reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 18</li><li>Access from classified calls: L2, writes or runs: runs processes, writes the clipboard, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes the clipboard, reads files, reads env vars, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, ui.focus, command.run {command=speckit-tracker}, command.run {command=spec}, tool.call, ui.render {component=AbovePrompt}, ui.render {component=Pane}, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=speckit-tracker}, command.run {command=spec}, tool.call, turn.complete</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.list, $.fs.read, $.process.run, $.session.cwd, $.session.surfaces, $.store.delete, $.store.get, $.store.set, $.ui.copy, $.ui.focus, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/alfredoperez/speckit-companion-claude-mod/tree/69363cd48e48e6fd7aed7298c17a3f7932345f62"><code>69363cd48e48</code></a></dd>
-    <dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/alfredoperez/speckit-companion-claude-mod/blob/69363cd48e48e6fd7aed7298c17a3f7932345f62/hooks/register.js#L241">hooks/register.js:241</a></dd></dl>
+    </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/alfredoperez--speckit-companion-claude-mod--speckit-companion-reach.svg" alt="Reach badge for speckit-companion"> <img src="/badges/alfredoperez--speckit-companion-claude-mod--speckit-companion-validates.svg" alt="Validation badge for speckit-companion"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/alfredoperez--speckit-companion-claude-mod--speckit-companion-reach.svg)](https://mods.aidojo.si/mods/alfredoperez--speckit-companion-claude-mod--speckit-companion/)

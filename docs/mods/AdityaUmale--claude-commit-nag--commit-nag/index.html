@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/AdityaUmale/claude-commit-nag">AdityaUmale/claude-commit-nag</a></p>
 <p class="lede">A band above the prompt that shows your branch, uncommitted files and time since your last commit, and roasts you when they pile up.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">commit-nag reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 4</li><li>Access from classified calls: L2, writes or runs: runs processes, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">commit-nag reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 1</li><li>API methods referenced: 4</li><li>Access from classified calls: L2, writes or runs: runs processes, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.process.run, $.ui.invalidate, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

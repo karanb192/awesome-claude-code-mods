@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/lianmatsuo/remcycle">lianmatsuo/remcycle</a></p>
 <p class="lede">Garbage collection for Claude Code's memory: gives a session what the dream accepted, recalls from the archive, and shows what waits for your ruling.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">remcycle reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">remcycle reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, writes the prompt box, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>the system prompt, mcp__remcycle__recall calls, mcp__remcycle__close_thread calls, mcp__remcycle__settle_memory calls, Read calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.context, tool.call {tool=mcp__remcycle__recall}, tool.call {tool=mcp__remcycle__close_thread}, tool.call {tool=mcp__remcycle__settle_memory}, ui.focus {requestId=remcycle}, tool.call {tool=Read}, session.end, command.run {command=remcycle}, ui.render {component=Pane, requestId=remcycle}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.context, tool.call {tool=mcp__remcycle__recall}, tool.call {tool=mcp__remcycle__close_thread}, tool.call {tool=mcp__remcycle__settle_memory}, tool.call {tool=Read}, session.end, command.run {command=remcycle}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.process.run, $.prompt.fill, $.session.id, $.state.get, $.state.set, $.tool.register, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/HaiNNT/c-hottag">HaiNNT/c-hottag</a></p>
 <p class="lede">Drive chottag (c-hottag) from Claude Code: switch the serving account, set the remote account, log accounts in, check limits and the install. On Claude Code 2.1.287+ a mod adds a status card, notices, /ct commands and a /login guard.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">chottag reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: runs processes, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">chottag reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: runs processes, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install chottag --marketplace HaiNNT/c-hottag</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads env vars, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>/&quot;^mcp__claude_ai_&quot;/ calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=login}, command.run {command=logout}, command.run {command=ct}, ui.render {component=AbovePrompt}, tool.call {tool=/&quot;^mcp__claude_ai_&quot;/}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=login}, command.run {command=logout}, command.run {command=ct}, tool.call {tool=/&quot;^mcp__claude_ai_&quot;/}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.process.run, $.store.get, $.store.set, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

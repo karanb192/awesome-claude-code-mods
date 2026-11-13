@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Spendry/claude-code-mods">Spendry/claude-code-mods</a></p>
 <p class="lede">Each session's goal, task progress and ETA above the prompt, and a /goals board of every running session on this machine</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">goal-board reaches L0 (draws and remembers) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 12</li><li>Access from classified calls: L0, draws and remembers: persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">goal-board reaches L0 (draws and remembers) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 12</li><li>Access from classified calls: L0, draws and remembers: persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install goal-board --marketplace Spendry/claude-code-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L0 Draws &amp; remembers</span><span class="track" aria-label="Reach level 0: Draws & remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt, TaskCreate calls, TaskUpdate calls, TodoWrite calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear}, session.end, prompt.submit, turn.start, turn.complete, tool.call {tool=TaskCreate}, tool.call {tool=TaskUpdate}, tool.call {tool=TodoWrite}, command.run {command=goal}, command.run {command=goals}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=goal-board}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear}, session.end, prompt.submit, turn.start, turn.complete, tool.call {tool=TaskCreate}, tool.call {tool=TaskUpdate}, tool.call {tool=TodoWrite}, command.run {command=goal}, command.run {command=goals}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.session.cwd, $.session.id, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

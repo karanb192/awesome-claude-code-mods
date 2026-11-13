@@ -15,17 +15,17 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Ludomajn/claude-mods">Ludomajn/claude-mods</a></p>
 <p class="lede">Viser, hvor meget af dine grænser (5 timer og ugen) dine samtaler bruger, også planlagte opgaver og forbrug i chat og Cowork, med indsigt på tværs af samtaler, råd til at bruge færre tokens og bedre første prompts</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">token-maaler reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 25</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">token-maaler reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 6</li><li>Access from classified calls: L2, writes or runs: drives Claude, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install token-maaler --marketplace Ludomajn/claude-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
-<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, reads files, reads env vars, reads mod state, persists state, draws</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
 <p class="actions"><a class="source" href="https://github.com/Ludomajn/claude-mods/tree/main/token-maaler">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#Ludomajn--claude-mods--token-maaler">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.measure, turn.start, turn.step, tool.call, turn.complete, command.run {command=tokens}, command.run {command=prompts}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=token-maaler}</code></dd>
-    <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.model.complete, $.process.spawn, $.session.cwd, $.session.id, $.session.surfaces, $.session.usage, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.tool.register, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.measure, turn.start, turn.step, tool.call, turn.complete, command.run {command=tokens}, command.run {command=prompts}</code></dd>
+    <dt>API calls</dt><dd><code>$.store.keys, $.store.set, $.tool.register, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 

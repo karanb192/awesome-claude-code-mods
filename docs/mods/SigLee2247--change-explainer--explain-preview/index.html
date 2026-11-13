@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/SigLee2247/change-explainer">SigLee2247/change-explainer</a></p>
 <p class="lede">change-explainer 해설 창 디자인 확인용 샘플 (고정 데이터, 모델 호출 없음)</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">explain-preview reaches L0 (draws and remembers) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 10</li><li>Access from classified calls: L0, draws and remembers: persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">explain-preview reaches L0 (draws and remembers) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 10</li><li>Access from classified calls: L0, draws and remembers: persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L0 Draws &amp; remembers</span><span class="track" aria-label="Reach level 0: Draws & remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=explain-sample}, ui.scroll {requestId=explain-preview}, ui.render {component=Pane}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=explain-sample}, ui.scroll {requestId=explain-preview}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.store.get, $.store.set, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.scroll, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

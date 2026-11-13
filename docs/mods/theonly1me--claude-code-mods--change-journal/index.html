@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/theonly1me/claude-code-mods">theonly1me/claude-code-mods</a></p>
 <p class="lede">A live HTML page that shows every change Claude makes, with diffs, the reason for each edit, checks, and before/after behavior flows.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">change-journal reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, writes the clipboard, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">change-journal reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, writes the clipboard, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install change-journal --marketplace theonly1me/claude-code-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, drives Claude, writes the clipboard, reads files, reads env vars, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Edit calls, Write calls, NotebookEdit calls, Bash calls, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>tool.call {tool=Edit}, tool.call {tool=Write}, tool.call {tool=NotebookEdit}, tool.call {tool=Bash}, turn.step, turn.start, turn.complete, ui.render {component=Pane, requestId=change-journal}, session.start, classic.SessionStart, command.run {command=changes}</code></dd>
+    <dt>Hooks</dt><dd><code>tool.call {tool=Edit}, tool.call {tool=Write}, tool.call {tool=NotebookEdit}, tool.call {tool=Bash}, turn.step, turn.start, turn.complete, session.start, classic.SessionStart, command.run {command=changes}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.read, $.fs.write, $.model.complete, $.process.run, $.session.id, $.ui.close, $.ui.copy, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

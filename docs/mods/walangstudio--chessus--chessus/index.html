@@ -14,8 +14,8 @@
 <h1>chessus</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/walangstudio/chessus">walangstudio/chessus</a></p>
 <p class="lede">Play chess against Claude inside Claude Code: pick the model and effort, review every game move by move</p>
-<p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">chessus reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 23</li><li>Access from classified calls: L3, network: network, writes files, drives Claude, writes the clipboard, reads files, reads settings, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+
+<section class="summary" aria-label="Scan summary"><p class="summary-line">chessus reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 23</li><li>Access from classified calls: L3, network: network, writes files, drives Claude, writes the clipboard, reads files, reads settings, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, writes files, drives Claude, writes the clipboard, reads files, reads settings, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=chess}, ui.message {module=&quot;hooks/board.tsx&quot;}, ui.render {component=Pane, requestId=chessus}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=chess}, ui.message {module=&quot;hooks/board.tsx&quot;}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.fs.read, $.fs.write, $.http.fetch, $.model.complete, $.settings.read, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.set, $.ui.ask, $.ui.close, $.ui.copy, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/board.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/walangstudio/chessus/tree/4f41b07fcc862126daf5b6c7301d389b467e3acd"><code>4f41b07fcc86</code></a></dd>
-    <dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/walangstudio/chessus/blob/4f41b07fcc862126daf5b6c7301d389b467e3acd/hooks/vendor/chess.js#L303">hooks/vendor/chess.js:303</a>, <a href="https://github.com/walangstudio/chessus/blob/4f41b07fcc862126daf5b6c7301d389b467e3acd/hooks/vendor/chess.js#L313">hooks/vendor/chess.js:313</a>, <a href="https://github.com/walangstudio/chessus/blob/4f41b07fcc862126daf5b6c7301d389b467e3acd/hooks/vendor/chess.js#L2923">hooks/vendor/chess.js:2923</a>, <a href="https://github.com/walangstudio/chessus/blob/4f41b07fcc862126daf5b6c7301d389b467e3acd/hooks/vendor/chess.js#L2925">hooks/vendor/chess.js:2925</a></dd></dl>
+    </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/walangstudio--chessus--chessus-reach.svg" alt="Reach badge for chessus"> <img src="/badges/walangstudio--chessus--chessus-validates.svg" alt="Validation badge for chessus"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/walangstudio--chessus--chessus-reach.svg)](https://mods.aidojo.si/mods/walangstudio--chessus--chessus/)

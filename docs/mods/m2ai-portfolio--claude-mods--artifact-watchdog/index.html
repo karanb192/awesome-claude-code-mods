@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/m2ai-portfolio/claude-mods">m2ai-portfolio/claude-mods</a></p>
 <p class="lede">Enforces the subagent output contract: watches each Agent dispatch's artifact file, flags a 5-minute stall, wakes an idle Claude once per stall, offers a Stop button</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">artifact-watchdog reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 18</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">artifact-watchdog reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 18</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads files, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, Agent calls</dd>
-    <dt>Hooks</dt><dd><code>tool.call, turn.step, session.start, command.run {command=watchdog}, turn.start, turn.complete, tool.call {tool=Agent}, ui.render {component=Pane, requestId=artifact-watchdog}</code></dd>
+    <dt>Hooks</dt><dd><code>tool.call, turn.step, session.start, command.run {command=watchdog}, turn.start, turn.complete, tool.call {tool=Agent}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.read, $.fs.stat, $.prompt.submit, $.session.append, $.state.get, $.state.set, $.tool.call, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

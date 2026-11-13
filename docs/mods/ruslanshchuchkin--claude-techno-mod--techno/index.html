@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/ruslanshchuchkin/claude-techno-mod">ruslanshchuchkin/claude-techno-mod</a></p>
 <p class="lede">A long techno set above your chat box: three drops, auto mixing into the next track, favorites, Mac media keys. Claude changes it from chat.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">techno reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 16</li><li>Access from classified calls: L3, network: network, runs processes, drives Claude, writes the clipboard, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">techno reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 16</li><li>Access from classified calls: L3, network: network, runs processes, drives Claude, writes the clipboard, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install techno --marketplace ruslanshchuchkin/claude-techno-mod</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, drives Claude, writes the clipboard, reads env vars, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__techno__jam calls, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=techno}, tool.call {tool=mcp__techno__jam}, prompt.submit, ui.render {component=AbovePrompt}, ui.message, session.end</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=techno}, tool.call {tool=mcp__techno__jam}, prompt.submit, ui.message, session.end</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.env.get, $.http.fetch, $.process.run, $.session.cwd, $.session.usage, $.store.get, $.store.set, $.tool.register, $.ui.copy, $.ui.invalidate, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/dancer.client.js, hooks/grid.client.js</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

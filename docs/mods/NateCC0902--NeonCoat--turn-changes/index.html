@@ -14,8 +14,8 @@
 <h1>turn-changes</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/NateCC0902/NeonCoat">NateCC0902/NeonCoat</a></p>
 <p class="lede">Lists the files the last turn changed in a pane, each with its diff a press away; /changes opens it (terminal)</p>
-<p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">turn-changes reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+
+<section class="summary" aria-label="Scan summary"><p class="summary-line">turn-changes reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>Edit calls, Write calls, Bash calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=changes}, ui.close {id=?}, turn.start, tool.call {tool=Edit}, tool.call {tool=Write}, tool.call {tool=Bash}, ui.render {component=Pane, requestId=?}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=changes}, ui.close {id=?}, turn.start, tool.call {tool=Edit}, tool.call {tool=Write}, tool.call {tool=Bash}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.fs.read, $.process.run, $.session.root, $.state.get, $.state.set, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/NateCC0902/NeonCoat/tree/ed82d3a7c212d441962764f1d592589731b4bdbe"><code>ed82d3a7c212</code></a></dd>
-    <dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/NateCC0902/NeonCoat/blob/ed82d3a7c212d441962764f1d592589731b4bdbe/mods/turn-changes/hooks/register.tsx#L108">mods/turn-changes/hooks/register.tsx:108</a>, <a href="https://github.com/NateCC0902/NeonCoat/blob/ed82d3a7c212d441962764f1d592589731b4bdbe/mods/turn-changes/hooks/register.tsx#L158">mods/turn-changes/hooks/register.tsx:158</a></dd></dl>
+    </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from NateCC0902/NeonCoat</h2><ul><li><a href="/mods/NateCC0902--NeonCoat--reply-markdown/">reply-markdown</a><span>Draws a reply's headings, lists, quotes, callouts, tables and rules in color, and its code fences as cards wi…</span></li><li><a href="/mods/NateCC0902--NeonCoat--reply-media/">reply-media</a><span>Draws the mermaid fences, math formulas and local images of a reply as pictures in the terminal, and plays it…</span></li><li><a href="/mods/NateCC0902--NeonCoat--shell-tail/">shell-tail</a><span>Lists every shell still running in the background above the prompt: how long it has run, how much it wrote, i…</span></li><li><a href="/mods/NateCC0902--NeonCoat--skill-router/">skill-router</a><span>/skill-router &lt;question&gt; asks a small model which of your user-only skills fits</span></li><li><a href="/mods/NateCC0902--NeonCoat--test-summary/">test-summary</a><span>Draws a test or type-check run's output as one count line with its failures under it, the passing tests folde…</span></li></ul></section>
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/NateCC0902--NeonCoat--turn-changes-reach.svg" alt="Reach badge for turn-changes"> <img src="/badges/NateCC0902--NeonCoat--turn-changes-validates.svg" alt="Validation badge for turn-changes"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/NateCC0902--NeonCoat--turn-changes-reach.svg)](https://mods.aidojo.si/mods/NateCC0902--NeonCoat--turn-changes/)

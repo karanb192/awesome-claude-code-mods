@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, classic hooks, every tool call, subagent spawns</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.compose, command.run {command=goal}, prompt.submit, turn.start, classic.Stop, tool.call, agent.spawn, session.append {door=attachment}, turn.complete, command.run {command=waypoints|waypoints-mod}, ui.close, config.set {key=&quot;agent-pulse.palette&quot;|&quot;agent-pulse.animation&quot;}, ui.render {component=AbovePrompt}, ui.render {component=SessionMode}, ui.render {component=ToolResult}, ui.render {component=Pane}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.compose, command.run {command=goal}, prompt.submit, turn.start, classic.Stop, tool.call, agent.spawn, session.append {door=attachment}, turn.complete, command.run {command=waypoints|waypoints-mod}, ui.close, config.set {key=&quot;agent-pulse.palette&quot;|&quot;agent-pulse.animation&quot;}, ui.render {component=SessionMode}, ui.render {component=ToolResult}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.config.list, $.config.set, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.write, $.process.run, $.session.append, $.session.cwd, $.session.id, $.session.surface, $.session.surfaces, $.store.get, $.store.set, $.tool.register, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/pulse.mjs</code></dd>
     <dt>Validation</dt><dd>Passed</dd>

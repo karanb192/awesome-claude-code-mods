@@ -14,8 +14,8 @@
 <h1>cc-commit-command</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/HuliLulu46/cc-commit-command">HuliLulu46/cc-commit-command</a></p>
 <p class="lede">/commit [instructions]: drafts a commit plan, confirms it in a pane and a confirm dialog, then commits; the transcript keeps only the command and the result</p>
-<p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">cc-commit-command reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+
+<section class="summary" aria-label="Scan summary"><p class="summary-line">cc-commit-command reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install cc-commit-command --marketplace HuliLulu46/cc-commit-command</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, drives Claude, reads files, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=commit}, ui.render {component=Pane, requestId=cc-commit-command}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=commit}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.env.get, $.fs.read, $.fs.write, $.model.complete, $.model.fork, $.process.run, $.state.get, $.state.set, $.ui.ask, $.ui.close, $.ui.open, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/HuliLulu46/cc-commit-command/tree/774539d0c9075134d7101176678156914a0c1792"><code>774539d0c907</code></a></dd>
-    <dt>Marketplace warnings</dt><dd><a href="https://github.com/HuliLulu46/cc-commit-command/blob/774539d0c9075134d7101176678156914a0c1792/.claude-plugin/marketplace.json">cc-commit-command</a></dd><dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/HuliLulu46/cc-commit-command/blob/774539d0c9075134d7101176678156914a0c1792/hooks/register.tsx#L70">hooks/register.tsx:70</a></dd></dl>
+    <dt>Marketplace warnings</dt><dd><a href="https://github.com/HuliLulu46/cc-commit-command/blob/774539d0c9075134d7101176678156914a0c1792/.claude-plugin/marketplace.json">cc-commit-command</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/HuliLulu46--cc-commit-command--cc-commit-command-reach.svg" alt="Reach badge for cc-commit-command"> <img src="/badges/HuliLulu46--cc-commit-command--cc-commit-command-validates.svg" alt="Validation badge for cc-commit-command"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/HuliLulu46--cc-commit-command--cc-commit-command-reach.svg)](https://mods.aidojo.si/mods/HuliLulu46--cc-commit-command--cc-commit-command/)
