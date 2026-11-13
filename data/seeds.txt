@@ -94,6 +94,8 @@ kevlar10x/quiet-transcript
 kevlar10x/recent-sessions
 kevlar10x/status-dots
 kiankhooban/open-paths
+KitTran1307/kit-claude-mods
+KitTran1307/kit-cloud-pilot
 kongyo2/context-view
 Kruhlikau/subagent-tuner
 kushalBanda/claude-tldr
