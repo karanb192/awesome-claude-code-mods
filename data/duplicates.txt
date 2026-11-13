@@ -181,3 +181,5 @@ aidan-nunn-sys/claude-config:mods/review-watch hamzafer/claude-code-mods:mods/re
 aidan-nunn-sys/claude-config:mods/secret-box ray-amjad/claude-code-mods:plugins/secret-box
 samuelbirocchi/ai-tools:plugins/pr-tracker samuelbirocchi/ai-tools:archive/pr-tracker
 marulimo/ask-codex:. marulimo/claude-code-mods:mods/ask-codex
+Leechael/claude-code-mod-agent-skills:. Leechael/claude-code-mod-agent-skills:plugins/agents-skills
+ThingsLikeClaude/ani-steer-public:plugins/jev-steer ThingsLikeClaude/ani-steer:plugins/jev-steer
