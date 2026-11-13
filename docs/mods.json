@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-13T08:23:15.743Z",
   "claudeVersion": "2.1.323",
-  "repos": 4187,
+  "repos": 4189,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -923067,6 +923067,353 @@
       "stars": 0,
       "pushedAt": "2026-11-11T22:35:28Z",
       "createdAt": "2026-11-11T09:54:47Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "KitTran1307/kit-claude-mods:plugins/kit-cloud",
+      "repo": "KitTran1307/kit-claude-mods",
+      "path": "plugins/kit-cloud",
+      "sourceCommit": "4cf164dee3c6e415489f65b89e2a66a964285254",
+      "name": "kit-cloud",
+      "description": "See your Claude Code cloud sessions above the prompt: working, asking, PR open, CI failed or silent, with a link to each. The band for kit-cloud-pilot, which tracks them.",
+      "author": "Kit Tran",
+      "homepage": "https://github.com/KitTran1307/kit-claude-mods/tree/main/plugins/kit-cloud",
+      "url": "https://github.com/KitTran1307/kit-claude-mods/tree/main/plugins/kit-cloud",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "cloud"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.process.run",
+        "$.session.id",
+        "$.settings.read",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.notify",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "kit-claude-mods",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "reads files",
+          "reads env vars",
+          "reads settings",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-12T13:49:22Z",
+      "createdAt": "2026-11-11T06:50:31Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "KitTran1307/kit-claude-mods:plugins/kit-statusbar",
+      "repo": "KitTran1307/kit-claude-mods",
+      "path": "plugins/kit-statusbar",
+      "sourceCommit": "4cf164dee3c6e415489f65b89e2a66a964285254",
+      "name": "kit-statusbar",
+      "description": "A status bar for Claude Code in the desktop app and the CLI: repo, model, effort, context, account, session title, 5-hour and weekly limits.",
+      "author": "KitTran1307",
+      "homepage": "https://github.com/KitTran1307/kit-claude-mods",
+      "url": "https://github.com/KitTran1307/kit-claude-mods/tree/main/plugins/kit-statusbar",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.attach",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.config.set",
+        "$.env.get",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.process.run",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.model",
+        "$.session.repo",
+        "$.session.surfaces",
+        "$.session.usage",
+        "$.settings.read",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.ask",
+        "$.ui.log",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "kit-claude-mods",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "changes config",
+          "reads files",
+          "reads env vars",
+          "reads settings",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-12T13:49:22Z",
+      "createdAt": "2026-11-11T06:50:31Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "KitTran1307/kit-claude-mods:plugins/kit-todos",
+      "repo": "KitTran1307/kit-claude-mods",
+      "path": "plugins/kit-todos",
+      "sourceCommit": "4cf164dee3c6e415489f65b89e2a66a964285254",
+      "name": "kit-todos",
+      "description": "Your open to-do tasks for the current project in a band above the prompt, with one-press buttons to hand a task to Claude, plus a pane, a /todo command, the project's latest memories, tasks Claude suggests for you to approve, and a Vietnamese interface.",
+      "author": "Kit Tran",
+      "homepage": "https://github.com/KitTran1307/kit-claude-mods/tree/main/plugins/kit-todos",
+      "url": "https://github.com/KitTran1307/kit-claude-mods/tree/main/plugins/kit-todos",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__kit-todos__propose_todo"
+          }
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "todo"
+          }
+        }
+      ],
+      "calls": [
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "kit-claude-mods",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "draws"
+        ]
+      },
+      "sees": [
+        "mcp__kit-todos__propose_todo calls"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-12T13:49:22Z",
+      "createdAt": "2026-11-11T06:50:31Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "KitTran1307/kit-cloud-pilot:.",
+      "repo": "KitTran1307/kit-cloud-pilot",
+      "path": ".",
+      "sourceCommit": "63d6e9ca3272e5ed348de83130bd8720d10f40d2",
+      "name": "kit-cloud-pilot",
+      "description": "Let Claude Code (CLI) run work in Claude Code cloud sessions by itself: start them, track them on GitHub, wait for what they need and answer their questions with a signed reply.",
+      "author": "Kit Tran",
+      "homepage": "https://github.com/KitTran1307/kit-cloud-pilot",
+      "url": "https://github.com/KitTran1307/kit-cloud-pilot",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "pilot"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.write",
+        "$.process.run"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "kit-cloud-pilot",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "writes files",
+          "reads env vars"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-12T19:02:29Z",
+      "createdAt": "2026-11-11T06:49:59Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
