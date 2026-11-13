@@ -177,6 +177,7 @@ tyler4400/tyler-claude-mods
 ugglr/claude-token-monster
 VaitaR/claude-code-limits
 valeryia-piatrova/token-hamster
+vampy/claude-last-turn-diff
 vancityAyush/mcp-list
 varunmoka7/image-shrinker
 varunmoka7/next-steps-autopilot
