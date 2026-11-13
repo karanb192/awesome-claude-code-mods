@@ -2012,6 +2012,8 @@ kiril6/vibeaudio
 kirilpolishchukdev-art/svitlo-guard
 kirishimarisano-rgb/Mods-Claude-code-0-powerd-by-claude
 kit-para-devs/mods
+KitTran1307/kit-claude-mods
+KitTran1307/kit-cloud-pilot
 KiwiNz324/rooms-hud
 Kiy-K/oxide
 Kiyliy/claude-code-tps
