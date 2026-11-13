@@ -86,6 +86,8 @@ Discovery depends on GitHub's index and our search patterns, so a new mod may no
 
 To add a mod to the full catalogue, follow the [discovery and seed submission guide](contributing.md). For a Featured slot, [open a nomination](https://github.com/karanb192/awesome-claude-code-mods/issues/new?template=featured-nomination.yml) with an install path, evidence of it working and its access details. Karan selects Featured entries; a nomination does not guarantee a slot. Corrections to existing listings are welcome.
 
+Maintained by [Karan Bansal](https://karanbansal.in/), who writes [engineering articles](https://karanbansal.in/blog/) and AI explainers at [AI Dojo](https://aidojo.si/). Each mod belongs to its author and is credited to them in the catalogue.
+
 ## Related
 
 - [claude-code-hooks](https://github.com/karanb192/claude-code-hooks) - Shell-hook plugins for safety, cost, observability and productivity, the layer mods are replacing.
