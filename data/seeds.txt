@@ -7,6 +7,7 @@ adamholter/claude-subway-surfers
 agentic-workbench/agent-quick-menu
 ajwann/next-context
 AlexeyHRDesign/colorwheel
+alexeyw/lot-map
 alexjacobs08/guided-mr
 alexlifexyz/p3c-guard
 AmberWJL/live-claude-notebook
@@ -20,6 +21,7 @@ Antreas-Strb/glanceflow
 apolenkov/agent-compact-advisor
 apolenkov/agent-council
 apolenkov/agent-shell-watch
+araujo-eduardo/claude-usage-bar
 Arjun0014/project-sentinel
 arturogarrido/claudinho
 Ashley-Pettit/lgtm-flash
@@ -75,6 +77,10 @@ HuliLulu46/cc-commit-command
 HuliLulu46/cc-effort-switch
 HuliLulu46/pending-decisions
 HuliLulu46/polish
+hwanyong/pane-grid
+hwanyong/pending-questions
+hwanyong/skill-kanban
+hwanyong/usage-gauge
 i-harsha-reddy/naruto-mod
 iamumeransari/claude-show-your-work
 icedevil2001/auto-continue
@@ -89,7 +95,11 @@ karanb192/cache-tax
 karanb192/claude-code-mods
 karanb192/time-blame
 kevlar10x/quiet-transcript
+kevlar10x/recent-sessions
+kevlar10x/status-dots
 kiankhooban/open-paths
+KitTran1307/kit-claude-mods
+KitTran1307/kit-cloud-pilot
 kongyo2/context-view
 Kruhlikau/subagent-tuner
 kushalBanda/claude-tldr
@@ -103,9 +113,12 @@ MarcoCarnevali/claude-code-mods
 Marius-Adam/claude-files-pane
 mertkayacs/ultramod
 MikeGT4/agent-tree
+mingfeng6684/claude-todo-panel
 mksadoughi/standby
 moduvoice/claude-code-ko-ui
 MohammedSaud404/rtl-terminal
+moxisuki/claude-ssh-tools
+moxisuki/provider-switch
 mralexivy/AutoMode
 MrMirhan/claude-buddy-chat
 mucida-claude-mods/faixa-de-terreno
@@ -161,6 +174,7 @@ SimakovIgor/pixel-buddy
 Sma1lboy/claude-standup
 somethingwentwell/cc-mod-banana-game
 SSS135/claude-code-codex-plugin
+suenot/claude-cache-timer
 Sumit189/explain-claude-mod
 SummerRiversound/review-inbox
 T-AI-Labs/claude-code-mods
@@ -171,6 +185,7 @@ tyler4400/tyler-claude-mods
 ugglr/claude-token-monster
 VaitaR/claude-code-limits
 valeryia-piatrova/token-hamster
+vampy/claude-last-turn-diff
 vancityAyush/mcp-list
 varunmoka7/image-shrinker
 varunmoka7/next-steps-autopilot
@@ -190,3 +205,4 @@ xuanji86/claude-statuspane
 yadava5/unramble
 yash-gadodia/claude-mods
 ynqa/claude-convey
+zigansh1n/claude-focus-sidebar

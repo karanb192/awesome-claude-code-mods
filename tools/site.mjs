@@ -29,12 +29,13 @@ export const reviewNotes = mod => [
 export const lowerBound = mod => !hasFootprint(mod) && mod.reach?.minimumLevel > 0 ? `at least L${mod.reach.minimumLevel}` : ''
 export const reachText = mod => !hasFootprint(mod) ? ['unknown access', lowerBound(mod)].filter(Boolean).join(', ') : mod.reach.labels.join(', ') || 'draws only'
 export const validationStatus = (mod, version) => ['passed', 'warnings'].includes(mod.validate.status) ? (mod.validate.status === 'warnings' ? 'Passed with warnings' : 'Passed') : mod.validate.status === 'failed' ? `fails on ${version}` : 'not verified'
+// The result alone, for mod pages, which name no current validator version.
+export const validationResult = validate => validate.status === 'passed' ? 'Passed' : validate.status === 'warnings' ? 'Passed with warnings' : validate.status === 'failed' ? 'Fails' : 'not verified'
 export const track = mod => `<span class="track" aria-label="${hasFootprint(mod) ? 'Reach level ' + mod.reach.level + ': ' + levels[mod.reach.level] : 'Unknown access'}">${[0, 1, 2, 3].map(i => `<i class="${hasFootprint(mod) && i <= mod.reach.level ? 'on l' + mod.reach.level : ''}"></i>`).join('')}</span>`
 
-// The full scan record of one mod, shown on its page. A retained record that was not rescanned keeps the
-// validator version that produced its footprint, so the label names that version rather than the current one.
-export function recordDetails(mod, claudeVersion) {
-  const version = mod.validate.claudeVersion ?? claudeVersion
+// The full scan record of one mod, shown on its page. Only a retained record names a validator version, the
+// one that produced its last footprint; the current version would rewrite every page at each release.
+export function recordDetails(mod) {
   const last = mod.validate.status === 'unknown' && mod.lastKnownValidate
   const compatibility = (mod.marketplaces ?? []).map(p => `<dt>Marketplace ${esc(p.status)}</dt><dd><a href="${esc(sourceUrl(mod, p.path))}">${esc(p.name ?? p.path)}</a>${p.errors.length ? ': ' + esc(p.errors.join('; ')) : ''}</dd>`).join('')
     + (mod.compatibility?.warnings ?? []).map(w => `<dt>${w.code === 'ui-review-incomplete' ? 'UI review incomplete' : 'UI rewrite review'}</dt><dd>${esc(w.message)} ${(w.evidence ?? []).map(e => `<a href="${esc(sourceUrl(mod, e.file, e.line))}">${esc(e.file)}:${e.line}</a>`).join(', ')}</dd>`).join('')
@@ -44,8 +45,8 @@ export function recordDetails(mod, claudeVersion) {
     <dt>Hooks</dt><dd><code>${esc(mod.hooks.map(hookText).join(', ') || (hasFootprint(mod) ? 'none' : 'not reported'))}</code></dd>
     <dt>API calls</dt><dd><code>${esc(mod.calls.join(', ') || (hasFootprint(mod) ? 'none recorded' : 'not reported'))}</code></dd>
     ${mod.surfaceModules.length ? `<dt>Surface modules</dt><dd><code>${esc(mod.surfaceModules.join(', '))}</code></dd>` : ''}
-    <dt>Validation on ${esc(version)}</dt><dd>${esc(validationStatus(mod, version))}</dd>
-    ${last ? `<dt>Last known result</dt><dd>${esc(validationStatus({ validate: last }, last.claudeVersion ?? version))}${last.claudeVersion ? ' on ' + esc(last.claudeVersion) : ''}</dd>` : ''}
+    <dt>Validation</dt><dd>${esc(validationResult(mod.validate))}</dd>
+    ${last ? `<dt>Last known result</dt><dd>${esc(validationResult(last))}${last.claudeVersion ? ' on ' + esc(last.claudeVersion) : ''}</dd>` : ''}
     ${mod.validate.errors.length ? `<dt>Validator output</dt><dd>${esc(mod.validate.errors.join('; '))}</dd>` : ''}
     ${mod.sourceCommit ? `<dt>Scanned revision</dt><dd><a href="https://github.com/${esc(mod.repo)}/tree/${esc(mod.sourceCommit)}"><code>${esc(mod.sourceCommit.slice(0, 12))}</code></a></dd>` : ''}
     ${compatibility}</dl>`

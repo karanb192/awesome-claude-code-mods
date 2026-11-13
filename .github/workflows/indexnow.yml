@@ -1,13 +1,14 @@
 name: indexnow
 
 # Tells Bing and the other IndexNow engines which site pages changed, once Pages serves them. Seed
-# publications merge with the workflow token, which starts no push event, hence workflow_run.
+# publications and applied rule changes merge with the workflow token, which starts no push event,
+# hence workflow_run.
 on:
   push:
     branches: [main]
     paths: ["docs/index.html", "docs/access/**", "docs/topics/**", "docs/browse/**", "docs/mods/**"]
   workflow_run:
-    workflows: [publish approved seeds]
+    workflows: [publish approved seeds, apply rule changes]
     types: [completed]
     branches: [main]
   workflow_dispatch:

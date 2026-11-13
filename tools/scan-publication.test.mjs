@@ -209,6 +209,8 @@ for (const mixedVersion of [false, true]) test(`scan publication retries concurr
   cpSync(fileURLToPath(new URL('.', import.meta.url)), join(checkout, 'tools'), { recursive: true })
   // Mod pages take their install hint from the finder's helper.
   cpSync(fileURLToPath(new URL('../finder', import.meta.url)), join(checkout, 'finder'), { recursive: true })
+  // The renderer writes the rounded count into the marketplace entry, and publication commits it.
+  cpSync(fileURLToPath(new URL('../.claude-plugin', import.meta.url)), join(checkout, '.claude-plugin'), { recursive: true })
   symlinkSync(fileURLToPath(new URL('../node_modules', import.meta.url)), join(checkout, 'node_modules'))
   writeFileSync(join(checkout, '.gitignore'), 'node_modules\n')
   const source = join(root, 'source')
@@ -231,7 +233,7 @@ for (const mixedVersion of [false, true]) test(`scan publication retries concurr
   writeFileSync(join(checkout, 'data/seeds.txt'), 'o/old\n')
   writeFileSync(join(checkout, 'data/discovery.json'), '{}')
   writeFileSync(join(checkout, 'data/topics.json'), JSON.stringify([{ slug: 'prompt-cache', title: 'Prompt cache mods for Claude Code', short: 'Prompt cache', description: 'Cache mods.', patterns: ['discover'], include: [], exclude: [], related: [] }]))
-  writeFileSync(join(checkout, 'README.md'), 'Curated original.\n<!-- stats:start -->\n<!-- stats:end -->\n')
+  writeFileSync(join(checkout, 'README.md'), '<!-- count:start --><!-- count:end --> Curated original.\n<!-- stats:start -->\n<!-- stats:end -->\n')
   writeFileSync(join(checkout, 'catalogue.md'), ['stats', 'scan', 'builtin'].map(name => `<!-- ${name}:start -->\n<!-- ${name}:end -->`).join('\n'))
   execFileSync(process.execPath, ['tools/render.mjs'], { cwd: checkout, env })
   // One run starts before the access page, topic pages, A to Z pages and directory data existed, so publication covers creating them as well as updating them.
