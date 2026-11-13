@@ -344127,7 +344127,7 @@
       "author": "Hypatia draft",
       "homepage": "https://github.com/Leechael/claude-code-mod-agent-skills",
       "url": "https://github.com/Leechael/claude-code-mod-agent-skills",
-      "kind": "mod",
+      "kind": "duplicate",
       "hasManifest": true,
       "modules": [
         "./register.ts"
@@ -344171,7 +344171,8 @@
         "errors": [
           "modules../register.ts: Leechael__claude-code-mod-agent-skills: hooks/discover/scan.ts does not parse: Expected \";\" but found \"$\" (line 89, column 50); Invalid flag \"k\" in regular expression (line 89, column 68); Invalid flag \"l\" in regular expression (line 89, column 70); Invalid flag \"l\" in regular expression (line 89, column 71); Duplicate flag \"s\" in regul… [+34 chars]"
         ]
-      }
+      },
+      "duplicateOf": "Leechael/claude-code-mod-agent-skills:plugins/agents-skills"
     },
     {
       "id": "Leechael/claude-code-mod-agent-skills:plugins/agents-skills",
@@ -862043,7 +862044,7 @@
       "author": null,
       "homepage": "https://github.com/ThingsLikeClaude/ani-steer-public",
       "url": "https://github.com/ThingsLikeClaude/ani-steer-public/tree/main/plugins/jev-steer",
-      "kind": "mod",
+      "kind": "duplicate",
       "hasManifest": true,
       "modules": [
         "./register.tsx"
@@ -862172,7 +862173,8 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "duplicateOf": "ThingsLikeClaude/ani-steer:plugins/jev-steer"
     },
     {
       "id": "ThingsLikeClaude/ani-steer:plugins/jev-steer",
