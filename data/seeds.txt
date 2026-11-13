@@ -113,6 +113,8 @@ mingfeng6684/claude-todo-panel
 mksadoughi/standby
 moduvoice/claude-code-ko-ui
 MohammedSaud404/rtl-terminal
+moxisuki/claude-ssh-tools
+moxisuki/provider-switch
 mralexivy/AutoMode
 MrMirhan/claude-buddy-chat
 mucida-claude-mods/faixa-de-terreno
