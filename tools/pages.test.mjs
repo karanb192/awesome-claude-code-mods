@@ -58,6 +58,11 @@ test('paths that differ only in case never share a folder', () => {
   assert.equal(slugOf(result, 'a/r:Clip'), 'a--r--Clip--2')
 })
 
+test('no path ends in a dot, which a Windows checkout cannot create', () => {
+  const result = assign([mod('a/r', '.'), mod('b/r', 'v2.', { path: 'one/v2.' }), mod('b/r', 'v2.', { path: 'two/v2.' })])
+  assert.deepEqual([...result.pages.values()].sort(), ['a--r--', 'b--r--v2', 'b--r--v2--two-v2'])
+})
+
 test('a renamed or copied mod redirects to its keeper, and keeps redirecting after the copy is retired', () => {
   const old = mod('old/name', 'tool')
   const first = assign([old])
@@ -156,7 +161,7 @@ test('the registry format is sorted, one entry per line, and rejects unsafe path
   assert.equal(text, '{\n  "a": {"id":"y","to":"b"},\n  "b": {"id":"x"}\n}\n')
   assert.deepEqual(readRegistry(text), { a: { id: 'y', to: 'b' }, b: { id: 'x' } })
   assert.throws(() => readRegistry('{"../escape": {"id": "x"}}'), /invalid entry/)
-  for (const slug of ['..', '.', '.hidden']) assert.throws(() => readRegistry(JSON.stringify({ [slug]: { id: 'x' } })), /invalid entry/)
+  for (const slug of ['..', '.', '.hidden', 'trailing.']) assert.throws(() => readRegistry(JSON.stringify({ [slug]: { id: 'x' } })), /invalid entry/)
   assert.throws(() => readRegistry('{"Foo": {"id": "a"}, "foo": {"id": "b"}}'), /invalid entry/)
   assert.throws(() => readRegistry('{"a": {"id": "x", "to": "../b"}}'), /invalid entry/)
   assert.throws(() => readRegistry('{"ok": {}}'), /invalid entry/)

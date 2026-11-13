@@ -6138,7 +6138,7 @@
   "mixmin0197--clawd-mods--dream": {"id":"mixmin0197/clawd-mods:plugins/dream"},
   "mixmin0197--usage-band--usage-band": {"id":"mixmin0197/usage-band:."},
   "mjoyshuvo--claude-progress-tracker--progress-tracker": {"id":"mjoyshuvo/claude-progress-tracker:.","indexed":true},
-  "mkalawoun--prompt-paraphrase--.": {"id":"mkalawoun/prompt-paraphrase:."},
+  "mkalawoun--prompt-paraphrase--": {"id":"mkalawoun/prompt-paraphrase:."},
   "mkbuilds4--mods--prayer-times": {"id":"mkbuilds4/mods:plugins/prayer-times"},
   "mkhaytman87--tandem-split--tandem-split": {"id":"mkhaytman87/tandem-split:."},
   "mkiselyow--claude-code-token-usage--token-usage-line": {"id":"mkiselyow/claude-code-token-usage:."},

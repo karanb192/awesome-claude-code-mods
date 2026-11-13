@@ -1,8 +1,9 @@
 // Badge files and website anchors are named owner--repo--name. Two plugins in one repo can share
 // a name; the one closest to the repo root keeps the plain key and the others add their path, so
-// no badge or anchor is overwritten and existing badge links stay stable.
+// no badge or anchor is overwritten and existing badge links stay stable. A key never ends in a dot,
+// because a Windows checkout cannot create a folder named that way; spaces are already dashes.
 
-const clean = s => s.replace(/[^A-Za-z0-9._-]/g, '-')
+const clean = s => s.replace(/[^A-Za-z0-9._-]/g, '-').replace(/\.+$/, '')
 export const baseSlug = m => clean(`${m.repo.replace('/', '--')}--${m.name}`)
 
 export function slugs(mods) {
