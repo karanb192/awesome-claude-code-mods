@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/dot-agi/high-command">dot-agi/high-command</a></p>
 <p class="lede">See the messages your teammates, named subagents, and other Claude Code sessions send you, grouped by peer with unread counts: a pane, a band above the prompt, and /highcommand.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">high-command reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 12</li><li>API methods referenced: 15</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">high-command reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 11</li><li>API methods referenced: 15</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install high-command --marketplace dot-agi/high-command</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt, ListAgents calls, subagent spawns</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, classic.SessionStart, session.receive, prompt.submit {origin has {kind=peer}}, session.send, tool.call {tool=ListAgents}, agent.spawn, turn.complete, command.run, config.set, command.run {command=highcommand}, ui.render {component=Pane, requestId=high-command}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, classic.SessionStart, session.receive, prompt.submit {origin has {kind=peer}}, session.send, tool.call {tool=ListAgents}, agent.spawn, turn.complete, command.run, config.set, command.run {command=highcommand}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.session.id, $.session.surfaces, $.state.get, $.state.set, $.ui.focus, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

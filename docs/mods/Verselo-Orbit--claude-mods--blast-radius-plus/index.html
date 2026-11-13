@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Verselo-Orbit/claude-mods">Verselo-Orbit/claude-mods</a></p>
 <p class="lede">Hält riskante Shell-Befehle an (rm -rf, git reset --hard, Force-Push, Migrationen) und zeigt dir vorher, was sie ändern würden.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">blast-radius-plus reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: runs processes, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">blast-radius-plus reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 1</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: runs processes, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install blast-radius-plus --marketplace Verselo-Orbit/claude-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Bash calls</dd>
-    <dt>Hooks</dt><dd><code>tool.call {tool=Bash}, ui.render {component=Pane}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>tool.call {tool=Bash}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.process.run, $.session.cwd, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

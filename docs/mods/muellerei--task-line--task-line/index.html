@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>TodoWrite calls, TaskCreate calls, TaskUpdate calls, /&quot;^mcp__.+__work_state_write$&quot;/ calls, /&quot;^mcp__ccd_turn__update_plan$&quot;/ calls, /&quot;^mcp__ccd_turn__wrap_up$&quot;/ calls, Bash calls, AskUserQuestion calls, ExitPlanMode calls</dd>
-    <dt>Hooks</dt><dd><code>tool.call {tool=TodoWrite}, tool.call {tool=TaskCreate}, tool.call {tool=TaskUpdate}, tool.call {tool=/&quot;^mcp__.+__work_state_write$&quot;/}, tool.call {tool=/&quot;^mcp__ccd_turn__update_plan$&quot;/}, tool.call {tool=/&quot;^mcp__ccd_turn__wrap_up$&quot;/}, tool.call {tool=Bash}, tool.call {tool=AskUserQuestion}, tool.call {tool=ExitPlanMode}, session.start, command.run {command=task-line}, ui.render {component=AbovePrompt}, ui.render {component=AskUserQuestion}</code></dd>
+    <dt>Hooks</dt><dd><code>tool.call {tool=TodoWrite}, tool.call {tool=TaskCreate}, tool.call {tool=TaskUpdate}, tool.call {tool=/&quot;^mcp__.+__work_state_write$&quot;/}, tool.call {tool=/&quot;^mcp__ccd_turn__update_plan$&quot;/}, tool.call {tool=/&quot;^mcp__ccd_turn__wrap_up$&quot;/}, tool.call {tool=Bash}, tool.call {tool=AskUserQuestion}, tool.call {tool=ExitPlanMode}, session.start, command.run {command=task-line}, ui.render {component=AskUserQuestion}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.state.get, $.state.set, $.ui.log, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

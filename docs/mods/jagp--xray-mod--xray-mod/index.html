@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, compaction</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=xray-mod-count}, command.run {command=xray-mod-viewport-demo}, ui.render {component=Pane, requestId=xray-mod-viewport-demo}, ui.message, ui.scroll {component=Pane, requestId=xray-mod-viewport-demo}, session.append, command.run {command=xray-mod-attribution}, command.run {command=xray-mod}, command.run {command=xrm}, tool.call, turn.step, session.measure, session.compact, ui.render {component=SessionMode}, ui.render {component=Pane, requestId=xray-mod}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=xray-mod-count}, command.run {command=xray-mod-viewport-demo}, ui.message, ui.scroll {component=Pane, requestId=xray-mod-viewport-demo}, session.append, command.run {command=xray-mod-attribution}, command.run {command=xray-mod}, command.run {command=xrm}, tool.call, turn.step, session.measure, session.compact, ui.render {component=SessionMode}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.config.set, $.session.usage, $.state.get, $.state.set, $.ui.copy, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/viewport.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

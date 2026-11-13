@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/korenka/claude-harness">korenka/claude-harness</a></p>
 <p class="lede">Agents side panel with run, pause, stop and open-in-tab controls</p>
 <p class="compatibility">marketplace fails</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">agent-dock reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 19</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads files, reads env vars, reads the transcript, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">agent-dock reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 19</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads files, reads env vars, reads the transcript, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads files, reads env vars, reads the transcript, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=agents-panel}, ui.render {component=AbovePrompt}, agent.offer, turn.complete, session.append, ui.render {component=Pane}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=agents-panel}, agent.offer, turn.complete, session.append</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.agent.spawn, $.clock.every, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.session.messages, $.session.root, $.session.send, $.state.get, $.state.set, $.tool.call, $.ui.close, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/robinade/claude-mods-ko">robinade/claude-mods-ko</a></p>
 <p class="lede">실행 중인 모든 Claude Code 세션을 작업 중·확인 필요·완료로 나눠 보여 주는 패널</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">session-monitor reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 18</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the clipboard, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">session-monitor reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 18</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the clipboard, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install session-monitor --marketplace robinade/claude-mods-ko</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, writes the clipboard, reads files, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=monitor}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=session-monitor}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=monitor}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.list, $.fs.read, $.process.run, $.session.id, $.session.send, $.state.get, $.state.set, $.ui.close, $.ui.copy, $.ui.focus, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

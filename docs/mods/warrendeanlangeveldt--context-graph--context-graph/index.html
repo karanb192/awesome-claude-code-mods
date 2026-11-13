@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, compaction</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=why}, command.run {command=graph-settings}, command.run {command=graph}, tool.call, session.compact, session.measure, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=Pane, requestId=?}, ui.close, ui.render {component=Pane, requestId=?}, ui.render {component=Pane, requestId=?}, ui.render {component=Pane, requestId=?}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=why}, command.run {command=graph-settings}, command.run {command=graph}, tool.call, session.compact, session.measure, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.close</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.command.register, $.command.run, $.fs.read, $.fs.stat, $.model.complete, $.model.fork, $.process.run, $.prompt.submit, $.session.cwd, $.session.id, $.session.send, $.session.usage, $.ui.ask, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.panes, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

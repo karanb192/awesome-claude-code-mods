@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/CommunityPokeOrg/claude-code-modscope">CommunityPokeOrg/claude-code-modscope</a></p>
 <p class="lede">A mod for debugging mods: inspects the session's loaded mods, attributes hook failures (throws, timeouts, rejections) to the mod that caused them, times the chain per plugin, exposes /modscope plus mcp__modscope__* tools the model can call, and can ask the session's model to diagnose a failing mod from its own source.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">modscope reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads files, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">modscope reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads files, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install modscope --marketplace CommunityPokeOrg/claude-code-modscope</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, reads files, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>everything, ? calls</dd>
-    <dt>Hooks</dt><dd><code>engine.create, plugin.register, *, session.start, session.end, command.run {command=modscope}, tool.call {tool=?}, ui.render {component=AbovePrompt}, ui.render {component=Pane}</code></dd>
+    <dt>Hooks</dt><dd><code>engine.create, plugin.register, *, session.start, session.end, command.run {command=modscope}, tool.call {tool=?}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.fs.read, $.model.complete, $.process.run, $.store.delete, $.store.get, $.store.set, $.tool.register, $.ui.close, $.ui.log, $.ui.open, $.ui.panes, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/gyoomun/claude-mods">gyoomun/claude-mods</a></p>
 <p class="lede">답이 끝나면 다음 프롬프트를 최대 3개 제안한다. 1·2·3으로 여러 개를 체크하고 0으로 한꺼번에 입력창에 넣는다.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">next-steps-multi reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">next-steps-multi reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install next-steps-multi --marketplace gyoomun/claude-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, writes the prompt box, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>turn.start, turn.complete, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>turn.start, turn.complete</code></dd>
     <dt>API calls</dt><dd><code>$.command.list, $.model.fork, $.prompt.fill, $.prompt.suggest, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

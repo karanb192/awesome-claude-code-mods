@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/liquid1982/claude-plugins">liquid1982/claude-plugins</a></p>
 <p class="lede">Marks conversation content wrapped in &lt;pin&gt;...&lt;/pin&gt; tags as compaction-proof: pinned content is re-injected verbatim into the transcript after every compaction (manual /compact, auto-compaction, plugin-triggered, or precompute).</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">pin reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 4</li><li>Access from classified calls: L1, reads: reads the transcript, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">pin reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 1</li><li>API methods referenced: 4</li><li>Access from classified calls: L1, reads: reads the transcript, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install pin --marketplace liquid1982/claude-plugins</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads the transcript, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>compaction</dd>
-    <dt>Hooks</dt><dd><code>session.compact, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.compact</code></dd>
     <dt>API calls</dt><dd><code>$.session.messages, $.ui.invalidate, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

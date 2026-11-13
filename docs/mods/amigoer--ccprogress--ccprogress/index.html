@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt, mcp__ccprogress__update_progress calls, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear|resume|fork}, prompt.compose, prompt.submit, tool.call {tool=mcp__ccprogress__update_progress}, tool.call, command.run {command=progress}, turn.start, turn.complete, ui.render {component=Spinner}, ui.render {component=AbovePrompt}, ui.render {component=ToolUse, props has {tool=mcp__ccprogress__update_progress}}, ui.render {component=ToolResult, props has {tool=mcp__ccprogress__update_progress}}, ui.render {component=Pane, requestId=ccprogress}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear|resume|fork}, prompt.compose, prompt.submit, tool.call {tool=mcp__ccprogress__update_progress}, tool.call, command.run {command=progress}, turn.start, turn.complete, ui.render {component=Spinner}, ui.render {component=ToolUse, props has {tool=mcp__ccprogress__update_progress}}, ui.render {component=ToolResult, props has {tool=mcp__ccprogress__update_progress}}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.list, $.fs.read, $.process.run, $.session.id, $.session.surfaces, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.tool.list, $.tool.register, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

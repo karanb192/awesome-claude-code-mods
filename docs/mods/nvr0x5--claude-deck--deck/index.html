@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/nvr0x5/claude-deck">nvr0x5/claude-deck</a></p>
 <p class="lede">A cockpit for Claude Code: plan bars and subagent strips, context, usage limits with reset countdowns and burn rates, spend, the model route and a pet. Six bar styles, three collapsed looks. CLI and Desktop.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">deck reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 19</li><li>API methods referenced: 17</li><li>Access from classified calls: L3, network: network, reads env vars, plays audio, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">deck reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 19</li><li>API methods referenced: 18</li><li>Access from classified calls: L3, network: network, reads env vars, plays audio, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install deck --marketplace nvr0x5/claude-deck</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, reads env vars, plays audio, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -25,14 +25,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, classic hooks, subagent spawns, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=deck}, prompt.submit, turn.start, turn.step, ui.status, ui.log, session.measure, classic.Stop, agent.spawn, turn.complete, classic.CwdChanged, classic.SubagentStop, classic.TaskCreated, classic.TaskCompleted, tool.check, tool.call, ui.render {component=SessionMode}, ui.render {component=Pane}, ui.render {component=AbovePrompt}, ui.render {component=Pane}</code></dd>
-    <dt>API calls</dt><dd><code>$.agent.list, $.audio.play, $.clock.after, $.clock.every, $.command.register, $.env.get, $.http.fetch, $.session.id, $.session.model, $.session.root, $.session.usage, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=deck}, prompt.submit, turn.start, turn.step, ui.status, ui.log, session.measure, classic.Stop, agent.spawn, turn.complete, classic.CwdChanged, classic.SubagentStop, classic.TaskCreated, classic.TaskCompleted, tool.check, tool.call, ui.render {component=SessionMode}</code></dd>
+    <dt>API calls</dt><dd><code>$.agent.list, $.audio.play, $.clock.after, $.clock.every, $.command.register, $.env.get, $.http.fetch, $.session.id, $.session.model, $.session.root, $.session.usage, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/nvr0x5/claude-deck/tree/1ecf6deb9199d3b1fa570bf08a57e69772bbb5af"><code>1ecf6deb9199</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/nvr0x5/claude-deck/blob/1ecf6deb9199d3b1fa570bf08a57e69772bbb5af/.claude-plugin/marketplace.json">deck</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/nvr0x5/claude-deck/tree/45eeb8f0e60ae66e797875aeada5e760a720d8c8"><code>45eeb8f0e60a</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/nvr0x5/claude-deck/blob/45eeb8f0e60ae66e797875aeada5e760a720d8c8/.claude-plugin/marketplace.json">deck</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/nvr0x5--claude-deck--deck-reach.svg" alt="Reach badge for deck"> <img src="/badges/nvr0x5--claude-deck--deck-validates.svg" alt="Validation badge for deck"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/nvr0x5--claude-deck--deck-reach.svg)](https://mods.aidojo.si/mods/nvr0x5--claude-deck--deck/)

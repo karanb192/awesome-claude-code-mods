@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/katzboaz/ClaudeAmp">katzboaz/ClaudeAmp</a></p>
 <p class="lede">A Winamp-style player for Claude Code: live spectrum visualizer, scrolling marquee, playlist of tool calls and transport controls.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">claudeamp reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads mod state, plays audio, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">claudeamp reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads mod state, plays audio, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, writes the prompt box, reads mod state, plays audio, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=claudeamp}, turn.start, turn.step, tool.call, turn.complete, ui.close, ui.render {component=Pane, requestId=claudeamp}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=claudeamp}, turn.start, turn.step, tool.call, turn.complete, ui.close</code></dd>
     <dt>API calls</dt><dd><code>$.audio.play, $.clock.every, $.clock.now, $.command.register, $.prompt.fill, $.state.get, $.state.set, $.turn.abort, $.ui.blit, $.ui.close, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

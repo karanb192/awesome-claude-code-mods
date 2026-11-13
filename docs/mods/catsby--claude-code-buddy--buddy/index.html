@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/catsby/claude-code-buddy">catsby/claude-code-buddy</a></p>
 <p class="lede">The Claude Code Buddy cat, back above the prompt as a mod. Needs CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">buddy reaches L0 (draws and remembers) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 10</li><li>Access from classified calls: L0, draws and remembers: persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">buddy reaches L0 (draws and remembers) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 10</li><li>Access from classified calls: L0, draws and remembers: persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install buddy --marketplace catsby/claude-code-buddy</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L0 Draws &amp; remembers</span><span class="track" aria-label="Reach level 0: Draws & remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=buddy}, ui.render {component=AbovePrompt}, ui.render {component=Pane}, ui.close</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=buddy}, ui.close</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.store.delete, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

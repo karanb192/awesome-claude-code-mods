@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/russellpope/claude-mods">russellpope/claude-mods</a></p>
 <p class="lede">Side pane listing files Claude writes or edits, split into planning, code and scratch, with a filter; click one to open it in your editor, or in a viewer split when you're in Rex on another machine</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">outputs-pane reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 10</li><li>Access from classified calls: L2, writes or runs: runs processes, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">outputs-pane reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 10</li><li>Access from classified calls: L2, writes or runs: runs processes, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Write calls, Edit calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=outputs}, tool.call {tool=Write}, tool.call {tool=Edit}, ui.render {component=Pane, requestId=outputs}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=outputs}, tool.call {tool=Write}, tool.call {tool=Edit}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.env.get, $.process.run, $.session.cwd, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.scroll, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

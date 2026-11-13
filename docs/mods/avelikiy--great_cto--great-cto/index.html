@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/avelikiy/great_cto">avelikiy/great_cto</a></p>
 <p class="lede">You already have the agent. This is everything around it. great_cto runs Claude Code as a pipeline of 73 specialist agents: an independent model checks each stage before the next builds on it, spending caps refuse rather than warn, and three decisions stay yours: what gets built, how, and whether it ships.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">great-cto reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 11</li><li>Access from classified calls: L3, network: network, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">great-cto reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 11</li><li>Access from classified calls: L3, network: network, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install great-cto --marketplace avelikiy/great_cto</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=gates}, turn.complete, ui.render {component=Pane, requestId=great-cto-gates}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=gates}, turn.complete</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.env.get, $.http.fetch, $.session.root, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/avelikiy/great_cto/tree/97f64c2fa0416f74083ec53503208252182a41b4"><code>97f64c2fa041</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/avelikiy/great_cto/blob/97f64c2fa0416f74083ec53503208252182a41b4/.claude-plugin/marketplace.json">great-cto</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/avelikiy/great_cto/tree/25952185af483d5dd43ac46b2b1cd4dc7a82640b"><code>25952185af48</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/avelikiy/great_cto/blob/25952185af483d5dd43ac46b2b1cd4dc7a82640b/.claude-plugin/marketplace.json">great-cto</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/avelikiy--great_cto--great-cto-reach.svg" alt="Reach badge for great-cto"> <img src="/badges/avelikiy--great_cto--great-cto-validates.svg" alt="Validation badge for great-cto"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/avelikiy--great_cto--great-cto-reach.svg)](https://mods.aidojo.si/mods/avelikiy--great_cto--great-cto/)

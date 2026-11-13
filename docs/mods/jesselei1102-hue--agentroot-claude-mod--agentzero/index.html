@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>compaction, every prompt, Bash calls</dd>
-    <dt>Hooks</dt><dd><code>session.compact, session.end, prompt.submit, tool.call {tool=Bash}, session.start, command.run {command=agentroot|agentzero}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=?}, ui.render {component=Pane, requestId=?}, ui.render {component=ToolUse}, ui.render {component=ToolGroup}, ui.close</code></dd>
+    <dt>Hooks</dt><dd><code>session.compact, session.end, prompt.submit, tool.call {tool=Bash}, session.start, command.run {command=agentroot|agentzero}, ui.render {component=ToolUse}, ui.render {component=ToolGroup}, ui.close</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.env.get, $.fs.read, $.fs.stat, $.process.run, $.session.id, $.session.messages, $.session.root, $.session.usage, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

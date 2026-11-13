@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/cbruyndoncx/claude-skills-manager-mod">cbruyndoncx/claude-skills-manager-mod</a></p>
 <p class="lede">Manage AI agent skills (SKILL.md), playbooks and value chains: list, toggle, categorise, install from GitHub/monorepo/ZIP/local/marketplace, update, freeze, scan, export, index; run and organise playbooks; map skills and playbooks to value chains. Port of the Obsidian Skills Manager plugin plus BOB playbooks.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">skills-manager reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 18</li><li>Access from classified calls: L3, network: network, runs processes, writes files, drives Claude, writes the prompt box, reads files, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">skills-manager reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 18</li><li>Access from classified calls: L3, network: network, runs processes, writes files, drives Claude, writes the prompt box, reads files, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, writes files, drives Claude, writes the prompt box, reads files, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__skills-manager__skills calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=playbook}, command.run {command=skills}, tool.call {tool=mcp__skills-manager__skills}, ui.render {component=Pane, requestId=skills-manager}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=playbook}, command.run {command=skills}, tool.call {tool=mcp__skills-manager__skills}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.fs.exists, $.fs.list, $.fs.read, $.fs.write, $.http.fetch, $.process.run, $.prompt.fill, $.prompt.submit, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.register, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

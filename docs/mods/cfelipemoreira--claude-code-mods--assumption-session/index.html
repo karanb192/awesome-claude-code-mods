@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/cfelipemoreira/claude-code-mods">cfelipemoreira/claude-code-mods</a></p>
 <p class="lede">Lista as suposições que o Claude faz enquanto constrói, num painel onde você aprova ou corrige. Abra com /suposicoes.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">assumption-session reaches L2 (writes or runs) and fails <code>claude plugin validate</code>: types: Path not found: ./types/index.d.ts. The runtime loader will report this as a load failure..</p><ul><li>Events hooked: 5</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">assumption-session reaches L2 (writes or runs) and fails <code>claude plugin validate</code>: types: Path not found: ./types/index.d.ts. The runtime loader will report this as a load failure..</p><ul><li>Events hooked: 4</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, writes the prompt box, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status bad">Fails</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__assumption-session__record_assumption calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=suposicoes}, prompt.compose, tool.call {tool=mcp__assumption-session__record_assumption}, ui.render {component=Pane, requestId=assumptions}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=suposicoes}, prompt.compose, tool.call {tool=mcp__assumption-session__record_assumption}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.prompt.fill, $.state.get, $.state.set, $.tool.register, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Fails</dd>

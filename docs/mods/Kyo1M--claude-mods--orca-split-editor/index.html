@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Kyo1M/claude-mods">Kyo1M/claude-mods</a></p>
 <p class="lede">Orca のペインを上下に分割してエディタでプロンプトを書く</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">orca-split-editor reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, writes the prompt box, reads files, reads the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">orca-split-editor reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, writes the prompt box, reads files, reads the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install orca-split-editor --marketplace Kyo1M/claude-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, writes the prompt box, reads files, reads the prompt box, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,16 +24,16 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=edit}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=edit}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.fs.read, $.fs.write, $.process.run, $.process.spawn, $.prompt.fill, $.prompt.read, $.state.get, $.state.set, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/Kyo1M/claude-mods/tree/f9f9862311552b2534e562940bdeb195f2a965d9"><code>f9f986231155</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/Kyo1M/claude-mods/blob/f9f9862311552b2534e562940bdeb195f2a965d9/.claude-plugin/marketplace.json">claude-mods</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/Kyo1M/claude-mods/tree/e064c7ea85ffacf8bafc7b5240d998d1febea33a"><code>e064c7ea85ff</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/Kyo1M/claude-mods/blob/e064c7ea85ffacf8bafc7b5240d998d1febea33a/.claude-plugin/marketplace.json">claude-mods</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
-
+<section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from Kyo1M/claude-mods</h2><ul><li><a href="/mods/Kyo1M--claude-mods--copy-block/">copy-block</a><span>返答の中の貼り付け用ブロックの右上にコピーアイコンを出す</span></li></ul></section>
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/Kyo1M--claude-mods--orca-split-editor-reach.svg" alt="Reach badge for orca-split-editor"> <img src="/badges/Kyo1M--claude-mods--orca-split-editor-validates.svg" alt="Validation badge for orca-split-editor"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/Kyo1M--claude-mods--orca-split-editor-reach.svg)](https://mods.aidojo.si/mods/Kyo1M--claude-mods--orca-split-editor/)
 [![validates](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/Kyo1M--claude-mods--orca-split-editor-validates.svg)](https://mods.aidojo.si/mods/Kyo1M--claude-mods--orca-split-editor/)</code></pre></section>
 </main>

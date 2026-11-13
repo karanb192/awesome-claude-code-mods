@@ -14,8 +14,8 @@
 <h1>agents-view</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/ushironoko/dotfiles">ushironoko/dotfiles</a></p>
 <p class="lede">A pane listing this session's subagents (Agent tool and workflow agents) with their status; select one to see its prompt, text, tool calls and results.</p>
-<p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">agents-view reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 17</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
+
+<section class="summary" aria-label="Scan summary"><p class="summary-line">agents-view reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 17</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, reads env vars, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, Workflow calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=subagents}, agent.spawn, turn.start, tool.call {tool=Workflow}, turn.step, session.append, turn.complete, ui.render {component=Pane}, ui.close {id=agents-view}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=subagents}, agent.spawn, turn.start, tool.call {tool=Workflow}, turn.step, session.append, turn.complete, ui.close {id=agents-view}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.process.run, $.session.cwd, $.session.id, $.session.root, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/ushironoko/dotfiles/tree/dd91f779a05269e26304051c743ff2e1e664a362"><code>dd91f779a052</code></a></dd>
-    <dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/ushironoko/dotfiles/blob/dd91f779a05269e26304051c743ff2e1e664a362/claude/.claude/skills/agents-view/hooks/register.tsx#L135">claude/.claude/skills/agents-view/hooks/register.tsx:135</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/ushironoko/dotfiles/tree/db8444c2b8848952dc950ee399b58556932afd35"><code>db8444c2b884</code></a></dd>
+    </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from ushironoko/dotfiles</h2><ul><li><a href="/mods/ushironoko--dotfiles--file-view/">file-view</a><span>Click a file path under a Read, Edit or Write row to show that file's contents, or the picture of a PNG, JPEG…</span></li><li><a href="/mods/ushironoko--dotfiles--issue-view/">issue-view</a><span>A pane listing the project root repository's open issues with titles; click one to open it in the browser.</span></li><li><a href="/mods/ushironoko--dotfiles--pr-view/">pr-view</a><span>A pane listing the project root repository's open pull requests with titles; click one to open it in the brow…</span></li></ul></section>
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/ushironoko--dotfiles--agents-view-reach.svg" alt="Reach badge for agents-view"> <img src="/badges/ushironoko--dotfiles--agents-view-validates.svg" alt="Validation badge for agents-view"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/ushironoko--dotfiles--agents-view-reach.svg)](https://mods.aidojo.si/mods/ushironoko--dotfiles--agents-view/)

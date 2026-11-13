@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/KonstantinRoehrl/devcycle">KonstantinRoehrl/devcycle</a></p>
 <p class="lede">Opinionated pipeline from a feature, bug, or refactor description to a verified, publish-ready implementation: scoped interview, wave-based plan, parallelized subagent execution, cross-model branch review, on-device UI verification via claude-in-chrome, and GitHub reconcile: layered on the superpowers skill set, with a doctor/learn loop that benchmarks and improves the pipeline from session to session.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">devcycle reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 17</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">devcycle reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 17</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install devcycle --marketplace KonstantinRoehrl/devcycle</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, every tool call</dd>
-    <dt>Hooks</dt><dd><code>turn.start, session.end, agent.spawn, turn.step, tool.call, turn.complete, session.start, ui.render {component=AbovePrompt}, session.measure</code></dd>
+    <dt>Hooks</dt><dd><code>turn.start, session.end, agent.spawn, turn.step, tool.call, turn.complete, session.start, session.measure</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.env.get, $.fs.exists, $.fs.read, $.fs.stat, $.process.run, $.session.cwd, $.session.id, $.session.surfaces, $.session.version, $.state.get, $.state.set, $.ui.notify, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/KonstantinRoehrl/devcycle/tree/0ee43de3e0b9bb8ece768faad5be787f3e8601a7"><code>0ee43de3e0b9</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/KonstantinRoehrl/devcycle/blob/0ee43de3e0b9bb8ece768faad5be787f3e8601a7/.claude-plugin/marketplace.json">devcycle</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/KonstantinRoehrl/devcycle/tree/d3e13e85845524e4cb807a1f485deaecdcca6de4"><code>d3e13e858455</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/KonstantinRoehrl/devcycle/blob/d3e13e85845524e4cb807a1f485deaecdcca6de4/.claude-plugin/marketplace.json">devcycle</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/KonstantinRoehrl--devcycle--devcycle-reach.svg" alt="Reach badge for devcycle"> <img src="/badges/KonstantinRoehrl--devcycle--devcycle-validates.svg" alt="Validation badge for devcycle"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/KonstantinRoehrl--devcycle--devcycle-reach.svg)](https://mods.aidojo.si/mods/KonstantinRoehrl--devcycle--devcycle/)

@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>? calls, ExitPlanMode calls, every tool call, every prompt</dd>
-    <dt>Hooks</dt><dd><code>tool.call {tool=?}, session.start, turn.start, agent.offer {agent=?}, command.run {command=delegate}, tool.call {tool=?}, tool.call {tool=ExitPlanMode}, tool.call, turn.step, turn.complete, ui.render {component=ToolUse, props has {tool=?}}, ui.render {component=TurnDuration}, ui.render {component=Pane, requestId=delegate}, ui.render {component=ToolResult, props has {tool=?}}, prompt.submit</code></dd>
+    <dt>Hooks</dt><dd><code>tool.call {tool=?}, session.start, turn.start, agent.offer {agent=?}, command.run {command=delegate}, tool.call {tool=?}, tool.call {tool=ExitPlanMode}, tool.call, turn.step, turn.complete, ui.render {component=ToolUse, props has {tool=?}}, ui.render {component=TurnDuration}, ui.render {component=ToolResult, props has {tool=?}}, prompt.submit</code></dd>
     <dt>API calls</dt><dd><code>$.agent.register, $.agent.spawn, $.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.read, $.fs.write, $.model.fork, $.process.run, $.prompt.submit, $.session.cwd, $.session.id, $.session.model, $.session.send, $.session.usage, $.state.get, $.state.set, $.tool.call, $.tool.list, $.tool.register, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

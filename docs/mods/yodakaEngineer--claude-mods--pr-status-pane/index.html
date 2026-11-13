@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/yodakaEngineer/claude-mods">yodakaEngineer/claude-mods</a></p>
 <p class="lede">Shows the current branch's PR and CI check status in a pane and notifies when checks finish</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">pr-status-pane reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 17</li><li>Access from classified calls: L2, writes or runs: runs processes, reads the transcript, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">pr-status-pane reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 17</li><li>Access from classified calls: L2, writes or runs: runs processes, reads the transcript, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install pr-status-pane --marketplace yodakaEngineer/claude-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads the transcript, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call, Bash calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.edit, prompt.submit, turn.start, ui.scroll {requestId=pr-status}, ui.focus {requestId=pr-status}, command.run {command=pr-status}, tool.call, tool.call {tool=Bash}, ui.render {component=Pane, requestId=pr-status}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.edit, prompt.submit, turn.start, ui.scroll {requestId=pr-status}, command.run {command=pr-status}, tool.call, tool.call {tool=Bash}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.process.run, $.session.id, $.session.messages, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.notify, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, TaskCreate calls, TaskUpdate calls, TodoWrite calls, mcp__ccd_turn__update_plan calls, every prompt, mcp__ccd_turn__wrap_up calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=pixel-agents}, agent.spawn, turn.step, turn.complete, tool.call {tool=TaskCreate}, tool.call {tool=TaskUpdate}, tool.call {tool=TodoWrite}, tool.call {tool=mcp__ccd_turn__update_plan}, prompt.submit, tool.call {tool=mcp__ccd_turn__wrap_up}, ui.render {component=ToolUse}, ui.render {component=Pane, requestId=pixel-agents}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=pixel-agents}, agent.spawn, turn.step, turn.complete, tool.call {tool=TaskCreate}, tool.call {tool=TaskUpdate}, tool.call {tool=TodoWrite}, tool.call {tool=mcp__ccd_turn__update_plan}, prompt.submit, tool.call {tool=mcp__ccd_turn__wrap_up}, ui.render {component=ToolUse}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.command.register, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.toast, $.ui.view</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

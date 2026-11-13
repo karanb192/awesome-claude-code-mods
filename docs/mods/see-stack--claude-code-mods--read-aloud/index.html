@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/see-stack/claude-code-mods">see-stack/claude-code-mods</a></p>
 <p class="lede">Speak the last reply aloud on demand, in a macOS Personal Voice, with pause, skip and speed above the prompt.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">read-aloud reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, reads files, reads the transcript, reads mod state, plays audio, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">read-aloud reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, reads files, reads the transcript, reads mod state, plays audio, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install read-aloud --marketplace see-stack/claude-code-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, reads files, reads the transcript, reads mod state, plays audio, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.complete, command.run {command=read-aloud}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.complete, command.run {command=read-aloud}</code></dd>
     <dt>API calls</dt><dd><code>$.audio.speak, $.clock.every, $.clock.sleep, $.command.register, $.fs.read, $.fs.write, $.process.run, $.session.messages, $.state.get, $.state.set, $.ui.invalidate, $.ui.log, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

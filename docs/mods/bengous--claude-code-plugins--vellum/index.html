@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/bengous/claude-code-plugins">bengous/claude-code-plugins</a></p>
 <p class="lede">Plan at the frontiers and review the plan in the browser: decisions and interfaces before mechanics, vertical slices each closed by a check. /vellum:start opens a planning mode of its own: Claude writes the plan and its mockups and grills the reviewer on the open choices; the reviewer comments, edits or approves in a page, and the answer reaches Claude as a prompt.</p>
 <p class="compatibility">marketplace fails</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">vellum reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 23</li><li>Access from classified calls: L3, network: network, runs processes, sets env vars, drives Claude, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">vellum reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 23</li><li>Access from classified calls: L3, network: network, runs processes, sets env vars, drives Claude, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, sets env vars, drives Claude, reads files, reads env vars, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>the vellum:start skill, the vellum:stop skill, mcp__vellum__submit calls, mcp__vellum__state calls, mcp__vellum__grill_ask|mcp__vellum__propose|AskUserQuestion calls, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, skill.prompt {skill=vellum:start}, skill.prompt {skill=vellum:stop}, command.run {command=clear|resume}, ui.render {component=AbovePrompt}, tool.check, tool.call {tool=mcp__vellum__submit}, tool.call {tool=mcp__vellum__state}, tool.call {tool=mcp__vellum__grill_ask|mcp__vellum__propose|AskUserQuestion}, prompt.submit, session.append {door=prompt}, turn.start, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, skill.prompt {skill=vellum:start}, skill.prompt {skill=vellum:stop}, command.run {command=clear|resume}, tool.check, tool.call {tool=mcp__vellum__submit}, tool.call {tool=mcp__vellum__state}, tool.call {tool=mcp__vellum__grill_ask|mcp__vellum__propose|AskUserQuestion}, prompt.submit, session.append {door=prompt}, turn.start, turn.complete</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.agent.spawn, $.clock.after, $.clock.every, $.clock.now, $.env.get, $.env.set, $.fs.stat, $.http.fetch, $.process.spawn, $.prompt.submit, $.session.cwd, $.session.id, $.session.root, $.store.delete, $.store.get, $.store.set, $.tool.call, $.tool.register, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

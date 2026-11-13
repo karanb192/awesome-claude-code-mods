@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>ui.render {component=AbovePrompt}, session.start, command.run {command=changes}, tool.call, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}, ui.render {component=ToolUse}, ui.render {component=Pane, requestId=desktop-look-changes}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=changes}, tool.call, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}, ui.render {component=ToolUse}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.env.get, $.fs.read, $.session.turns, $.state.get, $.state.set, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/chandan84/cache-time-pending-usage-limit-mod">chandan84/cache-time-pending-usage-limit-mod</a></p>
 <p class="lede">Three-box HUD above the prompt: tokens and API-equivalent cost across all sessions (daily and per-session breakdown), context-window meter with a soft limit, and prompt-cache warmth countdown with last-turn tokens and cost.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">usage-hud reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 17</li><li>Access from classified calls: L2, writes or runs: runs processes, reads env vars, reads settings, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">usage-hud reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 17</li><li>Access from classified calls: L2, writes or runs: runs processes, reads env vars, reads settings, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install usage-hud --marketplace chandan84/cache-time-pending-usage-limit-mod</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads env vars, reads settings, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear|resume|fork}, turn.start, turn.step, turn.complete, prompt.submit, command.run {command=usage-hud}, ui.render {component=AbovePrompt}, ui.close, ui.render {component=Pane}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear|resume|fork}, turn.start, turn.step, turn.complete, prompt.submit, command.run {command=usage-hud}, ui.close</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.command.register, $.env.get, $.process.run, $.session.id, $.session.surfaces, $.session.usage, $.settings.read, $.store.get, $.store.set, $.ui.ask, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

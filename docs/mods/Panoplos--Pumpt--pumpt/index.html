@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Panoplos/Pumpt">Panoplos/Pumpt</a></p>
 <p class="lede">Pixi works out above your prompt while Claude works: pixel-art exercises matched to how hard your prompt is, as rated by a locally hosted torchcast-decision-12b.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">pumpt reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 9</li><li>Access from classified calls: L3, network: network, writes files, reads env vars, reads the transcript, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">pumpt reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 9</li><li>Access from classified calls: L3, network: network, writes files, reads env vars, reads the transcript, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, writes files, reads env vars, reads the transcript, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, tool.call, turn.complete, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.submit, tool.call, turn.complete</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.env.get, $.fs.write, $.http.fetch, $.session.messages, $.ui.blit, $.ui.invalidate, $.ui.log, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

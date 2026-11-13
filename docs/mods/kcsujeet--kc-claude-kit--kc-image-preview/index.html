@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/kcsujeet/kc-claude-kit">kcsujeet/kc-claude-kit</a></p>
 <p class="lede">Thumbnails of the images you paste, above the prompt: the real picture in Ghostty and kitty, colored cells in other terminals, and the real file behind a copied Finder icon</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">kc-image-preview reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, reads the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">kc-image-preview reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, reads the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install kc-image-preview --marketplace kcsujeet/kc-claude-kit</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, reads env vars, reads the prompt box, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.submit</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.process.run, $.prompt.read, $.session.id, $.state.get, $.state.set, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/kcsujeet/kc-claude-kit/tree/35a6214a1acc7c8fd23a10e16903efdb773e64eb"><code>35a6214a1acc</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/kcsujeet/kc-claude-kit/blob/35a6214a1acc7c8fd23a10e16903efdb773e64eb/.claude-plugin/marketplace.json">kc-claude-kit</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/kcsujeet/kc-claude-kit/tree/3857f5a250d30a28c7d576bb85df111b52cd5756"><code>3857f5a250d3</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/kcsujeet/kc-claude-kit/blob/3857f5a250d30a28c7d576bb85df111b52cd5756/.claude-plugin/marketplace.json">kc-claude-kit</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from kcsujeet/kc-claude-kit</h2><ul><li><a href="/mods/kcsujeet--kc-claude-kit--kc-usage-band/">kc-usage-band</a><span>A row of pills above the prompt: model, git branch, context fill, 5h and 7d rate limits with reset times, inp…</span></li></ul></section>
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/kcsujeet--kc-claude-kit--kc-image-preview-reach.svg" alt="Reach badge for kc-image-preview"> <img src="/badges/kcsujeet--kc-claude-kit--kc-image-preview-validates.svg" alt="Validation badge for kc-image-preview"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/kcsujeet--kc-claude-kit--kc-image-preview-reach.svg)](https://mods.aidojo.si/mods/kcsujeet--kc-claude-kit--kc-image-preview/)

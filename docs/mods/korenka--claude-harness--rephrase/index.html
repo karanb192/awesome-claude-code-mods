@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/korenka/claude-harness">korenka/claude-harness</a></p>
 <p class="lede">Adds a Rephrase button that rewrites the draft in the prompt box with a small model, so the LLM gets a clearer, structured prompt. Undo restores the original</p>
 <p class="compatibility">marketplace fails</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">rephrase reaches L2 (writes or runs) and fails <code>claude plugin validate</code>: types: line 14: `export` at the top level is followed by `type` or `interface`: a contract exports types and nothing else.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 7</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">rephrase reaches L2 (writes or runs) and fails <code>claude plugin validate</code>: types: line 14: `export` at the top level is followed by `type` or `interface`: a contract exports types and nothing else.</p><ul><li>Events hooked: 1</li><li>API methods referenced: 7</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, writes the prompt box, reads the prompt box, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status bad">Fails</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>prompt.submit, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>prompt.submit</code></dd>
     <dt>API calls</dt><dd><code>$.model.complete, $.prompt.fill, $.prompt.read, $.state.get, $.state.set, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Fails</dd>

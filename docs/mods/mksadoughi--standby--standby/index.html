@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>/&quot;^mcp__standby__&quot;/ calls, classic hooks, AskUserQuestion calls, every tool call, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=standby}, tool.call {tool=/&quot;^mcp__standby__&quot;/}, classic.PermissionRequest, tool.call {tool=AskUserQuestion}, turn.start, turn.complete, tool.call, prompt.submit, ui.render {component=AbovePrompt}, ui.render {component=UserMessage}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=standby}, tool.call {tool=/&quot;^mcp__standby__&quot;/}, classic.PermissionRequest, tool.call {tool=AskUserQuestion}, turn.start, turn.complete, tool.call, prompt.submit, ui.render {component=UserMessage}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.env.get, $.fs.read, $.http.fetch, $.process.run, $.process.spawn, $.prompt.submit, $.session.append, $.session.cwd, $.session.id, $.session.surfaces, $.tool.register, $.turn.abort, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/mksadoughi/standby/tree/55ad3c69ab5814929bcee0c91dbb97df5f814f0b"><code>55ad3c69ab58</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/mksadoughi/standby/blob/55ad3c69ab5814929bcee0c91dbb97df5f814f0b/.claude-plugin/marketplace.json">standby</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/mksadoughi/standby/tree/869b05844d0f55d9accab7d94a8f64b940198105"><code>869b05844d0f</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/mksadoughi/standby/blob/869b05844d0f55d9accab7d94a8f64b940198105/.claude-plugin/marketplace.json">standby</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/mksadoughi--standby--standby-reach.svg" alt="Reach badge for standby"> <img src="/badges/mksadoughi--standby--standby-validates.svg" alt="Validation badge for standby"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/mksadoughi--standby--standby-reach.svg)](https://mods.aidojo.si/mods/mksadoughi--standby--standby/)

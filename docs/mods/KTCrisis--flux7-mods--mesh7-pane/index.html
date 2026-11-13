@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/KTCrisis/flux7-mods">KTCrisis/flux7-mods</a></p>
 <p class="lede">Live mesh7 decisions, pending approvals and emergency stops in a pane</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">mesh7-pane reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 10</li><li>Access from classified calls: L3, network: network, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">mesh7-pane reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 10</li><li>Access from classified calls: L3, network: network, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call, command.run {command=mesh7}, ui.render {component=Pane, requestId=mesh7-pane}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, tool.call, command.run {command=mesh7}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.http.fetch, $.session.id, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

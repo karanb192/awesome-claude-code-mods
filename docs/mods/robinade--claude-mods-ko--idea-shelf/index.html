@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/robinade/claude-mods-ko">robinade/claude-mods-ko</a></p>
 <p class="lede">작업 중 떠오른 곁가지 아이디어를 /idea 로 선반에 올려 두고(Claude도 직접 올려요), 나중에 클릭 한 번으로 Claude에게 보내요</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">idea-shelf reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">idea-shelf reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install idea-shelf --marketplace robinade/claude-mods-ko</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, mcp__idea-shelf__shelve_idea calls, Edit|Write|NotebookEdit calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart, prompt.compose, tool.call {tool=mcp__idea-shelf__shelve_idea}, command.run {command=idea}, turn.start, tool.call {tool=Edit|Write|NotebookEdit}, turn.complete, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=idea-shelf}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart, prompt.compose, tool.call {tool=mcp__idea-shelf__shelve_idea}, command.run {command=idea}, turn.start, tool.call {tool=Edit|Write|NotebookEdit}, turn.complete</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.prompt.submit, $.session.cwd, $.session.id, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.register, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

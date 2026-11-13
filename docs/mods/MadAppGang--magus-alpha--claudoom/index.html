@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/MadAppGang/magus-alpha">MadAppGang/magus-alpha</a></p>
 <p class="lede">Plays Doom-engine WADs in a Claude Code pane: runs doom-cli (GPLv2, built from upstream) in a private tmux server and repaints its frames into a Raster. Fetches Freedoom (BSD) on demand. DOOM is a ZeniMax trademark; not affiliated with id Software, ZeniMax or Anthropic.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">claudoom reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">claudoom reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install claudoom --marketplace MadAppGang/magus-alpha</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, reads files, reads env vars, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=claudoom}, ui.render {component=Pane}, ui.scroll {requestId=claudoom}, ui.message, ui.close {id=claudoom}, session.end</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=claudoom}, ui.scroll {requestId=claudoom}, ui.message, ui.close {id=claudoom}, session.end</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.env.get, $.fs.exists, $.fs.read, $.fs.write, $.process.run, $.session.id, $.ui.blit, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.panes, $.ui.resolve</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/controls.tsx</code></dd>
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/MadAppGang/magus-alpha/tree/e2807d04f7dede8aa8b25fb2717f6a83f751e012"><code>e2807d04f7de</code></a></dd>
-    <dt>Marketplace warnings</dt><dd><a href="https://github.com/MadAppGang/magus-alpha/blob/e2807d04f7dede8aa8b25fb2717f6a83f751e012/.claude-plugin/marketplace.json">magus-alpha</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/MadAppGang/magus-alpha/tree/55ae58f513570372ba3d73e7d6b9a954e8b5b958"><code>55ae58f51357</code></a></dd>
+    <dt>Marketplace warnings</dt><dd><a href="https://github.com/MadAppGang/magus-alpha/blob/55ae58f513570372ba3d73e7d6b9a954e8b5b958/.claude-plugin/marketplace.json">magus-alpha</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from MadAppGang/magus-alpha</h2><ul><li><a href="/mods/MadAppGang--magus-alpha--agent-colours/">agent-colours</a><span>Colours subagent and skill names in Claude Code by their own color: field. An agent's name sits on a coloured…</span></li></ul></section>
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/MadAppGang--magus-alpha--claudoom-reach.svg" alt="Reach badge for claudoom"> <img src="/badges/MadAppGang--magus-alpha--claudoom-validates.svg" alt="Validation badge for claudoom"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/MadAppGang--magus-alpha--claudoom-reach.svg)](https://mods.aidojo.si/mods/MadAppGang--magus-alpha--claudoom/)

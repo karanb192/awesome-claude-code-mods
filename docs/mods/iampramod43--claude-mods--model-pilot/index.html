@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/iampramod43/claude-mods">iampramod43/claude-mods</a></p>
 <p class="lede">Routes a task to a fit model or a small team of subagents, shares context through a versioned artifact store, and shows it all live: radial progress, agent lanes and a data-flow graph</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">model-pilot reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 17</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads settings, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">model-pilot reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 17</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads settings, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install model-pilot --marketplace iampramod43/claude-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads settings, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>? calls, every tool call, subagent spawns</dd>
-    <dt>Hooks</dt><dd><code>session.start, agent.offer {agent=?}, command.run {command=model-pilot}, tool.call {tool=?}, tool.call {tool=?}, tool.call {tool=?}, tool.call {tool=?}, tool.call, turn.complete, agent.spawn, ui.render {component=Pane, requestId=model-pilot}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, agent.offer {agent=?}, command.run {command=model-pilot}, tool.call {tool=?}, tool.call {tool=?}, tool.call {tool=?}, tool.call {tool=?}, tool.call, turn.complete, agent.spawn</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.agent.register, $.agent.spawn, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.config.list, $.session.model, $.session.usage, $.state.get, $.state.set, $.tool.call, $.tool.register, $.ui.close, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

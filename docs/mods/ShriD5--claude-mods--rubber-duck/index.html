@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/ShriD5/claude-mods">ShriD5/claude-mods</a></p>
 <p class="lede">A fast second opinion on every edit: a small model flags removed error handling, deleted tests, secrets and more</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">rubber-duck reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">rubber-duck reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads files, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call, prompt.submit, command.run {command=duck}, ui.render {component=Pane, requestId=rubber-duck}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, tool.call, prompt.submit, command.run {command=duck}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.fs.stat, $.model.complete, $.state.get, $.state.set, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Sajid-Rahman0126/claude-studio-mods">Sajid-Rahman0126/claude-studio-mods</a></p>
 <p class="lede">Keeps a running list of every file Claude edited or wrote this session: a count in the status line and a /touched pane</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">touched-files reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 8</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">touched-files reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 8</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install touched-files --marketplace Sajid-Rahman0126/claude-studio-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Edit calls, Write calls, NotebookEdit calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=Edit}, tool.call {tool=Write}, tool.call {tool=NotebookEdit}, command.run {command=touched}, ui.render {component=Pane, requestId=touched-files}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=Edit}, tool.call {tool=Write}, tool.call {tool=NotebookEdit}, command.run {command=touched}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.session.cwd, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

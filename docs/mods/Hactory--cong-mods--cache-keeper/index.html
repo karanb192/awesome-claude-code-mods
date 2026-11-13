@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>TodoWrite calls, TaskCreate calls, TaskUpdate calls, Agent calls, classic hooks, every tool call, every prompt</dd>
-    <dt>Hooks</dt><dd><code>command.run {command=tien-do}, tool.call {tool=TodoWrite}, tool.call {tool=TaskCreate}, tool.call {tool=TaskUpdate}, tool.call {tool=Agent}, classic.SubagentStart, classic.SubagentStop, tool.call, ui.render {component=Pane, requestId=tien-do}, command.run {command=luu-y}, ui.render {component=Pane, requestId=luu-y}, ui.render {component=Pane, requestId=handoff}, session.start, session.measure, prompt.submit, turn.complete, ui.render {component=AbovePrompt}, ui.render {component=SessionMode}</code></dd>
+    <dt>Hooks</dt><dd><code>command.run {command=tien-do}, tool.call {tool=TodoWrite}, tool.call {tool=TaskCreate}, tool.call {tool=TaskUpdate}, tool.call {tool=Agent}, classic.SubagentStart, classic.SubagentStop, tool.call, command.run {command=luu-y}, session.start, session.measure, prompt.submit, turn.complete, ui.render {component=SessionMode}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.list, $.command.register, $.command.run, $.env.get, $.fs.write, $.model.complete, $.model.fork, $.prompt.fill, $.session.id, $.session.messages, $.session.usage, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.copy, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

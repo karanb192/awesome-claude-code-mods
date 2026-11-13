@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/fanbuz/claude-workbench-mod">fanbuz/claude-workbench-mod</a></p>
 <p class="lede">Workbench for Claude Code: a live narration band above the prompt and a side pane with this turn's steps, working tree changes and turn history.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">workbench reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 24</li><li>Access from classified calls: L2, writes or runs: runs processes, changes config, drives Claude, writes the prompt box, writes the clipboard, reads env vars, reads settings, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">workbench reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 24</li><li>Access from classified calls: L2, writes or runs: runs processes, changes config, drives Claude, writes the prompt box, writes the clipboard, reads env vars, reads settings, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, changes config, drives Claude, writes the prompt box, writes the clipboard, reads env vars, reads settings, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=workbench}, prompt.submit, turn.step, tool.call, turn.complete, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=workbench}, ui.render {component=Pane, requestId=workbench-settings}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=workbench}, prompt.submit, turn.step, tool.call, turn.complete</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.command.register, $.config.list, $.config.set, $.env.get, $.model.complete, $.process.run, $.prompt.fill, $.prompt.submit, $.session.compact, $.session.cwd, $.session.id, $.session.usage, $.settings.read, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.copy, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

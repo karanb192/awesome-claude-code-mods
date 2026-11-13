@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, subagent spawns, ? calls, classic hooks, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=clear|resume}, turn.step, prompt.submit, turn.start, agent.spawn, turn.complete, session.measure, prompt.compose, tool.call {tool=?}, tool.call {tool=?}, classic.Stop, ui.render {component=ToolUse, props has {tool=?}}, ui.render {component=ToolResult, props has {tool=?}}, tool.call, command.run {command=?|?}, ui.render {component=PromptHint}, ui.render {component=AbovePrompt}, ui.close {id=?}, ui.render {component=Pane}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=clear|resume}, turn.step, prompt.submit, turn.start, agent.spawn, turn.complete, session.measure, prompt.compose, tool.call {tool=?}, tool.call {tool=?}, classic.Stop, ui.render {component=ToolUse, props has {tool=?}}, ui.render {component=ToolResult, props has {tool=?}}, tool.call, command.run {command=?|?}, ui.render {component=PromptHint}, ui.close {id=?}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.command.register, $.fs.read, $.model.complete, $.process.run, $.prompt.submit, $.session.id, $.store.delete, $.store.get, $.store.keys, $.store.set, $.tool.register, $.ui.close, $.ui.copy, $.ui.focus, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.scroll, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

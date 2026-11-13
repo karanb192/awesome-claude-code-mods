@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/nogu66/claude-code">nogu66/claude-code</a></p>
 <p class="lede">A Claude Mod (function-hooks plugin): /aquarium draws the session as a fish tank in a pane with kitty graphics: the main loop is the parent fish, each subagent a baby that is born and swims off, and every tool call an animation (Read feeds, Edit nests, Bash dashes, an error sinks); the water level follows the context window. Half-block fallback where the terminal shows no images. / Claude Mod（function hooks プラグイン）。/aquarium でセッションを Kitty graphics の水槽として pane に描画。メインループが親魚、サブエージェントは誕生して泳ぎ去る稚魚、ツール呼び出しは魚の動き（Read で餌、Edit で巣、Bash でダッシュ、エラーで沈む）、水位はコンテキスト使用率に連動。画像非対応端末では半ブロック描画に自動切替。</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">agent-aquarium reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 11</li><li>API methods referenced: 13</li><li>Access from classified calls: L1, reads: reads files, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">agent-aquarium reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 13</li><li>Access from classified calls: L1, reads: reads files, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install agent-aquarium --marketplace nogu66/claude-code</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads files, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, subagent spawns, compaction</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=aquarium}, ui.render {component=Pane, requestId=aquarium}, ui.close {id=aquarium}, tool.call, agent.spawn, turn.start, turn.complete, session.measure, session.compact, session.end</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=aquarium}, ui.close {id=aquarium}, tool.call, agent.spawn, turn.start, turn.complete, session.measure, session.compact, session.end</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.command.register, $.fs.read, $.session.surfaces, $.store.get, $.store.set, $.ui.blit, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

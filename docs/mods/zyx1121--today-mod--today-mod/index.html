@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/zyx1121/today-mod">zyx1121/today-mod</a></p>
 <p class="lede">/today: the day's agenda for Claude and for you. Calendar events, E3 deadlines and Reminders are read through the macos and nycu plugin scripts, shown as one line above the prompt with a countdown to the next event, and handed to Claude as a context block so it knows your day.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">today-mod reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">today-mod reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install today-mod --marketplace zyx1121/today-mod</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, reads files, reads env vars, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>the system prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=today}, ui.render {component=AbovePrompt}, prompt.context, session.end</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=today}, prompt.context, session.end</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.env.get, $.fs.read, $.fs.write, $.process.run, $.store.get, $.store.set, $.ui.invalidate, $.ui.log, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

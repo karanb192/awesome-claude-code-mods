@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/MatheusChiodi/cockpit">MatheusChiodi/cockpit</a></p>
 <p class="lede">Band that appears when the current turn edits the same file three times or more, a sign that Claude is going in circles</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">edit-thrash-band reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 3</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">edit-thrash-band reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 3</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Edit calls, Write calls</dd>
-    <dt>Hooks</dt><dd><code>turn.start, tool.call {tool=Edit}, tool.call {tool=Write}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>turn.start, tool.call {tool=Edit}, tool.call {tool=Write}</code></dd>
     <dt>API calls</dt><dd><code>$.state.get, $.state.set, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

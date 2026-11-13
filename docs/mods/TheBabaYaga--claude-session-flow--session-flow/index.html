@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/TheBabaYaga/claude-session-flow">TheBabaYaga/claude-session-flow</a></p>
 <p class="lede">A live pane that shows the session as a flow: each prompt, its phases, its subagents and its cost</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">session-flow reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 8</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">session-flow reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 8</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install session-flow --marketplace TheBabaYaga/claude-session-flow</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, subagent spawns</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=flow}, turn.start, turn.complete, tool.call, session.append, agent.spawn, ui.render {component=Pane, requestId=session-flow}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=flow}, turn.start, turn.complete, tool.call, session.append, agent.spawn</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.session.usage, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.scroll, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

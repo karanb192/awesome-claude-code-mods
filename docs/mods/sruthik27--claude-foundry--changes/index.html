@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt, TaskUpdate calls, TodoWrite calls, Edit|Write calls, Bash calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart, prompt.compose, turn.start, prompt.submit, tool.call {tool=TaskUpdate}, tool.call {tool=TodoWrite}, tool.call {tool=Edit|Write}, tool.call {tool=Bash}, turn.complete, ui.render {component=AssistantMessage}, command.run {command=changes}, ui.message {requestId=changes}, ui.render {component=Pane, requestId=changes}, ui.close {id=changes}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart, prompt.compose, turn.start, prompt.submit, tool.call {tool=TaskUpdate}, tool.call {tool=TodoWrite}, tool.call {tool=Edit|Write}, tool.call {tool=Bash}, turn.complete, ui.render {component=AssistantMessage}, command.run {command=changes}, ui.message {requestId=changes}, ui.close {id=changes}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.env.get, $.fs.exists, $.fs.read, $.model.complete, $.process.run, $.prompt.submit, $.session.id, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/viewer.tsx</code></dd>
     <dt>Validation</dt><dd>Passed</dd>

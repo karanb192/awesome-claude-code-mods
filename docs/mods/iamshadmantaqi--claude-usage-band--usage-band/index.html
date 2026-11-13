@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/iamshadmantaqi/claude-usage-band">iamshadmantaqi/claude-usage-band</a></p>
 <p class="lede">One tidy bar above the prompt: context against your auto-compact window, 5-hour and 7-day limits against the clock, prompt cache time left, session cost and running agents, each with a hover card.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">usage-band reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: runs processes, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">usage-band reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: runs processes, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install usage-band --marketplace iamshadmantaqi/claude-usage-band</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads env vars, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, compaction, subagent spawns</dd>
-    <dt>Hooks</dt><dd><code>command.run {command=?}, ui.render {component=Pane, requestId=job-queue}, session.start, session.end, prompt.submit, turn.step, turn.complete, session.compact, session.measure, agent.spawn, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>command.run {command=?}, session.start, session.end, prompt.submit, turn.step, turn.complete, session.compact, session.measure, agent.spawn</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.command.register, $.env.get, $.process.run, $.session.usage, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

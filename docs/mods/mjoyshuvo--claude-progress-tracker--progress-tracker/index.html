@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>progress-tracker, a Claude Code mod by mjoyshuvo | Awesome Claude Code Mods</title>
-<meta name="description" content="A live progress bar for the current task list and plan, drawn in the band above the prompt. Scan: L2 writes or runs, passes validation."><meta name="robots" content="noindex"><meta name="theme-color" content="#f0eee6" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1c1c1a" media="(prefers-color-scheme: dark)">
+<meta name="description" content="A live progress bar for the current task list and plan, drawn in the band above the prompt. Scan: L2 writes or runs, passes validation."><meta name="theme-color" content="#f0eee6" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1c1c1a" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://mods.aidojo.si/mods/mjoyshuvo--claude-progress-tracker--progress-tracker/"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/site.css">
@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/mjoyshuvo/claude-progress-tracker">mjoyshuvo/claude-progress-tracker</a></p>
 <p class="lede">A live progress bar for the current task list and plan, drawn in the band above the prompt.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">progress-tracker reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 11</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">progress-tracker reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install progress-tracker --marketplace mjoyshuvo/claude-progress-tracker</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>? calls, EnterPlanMode calls, subagent spawns, classic hooks, every tool call, ExitPlanMode calls, AskUserQuestion calls, TaskCreate calls, TaskUpdate calls, TodoWrite calls, Bash calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=progress}, command.run {command=progress-tracker-demo}, tool.describe {tool=?}, tool.call {tool=?}, tool.call {tool=EnterPlanMode}, agent.spawn, classic.PermissionRequest, classic.Notification, tool.call, turn.step, turn.start, turn.complete, tool.call {tool=ExitPlanMode}, tool.call {tool=AskUserQuestion}, tool.call {tool=TaskCreate}, tool.call {tool=TaskUpdate}, tool.call {tool=TodoWrite}, tool.call {tool=Bash}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=progress}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=progress}, command.run {command=progress-tracker-demo}, tool.describe {tool=?}, tool.call {tool=?}, tool.call {tool=EnterPlanMode}, agent.spawn, classic.PermissionRequest, classic.Notification, tool.call, turn.step, turn.start, turn.complete, tool.call {tool=ExitPlanMode}, tool.call {tool=AskUserQuestion}, tool.call {tool=TaskCreate}, tool.call {tool=TaskUpdate}, tool.call {tool=TodoWrite}, tool.call {tool=Bash}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.command.register, $.session.usage, $.state.get, $.state.set, $.tool.register, $.ui.blit, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/romtaugranot/issue-map">romtaugranot/issue-map</a></p>
 <p class="lede">Draws a Project's open Issues as a Map joined by the Links its Tracker records, inside Claude Code.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">issue-map reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">issue-map reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, writes the prompt box, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.complete, command.run {command=issue-map}, ui.message {requestId=map}, ui.render {component=Pane, requestId=map}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.complete, command.run {command=issue-map}, ui.message {requestId=map}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.process.run, $.prompt.fill, $.prompt.submit, $.session.cwd, $.session.id, $.state.get, $.state.set, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/link.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

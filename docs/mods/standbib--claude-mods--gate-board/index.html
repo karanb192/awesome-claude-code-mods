@@ -14,8 +14,8 @@
 <h1>gate-board</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/standbib/claude-mods">standbib/claude-mods</a></p>
 <p class="lede">A /gate pane: open PRs with checks and panel status, what main has that Supabase isn't running, and merges since the last Lovable publish</p>
-<p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">gate-board reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 12</li><li>Access from classified calls: L3, network: network, runs processes, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+
+<section class="summary" aria-label="Scan summary"><p class="summary-line">gate-board reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 12</li><li>Access from classified calls: L3, network: network, runs processes, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install gate-board --marketplace standbib/claude-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, reads files, reads env vars, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=gate}, prompt.submit, ui.render {component=Pane}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=gate}, prompt.submit</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.env.get, $.fs.read, $.http.fetch, $.process.run, $.store.get, $.store.set, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/standbib/claude-mods/tree/8a1b963acdeac097c811c358e6ec98e9edfb2929"><code>8a1b963acdea</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/standbib/claude-mods/blob/8a1b963acdeac097c811c358e6ec98e9edfb2929/.claude-plugin/marketplace.json">standbib-mods</a></dd><dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/standbib/claude-mods/blob/8a1b963acdeac097c811c358e6ec98e9edfb2929/gate-board/hooks/board.mjs#L78">gate-board/hooks/board.mjs:78</a>, <a href="https://github.com/standbib/claude-mods/blob/8a1b963acdeac097c811c358e6ec98e9edfb2929/gate-board/hooks/board.mjs#L82">gate-board/hooks/board.mjs:82</a></dd></dl>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/standbib/claude-mods/blob/8a1b963acdeac097c811c358e6ec98e9edfb2929/.claude-plugin/marketplace.json">standbib-mods</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from standbib/claude-mods</h2><ul><li><a href="/mods/standbib--claude-mods--remote-control-toggle/">remote-control-toggle</a><span>Shows whether Remote Control is on, in the prompt footer (or a band with a toggle button)</span></li><li><a href="/mods/standbib--claude-mods--voice-check/">voice-check</a><span>Holds Notion writes that contain meta commentary and sends them back to Claude to rewrite</span></li></ul></section>
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/standbib--claude-mods--gate-board-reach.svg" alt="Reach badge for gate-board"> <img src="/badges/standbib--claude-mods--gate-board-validates.svg" alt="Validation badge for gate-board"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/standbib--claude-mods--gate-board-reach.svg)](https://mods.aidojo.si/mods/standbib--claude-mods--gate-board/)

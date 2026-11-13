@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/korenka/claude-harness">korenka/claude-harness</a></p>
 <p class="lede">Adds a TLDR button that summarizes Claude's latest response in a side pane</p>
 <p class="compatibility">marketplace fails</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">tldr reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the clipboard, reads the transcript, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">tldr reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the clipboard, reads the transcript, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, writes the clipboard, reads the transcript, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=tldr}, ui.render {component=AbovePrompt}, ui.render {component=Pane}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=tldr}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.model.complete, $.session.messages, $.ui.copy, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

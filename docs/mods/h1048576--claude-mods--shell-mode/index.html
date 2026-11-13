@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/h1048576/claude-mods">h1048576/claude-mods</a></p>
 <p class="lede">用 /shell-mode 切换 Bash 模式，连续执行命令并显示颜色，退出后将输出保留在 CLI 中</p>
 <p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">shell-mode reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">shell-mode reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, drives Claude, reads files, reads env vars, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=shell-mode}, command.describe {command=shell-mode-output}, command.run {command=shell-mode-output}, ui.render {component=CommandOutput}, ui.render {component=UserMessage}, ui.input {plugin=shell-mode, element=shell-command, requestId=shell-console}, ui.render {component=Pane, requestId=shell-console}, ui.close {id=shell-console}, session.end</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=shell-mode}, command.describe {command=shell-mode-output}, command.run {command=shell-mode-output}, ui.render {component=CommandOutput}, ui.render {component=UserMessage}, ui.close {id=shell-console}, session.end</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.command.run, $.env.get, $.fs.exists, $.fs.read, $.fs.write, $.process.run, $.session.cwd, $.ui.close, $.ui.focus, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.scroll, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

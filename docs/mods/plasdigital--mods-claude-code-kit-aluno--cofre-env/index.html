@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/plasdigital/mods-claude-code-kit-aluno">plasdigital/mods-claude-code-kit-aluno</a></p>
 <p class="lede">A IA não lê mais os .env (vê só o nome das chaves e se estão vazias); o usuário ganha o link do arquivo na tela para preencher</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">cofre-env reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: runs processes, writes the clipboard, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">cofre-env reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: runs processes, writes the clipboard, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes the clipboard, reads files, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=env}, tool.call, prompt.submit, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=env}, tool.call, prompt.submit</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.process.run, $.session.cwd, $.state.get, $.state.set, $.ui.copy, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

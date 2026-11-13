@@ -14,8 +14,8 @@
 <h1>clack</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/Aaravkataria24/aarav-mods">Aaravkataria24/aarav-mods</a></p>
 <p class="lede">Mechanical keyboard sounds for Claude Code: you and Claude both clack, on 13 real switches, with a little keyboard that lights up.</p>
-<p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">clack reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 10</li><li>Access from classified calls: L3, network: network, runs processes, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+
+<section class="summary" aria-label="Scan summary"><p class="summary-line">clack reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 10</li><li>Access from classified calls: L3, network: network, runs processes, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install clack --marketplace Aaravkataria24/aarav-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.edit, prompt.submit, turn.step, command.run {command=keyboard}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.edit, prompt.submit, turn.step, command.run {command=keyboard}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.command.register, $.http.fetch, $.process.spawn, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/Aaravkataria24/aarav-mods/tree/9923dbafce4ff0f414af07972484dce5e0f64b19"><code>9923dbafce4f</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/Aaravkataria24/aarav-mods/blob/9923dbafce4ff0f414af07972484dce5e0f64b19/.claude-plugin/marketplace.json">aarav-mods</a></dd><dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/Aaravkataria24/aarav-mods/blob/9923dbafce4ff0f414af07972484dce5e0f64b19/plugins/clack/hooks/keys.ts#L31">plugins/clack/hooks/keys.ts:31</a></dd></dl>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/Aaravkataria24/aarav-mods/blob/9923dbafce4ff0f414af07972484dce5e0f64b19/.claude-plugin/marketplace.json">aarav-mods</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from Aaravkataria24/aarav-mods</h2><ul><li><a href="/mods/Aaravkataria24--aarav-mods--drunk/">drunk</a><span>Give Claude a /shot. It gets tipsy, then drunk, then wasted. It still does the work. Mostly.</span></li><li><a href="/mods/Aaravkataria24--aarav-mods--sulky/">sulky</a><span>Yell at Claude and it sulks. It still does the work. It just won't be happy about it.</span></li></ul></section>
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/Aaravkataria24--aarav-mods--clack-reach.svg" alt="Reach badge for clack"> <img src="/badges/Aaravkataria24--aarav-mods--clack-validates.svg" alt="Validation badge for clack"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/Aaravkataria24--aarav-mods--clack-reach.svg)](https://mods.aidojo.si/mods/Aaravkataria24--aarav-mods--clack/)

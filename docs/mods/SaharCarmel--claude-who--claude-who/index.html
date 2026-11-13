@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/SaharCarmel/claude-who">SaharCarmel/claude-who</a></p>
 <p class="lede">Friends' Claude Code presence and usage leaderboards via /who.</p>
 <p class="compatibility">marketplace fails</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">claude-who reaches L3 (network) and fails <code>claude plugin validate</code>: name: Plugin name &quot;claude-who&quot; is reserved: it passes as one of Anthropic's own. A third party's plugin name cannot start with &quot;claude-&quot;, &quot;anthropic-&quot;, &quot;anthro….</p><ul><li>Events hooked: 6</li><li>API methods referenced: 16</li><li>Access from classified calls: L3, network: network, runs processes, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">claude-who reaches L3 (network) and fails <code>claude plugin validate</code>: name: Plugin name &quot;claude-who&quot; is reserved: it passes as one of Anthropic's own. A third party's plugin name cannot start with &quot;claude-&quot;, &quot;anthropic-&quot;, &quot;anthro….</p><ul><li>Events hooked: 5</li><li>API methods referenced: 16</li><li>Access from classified calls: L3, network: network, runs processes, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status bad">Fails</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, command.run {command=who}, ui.close {id=who-leaderboard}, ui.render {component=Pane}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, command.run {command=who}, ui.close {id=who-leaderboard}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.http.fetch, $.process.run, $.session.id, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Fails</dd>

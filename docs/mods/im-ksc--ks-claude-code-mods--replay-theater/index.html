@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/im-ksc/ks-claude-code-mods">im-ksc/ks-claude-code-mods</a></p>
 <p class="lede">Replay Theater: step through the file edits Claude made in the last turn, one diff at a time.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">replay-theater reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">replay-theater reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install replay-theater --marketplace im-ksc/ks-claude-code-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads files, reads env vars, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=replay}, tool.call, turn.start, turn.complete, ui.render {component=AbovePrompt}, ui.render {component=Pane}, ui.close</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=replay}, tool.call, turn.start, turn.complete, ui.close</code></dd>
     <dt>API calls</dt><dd><code>$.clock.sleep, $.command.register, $.env.get, $.fs.exists, $.fs.read, $.model.fork, $.session.cwd, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/im-ksc/ks-claude-code-mods/tree/6654314f69615fd4edf296dda3cf29abfc53bf7a"><code>6654314f6961</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/im-ksc/ks-claude-code-mods/blob/6654314f69615fd4edf296dda3cf29abfc53bf7a/.claude-plugin/marketplace.json">ks-ai-stack</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/im-ksc/ks-claude-code-mods/tree/1f89ab81afd0669b91cb4acc87e3402c8f3ca7cf"><code>1f89ab81afd0</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/im-ksc/ks-claude-code-mods/blob/1f89ab81afd0669b91cb4acc87e3402c8f3ca7cf/.claude-plugin/marketplace.json">ks-ai-stack</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from im-ksc/ks-claude-code-mods</h2><ul><li><a href="/mods/im-ksc--ks-claude-code-mods--hud/">hud</a><span>A band above the prompt: usage limits with a pace verdict, context, branch and cost, with Compact and collaps…</span></li></ul></section>
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/im-ksc--ks-claude-code-mods--replay-theater-reach.svg" alt="Reach badge for replay-theater"> <img src="/badges/im-ksc--ks-claude-code-mods--replay-theater-validates.svg" alt="Validation badge for replay-theater"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/im-ksc--ks-claude-code-mods--replay-theater-reach.svg)](https://mods.aidojo.si/mods/im-ksc--ks-claude-code-mods--replay-theater/)

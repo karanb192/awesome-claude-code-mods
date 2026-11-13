@@ -14,8 +14,8 @@
 <h1>git-graph</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/juliomyitbrain/claude-code-git-graph">juliomyitbrain/claude-code-git-graph</a></p>
 <p class="lede">A pane that draws the repository's commit graph: lanes, merges and branch labels, with a card of details for a clicked commit</p>
-<p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">git-graph reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 5</li><li>Access from classified calls: L2, writes or runs: runs processes, draws</li><li>Static scan, not a runtime test</li></ul></section>
+
+<section class="summary" aria-label="Scan summary"><p class="summary-line">git-graph reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 5</li><li>Access from classified calls: L2, writes or runs: runs processes, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install git-graph --marketplace juliomyitbrain/claude-code-git-graph</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>Bash calls, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=git-graph-calibrate}, ui.render {component=Pane, requestId=git-graph-calibrate}, command.run {command=git-graph}, tool.call {tool=Bash}, turn.complete, classic.CwdChanged, ui.render {component=Pane, requestId=git-graph}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=git-graph-calibrate}, command.run {command=git-graph}, tool.call {tool=Bash}, turn.complete, classic.CwdChanged</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.process.run, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/juliomyitbrain/claude-code-git-graph/tree/22655b72db53ef43e48875d51ada92d6cf7c7950"><code>22655b72db53</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/juliomyitbrain/claude-code-git-graph/blob/22655b72db53ef43e48875d51ada92d6cf7c7950/.claude-plugin/marketplace.json">juliomyitbrain-mods</a></dd><dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/juliomyitbrain/claude-code-git-graph/blob/22655b72db53ef43e48875d51ada92d6cf7c7950/hooks/graph.ts#L33">hooks/graph.ts:33</a>, <a href="https://github.com/juliomyitbrain/claude-code-git-graph/blob/22655b72db53ef43e48875d51ada92d6cf7c7950/hooks/graph.ts#L34">hooks/graph.ts:34</a>, <a href="https://github.com/juliomyitbrain/claude-code-git-graph/blob/22655b72db53ef43e48875d51ada92d6cf7c7950/hooks/graph.ts#L106">hooks/graph.ts:106</a></dd></dl>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/juliomyitbrain/claude-code-git-graph/blob/22655b72db53ef43e48875d51ada92d6cf7c7950/.claude-plugin/marketplace.json">juliomyitbrain-mods</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/juliomyitbrain--claude-code-git-graph--git-graph-reach.svg" alt="Reach badge for git-graph"> <img src="/badges/juliomyitbrain--claude-code-git-graph--git-graph-validates.svg" alt="Validation badge for git-graph"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/juliomyitbrain--claude-code-git-graph--git-graph-reach.svg)](https://mods.aidojo.si/mods/juliomyitbrain--claude-code-git-graph--git-graph/)

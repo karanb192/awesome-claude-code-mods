@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/estruyf/claude-stats-mod">estruyf/claude-stats-mod</a></p>
 <p class="lede">Usage limits (5h / 7d) and ccusage spend, drawn as a status band above the prompt.</p>
 <p class="compatibility">marketplace fails</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">claude-stats reaches L2 (writes or runs) and fails <code>claude plugin validate</code>: name: Plugin name &quot;claude-stats&quot; is reserved: it passes as one of Anthropic's own. A third party's plugin name cannot start with &quot;claude-&quot;, &quot;anthropic-&quot;, &quot;anth….</p><ul><li>Events hooked: 4</li><li>API methods referenced: 9</li><li>Access from classified calls: L2, writes or runs: runs processes, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">claude-stats reaches L2 (writes or runs) and fails <code>claude plugin validate</code>: name: Plugin name &quot;claude-stats&quot; is reserved: it passes as one of Anthropic's own. A third party's plugin name cannot start with &quot;claude-&quot;, &quot;anthropic-&quot;, &quot;anth….</p><ul><li>Events hooked: 3</li><li>API methods referenced: 9</li><li>Access from classified calls: L2, writes or runs: runs processes, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status bad">Fails</span></div></div>
@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.measure, turn.complete, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.measure, turn.complete</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.env.get, $.process.run, $.session.usage, $.state.get, $.state.set, $.ui.log, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Fails</dd>

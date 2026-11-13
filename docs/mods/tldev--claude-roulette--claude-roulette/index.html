@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/tldev/claude-roulette">tldev/claude-roulette</a></p>
 <p class="lede">A private text chat with another human while Claude works, with random matching, interests, next, block, report, and automatic task completion handling.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">claude-roulette reaches L3 (network) and fails <code>claude plugin validate</code>: name: Plugin name &quot;claude-roulette&quot; is reserved: it passes as one of Anthropic's own. A third party's plugin name cannot start with &quot;claude-&quot;, &quot;anthropic-&quot;, &quot;a….</p><ul><li>Events hooked: 7</li><li>API methods referenced: 14</li><li>Access from classified calls: L3, network: network, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">claude-roulette reaches L3 (network) and fails <code>claude plugin validate</code>: name: Plugin name &quot;claude-roulette&quot; is reserved: it passes as one of Anthropic's own. A third party's plugin name cannot start with &quot;claude-&quot;, &quot;anthropic-&quot;, &quot;a….</p><ul><li>Events hooked: 6</li><li>API methods referenced: 14</li><li>Access from classified calls: L3, network: network, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, reads env vars, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status bad">Fails</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=roulette}, turn.start, turn.complete, ui.render {component=Pane}, ui.close {id=claude-roulette}, classic.SessionEnd</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=roulette}, turn.start, turn.complete, ui.close {id=claude-roulette}, classic.SessionEnd</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.http.fetch, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Fails</dd>

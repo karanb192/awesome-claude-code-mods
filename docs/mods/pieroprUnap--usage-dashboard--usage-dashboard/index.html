@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/pieroprUnap/usage-dashboard">pieroprUnap/usage-dashboard</a></p>
 <p class="lede">Live session dashboard: tokens, cost, context, limits, agents, tasks, background jobs, tools and an animated pet</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">usage-dashboard reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 14</li><li>API methods referenced: 13</li><li>Access from classified calls: L1, reads: reads env vars, reads settings, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">usage-dashboard reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 13</li><li>API methods referenced: 13</li><li>Access from classified calls: L1, reads: reads env vars, reads settings, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads env vars, reads settings, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=dashboard}, classic.UserPromptSubmit, prompt.submit, classic.PostToolUse, classic.Stop, classic.SessionStart, turn.step, turn.start, tool.call, session.send, session.receive, turn.complete, ui.render {component=Pane, requestId=dashboard}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=dashboard}, classic.UserPromptSubmit, prompt.submit, classic.PostToolUse, classic.Stop, classic.SessionStart, turn.step, turn.start, tool.call, session.send, session.receive, turn.complete</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.command.register, $.env.get, $.session.cwd, $.session.model, $.session.usage, $.settings.read, $.state.get, $.state.set, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

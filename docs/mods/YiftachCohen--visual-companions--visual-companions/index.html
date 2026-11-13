@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, subagent spawns, every tool call, Bash calls, compaction</dd>
-    <dt>Hooks</dt><dd><code>prompt.submit, session.start, ui.render {component=AbovePrompt}, agent.spawn, tool.call, tool.call {tool=Bash}, prompt.compose, ui.render {component=AssistantMessage}, turn.complete, session.compact, command.run {command=catchup}, ui.render {component=Pane, requestId=catchup}</code></dd>
+    <dt>Hooks</dt><dd><code>prompt.submit, session.start, agent.spawn, tool.call, tool.call {tool=Bash}, prompt.compose, ui.render {component=AssistantMessage}, turn.complete, session.compact, command.run {command=catchup}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.now, $.command.register, $.model.complete, $.session.id, $.session.root, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.blit, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

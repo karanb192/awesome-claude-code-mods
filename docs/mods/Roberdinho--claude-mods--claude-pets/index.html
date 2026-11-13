@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Roberdinho/claude-mods">Roberdinho/claude-mods</a></p>
 <p class="lede">VS Code Pets for Claude Code: a cat, dog, crab, fox, rubber duck or Clawd that lives above your prompt, chases balls, cheers when a turn ends and naps when you're away</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">claude-pets reaches L1 (reads) and fails <code>claude plugin validate</code>: name: Plugin name &quot;claude-pets&quot; is reserved: it passes as one of Anthropic's own. A third party's plugin name cannot start with &quot;claude-&quot;, &quot;anthropic-&quot;, &quot;anthr….</p><ul><li>Events hooked: 7</li><li>API methods referenced: 10</li><li>Access from classified calls: L1, reads: reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">claude-pets reaches L1 (reads) and fails <code>claude plugin validate</code>: name: Plugin name &quot;claude-pets&quot; is reserved: it passes as one of Anthropic's own. A third party's plugin name cannot start with &quot;claude-&quot;, &quot;anthropic-&quot;, &quot;anthr….</p><ul><li>Events hooked: 6</li><li>API methods referenced: 10</li><li>Access from classified calls: L1, reads: reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status bad">Fails</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, ui.close, command.run {command=pet}, prompt.submit, turn.complete, tool.call, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=claude-pets}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, ui.close, command.run {command=pet}, prompt.submit, turn.complete, tool.call</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.close, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Fails</dd>

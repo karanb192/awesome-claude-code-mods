@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/graugart/flingo">graugart/flingo</a></p>
 <p class="lede">Flingo, a sassy ASCII flamingo that gives Claude Code a face: it talks as Claude, comments on your work, and lives in a sidebar or the status line.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">pet reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">pet reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install pet --marketplace graugart/flingo</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=pet}, command.run {command=flingo}, prompt.submit, tool.call, turn.complete, ui.close, ui.render {component=Pane, requestId=pet}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=pet}, command.run {command=flingo}, prompt.submit, tool.call, turn.complete, ui.close</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.model.complete, $.model.fork, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.close, $.ui.open, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

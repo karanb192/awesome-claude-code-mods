@@ -14,8 +14,8 @@
 <h1>house-rules-guard</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/ramankrishna/house-rules-guard">ramankrishna/house-rules-guard</a></p>
 <p class="lede">Enforces your standing rules for Claude: no push to main, no force push, no surprise deletes or new dependencies.</p>
-<p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">house-rules-guard reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+
+<section class="summary" aria-label="Scan summary"><p class="summary-line">house-rules-guard reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install house-rules-guard --marketplace ramankrishna/house-rules-guard</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, reads files, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, Bash|Edit|Write calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear|resume|fork}, turn.start, command.run {command=house-rules}, tool.check {tool=Bash}, tool.check {tool=Edit|Write}, tool.call {tool=Bash|Edit|Write}, ui.render {component=Pane, requestId=house-rules}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear|resume|fork}, turn.start, command.run {command=house-rules}, tool.check {tool=Bash}, tool.check {tool=Edit|Write}, tool.call {tool=Bash|Edit|Write}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.fs.exists, $.fs.read, $.fs.write, $.process.run, $.session.root, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/ramankrishna/house-rules-guard/tree/af96297b65e4da54e99c570e6e164a2039c34240"><code>af96297b65e4</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/ramankrishna/house-rules-guard/blob/af96297b65e4da54e99c570e6e164a2039c34240/.claude-plugin/marketplace.json">ramankrishna-house-rules-guard</a></dd><dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/ramankrishna/house-rules-guard/blob/af96297b65e4da54e99c570e6e164a2039c34240/hooks/rules.ts#L319">hooks/rules.ts:319</a></dd></dl>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/ramankrishna/house-rules-guard/blob/af96297b65e4da54e99c570e6e164a2039c34240/.claude-plugin/marketplace.json">ramankrishna-house-rules-guard</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/ramankrishna--house-rules-guard--house-rules-guard-reach.svg" alt="Reach badge for house-rules-guard"> <img src="/badges/ramankrishna--house-rules-guard--house-rules-guard-validates.svg" alt="Validation badge for house-rules-guard"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/ramankrishna--house-rules-guard--house-rules-guard-reach.svg)](https://mods.aidojo.si/mods/ramankrishna--house-rules-guard--house-rules-guard/)

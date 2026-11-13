@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/irfanfaraaz/claude-kit">irfanfaraaz/claude-kit</a></p>
 <p class="lede">After a carousel render: Caption, Queue Threads and Log ledger buttons; blocks Threads posts with a part over 500 characters</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">carousel-ship reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 5</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">carousel-ship reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 5</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Bash calls, mcp__plugin_zernio_zernio__call_tool calls, mcp__plugin_zernio_zernio__posts_create calls, mcp__plugin_zernio_zernio__posts_update calls</dd>
-    <dt>Hooks</dt><dd><code>tool.call {tool=Bash}, turn.complete, tool.call {tool=mcp__plugin_zernio_zernio__call_tool}, tool.call {tool=mcp__plugin_zernio_zernio__posts_create}, tool.call {tool=mcp__plugin_zernio_zernio__posts_update}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>tool.call {tool=Bash}, turn.complete, tool.call {tool=mcp__plugin_zernio_zernio__call_tool}, tool.call {tool=mcp__plugin_zernio_zernio__posts_create}, tool.call {tool=mcp__plugin_zernio_zernio__posts_update}</code></dd>
     <dt>API calls</dt><dd><code>$.command.run, $.state.get, $.state.set, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

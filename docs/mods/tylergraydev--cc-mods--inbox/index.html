@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/tylergraydev/cc-mods">tylergraydev/cc-mods</a></p>
 <p class="lede">The repo's inbox/ work queue as a pane: todo items at the root, then processing/, review/, done/ and blocked/. Shows what is ready (dependencies, owner-path overlap, locks), starts Codex or Claude workers on items, drains the queue, reviews and accepts, with a watchdog for idle workers and cross-session locks</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">inbox reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 22</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, changes config, drives Claude, reads files, reads env vars, reads the transcript, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">inbox reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 22</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, changes config, drives Claude, reads files, reads env vars, reads the transcript, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, changes config, drives Claude, reads files, reads env vars, reads the transcript, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, config.set {key=&quot;inbox.autoReview&quot;}, agent.spawn, tool.call, turn.complete, command.run {command=inbox}, ui.render {component=Pane, requestId=inbox}, ui.render {component=Pane, requestId=?}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, config.set {key=&quot;inbox.autoReview&quot;}, agent.spawn, tool.call, turn.complete, command.run {command=inbox}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.agent.spawn, $.clock.every, $.clock.now, $.command.register, $.config.set, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.write, $.process.run, $.session.append, $.session.cwd, $.session.id, $.session.messages, $.session.root, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/jrlprost/claude-code-mods">jrlprost/claude-code-mods</a></p>
 <p class="lede">/jr-todo &lt;task&gt;: capture a task instantly, with no model call, to TODO.md, Todoist, Linear, Notion, a GitHub issue, Things, Apple Reminders, or your own command.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">jr-todo reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 7</li><li>Access from classified calls: L3, network: network, runs processes, writes files, reads files</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">jr-todo reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 7</li><li>Access from classified calls: L3, network: network, runs processes, writes files, reads files</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install jr-todo --marketplace jrlprost/claude-code-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, writes files, reads files</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, ui.render {component=AbovePrompt}, command.run {command=jr-todo}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=jr-todo}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.fs.read, $.fs.write, $.http.fetch, $.process.run, $.session.root</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

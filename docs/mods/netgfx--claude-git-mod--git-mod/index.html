@@ -14,8 +14,8 @@
 <h1>git-mod</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/netgfx/claude-git-mod">netgfx/claude-git-mod</a></p>
 <p class="lede">A /git side panel: changed files with stage buttons, AI commit messages, push, branch search and checkout, and stashes with AI titles</p>
-<p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">git-mod reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the clipboard, draws</li><li>Static scan, not a runtime test</li></ul></section>
+
+<section class="summary" aria-label="Scan summary"><p class="summary-line">git-mod reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the clipboard, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install git-mod --marketplace netgfx/claude-git-mod</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, writes the clipboard, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>Bash|PowerShell|Edit|Write|MultiEdit|NotebookEdit calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=git}, ui.focus, ui.press, ui.close, tool.call {tool=Bash|PowerShell|Edit|Write|MultiEdit|NotebookEdit}, turn.complete, ui.render {component=Pane}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=git}, ui.close, tool.call {tool=Bash|PowerShell|Edit|Write|MultiEdit|NotebookEdit}, turn.complete</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.model.complete, $.process.run, $.ui.copy, $.ui.focus, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/netgfx/claude-git-mod/tree/a3bea92875ab94018e629221108e0f762336a976"><code>a3bea92875ab</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/netgfx/claude-git-mod/blob/a3bea92875ab94018e629221108e0f762336a976/.claude-plugin/marketplace.json">claude-git-mod</a></dd><dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/netgfx/claude-git-mod/blob/a3bea92875ab94018e629221108e0f762336a976/hooks/register.js#L105">hooks/register.js:105</a>, <a href="https://github.com/netgfx/claude-git-mod/blob/a3bea92875ab94018e629221108e0f762336a976/hooks/register.js#L141">hooks/register.js:141</a>, <a href="https://github.com/netgfx/claude-git-mod/blob/a3bea92875ab94018e629221108e0f762336a976/hooks/register.js#L145">hooks/register.js:145</a>, <a href="https://github.com/netgfx/claude-git-mod/blob/a3bea92875ab94018e629221108e0f762336a976/hooks/register.js#L569">hooks/register.js:569</a></dd></dl>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/netgfx/claude-git-mod/blob/a3bea92875ab94018e629221108e0f762336a976/.claude-plugin/marketplace.json">claude-git-mod</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/netgfx--claude-git-mod--git-mod-reach.svg" alt="Reach badge for git-mod"> <img src="/badges/netgfx--claude-git-mod--git-mod-validates.svg" alt="Validation badge for git-mod"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/netgfx--claude-git-mod--git-mod-reach.svg)](https://mods.aidojo.si/mods/netgfx--claude-git-mod--git-mod/)

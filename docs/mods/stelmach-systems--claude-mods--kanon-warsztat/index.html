@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/stelmach-systems/claude-mods">stelmach-systems/claude-mods</a></p>
 <p class="lede">Warsztat modów Claude Code: narzędzie modelu `szukaj` (JSDoc i sygnatura zdarzenia, metody `$.…` albo typu z lokalnego claude-code/index.d.ts po nazwie, indeks budowany leniwie, wynik ≤ 2048 znaków: zamiast grep po 16 tys. linii) i komenda /warsztat [ścieżka] (dla katalogu modu kolejno: `claude plugin validate .` i `claude plugin test .` na CLI ~/.local/bin i na binarce desktopu, potem `tsc --noEmit -p .`; tabela binarka × krok z OK/FAIL/czas/liczbą testów, przyciski Powtórz i Kopiuj błędy). Zamknięta lista argv, bez shella, cwd tylko w ~/Developer/claude-mods* albo katalogu sesji. Zero modelu, zero sieci, zero zapisu plików.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">kanon-warsztat reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 18</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the clipboard, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">kanon-warsztat reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 18</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the clipboard, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, writes the clipboard, reads files, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>/&quot;^mcp__kanon-warsztat__szukaj$&quot;/ calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=/&quot;^mcp__kanon-warsztat__szukaj$&quot;/}, command.run {command=warsztat}, ui.render {component=Pane, requestId=warsztat}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=/&quot;^mcp__kanon-warsztat__szukaj$&quot;/}, command.run {command=warsztat}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.process.run, $.session.cwd, $.session.root, $.state.get, $.state.set, $.tool.register, $.ui.close, $.ui.copy, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

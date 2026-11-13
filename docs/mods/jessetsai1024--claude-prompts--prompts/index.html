@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/jessetsai1024/claude-prompts">jessetsai1024/claude-prompts</a></p>
 <p class="lede">側邊欄的「我問過的」：主人這次對話打過的每一句話，點一下看全文、複製、放回輸入框。/prompts 開或關</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">prompts reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 11</li><li>Access from classified calls: L1, reads: writes the prompt box, writes the clipboard, reads the prompt box, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">prompts reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 11</li><li>Access from classified calls: L1, reads: writes the prompt box, writes the clipboard, reads the prompt box, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install prompts --marketplace jessetsai1024/claude-prompts</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">writes the prompt box, writes the clipboard, reads the prompt box, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear}, prompt.submit, command.run {command=prompts}, ui.render {component=Pane, requestId=prompts}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear}, prompt.submit, command.run {command=prompts}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.prompt.fill, $.prompt.read, $.ui.close, $.ui.copy, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

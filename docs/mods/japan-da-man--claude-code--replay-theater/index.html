@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/japan-da-man/claude-code">japan-da-man/claude-code</a></p>
 <p class="lede">[mod] Records the file edits Claude makes in a turn; /replay or r steps through the diffs one at a time in a pane. Based on Anthropic's claude-code-playground mod</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">replay-theater reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 11</li><li>Access from classified calls: L1, reads: reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">replay-theater reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 11</li><li>Access from classified calls: L1, reads: reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install replay-theater --marketplace japan-da-man/claude-code</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads files, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=replay}, tool.call, turn.start, turn.complete, ui.render {component=AbovePrompt}, ui.render {component=Pane}, ui.close</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=replay}, tool.call, turn.start, turn.complete, ui.close</code></dd>
     <dt>API calls</dt><dd><code>$.clock.sleep, $.command.register, $.fs.exists, $.fs.read, $.session.cwd, $.state.get, $.state.set, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

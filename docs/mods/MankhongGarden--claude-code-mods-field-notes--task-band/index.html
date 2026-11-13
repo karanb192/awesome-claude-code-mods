@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/MankhongGarden/claude-code-mods-field-notes">MankhongGarden/claude-code-mods-field-notes</a></p>
 <p class="lede">Framed band above the prompt: running subagents, workflows, background shells and monitors, each with its own gauge; ctrl+x tab then arrows to page</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">task-band reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 9</li><li>Access from classified calls: L1, reads: reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">task-band reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 9</li><li>Access from classified calls: L1, reads: reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, every tool call, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, agent.spawn, tool.call, turn.complete, prompt.submit, ui.focus, ui.scroll, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, agent.spawn, tool.call, turn.complete, prompt.submit, ui.scroll</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.clock.now, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

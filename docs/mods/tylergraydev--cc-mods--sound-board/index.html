@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/tylergraydev/cc-mods">tylergraydev/cc-mods</a></p>
 <p class="lede">Plays a distinct sound for subagent spawn/finish/failure, permission asks, auto-mode denials, finished turns and more; pick, preview and mute per cue</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">sound-board reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 11</li><li>API methods referenced: 23</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, reads mod state, plays audio, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">sound-board reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 23</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, reads mod state, plays audio, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, reads env vars, reads mod state, plays audio, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, compaction, classic hooks, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, agent.spawn, turn.complete, session.compact {trigger=auto}, classic.PermissionRequest, tool.check, classic.PermissionDenied, tool.call, command.run {command=sounds|sound-board}, ui.render {component=Pane, requestId=sound-board}, ui.render {component=Pane, requestId=?}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, agent.spawn, turn.complete, session.compact {trigger=auto}, classic.PermissionRequest, tool.check, classic.PermissionDenied, tool.call, command.run {command=sounds|sound-board}</code></dd>
     <dt>API calls</dt><dd><code>$.audio.play, $.audio.speak, $.clock.after, $.clock.every, $.clock.now, $.clock.sleep, $.command.list, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.process.run, $.session.surfaces, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.close, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

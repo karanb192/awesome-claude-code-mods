@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/caiocinel/claude-code-sandgame-mod">caiocinel/claude-code-sandgame-mod</a></p>
 <p class="lede">A falling-sand sandbox in a side pane while Claude works</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">sand-falling reaches L0 (draws and remembers) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 4</li><li>Access from classified calls: L0, draws and remembers: draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">sand-falling reaches L0 (draws and remembers) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 4</li><li>Access from classified calls: L0, draws and remembers: draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L0 Draws &amp; remembers</span><span class="track" aria-label="Reach level 0: Draws & remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=sand}, prompt.submit, turn.complete, ui.close {id=sand}, ui.render {component=Pane, requestId=sand}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=sand}, prompt.submit, turn.complete, ui.close {id=sand}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.ui.close, $.ui.open, $.ui.resolve</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/sand.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

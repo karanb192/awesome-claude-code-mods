@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/PickleBoxer/peek">PickleBoxer/peek</a></p>
 <p class="lede">Thumbnails above the prompt for every image you paste</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">peek reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, reads the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">peek reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, reads the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, reads env vars, reads the prompt box, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.submit</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.process.run, $.prompt.read, $.session.id, $.state.get, $.state.set, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

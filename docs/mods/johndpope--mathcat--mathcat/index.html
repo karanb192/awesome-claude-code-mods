@@ -14,8 +14,8 @@
 <h1>mathcat</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/johndpope/mathcat">johndpope/mathcat</a></p>
 <p class="lede">Draw a formula and show the PNG in a pane</p>
-<p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">mathcat reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+
+<section class="summary" aria-label="Scan summary"><p class="summary-line">mathcat reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install mathcat --marketplace johndpope/mathcat</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, reads files, reads env vars, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, mcp__mathcat__show calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear|resume|fork}, command.run {command=mathcat}, tool.call {tool=mcp__mathcat__show}, ui.render {component=Pane}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear|resume|fork}, command.run {command=mathcat}, tool.call {tool=mcp__mathcat__show}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.read, $.fs.stat, $.process.run, $.store.get, $.store.set, $.tool.register, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/johndpope/mathcat/tree/153d411ab103af0c784f20fb8c061360af91dcf6"><code>153d411ab103</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/johndpope/mathcat/blob/153d411ab103af0c784f20fb8c061360af91dcf6/.claude-plugin/marketplace.json">mathcat</a></dd><dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/johndpope/mathcat/blob/153d411ab103af0c784f20fb8c061360af91dcf6/hooks/formula.js#L41">hooks/formula.js:41</a>, <a href="https://github.com/johndpope/mathcat/blob/153d411ab103af0c784f20fb8c061360af91dcf6/hooks/formula.js#L83">hooks/formula.js:83</a>, <a href="https://github.com/johndpope/mathcat/blob/153d411ab103af0c784f20fb8c061360af91dcf6/hooks/formula.js#L116">hooks/formula.js:116</a></dd></dl>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/johndpope/mathcat/blob/153d411ab103af0c784f20fb8c061360af91dcf6/.claude-plugin/marketplace.json">mathcat</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/johndpope--mathcat--mathcat-reach.svg" alt="Reach badge for mathcat"> <img src="/badges/johndpope--mathcat--mathcat-validates.svg" alt="Validation badge for mathcat"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/johndpope--mathcat--mathcat-reach.svg)](https://mods.aidojo.si/mods/johndpope--mathcat--mathcat/)

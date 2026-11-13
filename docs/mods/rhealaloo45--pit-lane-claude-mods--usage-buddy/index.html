@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/rhealaloo45/pit-lane-claude-mods">rhealaloo45/pit-lane-claude-mods</a></p>
 <p class="lede">Live usage meter with a mascot, plus model-switch recommendations based on your prompt</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">usage-buddy reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 5</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">usage-buddy reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 5</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.measure, prompt.submit, turn.complete, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.measure, prompt.submit, turn.complete</code></dd>
     <dt>API calls</dt><dd><code>$.session.usage, $.state.get, $.state.set, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/abonckus/claude-code-file-preview">abonckus/claude-code-file-preview</a></p>
 <p class="lede">Click a markdown, JSON or YAML file link in a reply to preview it in a side pane, drawn like a docs page</p>
 <p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">file-preview reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">file-preview reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install file-preview --marketplace abonckus/claude-code-file-preview</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=preview}, ui.scroll {requestId=file-preview}, ui.press {requestId=file-preview}, ui.input {requestId=file-preview}, ui.focus {requestId=file-preview}, ui.close, ui.render {component=AssistantMessage}, ui.render {component=Pane, requestId=file-preview}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=preview}, ui.scroll {requestId=file-preview}, ui.close, ui.render {component=AssistantMessage}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.command.register, $.env.get, $.fs.read, $.fs.stat, $.process.run, $.session.cwd, $.state.get, $.state.set, $.ui.focus, $.ui.open, $.ui.resolve, $.ui.scroll, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

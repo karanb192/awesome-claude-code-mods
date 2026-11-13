@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/augiefra/claude-mods">augiefra/claude-mods</a> <span class="listed" title="Listed in Anthropic's plugin directory as token-weather-usage@anthropic-plugin-directory">In Anthropic directory</span></p>
 <p class="lede">One line above the prompt: context tokens with their weather, a bar per recent prompt, your 5-hour and 7-day limits against the time elapsed, the prompt cache with its time left, the session cost with the last prompt's share in dollars and in points of the 5-hour limit, the subagents running, and a one-click pill for the GOs Claude proposes. Labels in English, French or Russian. After Token Weather (Anthropic, Apache-2.0) and the ideas of usage-meter (HolyGrail) and prompt-cache-control (Daniel San).</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">token-weather-usage reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">token-weather-usage reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install token-weather-usage@anthropic-plugin-directory</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From Anthropic's plugin directory. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads env vars, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -25,7 +25,7 @@
 <dl>
     <dt>Anthropic directory</dt><dd>Listed as <code>token-weather-usage@anthropic-plugin-directory</code></dd>
     <dt>Observed events</dt><dd>compaction</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, turn.step, turn.complete, session.compact, session.measure, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, turn.step, turn.complete, session.compact, session.measure</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.env.get, $.prompt.submit, $.session.id, $.session.model, $.session.usage, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.invalidate, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

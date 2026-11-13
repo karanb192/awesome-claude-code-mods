@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/KTCrisis/flux7-mods">KTCrisis/flux7-mods</a></p>
 <p class="lede">A machine face that watches tool calls and comments on them, with switchable avatars</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">avatar7 reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 11</li><li>API methods referenced: 20</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, reads files, reads the transcript, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">avatar7 reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 20</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, reads files, reads the transcript, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, drives Claude, reads files, reads the transcript, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>compaction, every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=avatar}, command.run {command=avatar-talk}, command.run {command=avatar-chat}, command.run {command=avatar-ask}, command.run, session.compact, command.run {command=avatar-mute}, session.end, turn.complete, prompt.submit, state.set, ui.toast, tool.check, tool.call, ui.render {component=Pane, requestId=avatar7}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=avatar}, command.run {command=avatar-talk}, command.run {command=avatar-chat}, command.run {command=avatar-ask}, command.run, session.compact, command.run {command=avatar-mute}, session.end, turn.complete, prompt.submit, state.set, ui.toast, tool.check, tool.call</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.sleep, $.command.register, $.fs.read, $.fs.write, $.model.complete, $.process.run, $.session.id, $.session.messages, $.session.model, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.blit, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

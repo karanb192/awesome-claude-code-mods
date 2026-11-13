@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/adamtasteslikegood/codex-pr-review-gate-cc">adamtasteslikegood/codex-pr-review-gate-cc</a></p>
 <p class="lede">Pre-PR gate: rounds of adversarial Codex review (gstack /codex) and agent fixes, run locally before a PR to dev or main is opened, with a live progress pane.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">codex-gate reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">codex-gate reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Bash calls, mcp__plugin_github_github__create_pull_request calls, every tool call</dd>
-    <dt>Hooks</dt><dd><code>tool.call {tool=Bash}, tool.call {tool=mcp__plugin_github_github__create_pull_request}, tool.call, turn.complete, session.start, command.run {command=pr-gate}, ui.render {component=Pane, requestId=codex-gate}</code></dd>
+    <dt>Hooks</dt><dd><code>tool.call {tool=Bash}, tool.call {tool=mcp__plugin_github_github__create_pull_request}, tool.call, turn.complete, session.start, command.run {command=pr-gate}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.spawn, $.clock.every, $.clock.now, $.command.register, $.process.run, $.prompt.submit, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

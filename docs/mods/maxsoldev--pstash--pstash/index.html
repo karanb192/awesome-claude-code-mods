@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/maxsoldev/pstash">maxsoldev/pstash</a></p>
 <p class="lede">Stash prompts for later and pop them back into the input box. Instant, no model call.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">pstash reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 18</li><li>Access from classified calls: L2, writes or runs: writes files, writes the prompt box, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">pstash reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 18</li><li>Access from classified calls: L2, writes or runs: writes files, writes the prompt box, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install pstash --marketplace maxsoldev/pstash</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">writes files, writes the prompt box, reads files, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear}, turn.start, turn.complete, prompt.submit, command.run {command=stash}, ui.render {component=Spinner}, session.append {door=command}, ui.render {component=SessionMode}, ui.focus {requestId=pstash}, ui.render {component=Pane, requestId=pstash}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear}, turn.start, turn.complete, prompt.submit, command.run {command=stash}, ui.render {component=Spinner}, session.append {door=command}, ui.render {component=SessionMode}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.read, $.fs.write, $.prompt.fill, $.session.root, $.state.get, $.state.set, $.ui.close, $.ui.focus, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

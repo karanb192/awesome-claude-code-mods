@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>the system prompt, every prompt, ? calls, Agent calls, subagent spawns</dd>
-    <dt>Hooks</dt><dd><code>telemetry.log {to=collector}, session.start, session.end, command.run {command=?}, prompt.context, prompt.submit, tool.call {tool=?}, tool.call {tool=Agent}, agent.spawn, turn.step, turn.complete, ui.render {component=SessionMode}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>telemetry.log {to=collector}, session.start, session.end, command.run {command=?}, prompt.context, prompt.submit, tool.call {tool=?}, tool.call {tool=Agent}, agent.spawn, turn.step, turn.complete, ui.render {component=SessionMode}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.clock.sleep, $.command.register, $.env.get, $.fs.list, $.fs.read, $.fs.write, $.model.complete, $.model.fork, $.session.cwd, $.session.id, $.session.messages, $.session.model, $.session.repo, $.session.root, $.settings.read, $.ui.invalidate, $.ui.log, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

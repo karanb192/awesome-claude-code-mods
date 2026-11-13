@@ -14,8 +14,8 @@
 <h1>notch-crab</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/JustinPerea/notch-crab">JustinPerea/notch-crab</a></p>
 <p class="lede">A pixel crab above your Claude Code prompt that acts out every hook (33 reactions). Thin bars beside him track the context window and your 5-hour and weekly limits. Works on its own. If the notch-crab Mac app (not released yet) is running, the mod also sends it each hook event's name, session id, tool name and ids, notification type and working directory, plus how many tools a batch ran, so the crab in your MacBook's notch reacts too. That goes over a local Unix socket and never includes prompts, tool inputs or outputs. The full list is in mod/hooks/wire.mjs.</p>
-<p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">notch-crab reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 15</li><li>Access from classified calls: L3, network: network, reads env vars, reads the transcript, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+
+<section class="summary" aria-label="Scan summary"><p class="summary-line">notch-crab reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 15</li><li>Access from classified calls: L3, network: network, reads env vars, reads the transcript, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install notch-crab --marketplace JustinPerea/notch-crab</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, reads env vars, reads the transcript, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -25,14 +25,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.measure, classic.*, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.measure, classic.*</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.clock.sleep, $.env.get, $.http.fetch, $.session.cwd, $.session.id, $.session.messages, $.session.usage, $.state.get, $.state.set, $.ui.blit, $.ui.invalidate, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/JustinPerea/notch-crab/tree/24e761d294a171edd4df23b67d8f379feba8ece3"><code>24e761d294a1</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/JustinPerea/notch-crab/blob/24e761d294a171edd4df23b67d8f379feba8ece3/.claude-plugin/marketplace.json">notch-crab</a></dd><dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/JustinPerea/notch-crab/blob/24e761d294a171edd4df23b67d8f379feba8ece3/mod/hooks/wire.mjs#L29">mod/hooks/wire.mjs:29</a></dd></dl>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/JustinPerea/notch-crab/blob/24e761d294a171edd4df23b67d8f379feba8ece3/.claude-plugin/marketplace.json">notch-crab</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/JustinPerea--notch-crab--notch-crab-reach.svg" alt="Reach badge for notch-crab"> <img src="/badges/JustinPerea--notch-crab--notch-crab-validates.svg" alt="Validation badge for notch-crab"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/JustinPerea--notch-crab--notch-crab-reach.svg)](https://mods.aidojo.si/mods/JustinPerea--notch-crab--notch-crab/)

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/yai333/autonomous-loop">yai333/autonomous-loop</a></p>
 <p class="lede">A state-machine graph engine that drives a ticket through claim -&gt; worktree -&gt; coding -&gt; evaluate -&gt; review -&gt; human approval, spawning and monitoring subagents at each step.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">autonomous-loop reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 17</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads files, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">autonomous-loop reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 17</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads files, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, reads files, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, agent.offer {agent=?}, agent.offer {agent=?}, turn.complete, turn.step, tool.call, command.run {command=autonomous-loop}, ui.render {component=Pane}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, agent.offer {agent=?}, agent.offer {agent=?}, turn.complete, turn.step, tool.call, command.run {command=autonomous-loop}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.agent.register, $.agent.spawn, $.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.fs.exists, $.process.run, $.store.delete, $.store.get, $.store.set, $.ui.ask, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

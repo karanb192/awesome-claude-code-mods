@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>thermostat, a Claude Code mod by modmyclaude | Awesome Claude Code Mods</title>
-<meta name="description" content="Shows when your prompt cache goes cold, and stops the expensive send. Scan: L2 writes or runs, passes validation."><meta name="robots" content="noindex"><meta name="theme-color" content="#f0eee6" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1c1c1a" media="(prefers-color-scheme: dark)">
+<meta name="description" content="Shows when your prompt cache goes cold, and stops the expensive send. Scan: L2 writes or runs, passes validation."><meta name="theme-color" content="#f0eee6" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1c1c1a" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://mods.aidojo.si/mods/modmyclaude--claude-code-mods--thermostat/"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/site.css">
@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, turn.step, classic.SessionStart, classic.PostModelSwitch, session.end, command.run {command=warm}, command.run {command=thermostat}, ui.render {component=Pane, requestId=thermostat-receipt}, ui.render {component=SessionMode}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.submit, turn.step, classic.SessionStart, classic.PostModelSwitch, session.end, command.run {command=warm}, command.run {command=thermostat}, ui.render {component=SessionMode}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.model.fork, $.prompt.fill, $.prompt.read, $.session.authorize, $.session.model, $.session.surfaces, $.session.usage, $.state.get, $.state.set, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

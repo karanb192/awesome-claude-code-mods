@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/hu-ghazal/Ghazal-Dev-Tools">hu-ghazal/Ghazal-Dev-Tools</a></p>
 <p class="lede">Lets Claude choose its own reasoning effort (medium, high, xhigh or max) by clear rules, with a side pane to make each level harder or easier to reach, a 60 s hold between changes, a 10-minute limit on max and a weekly-budget step. No model calls.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">adaptive-effort reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 14</li><li>Access from classified calls: L1, reads: reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">adaptive-effort reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 14</li><li>Access from classified calls: L1, reads: reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=adaptive-effort}, ui.render {component=Pane, requestId=adaptive-effort}, prompt.submit, turn.start, tool.call, turn.step</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=adaptive-effort}, prompt.submit, turn.start, tool.call, turn.step</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.session.id, $.session.usage, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

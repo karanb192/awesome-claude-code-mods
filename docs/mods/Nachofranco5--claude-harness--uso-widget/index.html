@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Nachofranco5/claude-harness">Nachofranco5/claude-harness</a></p>
 <p class="lede">Barra fija sobre el prompt con el uso del plan: ventana de 5 h (sesión) y semanal, con aviso al 80/90%.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">uso-widget reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 5</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">uso-widget reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 5</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install uso-widget --marketplace Nachofranco5/claude-harness</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -25,14 +25,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.measure, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.measure</code></dd>
     <dt>API calls</dt><dd><code>$.session.usage, $.state.get, $.state.set, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/Nachofranco5/claude-harness/tree/8059fdac54283f5d10951b80e00e45642408d63c"><code>8059fdac5428</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/Nachofranco5/claude-harness/blob/8059fdac54283f5d10951b80e00e45642408d63c/.claude-plugin/marketplace.json">claude-harness</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/Nachofranco5/claude-harness/tree/c253929ac05e9bf21275f7964300721cd0966718"><code>c253929ac05e</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/Nachofranco5/claude-harness/blob/c253929ac05e9bf21275f7964300721cd0966718/.claude-plugin/marketplace.json">claude-harness</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from Nachofranco5/claude-harness</h2><ul><li><a href="/mods/Nachofranco5--claude-harness--automatico/">automatico</a><span>Modo automático: encadena las tareas del plan, cada una en una ventana nueva con su modelo, hasta un tope de…</span></li><li><a href="/mods/Nachofranco5--claude-harness--harness-nacho/">harness-nacho</a><span>Reglas de trabajo de Nacho (con Perfil y Lecciones) + tablero al arrancar (tareas, git, uso, pruebas, errores…</span></li><li><a href="/mods/Nachofranco5--claude-harness--semaforo/">semaforo</a><span>Circulo al costado del chat: rojo mientras Claude trabaja o hay tareas de fondo, verde cuando no queda nada</span></li></ul></section>
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/Nachofranco5--claude-harness--uso-widget-reach.svg" alt="Reach badge for uso-widget"> <img src="/badges/Nachofranco5--claude-harness--uso-widget-validates.svg" alt="Validation badge for uso-widget"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/Nachofranco5--claude-harness--uso-widget-reach.svg)](https://mods.aidojo.si/mods/Nachofranco5--claude-harness--uso-widget/)
