@@ -2508,6 +2508,8 @@ moonteek/claude-mods
 MoonZhe/usage-band
 MoriHiroshiDesu/hiroshi-claude-mods
 moritalous/claude-mods-router
+moxisuki/claude-ssh-tools
+moxisuki/provider-switch
 mpolatcan/flowpane
 mr-dzzs21/cc-skins
 mralexivy/AutoMode

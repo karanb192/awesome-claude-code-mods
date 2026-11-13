@@ -6211,6 +6211,8 @@
   "moonteek--claude-mods--task-steps": {"id":"moonteek/claude-mods:task-steps"},
   "moritalous--claude-mods-router--effort-router": {"id":"moritalous/claude-mods-router:effort-router"},
   "moritalous--claude-mods-router--model-router": {"id":"moritalous/claude-mods-router:model-router"},
+  "moxisuki--claude-ssh-tools--ssh-tools": {"id":"moxisuki/claude-ssh-tools:ssh-tools"},
+  "moxisuki--provider-switch--provider-switch": {"id":"moxisuki/provider-switch:."},
   "mpolatcan--flowpane--flowpane": {"id":"mpolatcan/flowpane:.","indexed":true},
   "mr-dzzs21--cc-skins--cc-skins": {"id":"mr-dzzs21/cc-skins:.","indexed":true},
   "mralexivy--AutoMode--automode": {"id":"mralexivy/AutoMode:.","indexed":true},
