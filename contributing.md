@@ -63,7 +63,7 @@ Every scanned mod gets two badges you can paste into your README. Each one links
 [![validates](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/OWNER--REPO--NAME-validates.svg)](https://mods.aidojo.si/mods/OWNER--REPO--NAME/)
 ```
 
-`OWNER--REPO--NAME` is usually your GitHub owner, repo and the `name` from your `plugin.json`, joined by double dashes. The badge file name and the page path can differ, for example when a renamed plugin keeps its original page, so copy the snippet from your mod's page rather than building it by hand.
+`OWNER--REPO--NAME` is usually your GitHub owner, repo and the `name` from your `plugin.json`, joined by double dashes. The badge file name and the page path can differ, for example when a renamed plugin keeps its original page, so copy the snippet from your mod's page rather than building it by hand. When your repository is renamed or the mod moves, badges under the old path keep working and show the mod at its new home, as the old page redirects there.
 
 ## Disputing a footprint
 
