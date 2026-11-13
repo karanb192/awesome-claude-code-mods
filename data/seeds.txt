@@ -21,6 +21,7 @@ Antreas-Strb/glanceflow
 apolenkov/agent-compact-advisor
 apolenkov/agent-council
 apolenkov/agent-shell-watch
+araujo-eduardo/claude-usage-bar
 Arjun0014/project-sentinel
 arturogarrido/claudinho
 Ashley-Pettit/lgtm-flash
