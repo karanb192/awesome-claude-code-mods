@@ -77,6 +77,10 @@ HuliLulu46/cc-commit-command
 HuliLulu46/cc-effort-switch
 HuliLulu46/pending-decisions
 HuliLulu46/polish
+hwanyong/pane-grid
+hwanyong/pending-questions
+hwanyong/skill-kanban
+hwanyong/usage-gauge
 i-harsha-reddy/naruto-mod
 iamumeransari/claude-show-your-work
 icedevil2001/auto-continue
