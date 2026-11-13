@@ -871,3 +871,13 @@ test('the reclassify command reads the old rules from a commit and writes only r
   assert.deepEqual(mods.map(m => [m.id, m.kind, m.duplicateOf]), [['o/a:.', 'duplicate', 'o/b:x'], ['o/b:x', 'mod', undefined], ['o/c:.', 'mod', undefined]])
   assert.notEqual(spawnSync(process.execPath, ['tools/reclassify.mjs', '--base', 'main'], { cwd: root, encoding: 'utf8' }).status, 0)
 })
+
+test('hwanyong verification probes are fixtures beside the shipped mods', () => {
+  for (const repo of ['hwanyong/pane-grid', 'hwanyong/pending-questions', 'HWANYONG/Pane-Grid']) {
+    assert.equal(kindOf(repo, 'verification/click-probe', {}), 'fixture')
+    assert.equal(kindOf(repo, 'verification/harness-probe/snapshot', {}), 'fixture')
+    assert.equal(kindOf(repo, '.', {}), 'mod')
+    assert.equal(kindOf(repo, 'verification-tools', {}), 'mod')
+  }
+  assert.equal(kindOf('hwanyong/skill-kanban', 'verification/x', {}), 'mod')
+})
