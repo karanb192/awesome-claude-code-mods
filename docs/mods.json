@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-13T08:23:15.743Z",
   "claudeVersion": "2.1.323",
-  "repos": 4191,
+  "repos": 4195,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -923685,6 +923685,1584 @@
       "stars": 0,
       "pushedAt": "2026-11-06T12:51:18Z",
       "createdAt": "2026-11-05T11:39:29Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pane-grid:.",
+      "repo": "hwanyong/pane-grid",
+      "path": ".",
+      "sourceCommit": "a188dbb0ab39e410b4b2afeeb0c054c69cca597d",
+      "name": "pane-grid",
+      "description": "A Claude Code mod that splits a Claude Code pane into a tmux-style grid of other Claude mods' panes, with split, resize, zoom and layout tabs",
+      "author": "hwanyong",
+      "homepage": "https://github.com/hwanyong/pane-grid",
+      "url": "https://github.com/hwanyong/pane-grid",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "grid"
+          }
+        },
+        {
+          "event": "ui.scroll",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "/\"^grid-\"/"
+          }
+        },
+        {
+          "event": "ui.message",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "/\"^grid-\"/"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.fs.write",
+        "$.session.cwd",
+        "$.session.root",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.close",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [
+        "hooks/activate.tsx",
+        "hooks/divider.tsx",
+        "hooks/measure.tsx"
+      ],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "pane-grid",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "writes files",
+          "reads files",
+          "reads env vars",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T20:45:16Z",
+      "createdAt": "2026-11-07T06:24:25Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pane-grid:verification/click-probe",
+      "repo": "hwanyong/pane-grid",
+      "path": "verification/click-probe",
+      "sourceCommit": "a188dbb0ab39e410b4b2afeeb0c054c69cca597d",
+      "name": "clickprobe",
+      "description": "Not a plugin to install. probe: click anywhere in a cell under member content",
+      "author": null,
+      "homepage": "https://github.com/hwanyong/pane-grid",
+      "url": "https://github.com/hwanyong/pane-grid/tree/main/verification/click-probe",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "ui.message",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "click-probe"
+          }
+        },
+        {
+          "event": "ui.scroll",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "click-probe"
+          }
+        }
+      ],
+      "calls": [
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [
+        "hooks/catcher.tsx"
+      ],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T20:45:16Z",
+      "createdAt": "2026-11-07T06:24:25Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pane-grid:verification/cwd-probe",
+      "repo": "hwanyong/pane-grid",
+      "path": "verification/cwd-probe",
+      "sourceCommit": "a188dbb0ab39e410b4b2afeeb0c054c69cca597d",
+      "name": "k8probe",
+      "description": "Not a plugin to install. Probe for cwd, root and repo changes.",
+      "author": null,
+      "homepage": "https://github.com/hwanyong/pane-grid",
+      "url": "https://github.com/hwanyong/pane-grid/tree/main/verification/cwd-probe",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "classic.CwdChanged",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "k8probe"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.command.register",
+        "$.env.get",
+        "$.session.cwd",
+        "$.session.repo",
+        "$.session.root",
+        "$.ui.log"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads files",
+          "reads env vars",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T20:45:16Z",
+      "createdAt": "2026-11-07T06:24:25Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pane-grid:verification/engine-floor/own-file",
+      "repo": "hwanyong/pane-grid",
+      "path": "verification/engine-floor/own-file",
+      "sourceCommit": "a188dbb0ab39e410b4b2afeeb0c054c69cca597d",
+      "name": "pane-grid-floor-own-file",
+      "description": "Not a plugin to install. Engine floor probe: a hooks module that reads pane-grid's layout in its own file and imports only placementIn from hooks/pane-grid.ts",
+      "author": null,
+      "homepage": "https://github.com/hwanyong/pane-grid",
+      "url": "https://github.com/hwanyong/pane-grid/tree/main/verification/engine-floor/own-file",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "footprint": {
+        "status": "unavailable"
+      },
+      "hooks": [],
+      "calls": [],
+      "surfaceModules": [],
+      "validate": {
+        "status": "failed",
+        "claudeVersion": "2.1.323",
+        "errors": [
+          "modules../register.ts: own-file: cannot import \"./pane-grid\" (from hooks/register.ts): no such file under verification/engine-floor/own-file"
+        ]
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T20:45:16Z",
+      "createdAt": "2026-11-07T06:24:25Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pane-grid:verification/engine-floor/read-placement",
+      "repo": "hwanyong/pane-grid",
+      "path": "verification/engine-floor/read-placement",
+      "sourceCommit": "a188dbb0ab39e410b4b2afeeb0c054c69cca597d",
+      "name": "pane-grid-floor-read-placement",
+      "description": "Not a plugin to install. Engine floor probe: a hooks module that passes $ to readPlacement, imported from hooks/pane-grid.ts",
+      "author": null,
+      "homepage": "https://github.com/hwanyong/pane-grid",
+      "url": "https://github.com/hwanyong/pane-grid/tree/main/verification/engine-floor/read-placement",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "footprint": {
+        "status": "unavailable"
+      },
+      "hooks": [],
+      "calls": [],
+      "surfaceModules": [],
+      "validate": {
+        "status": "failed",
+        "claudeVersion": "2.1.323",
+        "errors": [
+          "modules../register.ts: read-placement: cannot import \"./pane-grid\" (from hooks/register.ts): no such file under verification/engine-floor/read-placement"
+        ]
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T20:45:16Z",
+      "createdAt": "2026-11-07T06:24:25Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pane-grid:verification/engine-floor/read-shown-tab",
+      "repo": "hwanyong/pane-grid",
+      "path": "verification/engine-floor/read-shown-tab",
+      "sourceCommit": "a188dbb0ab39e410b4b2afeeb0c054c69cca597d",
+      "name": "pane-grid-floor-read-shown-tab",
+      "description": "Not a plugin to install. Engine floor probe: a hooks module that passes $ to readShownTab, imported from hooks/pane-grid.ts",
+      "author": null,
+      "homepage": "https://github.com/hwanyong/pane-grid",
+      "url": "https://github.com/hwanyong/pane-grid/tree/main/verification/engine-floor/read-shown-tab",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "footprint": {
+        "status": "unavailable"
+      },
+      "hooks": [],
+      "calls": [],
+      "surfaceModules": [],
+      "validate": {
+        "status": "failed",
+        "claudeVersion": "2.1.323",
+        "errors": [
+          "modules../register.ts: read-shown-tab: cannot import \"./pane-grid\" (from hooks/register.ts): no such file under verification/engine-floor/read-shown-tab"
+        ]
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T20:45:16Z",
+      "createdAt": "2026-11-07T06:24:25Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pane-grid:verification/harness-probe/cooperative",
+      "repo": "hwanyong/pane-grid",
+      "path": "verification/harness-probe/cooperative",
+      "sourceCommit": "a188dbb0ab39e410b4b2afeeb0c054c69cca597d",
+      "name": "pane-grid-probe-cooperative",
+      "description": "Not a plugin to install. probe: child mods fill slots in one pane",
+      "author": null,
+      "homepage": "https://github.com/hwanyong/pane-grid",
+      "url": "https://github.com/hwanyong/pane-grid/tree/main/verification/harness-probe/cooperative",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [],
+      "calls": [
+        "$.ui.log",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T20:45:16Z",
+      "createdAt": "2026-11-07T06:24:25Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pane-grid:verification/harness-probe/host-in-member",
+      "repo": "hwanyong/pane-grid",
+      "path": "verification/harness-probe/host-in-member",
+      "sourceCommit": "a188dbb0ab39e410b4b2afeeb0c054c69cca597d",
+      "name": "pane-grid-probe-host-in-member",
+      "description": "Not a plugin to install. probe: draw the grid inside a member pane render",
+      "author": null,
+      "homepage": "https://github.com/hwanyong/pane-grid",
+      "url": "https://github.com/hwanyong/pane-grid/tree/main/verification/harness-probe/host-in-member",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [],
+      "calls": [
+        "$.ui.log",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T20:45:16Z",
+      "createdAt": "2026-11-07T06:24:25Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pane-grid:verification/harness-probe/press-proxy",
+      "repo": "hwanyong/pane-grid",
+      "path": "verification/harness-probe/press-proxy",
+      "sourceCommit": "a188dbb0ab39e410b4b2afeeb0c054c69cca597d",
+      "name": "pane-grid-probe-press-proxy",
+      "description": "Not a plugin to install. probe: forward a press to another plugin button",
+      "author": null,
+      "homepage": "https://github.com/hwanyong/pane-grid",
+      "url": "https://github.com/hwanyong/pane-grid/tree/main/verification/harness-probe/press-proxy",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [],
+      "calls": [
+        "$.ui.log",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T20:45:16Z",
+      "createdAt": "2026-11-07T06:24:25Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pane-grid:verification/harness-probe/snapshot",
+      "repo": "hwanyong/pane-grid",
+      "path": "verification/harness-probe/snapshot",
+      "sourceCommit": "a188dbb0ab39e410b4b2afeeb0c054c69cca597d",
+      "name": "pane-grid-probe-snapshot",
+      "description": "Not a plugin to install. probe: copy another plugin pane tree into one pane",
+      "author": null,
+      "homepage": "https://github.com/hwanyong/pane-grid",
+      "url": "https://github.com/hwanyong/pane-grid/tree/main/verification/harness-probe/snapshot",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [],
+      "calls": [
+        "$.ui.log",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T20:45:16Z",
+      "createdAt": "2026-11-07T06:24:25Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pane-grid:verification/logs/refactor-scripts/R-scroller",
+      "repo": "hwanyong/pane-grid",
+      "path": "verification/logs/refactor-scripts/R-scroller",
+      "sourceCommit": "a188dbb0ab39e410b4b2afeeb0c054c69cca597d",
+      "name": "r-scroller",
+      "description": "k12 R group test mod. Draws a grid cell that scrolls its own rows and logs each ui.scroll it takes.",
+      "author": null,
+      "homepage": "https://github.com/hwanyong/pane-grid",
+      "url": "https://github.com/hwanyong/pane-grid/tree/main/verification/logs/refactor-scripts/R-scroller",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "unavailable"
+      },
+      "hooks": [],
+      "calls": [],
+      "surfaceModules": [],
+      "validate": {
+        "status": "failed",
+        "claudeVersion": "2.1.323",
+        "errors": [
+          "modules../register.tsx: R-scroller: cannot import \"./pane-grid\" (from hooks/register.tsx): no such file under verification/logs/refactor-scripts/R-scroller"
+        ]
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T20:45:16Z",
+      "createdAt": "2026-11-07T06:24:25Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pane-grid:verification/member-probe",
+      "repo": "hwanyong/pane-grid",
+      "path": "verification/member-probe",
+      "sourceCommit": "a188dbb0ab39e410b4b2afeeb0c054c69cca597d",
+      "name": "k8member",
+      "description": "Not a plugin to install. Logs what the pane-grid member module readPlacement returns for usage-gauge and filetree.",
+      "author": null,
+      "homepage": "https://github.com/hwanyong/pane-grid",
+      "url": "https://github.com/hwanyong/pane-grid/tree/main/verification/member-probe",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "unavailable"
+      },
+      "hooks": [],
+      "calls": [],
+      "surfaceModules": [],
+      "validate": {
+        "status": "failed",
+        "claudeVersion": "2.1.323",
+        "errors": [
+          "modules../register.tsx: member-probe: cannot import \"./pane-grid\" (from hooks/register.tsx): no such file under verification/member-probe"
+        ]
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": null,
+        "name": "unknown",
+        "labels": [],
+        "minimumLevel": 0
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T20:45:16Z",
+      "createdAt": "2026-11-07T06:24:25Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pane-grid:verification/r1-order",
+      "repo": "hwanyong/pane-grid",
+      "path": "verification/r1-order",
+      "sourceCommit": "a188dbb0ab39e410b4b2afeeb0c054c69cca597d",
+      "name": "pane-grid-r1",
+      "description": "Not a plugin to install. R1 probe: chain order of pane-grid against an installed mod's Pane render",
+      "author": null,
+      "homepage": "https://github.com/hwanyong/pane-grid",
+      "url": "https://github.com/hwanyong/pane-grid/tree/main/verification/r1-order",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.ui.log"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T20:45:16Z",
+      "createdAt": "2026-11-07T06:24:25Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pane-grid:verification/r11-state/host",
+      "repo": "hwanyong/pane-grid",
+      "path": "verification/r11-state/host",
+      "sourceCommit": "a188dbb0ab39e410b4b2afeeb0c054c69cca597d",
+      "name": "pane-grid-r11-host",
+      "description": "Not a plugin to install. R11/R15/R17 probe: grid owner that publishes its layout in $.state and opens two grid panes as engine tabs",
+      "author": null,
+      "homepage": "https://github.com/hwanyong/pane-grid",
+      "url": "https://github.com/hwanyong/pane-grid/tree/main/verification/r11-state/host",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.state.set",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T20:45:16Z",
+      "createdAt": "2026-11-07T06:24:25Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pane-grid:verification/r11-state/member",
+      "repo": "hwanyong/pane-grid",
+      "path": "verification/r11-state/member",
+      "sourceCommit": "a188dbb0ab39e410b4b2afeeb0c054c69cca597d",
+      "name": "pane-grid-r11-member",
+      "description": "Not a plugin to install. R11/R15 probe: cooperative mod that keeps its own pane and adds a cell to grid panes when the host lists it",
+      "author": null,
+      "homepage": "https://github.com/hwanyong/pane-grid",
+      "url": "https://github.com/hwanyong/pane-grid/tree/main/verification/r11-state/member",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T20:45:16Z",
+      "createdAt": "2026-11-07T06:24:25Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pane-grid:verification/r19-command",
+      "repo": "hwanyong/pane-grid",
+      "path": "verification/r19-command",
+      "sourceCommit": "a188dbb0ab39e410b4b2afeeb0c054c69cca597d",
+      "name": "pane-grid-r19",
+      "description": "Not a plugin to install. R19 probe: does $.ui.open({ focus: true }) from a slash command switch the shown pane tab",
+      "author": null,
+      "homepage": "https://github.com/hwanyong/pane-grid",
+      "url": "https://github.com/hwanyong/pane-grid/tree/main/verification/r19-command",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "r19"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.command.register",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T20:45:16Z",
+      "createdAt": "2026-11-07T06:24:25Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pane-grid:verification/r2-hidden-tab",
+      "repo": "hwanyong/pane-grid",
+      "path": "verification/r2-hidden-tab",
+      "sourceCommit": "a188dbb0ab39e410b4b2afeeb0c054c69cca597d",
+      "name": "pane-grid-r2",
+      "description": "Not a plugin to install. R2/R3 probe: renders of hidden-tab panes and the reach of $.ui.invalidate",
+      "author": null,
+      "homepage": "https://github.com/hwanyong/pane-grid",
+      "url": "https://github.com/hwanyong/pane-grid/tree/main/verification/r2-hidden-tab",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T20:45:16Z",
+      "createdAt": "2026-11-07T06:24:25Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pane-grid:verification/r20-scroll/host",
+      "repo": "hwanyong/pane-grid",
+      "path": "verification/r20-scroll/host",
+      "sourceCommit": "a188dbb0ab39e410b4b2afeeb0c054c69cca597d",
+      "name": "pane-grid-r20-host",
+      "description": "Not a plugin to install. R20/R21 probe: grid owner that scrolls each cell on its own through ui.scroll and adds then removes the member cell",
+      "author": null,
+      "homepage": "https://github.com/hwanyong/pane-grid",
+      "url": "https://github.com/hwanyong/pane-grid/tree/main/verification/r20-scroll/host",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "ui.scroll",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "r20grid"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T20:45:16Z",
+      "createdAt": "2026-11-07T06:24:25Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pane-grid:verification/r20-scroll/member",
+      "repo": "hwanyong/pane-grid",
+      "path": "verification/r20-scroll/member",
+      "sourceCommit": "a188dbb0ab39e410b4b2afeeb0c054c69cca597d",
+      "name": "pane-grid-r20-member",
+      "description": "Not a plugin to install. R21 probe: member that closes its own pane while the grid layout holds its cell and opens it again when the cell is gone",
+      "author": null,
+      "homepage": "https://github.com/hwanyong/pane-grid",
+      "url": "https://github.com/hwanyong/pane-grid/tree/main/verification/r20-scroll/member",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "state.set",
+          "matcher": {
+            "plugin": "pane-grid-r20-host",
+            "key": "layout"
+          }
+        }
+      ],
+      "calls": [
+        "$.state.get",
+        "$.ui.close",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T20:45:16Z",
+      "createdAt": "2026-11-07T06:24:25Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pending-questions:.",
+      "repo": "hwanyong/pending-questions",
+      "path": ".",
+      "sourceCommit": "c9f8841e4ed861ecea21d7a346f8f5e15ec49146",
+      "name": "pending-questions",
+      "description": "Registers questions waiting for your answer in a pane, answers them in the pane or automatically, and recovers them after a crash",
+      "author": "hwanyong",
+      "homepage": "https://github.com/hwanyong/pending-questions#readme",
+      "url": "https://github.com/hwanyong/pending-questions",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "questions"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.press",
+          "matcher": {
+            "plugin": "pending-questions",
+            "component": "Pane",
+            "requestId": "pending-questions|/\"^grid-\"/",
+            "element": "/\"^q\\\\d+$\"/"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "AskUserQuestion"
+          }
+        },
+        {
+          "event": "state.set",
+          "matcher": {
+            "plugin": "pane-grid",
+            "key": "layout"
+          }
+        }
+      ],
+      "calls": [
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "pending-questions",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt",
+        "AskUserQuestion calls"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-10T22:53:19Z",
+      "createdAt": "2026-10-31T12:16:35Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pending-questions:verification/pq-eval",
+      "repo": "hwanyong/pending-questions",
+      "path": "verification/pq-eval",
+      "sourceCommit": "c9f8841e4ed861ecea21d7a346f8f5e15ec49146",
+      "name": "pq-eval",
+      "description": "Not a plugin to install. extraction eval",
+      "author": null,
+      "homepage": "https://github.com/hwanyong/pending-questions",
+      "url": "https://github.com/hwanyong/pending-questions/tree/main/verification/pq-eval",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "peval"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.model.complete",
+        "$.ui.log"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "drives Claude",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-10T22:53:19Z",
+      "createdAt": "2026-10-31T12:16:35Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/pending-questions:verification/pq-probe",
+      "repo": "hwanyong/pending-questions",
+      "path": "verification/pq-probe",
+      "sourceCommit": "c9f8841e4ed861ecea21d7a346f8f5e15ec49146",
+      "name": "pq-probe",
+      "description": "Not a plugin to install. dialog probe",
+      "author": null,
+      "homepage": "https://github.com/hwanyong/pending-questions",
+      "url": "https://github.com/hwanyong/pending-questions/tree/main/verification/pq-probe",
+      "kind": "fixture",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AskUserQuestion"
+          }
+        }
+      ],
+      "calls": [
+        "$.command.register",
+        "$.ui.ask",
+        "$.ui.log"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AskUserQuestion"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-11-10T22:53:19Z",
+      "createdAt": "2026-10-31T12:16:35Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/skill-kanban:plugins/uhd-kanban",
+      "repo": "hwanyong/skill-kanban",
+      "path": "plugins/uhd-kanban",
+      "sourceCommit": "e55fde31cdb1d977104de55c73ae8d551e19d822",
+      "name": "uhd-kanban",
+      "description": "프로젝트마다 kanban/ 의 .md 카드로 칸반 보드를 운영하는 스킬, 메인 세션이 작업을 카드로 맡기게 하는 스킬, milestone 마다 소속 카드를 색 칸으로 그리는 보드 모니터 pane",
+      "author": "uhd",
+      "homepage": "https://github.com/hwanyong/skill-kanban#readme",
+      "url": "https://github.com/hwanyong/skill-kanban/tree/main/plugins/uhd-kanban",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "kanban-board"
+          }
+        },
+        {
+          "event": "classic.PreToolUse",
+          "matcher": {
+            "tool": "Edit|Write|NotebookEdit"
+          }
+        },
+        {
+          "event": "state.set",
+          "matcher": {
+            "plugin": "pane-grid",
+            "key": "layout"
+          }
+        },
+        {
+          "event": "state.set",
+          "matcher": {
+            "plugin": "pane-grid",
+            "key": "shown"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.process.run",
+        "$.session.id",
+        "$.session.root",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.blit",
+        "$.ui.close",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "skill-kanban",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "classic hooks"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-11T20:53:08Z",
+      "createdAt": "2026-10-29T10:25:48Z",
+      "license": null,
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "hwanyong/usage-gauge:.",
+      "repo": "hwanyong/usage-gauge",
+      "path": ".",
+      "sourceCommit": "9647d56144126edd9fa8a2d45345862e394db336",
+      "name": "usage-gauge",
+      "description": "Session and weekly rate-limit gauges above the prompt, with a linear pace marker",
+      "author": "hwanyong",
+      "homepage": "https://github.com/hwanyong/usage-gauge",
+      "url": "https://github.com/hwanyong/usage-gauge",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "usage-gauge"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.session.usage",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.323",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "usage-gauge",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-07T08:42:26Z",
+      "createdAt": "2026-10-29T11:04:51Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

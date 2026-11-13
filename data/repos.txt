@@ -1538,6 +1538,10 @@ humzahkiani/prompt-polish
 Huuuuung/think-meter
 huydepzai121/claude-acp-ui
 huynl-96/claude-mods
+hwanyong/pane-grid
+hwanyong/pending-questions
+hwanyong/skill-kanban
+hwanyong/usage-gauge
 HydrowZer/claude-mods
 hymleong/claude-mods
 hyonnie-t/claude-mods
