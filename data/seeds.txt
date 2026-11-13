@@ -166,6 +166,7 @@ SimakovIgor/pixel-buddy
 Sma1lboy/claude-standup
 somethingwentwell/cc-mod-banana-game
 SSS135/claude-code-codex-plugin
+suenot/claude-cache-timer
 Sumit189/explain-claude-mod
 SummerRiversound/review-inbox
 T-AI-Labs/claude-code-mods
