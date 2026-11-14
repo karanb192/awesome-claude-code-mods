@@ -1,6 +1,9 @@
 // Parses `claude plugin validate` output into hooks, $ calls and surface modules.
-// The validator prints one "hooks:" and one "calls:" line per module; the calls
-// line may annotate helpers as "$.x.y (via a, b)", which is stripped here.
+// Since Claude Code 2.1.323 the validator splits a long list over several lines, each repeating
+// "<module> hooks:" or "<module> calls:" and breaking only between whole entries (about 700
+// characters per line), so every line of a module's list is part of that list. The calls list may
+// annotate helpers as "$.x.y (via a, b)" and the hooks list may annotate an entry with
+// "(default matcher key: plugin)"; both annotations are stripped here.
 
 import { posix } from 'node:path'
 
@@ -40,13 +43,15 @@ export function parseValidateOutput(text) {
     // A cut can split a matcher or a helper annotation; retain only whole list entries.
     const rest = truncated ? splitList(output.slice(0, truncated.index), false).join(', ') : output
     if (truncated) mod.truncated = true
+    const report = name => { if (!mod.reported.includes(name)) mod.reported.push(name) }
     if (kind === 'hooks') {
-      mod.hooks = parseHooks(rest)
-      if (rest.trim()) mod.reported.push('hooks')
+      mod.hooks.push(...parseHooks(rest))
+      if (rest.trim()) report('hooks')
     } else if (kind === 'calls') {
-      mod.calls = parseCalls(rest)
-      if (mod.calls.length || /^nothing on \$\s*$/.test(rest.trim())) mod.reported.push('calls')
-    } else mod.surfaceModules = rest.split(',').map(s => s.trim()).filter(Boolean)
+      const calls = parseCalls(rest)
+      mod.calls.push(...calls)
+      if (calls.length || /^nothing on \$\s*$/.test(rest.trim())) report('calls')
+    } else mod.surfaceModules.push(...rest.split(',').map(s => s.trim()).filter(Boolean))
     modules.set(file, mod)
   }
   const status = /✔ Validation passed with warnings/.test(text) ? 'warnings'
@@ -75,11 +80,11 @@ export function footprintStatus(parsed, declared) {
   return { status: complete ? 'reported' : 'unavailable' }
 }
 
-// "session.start, tool.call{tool=Bash}, ui.render{component=Pane, surface=terminal}"
+// "session.start, tool.call{tool=Bash}, ui.render{component=Pane, surface=terminal} (default matcher key: plugin)"
 export function parseHooks(s) {
   const out = []
   for (const entry of splitList(s)) {
-    const m = entry.match(/^([\w.*-]+)(?:\{(.*)\})?$/s)
+    const m = entry.replace(/\s+\(default matcher keys?: [^()]*\)$/, '').match(/^([\w.*-]+)(?:\{(.*)\})?$/s)
     if (!m) continue
     const event = m[1]
     if (!event || event === 'nothing') continue
