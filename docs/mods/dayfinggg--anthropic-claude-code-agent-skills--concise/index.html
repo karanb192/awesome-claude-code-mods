@@ -15,9 +15,9 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/dayfinggg/anthropic-claude-code-agent-skills">dayfinggg/anthropic-claude-code-agent-skills</a></p>
 <p class="lede">Official Concise output style for any language, always-on working rules, 23 engineering skills, web research by default, and rarely used built-in tools moved behind ToolSearch</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">concise reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 4</li><li>Access from classified calls: L1, reads: reads files</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">concise reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 5</li><li>Access from classified calls: L1, reads: reads files, reads settings</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install concise --marketplace dayfinggg/anthropic-claude-code-agent-skills</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
-<div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads files</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads files, reads settings</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
 <p class="actions"><a class="source" href="https://github.com/dayfinggg/anthropic-claude-code-agent-skills/tree/main/plugins/concise">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#dayfinggg--anthropic-claude-code-agent-skills--concise">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
@@ -25,13 +25,13 @@
 
     <dt>Observed events</dt><dd>WebSearch calls, every tool call, compaction, every prompt</dd>
     <dt>Hooks</dt><dd><code>tool.describe {tool=?}, tool.describe {tool=?}, prompt.attachment {type=silent_turn_reminder}, prompt.attachment {type=skill_listing}, tool.call {tool=WebSearch}, tool.call, session.compact, prompt.attachment {type=deferred_tools_delta}, prompt.compose, prompt.attachment {type=environment}, prompt.attachment {type=output_style_instructions}, prompt.submit, prompt.attachment {type=hook_additional_context}</code></dd>
-    <dt>API calls</dt><dd><code>$.fs.list, $.fs.read, $.session.usage, $.tool.list</code></dd>
+    <dt>API calls</dt><dd><code>$.fs.list, $.fs.read, $.session.usage, $.settings.read, $.tool.list</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/dayfinggg/anthropic-claude-code-agent-skills/tree/717a0878229414cc159b9558b362be89a28c4731"><code>717a08782294</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/dayfinggg/anthropic-claude-code-agent-skills/blob/717a0878229414cc159b9558b362be89a28c4731/.claude-plugin/marketplace.json">concise</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/dayfinggg/anthropic-claude-code-agent-skills/tree/c1c25537c227a550319d74b1c15d6a44b9a64d3c"><code>c1c25537c227</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/dayfinggg/anthropic-claude-code-agent-skills/blob/c1c25537c227a550319d74b1c15d6a44b9a64d3c/.claude-plugin/marketplace.json">concise</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/dayfinggg--anthropic-claude-code-agent-skills--concise-reach.svg" alt="Reach badge for concise"> <img src="/badges/dayfinggg--anthropic-claude-code-agent-skills--concise-validates.svg" alt="Validation badge for concise"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/dayfinggg--anthropic-claude-code-agent-skills--concise-reach.svg)](https://mods.aidojo.si/mods/dayfinggg--anthropic-claude-code-agent-skills--concise/)
