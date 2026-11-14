@@ -102,6 +102,26 @@ test('revalidation refreshes marketplace evidence, caches exact records and reje
   assert.throws(() => revalidatePublished([{ ...record, sourceCommit: null }], '2.1.290', {}, deps), /Missing pinned source/)
 })
 
+test('pinned revalidation reads modules from the hooks file plugin.json declares', () => {
+  const record = mod('o/journal', { sourceCommit: 'a'.repeat(40), path: 'claude-code', id: 'o/journal:claude-code', modules: ['./hooks/register.tsx'] })
+  const deps = {
+    ensureVersion: () => {},
+    checkout: (repo, revision, dir) => {
+      mkdirSync(join(dir, 'claude-code/.claude-plugin'), { recursive: true })
+      mkdirSync(join(dir, 'claude-code/hooks'))
+      writeFileSync(join(dir, 'claude-code/.claude-plugin/plugin.json'), JSON.stringify({ name: 'journal', hooks: './hooks.json' }))
+      writeFileSync(join(dir, 'claude-code/hooks.json'), JSON.stringify({ modules: ['./hooks/register.tsx'] }))
+      writeFileSync(join(dir, 'claude-code/hooks/register.tsx'), 'export const bell = "\\u0007"')
+    },
+    validate: () => parseValidateOutput('  ❯ ./hooks/register.tsx hooks: ui.render{component=Spinner}\n  ❯ ./hooks/register.tsx calls: $.fs.read\n✔ Validation passed'),
+  }
+  const [updated] = revalidatePublished([record], '2.1.325', {}, deps)
+  assert.deepEqual(updated.modules, ['./hooks/register.tsx'])
+  assert.equal(updated.footprint.status, 'reported')
+  assert.deepEqual(updated.compatibility.warnings.map(w => w.evidence.map(e => e.file)), [['claude-code/hooks/register.tsx']])
+  assert.throws(() => revalidatePublished([record], '2.1.325', {}, { ...deps, checkout: (repo, revision, dir) => mkdirSync(join(dir, 'claude-code'), { recursive: true }) }), /Hooks file not found/)
+})
+
 test('pinned revalidation rejects and retries incomplete UI analysis', () => {
   const record = mod('o/new', { sourceCommit: 'a'.repeat(40) }), cache = {}
   let validations = 0, broken = true
