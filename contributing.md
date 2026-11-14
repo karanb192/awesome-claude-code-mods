@@ -6,6 +6,8 @@ The full catalogue accepts discovered mods and seed submissions. The README's Fe
 
 A daily scan searches GitHub code for repositories that mention `CLAUDE_CODE_ENABLE_FUNCTION_HOOKS` or ship a `hooks/hooks.json` with a `modules` key. Public repositories matching those patterns become candidates once GitHub indexes them and discovery succeeds. Every three hours, a faster scan also checks repositories pushed since the last complete search that have the topic `claude-code-mod`, `claude-code-mods`, `claude-mods`, `function-hooks` or `claude-code-plugin`, or "claude mod" in the name or description. With the `claude-code-mod` topic, a scan usually picks up a mod within a few hours of its next push, often before code search indexes it. Results appear after the generated update pull request is merged. Known candidates are retained even when a later search omits them.
 
+The scan counts a plugin as a mod when a hooks file Claude Code loads for it lists modules: `hooks/hooks.json`, or a file that the `hooks` field of the plugin's `.claude-plugin/plugin.json` names, such as `"hooks": "./mod/hooks.json"`. Code search only looks for files named `hooks.json` under a folder named `hooks`, so a mod whose hooks file has another name or folder is found through the repository topics above or a seed.
+
 ## Open a pull request
 
 First search for your mod on [mods.aidojo.si](https://mods.aidojo.si/). If it is there, the scanner already tracks your repository and you do not need a seed: a seed PR for a listed repository changes nothing and is closed with a link to the mod's page. Your badges are at the bottom of that page.
