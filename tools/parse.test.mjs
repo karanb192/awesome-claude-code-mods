@@ -100,6 +100,87 @@ test('truncated validator lists retain whole entries but never establish a compl
   assert.equal(footprintStatus(mixed, ['./register.tsx', './b.ts']).status, 'unavailable')
 })
 
+// The validator's list formatter since Claude Code 2.1.323: whole entries, about 700 characters per line,
+// each line repeating "<label>: ".
+const wrap = (label, entries) => {
+  const room = 700 - label.length, lines = []
+  for (const entry of entries) {
+    const last = lines.at(-1)
+    if (last === undefined || last.length + entry.length + 2 > room) lines.push(entry)
+    else lines[lines.length - 1] = `${last}, ${entry}`
+  }
+  return lines.map(line => `${label}: ${line}`)
+}
+
+// A cache warmer's validator output from Claude Code 2.1.323, paths made relative.
+const SPLIT = `Validating hooks: ./hooks/hooks.json
+
+  ❯ ./register.tsx hooks: session.start, command.run{command=cache-warmer}, config.set{key="cache-warmer.ttl"}, turn.start, turn.complete, session.compact, session.end, ui.render{component=AbovePrompt} (default matcher key: plugin), ui.render{component=Pane, requestId=cache-warmer} (default matcher key: plugin), ui.focus{component=Pane, requestId=cache-warmer} (default matcher key: plugin), ui.close{id=cache-warmer}
+  ❯ ./register.tsx answers its own command: command.run{command=cache-warmer}
+  ❯ ./register.tsx gating hook without .catch: config.set{key="cache-warmer.ttl"}
+  ❯ ./register.tsx calls: $.clock.after (via preview, schedule, showNotice), $.clock.every (via syncAnimation), $.clock.now, $.command.register (via startSession), $.config.list (via startSession, themeOf), $.config.set (via chooseDefault, chooseTtl, setBand, setLimit), $.env.get (via debugPathOf, startSession, themeOf), $.env.set (via setTtl), $.fs.exists (via appendDebug), $.fs.read (via appendDebug), $.fs.write (via appendDebug), $.model.fork (via sendFork), $.session.append (via appendNotice), $.session.id (via debugPathOf), $.state.get, $.state.set, $.store.get (via storedAllTime), $.store.set (via addToAllTime, startSession), $.ui.blit (via paint), $.ui.close (via runCommand), $.ui.focus
+  ❯ ./register.tsx calls: $.ui.log (via addToTotals, appendDebug, appendNotice, logDenied), $.ui.open (via runCommand), $.ui.panes (via isPaneOpen, runCommand), $.ui.resolve
+  ❯ ./register.tsx env writes: CLAUDE_CODE_PROMPT_CACHE_TTL
+
+✔ Validation passed
+`
+
+test('a calls list the validator splits over several lines is read whole', () => {
+  const parsed = parseValidateOutput(SPLIT)
+  assert.equal(parsed.modules.length, 1)
+  const { calls } = parsed.modules[0]
+  assert.equal(calls.length, 25)
+  assert.ok(calls.includes('$.model.fork') && calls.includes('$.fs.write') && calls.includes('$.ui.resolve'))
+  assert.equal(footprintStatus(parsed, ['./register.tsx']).status, 'reported')
+  assert.equal(grade(calls).level, 2)
+  assert.ok(grade(calls).labels.includes('drives Claude'))
+})
+
+test('a hook annotated with its default matcher key keeps its event and matcher', () => {
+  const { hooks } = parseValidateOutput(SPLIT).modules[0]
+  assert.equal(hooks.length, 11)
+  assert.deepEqual(hooks.slice(7, 10), [
+    { event: 'ui.render', matcher: { component: 'AbovePrompt' } },
+    { event: 'ui.render', matcher: { component: 'Pane', requestId: 'cache-warmer' } },
+    { event: 'ui.focus', matcher: { component: 'Pane', requestId: 'cache-warmer' } },
+  ])
+  assert.deepEqual(drawsOn(hooks), ['AbovePrompt', 'Pane'])
+  assert.deepEqual(parseHooks('tool.call{tool=Bash} (default matcher key: plugin, source)'), [{ event: 'tool.call', matcher: { tool: 'Bash' } }])
+})
+
+test('every line of a split list counts, whichever list and module it belongs to', () => {
+  const calls = Array.from({ length: 60 }, (_, i) => `$.fs.read${i} (via helperNumber${i}, otherHelper${i})`)
+  calls.splice(3, 0, '$.process.run (via launch)')
+  const hooks = Array.from({ length: 40 }, (_, i) => `ui.render{component=Pane, requestId=pane${i}} (default matcher key: plugin)`)
+  const surfaces = Array.from({ length: 50 }, (_, i) => `hooks/boards/board-number-${i}.tsx`)
+  const lines = [...wrap('hooks', hooks), ...wrap('calls', calls), ...wrap('surface modules', surfaces)]
+  assert.ok(lines.filter(line => line.startsWith('calls:')).length > 2)
+  assert.ok(lines.filter(line => line.startsWith('hooks:')).length > 2)
+  const text = [...lines.map(line => `  ❯ ./a.tsx ${line}`), '  ❯ ./b.tsx hooks: session.start', '  ❯ ./b.tsx calls: $.ui.toast', '✔ Validation passed'].join('\n')
+  const parsed = parseValidateOutput(text)
+  const [a, b] = parsed.modules
+  assert.equal(a.calls.length, 61)
+  assert.equal(a.calls[3], '$.process.run')
+  assert.equal(a.hooks.length, 40)
+  assert.equal(a.surfaceModules.length, 50)
+  assert.deepEqual(a.reported, ['hooks', 'calls'])
+  assert.deepEqual(b.calls, ['$.ui.toast'])
+  assert.equal(footprintStatus(parsed, ['./a.tsx', './b.tsx']).status, 'reported')
+  assert.equal(grade([...a.calls, ...b.calls]).level, 2)
+})
+
+test('a cut in any line of a split list leaves the footprint unknown with every whole entry as its lower bound', () => {
+  const text = `  ❯ ./a.tsx hooks: session.start
+  ❯ ./a.tsx calls: $.http.fetch (via first), $.ui.log
+  ❯ ./a.tsx calls: $.process.run (via a, b… [+300 chars]
+  ❯ ./a.tsx calls: $.ui.toast
+✔ Validation passed`
+  const parsed = parseValidateOutput(text)
+  assert.deepEqual(parsed.modules[0].calls, ['$.http.fetch', '$.ui.log', '$.ui.toast'])
+  assert.equal(footprintStatus(parsed, ['./a.tsx']).status, 'unavailable')
+  assert.deepEqual(grade(parsed.modules[0].calls, false), { level: null, name: 'unknown', labels: ['network', 'draws'], minimumLevel: 3 })
+})
+
 test('embedded character-count markers discard the affected matcher before parsing it', () => {
   for (const suffix of ['', ', ui.render{component=Pane, r… [+248 chars]']) {
     const parsed = parseValidateOutput(`  ❯ ./register.ts hooks: session.start, command.run{command=status}, tool.call{tool=/"^mcp__(?:service|[0-9a-fA-F]{8})__"[+47 chars]/}, session.end${suffix}\n  ❯ ./register.ts calls: $.http.fetch\n✔ Validation passed`)
