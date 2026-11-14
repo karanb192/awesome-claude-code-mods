@@ -22,7 +22,7 @@ function fixture(t) {
   const stateFile = join(root, 'state.json'), callsFile = join(root, 'calls.log')
   for (const [file, text] of Object.entries({ 'repos.txt': 'fixture/mod\n', 'seeds.txt': '', 'duplicates.txt': '', 'catalogs.txt': '', 'fixture-exceptions.txt': '' })) writeFileSync(join(root, 'data', file), text)
   const command = (name, source) => writeFileSync(join(root, 'bin', name), `#!${process.execPath}\nconst fs = require('node:fs'), p = require('node:path'), state = JSON.parse(fs.readFileSync(process.env.FIXTURE_STATE, 'utf8')), args = process.argv.slice(2)\n${source}`, { mode: 0o755 })
-  command('gh', `console.log(JSON.stringify({ data: { r0: { nameWithOwner: 'fixture/mod', stargazerCount: state.stars, description: state.description, defaultBranchRef: { name: 'main', target: { oid: state.revision } } } } }))`)
+  command('gh', `console.log(JSON.stringify({ data: { r0: { nameWithOwner: state.fullName ?? 'fixture/mod', stargazerCount: state.stars, description: state.description, defaultBranchRef: { name: 'main', target: { oid: state.revision } } } } }))`)
   command('git', `
 if (args[0] === 'clone') {
   fs.appendFileSync(process.env.FIXTURE_CALLS, 'clone\\n')
@@ -62,12 +62,12 @@ if (state.fail === type) { console.log('✘ Found 1 error:\\n  ❯ name: invalid
 console.log('✔ Validation passed')
 `)
   let runs = 0
-  function run({ cache = true, previous, retire = false, required = false } = {}) {
+  function run({ cache = true, previous, retire = false, required = false, args = [] } = {}) {
     writeFileSync(stateFile, JSON.stringify(state))
     writeFileSync(callsFile, '')
     const out = join(root, `out-${runs++}.json`)
     if (previous) writeFileSync(out, JSON.stringify(previous))
-    const result = spawnSync(process.execPath, [scanner, '--out', out, '--include-checked', ...(cache ? ['--cache', join(root, 'cache.json')] : []), ...(retire ? ['--retire'] : []), ...(required ? ['--required', join(root, 'data/repos.txt')] : [])], {
+    const result = spawnSync(process.execPath, [scanner, '--out', out, '--include-checked', ...(cache ? ['--cache', join(root, 'cache.json')] : []), ...(retire ? ['--retire'] : []), ...(required ? ['--required', join(root, 'data/repos.txt')] : []), ...args], {
       cwd: root, encoding: 'utf8', timeout: 30000,
       env: { ...process.env, PATH: join(root, 'bin') + ':' + process.env.PATH, TMPDIR: join(root, 'tmp'), FIXTURE_STATE: stateFile, FIXTURE_CALLS: callsFile },
     })
@@ -89,6 +89,21 @@ test('a cached repository needs no clone and records what a fresh scan records',
   assert.deepEqual(cached.calls, [])
   assert.deepEqual(cached.data, fresh.data)
   assert.deepEqual(f.run({ cache: false }).data, fresh.data)
+})
+
+test('a candidate listed only under an old name is also scanned under its current name, which keeps the record', t => {
+  const f = fixture(t)
+  writeFileSync(join(f.root, 'data/repos.txt'), 'fixture/old\n')
+  f.state.fullName = 'fixture/mod'
+  const listedOnly = f.run({ args: ['--listed-only'] })
+  assert.deepEqual(listedOnly.data.mods.map(m => [m.id, m.kind]), [['fixture/old:.', 'mod']], 'seed publication scans only the names it was given')
+  const next = f.run()
+  assert.deepEqual(next.data.mods.map(m => [m.id, m.kind, m.duplicateOf]), [['fixture/mod:.', 'mod', undefined], ['fixture/old:.', 'duplicate', 'fixture/mod:.']])
+  assert.deepEqual(next.data.checkedRepos, ['fixture/mod', 'fixture/old'])
+  assert.deepEqual(next.calls.filter(call => call === 'clone'), ['clone'], 'the old name reuses its cached findings; only the current name is cloned')
+  assert.deepEqual(f.run().calls, [], 'the current name reuses the old name\'s metadata, so its findings are cached too')
+  f.run({ retire: true })
+  assert.equal(readFileSync(join(f.root, 'data/repos.txt'), 'utf8'), 'fixture/mod\nfixture/old\n', 'the weekly retirement writes the current name into the candidates')
 })
 
 test('incomplete source analysis is retried, blocks seeds and cannot retire earlier records', t => {

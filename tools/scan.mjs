@@ -6,7 +6,10 @@
 // With --cache, a repository whose default branch has not moved since a scan with the same validator and
 // checkout reader (tools/inspect.mjs and its imports) reuses that scan's findings instead of being cloned again.
 //
-//   node tools/scan.mjs [--clones DIR] [--repos FILE] [--out FILE] [--concurrency N] [--cache FILE]
+// A candidate GitHub reports under a new name is scanned under that name as well, unless --listed-only
+// limits the scan to the names in the list.
+//
+//   node tools/scan.mjs [--clones DIR] [--repos FILE] [--out FILE] [--concurrency N] [--cache FILE] [--listed-only]
 
 import { execFileSync } from 'node:child_process'
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
@@ -15,7 +18,7 @@ import { tmpdir } from 'node:os'
 import { spawnAsync } from './validate.mjs'
 import { clone, inspect, findingsKey } from './inspect.mjs'
 import { grade, regrade, visibility, drawsOn } from './grade.mjs'
-import { readDuplicates, applyDuplicatesWithRenames, suspectDuplicates, renamePairs } from './dedupe.mjs'
+import { readDuplicates, applyDuplicatesWithRenames, suspectDuplicates, renamePairs, currentNames } from './dedupe.mjs'
 import { kindOf, readCatalogs, readFixtureExceptions } from './kind.mjs'
 import { parseArgs } from 'node:util'
 import { readRepos, mergeRepos } from './candidates.mjs'
@@ -27,6 +30,7 @@ const { values: args } = parseArgs({ options: {
   clones: { type: 'string' }, repos: { type: 'string' }, out: { type: 'string' },
   required: { type: 'string' }, retire: { type: 'boolean', default: false },
   'include-checked': { type: 'boolean', default: false }, concurrency: { type: 'string' }, cache: { type: 'string' },
+  'listed-only': { type: 'boolean', default: false },
 } })
 const CLONES = args.clones ?? mkdtempSync(join(tmpdir(), 'acm-clones-'))
 const REPOS = args.repos ?? 'data/repos.txt'
@@ -37,7 +41,7 @@ if (!Number.isInteger(CONCURRENCY) || CONCURRENCY < 1) throw new Error(`invalid 
 
 const claudeVersion = execFileSync('claude', ['--version'], { encoding: 'utf8' }).trim().split(' ')[0]
 if (!existsSync(REPOS)) throw new Error(`candidate list not found: ${REPOS}`)
-const repos = mergeRepos(readRepos(REPOS))
+const listed = mergeRepos(readRepos(REPOS))
 const previous = existsSync(OUT) ? JSON.parse(readFileSync(OUT, 'utf8')).mods : []
 if (!Array.isArray(previous)) throw new Error(`invalid previous inventory: ${OUT}`)
 const checkedRepos = new Map()
@@ -54,7 +58,13 @@ function meta(repo) {
   } catch { return { stars: null } }
 }
 
-const metas = metaBatch(repos)
+const metas = metaBatch(listed)
+const renamed = args['listed-only'] ? new Map() : currentNames(listed, metas)
+for (const [repo, m] of renamed) {
+  metas.set(repo.toLowerCase(), m)
+  console.log(`current name ${repo} is scanned too`)
+}
+const repos = mergeRepos(listed, [...renamed.keys()])
 const currentName = new Map()
 
 // Findings read from a checkout are cached under its commit, the validator and the checkout reader's code;
