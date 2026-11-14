@@ -15,9 +15,9 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/vus955-gif/claude-code-token-heatmap">vus955-gif/claude-code-token-heatmap</a></p>
 <p class="lede">A /tokens pane for Claude Code: tokens used per day as a heatmap, each API response counted once</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">token-heatmap reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 7</li><li>Access from classified calls: L2, writes or runs: runs processes, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">token-heatmap reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: runs processes, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install token-heatmap --marketplace vus955-gif/claude-code-token-heatmap</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
-<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads mod state, draws</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
 <p class="topics-line">Listed under <a href="/topics/usage-meters/">Context and usage meters for Claude Code</a>.</p>
 <p class="actions"><a class="source" href="https://github.com/vus955-gif/claude-code-token-heatmap">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#vus955-gif--claude-code-token-heatmap--token-heatmap">Back to the list</a></p>
@@ -26,13 +26,13 @@
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
     <dt>Hooks</dt><dd><code>session.start, command.run {command=tokens}</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.process.run, $.state.get, $.state.set, $.ui.open, $.ui.resolve</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.env.get, $.process.run, $.state.get, $.state.set, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/vus955-gif/claude-code-token-heatmap/tree/c5b614918249979e929661e8b1dad6c3b916c1f1"><code>c5b614918249</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/vus955-gif/claude-code-token-heatmap/blob/c5b614918249979e929661e8b1dad6c3b916c1f1/.claude-plugin/marketplace.json">claude-code-token-heatmap</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/vus955-gif/claude-code-token-heatmap/tree/2226ae82183ed2de2bace04c01e95a58f3cf2564"><code>2226ae82183e</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/vus955-gif/claude-code-token-heatmap/blob/2226ae82183ed2de2bace04c01e95a58f3cf2564/.claude-plugin/marketplace.json">claude-code-token-heatmap</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/vus955-gif--claude-code-token-heatmap--token-heatmap-reach.svg" alt="Reach badge for token-heatmap"> <img src="/badges/vus955-gif--claude-code-token-heatmap--token-heatmap-validates.svg" alt="Validation badge for token-heatmap"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/vus955-gif--claude-code-token-heatmap--token-heatmap-reach.svg)](https://mods.aidojo.si/mods/vus955-gif--claude-code-token-heatmap--token-heatmap/)

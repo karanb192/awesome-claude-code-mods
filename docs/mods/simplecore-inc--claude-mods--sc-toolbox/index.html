@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/simplecore-inc/claude-mods">simplecore-inc/claude-mods</a></p>
 <p class="lede">A toolbox pane for Claude Code: run, stop and watch the project's build tasks, scripts, Claude commands and prompts from one list</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">sc-toolbox reaches L0 (draws and remembers) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 2</li><li>Access from classified calls: L0, draws and remembers: draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">sc-toolbox reaches L0 (draws and remembers) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 2</li><li>Access from classified calls: L0, draws and remembers: draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install sc-toolbox --marketplace simplecore-inc/claude-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L0 Draws &amp; remembers</span><span class="track" aria-label="Reach level 0: Draws & remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, ui.close, command.run {command=sc:toolbox}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, ui.close, ui.press {plugin=sc-accounts, component=AbovePrompt, element=?}, command.run {command=sc:toolbox}</code></dd>
     <dt>API calls</dt><dd><code>$.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/simplecore-inc/claude-mods/tree/bbaba993776913888aa02a9e21e101a46b1f0bce"><code>bbaba9937769</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/simplecore-inc/claude-mods/blob/bbaba993776913888aa02a9e21e101a46b1f0bce/.claude-plugin/marketplace.json">simplecore-mods</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/simplecore-inc/claude-mods/tree/e4042b71f13a8a02467f3a97af80fb264e770aad"><code>e4042b71f13a</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/simplecore-inc/claude-mods/blob/e4042b71f13a8a02467f3a97af80fb264e770aad/.claude-plugin/marketplace.json">simplecore-mods</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from simplecore-inc/claude-mods</h2><ul><li><a href="/mods/simplecore-inc--claude-mods--sc-accounts/">sc-accounts</a><span>Switch between saved Claude logins and watch every account's rate limits</span></li><li><a href="/mods/simplecore-inc--claude-mods--sc-workspace/">sc-workspace</a><span>A workspace pane for Claude Code: agents and worktrees, checkpoints, notes, changes and memory files in one t…</span></li></ul></section>
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/simplecore-inc--claude-mods--sc-toolbox-reach.svg" alt="Reach badge for sc-toolbox"> <img src="/badges/simplecore-inc--claude-mods--sc-toolbox-validates.svg" alt="Validation badge for sc-toolbox"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/simplecore-inc--claude-mods--sc-toolbox-reach.svg)](https://mods.aidojo.si/mods/simplecore-inc--claude-mods--sc-toolbox/)

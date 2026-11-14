@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/hopetonp/claude-voice-mod">hopetonp/claude-voice-mod</a></p>
 <p class="lede">VoiceMesh controls and Claude Code session bridge</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">voicemesh-controls reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 11</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: drives Claude, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">voicemesh-controls reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 11</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: drives Claude, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -25,12 +25,12 @@
 
     <dt>Observed events</dt><dd>classic hooks, every tool call</dd>
     <dt>Hooks</dt><dd><code>ui.message, session.attach, prompt.compose, session.start, classic.SessionStart, turn.start, turn.step, tool.call, turn.complete, ui.close, ui.render {component=UserMessage}</code></dd>
-    <dt>API calls</dt><dd><code>$.prompt.submit, $.session.cwd, $.session.id, $.session.surfaces, $.store.get, $.store.set, $.turn.abort, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
+    <dt>API calls</dt><dd><code>$.prompt.submit, $.session.cwd, $.session.id, $.session.surfaces, $.store.get, $.store.set, $.turn.abort, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/voice-hit-client.js, hooks/voice-toggle-client.js</code></dd>
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/hopetonp/claude-voice-mod/tree/dbd53dd405e03b919ce1d4de3ea2afec8a9d0d8d"><code>dbd53dd405e0</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/hopetonp/claude-voice-mod/tree/beee0d14ea6b12f080dd9f4cddc29e198fd23fd8"><code>beee0d14ea6b</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from hopetonp/claude-voice-mod</h2><ul><li><a href="/mods/hopetonp--claude-voice-mod--voicemesh-said/">voicemesh-said</a><span>Shows VoiceMesh conversation captions as chat bubbles without starting a Claude turn</span></li></ul></section>
