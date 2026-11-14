@@ -6,10 +6,11 @@
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync, rmSync, existsSync } from 'node:fs'
 import { LEVEL_NAMES, grade, hasFootprint } from './grade.mjs'
-import { renderSite, renderSitemap, renderRobots, renderLlms, reviewNotes, css, browseKeys } from './site.mjs'
+import { renderSite, renderSitemap, renderRobots, renderLlms, reviewNotes, css, browseKeys, lowerBound } from './site.mjs'
 import { renderBrowsePage } from './browse.mjs'
-import { assignPages, formatRegistry, idOf, indexable, readRegistry, renderModPage, renderNotFound, renderRedirect } from './pages.mjs'
+import { assignPages, formatRegistry, idOf, indexedPages, readRegistry, renderModPage, renderNotFound, renderRedirect } from './pages.mjs'
 import { siteAnchors } from './slug.mjs'
+import { readDuplicates } from './dedupe.mjs'
 import { ACCESS_PATH, renderAccessPage } from './access.mjs'
 import { TOPICS_PATH, listedMembers, readTopics, renderTopicPage, topicMembers, topicSummary } from './topics.mjs'
 
@@ -35,7 +36,7 @@ const short = (s, n = 110) => { s = String(s ?? '').replace(/\s+/g, ' ').replace
 // Anthropic palette (olive, clay, deep clay, plum, error red) with ivory text, matching claude.com and claude.dev.
 const LEVEL_COLORS = ['#788c5d', '#c96442', '#a94e2f', '#827dbd']
 const FAIL_COLOR = '#b53333'
-const reachText = m => !hasFootprint(m) ? 'unknown access' : m.reach.labels.length ? m.reach.labels.join(', ') : 'draws only'
+const reachText = m => !hasFootprint(m) ? ['unknown access', lowerBound(m)].filter(Boolean).join(', ') : m.reach.labels.length ? m.reach.labels.join(', ') : 'draws only'
 const validates = m => ['passed', 'warnings'].includes(m.validate.status)
 const validationText = m => validates(m) ? data.claudeVersion : m.validate.status === 'failed' ? `fails on ${data.claudeVersion}` : 'not verified'
 const scanText = m => [validationText(m), ...reviewNotes(m)].join('; ')
@@ -51,25 +52,9 @@ function badge(label, value, color) {
 `
 }
 
-// badges/ is what the README and contributing.md link via raw.githubusercontent.com; docs/badges/ is the same
-// set served from the Pages domain.
-const BADGE_DIRS = ['badges', 'docs/badges']
-for (const dir of BADGE_DIRS) mkdirSync(dir, { recursive: true })
-const expectedBadges = new Set([...mods, ...builtins].flatMap(m => [`${slug(m)}-reach.svg`, `${slug(m)}-validates.svg`]))
-for (const dir of BADGE_DIRS) {
-  for (const file of readdirSync(dir)) {
-    if (/-(reach|validates)\.svg$/.test(file) && !expectedBadges.has(file)) unlinkSync(`${dir}/${file}`)
-  }
-}
-const writeBadge = (file, svg) => { for (const dir of BADGE_DIRS) writeFileSync(`${dir}/${file}`, svg) }
-for (const m of [...mods, ...builtins]) {
-  writeBadge(`${slug(m)}-reach.svg`, badge('reach', `${hasFootprint(m) ? 'L' + m.reach.level + ' ' : ''}${reachText(m)}`, hasFootprint(m) ? LEVEL_COLORS[m.reach.level] : '#5e5d59'))
-  writeBadge(`${slug(m)}-validates.svg`, badge('validates on', scanText(m), !validates(m) ? FAIL_COLOR : reviewNotes(m).length ? LEVEL_COLORS[1] : LEVEL_COLORS[0]))
-}
-
 const count = pred => mods.filter(pred).length
 const has = label => m => m.reach.labels.includes(label)
-const stats = `As of ${asOf}, scanned against Claude Code ${data.claudeVersion}: **${mods.length} mods** in **${data.repos} candidate repos**. `
+const stats = `As of ${asOf}, scanned against Claude Code ${data.claudeVersion}: **${mods.length.toLocaleString('en')} mods** in **${data.repos.toLocaleString('en')} candidate repos**. `
   + `${count(has('runs processes'))} run host processes, ${count(has('writes files'))} write files, ${count(has('reads files'))} read files, `
   + `${count(has('network'))} reach the network, ${count(m => m.sees.includes('every tool call'))} see every tool call, `
   + `${count(m => m.sees.includes('every prompt'))} see every prompt, ${count(m => m.validate.status === 'failed')} fail to validate on this version. `
@@ -97,18 +82,52 @@ function updateBlocks(file, blocks) {
   }
   writeFileSync(file, text)
 }
-updateBlocks('README.md', { stats: `**${mods.length} mods** · Last scanned ${asOf}.` })
+updateBlocks('README.md', { stats: `**${mods.length.toLocaleString('en')} mods** · Last scanned ${asOf}.` })
+
+// The count in hand-written copy, rounded down to the hundred so the sentence moves every few scans, not every one.
+const about = mods.length < 100 ? String(mods.length) : `${(Math.floor(mods.length / 100) * 100).toLocaleString('en')}+`
+// Rewrites the count between inline markers, or the one match of a pattern in a file that cannot carry markers.
+function updateCount(file, pattern) {
+  if (!existsSync(file)) return
+  const text = readFileSync(file, 'utf8')
+  if (!pattern.test(text)) throw new Error(`${file} has no count to update`)
+  writeFileSync(file, text.replace(pattern, (match, before, after) => `${before}${about}${after}`))
+}
+updateCount('README.md', /(<!-- count:start -->)[^<]*(<!-- count:end -->)/)
+updateCount('finder/.claude-plugin/plugin.json', /(get matches from )(?:[\d,]+\+?|thousands of)( community mods)/)
+updateCount('.claude-plugin/marketplace.json', /(Search )(?:[\d,]+\+?|thousands of)( community Claude Code mods)/)
 updateBlocks('catalogue.md', { stats, scan: table(mods), builtin: table(builtins) })
 
 const records = [...mods, ...builtins]
-const identity = assignPages(records, readRegistry(existsSync('data/pages.json') ? readFileSync('data/pages.json', 'utf8') : ''), data.mods)
+const identity = assignPages(records, readRegistry(existsSync('data/pages.json') ? readFileSync('data/pages.json', 'utf8') : ''), data.mods, readDuplicates())
 const pageOf = mod => identity.pages.get(mod)
+// badges/ is what the README and contributing.md link via raw.githubusercontent.com; docs/badges/ is the same
+// set served from the Pages domain. Authors embed a badge by its file name, so a page path that redirects keeps
+// its badge pair, drawn from the mod it redirects to, as its page does. A counted mod's own badge wins a shared name.
+const BADGE_DIRS = ['badges', 'docs/badges']
+for (const dir of BADGE_DIRS) mkdirSync(dir, { recursive: true })
+const badgeOwners = new Map([...mods, ...builtins].map(m => [slug(m), m]))
+const pageOwners = new Map([...identity.pages].map(([m, page]) => [page, m]))
+for (const [from, to] of identity.redirects) if (!badgeOwners.has(from) && pageOwners.has(to)) badgeOwners.set(from, pageOwners.get(to))
+const expectedBadges = new Set([...badgeOwners.keys()].flatMap(key => [`${key}-reach.svg`, `${key}-validates.svg`]))
+for (const dir of BADGE_DIRS) {
+  for (const file of readdirSync(dir)) {
+    if (/-(reach|validates)\.svg$/.test(file) && !expectedBadges.has(file)) unlinkSync(`${dir}/${file}`)
+  }
+}
+const writeBadge = (file, svg) => { for (const dir of BADGE_DIRS) writeFileSync(`${dir}/${file}`, svg) }
+for (const [key, m] of badgeOwners) {
+  writeBadge(`${key}-reach.svg`, badge('reach', `${hasFootprint(m) ? 'L' + m.reach.level + ' ' : ''}${reachText(m)}`, hasFootprint(m) ? LEVEL_COLORS[m.reach.level] : '#5e5d59'))
+  writeBadge(`${key}-validates.svg`, badge('validates on', scanText(m), !validates(m) ? FAIL_COLOR : reviewNotes(m).length ? LEVEL_COLORS[1] : LEVEL_COLORS[0]))
+}
+
 const byRepo = new Map()
 for (const m of [...records].sort((a, b) => a.name.localeCompare(b.name, 'en') || (idOf(a) < idOf(b) ? -1 : 1))) byRepo.set(m.repo, [...(byRepo.get(m.repo) ?? []), m])
 
+const index = indexedPages(records, identity.pages, identity.registry)
 const browsable = records.filter(m => !identity.redirects.has(pageOf(m)))
 const letters = browseKeys(browsable)
-// A topic lists the members of its rule that have an indexable page of their own. A stale id in the rule is
+// A topic lists the members of its rule that have a described page of their own. A stale id in the rule is
 // reported and tolerated, so a retirement never breaks the render.
 const topics = existsSync(TOPICS_PATH) ? readTopics(readFileSync(TOPICS_PATH, 'utf8')) : []
 const listedIn = new Map(topics.map(topic => {
@@ -138,7 +157,7 @@ for (const m of records) {
   if (identity.redirects.has(pageOf(m))) continue
   mkdirSync(`docs/mods/${pageOf(m)}`, { recursive: true })
   const siblings = byRepo.get(m.repo).filter(other => other !== m).map(other => ({ mod: other, slug: pageOf(other) }))
-  writeFileSync(`docs/mods/${pageOf(m)}/index.html`, renderModPage(m, { slug: pageOf(m), anchor: slug(m), claudeVersion: data.claudeVersion, siblings, topics: topicsOf.get(m) ?? [] }))
+  writeFileSync(`docs/mods/${pageOf(m)}/index.html`, renderModPage(m, { slug: pageOf(m), anchor: slug(m), siblings, topics: topicsOf.get(m) ?? [], indexed: index.indexed.has(m) }))
 }
 for (const [from, to] of identity.redirects) {
   mkdirSync(`docs/mods/${from}`, { recursive: true })
@@ -166,8 +185,8 @@ for (const topic of topics) {
 writeFileSync('docs/404.html', renderNotFound())
 mkdirSync('docs/access', { recursive: true })
 writeFileSync('docs/access/index.html', renderAccessPage(data))
-writeFileSync('data/pages.json', formatRegistry(identity.registry))
-writeFileSync('docs/sitemap.xml', renderSitemap([ACCESS_PATH, ...shownTopics.map(topic => `topics/${topic.slug}/`), ...letters.map(key => `browse/${key}/`), ...records.filter(indexable).map(m => `mods/${pageOf(m)}/`).sort()]))
+writeFileSync('data/pages.json', formatRegistry(index.registry))
+writeFileSync('docs/sitemap.xml', renderSitemap([ACCESS_PATH, ...shownTopics.map(topic => `topics/${topic.slug}/`), ...letters.map(key => `browse/${key}/`), ...records.filter(m => index.indexed.has(m)).map(m => `mods/${pageOf(m)}/`).sort()]))
 writeFileSync('docs/robots.txt', renderRobots())
 writeFileSync('docs/llms.txt', renderLlms(data, shownTopics.map(topic => ({ slug: topic.slug, title: topic.title, summary: topicSummary(topic, listedIn.get(topic).length) }))))
 console.log(`rendered ${mods.length} mods and ${builtins.length} built-ins into README.md, catalogue.md, badges/, docs/, docs/badges/, docs/mods/, docs/browse/, docs/topics/ and docs/access/`)

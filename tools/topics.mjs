@@ -9,7 +9,7 @@ import { readFileSync } from 'node:fs'
 import { parseArgs } from 'node:util'
 import { esc, site, browseNav, topicNav } from './site.mjs'
 import { hasFootprint } from './grade.mjs'
-import { accessFacts, accessLine, clip, idOf, identity, indexable, installLine, shell } from './pages.mjs'
+import { accessFacts, accessLine, clip, describable, idOf, identity, installLine, shell } from './pages.mjs'
 
 export const TOPICS_PATH = 'data/topics.json'
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
@@ -117,8 +117,8 @@ export function topicMembers(topic, records) {
   return { members, hits, stale }
 }
 
-// What the page lists: members that pass the mod page's index gate, so the page never links a noindex page.
-export const listedMembers = members => members.filter(indexable)
+// What the page lists: members with a scan result and a description of their own.
+export const listedMembers = members => members.filter(describable)
 
 export const topicSummary = (topic, n) => PROSE[topic.slug].summary(n)
 

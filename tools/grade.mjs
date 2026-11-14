@@ -57,6 +57,16 @@ export function hasFootprint(mod) {
   return ['passed', 'warnings'].includes(status)
 }
 
+// Must match the reason tools/parse.mjs records; parse.test.mjs checks that it does. The literal is
+// repeated rather than imported so that this policy can change without invalidating cached scan findings.
+export const TRUNCATED_FOOTPRINT = 'Validator output was truncated'
+
+// The validator shortened its own output. Such a footprint is still unknown access, and any recorded calls are
+// only a lower bound, but a new seed with it may be listed, as discovery already lists such mods.
+export function truncatedFootprint(mod) {
+  return mod.footprint?.status === 'unavailable' && mod.footprint.reason === TRUNCATED_FOOTPRINT
+}
+
 // An unclassified call is labelled "other: <call>" and counts as level 1, the form installed copies of
 // mod-finder read; calls in a namespace the table does not cover are also listed under `foreign`.
 export function grade(calls, complete = true) {

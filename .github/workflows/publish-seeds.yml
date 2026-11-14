@@ -47,12 +47,13 @@ jobs:
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
       - run: npm ci
         if: steps.seeds.outputs.pending == 'true'
+      # Publication accepts only the requested repositories, so a seed's current name is left to the next full scan.
       - name: Scan only unpublished seeds
         if: steps.seeds.outputs.pending == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          node tools/scan.mjs --repos "$RUNNER_TEMP/seeds.txt" --include-checked --out "$RUNNER_TEMP/seed-scan.json"
+          node tools/scan.mjs --repos "$RUNNER_TEMP/seeds.txt" --include-checked --listed-only --out "$RUNNER_TEMP/seed-scan.json"
       - name: Install browser checks
         if: steps.seeds.outputs.pending == 'true'
         run: npx playwright install --with-deps chromium
