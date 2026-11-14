@@ -7,7 +7,8 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { findingsModules, findingsPackages, findingsKey } from './inspect.mjs'
 import { buildIndex, search, getMod } from '../finder/search.mjs'
-import { reviewSeed } from './seed-publication.mjs'
+import { appendSeeds, reviewSeed } from './seed-publication.mjs'
+import { regrade } from './grade.mjs'
 
 const scanner = fileURLToPath(new URL('./scan.mjs', import.meta.url))
 
@@ -105,7 +106,7 @@ test('incomplete source analysis is retried, blocks seeds and cannot retire earl
   assert.deepEqual(JSON.parse(readFileSync(join(f.root, 'data/retirements.json'))).plugins, [])
   const required = f.run({ required: true })
   assert.notEqual(required.status, 0)
-  assert.match(required.stderr, /new seed fixture\/mod must clone successfully/)
+  assert.match(required.stderr, /new seed fixture\/mod was not fully inspected/)
   f.state.source = 'const value="safe"'
   const recovered = f.run()
   assert.ok(recovered.calls.includes('clone'))
@@ -260,16 +261,42 @@ test('truncated successful validation stays unknown through scans, cache and pub
   for (const filter of [{ without: ['network'] }, { max_reach: 1 }, { without: ['every prompt'] }]) {
     assert.deepEqual(search(index, filter).results, [])
   }
-  assert.match(reviewSeed(first.mods, first.claudeVersion, new Set()), /footprint unavailable/)
+  // A seed in this state is accepted by the PR check and by publication, and stays unknown access once listed.
+  assert.equal(reviewSeed(first.mods, first.claudeVersion, new Set()), null)
+  const published = appendSeeds({ claudeVersion: first.claudeVersion, mods: [] }, first, ['fixture/mod'], [])
+  assert.deepEqual(published.published, ['fixture/mod'])
+  regrade(published.inventory.mods)
+  assert.equal(published.inventory.mods[0].reach.level, null)
+  assert.equal(published.inventory.mods[0].reach.minimumLevel, 1)
   const cached = f.run()
   assert.deepEqual(cached.calls, [])
   assert.deepEqual(cached.data.mods[0], record)
-  assert.notEqual(f.run({ required: true }).status, 0)
+  const required = f.run({ required: true })
+  assert.equal(required.status, 0, required.stderr)
+  assert.match(required.stdout, /new seed accepted with unknown access: fixture\/mod:\./)
   f.state.revision = 'b'.repeat(40)
   f.state.calls = '$.fs.read, $.http.fetch'
   const recovered = f.run().data.mods[0]
   assert.equal(recovered.footprint.status, 'reported')
   assert.equal(recovered.reach.level, 3)
+})
+
+test('a required seed is still rejected, with the reason, when validation fails or its output is missing', t => {
+  const f = fixture(t)
+  f.state.fail = 'plugin'
+  const failed = f.run({ required: true, cache: false })
+  assert.notEqual(failed.status, 0)
+  assert.match(failed.stderr, /new seed fixture\/mod cloned, but fixture\/mod:\. did not pass claude plugin validate \(status: failed\)/)
+  f.state.fail = ''
+  f.state.output = false
+  const silent = f.run({ required: true, cache: false })
+  assert.notEqual(silent.status, 0)
+  assert.match(silent.stderr, /new seed fixture\/mod cloned and validated, but the validator did not report hooks and calls/)
+  f.state.output = true
+  f.state.inspectionFailure = true
+  const uninspected = f.run({ required: true, cache: false })
+  assert.notEqual(uninspected.status, 0)
+  assert.match(uninspected.stderr, /new seed fixture\/mod did not clone or could not be inspected/)
 })
 
 test('a new parser release in the lockfile retires cached findings; other dependency changes do not', () => {

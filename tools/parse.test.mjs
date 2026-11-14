@@ -1,7 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { parseValidateOutput, parseHooks, parseCalls, footprintStatus } from './parse.mjs'
-import { grade, visibility, drawsOn, hasFootprint } from './grade.mjs'
+import { grade, visibility, drawsOn, hasFootprint, truncatedFootprint, TRUNCATED_FOOTPRINT } from './grade.mjs'
 import { validate, validateAsync, spawnAsync, relativePaths } from './validate.mjs'
 import { mkdtempSync, readFileSync, mkdirSync, writeFileSync, chmodSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
@@ -108,7 +108,8 @@ test('embedded character-count markers discard the affected matcher before parsi
       { event: 'session.start', matcher: {} },
       { event: 'command.run', matcher: { command: 'status' } },
     ])
-    assert.deepEqual(footprintStatus(parsed, ['./register.ts']), { status: 'unavailable', reason: 'Validator output was truncated' })
+    assert.deepEqual(footprintStatus(parsed, ['./register.ts']), { status: 'unavailable', reason: TRUNCATED_FOOTPRINT })
+    assert.equal(truncatedFootprint({ footprint: footprintStatus(parsed, ['./register.ts']) }), true)
     assert.deepEqual(parsed.modules[0].calls, ['$.http.fetch'])
   }
 })
