@@ -6,6 +6,7 @@ import { validate } from './validate.mjs'
 import { footprintStatus } from './parse.mjs'
 import { grade, visibility, drawsOn } from './grade.mjs'
 import { marketplacesFor, uiRewriteReview } from './compatibility.mjs'
+import { DEFAULT_HOOKS_FILE, hooksModules, moduleSources, pluginHooksFiles } from './hooks-files.mjs'
 
 function ensureVersion(version) {
   let current
@@ -58,8 +59,16 @@ export function revalidatePublished(records, version, cache = {}, deps = {}) {
       if (existsSync(manifest)) inside(relative(dir, manifest))
       const parsed = runValidate(existsSync(manifest) ? '.claude-plugin/plugin.json' : '.', plugin, [dir])
       if (parsed.status === 'unknown') throw new Error(`Revalidation incomplete: ${record.id}`)
-      const hooksPath = inside(join(record.path, 'hooks/hooks.json'))
-      const modules = JSON.parse(readFileSync(hooksPath, 'utf8')).modules
+      let manifestJson = null
+      try { manifestJson = JSON.parse(readFileSync(manifest, 'utf8')) } catch {}
+      const hooksFiles = pluginHooksFiles(plugin, manifestJson)
+      if (!hooksFiles.length) throw new Error(`Hooks file not found: ${record.id}`)
+      const named = hooksFiles.map((path, i) => {
+        // A broken default fails revalidation as it always has; a broken declared file is skipped, as the scanner skips it.
+        if (i === 0 && path === join(plugin, DEFAULT_HOOKS_FILE)) return { path, modules: JSON.parse(readFileSync(path, 'utf8')).modules }
+        try { return { path, modules: hooksModules(JSON.parse(readFileSync(path, 'utf8'))) } } catch { return { path, modules: null } }
+      }).filter(({ modules }) => Array.isArray(modules) && modules.length)
+      const modules = named.length === 1 ? named[0].modules : named.flatMap(n => n.modules)
       const footprint = footprintStatus(parsed, modules)
       const hooks = parsed.modules.flatMap(module => module.hooks)
       const calls = [...new Set(parsed.modules.flatMap(module => module.calls))].sort()
@@ -69,7 +78,7 @@ export function revalidatePublished(records, version, cache = {}, deps = {}) {
         if (result.status === 'unknown') throw new Error(`Marketplace revalidation incomplete: ${record.id}`)
         return { path: relative(dir, path), name: JSON.parse(readFileSync(path, 'utf8')).name ?? null, status: result.status, errors: result.errors }
       })
-      const warnings = uiRewriteReview(dir, plugin, Array.isArray(modules) ? modules : [], hooks)
+      const warnings = uiRewriteReview(dir, plugin, named.flatMap(n => moduleSources(n.path, n.modules)), hooks)
       if (warnings.some(w => w.code === 'ui-review-incomplete')) throw new Error(`UI revalidation incomplete: ${record.id}`)
       const updated = { ...record, modules, footprint, hooks, calls, surfaceModules: [...new Set(parsed.modules.flatMap(module => module.surfaceModules))],
         validate: { status: parsed.status, claudeVersion: version, errors: parsed.errors }, marketplaces,

@@ -1,7 +1,7 @@
 // Finds candidates pushed since the last complete search through repository search. It has
 // its own rate limit and sees new repositories before code search indexes their files. A
-// repository joins the candidates only when its tree holds a hooks/hooks.json that lists
-// modules, so broad queries cannot fill data/repos.txt with plugins that are not mods.
+// repository joins the candidates only when its tree holds a hooks file that lists modules, the
+// scanner's rule, so broad queries cannot fill data/repos.txt with plugins that are not mods.
 // Progress lives in data/discovery.json: the start of the last complete search, repositories
 // already found not to be mods, repositories left for the next run, and repositories found but
 // not yet on main. Scheduled runs carry it between runs through the Actions cache.
@@ -9,6 +9,7 @@
 import { execFileSync } from 'node:child_process'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { ghSearchPage, createSearchRequest } from './github-search.mjs'
+import { declaredHooksFiles } from './hooks-files.mjs'
 
 // Ordered from most to least specific: when the check limit is reached, the broad query loses out.
 export const RECENT_QUERIES = [
@@ -109,22 +110,33 @@ export function rawFile(repo, branch, path) {
   return execFileSync('curl', ['-fsSL', '--max-time', '30', url], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 16 * 1024 * 1024 })
 }
 
-// Same rule as the scanner: a hooks.json inside a folder named hooks, outside node_modules.
-// Unreadable trees and hook files count as candidates, so the scanner reports them instead.
-// One API call per repository; hook files come from raw.githubusercontent.com.
+// Same rule as the scanner (hooks-files.mjs): a hooks/hooks.json, or a hooks file a plugin.json
+// declares, that lists modules, outside node_modules. Unreadable trees, manifests and hook files
+// count as candidates, so the scanner reports them instead. One API call per repository; manifests
+// and hook files come from raw.githubusercontent.com.
 export function hasHookModules({ repo, branch }, api = ghApi, raw = rawFile) {
   const tree = api(`repos/${repo}/git/trees/${encodeURIComponent(branch)}?recursive=1`)
   if (tree.truncated) return true
-  const paths = (tree.tree ?? [])
-    .filter(entry => entry.type === 'blob' && /(^|\/)hooks\/hooks\.json$/.test(entry.path) && !/(^|\/)node_modules\//.test(entry.path))
-    .map(entry => entry.path)
-  return paths.some(path => {
+  const blobs = new Set((tree.tree ?? [])
+    .filter(entry => entry.type === 'blob' && !/(^|\/)node_modules\//.test(entry.path))
+    .map(entry => entry.path))
+  const namesModules = path => {
     let text
     try { text = raw(repo, branch, path) } catch { return true }
     try {
       const hooks = JSON.parse(text)
       return Array.isArray(hooks?.modules) && hooks.modules.length > 0
     } catch { return true }
+  }
+  const defaults = [...blobs].filter(path => /(^|\/)hooks\/hooks\.json$/.test(path))
+  if (defaults.some(namesModules)) return true
+  return [...blobs].filter(path => /(^|\/)\.claude-plugin\/plugin\.json$/.test(path)).some(path => {
+    const root = path.slice(0, -'.claude-plugin/plugin.json'.length).replace(/\/$/, '')
+    let manifest
+    try { manifest = JSON.parse(raw(repo, branch, path)) } catch { return true }
+    return declaredHooksFiles(manifest, `/${root}`)
+      .map(file => root ? `${root}/${file}` : file)
+      .some(file => blobs.has(file) && namesModules(file))
   })
 }
 
