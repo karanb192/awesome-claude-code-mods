@@ -1,7 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { parseValidateOutput, parseHooks, parseCalls, footprintStatus } from './parse.mjs'
-import { grade, visibility, drawsOn, hasFootprint } from './grade.mjs'
+import { grade, visibility, drawsOn, hasFootprint, truncatedFootprint, TRUNCATED_FOOTPRINT } from './grade.mjs'
 import { validate, validateAsync, spawnAsync, relativePaths } from './validate.mjs'
 import { mkdtempSync, readFileSync, mkdirSync, writeFileSync, chmodSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
@@ -189,7 +189,8 @@ test('embedded character-count markers discard the affected matcher before parsi
       { event: 'session.start', matcher: {} },
       { event: 'command.run', matcher: { command: 'status' } },
     ])
-    assert.deepEqual(footprintStatus(parsed, ['./register.ts']), { status: 'unavailable', reason: 'Validator output was truncated' })
+    assert.deepEqual(footprintStatus(parsed, ['./register.ts']), { status: 'unavailable', reason: TRUNCATED_FOOTPRINT })
+    assert.equal(truncatedFootprint({ footprint: footprintStatus(parsed, ['./register.ts']) }), true)
     assert.deepEqual(parsed.modules[0].calls, ['$.http.fetch'])
   }
 })
@@ -224,7 +225,11 @@ test('visibility names what a hook can observe', () => {
 })
 
 import { fingerprint, describeChange, looksPartial, summarize } from './changed.mjs'
-import { applyDuplicates, applyDuplicatesWithRenames, suspectDuplicates, readDuplicates, renamePairs, appliesWithoutRescan } from './dedupe.mjs'
+import { applyDuplicates, applyDuplicatesWithRenames, suspectDuplicates, readDuplicates, renamePairs, appliesWithoutRescan, currentNames } from './dedupe.mjs'
+import { toMeta } from './meta.mjs'
+import { mergeRepos } from './candidates.mjs'
+import { assignPages, readRegistry } from './pages.mjs'
+import { install } from '../finder/install.mjs'
 import { reconcile } from './inventory.mjs'
 import { kindOf, readCatalogs } from './kind.mjs'
 import { reclassify, needsReview } from './reclassify.mjs'
@@ -805,6 +810,56 @@ test('retained Anderson plugins resolve to Codex after repository discovery foll
   }
   assert.equal(keeper.kind, 'mod')
   assert.equal(mods.filter(mod => mod.kind === 'mod').length, 1)
+})
+
+test('a candidate listed only under an old name is scanned under the name GitHub reports', () => {
+  const meta = fullName => ({ fullName, headOid: 'c1' })
+  const metas = new Map([
+    ['o/old', meta('o/new')], ['o/older', meta('o/new')], ['o/case', meta('O/Case')],
+    ['o/listed-old', meta('o/listed-new')], ['o/listed-new', meta('o/listed-new')], ['o/same', meta('o/same')],
+  ])
+  const added = currentNames(['o/case', 'o/listed-old', 'O/Listed-New', 'o/old', 'o/older', 'o/same', 'o/no-meta'], metas)
+  assert.deepEqual([...added.keys()], ['o/new'], 'once for two old names, never for a change of letter case or a current name already listed')
+  assert.equal(added.get('o/new'), metas.get('o/old'), 'the current name reuses the metadata, so the scan cache can match its head commit')
+  assert.equal(currentNames(['o/old'], new Map()).size, 0, 'no metadata, nothing added')
+})
+
+test('nextcost moves from HMarzban/claude-mod to HMarzban/nextcost and every old page redirects to it', () => {
+  const listed = ['HMarzban/claude-mod']
+  const node = { nameWithOwner: 'HMarzban/nextcost', stargazerCount: 5, defaultBranchRef: { name: 'main', target: { oid: '56437d498893e405004b373dddb2041314b98230' } } }
+  const metas = new Map([['hmarzban/claude-mod', toMeta(node)]])
+  const record = repo => ({
+    id: `${repo}:plugins/nextcost`, repo, path: 'plugins/nextcost', name: 'nextcost', kind: 'mod', sourceCommit: node.defaultBranchRef.target.oid,
+    description: 'See what your next message costs: a live band above the prompt with the prompt-cache countdown.',
+    marketplaces: [{ path: '.claude-plugin/marketplace.json', status: 'passed', errors: [] }],
+    validate: { status: 'warnings', claudeVersion: '2.1.323', errors: [] },
+  })
+  const scan = repos => {
+    const mods = repos.map(record)
+    const currentName = new Map(repos.map(repo => [repo.toLowerCase(), metas.get(repo.toLowerCase()).fullName]))
+    const renames = renamePairs(mods, currentName, new Set(mods.map(m => m.id)))
+    return applyDuplicatesWithRenames(mods, readDuplicates('data/duplicates.txt'), renames)
+  }
+  assert.deepEqual(scan(listed).filter(m => m.kind === 'mod').map(m => m.id), ['HMarzban/claude-mod:plugins/nextcost'], 'the old name alone kept the record under it')
+
+  const renamed = currentNames(listed, metas)
+  for (const [repo, m] of renamed) metas.set(repo.toLowerCase(), m)
+  const mods = scan(mergeRepos(listed, [...renamed.keys()]))
+  const [current] = mods.filter(m => m.kind === 'mod')
+  assert.equal(current.id, 'HMarzban/nextcost:plugins/nextcost')
+  assert.deepEqual(mods.find(m => m.repo === 'HMarzban/claude-mod'), { ...record('HMarzban/claude-mod'), kind: 'duplicate', duplicateOf: current.id })
+  assert.equal(install(current).command, '/plugin install nextcost --marketplace HMarzban/nextcost')
+
+  const published = readRegistry(readFileSync('data/pages.json', 'utf8'))
+  const registry = Object.fromEntries(Object.entries(published).filter(([slug]) => slug.startsWith('HMarzban--')))
+  const moved = assignPages([current], registry, mods, readDuplicates('data/duplicates.txt'))
+  assert.equal(moved.pages.get(current), 'HMarzban--nextcost--nextcost')
+  assert.deepEqual(Object.fromEntries(moved.redirects), {
+    'HMarzban--claude-mod--nextcost': 'HMarzban--nextcost--nextcost',
+    'HMarzban--claude-mod--session-usage-band': 'HMarzban--nextcost--nextcost',
+  })
+  const retired = assignPages([current], moved.registry, [current], readDuplicates('data/duplicates.txt'))
+  assert.deepEqual(Object.fromEntries(retired.redirects), Object.fromEntries(moved.redirects), 'the redirects outlive the old record')
 })
 
 test('claudetto release evidence probes are fixtures, not shipped mods', () => {

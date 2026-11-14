@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/WizardingCode-io/wizardingcode-developer-crew">WizardingCode-io/wizardingcode-developer-crew</a></p>
 <p class="lede">Guided delivery where done is proven: the crew engine detects your project, records test-first, runs the real build, tests and checks, and holds the turn until the evidence says the work is done.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">wizardingcode-developer-crew reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">wizardingcode-developer-crew reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -25,12 +25,12 @@
 
     <dt>Observed events</dt><dd>classic hooks, subagent spawns</dd>
     <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear|resume|fork}, command.run {command=crew}, agent.spawn, turn.complete</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.model.complete, $.process.run, $.session.cwd, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.model.complete, $.process.run, $.session.cwd, $.session.id, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/WizardingCode-io/wizardingcode-developer-crew/tree/b354d4b9b8e6d6e8a831600bf2fda8ad6458a661"><code>b354d4b9b8e6</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/WizardingCode-io/wizardingcode-developer-crew/tree/c40fb69984f6b4802d6dfcaf6dbd450be3c1f7df"><code>c40fb69984f6</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 

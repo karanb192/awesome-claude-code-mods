@@ -6,6 +6,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { appendSeeds, pendingSeeds, planPublication, reviewSeed } from './seed-publication.mjs'
+import { TRUNCATED_FOOTPRINT, hasFootprint, regrade } from './grade.mjs'
 
 const mod = (repo, name = 'mod', extra = {}) => ({
   id: `${repo}:${name}`, repo, name, kind: 'mod', sourceCommit: 'a'.repeat(40),
@@ -58,12 +59,34 @@ test('failed, unknown, marketplace and compatibility results keep that seed unpu
     skippedFor(append(inventory([mod('new/repo', 'x', { marketplaces: [{ status }] })])), /marketplace needs review/)
   }
   skippedFor(append(inventory([mod('new/repo', 'x', { compatibility: { warnings: ['review'] } })])), /compatibility needs review/)
-  skippedFor(append(inventory([])), /no validating mod plugins/)
-  skippedFor(append(inventory([mod('new/repo', 'probe', { kind: 'fixture' })])), /no validating mod plugins/)
+  skippedFor(append(inventory([])), /did not clone/)
+  skippedFor(append({ ...inventory([]), checkedRepos: ['new/repo'] }), /no plugin with a hooks module that counts as a mod/)
+  skippedFor(append(inventory([mod('new/repo', 'probe', { kind: 'fixture' })])), /no plugin with a hooks module that counts as a mod/)
   skippedFor(append(inventory([mod('new/repo', 'x', { id: 'existing/repo:mod' })])), /already published/)
   skippedFor(append(inventory([mod('new/repo', 'x', { validate: { status: 'passed', claudeVersion: '2.1.288' } })])), /validator mismatch/)
   assert.equal(reviewSeed(scan().mods, '2.1.287', new Set()), null)
-  assert.match(reviewSeed([{ ...scan().mods[0], footprint: { status: 'unavailable' } }], '2.1.287', new Set()), /footprint unavailable/)
+  assert.match(reviewSeed([{ ...scan().mods[0], footprint: { status: 'unavailable' } }], '2.1.287', new Set()), /footprint not reported/)
+})
+
+test('a validated seed whose footprint the validator truncated publishes as unknown access', () => {
+  const truncated = (name, extra = {}) => mod('new/repo', name, { footprint: { status: 'unavailable', reason: TRUNCATED_FOOTPRINT }, calls: ['$.fs.read'], reach: { level: null, name: 'unknown', labels: ['reads files'], minimumLevel: 1 }, ...extra })
+  for (const status of ['passed', 'warnings']) {
+    const result = append(inventory([truncated('one', { validate: { status, claudeVersion: '2.1.287', errors: [] } }), mod('new/repo', 'two')]))
+    assert.deepEqual(result.published, ['new/repo'])
+    assert.deepEqual(result.skipped, [])
+    const listed = result.inventory.mods.find(m => m.id === 'new/repo:one')
+    assert.equal(hasFootprint(listed), false, 'listed as unknown access, never as a reported footprint')
+    regrade(result.inventory.mods)
+    assert.equal(listed.reach.level, null, 'never L0')
+    assert.equal(listed.reach.minimumLevel, 1, 'recorded calls stay a lower bound')
+  }
+  // Everything else that holds a seed still holds a truncated one.
+  skippedFor(append(inventory([truncated('one', { validate: { status: 'failed', claudeVersion: '2.1.287', errors: [] } })])), /validation needs review: new\/repo:one did not pass claude plugin validate \(status: failed\)/)
+  skippedFor(append({ ...inventory([truncated('one')]), checkedRepos: [] }), /not fully inspected/)
+  skippedFor(append(inventory([truncated('one', { marketplaces: [{ status: 'failed' }] })])), /marketplace needs review/)
+  skippedFor(append(inventory([truncated('one', { compatibility: { warnings: ['review'] } })])), /compatibility needs review/)
+  skippedFor(append(inventory([truncated('one', { kind: 'fixture' })])), /no plugin with a hooks module that counts as a mod/)
+  skippedFor(append(inventory([truncated('one'), mod('new/repo', 'two', { footprint: { status: 'unavailable' } })])), /footprint not reported; needs review: .*new\/repo:two/)
 })
 
 test('one failing seed does not hold back the others', () => {
@@ -344,7 +367,7 @@ if(args[0]==='api'){
   assert.match(git('--git-dir', remote, 'show', 'main:docs/access/index.html'), /catalogue of 3 counted mods/, 'the access page is published with the new mod')
   assert.match(git('--git-dir', remote, 'show', 'main:docs/topics/prompt-cache/index.html'), /<a class="name" href="\/mods\/new--repo--new\/">/, 'the topic page lists the newly published mod')
   assert.deepEqual(pendingSeeds(['existing/repo', 'new/repo', 'later/repo', 'broken/repo'], published), ['broken/repo', 'later/repo'])
-  assert.match(readFileSync(join(runner, 'seed-skipped.md'), 'utf8'), /^- broken\/repo: no validating mod plugins/)
+  assert.match(readFileSync(join(runner, 'seed-skipped.md'), 'utf8'), /^- broken\/repo: repository did not clone/)
   if (!concurrentPublication) assert.match(readFileSync(pr, 'utf8'), /## Seeds not published\n\n- broken\/repo/)
   assert.equal(readFileSync(join(runner, 'seed-published.txt'), 'utf8'), concurrentPublication ? '' : 'new/repo\n')
   const commands = readFileSync(log, 'utf8').trim().split('\n').map(line => JSON.parse(line))
