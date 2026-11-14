@@ -112,7 +112,7 @@ export function rawFile(repo, branch, path) {
 
 // Same rule as the scanner (hooks-files.mjs): a hooks/hooks.json, or a hooks file a plugin.json
 // declares, that lists modules, outside node_modules. Unreadable trees, manifests and hook files
-// count as candidates, so the scanner reports them instead. One API call per repository; manifests
+// count as candidates, so the scanner reports them instead; a manifest that is not JSON declares nothing. One API call per repository; manifests
 // and hook files come from raw.githubusercontent.com.
 export function hasHookModules({ repo, branch }, api = ghApi, raw = rawFile) {
   const tree = api(`repos/${repo}/git/trees/${encodeURIComponent(branch)}?recursive=1`)
@@ -132,8 +132,9 @@ export function hasHookModules({ repo, branch }, api = ghApi, raw = rawFile) {
   if (defaults.some(namesModules)) return true
   return [...blobs].filter(path => /(^|\/)\.claude-plugin\/plugin\.json$/.test(path)).some(path => {
     const root = path.slice(0, -'.claude-plugin/plugin.json'.length).replace(/\/$/, '')
-    let manifest
-    try { manifest = JSON.parse(raw(repo, branch, path)) } catch { return true }
+    let text, manifest = null
+    try { text = raw(repo, branch, path) } catch { return true }
+    try { manifest = JSON.parse(text) } catch {}
     return declaredHooksFiles(manifest, `/${root}`)
       .map(file => root ? `${root}/${file}` : file)
       .some(file => blobs.has(file) && namesModules(file))

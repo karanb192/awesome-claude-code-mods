@@ -132,8 +132,9 @@ test('a hooks file that plugin.json declares makes a candidate when it lists mod
     'a/broken-manifest': { '.claude-plugin/plugin.json': '{', 'h.json': { modules: ['x'] } },
   })
   const check = name => hasHookModules({ repo: name, branch: 'main' }, api, raw)
-  assert.deepEqual(['a/root-file', 'a/array', 'a/settings-only', 'a/inline', 'a/escape', 'a/missing', 'a/vendored', 'a/broken-manifest'].map(check), [true, true, false, false, false, false, false, true])
+  assert.deepEqual(['a/root-file', 'a/array', 'a/settings-only', 'a/inline', 'a/escape', 'a/missing', 'a/vendored', 'a/broken-manifest'].map(check), [true, true, false, false, false, false, false, false])
   assert.equal(calls.length, 8)
+  assert.equal(hasHookModules({ repo: 'a/settings-only', branch: 'main' }, api, () => { throw new Error('curl: (28) timeout') }), true)
 })
 
 test('a search that does not finish keeps the checkpoint, and known repos are never checked', () => {
