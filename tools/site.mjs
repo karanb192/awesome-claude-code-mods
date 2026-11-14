@@ -25,7 +25,9 @@ export const reviewNotes = mod => [
   ...((mod.compatibility?.warnings ?? []).some(w => w.code !== 'ui-review-incomplete') ? ['review UI rewrite'] : []),
   ...((mod.compatibility?.warnings ?? []).some(w => w.code === 'ui-review-incomplete') ? ['UI review incomplete'] : []),
 ]
-export const reachText = mod => !hasFootprint(mod) ? 'unknown access' : mod.reach.labels.join(', ') || 'draws only'
+// A cut footprint keeps unknown access but says the floor its recorded calls already set (reach.minimumLevel).
+export const lowerBound = mod => !hasFootprint(mod) && mod.reach?.minimumLevel > 0 ? `at least L${mod.reach.minimumLevel}` : ''
+export const reachText = mod => !hasFootprint(mod) ? ['unknown access', lowerBound(mod)].filter(Boolean).join(', ') : mod.reach.labels.join(', ') || 'draws only'
 export const validationStatus = (mod, version) => ['passed', 'warnings'].includes(mod.validate.status) ? (mod.validate.status === 'warnings' ? 'Passed with warnings' : 'Passed') : mod.validate.status === 'failed' ? `fails on ${version}` : 'not verified'
 // The result alone, for mod pages, which name no current validator version.
 export const validationResult = validate => validate.status === 'passed' ? 'Passed' : validate.status === 'warnings' ? 'Passed with warnings' : validate.status === 'failed' ? 'Fails' : 'not verified'

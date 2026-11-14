@@ -196,6 +196,10 @@ test('unavailable footprints render as unknown in every export and never enter t
   assert.deepEqual(snapshot.mods[1].validate, empty.validate)
   assert.deepEqual(snapshot.mods[2].calls, ['$.http.fetch'])
   assert.equal(snapshot.mods[2].reach.minimumLevel, 3)
+  // A cut footprint says the floor its recorded calls set, and stays unknown.
+  assert.match(readFileSync(join(dir, 'badges/example--mods--mod-2-reach.svg'), 'utf8'), /unknown access, at least L3/)
+  assert.match(modPage(dir, 'example--mods--mod-2'), /Unknown access · at least L3<\/span>/)
+  assert.doesNotMatch(readFileSync(join(dir, 'badges/example--mods--mod-1-reach.svg'), 'utf8'), /at least/)
   assert.equal(snapshot.mods[4].reach.level, 3)
   assert.match(readFileSync(join(dir, 'catalogue.md'), 'utf8'), /Unknown access: 3/)
   assert.match(readFileSync(join(dir, 'catalogue.md'), 'utf8'), /unknown; incomplete footprint/)

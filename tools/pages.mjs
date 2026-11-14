@@ -3,7 +3,7 @@
 // describing another mod. When a mod is renamed or confirmed as a copy, its old path redirects to the page
 // of the mod that replaced it, and the registry remembers that target after the copy's record is retired.
 
-import { esc, arrow, mark, star, repo, site, levels, reachText, track, recordDetails, validationResult, reviewNotes } from './site.mjs'
+import { esc, arrow, mark, star, repo, site, levels, reachText, track, recordDetails, validationResult, reviewNotes, lowerBound } from './site.mjs'
 import { hasFootprint, classified } from './grade.mjs'
 import { install } from '../finder/install.mjs'
 import { slugs } from './slug.mjs'
@@ -317,7 +317,7 @@ export function renderModPage(mod, { slug, anchor, siblings = [], topics = [], i
 ${reviewNotes(mod).length ? `<p class="compatibility">${esc(reviewNotes(mod).join('; '))}</p>` : ''}
 ${summary.html}
 ${installBlock(mod)}
-<div class="facts"><div><h2>Access</h2><span class="level">${esc(hasFootprint(mod) ? `L${mod.reach.level} ${levels[mod.reach.level]}` : 'Unknown access')}</span>${track(mod)}<span class="labels">${esc(hasFootprint(mod) ? reachText(mod) : 'The footprint is unavailable or incomplete.')}</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">${esc(hasFootprint(mod) ? `L${mod.reach.level} ${levels[mod.reach.level]}` : ['Unknown access', lowerBound(mod)].filter(Boolean).join(' · '))}</span>${track(mod)}<span class="labels">${esc(hasFootprint(mod) ? reachText(mod) : 'The footprint is unavailable or incomplete.')}</span></div>
 <div><h2>Validation</h2><span class="status${statusClass}">${esc(status)}</span></div></div>${topics.length ? `\n<p class="topics-line">Listed under ${topics.map(topic => `<a href="/topics/${esc(topic.slug)}/">${esc(topic.title)}</a>`).join(', ')}.</p>` : ''}
 <p class="actions"><a class="source" href="${esc(sourceOf(mod))}">View the source on GitHub ${arrow}</a><a href="/#${esc(anchor)}">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
