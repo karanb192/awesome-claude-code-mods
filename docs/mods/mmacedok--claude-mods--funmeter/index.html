@@ -15,24 +15,24 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/mmacedok/claude-mods">mmacedok/claude-mods</a></p>
 <p class="lede">A live band above the prompt: context by token type, cost, cache hit, speed and plan limits, with a mascot and a Handoff button</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">funmeter reaches L0 (draws and remembers) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 2</li><li>Access from classified calls: L0, draws and remembers: draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">funmeter reaches L0 (draws and remembers) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 7</li><li>Access from classified calls: L0, draws and remembers: persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install funmeter --marketplace mmacedok/claude-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
-<div class="facts"><div><h2>Access</h2><span class="level">L0 Draws &amp; remembers</span><span class="track" aria-label="Reach level 0: Draws & remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">draws</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">L0 Draws &amp; remembers</span><span class="track" aria-label="Reach level 0: Draws & remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
 <p class="topics-line">Listed under <a href="/topics/prompt-cache/">Prompt cache mods for Claude Code</a>, <a href="/topics/usage-meters/">Context and usage meters for Claude Code</a>.</p>
 <p class="actions"><a class="source" href="https://github.com/mmacedok/claude-mods/tree/main/plugins/funmeter">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#mmacedok--claude-mods--funmeter">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>every tool call, every skill</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call, command.run {command=funstats}, session.end, turn.step, turn.complete, session.measure, skill.prompt</code></dd>
-    <dt>API calls</dt><dd><code>$.ui.status, $.ui.toast</code></dd>
+    <dt>Observed events</dt><dd>every tool call, subagent spawns, every skill</dd>
+    <dt>Hooks</dt><dd><code>session.start, tool.call, agent.spawn, turn.start, command.run {command=funstats}, session.end, turn.step, turn.complete, session.measure, skill.prompt</code></dd>
+    <dt>API calls</dt><dd><code>$.store.set, $.ui.close, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/mmacedok/claude-mods/tree/5d7ca71dbbc4ae35a0a88eee1e0651f674268727"><code>5d7ca71dbbc4</code></a></dd>
-    <dt>Marketplace warnings</dt><dd><a href="https://github.com/mmacedok/claude-mods/blob/5d7ca71dbbc4ae35a0a88eee1e0651f674268727/.claude-plugin/marketplace.json">claude-mods</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/mmacedok/claude-mods/tree/43122ca6312d637292b42f7bb959a8be1946acb8"><code>43122ca6312d</code></a></dd>
+    <dt>Marketplace warnings</dt><dd><a href="https://github.com/mmacedok/claude-mods/blob/43122ca6312d637292b42f7bb959a8be1946acb8/.claude-plugin/marketplace.json">claude-mods</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/mmacedok--claude-mods--funmeter-reach.svg" alt="Reach badge for funmeter"> <img src="/badges/mmacedok--claude-mods--funmeter-validates.svg" alt="Validation badge for funmeter"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/mmacedok--claude-mods--funmeter-reach.svg)](https://mods.aidojo.si/mods/mmacedok--claude-mods--funmeter/)
