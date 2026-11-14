@@ -196,6 +196,10 @@ test('unavailable footprints render as unknown in every export and never enter t
   assert.deepEqual(snapshot.mods[1].validate, empty.validate)
   assert.deepEqual(snapshot.mods[2].calls, ['$.http.fetch'])
   assert.equal(snapshot.mods[2].reach.minimumLevel, 3)
+  // A cut footprint says the floor its recorded calls set, and stays unknown.
+  assert.match(readFileSync(join(dir, 'badges/example--mods--mod-2-reach.svg'), 'utf8'), /unknown access, at least L3/)
+  assert.match(modPage(dir, 'example--mods--mod-2'), /Unknown access · at least L3<\/span>/)
+  assert.doesNotMatch(readFileSync(join(dir, 'badges/example--mods--mod-1-reach.svg'), 'utf8'), /at least/)
   assert.equal(snapshot.mods[4].reach.level, 3)
   assert.match(readFileSync(join(dir, 'catalogue.md'), 'utf8'), /Unknown access: 3/)
   assert.match(readFileSync(join(dir, 'catalogue.md'), 'utf8'), /unknown; incomplete footprint/)
@@ -744,6 +748,27 @@ test('retired mods lose their page, renamed ones leave a redirect, and their pat
   writeFileSync(join(dir, 'data/mods.json'), JSON.stringify(data))
   render(dir)
   assert.match(modPage(dir, 'example--mods--mod-2'), /url=\/mods\/example--renamed--mod-2\//, 'the redirect survives retirement of the old record')
+})
+
+test('a renamed repository\'s old badge files keep serving the renamed mod, and a retired mod loses its badges', t => {
+  const dir = fixture(t, [mod(0), mod(1), mod(2)])
+  render(dir)
+  const badges = (folder, key) => ['reach', 'validates'].map(kind => join(dir, folder, `${key}-${kind}.svg`))
+  const read = (folder, key) => badges(folder, key).map(file => existsSync(file) ? readFileSync(file, 'utf8') : null)
+  const renamed = { ...mod(2), id: 'example/renamed:plugins/mod-2', repo: 'example/renamed', calls: ['$.http.fetch'] }
+  const data = JSON.parse(readFileSync(join(dir, 'data/mods.json'), 'utf8'))
+  data.mods = [mod(0), renamed, { ...mod(2), kind: 'duplicate', duplicateOf: renamed.id }]
+  writeFileSync(join(dir, 'data/mods.json'), JSON.stringify(data))
+  render(dir)
+  for (const folder of ['badges', 'docs/badges']) {
+    assert.deepEqual(read(folder, 'example--mods--mod-2'), read(folder, 'example--renamed--mod-2'), `${folder}: the old badge path draws the renamed mod`)
+    assert.match(read(folder, 'example--mods--mod-2')[0], /L3 network/, `${folder}: with its current values`)
+    assert.deepEqual(read(folder, 'example--mods--mod-1'), [null, null], `${folder}: a retired mod with no keeper loses its badges`)
+  }
+  data.mods = [mod(0), renamed]
+  writeFileSync(join(dir, 'data/mods.json'), JSON.stringify(data))
+  render(dir)
+  assert.deepEqual(read('badges', 'example--mods--mod-2'), read('badges', 'example--renamed--mod-2'), 'the badges outlive the old record, as the redirect does')
 })
 
 test('mod pages and the access page load every asset over HTTP, fit a phone, need no script, and removed mods get a 404', async t => {

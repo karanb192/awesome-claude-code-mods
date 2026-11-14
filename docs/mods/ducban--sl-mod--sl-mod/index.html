@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/ducban/sl-mod">ducban/sl-mod</a></p>
 <p class="lede">A lighter status line drawn in the band above the prompt</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">sl-mod reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 0</li><li>API methods referenced: 19</li><li>Access from classified calls: L3, network: network, runs processes, reads files, reads settings, requests an Anthropic credential handle, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">sl-mod reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 15</li><li>API methods referenced: 19</li><li>Access from classified calls: L3, network: network, runs processes, reads files, reads settings, requests an Anthropic credential handle, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, reads files, reads settings, requests an Anthropic credential handle, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -23,14 +23,14 @@
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>none</code></dd>
+    <dt>Observed events</dt><dd>classic hooks, compaction, subagent spawns, Bash calls, every prompt</dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart, config.set {key=theme}, session.measure, session.compact, classic.PostCompact, turn.step, turn.start, turn.complete, agent.spawn, classic.PostToolUse, classic.Stop, command.run {command=sl}, tool.call {tool=Bash}, prompt.submit</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.command.register, $.config.list, $.fs.exists, $.fs.read, $.http.fetch, $.process.run, $.session.authorize, $.session.cwd, $.session.model, $.session.usage, $.store.get, $.store.set, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/ducban/sl-mod/tree/e7e1bb443f635352e87384899e6d807e1466e6d4"><code>e7e1bb443f63</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/ducban/sl-mod/tree/0c418a4622dd912a29fff32ab9d517bf1ae3ab61"><code>0c418a4622dd</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 

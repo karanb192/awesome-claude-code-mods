@@ -6,7 +6,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync, rmSync, existsSync } from 'node:fs'
 import { LEVEL_NAMES, grade, hasFootprint } from './grade.mjs'
-import { renderSite, renderSitemap, renderRobots, renderLlms, reviewNotes, css, browseKeys } from './site.mjs'
+import { renderSite, renderSitemap, renderRobots, renderLlms, reviewNotes, css, browseKeys, lowerBound } from './site.mjs'
 import { renderBrowsePage } from './browse.mjs'
 import { assignPages, formatRegistry, idOf, indexedPages, readRegistry, renderModPage, renderNotFound, renderRedirect } from './pages.mjs'
 import { siteAnchors } from './slug.mjs'
@@ -36,7 +36,7 @@ const short = (s, n = 110) => { s = String(s ?? '').replace(/\s+/g, ' ').replace
 // Anthropic palette (olive, clay, deep clay, plum, error red) with ivory text, matching claude.com and claude.dev.
 const LEVEL_COLORS = ['#788c5d', '#c96442', '#a94e2f', '#827dbd']
 const FAIL_COLOR = '#b53333'
-const reachText = m => !hasFootprint(m) ? 'unknown access' : m.reach.labels.length ? m.reach.labels.join(', ') : 'draws only'
+const reachText = m => !hasFootprint(m) ? ['unknown access', lowerBound(m)].filter(Boolean).join(', ') : m.reach.labels.length ? m.reach.labels.join(', ') : 'draws only'
 const validates = m => ['passed', 'warnings'].includes(m.validate.status)
 const validationText = m => validates(m) ? data.claudeVersion : m.validate.status === 'failed' ? `fails on ${data.claudeVersion}` : 'not verified'
 const scanText = m => [validationText(m), ...reviewNotes(m)].join('; ')
@@ -50,22 +50,6 @@ function badge(label, value, color) {
 <g fill="#faf9f5" font-family="Verdana,DejaVu Sans,sans-serif" font-size="11" text-anchor="middle">
 <text x="${lw / 2}" y="14">${esc(label)}</text><text x="${lw + vw / 2}" y="14">${esc(value)}</text></g></svg>
 `
-}
-
-// badges/ is what the README and contributing.md link via raw.githubusercontent.com; docs/badges/ is the same
-// set served from the Pages domain.
-const BADGE_DIRS = ['badges', 'docs/badges']
-for (const dir of BADGE_DIRS) mkdirSync(dir, { recursive: true })
-const expectedBadges = new Set([...mods, ...builtins].flatMap(m => [`${slug(m)}-reach.svg`, `${slug(m)}-validates.svg`]))
-for (const dir of BADGE_DIRS) {
-  for (const file of readdirSync(dir)) {
-    if (/-(reach|validates)\.svg$/.test(file) && !expectedBadges.has(file)) unlinkSync(`${dir}/${file}`)
-  }
-}
-const writeBadge = (file, svg) => { for (const dir of BADGE_DIRS) writeFileSync(`${dir}/${file}`, svg) }
-for (const m of [...mods, ...builtins]) {
-  writeBadge(`${slug(m)}-reach.svg`, badge('reach', `${hasFootprint(m) ? 'L' + m.reach.level + ' ' : ''}${reachText(m)}`, hasFootprint(m) ? LEVEL_COLORS[m.reach.level] : '#5e5d59'))
-  writeBadge(`${slug(m)}-validates.svg`, badge('validates on', scanText(m), !validates(m) ? FAIL_COLOR : reviewNotes(m).length ? LEVEL_COLORS[1] : LEVEL_COLORS[0]))
 }
 
 const count = pred => mods.filter(pred).length
@@ -117,6 +101,26 @@ updateBlocks('catalogue.md', { stats, scan: table(mods), builtin: table(builtins
 const records = [...mods, ...builtins]
 const identity = assignPages(records, readRegistry(existsSync('data/pages.json') ? readFileSync('data/pages.json', 'utf8') : ''), data.mods, readDuplicates())
 const pageOf = mod => identity.pages.get(mod)
+// badges/ is what the README and contributing.md link via raw.githubusercontent.com; docs/badges/ is the same
+// set served from the Pages domain. Authors embed a badge by its file name, so a page path that redirects keeps
+// its badge pair, drawn from the mod it redirects to, as its page does. A counted mod's own badge wins a shared name.
+const BADGE_DIRS = ['badges', 'docs/badges']
+for (const dir of BADGE_DIRS) mkdirSync(dir, { recursive: true })
+const badgeOwners = new Map([...mods, ...builtins].map(m => [slug(m), m]))
+const pageOwners = new Map([...identity.pages].map(([m, page]) => [page, m]))
+for (const [from, to] of identity.redirects) if (!badgeOwners.has(from) && pageOwners.has(to)) badgeOwners.set(from, pageOwners.get(to))
+const expectedBadges = new Set([...badgeOwners.keys()].flatMap(key => [`${key}-reach.svg`, `${key}-validates.svg`]))
+for (const dir of BADGE_DIRS) {
+  for (const file of readdirSync(dir)) {
+    if (/-(reach|validates)\.svg$/.test(file) && !expectedBadges.has(file)) unlinkSync(`${dir}/${file}`)
+  }
+}
+const writeBadge = (file, svg) => { for (const dir of BADGE_DIRS) writeFileSync(`${dir}/${file}`, svg) }
+for (const [key, m] of badgeOwners) {
+  writeBadge(`${key}-reach.svg`, badge('reach', `${hasFootprint(m) ? 'L' + m.reach.level + ' ' : ''}${reachText(m)}`, hasFootprint(m) ? LEVEL_COLORS[m.reach.level] : '#5e5d59'))
+  writeBadge(`${key}-validates.svg`, badge('validates on', scanText(m), !validates(m) ? FAIL_COLOR : reviewNotes(m).length ? LEVEL_COLORS[1] : LEVEL_COLORS[0]))
+}
+
 const byRepo = new Map()
 for (const m of [...records].sort((a, b) => a.name.localeCompare(b.name, 'en') || (idOf(a) < idOf(b) ? -1 : 1))) byRepo.set(m.repo, [...(byRepo.get(m.repo) ?? []), m])
 
