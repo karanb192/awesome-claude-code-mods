@@ -72,7 +72,6 @@ DarkVelours/claude-code-galactic-battle
 data-goblin/power-bi-agentic-development
 deepaksinghcs14/deadeye-cc
 devsergioherrera/read-aloud-mod
-Digital-Threads/token-pilot
 dominicrico/jev-router
 dophamine/claude-suggest
 dot-agi/arrester
@@ -174,7 +173,6 @@ MarcoCarnevali/claude-code-mods
 Marius-Adam/claude-files-pane
 Mazzeo-Marketing/MazyOS
 Mel0nidas/spark-hud
-Melvynx/aiblueprint
 mertkayacs/ultramod
 mhylle/claude-skills-collection
 midagedev/cc-trans
@@ -230,7 +228,6 @@ plaxagoras/clawd-tales
 plaxagoras/jungle-run
 ponomr/spasi-sohrani
 proxify-dev/agentic-kit
-qf-studio/navigator
 qualixar/modstage
 quaresc/cockpit
 Quinnod345/ponder
@@ -273,7 +270,6 @@ somethingwentwell/cc-mod-banana-game
 sonichi/sutando
 SSS135/claude-code-codex-plugin
 stablyai/claude-retardmax
-stanislavjiricek/neuroflow
 stgoddv/session-pilot
 suenot/claude-cache-timer
 Sumit189/explain-claude-mod
