@@ -4,6 +4,7 @@ import { search as discover } from './discover.mjs'
 import { createSearchRequest } from './github-search.mjs'
 import { mergeRepos, newSeeds, prScanRepos, readRepos } from './candidates.mjs'
 import { reconcile, checkRequired } from './inventory.mjs'
+import { TRUNCATED_FOOTPRINT } from './grade.mjs'
 import { execFileSync, spawnSync } from 'node:child_process'
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, chmodSync } from 'node:fs'
 import { tmpdir } from 'node:os'
@@ -99,12 +100,33 @@ test('daily absence is unverified, fresh weekly absence retires, and failed clon
   assert.deepEqual(reconcile([prior], [failed], checked, true).mods, [failed])
 })
 
-test('new-seed requirements reject absent, failed and unscanned plugins', () => {
+test('new-seed requirements reject absent, failed and unscanned plugins and say which', () => {
   const checked = new Map([['old/mod', 'revision']])
-  assert.doesNotThrow(() => checkRequired(['OLD/mod'], [prior], checked))
-  assert.throws(() => checkRequired(['old/mod'], [], checked), /new seed/)
-  assert.throws(() => checkRequired(['old/mod'], [prior], new Map()), /new seed/)
-  assert.throws(() => checkRequired(['old/mod'], [{ ...prior, validate: { status: 'failed' } }], checked), /new seed/)
+  assert.deepEqual(checkRequired(['OLD/mod'], [prior], checked), [])
+  assert.throws(() => checkRequired(['old/mod'], [], checked), /new seed old\/mod cloned, but contains no plugin with a hooks module that counts as a mod/)
+  assert.throws(() => checkRequired(['old/mod'], [{ ...prior, kind: 'fixture' }], checked), /no plugin with a hooks module that counts as a mod/)
+  assert.throws(() => checkRequired(['old/mod'], [], new Map()), /new seed old\/mod did not clone or could not be inspected/)
+  assert.throws(() => checkRequired(['old/mod'], [prior], new Map()), /new seed old\/mod was not fully inspected/)
+  for (const status of ['failed', 'unknown']) {
+    assert.throws(() => checkRequired(['old/mod'], [{ ...prior, validate: { status } }], checked), new RegExp(`old/mod:\\. did not pass claude plugin validate \\(status: ${status}\\)`))
+  }
+  const errors = (() => { try { checkRequired(['old/mod', 'gone/mod'], [{ ...prior, validate: { status: 'failed' } }], checked) } catch (error) { return error.message.split('\n') } })()
+  assert.equal(errors.length, 2, 'every rejected seed is named, not only the first')
+  for (const message of errors) assert.doesNotMatch(message, /must clone successfully/)
+})
+
+test('a validated seed whose footprint the validator truncated is accepted as unknown access', () => {
+  const checked = new Map([['old/mod', 'revision']])
+  const truncated = { ...prior, footprint: { status: 'unavailable', reason: TRUNCATED_FOOTPRINT }, reach: { level: null, minimumLevel: 1 } }
+  for (const status of ['passed', 'warnings']) {
+    assert.deepEqual(checkRequired(['old/mod'], [{ ...truncated, validate: { status } }], checked), ['old/mod:.'])
+  }
+  assert.deepEqual(checkRequired(['old/mod'], [{ ...truncated, kind: 'fixture' }, { ...prior, id: 'old/mod:b' }], checked), [], 'only counted mods are reported')
+  assert.throws(() => checkRequired(['old/mod'], [{ ...truncated, validate: { status: 'failed' } }], checked), /did not pass claude plugin validate/)
+  assert.throws(() => checkRequired(['old/mod'], [], new Map()), /did not clone/)
+  // Missing output is not the validator shortening it: that still needs a maintainer.
+  assert.throws(() => checkRequired(['old/mod'], [{ ...prior, footprint: { status: 'unavailable' } }], checked), /cloned and validated, but the validator did not report hooks and calls for every module of old\/mod:\./)
+  assert.throws(() => checkRequired(['old/mod'], [{ ...prior, footprint: { status: 'unavailable', reason: 'something else' } }], checked), /did not report hooks and calls/)
 })
 
 test('scanner CLI retains unavailable entries and rejects an invalid newly submitted seed', t => {

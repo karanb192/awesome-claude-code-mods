@@ -2,7 +2,7 @@ import { appendFileSync, readFileSync, writeFileSync } from 'node:fs'
 import { isDeepStrictEqual, parseArgs } from 'node:util'
 import { mergeRepos, readRepos } from './candidates.mjs'
 import { applyDuplicates, readDuplicates, suspectDuplicates } from './dedupe.mjs'
-import { hasFootprint, regrade } from './grade.mjs'
+import { hasFootprint, regrade, truncatedFootprint } from './grade.mjs'
 
 const ACCEPTED = ['passed', 'warnings']
 const key = repo => repo.toLowerCase()
@@ -12,15 +12,16 @@ export function pendingSeeds(seeds, inventory) {
   return mergeRepos(seeds).filter(repo => !published.has(key(repo)))
 }
 
-// Why one repository cannot publish automatically, or null when every record qualifies.
+// Why one repository cannot publish automatically, or null when every record qualifies. A footprint the
+// validator shortened publishes as unknown access, as discovery lists such mods; one it did not report waits.
 export function reviewSeed(mods, claudeVersion, publishedIds, compatibilityReviews = []) {
-  if (!mods.some(mod => mod.kind === 'mod')) return 'no validating mod plugins found; the repository may have failed to clone'
+  if (!mods.some(mod => mod.kind === 'mod')) return 'no plugin with a hooks module that counts as a mod was found'
   for (const mod of mods) {
     if (publishedIds.has(mod.id)) return `plugin ID already published: ${mod.id}`
     if (mod.validate.claudeVersion !== claudeVersion) return `validator mismatch: ${mod.id}`
     if (mod.kind !== 'mod') continue
-    if (!ACCEPTED.includes(mod.validate.status)) return `validation needs review: ${mod.id}`
-    if (!hasFootprint(mod)) return `footprint unavailable; needs review: ${mod.id}`
+    if (!ACCEPTED.includes(mod.validate.status)) return `validation needs review: ${mod.id} did not pass claude plugin validate (status: ${mod.validate.status})`
+    if (!hasFootprint(mod) && !truncatedFootprint(mod)) return `footprint not reported; needs review: the validator printed no hooks or calls for a module of ${mod.id}`
     if ((mod.marketplaces ?? []).some(market => !ACCEPTED.includes(market.status))) return `marketplace needs review: ${mod.id}`
     if (mod.compatibility?.warnings?.length && !compatibilityReviews.some(review =>
       review?.id === mod.id && /^[a-f0-9]{40}$/.test(review.sourceCommit ?? '') &&
@@ -51,8 +52,11 @@ export function appendSeeds(before, scanned, seeds, candidates, duplicates = new
   const skipped = []
   let accepted = wanted.filter(repo => {
     const records = scanned.mods.filter(mod => key(mod.repo) === key(repo))
-    const reason = reviewSeed(records, before.claudeVersion, publishedIds, compatibilityReviews)
-      ?? (checked.has(key(repo)) ? null : 'repository was not fully inspected; retry or repair malformed hooks')
+    // Inspection comes first: a clone that failed leaves no records, which must not read as "no mod found".
+    const reason = (checked.has(key(repo)) ? null : records.length
+      ? 'repository was not fully inspected; retry or repair malformed hooks'
+      : 'repository did not clone or was not fully inspected; retry, or check that it is public and has commits')
+      ?? reviewSeed(records, before.claudeVersion, publishedIds, compatibilityReviews)
     if (reason) skipped.push({ repo, reason })
     return !reason
   })

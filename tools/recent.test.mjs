@@ -120,6 +120,23 @@ test('only a hooks.json in a hooks folder that lists modules makes a candidate, 
   assert.equal(hasHookModules({ repo: 'a/mod', branch: 'main' }, api, () => { throw new Error('curl: (22) 404') }), true)
 })
 
+test('a hooks file that plugin.json declares makes a candidate when it lists modules', () => {
+  const { api, raw, calls } = fakeGitHub({
+    'a/root-file': { 'claude-code/.claude-plugin/plugin.json': { name: 'j', hooks: './hooks.json' }, 'claude-code/hooks.json': { modules: ['./hooks/register.tsx'] } },
+    'a/array': { '.claude-plugin/plugin.json': { name: 'm', hooks: ['./settings.json', { PostToolUse: [] }, './mod/hooks.json'] }, 'settings.json': { hooks: {} }, 'mod/hooks.json': { modules: ['./register.ts'] } },
+    'a/settings-only': { '.claude-plugin/plugin.json': { name: 's', hooks: './hooks/claude.json' }, 'hooks/claude.json': { hooks: { PreToolUse: [] } } },
+    'a/inline': { '.claude-plugin/plugin.json': { name: 'i', hooks: { modules: ['./register.ts'] } } },
+    'a/escape': { 'p/.claude-plugin/plugin.json': { name: 'e', hooks: './../mod.json' }, 'mod.json': { modules: ['x'] } },
+    'a/missing': { '.claude-plugin/plugin.json': { name: 'x', hooks: './nope.json' } },
+    'a/vendored': { 'node_modules/pkg/.claude-plugin/plugin.json': { name: 'v', hooks: './h.json' }, 'node_modules/pkg/h.json': { modules: ['x'] } },
+    'a/broken-manifest': { '.claude-plugin/plugin.json': '{', 'h.json': { modules: ['x'] } },
+  })
+  const check = name => hasHookModules({ repo: name, branch: 'main' }, api, raw)
+  assert.deepEqual(['a/root-file', 'a/array', 'a/settings-only', 'a/inline', 'a/escape', 'a/missing', 'a/vendored', 'a/broken-manifest'].map(check), [true, true, false, false, false, false, false, false])
+  assert.equal(calls.length, 8)
+  assert.equal(hasHookModules({ repo: 'a/settings-only', branch: 'main' }, api, () => { throw new Error('curl: (28) timeout') }), true)
+})
+
 test('a search that does not finish keeps the checkpoint, and known repos are never checked', () => {
   const { api, raw, calls } = fakeGitHub({ 'new/mod': { 'hooks/hooks.json': { modules: ['m'] } } })
   const state = { searchedThrough: '2026-10-03T07:00:00Z', checked: {}, deferred: [{ repo: 'new/mod', branch: 'main', pushedAt: '2026-10-03T06:00:00Z' }], pending: [] }

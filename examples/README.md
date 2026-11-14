@@ -4,12 +4,12 @@ Minimal mods kept here so the list has something runnable to point at. The scann
 
 ## hello-mod
 
-Three files. Validate it, then load it for one session:
+Three files. Needs Claude Code 2.1.287 or later; no feature flag. Validate it, then load it for one session:
 
 ```sh
 cd examples/hello-mod
 claude plugin validate .claude-plugin/plugin.json
-CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1 claude --plugin-dir .
+claude --plugin-dir .
 ```
 
 The validator prints the footprint before anything runs:

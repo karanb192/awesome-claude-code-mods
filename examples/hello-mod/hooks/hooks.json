@@ -1,4 +1,4 @@
 {
-  "description": "hello-mod: one session.start hook and one tool.call hook. Needs CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1; builds without function hooks ignore the modules key.",
+  "description": "hello-mod: one session.start hook and one tool.call hook. Needs Claude Code 2.1.287 or later; builds without function hooks ignore the modules key.",
   "modules": ["./register.ts"]
 }

@@ -55,6 +55,23 @@ export function suspectDuplicates(mods) {
   return [...groups.values()].filter(g => g.length > 1).map(g => g.sort())
 }
 
+// GitHub answers an old repository name with the renamed repository, and discovery can miss the
+// new name, so a candidate list may hold only the old one. Returns each current name that
+// metadata reports for a candidate and the list lacks, with that metadata, so the scan also reads
+// the repository under its current name and renamePairs has a fresh copy to keep. Names match
+// without case, so a change in letter case alone adds nothing.
+export function currentNames(repos, metas) {
+  const listed = new Set(repos.map(repo => repo.toLowerCase()))
+  const added = new Map()
+  for (const repo of repos) {
+    const meta = metas.get(repo.toLowerCase()), now = meta?.fullName
+    if (!now || listed.has(now.toLowerCase())) continue
+    listed.add(now.toLowerCase())
+    added.set(now, meta)
+  }
+  return added
+}
+
 // A renamed repository still clones under its old name, so a scan that lists both names finds
 // every plugin twice. Pairs each plugin under the old name with the same path under the name
 // GitHub now reports, only when that copy came from this scan: a retained record of a failed
