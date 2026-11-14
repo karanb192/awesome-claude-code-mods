@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/hwanyong/usage-gauge">hwanyong/usage-gauge</a></p>
 <p class="lede">Session and weekly rate-limit gauges above the prompt, with a linear pace marker</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">usage-gauge reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 9</li><li>Access from classified calls: L1, reads: reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">usage-gauge reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 9</li><li>Access from classified calls: L1, reads: reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install usage-gauge --marketplace hwanyong/usage-gauge</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -25,14 +25,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.measure, command.run {command=usage-gauge}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.measure, command.run {command=usage-gauge}, ui.render {component=Pane, requestId=/&quot;^grid-&quot;/, plugin=pane-grid}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.session.usage, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/hwanyong/usage-gauge/tree/9647d56144126edd9fa8a2d45345862e394db336"><code>9647d5614412</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/hwanyong/usage-gauge/blob/9647d56144126edd9fa8a2d45345862e394db336/.claude-plugin/marketplace.json">usage-gauge</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/hwanyong/usage-gauge/tree/e36bfbbbdbda283c0815997833156f97e52d7c62"><code>e36bfbbbdbda</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/hwanyong/usage-gauge/blob/e36bfbbbdbda283c0815997833156f97e52d7c62/.claude-plugin/marketplace.json">usage-gauge</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/hwanyong--usage-gauge--usage-gauge-reach.svg" alt="Reach badge for usage-gauge"> <img src="/badges/hwanyong--usage-gauge--usage-gauge-validates.svg" alt="Validation badge for usage-gauge"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/hwanyong--usage-gauge--usage-gauge-reach.svg)](https://mods.aidojo.si/mods/hwanyong--usage-gauge--usage-gauge/)

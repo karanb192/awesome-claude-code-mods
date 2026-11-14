@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/samuelpatro/claude-code-inline-images">samuelpatro/claude-code-inline-images</a></p>
 <p class="lede">Shows images inline in the Claude Code terminal: pasted images under your prompt and above the prompt box, and the images Claude reads, writes or screenshots under their tool call.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">inline-images reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">inline-images reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install inline-images --marketplace samuelpatro/claude-code-inline-images</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, reads env vars, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, ui.render {component=UserMessage}, ui.render {component=ToolUse}, ui.render {component=ToolGroup}, ui.message</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, prompt.submit, ui.render {component=UserMessage}, ui.render {component=ToolUse}, ui.render {component=ToolGroup}, ui.message</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.env.get, $.fs.exists, $.fs.list, $.fs.stat, $.process.run, $.session.id, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/click.ts</code></dd>
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/samuelpatro/claude-code-inline-images/tree/0894a0c2ec8ec3d73dcccb5e53434b1e4f05128e"><code>0894a0c2ec8e</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/samuelpatro/claude-code-inline-images/blob/0894a0c2ec8ec3d73dcccb5e53434b1e4f05128e/.claude-plugin/marketplace.json">claude-code-inline-images</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/samuelpatro/claude-code-inline-images/tree/a0422d1c36ffe23a9c16f076f3a1c284e9abdae4"><code>a0422d1c36ff</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/samuelpatro/claude-code-inline-images/blob/a0422d1c36ffe23a9c16f076f3a1c284e9abdae4/.claude-plugin/marketplace.json">claude-code-inline-images</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/samuelpatro--claude-code-inline-images--inline-images-reach.svg" alt="Reach badge for inline-images"> <img src="/badges/samuelpatro--claude-code-inline-images--inline-images-validates.svg" alt="Validation badge for inline-images"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/samuelpatro--claude-code-inline-images--inline-images-reach.svg)](https://mods.aidojo.si/mods/samuelpatro--claude-code-inline-images--inline-images/)
