@@ -317,3 +317,5 @@ ynqa/claude-convey
 yugabyte/meko
 zed-industries/delta-claude
 zigansh1n/claude-focus-sidebar
+zirkelc/agent-journal
+zirkelc/claude-quick-actions
