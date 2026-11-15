@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-15T08:11:43.070Z",
   "claudeVersion": "2.1.325",
-  "repos": 4480,
+  "repos": 4482,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -1099193,6 +1099193,313 @@
       "stars": 0,
       "pushedAt": "2026-10-17T02:40:48Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "zirkelc/agent-journal:claude-code",
+      "repo": "zirkelc/agent-journal",
+      "path": "claude-code",
+      "sourceCommit": "a48538c3f8826e445c3b096dd30c72c769c47bc5",
+      "name": "agent-journal",
+      "description": "A journal written by your agent, autonomously. One small markdown file per milestone, written as the work happens, in a format built to be scanned with grep and ls.",
+      "author": "Chris Cook",
+      "homepage": "https://github.com/zirkelc/agent-journal",
+      "url": "https://github.com/zirkelc/agent-journal/tree/main/claude-code",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./hooks/register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.context",
+          "matcher": {}
+        },
+        {
+          "event": "session.compact",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "agent.offer",
+          "matcher": {
+            "agent": "agent-journal:search"
+          }
+        },
+        {
+          "event": "tool.describe",
+          "matcher": {
+            "tool": "/\"^mcp__agent-journal__(list|read|write)$\"/"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "/\"^mcp__agent-journal__write$\"/"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "/\"^mcp__agent-journal__(list|read)$\"/"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolUse"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "ToolResult"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "agent-journal"
+          }
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Write"
+          }
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "ui.press",
+          "matcher": {}
+        },
+        {
+          "event": "ui.input",
+          "matcher": {}
+        },
+        {
+          "event": "ui.close",
+          "matcher": {}
+        },
+        {
+          "event": "ui.scroll",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "journal"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "journal"
+          }
+        }
+      ],
+      "calls": [
+        "$.agent.list",
+        "$.agent.register",
+        "$.agent.spawn",
+        "$.clock.after",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.stat",
+        "$.process.run",
+        "$.prompt.fill",
+        "$.session.append",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.messages",
+        "$.session.model",
+        "$.session.repo",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.tool.check",
+        "$.tool.register",
+        "$.ui.close",
+        "$.ui.invalidate",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.325",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "drives Claude",
+          "writes the prompt box",
+          "reads files",
+          "reads env vars",
+          "reads the transcript",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "the system prompt",
+        "compaction",
+        "every prompt",
+        "/\"^mcp__agent-journal__write$\"/ calls",
+        "/\"^mcp__agent-journal__(list|read)$\"/ calls",
+        "Write calls"
+      ],
+      "draws": [
+        "ToolUse",
+        "ToolResult",
+        "Pane"
+      ],
+      "stars": 8,
+      "pushedAt": "2026-11-13T15:10:01Z",
+      "createdAt": "2026-08-11T14:53:22Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "zirkelc/claude-quick-actions:.",
+      "repo": "zirkelc/claude-quick-actions",
+      "path": ".",
+      "sourceCommit": "1a61e8aebc4b4c29f54f361cc5f21aaccb79d230",
+      "name": "quick-actions",
+      "description": "A band above the prompt with buttons that run saved prompts, skills and shell commands",
+      "author": "Chris Cook",
+      "homepage": "https://github.com/zirkelc/claude-quick-actions",
+      "url": "https://github.com/zirkelc/claude-quick-actions",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "?"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "?"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "?"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.command.register",
+        "$.command.run",
+        "$.process.run",
+        "$.prompt.fill",
+        "$.prompt.submit",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.close",
+        "$.ui.log",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.325",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "claude-quick-actions",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "drives Claude",
+          "writes the prompt box",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 1,
+      "pushedAt": "2026-10-23T09:00:26Z",
+      "createdAt": "2026-10-02T15:57:20Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",

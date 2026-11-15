@@ -4453,6 +4453,8 @@ Ziggedy/claude-auto-level
 Zimoholdijk/collapse-diffs
 Zinzan48/claude-mods
 zirkelc/agent-history
+zirkelc/agent-journal
+zirkelc/claude-quick-actions
 Zoria-Lind/behavior-enhancer-generic
 Zoria-Lind/cc-token-optimizer
 zorroshine/claude-mods
