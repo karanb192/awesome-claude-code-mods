@@ -48,7 +48,16 @@ Missing plugins stay listed as unverified during scheduled scans. Weekly retirem
 
 The count in `README.md` and the statistics and tables in [catalogue.md](catalogue.md) are generated. Do not edit anything between `<!-- scan:start -->` and `<!-- scan:end -->`, `<!-- builtin:start -->` and `<!-- builtin:end -->`, or `<!-- stats:start -->` and `<!-- stats:end -->`. The renderer would overwrite your change.
 
-## Nominate a Featured mod
+## Auto-merge for maintainers
+
+Every pull request reports one check, `ci-gate`, which branch protection requires. On a PR you have reviewed, choose **Enable auto-merge** with squash, and GitHub merges it once `ci-gate` passes.
+
+- `ci-gate` passes when the `scan` job passes. A PR that changes none of the paths listed in `tools/pr-scope.mjs`, such as a README or website-only change, does not need the scan, so `ci-gate` passes after a short scope check.
+- `ci-gate` fails when the scope check or the scan fails or is cancelled. A skipped job never makes it pass.
+- Pull requests that workflows open with the workflow token start no workflows: seed publication, rule changes, the scan PR and the weekly retirement proposal. The run that builds each one reports `ci-gate` on the commit it pushed, through `tools/report-gate.sh`, and only after its own tests, render and lint passed. Seed and rule publications still merge themselves.
+- GitHub turns auto-merge off when someone without write access pushes to the PR branch, so a contributor's later commits need another review. A push by a workflow, such as a scan PR refresh, keeps it on; the refreshed commit merges once its run reports `ci-gate`.
+- A first-time contributor's workflows wait for a maintainer's approval. Until then `ci-gate` does not report and the PR stays open.
+
 
 The generated catalogue lists discovered mods, including failed and unverified results. Featured entries are recommendations for useful tasks, with a clear install path, accurate access disclosure and evidence of the main behavior.
 

@@ -54,6 +54,7 @@ for attempt in {1..8}; do
   if [ "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)" != "$base" ]; then continue; fi
   remote_head=$(git ls-remote origin "refs/heads/$branch" | cut -f1)
   git push "--force-with-lease=refs/heads/$branch:$remote_head" origin "HEAD:refs/heads/$branch"
+  bash tools/report-gate.sh "$head"
   if [ -z "$pr" ]; then
     gh pr create --base main --head "$branch" --title "$title" --body-file "$body"
     pr=$(gh pr list --head "$branch" --base main --state open --json number --jq '.[0].number')
