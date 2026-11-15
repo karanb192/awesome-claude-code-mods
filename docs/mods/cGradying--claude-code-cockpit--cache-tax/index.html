@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/cGradying/claude-code-cockpit">cGradying/claude-code-cockpit</a></p>
 <p class="lede">A Claude Code mod that keeps the one-hour prompt cache warm during breaks and stops a cold send once with its estimated rewrite cost. Warming uses model requests and costs tokens. Requires Claude Code 2.1.287+.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">cache-tax reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 17</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads env vars, reads settings, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">cache-tax reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 17</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads env vars, reads settings, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install cache-tax --marketplace cGradying/claude-code-cockpit</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads env vars, reads settings, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt, compaction</dd>
-    <dt>Hooks</dt><dd><code>config.set {key=theme}, session.start, classic.SessionStart, command.run {command=keepwarm}, command.run {command=cache-tax}, prompt.submit, turn.step, turn.complete, session.compact</code></dd>
+    <dt>Hooks</dt><dd><code>config.set {key=theme}, ui.render {component=AbovePrompt}, session.start, classic.SessionStart, command.run {command=keepwarm}, command.run {command=cache-tax}, prompt.submit, turn.step, turn.complete, session.compact</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.list, $.command.register, $.config.list, $.env.get, $.model.fork, $.session.id, $.session.model, $.session.usage, $.store.delete, $.store.get, $.store.set, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

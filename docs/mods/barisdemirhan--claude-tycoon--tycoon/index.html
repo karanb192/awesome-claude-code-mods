@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=tycoon}, ui.message, ui.close, tool.call, turn.complete, ui.render {component=PromptHint}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=tycoon}, ui.message, ui.close, tool.call, turn.complete, ui.render {component=PromptHint}, ui.render {component=Pane, requestId=tycoon}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.http.fetch, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.set, $.ui.close, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/game.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

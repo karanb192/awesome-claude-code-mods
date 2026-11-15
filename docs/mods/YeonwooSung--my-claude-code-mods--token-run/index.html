@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/YeonwooSung/my-claude-code-mods">YeonwooSung/my-claude-code-mods</a></p>
 <p class="lede">A fully local ASCII runner game for Claude Code request failures and short breaks</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">token-run reaches L0 (draws and remembers) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 7</li><li>Access from classified calls: L0, draws and remembers: persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">token-run reaches L0 (draws and remembers) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 7</li><li>Access from classified calls: L0, draws and remembers: persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install token-run --marketplace YeonwooSung/my-claude-code-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L0 Draws &amp; remembers</span><span class="track" aria-label="Reach level 0: Draws & remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, turn.start, turn.complete, turn.step, command.run {command=token-run}, ui.close {id=token-run}, ui.message {element=runner}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, turn.start, turn.complete, turn.step, command.run {command=token-run}, ui.close {id=token-run}, ui.message {element=runner}, ui.render {component=AbovePrompt}, ui.render {component=Pane}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/game.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

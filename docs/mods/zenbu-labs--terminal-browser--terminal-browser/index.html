@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/zenbu-labs/terminal-browser">zenbu-labs/terminal-browser</a></p>
 <p class="lede">A browser running directly inside claude code. Preview websites, view HTML documents, and let your agent control the built in browser.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">terminal-browser reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 14</li><li>Access from classified calls: L3, network: network, runs processes, drives Claude, writes the prompt box, reads files, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">terminal-browser reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 14</li><li>Access from classified calls: L3, network: network, runs processes, drives Claude, writes the prompt box, reads files, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install terminal-browser --marketplace zenbu-labs/terminal-browser</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, drives Claude, writes the prompt box, reads files, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>? calls</dd>
-    <dt>Hooks</dt><dd><code>engine.create, browser.open, browser.close, session.start, command.run {command=browser}, tool.call {tool=?}, tool.call {tool=?}, ui.message, ui.scroll {requestId=browser}, ui.close {id=browser}</code></dd>
+    <dt>Hooks</dt><dd><code>engine.create, browser.open, browser.close, session.start, command.run {command=browser}, tool.call {tool=?}, tool.call {tool=?}, ui.render {component=Pane, requestId=browser}, ui.message, ui.scroll {requestId=browser}, ui.close {id=browser}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.sleep, $.command.register, $.fs.exists, $.http.fetch, $.process.run, $.prompt.fill, $.session.surfaces, $.tool.register, $.ui.blit, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/surface.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

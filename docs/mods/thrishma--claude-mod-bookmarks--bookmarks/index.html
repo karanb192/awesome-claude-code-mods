@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=bm}, command.run {command=bm-tag}, command.run {command=bm-group}, command.run {command=bookmarks}, ui.render {component=AssistantMessage}, ui.render {component=UserMessage}, ui.render {component=ToolUse}, prompt.compose, turn.start, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=bm}, command.run {command=bm-tag}, command.run {command=bm-group}, command.run {command=bookmarks}, ui.render {component=AssistantMessage}, ui.render {component=UserMessage}, ui.render {component=ToolUse}, prompt.compose, turn.start, turn.complete, ui.render {component=Pane, requestId=bookmarks}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.prompt.submit, $.session.cwd, $.session.messages, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.copy, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.scroll, $.ui.selection, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

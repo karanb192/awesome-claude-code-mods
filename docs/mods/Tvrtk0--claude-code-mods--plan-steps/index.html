@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, mcp__plan-steps__steps calls, mcp__plan-steps__wrap_up calls</dd>
-    <dt>Hooks</dt><dd><code>ui.render {component=ToolGroup}, session.start, prompt.submit, tool.call {tool=mcp__plan-steps__steps}, tool.call {tool=mcp__plan-steps__wrap_up}</code></dd>
+    <dt>Hooks</dt><dd><code>ui.render {component=ToolUse|ToolResult}, ui.render {component=ToolGroup}, session.start, prompt.submit, tool.call {tool=mcp__plan-steps__steps}, tool.call {tool=mcp__plan-steps__wrap_up}</code></dd>
     <dt>API calls</dt><dd><code>$.env.get, $.fs.read, $.fs.write, $.tool.register, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

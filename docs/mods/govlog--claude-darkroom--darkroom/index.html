@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, mcp__darkroom__show calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=darkroom}, tool.call, tool.call {tool=mcp__darkroom__show}, prompt.edit, ui.message, ui.render {component=ToolResult|ToolGroup|UserMessage|CommandOutput}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=darkroom}, tool.call, tool.call {tool=mcp__darkroom__show}, prompt.edit, ui.render {component=AbovePrompt}, ui.message, ui.render {component=ToolResult|ToolGroup|UserMessage|CommandOutput}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.process.run, $.session.id, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.register, $.ui.blit, $.ui.copy, $.ui.invalidate, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/hit.ts</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

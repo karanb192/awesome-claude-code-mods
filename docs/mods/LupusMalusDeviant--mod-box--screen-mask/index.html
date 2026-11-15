@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=mask}, ui.render {component=AssistantMessage}, ui.render {component=UserMessage}, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=ToolGroup}</code></dd>
+    <dt>Hooks</dt><dd><code>ui.render {component=AbovePrompt}, session.start, command.run {command=mask}, ui.render {component=AssistantMessage}, ui.render {component=UserMessage}, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=ToolGroup}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.env.get, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

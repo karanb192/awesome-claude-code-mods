@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt, /&quot;^mcp__mission-control__step$&quot;/ calls, /&quot;^mcp__mission-control__ask$&quot;/ calls, every tool call, subagent spawns, compaction</dd>
-    <dt>Hooks</dt><dd><code>classic.Notification, session.start, command.run {command=mission-band}, command.run {command=mission-talk}, prompt.submit, prompt.compose, command.run {command=mission}, turn.start, tool.check, classic.PermissionRequest, tool.call {tool=/&quot;^mcp__mission-control__step$&quot;/}, tool.call {tool=/&quot;^mcp__mission-control__ask$&quot;/}, tool.call, agent.spawn, turn.step, session.compact, turn.complete, session.send, ui.render {component=Spinner}</code></dd>
+    <dt>Hooks</dt><dd><code>classic.Notification, session.start, command.run {command=mission-band}, command.run {command=mission-talk}, prompt.submit, prompt.compose, command.run {command=mission}, turn.start, tool.check, classic.PermissionRequest, tool.call {tool=/&quot;^mcp__mission-control__step$&quot;/}, tool.call {tool=/&quot;^mcp__mission-control__ask$&quot;/}, tool.call, agent.spawn, turn.step, session.compact, turn.complete, session.send, ui.render {component=Spinner}, ui.render {component=Pane, requestId=mission-control}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.audio.play, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.env.get, $.model.complete, $.process.run, $.session.usage, $.state.get, $.state.set, $.tool.list, $.tool.register, $.ui.close, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/robot-clip.ts</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

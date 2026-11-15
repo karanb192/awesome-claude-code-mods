@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/AbhiramDwivedi/claude-ops">AbhiramDwivedi/claude-ops</a></p>
 <p class="lede">Keeps the 5-hour and weekly limit windows, their burn rate, a run-out projection, context fill, session cost and prompt-cache drops in a dim line above the prompt</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">usage-limits reaches L0 (draws and remembers) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 8</li><li>Access from classified calls: L0, draws and remembers: draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">usage-limits reaches L0 (draws and remembers) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 8</li><li>Access from classified calls: L0, draws and remembers: draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install usage-limits --marketplace AbhiramDwivedi/claude-ops</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L0 Draws &amp; remembers</span><span class="track" aria-label="Reach level 0: Draws & remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end {reason=clear}, turn.step, session.measure, session.attach, session.detach</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end {reason=clear}, turn.step, session.measure, session.attach, session.detach, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.session.surfaces, $.session.usage, $.ui.invalidate, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

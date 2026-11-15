@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/drdickgraysonjr/chalkery">drdickgraysonjr/chalkery</a></p>
 <p class="lede">A Handoff button above the prompt: runs /handoff and lights up from 180k tokens of context (the threshold option). Joins cache-meter and next-steps in one band.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">handoff-relay reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 10</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads settings, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">handoff-relay reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 10</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads settings, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, writes the prompt box, reads settings, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Skill calls, Write calls, mcp__ccd_session__spawn_task calls, mcp__ccd_session__start_session calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.measure, config.set, command.run, tool.call {tool=Skill}, tool.call {tool=Write}, tool.call {tool=mcp__ccd_session__spawn_task}, tool.call {tool=mcp__ccd_session__start_session}, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.measure, config.set, command.run, tool.call {tool=Skill}, tool.call {tool=Write}, tool.call {tool=mcp__ccd_session__spawn_task}, tool.call {tool=mcp__ccd_session__start_session}, turn.complete, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.command.list, $.command.run, $.config.list, $.prompt.fill, $.session.usage, $.state.get, $.state.set, $.ui.invalidate, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

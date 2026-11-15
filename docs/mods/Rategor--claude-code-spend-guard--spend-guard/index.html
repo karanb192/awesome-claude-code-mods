@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Rategor/claude-code-spend-guard">Rategor/claude-code-spend-guard</a></p>
 <p class="lede">Spend Guard: live session cost band, a warning toast, and a hard stop that holds your next prompt once the session hits a dollar cap.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">spend-guard reaches L0 (draws and remembers) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 5</li><li>Access from classified calls: L0, draws and remembers: draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">spend-guard reaches L0 (draws and remembers) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 5</li><li>Access from classified calls: L0, draws and remembers: draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L0 Draws &amp; remembers</span><span class="track" aria-label="Reach level 0: Draws & remembers"><i class="on l0"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, session.measure</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.submit, session.measure, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.session.usage, $.ui.invalidate, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

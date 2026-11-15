@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, mcp__red-alert__alert calls, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, prompt.submit, tool.describe {tool=mcp__red-alert__alert}, tool.check {tool=mcp__red-alert__alert}, tool.call {tool=mcp__red-alert__alert}, prompt.compose, classic.Notification, command.run {command=alert}, ui.render {component=ToolUse, props has {tool=mcp__red-alert__alert}}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, prompt.submit, tool.describe {tool=mcp__red-alert__alert}, tool.check {tool=mcp__red-alert__alert}, tool.call {tool=mcp__red-alert__alert}, prompt.compose, classic.Notification, command.run {command=alert}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=alert-console}, ui.render {component=ToolUse, props has {tool=mcp__red-alert__alert}}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.http.fetch, $.process.run, $.state.get, $.state.set, $.tool.register, $.ui.close, $.ui.focus, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

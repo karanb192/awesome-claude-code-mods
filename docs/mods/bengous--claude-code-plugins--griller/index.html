@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/bengous/claude-code-plugins">bengous/claude-code-plugins</a></p>
 <p class="lede">A grill where you answer before you see Claude's recommendation: Claude writes each round of questions in its reply, the chat hides every recommendation, and a pane beside it collects your answers and shows a recommendation only when you peek at it</p>
 <p class="compatibility">marketplace fails</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">griller reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: writes files, drives Claude, reads files, reads the transcript, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">griller reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: writes files, drives Claude, reads files, reads the transcript, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">writes files, drives Claude, reads files, reads the transcript, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart, turn.complete, ui.close, ui.render {component=AssistantMessage}, classic.MessageDisplay</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart, turn.complete, ui.close, ui.focus, ui.render {component=AssistantMessage}, classic.MessageDisplay, ui.render {component=Pane, requestId=griller}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.clock.sleep, $.fs.exists, $.fs.read, $.fs.write, $.prompt.submit, $.session.id, $.session.messages, $.session.root, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.scroll, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

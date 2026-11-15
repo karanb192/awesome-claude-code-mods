@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/drdickgraysonjr/chalkery">drdickgraysonjr/chalkery</a></p>
 <p class="lede">A What next? button above the prompt: on press, suggests up to three next prompts; 1, 2 or 3 puts one into the input box as a draft, 0 hides them. A fork of Thariq Shihipar's next-steps, which suggested after every turn.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">next-steps reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads settings, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">next-steps reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads settings, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, writes the prompt box, reads settings, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>config.set, turn.start, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>config.set, turn.start, turn.complete, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.list, $.config.list, $.model.fork, $.prompt.fill, $.prompt.suggest, $.state.get, $.state.set, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

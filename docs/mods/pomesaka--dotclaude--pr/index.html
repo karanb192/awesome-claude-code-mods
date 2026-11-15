@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, mcp__pr__track_pr calls, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart, tool.call {tool=mcp__pr__track_pr}, tool.call, turn.start, turn.complete, ui.render {component=PromptHint}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart, tool.call {tool=mcp__pr__track_pr}, tool.call, turn.start, turn.complete, ui.render {component=PromptHint}, ui.render {component=Pane, requestId=pull-requests}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.process.run, $.prompt.submit, $.session.id, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.tool.register, $.ui.close, $.ui.copy, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

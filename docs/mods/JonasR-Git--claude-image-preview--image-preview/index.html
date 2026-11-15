@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, Read calls, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.edit, classic.SessionStart {source=clear|resume|fork}, command.run {command=paste}, command.run {command=images}, command.run {command=image-copy}, command.run {command=image-open}, command.run {command=image-preview}, tool.call {tool=Read}, ui.render {component=ToolResult, props has {tool=Read}}, prompt.submit, prompt.autocomplete {token=/&quot;^@c&quot;/i}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.edit, classic.SessionStart {source=clear|resume|fork}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=image-gallery}, command.run {command=paste}, command.run {command=images}, command.run {command=image-copy}, command.run {command=image-open}, command.run {command=image-preview}, tool.call {tool=Read}, ui.render {component=ToolResult, props has {tool=Read}}, prompt.submit, prompt.autocomplete {token=/&quot;^@c&quot;/i}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.list, $.fs.read, $.fs.stat, $.fs.write, $.process.run, $.process.spawn, $.prompt.fill, $.prompt.read, $.session.id, $.session.version, $.state.get, $.state.set, $.ui.blit, $.ui.close, $.ui.copy, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

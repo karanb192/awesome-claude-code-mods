@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>command.run {command=editor-context-demo}, session.start, session.attach, prompt.submit, ui.render {component=UserMessage}, ui.message, ui.close</code></dd>
+    <dt>Hooks</dt><dd><code>command.run {command=editor-context-demo}, session.start, session.attach, prompt.submit, ui.render {component=UserMessage}, ui.message, ui.close, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.sleep, $.command.register, $.http.fetch, $.process.run, $.process.spawn, $.session.cwd, $.session.surfaces, $.session.turns, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.resolve</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/controls.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

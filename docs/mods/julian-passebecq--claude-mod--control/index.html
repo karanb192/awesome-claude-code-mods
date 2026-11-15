@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/julian-passebecq/claude-mod">julian-passebecq/claude-mod</a></p>
 <p class="lede">Claude Control, read live: SETUP (rules version from ~/.claude/CLAUDE.md, settings env names and hooks, agents, skills, workflows, mods loaded or not, blockers and hidden rules), USAGE (model, effort and delegation mix against the live rule lines), PRACTICES (one section per CLAUDE.md heading with the evidence it cites, plus pending V6 changes), CONFIG (everything in Claude Code as a searchable tree with full contents, settings by precedence, documented defaults, secrets masked). /control, /config-claude</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">control reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">control reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=config-claude}, command.run {command=control}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=config-claude}, command.run {command=control}, ui.render {component=Pane, requestId=?}, ui.render {component=Pane, requestId=?}, ui.render {component=Pane, requestId=?}, ui.render {component=Pane, requestId=?}, ui.render {component=Pane, requestId=?}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.command.list, $.command.register, $.env.get, $.fs.read, $.process.run, $.state.get, $.state.set, $.ui.close, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

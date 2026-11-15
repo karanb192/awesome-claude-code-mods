@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.measure, turn.start, turn.step, turn.complete, session.end, session.attach {surface=vscode}, command.run {command=spend}, ui.render {component=SessionMode}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.measure, turn.start, turn.step, turn.complete, session.end, session.attach {surface=vscode}, command.run {command=spend}, ui.render {component=SessionMode}, ui.render {component=Pane, requestId=cost-info}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.http.fetch, $.session.surfaces, $.session.usage, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

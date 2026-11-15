@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>/&quot;.*&quot;/ calls, every prompt, compaction, subagent spawns, Agent calls, SendMessage calls</dd>
-    <dt>Hooks</dt><dd><code>tool.call {tool=/&quot;.*&quot;/}, session.start, prompt.submit, prompt.compose, session.compact, turn.step, agent.spawn, tool.call {tool=Agent}, tool.call {tool=SendMessage}, ui.render {component=ToolUse, props has {tool=Agent}}, command.run {command=router}, ui.render {component=CommandOutput}, command.run {command=router-usage}</code></dd>
+    <dt>Hooks</dt><dd><code>tool.call {tool=/&quot;.*&quot;/}, session.start, prompt.submit, prompt.compose, session.compact, turn.step, agent.spawn, tool.call {tool=Agent}, tool.call {tool=SendMessage}, ui.render {component=Pane, requestId=model-router}, ui.render {component=ToolUse, props has {tool=Agent}}, command.run {command=router}, ui.render {component=CommandOutput}, command.run {command=router-usage}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.register, $.command.register, $.env.get, $.fs.read, $.fs.write, $.process.run, $.session.id, $.session.usage, $.state.get, $.state.set, $.store.get, $.ui.open, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

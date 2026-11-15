@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>/&quot;^mcp__x-timeline__read_timeline$&quot;/ calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=x-timeline}, command.run {command=x}, tool.call {tool=/&quot;^mcp__x-timeline__read_timeline$&quot;/}, ui.render {component=CommandOutput, props has {command=x|x-timeline, args=/&quot;^\\s*(qr|QR)\\b&quot;/}}, ui.render {component=CommandOutput, props has {command=x|x-timeline}}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=x-timeline}, command.run {command=x}, ui.render {component=Pane, requestId=x-timeline}, tool.call {tool=/&quot;^mcp__x-timeline__read_timeline$&quot;/}, ui.render {component=CommandOutput, props has {command=x|x-timeline, args=/&quot;^\\s*(qr|QR)\\b&quot;/}}, ui.render {component=CommandOutput, props has {command=x|x-timeline}}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.stat, $.fs.write, $.http.fetch, $.process.run, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.register, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>? calls, mcp__flightdeck__pinboard calls, classic hooks, compaction, every tool call, subagent spawns</dd>
-    <dt>Hooks</dt><dd><code>tool.call {tool=?}, prompt.compose, tool.call {tool=mcp__flightdeck__pinboard}, classic.Stop, ui.render {component=ToolUse, props has {tool=mcp__flightdeck__pinboard}}, ui.render {component=ToolResult, props has {tool=mcp__flightdeck__pinboard}}, session.start, ui.open {id=flightdeck}, ui.close {id=flightdeck}, session.end, command.run {command=flightdeck}, classic.UserPromptSubmit, agent.offer, turn.start, turn.step, session.measure, session.compact, tool.check, tool.call, session.append, agent.spawn, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>tool.call {tool=?}, prompt.compose, tool.call {tool=mcp__flightdeck__pinboard}, classic.Stop, ui.render {component=ToolUse, props has {tool=mcp__flightdeck__pinboard}}, ui.render {component=ToolResult, props has {tool=mcp__flightdeck__pinboard}}, session.start, ui.open {id=flightdeck}, ui.close {id=flightdeck}, session.end, command.run {command=flightdeck}, classic.UserPromptSubmit, agent.offer, turn.start, turn.step, session.measure, session.compact, tool.check, tool.call, session.append, agent.spawn, turn.complete, ui.render {component=Pane, requestId=flightdeck}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.session.usage, $.state.get, $.state.set, $.tool.register, $.ui.close, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/elapsed.tsx, hooks/rail.tsx</code></dd>
     <dt>Validation</dt><dd>Passed</dd>

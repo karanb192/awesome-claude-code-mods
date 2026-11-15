@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, every tool call, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, ui.render {component=PromptHint}, command.run {command=?}, command.run {command=clear|resume}, ui.close, agent.spawn, tool.call, turn.start, turn.complete, classic.PermissionRequest, classic.Notification {notification_type=permission_prompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, ui.render {component=PromptHint}, ui.render {component=Pane}, command.run {command=?}, command.run {command=clear|resume}, ui.close, agent.spawn, tool.call, turn.start, turn.complete, classic.PermissionRequest, classic.Notification {notification_type=permission_prompt}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

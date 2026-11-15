@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/DustinVerzal/magic-router">DustinVerzal/magic-router</a></p>
 <p class="lede">Routes each session to Sonnet 5.5 or Opus 5.5 and each prompt to an effort level, using a local GLiNER2.5 classifier</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">magic-router reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 7</li><li>Access from classified calls: L3, network: network, runs processes, reads env vars, reads the transcript, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">magic-router reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 7</li><li>Access from classified calls: L3, network: network, runs processes, reads env vars, reads the transcript, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install magic-router --marketplace DustinVerzal/magic-router</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, reads env vars, reads the transcript, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, turn.step, turn.complete, session.end</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.submit, turn.step, turn.complete, session.end, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.env.get, $.http.fetch, $.process.run, $.session.messages, $.state.get, $.state.set, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

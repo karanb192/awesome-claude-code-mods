@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/markfulton/safe-keys">markfulton/safe-keys</a></p>
 <p class="lede">A Claude Code mod. Paste an API key into the chat and it becomes a name everywhere: the transcript on disk, the screen, the model. Your tools still use it as $NAME.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">safe-keys reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, sets env vars, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">safe-keys reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, sets env vars, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install safe-keys --marketplace markfulton/safe-keys</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, sets env vars, reads files, reads env vars, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>classic.SessionStart, session.start, prompt.edit, prompt.submit, session.append, tool.call, turn.complete, session.end, command.run {command=safe-keys|keys}</code></dd>
+    <dt>Hooks</dt><dd><code>classic.SessionStart, session.start, prompt.edit, prompt.submit, session.append, tool.call, ui.render, turn.complete, session.end, command.run {command=safe-keys|keys}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.env.get, $.env.set, $.fs.read, $.fs.stat, $.fs.write, $.process.run, $.session.cwd, $.session.id, $.ui.invalidate, $.ui.log, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

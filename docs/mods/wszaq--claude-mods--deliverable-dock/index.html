@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Write calls, Bash calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.attach, tool.call {tool=Write}, tool.call {tool=Bash}, command.run {command=ship}, ui.render {component=SessionMode}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.attach, tool.call {tool=Write}, tool.call {tool=Bash}, command.run {command=ship}, ui.render {component=AbovePrompt}, ui.render {component=SessionMode}, ui.render {component=Pane, requestId=deliverable-dock}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.read, $.fs.stat, $.process.run, $.session.id, $.session.surfaces, $.state.get, $.state.set, $.ui.copy, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

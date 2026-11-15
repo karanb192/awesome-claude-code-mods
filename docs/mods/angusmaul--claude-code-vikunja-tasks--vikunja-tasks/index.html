@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/angusmaul/claude-code-vikunja-tasks">angusmaul/claude-code-vikunja-tasks</a></p>
 <p class="lede">A live Vikunja pane for Claude Code: the Doing, Blocked and To-Do lanes, the task the session is working on, and a button to start a session on a task in its folder</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">vikunja-tasks reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 19</li><li>Access from classified calls: L3, network: network, runs processes, writes files, drives Claude, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">vikunja-tasks reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 19</li><li>Access from classified calls: L3, network: network, runs processes, writes files, drives Claude, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, writes files, drives Claude, reads files, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=vikunja}, tool.call</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=vikunja}, tool.call, ui.render {component=Pane, requestId=vikunja-tasks}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.stat, $.fs.write, $.http.fetch, $.process.run, $.session.cwd, $.state.get, $.state.set, $.tool.call, $.ui.focus, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

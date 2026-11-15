@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/devbrother2024/devbrothers-mods">devbrother2024/devbrothers-mods</a></p>
 <p class="lede">Claude의 할 일 목록을 내비게이션처럼: 진행 경로·다음 안내 표시, 계획이 바뀌면 '경로를 재탐색합니다', 끝나면 도착 안내</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">taxi-navi reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 8</li><li>Access from classified calls: L1, reads: reads env vars, plays audio, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">taxi-navi reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 8</li><li>Access from classified calls: L1, reads: reads env vars, plays audio, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install taxi-navi --marketplace devbrother2024/devbrothers-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads env vars, plays audio, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>TaskCreate|TaskUpdate|TaskList|TodoWrite calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.start, tool.call {tool=TaskCreate|TaskUpdate|TaskList|TodoWrite}, command.run {command=navi}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.start, tool.call {tool=TaskCreate|TaskUpdate|TaskList|TodoWrite}, command.run {command=navi}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.audio.play, $.audio.speak, $.clock.after, $.clock.now, $.command.register, $.env.get, $.ui.invalidate, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

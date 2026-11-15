@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__close-gate__running_state calls, the session-handoff skill, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.attach, ui.render {component=SessionMode}, tool.call {tool=mcp__close-gate__running_state}, skill.prompt {skill=session-handoff}, prompt.submit, command.run {command=closeok}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.attach, ui.render {component=AbovePrompt}, ui.render {component=SessionMode}, ui.render {component=Pane, requestId=close-gate}, tool.call {tool=mcp__close-gate__running_state}, skill.prompt {skill=session-handoff}, prompt.submit, command.run {command=closeok}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.read, $.process.run, $.session.id, $.session.root, $.session.surfaces, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.register, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

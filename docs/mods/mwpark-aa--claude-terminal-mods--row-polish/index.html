@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Bash|Read|Edit|Write calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=row-polish}, ui.render {component=Spinner}, ui.render {component=ToolProgress}, ui.render {component=TurnDuration}, ui.render {component=AssistantMessage}, tool.call {tool=Bash|Read|Edit|Write}, ui.render {component=ToolUse, props has {tool=Bash}}, ui.render {component=ToolUse, props has {tool=Read|Edit|Write}}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=row-polish}, ui.render {component=Pane, requestId=?}, ui.render {component=Spinner}, ui.render {component=ToolProgress}, ui.render {component=TurnDuration}, ui.render {component=AssistantMessage}, tool.call {tool=Bash|Read|Edit|Write}, ui.render {component=ToolUse, props has {tool=Bash}}, ui.render {component=ToolUse, props has {tool=Read|Edit|Write}}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/kavidu-hettiarachchi/claude-code-mod">kavidu-hettiarachchi/claude-code-mod</a></p>
 <p class="lede">Styled Agent Card workflow with live lifecycle, task, worker and gate UI</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">agent-card reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">agent-card reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, writes the prompt box, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__agent-card__set_plan calls, mcp__agent-card__task_update calls, mcp__agent-card__stage_update calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.complete, command.run {command=card}, command.run {command=requirement}, command.run {command=plan-open}, command.run {command=plan-updates}, command.run {command=build}, command.run {command=ship}, tool.call {tool=mcp__agent-card__set_plan}, tool.call {tool=mcp__agent-card__task_update}, tool.call {tool=mcp__agent-card__stage_update}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.complete, command.run {command=card}, command.run {command=requirement}, command.run {command=plan-open}, command.run {command=plan-updates}, command.run {command=build}, command.run {command=ship}, tool.call {tool=mcp__agent-card__set_plan}, tool.call {tool=mcp__agent-card__task_update}, tool.call {tool=mcp__agent-card__stage_update}, ui.render {component=Pane, requestId=agent-card}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.register, $.agent.spawn, $.command.register, $.prompt.fill, $.prompt.submit, $.store.get, $.store.set, $.tool.register, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

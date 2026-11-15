@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, Agent calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, agent.spawn, tool.call {tool=Agent}, prompt.compose, command.run {command=route-status|task-router:route-status}, ui.render {component=SessionMode}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, agent.spawn, tool.call {tool=Agent}, prompt.compose, command.run {command=route-status|task-router:route-status}, ui.render {component=SessionMode}, ui.render {component=Pane, requestId=task-router}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.fs.stat, $.process.run, $.session.cwd, $.state.get, $.state.set, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

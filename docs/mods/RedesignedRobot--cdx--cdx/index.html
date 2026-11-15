@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/RedesignedRobot/cdx">RedesignedRobot/cdx</a></p>
 <p class="lede">Run OpenAI Codex and Google Antigravity execution lanes from Claude Code with background event delivery, status tracking, and raw command protection.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">cdx reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 18</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, writes the prompt box, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">cdx reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 18</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, writes the prompt box, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, drives Claude, writes the prompt box, reads files, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Bash calls, every tool call, /&quot;^mcp__cdx__&quot;/ calls, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, command.run {command=lanes}, command.run {command=clear|resume}, tool.call {tool=Bash}, tool.call, tool.call {tool=/&quot;^mcp__cdx__&quot;/}, prompt.submit</code></dd>
+    <dt>Hooks</dt><dd><code>ui.render {component=AbovePrompt}, ui.render {component=Pane}, session.start, turn.start, turn.complete, command.run {command=lanes}, command.run {command=clear|resume}, tool.call {tool=Bash}, tool.call, tool.call {tool=/&quot;^mcp__cdx__&quot;/}, prompt.submit</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.env.get, $.fs.exists, $.fs.write, $.process.run, $.prompt.submit, $.prompt.suggest, $.session.cwd, $.session.id, $.session.surfaces, $.state.get, $.state.set, $.tool.register, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

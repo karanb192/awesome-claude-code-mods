@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/ChanMeng666/echook">ChanMeng666/echook</a></p>
 <p class="lede">Audio notifications + AI-controlled config for Claude Code, Cursor IDE, and Codex CLI events. 39 hook events across Claude Code, Cursor and Codex (30 registered on Claude Code) + 47 matcher variants, each with its own sound. Desktop toasts, TTS, webhooks, a status line that follows the subagent you are viewing, per-subagent rows, rate-limit alerts. Auto-bridges to Cursor IDE 3.2.16+; native install via 'audio-hooks install --cursor' or 'audio-hooks install --codex'.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">audio-hooks reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 1</li><li>API methods referenced: 5</li><li>Access from classified calls: L2, writes or runs: writes files, reads files, reads env vars</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">audio-hooks reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 5</li><li>Access from classified calls: L2, writes or runs: writes files, reads files, reads env vars</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install audio-hooks --marketplace ChanMeng666/echook</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">writes files, reads files, reads env vars</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.env.get, $.fs.exists, $.fs.write, $.session.id</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

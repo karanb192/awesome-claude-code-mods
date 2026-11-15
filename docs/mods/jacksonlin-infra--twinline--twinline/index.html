@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}, turn.complete, session.end, command.run {command=twinline|tl}, classic.SessionStart {source=clear|resume|fork}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.submit, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}, turn.complete, ui.render {component=AbovePrompt}, session.end, command.run {command=twinline|tl}, classic.SessionStart {source=clear|resume|fork}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.http.fetch, $.model.complete, $.session.id, $.state.get, $.state.set, $.store.get, $.store.keys, $.store.set, $.ui.log, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

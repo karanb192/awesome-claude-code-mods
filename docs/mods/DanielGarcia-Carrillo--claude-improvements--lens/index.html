@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=lens}, ui.render {component=AssistantMessage}, ui.close, turn.start, tool.call, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=lens}, ui.render {component=AssistantMessage}, ui.close, turn.start, tool.call, turn.complete, ui.render {component=Pane, requestId=lens}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.model.complete, $.session.messages, $.state.get, $.state.set, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

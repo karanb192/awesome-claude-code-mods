@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>the system prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=jot}, turn.complete, ui.render {component=SessionMode}, prompt.edit, ui.render {component=PromptHint}, prompt.context, command.run {command=recall}, command.run {command=incubate}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=jot}, turn.complete, ui.render {component=SessionMode}, ui.render {component=AbovePrompt}, prompt.edit, ui.render {component=PromptHint}, prompt.context, command.run {command=recall}, command.run {command=incubate}, ui.render {component=Pane, requestId=jot-draft}, ui.render {component=Pane, requestId=ingest}, ui.render {component=Pane, requestId=incubate}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.spawn, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.fs.write, $.model.fork, $.process.run, $.prompt.fill, $.session.append, $.session.cwd, $.session.id, $.session.repo, $.state.get, $.state.set, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

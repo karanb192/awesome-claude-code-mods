@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, mcp__lens__lens_diagnostics calls, mcp__lens__lens_diagnostic_mark calls</dd>
-    <dt>Hooks</dt><dd><code>tool.call, tool.call {tool=mcp__lens__lens_diagnostics}, tool.call {tool=mcp__lens__lens_diagnostic_mark}, command.run {command=lens}, command.run {command=lens-health}, ui.render {component=SessionMode}, session.start, turn.start, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>tool.call, tool.call {tool=mcp__lens__lens_diagnostics}, tool.call {tool=mcp__lens__lens_diagnostic_mark}, command.run {command=lens}, command.run {command=lens-health}, ui.render {component=SessionMode}, ui.render {component=AbovePrompt}, session.start, turn.start, turn.complete</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.process.run, $.process.spawn, $.prompt.submit, $.session.root, $.store.delete, $.store.get, $.store.set, $.tool.register, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

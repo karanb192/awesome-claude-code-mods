@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, mcp__kitchen-sink__mix calls, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=kitchen}, command.run {command=kitchen-status}, tool.call, tool.call {tool=mcp__kitchen-sink__mix}, prompt.submit, turn.complete, ui.render {component=Spinner}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=kitchen}, command.run {command=kitchen-status}, tool.call, tool.call {tool=mcp__kitchen-sink__mix}, prompt.submit, turn.complete, ui.render {component=Spinner}, ui.render {component=AbovePrompt}, ui.render {component=Pane}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.prompt.fill, $.prompt.read, $.session.surfaces, $.store.delete, $.store.get, $.store.set, $.tool.register, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

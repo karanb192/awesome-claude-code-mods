@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/galElmalah/claude-mods">galElmalah/claude-mods</a></p>
 <p class="lede">A prompt typed while Claude is working is held in a stack above the prompt instead of landing in the running turn, and sent once the turn ends. Reorder the stack, edit a row in place, send one first, remove one, flush the lot. Needs function hooks (early access) and an interactive terminal.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">prompt-queue reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 9</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">prompt-queue reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 9</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install prompt-queue --marketplace galElmalah/claude-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, writes the prompt box, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every tool call, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, classic.Stop, tool.call, prompt.submit, command.run {command=q}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, classic.Stop, tool.call, prompt.submit, ui.focus {component=AbovePrompt}, command.run {command=q}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.command.run, $.prompt.fill, $.prompt.submit, $.ui.focus, $.ui.invalidate, $.ui.log, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

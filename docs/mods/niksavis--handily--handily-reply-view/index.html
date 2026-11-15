@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, compaction, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, config.set, command.run {command=replies}, session.end, turn.complete, tool.call, session.compact, prompt.submit, session.append {door=prompt|delivery}, session.append {door=notice}, ui.render {component=TurnDuration}, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, config.set, command.run {command=replies}, session.end, turn.complete, tool.call, session.compact, ui.render {component=Pane, requestId=?}, prompt.submit, session.append {door=prompt|delivery}, session.append {door=notice}, ui.render {component=TurnDuration}, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.now, $.command.register, $.config.list, $.env.get, $.session.messages, $.session.surfaces, $.settings.read, $.state.get, $.state.set, $.ui.close, $.ui.copy, $.ui.log, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.scroll, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

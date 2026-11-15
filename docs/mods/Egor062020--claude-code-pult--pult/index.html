@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.measure, tool.call, turn.complete, prompt.submit, command.run {command=pult}, command.run {command=journal}, command.run {command=keep-cache}, ui.close {id=pult}, ui.render {component=SessionMode}, ui.render {component=PromptHint}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.measure, tool.call, turn.complete, prompt.submit, command.run {command=pult}, command.run {command=journal}, command.run {command=keep-cache}, ui.close {id=pult}, ui.render {component=SessionMode}, ui.render {component=PromptHint}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=pult}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.command.run, $.fs.list, $.fs.read, $.fs.write, $.model.fork, $.process.run, $.prompt.submit, $.session.id, $.session.surfaces, $.session.usage, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

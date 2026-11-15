@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, subagent spawns, Bash calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=cockpit}, command.run {command=fleet}, command.run {command=session-log}, command.run {command=git-graph}, command.run {command=usage-chart}, command.run {command=effort-up}, command.run {command=effort-down}, turn.start, turn.step, turn.complete, tool.call, agent.spawn, agent.offer, session.measure, ui.render {component=CommandOutput, props has {command=usage-chart}}, tool.call {tool=Bash}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=cockpit}, command.run {command=fleet}, command.run {command=session-log}, command.run {command=git-graph}, command.run {command=usage-chart}, command.run {command=effort-up}, command.run {command=effort-down}, turn.start, turn.step, turn.complete, tool.call, agent.spawn, agent.offer, session.measure, ui.render {component=Pane, requestId=cockpit}, ui.render {component=AbovePrompt}, ui.render {component=CommandOutput, props has {command=usage-chart}}, tool.call {tool=Bash}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.agent.register, $.clock.every, $.clock.now, $.command.register, $.config.list, $.config.set, $.env.get, $.fs.write, $.process.run, $.process.spawn, $.session.cwd, $.session.id, $.session.model, $.session.usage, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.log, $.ui.notify, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

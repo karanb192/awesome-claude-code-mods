@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, subagent spawns</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=roadraven}, tool.call, agent.spawn, turn.complete, ui.render {component=Spinner}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=roadraven}, tool.call, agent.spawn, turn.complete, ui.render {component=Spinner}, ui.render {component=Pane, requestId=roadraven}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.spawn, $.clock.every, $.command.register, $.env.get, $.fs.exists, $.fs.read, $.mcp.call, $.prompt.submit, $.session.append, $.settings.read, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/bar.tsx, hooks/raven-mark.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

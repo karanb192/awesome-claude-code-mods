@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call, classic hooks, mcp__plan-progress-fx__plan_progress calls, AskUserQuestion calls, ExitPlanMode calls, subagent spawns</dd>
-    <dt>Hooks</dt><dd><code>turn.start, prompt.submit, tool.call, classic.Stop, session.start, prompt.compose, tool.call {tool=mcp__plan-progress-fx__plan_progress}, tool.call {tool=AskUserQuestion}, tool.call {tool=ExitPlanMode}, command.run {command=progress}, command.run {command=progress-demo}, command.run {command=progress-clear}, command.run {command=progress-debug}, command.run {command=progress-sounds}, ui.render {component=SessionMode}, ui.render {component=PromptHint}, agent.spawn, tool.check, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>turn.start, prompt.submit, tool.call, classic.Stop, session.start, prompt.compose, tool.call {tool=mcp__plan-progress-fx__plan_progress}, tool.call {tool=AskUserQuestion}, tool.call {tool=ExitPlanMode}, command.run {command=progress}, command.run {command=progress-demo}, command.run {command=progress-clear}, command.run {command=progress-debug}, command.run {command=progress-sounds}, ui.render {component=SessionMode}, ui.render {component=Pane}, ui.render {component=PromptHint}, ui.render {component=AbovePrompt}, agent.spawn, tool.check, turn.complete</code></dd>
     <dt>API calls</dt><dd><code>$.audio.play, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.process.run, $.session.root, $.state.get, $.state.set, $.tool.register, $.ui.blit, $.ui.invalidate, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

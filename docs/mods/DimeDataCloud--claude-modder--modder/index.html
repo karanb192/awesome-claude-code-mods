@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, mcp__modder__skin calls, mcp__modder__mind calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, turn.start, turn.complete, session.measure, tool.call, tool.check, command.run {command=modder}, command.run {command=skin}, tool.call {tool=mcp__modder__skin}, tool.call {tool=mcp__modder__mind}, ui.render {component=UserMessage|AssistantMessage|ToolUse|ToolResult|ToolGroup|ToolProgress|Spinner|InfoNotice|TurnDuration|CommandOutput|AskUserQuestion|PromptHint}, ui.render {component=SessionMode}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, turn.start, turn.complete, session.measure, tool.call, tool.check, command.run {command=modder}, command.run {command=skin}, tool.call {tool=mcp__modder__skin}, tool.call {tool=mcp__modder__mind}, ui.render {component=UserMessage|AssistantMessage|ToolUse|ToolResult|ToolGroup|ToolProgress|Spinner|InfoNotice|TurnDuration|CommandOutput|AskUserQuestion|PromptHint}, ui.render {component=SessionMode}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=modder}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.config.list, $.config.set, $.env.get, $.fs.list, $.fs.read, $.fs.write, $.http.fetch, $.model.complete, $.prompt.fill, $.prompt.read, $.session.id, $.session.messages, $.session.model, $.session.repo, $.session.root, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.register, $.ui.close, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

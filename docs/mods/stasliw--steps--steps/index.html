@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call, mcp__steps__set_steps calls, ProposeGoal calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=steps}, ui.render {component=SessionMode}, tool.describe {tool=mcp__steps__set_steps}, prompt.compose, prompt.submit, tool.call, tool.call {tool=mcp__steps__set_steps}, command.run {command=goal}, tool.call {tool=ProposeGoal}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=steps}, ui.render {component=SessionMode}, tool.describe {tool=mcp__steps__set_steps}, prompt.compose, prompt.submit, tool.call, tool.call {tool=mcp__steps__set_steps}, command.run {command=goal}, tool.call {tool=ProposeGoal}, ui.render {component=Pane, requestId=steps}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.tool.register, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

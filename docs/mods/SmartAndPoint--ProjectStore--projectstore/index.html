@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/SmartAndPoint/ProjectStore">SmartAndPoint/ProjectStore</a></p>
 <p class="lede">Your agent runs the project through a verified loop: task → artifact (ADR / spec / epic / story) → adversarial critic → backlog → planner → reviewer → done. Plain markdown in git: any model can pick the project up tomorrow.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">projectstore reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: writes files, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">projectstore reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: writes files, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">writes files, reads files, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,13 +24,13 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.start, agent.spawn, turn.step, tool.call, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.start, ui.render {component=AbovePrompt}, agent.spawn, turn.step, tool.call, turn.complete</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.clock.sleep, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.fs.write, $.session.id, $.session.root, $.state.get, $.state.set, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/SmartAndPoint/ProjectStore/tree/3857252cd7afe51da174fdbbbd8633fcbd3c9a48"><code>3857252cd7af</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/SmartAndPoint/ProjectStore/tree/5864727d38ae97b205e54271e8064777e4450dd7"><code>5864727d38ae</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 

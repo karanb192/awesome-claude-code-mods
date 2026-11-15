@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Write calls, Edit calls, Read calls, compaction, Skill calls, every prompt, every skill</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.describe {command=compact-handoff-go}, command.run {command=compact-handoff}, command.run {command=compact-handoffplan}, command.run {command=compact-handoff-go}, tool.call {tool=Write}, tool.call {tool=Edit}, tool.call {tool=Read}, session.compact, tool.call {tool=Skill}, prompt.submit, skill.prompt, ui.render {component=Spinner}, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.describe {command=compact-handoff-go}, command.run {command=compact-handoff}, command.run {command=compact-handoffplan}, command.run {command=compact-handoff-go}, tool.call {tool=Write}, tool.call {tool=Edit}, tool.call {tool=Read}, session.compact, tool.call {tool=Skill}, prompt.submit, skill.prompt, ui.render {component=Spinner}, ui.render {component=AbovePrompt}, turn.complete</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.command.run, $.fs.read, $.prompt.submit, $.session.compact, $.session.cwd, $.session.usage, $.state.get, $.state.set, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

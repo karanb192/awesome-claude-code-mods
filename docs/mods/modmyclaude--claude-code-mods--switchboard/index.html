@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every tool call</dd>
-    <dt>Hooks</dt><dd><code>config.set {key=&quot;switchboard.enabled&quot;}, session.start, classic.SessionStart, classic.UserPromptSubmit, turn.start, turn.complete, classic.Notification, tool.call, session.measure, session.end, session.attach, command.run {command=switchboard}, ui.render {component=SessionMode}</code></dd>
+    <dt>Hooks</dt><dd><code>config.set {key=&quot;switchboard.enabled&quot;}, session.start, classic.SessionStart, classic.UserPromptSubmit, turn.start, turn.complete, classic.Notification, tool.call, session.measure, session.end, session.attach, command.run {command=switchboard}, ui.render {component=SessionMode}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=switchboard}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.list, $.fs.read, $.fs.write, $.process.run, $.session.id, $.session.root, $.session.surfaces, $.session.turns, $.state.get, $.state.set, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

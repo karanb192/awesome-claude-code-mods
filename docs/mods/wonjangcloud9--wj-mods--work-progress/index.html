@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__work-progress__report calls, ? calls, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=mcp__work-progress__report}, tool.call {tool=?}, tool.call, prompt.compose, command.run {command=progress}, ui.render {component=ToolUse}, ui.render {component=ToolResult}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=mcp__work-progress__report}, tool.call {tool=?}, tool.call, prompt.compose, command.run {command=progress}, ui.render {component=Pane, requestId=work-progress}, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.list, $.fs.read, $.fs.write, $.process.run, $.session.id, $.state.get, $.state.set, $.tool.register, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

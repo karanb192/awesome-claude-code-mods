@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__too-long-live__show_plan calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=too-long-live}, tool.call {tool=mcp__too-long-live__show_plan}, ui.close {id=too-long}, prompt.attachment {type=plan_mode|plan_mode_reentry|plan_mode_exit}, ui.render {component=ToolUse}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=too-long-live}, tool.call {tool=mcp__too-long-live__show_plan}, ui.close {id=too-long}, prompt.attachment {type=plan_mode|plan_mode_reentry|plan_mode_exit}, ui.render {component=AbovePrompt}, ui.render {component=ToolUse}, ui.render {component=Pane, requestId=too-long}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.command.register, $.env.get, $.fs.stat, $.process.run, $.process.spawn, $.session.root, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.register, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

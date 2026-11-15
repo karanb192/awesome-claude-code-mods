@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=sidecard}, turn.start, prompt.submit, tool.call, turn.complete, classic.PermissionRequest, classic.Notification {notification_type=permission_prompt|agent_needs_input|elicitation_dialog}, ui.render {component=Spinner}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=sidecard}, turn.start, prompt.submit, tool.call, turn.complete, classic.PermissionRequest, classic.Notification {notification_type=permission_prompt|agent_needs_input|elicitation_dialog}, ui.render {component=Spinner}, ui.render {component=AbovePrompt}, ui.render {component=Pane}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.list, $.fs.read, $.model.complete, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

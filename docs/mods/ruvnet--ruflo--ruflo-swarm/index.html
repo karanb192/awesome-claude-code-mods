@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, every tool call, everything</dd>
-    <dt>Hooks</dt><dd><code>session.start, ui.render {component=PromptHint}, ui.close, command.run {command=ruflo|ruflo-console}, command.run {command=?}, command.run {command=ruflo-swarm:watch}, turn.start, turn.complete, agent.spawn, tool.call, *</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, ui.render {component=PromptHint}, ui.render {component=Pane}, ui.close, command.run {command=ruflo|ruflo-console}, command.run {command=?}, command.run {command=ruflo-swarm:watch}, turn.start, turn.complete, agent.spawn, tool.call, *</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.fs.exists, $.fs.read, $.fs.stat, $.fs.write, $.process.run, $.prompt.fill, $.session.usage, $.session.version, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

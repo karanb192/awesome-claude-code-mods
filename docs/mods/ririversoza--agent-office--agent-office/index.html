@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/ririversoza/agent-office">ririversoza/agent-office</a></p>
 <p class="lede">A view-only pixel office pane showing which agents (lead, subagents, Codex, Cursor) are working, with your checklist and this branch's PR</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">agent-office reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 18</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads files, reads the transcript, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">agent-office reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 18</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads files, reads the transcript, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, reads files, reads the transcript, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, mcp__agent-office__usage calls, mcp__agent-office__checklist calls, subagent spawns, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=office}, prompt.submit, session.append, tool.call {tool=mcp__agent-office__usage}, tool.call {tool=mcp__agent-office__checklist}, turn.start, turn.complete, agent.spawn, tool.call</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=office}, prompt.submit, session.append, tool.call {tool=mcp__agent-office__usage}, tool.call {tool=mcp__agent-office__checklist}, turn.start, turn.complete, agent.spawn, tool.call, ui.render {component=Pane, requestId=agent-office}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.command.register, $.fs.read, $.process.run, $.prompt.submit, $.session.cwd, $.session.messages, $.session.usage, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.register, $.ui.log, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

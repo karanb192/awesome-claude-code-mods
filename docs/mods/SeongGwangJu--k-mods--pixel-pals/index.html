@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, every prompt, classic hooks, subagent spawns, compaction</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.start, tool.call, tool.check, turn.complete, ui.message, command.run {command=pals}, prompt.edit, prompt.submit, ui.render {component=SessionMode}, ui.render {component=Spinner}, command.run {command=tales}, classic.UserPromptSubmit, session.measure, classic.PermissionRequest, agent.spawn, session.compact, classic.SessionStart</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.start, tool.call, tool.check, turn.complete, ui.message, command.run {command=pals}, prompt.edit, prompt.submit, ui.render {component=SessionMode}, ui.render {component=Spinner}, ui.render {component=AbovePrompt}, command.run {command=tales}, classic.UserPromptSubmit, session.measure, classic.PermissionRequest, agent.spawn, session.compact, classic.SessionStart</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.config.set, $.env.get, $.session.root, $.session.usage, $.settings.read, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.set, $.ui.ask, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/kit/pet-player.tsx, hooks/sprite.tsx, hooks/stage.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

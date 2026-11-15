@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, turn.step, classic.SessionStart, classic.PostModelSwitch, session.end, command.run {command=warm}, command.run {command=thermostat}, ui.render {component=SessionMode}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.submit, turn.step, classic.SessionStart, classic.PostModelSwitch, session.end, command.run {command=warm}, command.run {command=thermostat}, ui.render {component=Pane, requestId=thermostat-receipt}, ui.render {component=SessionMode}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.model.fork, $.prompt.fill, $.prompt.read, $.session.authorize, $.session.model, $.session.surfaces, $.session.usage, $.state.get, $.state.set, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

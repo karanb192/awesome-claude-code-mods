@@ -17,7 +17,7 @@
 
 <section class="summary" aria-label="Scan summary"><p class="summary-line">The scan could not record a complete footprint for workflow-gates, so its access is unknown; it passed <code>claude plugin validate</code> with warnings.</p><ul><li>Access: unknown, the footprint is incomplete</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
-<div class="facts"><div><h2>Access</h2><span class="level">Unknown access</span><span class="track" aria-label="Unknown access"><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">The footprint is unavailable or incomplete.</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">Unknown access · at least L2</span><span class="track" aria-label="Unknown access"><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">The footprint is unavailable or incomplete.</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
 <p class="actions"><a class="source" href="https://github.com/leeovery/portal/tree/main/.claude/skills/workflow-gates">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#leeovery--portal--workflow-gates">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
@@ -25,8 +25,8 @@
 
     <dt>Footprint</dt><dd>Unavailable or incomplete. Recorded events and calls below may omit access.</dd>
     <dt>Observed events</dt><dd>every tool call, Bash calls, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, tool.call, tool.call {tool=Bash}, tool.describe {tool=SendUserMessage}, turn.complete, ui.message {element=gate}, prompt.submit, turn.start</code></dd>
-    <dt>API calls</dt><dd><code>$.session.surfaces, $.session.version, $.ui.invalidate, $.ui.resolve, $.ui.toast</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, tool.call, tool.call {tool=Bash}, tool.describe {tool=SendUserMessage}, turn.complete, ui.render {component=AbovePrompt}, ui.message {element=gate}, prompt.submit, turn.start</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.after, $.command.run, $.env.get, $.env.set, $.fs.exists, $.fs.read, $.fs.stat, $.fs.write, $.process.run, $.prompt.fill, $.prompt.read, $.prompt.submit, $.session.cwd, $.session.id, $.session.messages, $.session.root, $.session.surfaces, $.session.version, $.ui.invalidate, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/board.ts</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>
 

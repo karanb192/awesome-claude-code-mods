@@ -14,8 +14,8 @@
 <h1>review-radar</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/pedrovelasquez9/review-radar">pedrovelasquez9/review-radar</a></p>
 <p class="lede">Review pane for the human in the loop: summarizes your branch changes and shows, with their diff, only those that need a person (business logic, architecture, data, secrets, third parties, security, infra, likely mistakes) and the changes nobody asked for; the rest goes to the PR.</p>
-
-<section class="summary" aria-label="Scan summary"><p class="summary-line">review-radar reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the prompt box, reads files, reads the transcript, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<p class="compatibility">review UI rewrite</p>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">review-radar reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the prompt box, reads files, reads the transcript, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install review-radar --marketplace pedrovelasquez9/review-radar</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, writes the prompt box, reads files, reads the transcript, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=review-radar}, tool.call, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=review-radar}, tool.call, turn.complete, ui.render {component=Pane, requestId=review-radar}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.fs.read, $.model.complete, $.process.run, $.prompt.fill, $.session.messages, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/pedrovelasquez9/review-radar/tree/f0ddd0e484fe73c7cd292ff2e2761328869cc6ed"><code>f0ddd0e484fe</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/pedrovelasquez9/review-radar/blob/f0ddd0e484fe73c7cd292ff2e2761328869cc6ed/.claude-plugin/marketplace.json">review-radar</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/pedrovelasquez9/review-radar/tree/9e8a73fb3e55dc64a7cc1c5f7a97508858d17552"><code>9e8a73fb3e55</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/pedrovelasquez9/review-radar/blob/9e8a73fb3e55dc64a7cc1c5f7a97508858d17552/.claude-plugin/marketplace.json">review-radar</a></dd><dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/pedrovelasquez9/review-radar/blob/9e8a73fb3e55dc64a7cc1c5f7a97508858d17552/core/git.ts#L108">core/git.ts:108</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/pedrovelasquez9--review-radar--review-radar-reach.svg" alt="Reach badge for review-radar"> <img src="/badges/pedrovelasquez9--review-radar--review-radar-validates.svg" alt="Validation badge for review-radar"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/pedrovelasquez9--review-radar--review-radar-reach.svg)](https://mods.aidojo.si/mods/pedrovelasquez9--review-radar--review-radar/)

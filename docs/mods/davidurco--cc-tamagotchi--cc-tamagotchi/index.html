@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every tool call, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear|resume|fork}, command.run {command=tama|tamagotchi}, tool.call, turn.start, turn.complete, prompt.submit, ui.message, ui.close, ui.render {component=Spinner}, ui.render {component=PromptHint}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear|resume|fork}, command.run {command=tama|tamagotchi}, tool.call, turn.start, turn.complete, prompt.submit, ui.message, ui.close, ui.render {component=Pane, requestId=tama}, ui.render {component=AbovePrompt}, ui.render {component=Spinner}, ui.render {component=PromptHint}</code></dd>
     <dt>API calls</dt><dd><code>$.audio.play, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.ask, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/lcd.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

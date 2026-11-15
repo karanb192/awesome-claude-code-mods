@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=catchup}, prompt.submit, classic.SessionStart {source=clear|resume|fork}, session.append, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}, ui.render {component=ToolUse}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=catchup}, prompt.submit, classic.SessionStart {source=clear|resume|fork}, session.append, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}, ui.render {component=ToolUse}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=catchup}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.command.register, $.model.complete, $.prompt.fill, $.prompt.read, $.session.messages, $.ui.copy, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

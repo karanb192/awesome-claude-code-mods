@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/robinade/claude-mods-ko">robinade/claude-mods-ko</a></p>
 <p class="lede">대충 쓴 초안을 프로젝트의 CLAUDE.md와 설치된 스킬을 바탕으로 구체적인 프롬프트로 다시 써 줘요. 한국어 초안은 한국어로 다듬어요.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">prompt-enhancer reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 19</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads files, reads env vars, reads the prompt box, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">prompt-enhancer reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 19</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads files, reads env vars, reads the prompt box, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install prompt-enhancer --marketplace robinade/claude-mods-ko</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, writes the prompt box, reads files, reads env vars, reads the prompt box, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, command.run {command=enhance}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.submit, command.run {command=enhance}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.command.list, $.command.register, $.env.get, $.fs.ancestors, $.fs.list, $.fs.read, $.model.complete, $.model.fork, $.prompt.fill, $.prompt.read, $.prompt.submit, $.session.model, $.session.root, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/ashafizullah/cmdc-worker">ashafizullah/cmdc-worker</a></p>
 <p class="lede">Claude orchestrates, Command Code (cmdc) implements: a tool that hands a task to cmdc and returns its diff for review, with a live pane of the run.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">cmdc-worker reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">cmdc-worker reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__cmdc-worker__implement calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=cmdc}, turn.step, turn.complete, tool.call {tool=mcp__cmdc-worker__implement}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=cmdc}, turn.step, turn.complete, tool.call {tool=mcp__cmdc-worker__implement}, ui.render {component=Pane, requestId=cmdc-worker}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.process.run, $.process.spawn, $.session.cwd, $.session.usage, $.state.get, $.state.set, $.tool.register, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call, subagent spawns</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, prompt.submit, turn.start, turn.complete, tool.call, agent.spawn, session.measure, config.set {key=theme}, session.append, ui.render {component=AssistantMessage}, ui.close {id=?}, ui.render {component=Spinner}, ui.render {component=CommandOutput, props has {command=hf}}, command.run {command=hf}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, prompt.submit, turn.start, turn.complete, tool.call, agent.spawn, session.measure, config.set {key=theme}, session.append, ui.render {component=AssistantMessage}, ui.close {id=?}, ui.render {component=Pane, requestId=?}, ui.render {component=AbovePrompt}, ui.render {component=Spinner}, ui.render {component=CommandOutput, props has {command=hf}}, command.run {command=hf}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.command.run, $.config.list, $.session.messages, $.session.surfaces, $.session.usage, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.blit, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

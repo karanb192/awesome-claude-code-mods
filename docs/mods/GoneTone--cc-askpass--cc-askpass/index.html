@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/GoneTone/cc-askpass">GoneTone/cc-askpass</a></p>
 <p class="lede">Lets Claude run commands that ask for a password (sudo, ssh, git): a pane inside Claude Code asks you, and the password never reaches the model</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">cc-askpass reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 21</li><li>Access from classified calls: L2, writes or runs: runs processes, sets env vars, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">cc-askpass reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 21</li><li>Access from classified calls: L2, writes or runs: runs processes, sets env vars, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, sets env vars, reads files, reads env vars, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Bash calls, /&quot;^PowerShell$&quot;/ calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.compose, tool.call {tool=Bash}, tool.call {tool=/&quot;^PowerShell$&quot;/}, session.end, command.run {command=askpass}, ui.close</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.compose, tool.call {tool=Bash}, tool.call {tool=/&quot;^PowerShell$&quot;/}, session.end, command.run {command=askpass}, ui.close, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=askpass}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.env.get, $.env.set, $.fs.exists, $.fs.read, $.process.run, $.process.spawn, $.session.id, $.store.delete, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

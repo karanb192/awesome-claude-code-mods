@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>AskUserQuestion calls, every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=decision-tree}, tool.call {tool=AskUserQuestion}, turn.complete, prompt.submit, tool.call, ui.render {component=ToolUse, props has {tool=AskUserQuestion}}, ui.render {component=ToolResult, props has {tool=AskUserQuestion}}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=decision-tree}, tool.call {tool=AskUserQuestion}, turn.complete, prompt.submit, tool.call, ui.render {component=ToolUse, props has {tool=AskUserQuestion}}, ui.render {component=ToolResult, props has {tool=AskUserQuestion}}, ui.render {component=Pane, requestId=decision-tree}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.agent.spawn, $.command.register, $.model.complete, $.model.fork, $.prompt.fill, $.prompt.submit, $.state.get, $.state.set, $.tool.call, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

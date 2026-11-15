@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, subagent spawns</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=gsd-status}, command.run {command=gsd-board}, turn.start, tool.call, agent.spawn, turn.step, turn.complete, ui.close {id=gsd-board}, ui.render {component=ToolUse}, ui.render {component=AssistantMessage}, ui.render {component=PromptHint}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=gsd-status}, command.run {command=gsd-board}, turn.start, tool.call, agent.spawn, turn.step, turn.complete, ui.close {id=gsd-board}, ui.render {component=Pane, requestId=gsd-board}, ui.render {component=ToolUse}, ui.render {component=AssistantMessage}, ui.render {component=AbovePrompt}, ui.render {component=PromptHint}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.fs.list, $.fs.read, $.fs.stat, $.prompt.suggest, $.session.root, $.session.usage, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.scroll, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

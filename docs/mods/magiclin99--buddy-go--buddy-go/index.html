@@ -14,8 +14,8 @@
 <h1>buddy-go</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/magiclin99/buddy-go">magiclin99/buddy-go</a></p>
 <p class="lede">Buddy, a fan-made companion inspired by Clawd, living above the prompt: it walks, waves when it is your turn, paces while the model thinks, types along when a file is edited, runs while a command does, plays ping pong while an API is called, and throws your PR into orbit.</p>
-
-<section class="summary" aria-label="Scan summary"><p class="summary-line">buddy-go reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 4</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<p class="compatibility">review UI rewrite</p>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">buddy-go reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 4</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install buddy-go --marketplace magiclin99/buddy-go</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>Bash calls, Edit calls, Write calls, NotebookEdit calls, WebFetch calls, AskUserQuestion calls, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=Bash}, tool.call {tool=Edit}, tool.call {tool=Write}, tool.call {tool=NotebookEdit}, tool.call {tool=Bash}, tool.call {tool=Bash}, tool.call {tool=WebFetch}, turn.step, turn.complete, turn.start, tool.call {tool=AskUserQuestion}, prompt.submit</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=Bash}, tool.call {tool=Edit}, tool.call {tool=Write}, tool.call {tool=NotebookEdit}, tool.call {tool=Bash}, tool.call {tool=Bash}, tool.call {tool=WebFetch}, turn.step, turn.complete, turn.start, tool.call {tool=AskUserQuestion}, prompt.submit, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.state.get, $.state.set, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/magiclin99/buddy-go/tree/cec9ba9ff945df05b035426a243159a22efa5dd1"><code>cec9ba9ff945</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/magiclin99/buddy-go/blob/cec9ba9ff945df05b035426a243159a22efa5dd1/.claude-plugin/marketplace.json">buddy-go</a></dd></dl>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/magiclin99/buddy-go/blob/cec9ba9ff945df05b035426a243159a22efa5dd1/.claude-plugin/marketplace.json">buddy-go</a></dd><dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/magiclin99/buddy-go/blob/cec9ba9ff945df05b035426a243159a22efa5dd1/hooks/lib/command.ts#L10">hooks/lib/command.ts:10</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/magiclin99--buddy-go--buddy-go-reach.svg" alt="Reach badge for buddy-go"> <img src="/badges/magiclin99--buddy-go--buddy-go-validates.svg" alt="Validation badge for buddy-go"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/magiclin99--buddy-go--buddy-go-reach.svg)](https://mods.aidojo.si/mods/magiclin99--buddy-go--buddy-go/)

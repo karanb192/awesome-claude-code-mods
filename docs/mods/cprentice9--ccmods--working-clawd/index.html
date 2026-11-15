@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/cprentice9/ccmods">cprentice9/ccmods</a></p>
 <p class="lede">While Claude works, Clawd walks above the prompt: across a starry sky in the desktop app, Ghostty and kitty, stopping to look around, wave and jump, and back and forth in half blocks in other terminals.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">working-clawd reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 9</li><li>Access from classified calls: L1, reads: reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">working-clawd reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 9</li><li>Access from classified calls: L1, reads: reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,16 +24,16 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.start, agent.spawn, tool.call, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.start, agent.spawn, tool.call, turn.complete, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.env.get, $.state.get, $.state.set, $.ui.blit, $.ui.invalidate, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/cprentice9/ccmods/tree/cda6503cca2ffb19c13dd88db0bd5c4abf14bee9"><code>cda6503cca2f</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/cprentice9/ccmods/tree/a74844b56575633ecad4874d4bece17d3a8b04d4"><code>a74844b56575</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
-<section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from cprentice9/ccmods</h2><ul><li><a href="/mods/cprentice9--ccmods--prose-guard/">prose-guard</a><span>Blocks em dashes in edits, shell commands and replies, and British spellings in prose files, commit messages…</span></li><li><a href="/mods/cprentice9--ccmods--stuck-detector/">stuck-detector</a><span>Notices when the same test command fails twice in a row and tells the model to ask for a second opinion.</span></li></ul></section>
+<section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from cprentice9/ccmods</h2><ul><li><a href="/mods/cprentice9--ccmods--prose-guard/">prose-guard</a><span>Blocks em dashes in edits, shell commands and replies, and British spellings in prose files, commit messages…</span></li><li><a href="/mods/cprentice9--ccmods--starfield/">starfield</a><span>A theme for the desktop app: the usual dark gray with the dotted night sky from the foot of claude.dev behind…</span></li><li><a href="/mods/cprentice9--ccmods--stuck-detector/">stuck-detector</a><span>Notices when the same test command fails twice in a row and tells the model to ask for a second opinion.</span></li><li><a href="/mods/cprentice9--ccmods--usage-meter/">usage-meter</a><span>A row above the prompt with your 5-hour, weekly and Fable weekly plan limits and the session's context.</span></li></ul></section>
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/cprentice9--ccmods--working-clawd-reach.svg" alt="Reach badge for working-clawd"> <img src="/badges/cprentice9--ccmods--working-clawd-validates.svg" alt="Validation badge for working-clawd"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/cprentice9--ccmods--working-clawd-reach.svg)](https://mods.aidojo.si/mods/cprentice9--ccmods--working-clawd/)
 [![validates](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/cprentice9--ccmods--working-clawd-validates.svg)](https://mods.aidojo.si/mods/cprentice9--ccmods--working-clawd/)</code></pre></section>
 </main>

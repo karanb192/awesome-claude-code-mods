@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/KyongSik-Yoon/cc-desktop-mod">KyongSik-Yoon/cc-desktop-mod</a></p>
 <p class="lede">Claude Code mod with a /desk-review:simplify-review skill (/simplify, then /code-review medium) whose report opens in a side pane: each fixed, skipped, found or dismissed item with its reason, its diff or current source unfolding in place, and the file opened in desk-look's diff pane. Needs desk-look</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">desk-review reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads settings, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">desk-review reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads settings, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install desk-review --marketplace KyongSik-Yoon/cc-desktop-mod</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads settings, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__desk-review__review_report calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, state.set {plugin=desk-look, key=lang}, tool.call {tool=mcp__desk-review__review_report}, command.run {command=desk-review}, ui.scroll {component=Pane, requestId=desk-review}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, state.set {plugin=desk-look, key=lang}, tool.call {tool=mcp__desk-review__review_report}, command.run {command=desk-review}, ui.scroll {component=Pane, requestId=desk-review}, ui.render {component=Pane, requestId=desk-review}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.config.list, $.session.cwd, $.state.get, $.state.set, $.tool.register, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.scroll</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

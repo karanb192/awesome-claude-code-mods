@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=tw}, command.run {command=tw-focus}, ui.render {component=UserMessage|AssistantMessage|ToolUse|ToolResult|ToolGroup|TurnDuration}, command.run {command=tw-dm}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=tw}, command.run {command=tw-focus}, ui.render {component=UserMessage|AssistantMessage|ToolUse|ToolResult|ToolGroup|TurnDuration}, command.run {command=tw-dm}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=teamwork-chat}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.read, $.http.fetch, $.mcp.call, $.model.complete, $.process.run, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.focus, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=pad}, command.describe, classic.SessionStart, turn.step, ui.render {component=CommandOutput}, ui.render {component=PromptHint}, ui.render {component=AskUserQuestion}, ui.scroll {component=Pane, requestId=launchpad}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=pad}, command.describe, classic.SessionStart, turn.step, ui.render {component=CommandOutput}, ui.render {component=PromptHint}, ui.render {component=AbovePrompt}, ui.render {component=AskUserQuestion}, ui.render {component=Pane, requestId=launchpad-panel}, ui.render {component=Pane, requestId=launchpad-menu}, ui.scroll {component=Pane, requestId=launchpad}, ui.render {component=Pane, requestId=launchpad}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.list, $.command.register, $.command.run, $.config.list, $.config.set, $.env.get, $.fs.list, $.fs.read, $.prompt.fill, $.session.messages, $.session.model, $.session.usage, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.ask, $.ui.close, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

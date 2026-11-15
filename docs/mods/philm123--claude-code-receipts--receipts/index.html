@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/philm123/claude-code-receipts">philm123/claude-code-receipts</a></p>
 <p class="lede">Receipts for consultants: a scope creep siren for change orders, and undo receipts that turn rm into a move to trash with a Restore button.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">receipts reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">receipts reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, reads env vars, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, Bash calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, prompt.submit, tool.call {tool=Bash}, command.run {command=change-orders}, command.run {command=siren}, command.run {command=restore}, command.run {command=receipts}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, prompt.submit, tool.call {tool=Bash}, command.run {command=change-orders}, command.run {command=siren}, command.run {command=restore}, command.run {command=receipts}, ui.press {plugin=receipts}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.env.get, $.fs.exists, $.fs.stat, $.process.run, $.session.cwd, $.session.root, $.store.delete, $.store.get, $.store.keys, $.store.set, $.tool.check, $.ui.ask, $.ui.invalidate, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Djdhmf/prompt-enhancer">Djdhmf/prompt-enhancer</a></p>
 <p class="lede">An animated pixel librarian-Clawd above the prompt that rewrites your draft into a clearer one using the project's CLAUDE.md, skills and tools, for you to review and send.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">prompt-enhancer reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads files, reads the transcript, reads the prompt box, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">prompt-enhancer reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads files, reads the transcript, reads the prompt box, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install prompt-enhancer --marketplace Djdhmf/prompt-enhancer</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, writes the prompt box, reads files, reads the transcript, reads the prompt box, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=enhance}, ui.message</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=enhance}, ui.render {component=AbovePrompt}, ui.message</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.fs.read, $.model.complete, $.prompt.fill, $.prompt.read, $.session.cwd, $.session.messages, $.session.usage, $.store.get, $.store.set, $.tool.list, $.ui.invalidate, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/crab.ts</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

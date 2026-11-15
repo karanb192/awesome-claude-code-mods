@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, compaction, every tool call, subagent spawns, /&quot;^mcp__cabina__diagnose$&quot;/ calls, every skill</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=cabina}, classic.UserPromptSubmit, agent.offer, turn.start, turn.step, session.measure, session.compact, tool.check, tool.call, session.append, agent.spawn, turn.complete, tool.call {tool=/&quot;^mcp__cabina__diagnose$&quot;/}, skill.prompt, session.receive, classic.Notification, classic.TaskCreated, classic.TaskCompleted, classic.PostModelSwitch, classic.CwdChanged, classic.WorktreeCreate, classic.InstructionsLoaded, classic.PostCompact, classic.Stop, ui.render {component=PromptHint}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=cabina}, classic.UserPromptSubmit, agent.offer, turn.start, turn.step, session.measure, session.compact, tool.check, tool.call, session.append, agent.spawn, turn.complete, tool.call {tool=/&quot;^mcp__cabina__diagnose$&quot;/}, skill.prompt, session.receive, classic.Notification, classic.TaskCreated, classic.TaskCompleted, classic.PostModelSwitch, classic.CwdChanged, classic.WorktreeCreate, classic.InstructionsLoaded, classic.PostCompact, classic.Stop, ui.render {component=Pane, requestId=cabina}, ui.render {component=PromptHint}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.session.surfaces, $.session.usage, $.state.get, $.state.set, $.tool.register, $.ui.close, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/elapsed.tsx, hooks/rail.tsx, hooks/spinner.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

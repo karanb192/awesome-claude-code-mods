@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=og-sf-org}, tool.call, prompt.compose, ui.render {component=AskUserQuestion}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=og-sf-org}, tool.call, prompt.compose, ui.render {component=AskUserQuestion}, ui.render {component=Pane, requestId=sf-orgs}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.audio.play, $.clock.every, $.command.register, $.env.get, $.fs.list, $.fs.read, $.process.run, $.session.cwd, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.ask, $.ui.open, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

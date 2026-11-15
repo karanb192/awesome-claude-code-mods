@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear|resume|fork}, command.run {command=court}, tool.describe {tool=Bash}, turn.complete, prompt.submit, tool.check {tool=Bash}, ui.render {component=Spinner}, ui.render {component=ToolResult, props has {tool=Bash}}, ui.render {component=ToolGroup}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear|resume|fork}, command.run {command=court}, tool.describe {tool=Bash}, turn.complete, prompt.submit, tool.check {tool=Bash}, ui.render {component=Pane, requestId=trial-run-court}, ui.render {component=Pane, requestId=trial-run-docket}, ui.render {component=AbovePrompt}, ui.render {component=Spinner}, ui.render {component=ToolResult, props has {tool=Bash}}, ui.render {component=ToolGroup}</code></dd>
     <dt>API calls</dt><dd><code>$.audio.play, $.audio.speak, $.clock.after, $.clock.sleep, $.command.register, $.fs.list, $.fs.stat, $.model.complete, $.process.run, $.session.messages, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.log, $.ui.open, $.ui.resolve</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/clients/deliberation.ts, hooks/clients/entrance.ts, hooks/clients/gavel.ts, hooks/clients/scales.ts, hooks/clients/typed.ts</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

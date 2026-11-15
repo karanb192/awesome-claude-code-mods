@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, every tool call, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=intiface}, command.run {command=intiface-connect}, command.run {command=intiface-disconnect}, command.run {command=intiface-intensity}, turn.start, turn.complete, turn.step, agent.spawn, tool.call, tool.check, classic.PermissionRequest, ui.render {component=ToolProgress}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=intiface}, ui.render {component=Pane, requestId=intiface}, command.run {command=intiface-connect}, command.run {command=intiface-disconnect}, command.run {command=intiface-intensity}, turn.start, turn.complete, turn.step, agent.spawn, tool.call, tool.check, classic.PermissionRequest, ui.render {component=ToolProgress}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.http.fetch, $.process.run, $.session.id, $.state.get, $.state.set, $.ui.close, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

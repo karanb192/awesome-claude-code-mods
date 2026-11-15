@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/OrihuelaConde/cozy-clawd">OrihuelaConde/cozy-clawd</a></p>
 <p class="lede">An unofficial fan mod: a cozy pixel-art band above the prompt where Clawd acts out what Claude is doing, beside a scene of session meters</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">cozy-clawd reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 12</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads env vars, reads settings, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">cozy-clawd reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 14</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads env vars, reads settings, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads env vars, reads settings, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, classic hooks, compaction</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=cozy-clawd}, command.run {command=cozy-clawd-scene}, config.set {key=language}, config.set {key=theme}, turn.step, tool.call, classic.PermissionRequest, telemetry.log {to=collector}, classic.Elicitation, classic.ElicitationResult, classic.SessionStart, session.compact, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, ui.focus {requestId=clawd}, command.run {command=cozy-clawd}, command.run {command=cozy-clawd-scene}, config.set {key=language}, config.set {key=theme}, turn.step, tool.call, classic.PermissionRequest, telemetry.log {to=collector}, classic.Elicitation, classic.ElicitationResult, classic.SessionStart, session.compact, turn.complete, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=clawd}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.command.run, $.config.list, $.env.get, $.session.surfaces, $.session.usage, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.blit, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

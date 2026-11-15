@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/hex/claude-sessions">hex/claude-sessions</a></p>
 <p class="lede">Restyles the chat: your messages and Claude's replies, and nothing of the work between them. Off by default; the band's filter chat key or /filter-chat turns it on for a session.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">cs-filter-chat reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 9</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">cs-filter-chat reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 9</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, reads env vars, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=filter-chat}, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}, ui.render {component=ToolUse}, ui.render {component=ToolGroup}, ui.render {component=ToolResult}, ui.render {component=ToolProgress}, ui.render {component=TurnDuration}, ui.render {component=CommandOutput}, ui.render {component=SessionMode}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=filter-chat}, ui.press {plugin=cs, element=cs-filter-chat}, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}, ui.render {component=ToolUse}, ui.render {component=ToolGroup}, ui.render {component=ToolResult}, ui.render {component=ToolProgress}, ui.render {component=TurnDuration}, ui.render {component=CommandOutput}, ui.render {component=SessionMode}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.env.get, $.fs.exists, $.fs.read, $.process.run, $.session.cwd, $.ui.invalidate, $.ui.log, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

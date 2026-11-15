@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.measure, command.run {command=keystone-handoff}, classic.SessionStart, ui.render {component=AssistantMessage}, session.start, turn.start, command.run {command=keystone-status}, prompt.submit, tool.call, turn.complete, prompt.suggest {origin has {kind=suggestion}}</code></dd>
+    <dt>Hooks</dt><dd><code>session.measure, command.run {command=keystone-handoff}, classic.SessionStart, ui.render {component=AbovePrompt}, ui.render {component=AssistantMessage}, session.start, turn.start, command.run {command=keystone-status}, prompt.submit, tool.call, turn.complete, prompt.suggest {origin has {kind=suggestion}}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.now, $.command.register, $.command.run, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.prompt.fill, $.prompt.read, $.prompt.submit, $.prompt.suggest, $.session.cwd, $.session.id, $.session.usage, $.settings.read, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.set, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

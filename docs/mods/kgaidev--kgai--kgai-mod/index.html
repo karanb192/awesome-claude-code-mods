@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, /&quot;^(Edit|Write|MultiEdit|NotebookEdit)$&quot;/ calls, Bash calls, Skill calls, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>ui.render {component=ToolUse}, ui.render {component=ToolResult}, turn.start, prompt.submit, tool.call {tool=/&quot;^(Edit|Write|MultiEdit|NotebookEdit)$&quot;/}, tool.call {tool=Bash}, tool.call {tool=Skill}, classic.Stop, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>ui.render {component=ToolUse}, ui.render {component=ToolResult}, turn.start, prompt.submit, tool.call {tool=/&quot;^(Edit|Write|MultiEdit|NotebookEdit)$&quot;/}, tool.call {tool=Bash}, tool.call {tool=Skill}, classic.Stop, turn.complete, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.env.get, $.fs.stat, $.model.fork, $.process.run, $.session.surfaces, $.state.get, $.state.set, $.ui.log, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/PickleBoxer/burn">PickleBoxer/burn</a></p>
 <p class="lede">Rate limits, usage credits and spend above the prompt, with a /burn pane for the last 7 days</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">burn reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 20</li><li>Access from classified calls: L3, network: network, drives Claude, reads the transcript, reads mod state, requests an Anthropic credential handle, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">burn reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 20</li><li>Access from classified calls: L3, network: network, drives Claude, reads the transcript, reads mod state, requests an Anthropic credential handle, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, drives Claude, reads the transcript, reads mod state, requests an Anthropic credential handle, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, Skill calls, Read calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.measure, agent.spawn, command.run, tool.call {tool=Skill}, tool.call {tool=Read}, command.run {command=burn}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.measure, agent.spawn, command.run, tool.call {tool=Skill}, tool.call {tool=Read}, command.run {command=burn}, ui.render {component=Pane, requestId=burn}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.command.list, $.command.register, $.http.fetch, $.session.authorize, $.session.compact, $.session.messages, $.session.model, $.session.usage, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

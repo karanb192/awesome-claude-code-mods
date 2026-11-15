@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Edit|Write|NotebookEdit|Bash calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=diffsplit}, tool.call {tool=Edit|Write|NotebookEdit|Bash}, ui.render {component=ToolResult}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=diffsplit}, ui.render {component=Pane, requestId=diffsplit}, tool.call {tool=Edit|Write|NotebookEdit|Bash}, ui.render {component=ToolResult}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.process.run, $.state.get, $.state.set, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.scroll</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

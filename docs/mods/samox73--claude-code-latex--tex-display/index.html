@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>compaction, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=tex-calibrate}, config.set {key=theme}, session.compact, session.end, prompt.submit, ui.render {component=AssistantMessage}, command.run {command=btw}, ui.render {component=CommandOutput, props has {command=btw}}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=tex-calibrate}, ui.render {component=Pane, requestId=tex-calibrate}, config.set {key=theme}, session.compact, session.end, prompt.submit, ui.render {component=AssistantMessage}, command.run {command=btw}, ui.render {component=CommandOutput, props has {command=btw}}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.config.list, $.config.set, $.env.get, $.model.fork, $.session.surfaces, $.state.get, $.state.set, $.ui.close, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

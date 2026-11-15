@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, ui.message, command.run {command=ambient}, ui.close, tool.call, turn.start, turn.complete, ui.render {component=PromptHint}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, ui.message, command.run {command=ambient}, ui.close, tool.call, turn.start, turn.complete, ui.render {component=PromptHint}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=ambient}</code></dd>
     <dt>API calls</dt><dd><code>$.audio.play, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.http.fetch, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.set, $.ui.close, $.ui.open, $.ui.resolve</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/band.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

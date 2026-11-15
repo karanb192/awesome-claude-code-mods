@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/timoncool/slapbox">timoncool/slapbox</a></p>
 <p class="lede">Spank Claude when it messes up: a cartoon butt above the prompt, eight slappers, nine butts, marks, combos and sounds; your next message tells Claude how it was spanked. English and Russian.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">slapbox reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 10</li><li>Access from classified calls: L2, writes or runs: runs processes, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">slapbox reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 10</li><li>Access from classified calls: L2, writes or runs: runs processes, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install slapbox --marketplace timoncool/slapbox</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads env vars, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.start, prompt.submit, ui.message, command.run {command=slap}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.start, prompt.submit, ui.message, command.run {command=slap}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.env.get, $.process.run, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.log, $.ui.resolve</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/clicker.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/timoncool/slapbox/tree/c3fbf7ff054d58db83923b9ab556a379185e2db4"><code>c3fbf7ff054d</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/timoncool/slapbox/blob/c3fbf7ff054d58db83923b9ab556a379185e2db4/.claude-plugin/marketplace.json">slapbox</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/timoncool/slapbox/tree/0b3db511bbc70402662fee017d8a6032a45c3253"><code>0b3db511bbc7</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/timoncool/slapbox/blob/0b3db511bbc70402662fee017d8a6032a45c3253/.claude-plugin/marketplace.json">slapbox</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/timoncool--slapbox--slapbox-reach.svg" alt="Reach badge for slapbox"> <img src="/badges/timoncool--slapbox--slapbox-validates.svg" alt="Validation badge for slapbox"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/timoncool--slapbox--slapbox-reach.svg)](https://mods.aidojo.si/mods/timoncool--slapbox--slapbox/)

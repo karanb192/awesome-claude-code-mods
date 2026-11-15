@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/ucsandman/Agnostic-AI">ucsandman/Agnostic-AI</a></p>
 <p class="lede">PRODUCTION GUARD: ambient project/environment context + a transport-independent policy core (DashClaw evidence classifier + offlocal policy engine) enforced natively on tool.call and tool.check. Blocks, asks, or contains before the command runs. /prodguard</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">prodguard reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: writes files, reads files, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">prodguard reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: writes files, reads files, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">writes files, reads files, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Bash|Write|Edit|NotebookEdit calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=Bash|Write|Edit|NotebookEdit}, tool.check {tool=Bash|Write|Edit|NotebookEdit}, command.run {command=prodguard}, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=Bash|Write|Edit|NotebookEdit}, tool.check {tool=Bash|Write|Edit|NotebookEdit}, command.run {command=prodguard}, ui.render {component=AbovePrompt, surface=terminal}, turn.complete</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.fs.exists, $.fs.read, $.fs.write, $.session.id, $.session.repo, $.ui.ask, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

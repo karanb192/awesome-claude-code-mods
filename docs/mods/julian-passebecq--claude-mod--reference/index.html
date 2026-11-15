@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/julian-passebecq/claude-mod">julian-passebecq/claude-mod</a></p>
 <p class="lede">Référence : un seul panneau en lecture seule, onglets Config (toute la config de Claude Code, secrets masqués), Guide (mode d'emploi des mods), Scénarios (modèle et effort par rôle, « Appliquer ce scénario » note le choix dans ~/.claude/scenarios/applied.json et montre l'écart, sans jamais toucher settings ni agents), Santé (mods chargés, erreurs, CPU), CI (routage et Diagramme avec Gantt et ETA), À essayer (fonctions et idées des recherches, état jamais/en test/adopté/écarté, test, coût, risque, ce qu'on doit tester), R&amp;D (index des recherches, Exporter vers eta), Repos (état, PR, Mettre à jour sur clic) et Exporter pour audit (/audit-export, zip masqué). Les anciennes commandes /config-claude, /control, /mods-guide, /scenarios, /sante, /ci restent quand leur mod n'est pas chargé. /reference</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">reference reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, writes the clipboard, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">reference reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, writes the clipboard, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, writes the clipboard, reads files, reads env vars, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=reference}, command.run {command=?}, command.run {command=audit-export}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=reference}, command.run {command=?}, command.run {command=audit-export}, ui.render {component=Pane, requestId=reference}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.list, $.command.register, $.env.get, $.fs.exists, $.fs.read, $.fs.write, $.process.run, $.session.id, $.session.version, $.ui.close, $.ui.copy, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

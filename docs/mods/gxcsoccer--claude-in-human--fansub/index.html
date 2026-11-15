@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, compaction, classic hooks, /&quot;^mcp__fansub__subtitles$&quot;/ calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, session.compact, session.end, classic.MessageDisplay, turn.step, ui.render {component=AssistantMessage}, tool.call {tool=/&quot;^mcp__fansub__subtitles$&quot;/}, ui.close {id=fansub-cinema}, command.run {command=fansub}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.submit, session.compact, session.end, classic.MessageDisplay, turn.step, ui.render {component=AssistantMessage}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=fansub-cinema}, tool.call {tool=/&quot;^mcp__fansub__subtitles$&quot;/}, ui.render {component=Pane, requestId=fansub-menu}, ui.close {id=fansub-cinema}, command.run {command=fansub}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.command.register, $.env.get, $.model.complete, $.process.run, $.settings.read, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.register, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

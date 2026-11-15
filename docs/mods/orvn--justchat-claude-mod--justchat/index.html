@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call, compaction</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=justchat}, prompt.submit, tool.call, turn.complete, session.compact, ui.render {component=SessionMode}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=justchat}, prompt.submit, tool.call, turn.complete, session.compact, ui.render {component=AbovePrompt}, ui.render {component=SessionMode}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.prompt.submit, $.session.append, $.session.id, $.session.messages, $.state.get, $.state.set, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

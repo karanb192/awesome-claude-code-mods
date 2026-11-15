@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/archid21/whatsnext">archid21/whatsnext</a></p>
 <p class="lede">One plan, one next step, for every coding agent. Check items off with a command that must pass, resume a session from a short note, and hand off with one prompt. Plain files in your repository.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">whatsnext reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 21</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, writes the clipboard, reads files, reads env vars, reads settings, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">whatsnext reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 21</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, writes the clipboard, reads files, reads env vars, reads settings, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install whatsnext --marketplace archid21/whatsnext</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, drives Claude, writes the clipboard, reads files, reads env vars, reads settings, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, Bash calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=whatsnext-welcome}, command.run {command=whatsnext-tips}, command.run {command=compact}, prompt.submit, turn.complete, tool.call {tool=Bash}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=whatsnext-welcome}, command.run {command=whatsnext-tips}, command.run {command=compact}, prompt.submit, turn.complete, tool.call {tool=Bash}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.command.run, $.env.get, $.fs.list, $.fs.read, $.fs.stat, $.fs.write, $.process.run, $.prompt.submit, $.session.cwd, $.session.id, $.session.usage, $.settings.read, $.store.get, $.store.set, $.ui.copy, $.ui.invalidate, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

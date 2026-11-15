@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, config.set {key=theme}, command.run {command=ricky}, turn.start, tool.call, turn.complete, ui.close, ui.render {component=Spinner}, ui.render {component=TurnDuration}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, config.set {key=theme}, command.run {command=ricky}, turn.start, tool.call, turn.complete, ui.close, ui.render {component=Pane, requestId=ricky}, ui.render {component=AbovePrompt}, ui.render {component=Spinner}, ui.render {component=TurnDuration}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.config.list, $.process.run, $.session.cwd, $.state.get, $.state.set, $.ui.blit, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, classic hooks, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=clawdman}, ui.message, tool.call, classic.PermissionRequest, classic.Notification, classic.PermissionDenied, prompt.submit, turn.complete, ui.render {component=PromptHint}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=clawdman}, ui.message, tool.call, classic.PermissionRequest, classic.Notification, classic.PermissionDenied, prompt.submit, turn.complete, ui.render {component=PromptHint}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.command.register, $.env.get, $.process.run, $.session.usage, $.store.get, $.store.set, $.ui.blit, $.ui.invalidate, $.ui.resolve</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/pointer.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>
