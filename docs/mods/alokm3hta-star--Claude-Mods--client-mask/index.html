@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, the system prompt, every skill, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, prompt.submit, session.append, prompt.compose, prompt.context, prompt.attachment, skill.prompt, tool.describe, session.send, tool.call, turn.step, command.run {command=client-mask-view}, command.run {command=client-mask-edit}, turn.complete, ui.render {component=AssistantMessage}, ui.render {component=UserMessage}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, prompt.submit, session.append, prompt.compose, prompt.context, prompt.attachment, skill.prompt, tool.describe, session.send, tool.call, turn.step, command.run {command=client-mask-view}, command.run {command=client-mask-edit}, turn.complete, ui.render {component=AssistantMessage}, ui.render {component=UserMessage}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=client-mask-view}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.fs.write, $.process.run, $.session.id, $.session.messages, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

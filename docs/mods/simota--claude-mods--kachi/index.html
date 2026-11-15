@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Bash calls, Edit|Write|NotebookEdit calls, every prompt</dd>
-    <dt>Hooks</dt><dd><code>tool.call {tool=Bash}, tool.call {tool=Edit|Write|NotebookEdit}, prompt.submit, turn.complete, ui.render {component=ToolResult, props has {tool=Bash}}</code></dd>
+    <dt>Hooks</dt><dd><code>tool.call {tool=Bash}, tool.call {tool=Edit|Write|NotebookEdit}, prompt.submit, turn.complete, ui.render {component=AbovePrompt}, ui.render {component=ToolResult, props has {tool=Bash}}</code></dd>
     <dt>API calls</dt><dd><code>$.audio.play, $.clock.after, $.clock.every, $.clock.now, $.env.get, $.fs.read, $.session.cwd, $.settings.read, $.state.get, $.state.set, $.ui.blit, $.ui.log, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

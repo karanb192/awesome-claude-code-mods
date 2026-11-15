@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, Bash calls, Edit|Write calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear|resume|fork}, command.run {command=attest}, tool.call {tool=Bash}, tool.call {tool=Edit|Write}, turn.start, turn.complete, ui.render {component=Spinner}, ui.render {component=ToolResult}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear|resume|fork}, command.run {command=attest}, tool.call {tool=Bash}, tool.call {tool=Edit|Write}, turn.start, turn.complete, ui.render {component=Spinner}, ui.render {component=ToolResult}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=attest}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.fs.exists, $.fs.read, $.fs.write, $.process.run, $.session.root, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.ask, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

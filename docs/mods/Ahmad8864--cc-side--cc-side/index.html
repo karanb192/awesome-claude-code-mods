@@ -14,8 +14,8 @@
 <h1>cc-side</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/Ahmad8864/cc-side">Ahmad8864/cc-side</a></p>
 <p class="lede">A separate agent conversation in Claude Code's right-hand pane, forked from the current context.</p>
-
-<section class="summary" aria-label="Scan summary"><p class="summary-line">cc-side reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 27</li><li>Access from classified calls: L3, network: network, runs processes, writes files, writes the prompt box, writes the clipboard, reads env vars, reads settings, reads the transcript, reads the prompt box, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<p class="compatibility">review UI rewrite</p>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">cc-side reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 27</li><li>Access from classified calls: L3, network: network, runs processes, writes files, writes the prompt box, writes the clipboard, reads env vars, reads settings, reads the transcript, reads the prompt box, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, writes files, writes the prompt box, writes the clipboard, reads env vars, reads settings, reads the transcript, reads the prompt box, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=side}, ui.message {component=Pane}, turn.complete, classic.Stop, ui.scroll {component=Pane}, ui.close {id=side}, session.end</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=side}, ui.render {component=Pane}, ui.message {component=Pane}, turn.complete, classic.Stop, ui.scroll {component=Pane}, ui.close {id=side}, session.end</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.env.get, $.fs.write, $.http.fetch, $.process.run, $.prompt.fill, $.prompt.read, $.session.cwd, $.session.id, $.session.messages, $.session.model, $.session.version, $.settings.read, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.list, $.ui.close, $.ui.copy, $.ui.focus, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.scroll</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/composer.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/Ahmad8864/cc-side/tree/3684deb66be62afe15f1d007eefe7dd5921855fc"><code>3684deb66be6</code></a></dd>
-    </dl>
+    <dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/Ahmad8864/cc-side/blob/3684deb66be62afe15f1d007eefe7dd5921855fc/hooks/register.tsx#L56">hooks/register.tsx:56</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/Ahmad8864--cc-side--cc-side-reach.svg" alt="Reach badge for cc-side"> <img src="/badges/Ahmad8864--cc-side--cc-side-validates.svg" alt="Validation badge for cc-side"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/Ahmad8864--cc-side--cc-side-reach.svg)](https://mods.aidojo.si/mods/Ahmad8864--cc-side--cc-side/)

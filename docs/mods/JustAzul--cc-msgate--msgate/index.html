@@ -15,17 +15,17 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/JustAzul/cc-msgate">JustAzul/cc-msgate</a></p>
 <p class="lede">msgate: the engine that runs agent CLIs (Codex today) for Claude Code, hooks, scripts and other plugins, with resumable conversations, background jobs and append-only telemetry.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">msgate reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 17</li><li>API methods referenced: 7</li><li>Access from classified calls: L2, writes or runs: drives Claude, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">msgate reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 17</li><li>API methods referenced: 26</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads env vars, reads the transcript, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
-<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, persists state, draws</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, reads env vars, reads the transcript, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
 <p class="actions"><a class="source" href="https://github.com/JustAzul/cc-msgate/tree/main/plugin">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#JustAzul--cc-msgate--msgate">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, compaction, mcp__msgate__run calls, mcp__msgate__jobs calls, every tool call, mcp__msgate__progress calls</dd>
-    <dt>Hooks</dt><dd><code>engine.create, msgate.complete, msgate.backType, msgate.version, msgate.run, msgate.jobs, msgate.flaggedRuns, msgate.models, agent.spawn, session.start, session.compact, tool.call {tool=mcp__msgate__run}, tool.call {tool=mcp__msgate__jobs}, command.run {command=msgate-jobs}, turn.start, turn.complete, turn.step, tool.call, tool.call {tool=mcp__msgate__progress}, ui.render {component=Spinner}</code></dd>
-    <dt>API calls</dt><dd><code>$.store.set, $.tool.register, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
+    <dt>Hooks</dt><dd><code>engine.create, msgate.complete, msgate.backType, msgate.version, msgate.run, msgate.jobs, msgate.flaggedRuns, msgate.models, agent.spawn, session.start, session.compact, tool.call {tool=mcp__msgate__run}, tool.call {tool=mcp__msgate__jobs}, command.run {command=msgate-jobs}, turn.start, turn.complete, turn.step, tool.call, tool.call {tool=mcp__msgate__progress}, ui.render {component=ToolUse|ToolResult}, ui.render {component=Spinner}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.env.get, $.model.complete, $.process.run, $.process.spawn, $.prompt.submit, $.session.id, $.session.messages, $.session.surfaces, $.session.usage, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.tool.register, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 

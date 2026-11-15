@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/avestura/whiteboard-defense">avestura/whiteboard-defense</a></p>
 <p class="lede">After substantial work, tells you what you should know to defend it at a whiteboard: the decisions, who made each one, and where the agent relied on its defaults.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">whiteboard-defense reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: changes config, drives Claude, writes the clipboard, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">whiteboard-defense reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: changes config, drives Claude, writes the clipboard, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install whiteboard-defense --marketplace avestura/whiteboard-defense</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">changes config, drives Claude, writes the clipboard, reads files, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__whiteboard-defense__report calls, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=whiteboard-ui}, tool.call {tool=mcp__whiteboard-defense__report}, tool.call, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=whiteboard-ui}, tool.call {tool=mcp__whiteboard-defense__report}, tool.call, turn.complete, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=whiteboard}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.config.set, $.fs.read, $.prompt.submit, $.state.get, $.state.set, $.tool.register, $.ui.copy, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

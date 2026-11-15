@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>compaction, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, session.compact, turn.start, turn.complete, tool.call, command.run {command=engram-memories}, ui.render {component=SessionMode}, ui.close</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, session.compact, turn.start, turn.complete, tool.call, command.run {command=engram-memories}, ui.render {component=SessionMode}, ui.close, ui.render {component=Pane, requestId=engram-memories}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.env.get, $.fs.exists, $.fs.read, $.fs.stat, $.session.cwd, $.session.usage, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.close, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

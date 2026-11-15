@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>/&quot;^mcp__standby__&quot;/ calls, classic hooks, AskUserQuestion calls, every tool call, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=standby}, tool.call {tool=/&quot;^mcp__standby__&quot;/}, classic.PermissionRequest, tool.call {tool=AskUserQuestion}, turn.start, turn.complete, tool.call, prompt.submit, ui.render {component=UserMessage}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=standby}, tool.call {tool=/&quot;^mcp__standby__&quot;/}, classic.PermissionRequest, tool.call {tool=AskUserQuestion}, turn.start, turn.complete, tool.call, prompt.submit, ui.render {component=AbovePrompt}, ui.render {component=UserMessage}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.env.get, $.fs.read, $.http.fetch, $.process.run, $.process.spawn, $.prompt.submit, $.session.append, $.session.cwd, $.session.id, $.session.surfaces, $.tool.register, $.turn.abort, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

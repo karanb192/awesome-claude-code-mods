@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/LiarMTTT/TavernWeave">LiarMTTT/TavernWeave</a></p>
 <p class="lede">TavernWeaveX无限月读 2.4.0: 23 shared skills for rolecards, software work and bounded cloud tasks, with capability checks and resumable handoffs; in Claude Code it injects the Host Front Door, adds the tavernweave agent and a Soul mode switch above the prompt. Actual execution depends on host tools and permissions.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">tavernweave-agent-skills reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 1</li><li>API methods referenced: 4</li><li>Access from classified calls: L1, reads: writes the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">tavernweave-agent-skills reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 4</li><li>Access from classified calls: L1, reads: writes the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">writes the prompt box, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>prompt.submit</code></dd>
+    <dt>Hooks</dt><dd><code>prompt.submit, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.prompt.fill, $.state.get, $.state.set, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Write|Edit calls, Bash calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.start, tool.call {tool=Write|Edit}, tool.call {tool=Bash}, turn.complete, command.run {command=receipts}, ui.render {component=Spinner}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.start, tool.call {tool=Write|Edit}, tool.call {tool=Bash}, turn.complete, command.run {command=receipts}, ui.render {component=Spinner}, ui.render {component=Pane, requestId=receipts}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.process.run, $.state.get, $.state.set, $.ui.close, $.ui.copy, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

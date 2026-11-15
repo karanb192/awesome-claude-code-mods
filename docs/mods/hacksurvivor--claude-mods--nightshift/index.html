@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call, mcp__nightshift__codex calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, turn.start, turn.step, turn.complete, ui.render {component=AssistantMessage}, ui.render {component=UserMessage}, ui.render {component=ToolResult}, tool.describe, tool.call, tool.call {tool=mcp__nightshift__codex}, ui.render {component=Spinner}, ui.render {component=SessionMode}, command.run {command=codex}, command.run {command=nightshift}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.submit, turn.start, turn.step, turn.complete, ui.render {component=AssistantMessage}, ui.render {component=UserMessage}, ui.render {component=ToolResult}, tool.describe, tool.call, tool.call {tool=mcp__nightshift__codex}, ui.render {component=Spinner}, ui.render {component=AbovePrompt}, ui.render {component=SessionMode}, command.run {command=codex}, command.run {command=nightshift}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.http.fetch, $.mcp.call, $.process.run, $.process.spawn, $.prompt.submit, $.session.append, $.session.cwd, $.session.messages, $.session.usage, $.store.get, $.store.set, $.tool.register, $.ui.invalidate, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>engine.create, session.start, session.end, classic.SessionStart {source=clear|resume|fork}, command.run {command=tts}, prompt.submit, prompt.compose, turn.start, turn.complete, ui.render {component=Placed}, tool.call, classic.PermissionRequest, turn.step</code></dd>
+    <dt>Hooks</dt><dd><code>engine.create, session.start, session.end, classic.SessionStart {source=clear|resume|fork}, command.run {command=tts}, ui.render {component=Pane, requestId=tts-picker}, prompt.submit, prompt.compose, turn.start, turn.complete, ui.render {component=Placed}, tool.call, classic.PermissionRequest, turn.step</code></dd>
     <dt>API calls</dt><dd><code>$.audio.play, $.clock.after, $.clock.now, $.command.register, $.config.set, $.env.get, $.http.fetch, $.process.run, $.process.spawn, $.session.cwd, $.session.messages, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.close, $.ui.log, $.ui.open, $.ui.place, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

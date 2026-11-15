@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__doc-editor__show calls, Write|Edit calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=doc|doc-editor}, prompt.autocomplete, tool.call {tool=mcp__doc-editor__show}, tool.call {tool=Write|Edit}, turn.start, turn.complete, ui.close {id=doc}, ui.scroll {requestId=doc}, ui.render {component=ToolUse}, ui.render {component=ToolGroup}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=doc|doc-editor}, prompt.autocomplete, tool.call {tool=mcp__doc-editor__show}, tool.call {tool=Write|Edit}, turn.start, turn.complete, ui.close {id=doc}, ui.scroll {requestId=doc}, ui.render {component=Pane}, ui.render {component=ToolUse}, ui.render {component=ToolGroup}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.fs.list, $.fs.read, $.fs.stat, $.fs.write, $.process.run, $.prompt.submit, $.state.get, $.state.set, $.tool.register, $.ui.ask, $.ui.close, $.ui.focus, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

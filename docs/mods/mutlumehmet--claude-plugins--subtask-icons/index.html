@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, command.run {command=subtask}, command.run {command=st}, ui.render {component=AssistantMessage}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, command.run {command=subtask}, command.run {command=st}, ui.render {component=Pane, requestId=st-picker}, ui.render {component=AbovePrompt}, ui.render {component=AssistantMessage}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.prompt.fill, $.prompt.read, $.state.get, $.state.set, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

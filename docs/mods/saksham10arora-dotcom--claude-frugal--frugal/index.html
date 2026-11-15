@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/saksham10arora-dotcom/claude-frugal">saksham10arora-dotcom/claude-frugal</a></p>
 <p class="lede">Cost-free mode for Claude Code. Helper subagents (Explore and friends) run on Haiku, and a summarize_free tool lets Claude hand big files and logs to a free Gemini model instead of reading them whole. /frugal on, off, status. Needs function hooks (early access).</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">frugal reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 9</li><li>Access from classified calls: L3, network: network, drives Claude, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">frugal reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 9</li><li>Access from classified calls: L3, network: network, drives Claude, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install frugal --marketplace saksham10arora-dotcom/claude-frugal</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, drives Claude, reads files, reads env vars, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, mcp__frugal__summarize_free calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=frugal}, agent.spawn, tool.call {tool=mcp__frugal__summarize_free}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=frugal}, agent.spawn, tool.call {tool=mcp__frugal__summarize_free}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.env.get, $.fs.read, $.http.fetch, $.store.get, $.store.set, $.tool.register, $.ui.invalidate, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>the system prompt, every prompt, compaction, AskUserQuestion calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=handoffs}, config.set {key=theme}, prompt.compose, prompt.context, session.append {door=response}, turn.complete, prompt.submit, session.compact, tool.call {tool=AskUserQuestion}, ui.render {component=AssistantMessage}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=handoffs}, config.set {key=theme}, prompt.compose, prompt.context, session.append {door=response}, turn.complete, prompt.submit, session.compact, tool.call {tool=AskUserQuestion}, ui.render {component=AssistantMessage}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=handoffs}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.config.list, $.env.get, $.fs.exists, $.fs.read, $.fs.stat, $.process.run, $.prompt.submit, $.session.id, $.session.root, $.session.version, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.copy, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

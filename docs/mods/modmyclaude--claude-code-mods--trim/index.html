@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>config.set {key=&quot;trim.enabled&quot;}, session.start, tool.call, ui.render {component=ToolResult}, command.run {command=trim}</code></dd>
+    <dt>Hooks</dt><dd><code>config.set {key=&quot;trim.enabled&quot;}, session.start, tool.call, ui.render {component=ToolResult}, ui.render {component=Pane, requestId=trim}, ui.render {component=Pane, requestId=trim-output}, command.run {command=trim}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.state.get, $.state.set, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

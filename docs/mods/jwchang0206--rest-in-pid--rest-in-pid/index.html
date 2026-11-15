@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=rest-in-pid}, ui.render {component=CommandOutput, props has {command=rest-in-pid}}, ui.message</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=rest-in-pid}, ui.render {component=Pane, requestId=rest-in-pid}, ui.render {component=CommandOutput, props has {command=rest-in-pid}}, ui.message, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.process.run, $.settings.read, $.state.get, $.state.set, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/press.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

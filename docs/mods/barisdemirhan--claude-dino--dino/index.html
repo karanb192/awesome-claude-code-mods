@@ -24,7 +24,7 @@
 <dl>
     <dt>Anthropic directory</dt><dd>Listed as <code>dino@anthropic-plugin-directory</code></dd>
     <dt>Observed events</dt><dd>every tool call, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=dino}, ui.message, ui.close, tool.call, turn.complete, classic.Notification, ui.render {component=PromptHint}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=dino}, ui.message, ui.close, tool.call, turn.complete, classic.Notification, ui.render {component=PromptHint}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=dino}</code></dd>
     <dt>API calls</dt><dd><code>$.audio.play, $.clock.every, $.command.register, $.http.fetch, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.close, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/dino.tsx, hooks/mini.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

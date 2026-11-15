@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, /&quot;^mcp__brewmod-placeholders__&quot;/ calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.complete, prompt.edit, prompt.change, ui.render {component=PromptHint}, prompt.autocomplete {token=/&quot;^[^\\w\\s]{2}&quot;/}, prompt.submit, command.run {command=placeholders}, tool.call {tool=/&quot;^mcp__brewmod-placeholders__&quot;/}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.complete, prompt.edit, prompt.change, ui.render {component=PromptHint}, prompt.autocomplete {token=/&quot;^[^\\w\\s]{2}&quot;/}, prompt.submit, ui.render {component=AbovePrompt}, command.run {command=placeholders}, tool.call {tool=/&quot;^mcp__brewmod-placeholders__&quot;/}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.fs.write, $.process.run, $.prompt.fill, $.prompt.read, $.prompt.submit, $.session.id, $.session.root, $.state.get, $.state.set, $.tool.register, $.ui.invalidate, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

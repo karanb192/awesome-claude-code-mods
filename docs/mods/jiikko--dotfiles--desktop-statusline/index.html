@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/jiikko/dotfiles">jiikko/dotfiles</a></p>
 <p class="lede">Claude desktop の Code タブに、CLI と同じステータスバー (statusline-command.sh の出力) を色つきで出す (issue 625)</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">desktop-statusline reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: runs processes, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">desktop-statusline reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: runs processes, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,13 +24,13 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=statusline-refresh}, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=statusline-refresh}, turn.complete, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.env.get, $.process.run, $.session.cwd, $.session.id, $.session.model, $.session.usage, $.state.get, $.state.set, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/jiikko/dotfiles/tree/cd7616d4ab9a41be087cdf60d85545d55adab119"><code>cd7616d4ab9a</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/jiikko/dotfiles/tree/a6af6ae9aedcf150b93e30034b218f48140e9c13"><code>a6af6ae9aedc</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from jiikko/dotfiles</h2><ul><li><a href="/mods/jiikko--dotfiles--bg-watchdog/">bg-watchdog</a><span>背景タスク (run_in_background の Bash / Agent) の完了を待ったまま一定時間動きがないセッションを、toast・status line・tmux のベルと通知で知らせる。設定で agen…</span></li><li><a href="/mods/jiikko--dotfiles--issue-band/">issue-band</a><span>期限切れ・期限が近い human と未決着の retro があるときだけ、プロンプトの上の帯に出す (issue 621)</span></li><li><a href="/mods/jiikko--dotfiles--peer-inbox/">peer-inbox</a><span>他セッションとの SendMessage の送受信を、プロンプト直上の帯・toast・status line に残す (transcript が流れても消えない写し)</span></li><li><a href="/mods/jiikko--dotfiles--ratelimit-warn/">ratelimit-warn</a><span>Claude の 5h 枠が閾値を超えていたらプロンプトに 1 行注入し、status line にも出す (settings の hook ratelimit-warn.sh の mod 版。issue 658)</span></li><li><a href="/mods/jiikko--dotfiles--tool-elapsed/">tool-elapsed</a><span>長く走っている tool 呼び出し (codex exec / swift test / make test …) の経過時間をプロンプトの上の帯に出し、5 分ごとに toast で知らせる</span></li></ul></section>

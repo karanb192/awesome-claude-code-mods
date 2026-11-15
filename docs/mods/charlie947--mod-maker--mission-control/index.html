@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, mcp__mission-control__add_ask calls, mcp__mission-control__set_plan calls, mcp__mission-control__step_done calls, mcp__mission-control__tick_ask calls, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=mission-rows}, command.run {command=mission}, turn.start, prompt.submit, tool.call {tool=mcp__mission-control__add_ask}, tool.call {tool=mcp__mission-control__set_plan}, tool.call {tool=mcp__mission-control__step_done}, tool.call {tool=mcp__mission-control__tick_ask}, tool.check, tool.call, turn.complete, ui.render {component=ToolUse}, ui.render {component=ToolResult}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=mission-rows}, command.run {command=mission}, turn.start, prompt.submit, tool.call {tool=mcp__mission-control__add_ask}, tool.call {tool=mcp__mission-control__set_plan}, tool.call {tool=mcp__mission-control__step_done}, tool.call {tool=mcp__mission-control__tick_ask}, tool.check, tool.call, turn.complete, ui.render {component=AbovePrompt}, ui.render {component=ToolUse}, ui.render {component=ToolResult}</code></dd>
     <dt>API calls</dt><dd><code>$.audio.play, $.clock.every, $.clock.now, $.command.register, $.state.get, $.state.set, $.tool.register, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

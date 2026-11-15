@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/darrell-tw/darrelltw-mods">darrell-tw/darrelltw-mods</a></p>
 <p class="lede">Watchlist band above the Claude Code prompt: Taiwan hours show the Taiwan list (紅漲綠跌), US hours show the US list (綠漲紅跌), in a broker-style table with a Solari split-flap footer, plus a 損益 mode (P&amp;L view) for your holdings. 20 symbols a market, 10 on screen at a time. Live prices from Yahoo by default, no key and no account; 永豐 Shioaji (macOS/Linux) and 群益 Capital (Windows) are opt-in real-time routes the band runs itself, tried in your own preference order (twSources) - keep that order and any broker paths in a user-level ~/.claude/stock-band.json so a shared project config stays neutral. Needs function hooks (early access) and an interactive terminal. Zero model tokens.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">tw-stock-mod reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 11</li><li>Access from classified calls: L3, network: network, runs processes, writes files, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">tw-stock-mod reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 11</li><li>Access from classified calls: L3, network: network, runs processes, writes files, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install tw-stock-mod --marketplace darrell-tw/darrelltw-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, writes files, reads files, reads env vars, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, ui.message</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, ui.render {component=AbovePrompt}, ui.message</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.env.get, $.fs.read, $.fs.write, $.http.fetch, $.process.run, $.session.cwd, $.ui.invalidate, $.ui.log, $.ui.resolve</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/board.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

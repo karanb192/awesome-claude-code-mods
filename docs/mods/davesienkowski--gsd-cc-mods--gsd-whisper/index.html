@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__gsd-whisper__report calls, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.complete, ui.close {id=gsd-whisper}, tool.call {tool=mcp__gsd-whisper__report}, command.run {command=gsd-whisper}, classic.PreToolUse, classic.PostToolUse, classic.PostToolUseFailure, classic.Stop, classic.SubagentStop, classic.SessionStart, classic.UserPromptSubmit, ui.render {component=ToolUse}, ui.render {component=ToolGroup}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.complete, ui.close {id=gsd-whisper}, tool.call {tool=mcp__gsd-whisper__report}, command.run {command=gsd-whisper}, classic.PreToolUse, classic.PostToolUse, classic.PostToolUseFailure, classic.Stop, classic.SubagentStop, classic.SessionStart, classic.UserPromptSubmit, ui.render {component=ToolUse}, ui.render {component=ToolGroup}, ui.render {component=Pane, requestId=gsd-whisper}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.fs.exists, $.prompt.fill, $.session.cwd, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.register, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

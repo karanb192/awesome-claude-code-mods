@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.attach, turn.complete, command.run {command=clipboard}, command.run {command=keep}, ui.render {component=AssistantMessage}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.attach, turn.complete, command.run {command=clipboard}, command.run {command=keep}, ui.render {component=AssistantMessage}, ui.render {component=Pane, requestId=clipboard}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.fs.write, $.session.cwd, $.session.root, $.session.surfaces, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.copy, $.ui.open, $.ui.resolve, $.ui.selection, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

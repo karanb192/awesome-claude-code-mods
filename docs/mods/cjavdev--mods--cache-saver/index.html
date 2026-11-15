@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/cjavdev/mods">cjavdev/mods</a></p>
 <p class="lede">When an idle session's prompt cache is about to expire, summarizes it while the cache is still warm; when you come back, pick A (keep the full session, pay the cache write) or B (continue from the summary).</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">cache-saver reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 17</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the prompt box, reads the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">cache-saver reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 17</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the prompt box, reads the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, writes the prompt box, reads the prompt box, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, compaction, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, turn.step, classic.Stop, classic.PostModelSwitch, session.compact, session.end, prompt.submit</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, turn.step, classic.Stop, classic.PostModelSwitch, session.compact, session.end, prompt.submit, ui.render {component=Pane, requestId=cache-saver-summary}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.run, $.model.fork, $.process.run, $.prompt.fill, $.prompt.read, $.prompt.submit, $.state.get, $.state.set, $.ui.ask, $.ui.close, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

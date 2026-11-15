@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=dg-listen}, command.run {command=dg}, command.run {command=dg-voice}, audio.speak, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=ToolGroup}, ui.render {component=TurnDuration}, prompt.submit, turn.step, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=dg-listen}, command.run {command=dg}, command.run {command=dg-voice}, audio.speak, ui.render {component=AbovePrompt}, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=ToolGroup}, ui.render {component=TurnDuration}, ui.render {component=Pane, requestId=dg-mic}, prompt.submit, turn.step, turn.complete</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.process.run, $.process.spawn, $.prompt.fill, $.prompt.submit, $.session.cwd, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.close, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

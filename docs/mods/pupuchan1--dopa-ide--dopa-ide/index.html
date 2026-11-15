@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>prompt.submit, session.start, command.run {command=dopa-log}, command.run {command=dopa-sound}, command.run {command=dopa-overlay}, turn.start, tool.call, turn.complete, ui.render {component=Spinner}, ui.render {component=ToolUse}, ui.render {component=ToolGroup}, ui.render {component=PromptHint}, ui.render {component=AssistantMessage}, ui.render {component=UserMessage}, ui.render {component=SessionMode}, ui.render {component=TurnDuration}</code></dd>
+    <dt>Hooks</dt><dd><code>prompt.submit, session.start, command.run {command=dopa-log}, command.run {command=dopa-sound}, command.run {command=dopa-overlay}, turn.start, tool.call, turn.complete, ui.render {component=AbovePrompt}, ui.render {component=Spinner}, ui.render {component=ToolUse}, ui.render {component=ToolGroup}, ui.render {component=PromptHint}, ui.render {component=AssistantMessage}, ui.render {component=UserMessage}, ui.render {component=SessionMode}, ui.render {component=TurnDuration}, ui.render {component=Pane, requestId=dopa-fireworks}, ui.render {component=Pane, requestId=dopa-log}</code></dd>
     <dt>API calls</dt><dd><code>$.audio.play, $.audio.speak, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.env.get, $.process.run, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.call, $.ui.close, $.ui.notify, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

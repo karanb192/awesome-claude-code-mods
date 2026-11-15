@@ -14,8 +14,8 @@
 <h1>last-turn-diff</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/RomuloDrumond/claude-last-turn-diff">RomuloDrumond/claude-last-turn-diff</a></p>
 <p class="lede">Shows the file edits Claude made in the last turn, and earlier turns, in a pane, built from its own Edit, Write and NotebookEdit calls (no git).</p>
-
-<section class="summary" aria-label="Scan summary"><p class="summary-line">last-turn-diff reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 16</li><li>Access from classified calls: L1, reads: writes the clipboard, reads files, reads the transcript, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<p class="compatibility">review UI rewrite</p>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">last-turn-diff reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 16</li><li>Access from classified calls: L1, reads: writes the clipboard, reads files, reads the transcript, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install last-turn-diff --marketplace RomuloDrumond/claude-last-turn-diff</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">writes the clipboard, reads files, reads the transcript, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart, command.run {command=lastturn}, turn.start, tool.call, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart, command.run {command=lastturn}, turn.start, tool.call, turn.complete, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=?}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.command.register, $.fs.exists, $.fs.read, $.session.cwd, $.session.messages, $.session.version, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.copy, $.ui.open, $.ui.resolve, $.ui.scroll, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/RomuloDrumond/claude-last-turn-diff/tree/25dbe663227299a6497cafc419a5f190f6f31cf4"><code>25dbe6632272</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/RomuloDrumond/claude-last-turn-diff/blob/25dbe663227299a6497cafc419a5f190f6f31cf4/.claude-plugin/marketplace.json">last-turn-diff</a></dd></dl>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/RomuloDrumond/claude-last-turn-diff/blob/25dbe663227299a6497cafc419a5f190f6f31cf4/.claude-plugin/marketplace.json">last-turn-diff</a></dd><dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/RomuloDrumond/claude-last-turn-diff/blob/25dbe663227299a6497cafc419a5f190f6f31cf4/hooks/diff.ts#L25">hooks/diff.ts:25</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/RomuloDrumond--claude-last-turn-diff--last-turn-diff-reach.svg" alt="Reach badge for last-turn-diff"> <img src="/badges/RomuloDrumond--claude-last-turn-diff--last-turn-diff-validates.svg" alt="Validation badge for last-turn-diff"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/RomuloDrumond--claude-last-turn-diff--last-turn-diff-reach.svg)](https://mods.aidojo.si/mods/RomuloDrumond--claude-last-turn-diff--last-turn-diff/)

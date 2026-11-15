@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/alexei-led/claude-router">alexei-led/claude-router</a></p>
 <p class="lede">Opt-in probe of native model routing, usage and UI; not the production router.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">router-mod-probe reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 13</li><li>Access from classified calls: L3, network: network, runs processes, sets env vars, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">router-mod-probe reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 13</li><li>Access from classified calls: L3, network: network, runs processes, sets env vars, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, sets env vars, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>compaction</dd>
-    <dt>Hooks</dt><dd><code>tool.describe {tool=mcp__router_probe__verification_marker}, session.start, session.end, session.compact, command.run {command=model}, command.run {command=router-probe}, turn.start, turn.step</code></dd>
+    <dt>Hooks</dt><dd><code>tool.describe {tool=mcp__router_probe__verification_marker}, session.start, session.end, session.compact, command.run {command=model}, command.run {command=router-probe}, turn.start, turn.step, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.clock.sleep, $.command.register, $.env.get, $.env.set, $.http.fetch, $.process.run, $.session.id, $.session.model, $.state.get, $.state.set, $.ui.log, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

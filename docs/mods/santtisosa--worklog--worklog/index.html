@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, turn.complete, command.run {command=worklog}, ui.render {component=PromptHint}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.submit, turn.complete, command.run {command=worklog}, ui.render {component=PromptHint}, ui.render {component=Pane, requestId=worklog}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.fs.write, $.session.id, $.session.repo, $.session.root, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

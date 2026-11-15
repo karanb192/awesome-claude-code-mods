@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__flightplan__route calls, ExitPlanMode calls, every tool call, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=flight}, ui.close {id=flightplan}, tool.call {tool=mcp__flightplan__route}, tool.call {tool=ExitPlanMode}, tool.call, prompt.submit, turn.start, turn.complete, ui.render {component=Spinner}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=flight}, ui.close {id=flightplan}, tool.call {tool=mcp__flightplan__route}, tool.call {tool=ExitPlanMode}, tool.call, prompt.submit, turn.start, turn.complete, ui.render {component=Pane, requestId=flightplan}, ui.render {component=AbovePrompt}, ui.render {component=Spinner}</code></dd>
     <dt>API calls</dt><dd><code>$.audio.play, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.write, $.model.fork, $.prompt.submit, $.session.id, $.session.surfaces, $.session.usage, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.tool.register, $.turn.abort, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.scroll, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

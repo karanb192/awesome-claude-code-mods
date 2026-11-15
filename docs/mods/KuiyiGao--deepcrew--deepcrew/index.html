@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/KuiyiGao/deepcrew">KuiyiGao/deepcrew</a></p>
 <p class="lede">The /deepcrew skill to lead a crew, the crew's requests answered above your prompt, and /crew to see the whole crew</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">deepcrew reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 12</li><li>Access from classified calls: L3, network: network, runs processes, drives Claude, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">deepcrew reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 12</li><li>Access from classified calls: L3, network: network, runs processes, drives Claude, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install deepcrew --marketplace KuiyiGao/deepcrew</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, drives Claude, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Bash calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.start, tool.call {tool=Bash}, turn.complete, command.run {command=crew}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.start, tool.call {tool=Bash}, turn.complete, command.run {command=crew}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=deepcrew}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.env.get, $.http.fetch, $.process.run, $.prompt.submit, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

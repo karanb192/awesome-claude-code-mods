@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>? calls, the system prompt, subagent spawns, compaction</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=?}, tool.call {tool=?}, tool.call {tool=?}, prompt.compose, prompt.context, agent.spawn, turn.step, turn.complete, session.compact, session.end, ui.render {component=PromptHint}, ui.render {component=AskUserQuestion}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=?}, tool.call {tool=?}, tool.call {tool=?}, prompt.compose, prompt.context, agent.spawn, turn.step, turn.complete, session.compact, session.end, ui.render {component=PromptHint}, ui.render {component=AskUserQuestion}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.run, $.env.get, $.fs.read, $.prompt.submit, $.session.compact, $.session.usage, $.state.get, $.state.set, $.tool.register, $.ui.invalidate, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

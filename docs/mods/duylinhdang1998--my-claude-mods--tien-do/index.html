@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call, subagent spawns, Bash calls, /&quot;^mcp__&quot;/ calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=tien-do}, command.run {command=chi-tiet}, prompt.compose, prompt.submit, turn.start, turn.complete, tool.call, agent.spawn, tool.call {tool=Bash}, tool.call {tool=/&quot;^mcp__&quot;/}, tool.check {tool=Bash}, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=AssistantMessage}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=tien-do}, command.run {command=chi-tiet}, prompt.compose, prompt.submit, turn.start, turn.complete, tool.call, agent.spawn, tool.call {tool=Bash}, tool.call {tool=/&quot;^mcp__&quot;/}, tool.check {tool=Bash}, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=AssistantMessage}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.command.register, $.session.cwd, $.session.root, $.store.get, $.store.set, $.ui.ask, $.ui.invalidate, $.ui.log, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

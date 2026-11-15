@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/datvodinh/claude-mission-control">datvodinh/claude-mission-control</a></p>
 <p class="lede">Your crew, live: an animated Clawd for Claude and every subagent above the prompt, and a pane with the context and the budget.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">mission-control reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 11</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">mission-control reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 11</li><li>API methods referenced: 11</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, compaction, every tool call</dd>
-    <dt>Hooks</dt><dd><code>plugin.register, session.start, turn.start, turn.complete, agent.spawn, turn.step, session.compact, tool.call, ui.message, command.run {command=mission}</code></dd>
+    <dt>Hooks</dt><dd><code>plugin.register, session.start, turn.start, turn.complete, agent.spawn, turn.step, session.compact, tool.call, ui.message, command.run {command=mission}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=mission-control}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.command.register, $.session.model, $.session.usage, $.state.get, $.state.set, $.ui.close, $.ui.open, $.ui.resolve</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/clawd.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

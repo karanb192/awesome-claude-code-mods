@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/gergesh/claude-queue-mod">gergesh/claude-queue-mod</a></p>
 <p class="lede">/q &lt;prompt&gt; holds prompts until the running turn ends and sends them one per turn; a band above the prompt lists, edits, reorders and pauses them</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">wait-queue reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">wait-queue reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install wait-queue --marketplace gergesh/claude-queue-mod</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, writes the prompt box, reads the prompt box, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=q}, prompt.submit, turn.start, turn.step, turn.complete, ui.render {component=CommandOutput}, ui.render {component=UserMessage}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=q}, prompt.submit, turn.start, turn.step, turn.complete, ui.render {component=CommandOutput}, ui.render {component=UserMessage}, ui.focus {component=AbovePrompt}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.prompt.fill, $.prompt.read, $.prompt.submit, $.session.append, $.state.get, $.state.set, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/rasa-mrankovic/agent-dash">rasa-mrankovic/agent-dash</a></p>
 <p class="lede">Sessions, subagents and agent teams in one terminal pane (/dash)</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">agent-dash reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the clipboard, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">agent-dash reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 11</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the clipboard, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, writes the clipboard, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, classic hooks, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=dash}, ui.close, agent.spawn, classic.TaskCreated, classic.TaskCompleted, classic.TeammateIdle, tool.call, turn.complete, session.end</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=dash}, ui.close, agent.spawn, classic.TaskCreated, classic.TaskCompleted, classic.TeammateIdle, tool.call, turn.complete, session.end, ui.render {component=Pane}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.process.run, $.session.cwd, $.session.id, $.session.model, $.session.send, $.session.usage, $.store.get, $.store.keys, $.store.set, $.ui.copy, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

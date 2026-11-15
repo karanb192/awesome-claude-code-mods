@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Aimarmndz/vibe-gambling">Aimarmndz/vibe-gambling</a></p>
 <p class="lede">🎰 Every prompt is a spin. A PS1-style roulette that pops up while Claude Code thinks. You can lose 100%, but you could also win infinity (in fake coins only).</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">vibe-gambling reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 1</li><li>API methods referenced: 14</li><li>Access from classified calls: L3, network: network, runs processes, changes config, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">vibe-gambling reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 14</li><li>Access from classified calls: L3, network: network, runs processes, changes config, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install vibe-gambling --marketplace Aimarmndz/vibe-gambling</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, changes config, reads files, reads env vars, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -23,8 +23,8 @@
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>command.run {command=vibe-use}, command.run {command=vibe-usar}</code></dd>
+    <dt>Observed events</dt><dd>Bash calls</dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.start, tool.call {tool=Bash}, turn.complete, command.run {command=roulette}, command.run {command=ruleta}, command.run {command=bet}, command.run {command=apostar}, command.run {command=all-in}, command.run {command=balance}, command.run {command=saldo}, command.run {command=vibe-login}, command.run {command=vibe-logout}, command.run {command=vibe-hide}, command.run {command=vibe-show}, command.run {command=vibe-server}, command.run {command=vibe-delete-account}, command.run {command=vibe-invite}, command.run {command=vibe-invitar}, command.run {command=vibe-redeem}, command.run {command=vibe-canjear}, command.run {command=vibe-shop}, command.run {command=vibe-tienda}, command.run {command=vibe-use}, command.run {command=vibe-usar}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.config.set, $.env.get, $.fs.exists, $.http.fetch, $.process.run, $.store.delete, $.store.get, $.store.set, $.ui.log, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

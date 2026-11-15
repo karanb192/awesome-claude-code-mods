@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=payback}, prompt.submit, turn.start, tool.call, turn.complete, ui.render {component=PromptHint}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=payback}, prompt.submit, turn.start, tool.call, turn.complete, ui.render {component=PromptHint}, ui.render {component=Pane, requestId=payback}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.model.complete, $.process.spawn, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

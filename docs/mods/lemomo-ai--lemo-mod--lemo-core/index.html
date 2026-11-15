@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>engine.create, session.start, prompt.compose, config.set {key=theme}, prompt.submit, session.append {door=prompt}, session.append {door=response}, session.append {door=notice}, turn.start, turn.step, turn.complete, command.run {command=lemo-mod}, ui.render {component=CommandOutput, props has {command=lemo-mod}}</code></dd>
+    <dt>Hooks</dt><dd><code>engine.create, session.start, prompt.compose, config.set {key=theme}, prompt.submit, session.append {door=prompt}, session.append {door=response}, session.append {door=notice}, turn.start, turn.step, turn.complete, command.run {command=lemo-mod}, ui.render {component=CommandOutput, props has {command=lemo-mod}}, ui.render {component=Pane, requestId=?}</code></dd>
     <dt>API calls</dt><dd><code>$.audio.play, $.audio.speak, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.config.list, $.env.get, $.fs.read, $.lemo.badge, $.lemo.caps, $.lemo.command, $.lemo.lang, $.lemo.notice, $.lemo.off, $.lemo.style, $.lemo.toggle, $.session.id, $.session.messages, $.session.surfaces, $.settings.read, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

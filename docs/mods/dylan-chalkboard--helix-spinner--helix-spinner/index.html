@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>compaction, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=helix-demo}, turn.start, session.compact, tool.call, turn.step, turn.complete, command.run {command=helix-focus}, command.run {command=helix-tap}, command.run {command=helix-color}, command.run {command=helix-theme}, ui.render {component=TurnDuration}, ui.render {component=Spinner}, command.run {command=helix-dex}, ui.message</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=helix-demo}, ui.render {component=Pane, requestId=helix-demo-rare}, ui.render {component=Pane, requestId=helix-demo}, turn.start, session.compact, tool.call, turn.step, turn.complete, command.run {command=helix-focus}, command.run {command=helix-tap}, command.run {command=helix-color}, command.run {command=helix-theme}, ui.render {component=TurnDuration}, ui.render {component=Spinner}, command.run {command=helix-dex}, ui.message, ui.render {component=Pane, requestId=helix-tap}, ui.render {component=Pane, requestId=helix-dex}</code></dd>
     <dt>API calls</dt><dd><code>$.audio.play, $.clock.after, $.clock.now, $.command.register, $.process.run, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.set, $.ui.close, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/helix.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

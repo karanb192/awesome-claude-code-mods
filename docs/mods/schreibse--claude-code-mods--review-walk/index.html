@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Skill calls, ReportFindings calls, /&quot;^mcp__review-walk__ReviewWalkDecide$&quot;/ calls, AskUserQuestion calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=Skill}, command.run, tool.call {tool=ReportFindings}, tool.call {tool=/&quot;^mcp__review-walk__ReviewWalkDecide$&quot;/}, tool.call {tool=AskUserQuestion}, ui.render {component=AskUserQuestion}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=Skill}, command.run, tool.call {tool=ReportFindings}, tool.call {tool=/&quot;^mcp__review-walk__ReviewWalkDecide$&quot;/}, tool.call {tool=AskUserQuestion}, ui.render {component=AskUserQuestion}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.session.id, $.state.get, $.state.set, $.tool.register, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

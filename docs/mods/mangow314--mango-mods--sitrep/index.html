@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, every tool call, classic hooks, every prompt</dd>
-    <dt>Hooks</dt><dd><code>turn.start, session.start, agent.spawn, command.run {command=sitrep-pane}, ui.close, tool.call, classic.Stop, classic.TaskCreated, classic.TaskCompleted, turn.complete, prompt.submit, ui.render {component=AssistantMessage}, ui.render {component=TurnDuration}, ui.render {component=UserMessage}</code></dd>
+    <dt>Hooks</dt><dd><code>turn.start, session.start, agent.spawn, command.run {command=sitrep-pane}, ui.close, tool.call, classic.Stop, classic.TaskCreated, classic.TaskCompleted, turn.complete, prompt.submit, ui.render {component=AbovePrompt}, ui.render {component=Pane}, ui.render {component=AssistantMessage}, ui.render {component=TurnDuration}, ui.render {component=UserMessage}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.model.complete, $.process.run, $.prompt.fill, $.session.surfaces, $.state.get, $.state.set, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

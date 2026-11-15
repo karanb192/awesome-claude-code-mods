@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, compaction, every prompt, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>turn.complete, tool.call, turn.step, session.compact, ui.render {component=UserMessage, props.origin has {kind=plugin}}, prompt.submit, classic.SessionStart</code></dd>
+    <dt>Hooks</dt><dd><code>turn.complete, tool.call, turn.step, session.compact, ui.render {component=AbovePrompt}, ui.render {component=UserMessage, props.origin has {kind=plugin}}, prompt.submit, classic.SessionStart</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.command.run, $.env.get, $.fs.list, $.fs.read, $.fs.write, $.model.complete, $.process.run, $.prompt.submit, $.session.cwd, $.session.id, $.session.messages, $.session.surfaces, $.session.usage, $.store.get, $.store.set, $.ui.invalidate, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

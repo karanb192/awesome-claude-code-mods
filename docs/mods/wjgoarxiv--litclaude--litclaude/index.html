@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, every prompt, subagent spawns, every skill</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, session.measure, tool.call, prompt.edit, prompt.change, prompt.submit, turn.step, agent.spawn, skill.prompt, session.detach, ui.fault, ui.render {component=Spinner}, command.run {command=lit-evidence}, ui.close</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, session.measure, tool.call, prompt.edit, prompt.change, prompt.submit, turn.step, agent.spawn, skill.prompt, session.detach, ui.fault, ui.render {component=AbovePrompt}, ui.render {component=Spinner}, command.run {command=lit-evidence}, ui.close, ui.render {component=Pane, requestId=lit-evidence}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.list, $.fs.read, $.fs.stat, $.session.cwd, $.session.id, $.session.surfaces, $.session.usage, $.settings.read, $.ui.invalidate, $.ui.notify, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/lit-band-client.mjs</code></dd>
     <dt>Validation</dt><dd>Passed</dd>

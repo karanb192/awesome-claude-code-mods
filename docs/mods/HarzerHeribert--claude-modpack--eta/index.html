@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__eta__track_progress calls, every tool call, every prompt</dd>
-    <dt>Hooks</dt><dd><code>tool.call {tool=mcp__eta__track_progress}, session.start, tool.call, prompt.submit, ui.render {component=ToolUse, props has {tool=?}}, ui.render {component=ToolResult, props has {tool=?}}</code></dd>
+    <dt>Hooks</dt><dd><code>tool.call {tool=mcp__eta__track_progress}, session.start, tool.call, prompt.submit, ui.render {component=ToolUse, props has {tool=?}}, ui.render {component=ToolResult, props has {tool=?}}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.fs.stat, $.process.run, $.session.surfaces, $.state.get, $.state.set, $.tool.register, $.ui.invalidate, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

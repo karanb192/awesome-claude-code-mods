@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, AskUserQuestion calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=zh}, prompt.submit, tool.call {tool=AskUserQuestion}, turn.complete, ui.render {component=AssistantMessage}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=zh}, prompt.submit, tool.call {tool=AskUserQuestion}, turn.complete, ui.render {component=AssistantMessage}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.model.complete, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

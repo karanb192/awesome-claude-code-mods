@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Bash calls, /&quot;^(Edit|Write|MultiEdit|NotebookEdit)$&quot;/ calls, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=Bash}, tool.call {tool=/&quot;^(Edit|Write|MultiEdit|NotebookEdit)$&quot;/}, ui.render {component=Spinner}, ui.render {component=TurnDuration}, prompt.submit, command.run {command=bonfire}, command.run {command=soapstone}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=Bash}, tool.call {tool=/&quot;^(Edit|Write|MultiEdit|NotebookEdit)$&quot;/}, ui.render {component=AbovePrompt}, ui.render {component=Spinner}, ui.render {component=TurnDuration}, prompt.submit, command.run {command=bonfire}, command.run {command=soapstone}</code></dd>
     <dt>API calls</dt><dd><code>$.audio.speak, $.clock.after, $.command.register, $.session.compact, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.notice, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

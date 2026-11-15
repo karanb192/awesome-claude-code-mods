@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>? calls, every tool call</dd>
-    <dt>Hooks</dt><dd><code>turn.start, session.start {isInteractive=true}, turn.complete, tool.call {tool=?}, session.append, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=Spinner}, ui.render {component=SessionMode}, session.start, prompt.compose, tool.call, tool.describe, tool.check, command.run {command=zebra}</code></dd>
+    <dt>Hooks</dt><dd><code>turn.start, session.start {isInteractive=true}, turn.complete, tool.call {tool=?}, session.append, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=Spinner}, ui.render {component=SessionMode}, ui.render {component=AbovePrompt}, session.start, prompt.compose, tool.call, tool.describe, tool.check, command.run {command=zebra}, ui.render {component=Pane, requestId=zebra-board}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.env.get, $.env.set, $.fs.exists, $.fs.read, $.fs.stat, $.process.run, $.prompt.fill, $.session.append, $.session.cwd, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.check, $.tool.register, $.ui.ask, $.ui.blit, $.ui.close, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

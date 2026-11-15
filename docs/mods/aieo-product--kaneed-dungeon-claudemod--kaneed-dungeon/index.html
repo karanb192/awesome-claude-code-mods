@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every skill, compaction, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=kaneed}, turn.start, turn.complete, prompt.submit, skill.prompt, session.compact, tool.call, ui.message, ui.render {component=AssistantMessage}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=kaneed}, turn.start, turn.complete, prompt.submit, skill.prompt, session.compact, tool.call, ui.message, ui.render {component=AssistantMessage}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.now, $.command.register, $.env.get, $.fs.read, $.fs.stat, $.http.fetch, $.process.run, $.session.cwd, $.session.messages, $.session.usage, $.store.get, $.store.set, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/boards/dungeon.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

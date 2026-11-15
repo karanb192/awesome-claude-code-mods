@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>command.run {command=crush}, session.start, session.end, command.run {command=sidebar}, ui.close {id=crush-sidebar}, prompt.submit, prompt.edit, turn.start, turn.complete, tool.call, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=ToolGroup}, ui.render {component=Spinner}, ui.render {component=TurnDuration}, ui.render {component=InfoNotice}, ui.render {component=CommandOutput}</code></dd>
+    <dt>Hooks</dt><dd><code>command.run {command=crush}, session.start, session.end, command.run {command=sidebar}, ui.close {id=crush-sidebar}, prompt.submit, prompt.edit, turn.start, turn.complete, tool.call, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=ToolGroup}, ui.render {component=Spinner}, ui.render {component=TurnDuration}, ui.render {component=InfoNotice}, ui.render {component=CommandOutput}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=crush-sidebar}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.env.get, $.process.run, $.session.cwd, $.session.model, $.session.usage, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

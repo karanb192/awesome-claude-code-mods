@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call, every skill, compaction, subagent spawns</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, turn.start, tool.call, command.run, skill.prompt, prompt.compose, session.compact, session.end, agent.spawn, turn.complete, ui.render {component=Spinner}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.submit, turn.start, tool.call, command.run, skill.prompt, prompt.compose, session.compact, session.end, agent.spawn, turn.complete, ui.render {component=Spinner}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.now, $.clock.sleep, $.command.register, $.fs.exists, $.fs.read, $.fs.write, $.process.run, $.session.cwd, $.session.usage, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.tool.register, $.ui.blit, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=antfarm}, agent.spawn, turn.start, turn.step, tool.call, turn.complete, ui.close {id=ant-farm}, ui.render {component=SessionMode}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=antfarm}, agent.spawn, turn.start, turn.step, tool.call, turn.complete, ui.close {id=ant-farm}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=ant-farm}, ui.render {component=SessionMode}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.session.usage, $.state.get, $.state.set, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

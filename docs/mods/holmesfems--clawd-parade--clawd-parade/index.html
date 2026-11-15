@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, classic hooks, subagent spawns</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=parade}, ui.message, turn.start, tool.call, classic.PermissionRequest, agent.spawn, turn.complete, ui.render {component=Backdrop}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=parade}, ui.message, turn.start, tool.call, classic.PermissionRequest, agent.spawn, turn.complete, ui.render {component=AbovePrompt}, ui.render {component=Backdrop}, ui.render {component=Pane, requestId=?}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.prompt.read, $.state.get, $.state.set, $.store.get, $.store.set, $.theme.clear, $.theme.set, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/parade-view.tsx, hooks/touch-pad.tsx</code></dd>
     <dt>Validation</dt><dd>Passed</dd>

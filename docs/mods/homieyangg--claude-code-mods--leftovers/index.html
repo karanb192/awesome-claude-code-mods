@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Bash calls, Edit|Write calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=Bash}, tool.call {tool=Edit|Write}, turn.complete, ui.render {component=CommandOutput, props has {command=leftovers}}, command.run {command=leftovers}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=Bash}, tool.call {tool=Edit|Write}, turn.complete, ui.render {component=AbovePrompt}, ui.render {component=CommandOutput, props has {command=leftovers}}, command.run {command=leftovers}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.env.get, $.fs.exists, $.process.run, $.prompt.submit, $.session.cwd, $.session.id, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.log, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/qizhuxu/qi-pm">qizhuxu/qi-pm</a></p>
 <p class="lede">Rewrite the draft in the prompt box with a side-channel model call, then put the result back for you to edit or send.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">qi-pm reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 18</li><li>Access from classified calls: L3, network: network, drives Claude, writes the prompt box, reads the transcript, reads the prompt box, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">qi-pm reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 18</li><li>Access from classified calls: L3, network: network, drives Claude, writes the prompt box, reads the transcript, reads the prompt box, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install qi-pm --marketplace qizhuxu/qi-pm</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, drives Claude, writes the prompt box, reads the transcript, reads the prompt box, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=qi-pm}, command.run {command=qi-pm-config}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=qi-pm}, command.run {command=qi-pm-config}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=qi-pm-config}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.http.fetch, $.model.complete, $.model.fork, $.prompt.fill, $.prompt.read, $.session.cwd, $.session.messages, $.session.model, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

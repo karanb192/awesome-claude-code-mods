@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/akparhi/context-engineering">akparhi/context-engineering</a></p>
 <p class="lede">Shared Switchboard gateway, setup, status and reversible Claude startup integration.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">switchboard reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 13</li><li>API methods referenced: 10</li><li>Access from classified calls: L3, network: network, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">switchboard reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 14</li><li>API methods referenced: 10</li><li>Access from classified calls: L3, network: network, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install switchboard --marketplace akparhi/context-engineering</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, reads env vars, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, compaction, subagent spawns</dd>
-    <dt>Hooks</dt><dd><code>classic.PreToolUse, command.run {command=switchboard-usage}, ui.message {source=client}, turn.step, turn.complete, session.detach, session.compact, agent.offer, classic.SubagentStart, agent.spawn, session.start, classic.UserPromptSubmit, classic.SessionStart</code></dd>
+    <dt>Hooks</dt><dd><code>classic.PreToolUse, command.run {command=switchboard-usage}, ui.render {component=Pane}, ui.message {source=client}, turn.step, turn.complete, session.detach, session.compact, agent.offer, classic.SubagentStart, agent.spawn, session.start, classic.UserPromptSubmit, classic.SessionStart</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.env.get, $.http.fetch, $.session.cwd, $.session.id, $.session.model, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.status</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/usage-view.ts</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

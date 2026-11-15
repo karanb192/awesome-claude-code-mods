@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, prompt.compose, command.run {command=board}, agent.spawn, tool.call, turn.start, turn.complete, ui.render {component=Spinner}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, prompt.compose, command.run {command=board}, agent.spawn, tool.call, turn.start, turn.complete, ui.render {component=Spinner}, ui.render {component=Pane, requestId=agent-board}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.command.run, $.env.get, $.fs.read, $.fs.write, $.http.fetch, $.process.run, $.session.cwd, $.session.id, $.session.model, $.state.get, $.state.set, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

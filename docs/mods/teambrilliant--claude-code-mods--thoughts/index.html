@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Bash calls, Read calls, Write calls, Edit calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.append {door=response}, session.end, command.run {command=thoughts}, ui.open, ui.close, tool.call {tool=Bash}, tool.call {tool=Read}, tool.call {tool=Write}, tool.call {tool=Edit}, turn.complete, ui.render {component=AssistantMessage}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.append {door=response}, session.end, command.run {command=thoughts}, ui.open, ui.close, tool.call {tool=Bash}, tool.call {tool=Read}, tool.call {tool=Write}, tool.call {tool=Edit}, turn.complete, ui.render {component=AssistantMessage}, ui.render {component=Pane, requestId=thoughts}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.fs.read, $.prompt.fill, $.session.messages, $.session.root, $.state.get, $.state.set, $.ui.close, $.ui.open, $.ui.panes, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

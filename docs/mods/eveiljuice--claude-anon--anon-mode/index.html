@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Write calls, Edit calls, the system prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=anon}, ui.render {component=SessionMode}, tool.call {tool=Write}, tool.call {tool=Edit}, ui.render {component=PromptHint}, prompt.compose, prompt.context, prompt.attachment {type=?}, session.end</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=anon}, ui.render {component=AbovePrompt}, ui.render {component=SessionMode}, tool.call {tool=Write}, tool.call {tool=Edit}, ui.render {component=PromptHint}, prompt.compose, prompt.context, prompt.attachment {type=?}, session.end</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.command.run, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.fs.write, $.process.run, $.session.cwd, $.session.id, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.set, $.ui.ask, $.ui.invalidate, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

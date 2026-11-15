@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__doc-desk__open_form calls, mcp__doc-desk__open_review calls, mcp__doc-desk__open_live calls, Write calls, Edit calls, compaction</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=mcp__doc-desk__open_form}, tool.call {tool=mcp__doc-desk__open_review}, tool.call {tool=mcp__doc-desk__open_live}, command.run {command=?}, ui.render {component=UserMessage, props.origin has {kind=plugin}}, turn.start, turn.step, turn.complete, tool.call {tool=Write}, tool.call {tool=Edit}, tool.check {tool=Write}, tool.check {tool=Edit}, tool.check {tool=NotebookEdit}, session.compact, session.end, ui.close {id=doc-desk}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=mcp__doc-desk__open_form}, tool.call {tool=mcp__doc-desk__open_review}, tool.call {tool=mcp__doc-desk__open_live}, command.run {command=?}, ui.render {component=Pane}, ui.render {component=UserMessage, props.origin has {kind=plugin}}, turn.start, turn.step, turn.complete, tool.call {tool=Write}, tool.call {tool=Edit}, tool.check {tool=Write}, tool.check {tool=Edit}, tool.check {tool=NotebookEdit}, session.compact, session.end, ui.close {id=doc-desk}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.fs.exists, $.fs.read, $.fs.stat, $.fs.write, $.http.fetch, $.model.fork, $.process.run, $.prompt.submit, $.prompt.suggest, $.session.id, $.store.delete, $.store.get, $.store.keys, $.store.set, $.tool.register, $.turn.abort, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

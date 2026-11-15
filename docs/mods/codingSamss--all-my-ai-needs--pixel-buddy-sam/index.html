@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, subagent spawns, TaskStop calls, classic hooks, every prompt, compaction, AskUserQuestion calls, ExitPlanMode calls</dd>
-    <dt>Hooks</dt><dd><code>command.run {command=buddy-status}, tool.call, agent.spawn, tool.call {tool=TaskStop}, classic.Stop, classic.SubagentStop, prompt.submit, session.append, session.start, session.attach, session.measure, session.compact, command.run, config.set {key=autoCompact}, turn.start, turn.step, tool.call {tool=AskUserQuestion}, tool.call {tool=ExitPlanMode}, turn.complete, session.end, ui.render {component=SessionMode}</code></dd>
+    <dt>Hooks</dt><dd><code>command.run {command=buddy-status}, tool.call, agent.spawn, tool.call {tool=TaskStop}, classic.Stop, classic.SubagentStop, prompt.submit, session.append, session.start, session.attach, session.measure, session.compact, command.run, config.set {key=autoCompact}, turn.start, turn.step, tool.call {tool=AskUserQuestion}, tool.call {tool=ExitPlanMode}, turn.complete, session.end, ui.render {component=AbovePrompt}, ui.render {component=SessionMode}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.session.id, $.session.usage, $.state.get, $.state.set, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

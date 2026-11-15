@@ -14,8 +14,8 @@
 <h1>git-sync-band</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/MohabYasser2/claude-code-mods">MohabYasser2/claude-code-mods</a></p>
 <p class="lede">A band above the prompt with branch, ahead/behind, changed files and last push; pulls before your prompt when it is safe; Pull, Files and Commit &amp; push buttons that run git without a model turn.</p>
-
-<section class="summary" aria-label="Scan summary"><p class="summary-line">git-sync-band reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads files, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<p class="compatibility">review UI rewrite</p>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">git-sync-band reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads files, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, reads files, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, tool.call, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.submit, tool.call, turn.complete, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.fs.exists, $.model.complete, $.process.run, $.session.cwd, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.log, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/MohabYasser2/claude-code-mods/tree/6732b3bf4d59d3e010126c432704b06a51153c8f"><code>6732b3bf4d59</code></a></dd>
-    </dl>
+    <dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/MohabYasser2/claude-code-mods/blob/6732b3bf4d59d3e010126c432704b06a51153c8f/git-sync-band/hooks/register.tsx#L99">git-sync-band/hooks/register.tsx:99</a>, <a href="https://github.com/MohabYasser2/claude-code-mods/blob/6732b3bf4d59d3e010126c432704b06a51153c8f/git-sync-band/hooks/register.tsx#L331">git-sync-band/hooks/register.tsx:331</a>, <a href="https://github.com/MohabYasser2/claude-code-mods/blob/6732b3bf4d59d3e010126c432704b06a51153c8f/git-sync-band/hooks/register.tsx#L347">git-sync-band/hooks/register.tsx:347</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from MohabYasser2/claude-code-mods</h2><ul><li><a href="/mods/MohabYasser2--claude-code-mods--cache-band/">cache-band</a><span>Shows how hot or cold the prompt cache is above the prompt, with a Compact button.</span></li><li><a href="/mods/MohabYasser2--claude-code-mods--scout-router/">scout-router</a><span>Before a subagent starts on Opus, a Haiku judge reads its task and moves it to Sonnet unless it needs Opus's…</span></li></ul></section>
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/MohabYasser2--claude-code-mods--git-sync-band-reach.svg" alt="Reach badge for git-sync-band"> <img src="/badges/MohabYasser2--claude-code-mods--git-sync-band-validates.svg" alt="Validation badge for git-sync-band"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/MohabYasser2--claude-code-mods--git-sync-band-reach.svg)](https://mods.aidojo.si/mods/MohabYasser2--claude-code-mods--git-sync-band/)

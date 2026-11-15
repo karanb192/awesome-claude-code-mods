@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=painel}, ui.close {id=painel}, prompt.compose, turn.start, turn.step, turn.complete, session.measure, tool.call, ui.render {component=ToolUse, props has {tool=mcp__painel__passos}}, ui.render {component=ToolResult, props has {tool=mcp__painel__passos}}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=painel}, ui.close {id=painel}, prompt.compose, turn.start, turn.step, turn.complete, session.measure, tool.call, ui.render {component=Pane, requestId=painel}, ui.render {component=ToolUse, props has {tool=mcp__painel__passos}}, ui.render {component=ToolResult, props has {tool=mcp__painel__passos}}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.command.register, $.env.get, $.session.usage, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.register, $.ui.close, $.ui.open, $.ui.panes, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

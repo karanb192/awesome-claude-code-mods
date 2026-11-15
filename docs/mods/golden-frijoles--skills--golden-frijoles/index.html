@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, Bash calls, AskUserQuestion calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, prompt.edit, prompt.submit, command.run {command=screensaver}, tool.call {tool=Bash}, command.run {command=build}, session.measure, tool.call {tool=AskUserQuestion}, ui.render {component=PromptHint}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, prompt.edit, prompt.submit, command.run {command=screensaver}, tool.call {tool=Bash}, command.run {command=build}, session.measure, tool.call {tool=AskUserQuestion}, ui.render {component=AbovePrompt}, ui.render {component=PromptHint}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.fs.exists, $.fs.list, $.fs.read, $.fs.write, $.process.run, $.prompt.fill, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

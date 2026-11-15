@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>? calls, ListAgents calls, every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=?}, command.run {command=compass}, session.end, session.receive, session.send, ui.scroll {requestId=?}, ui.message, tool.call {tool=ListAgents}, command.run {command=btw}, prompt.submit, turn.start, turn.complete, tool.call, prompt.compose, ui.render {component=PromptHint}, ui.render {component=UserMessage}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=?}, command.run {command=compass}, session.end, session.receive, session.send, ui.scroll {requestId=?}, ui.message, tool.call {tool=ListAgents}, command.run {command=btw}, prompt.submit, turn.start, turn.complete, tool.call, prompt.compose, ui.render {component=PromptHint}, ui.render {component=UserMessage}, ui.render {component=Pane, requestId=?}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.model.complete, $.model.fork, $.prompt.submit, $.session.append, $.session.id, $.session.messages, $.session.send, $.session.usage, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.tool.call, $.tool.register, $.ui.close, $.ui.copy, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/board.tsx, hooks/brand.tsx, hooks/pill.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

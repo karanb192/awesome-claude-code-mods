@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>prompt.compose, session.start, command.run {command=peek}, config.set {key=verbose}, session.end, session.append, ui.render {component=ToolUse}, ui.render {component=UserMessage}, ui.render {component=ToolGroup}</code></dd>
+    <dt>Hooks</dt><dd><code>prompt.compose, session.start, command.run {command=peek}, ui.render {component=Pane, requestId=peek}, config.set {key=verbose}, session.end, session.append, ui.render {component=ToolUse}, ui.render {component=UserMessage}, ui.render {component=ToolGroup}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.sleep, $.command.register, $.config.list, $.session.messages, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.blit, $.ui.close, $.ui.open, $.ui.panes, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

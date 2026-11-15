@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.append {door=prompt|command|attachment|note}, prompt.edit, prompt.submit, command.run, session.append {door=response}, turn.complete, session.end, command.run {command=image}, ui.message, ui.render {component=UserMessage|AssistantMessage|ToolUse|ToolGroup}, ui.render {component=Placed}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.append {door=prompt|command|attachment|note}, prompt.edit, prompt.submit, command.run, session.append {door=response}, turn.complete, session.end, command.run {command=image}, ui.message, ui.render {component=UserMessage|AssistantMessage|ToolUse|ToolGroup}, ui.render {component=Placed}, ui.render {component=Pane, requestId=image-view}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.fs.read, $.fs.stat, $.process.run, $.session.id, $.state.get, $.state.set, $.ui.close, $.ui.log, $.ui.open, $.ui.place, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/claim-area.ts, hooks/click-area.ts</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Edit calls, Write calls, NotebookEdit calls, Bash calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=changes}, ui.scroll {requestId=round-changes}, ui.close, turn.start, turn.complete, tool.call {tool=Edit}, tool.call {tool=Write}, tool.call {tool=NotebookEdit}, tool.call {tool=Bash}, ui.render {component=TurnDuration}, ui.render {component=SessionMode}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=changes}, ui.scroll {requestId=round-changes}, ui.close, turn.start, turn.complete, tool.call {tool=Edit}, tool.call {tool=Write}, tool.call {tool=NotebookEdit}, tool.call {tool=Bash}, ui.render {component=TurnDuration}, ui.render {component=SessionMode}, ui.render {component=Pane, requestId=round-changes}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.env.get, $.process.run, $.session.cwd, $.session.messages, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.scroll, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

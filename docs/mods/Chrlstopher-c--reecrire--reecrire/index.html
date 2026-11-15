@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Chrlstopher-c/reecrire">Chrlstopher-c/reecrire</a></p>
 <p class="lede">Bouton « Reprompting » au-dessus du prompt : Haiku 5.5 réécrit votre brouillon en direct dans le champ, au format de prompting du modèle actif (CLI + Desktop)</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">reecrire reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the prompt box, reads the transcript, reads the prompt box, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">reecrire reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the prompt box, reads the transcript, reads the prompt box, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install reecrire --marketplace Chrlstopher-c/reecrire</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, writes the prompt box, reads the transcript, reads the prompt box, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=reecrire}, ui.message, prompt.submit</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=reecrire}, ui.message, ui.press, prompt.submit, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.sleep, $.command.register, $.model.complete, $.process.spawn, $.prompt.fill, $.prompt.read, $.session.messages, $.session.model, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/live.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

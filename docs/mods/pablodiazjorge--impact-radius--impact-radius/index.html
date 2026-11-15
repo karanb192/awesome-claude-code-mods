@@ -14,8 +14,8 @@
 <h1>impact-radius</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/pablodiazjorge/impact-radius">pablodiazjorge/impact-radius</a></p>
 <p class="lede">Holds risky shell commands (recursive deletes, git reset --hard, git clean, force pushes, discarded changes, migrations and third-party installs for the whole user or system), shows what they would change and waits for you to press Run or Cancel. Bash and PowerShell, on Windows, macOS and Linux.</p>
-
-<section class="summary" aria-label="Scan summary"><p class="summary-line">impact-radius reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 1</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<p class="compatibility">review UI rewrite</p>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">impact-radius reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install impact-radius --marketplace pablodiazjorge/impact-radius</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, reads env vars, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>tool.check</code></dd>
+    <dt>Hooks</dt><dd><code>tool.check, ui.render {component=Pane, requestId=impact-radius}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.env.get, $.fs.exists, $.fs.list, $.fs.stat, $.process.run, $.session.cwd, $.session.surfaces, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/pablodiazjorge/impact-radius/tree/15e86511928360e817090cc446211cf0586cb947"><code>15e865119283</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/pablodiazjorge/impact-radius/blob/15e86511928360e817090cc446211cf0586cb947/.claude-plugin/marketplace.json">impact-radius</a></dd></dl>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/pablodiazjorge/impact-radius/blob/15e86511928360e817090cc446211cf0586cb947/.claude-plugin/marketplace.json">impact-radius</a></dd><dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/pablodiazjorge/impact-radius/blob/15e86511928360e817090cc446211cf0586cb947/hooks/shell.ts#L70">hooks/shell.ts:70</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/pablodiazjorge--impact-radius--impact-radius-reach.svg" alt="Reach badge for impact-radius"> <img src="/badges/pablodiazjorge--impact-radius--impact-radius-validates.svg" alt="Validation badge for impact-radius"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/pablodiazjorge--impact-radius--impact-radius-reach.svg)](https://mods.aidojo.si/mods/pablodiazjorge--impact-radius--impact-radius/)

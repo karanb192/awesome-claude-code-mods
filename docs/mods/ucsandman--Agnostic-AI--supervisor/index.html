@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/ucsandman/Agnostic-AI">ucsandman/Agnostic-AI</a></p>
 <p class="lede">SUBAGENT SUPERVISOR: routing-and-budget Mod. Rewrites a spawn's model onto the capability graph instead of denying it, keeps a measured per-agent-type token ledger in $.store, caps tool calls per subagent, and shows live subagents + the last routing decision above the prompt. /supervisor prints the routing log and the ledger.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">supervisor reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: writes files, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">supervisor reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: writes files, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">writes files, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, agent.spawn, turn.step, turn.complete, tool.call, command.run {command=supervisor}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, agent.spawn, turn.step, turn.complete, tool.call, command.run {command=supervisor}, ui.render {component=AbovePrompt, surface=terminal}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.fs.write, $.session.id, $.session.usage, $.store.get, $.store.set, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

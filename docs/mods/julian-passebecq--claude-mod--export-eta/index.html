@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/julian-passebecq/claude-mod">julian-passebecq/claude-mod</a></p>
 <p class="lede">Export eta : /export-tout exporte en un clic, sans tokens, un snapshot daté de tout (conversations, statut des conversations, workflows et agents, CI, consommation, problèmes, veille, à faire, santé des mods, audits, règles) avec un INDEX.md pour une IA, par une PR mergée dans le dépôt eta. Exporte aussi des conversations Claude Code en Markdown vers le dépôt eta, sans tokens. En cours (instantané de toutes les conversations en cours), Sélection (cases à cocher par projet), Lot terminé (la Veille compte les conversations terminées depuis le dernier export et propose un bouton « Exporter vers eta »). Passe de confidentialité avant écriture (jetons, clés, mots de passe, cookies, chaînes de connexion, JWT, clés privées, e-mails), fichiers non masquables retenus et listés ; worktree neuf du dépôt eta, branche, PR, merge squash. Le lot terminé est aussi l'onglet « Export eta » du panneau Veille (/veille export), qui lance le même exporteur. Erreurs dans ~/.claude/mods-health/export-eta.json (Santé, Problèmes). /export-tout, /export, /export-eta Brief pour une autre IA (/export-eta brief [enfants], boutons du bandeau) : un fichier Markdown masqué sur une conversation et ses sous-conversations (où on en est, ETA, git, PR, messages), copié dans le presse-papiers, sans PR.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">export-eta reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">export-eta reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, reads env vars, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=export-eta}, command.run {command=export}, command.run {command=export-tout}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=export-eta}, command.run {command=export}, command.run {command=export-tout}, ui.render {component=Pane}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.read, $.process.run, $.session.id, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

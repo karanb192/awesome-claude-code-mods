@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, Agent calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, agent.spawn, tool.call {tool=Agent}, turn.start, turn.step, turn.complete, session.end, command.run {command=carbon-panel|?}, ui.close, ui.render {component=TurnDuration}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, agent.spawn, tool.call {tool=Agent}, turn.start, turn.step, turn.complete, session.end, command.run {command=carbon-panel|?}, ui.close, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=carbon}, ui.render {component=TurnDuration}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.env.get, $.fs.read, $.prompt.fill, $.prompt.read, $.session.id, $.session.surfaces, $.session.usage, $.settings.read, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.blit, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Fails</dd>

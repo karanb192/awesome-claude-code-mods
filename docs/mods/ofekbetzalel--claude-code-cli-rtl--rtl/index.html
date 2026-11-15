@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, config.set {key=theme}, ui.render {component=UserMessage}, ui.render {component=CommandOutput}, ui.render {component=AssistantMessage}, config.set, prompt.submit, prompt.edit, prompt.suggest, turn.start, turn.complete, classic.Notification, ui.render {component=PromptHint}, command.run {command=rtl-draft}, ui.close {id=rtl-draft}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, config.set {key=theme}, ui.render {component=UserMessage}, ui.render {component=CommandOutput}, ui.render {component=AssistantMessage}, config.set, prompt.submit, prompt.edit, prompt.suggest, turn.start, turn.complete, classic.Notification, ui.render {component=PromptHint}, command.run {command=rtl-draft}, ui.close {id=rtl-draft}, ui.render {component=Pane, requestId=rtl-draft}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.command.register, $.config.list, $.env.get, $.model.fork, $.prompt.read, $.session.id, $.session.surface, $.state.get, $.state.set, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

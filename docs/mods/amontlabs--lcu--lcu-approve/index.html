@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/amontlabs/lcu">amontlabs/lcu</a></p>
 <p class="lede">Native per-app approval for LCU computer use in the Claude app and Claude Code (Allow this conversation, Always allow, Deny), and the /computer-use-apps panel of approved apps.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">lcu-approve reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 20</li><li>Access from classified calls: L3, network: MCP servers, runs processes, reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">lcu-approve reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 20</li><li>Access from classified calls: L3, network: MCP servers, runs processes, reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">MCP servers, runs processes, reads files, reads env vars, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,13 +24,13 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt, ? calls</dd>
-    <dt>Hooks</dt><dd><code>classic.Elicitation, ui.close, session.start, prompt.submit, command.run {command=computer-use-apps}, tool.call {tool=?}, tool.check {tool=?}</code></dd>
+    <dt>Hooks</dt><dd><code>classic.Elicitation, ui.render {component=Pane}, ui.press, ui.input, ui.close, session.start, prompt.submit, command.run {command=computer-use-apps}, tool.call {tool=?}, tool.check {tool=?}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.read, $.mcp.call, $.process.run, $.session.id, $.session.surfaces, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.ask, $.ui.close, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/amontlabs/lcu/tree/c8e5693d7141c60ef42294c03b2eee2d88557a49"><code>c8e5693d7141</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/amontlabs/lcu/tree/8163ff3d501ab8b7d06603b827c5ffca03115dc4"><code>8163ff3d501a</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 

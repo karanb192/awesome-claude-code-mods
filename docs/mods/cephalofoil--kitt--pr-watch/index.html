@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, Bash|PowerShell calls, mcp__pr-watch__commit calls, mcp__pr-watch__push calls, mcp__pr-watch__rebase_and_push calls, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=pr-watch}, tool.call, turn.start, turn.complete, ui.render {component=PromptHint}, tool.call {tool=Bash|PowerShell}, tool.call {tool=mcp__pr-watch__commit}, tool.call {tool=mcp__pr-watch__push}, tool.call {tool=mcp__pr-watch__rebase_and_push}, prompt.submit</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=pr-watch}, tool.call, turn.start, turn.complete, ui.render {component=PromptHint}, tool.call {tool=Bash|PowerShell}, tool.call {tool=mcp__pr-watch__commit}, tool.call {tool=mcp__pr-watch__push}, tool.call {tool=mcp__pr-watch__rebase_and_push}, prompt.submit, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=pr-watch}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.fs.read, $.model.complete, $.model.fork, $.process.run, $.process.spawn, $.prompt.submit, $.session.append, $.state.get, $.state.set, $.tool.register, $.ui.ask, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

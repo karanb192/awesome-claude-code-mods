@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/bbarney7/claude-code-mods">bbarney7/claude-code-mods</a></p>
 <p class="lede">A firewall for Claude Code mods: watches what every other mod does (network, processes, secret files, env vars) and asks, blocks or logs</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">mod-firewall reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 11</li><li>API methods referenced: 15</li><li>Access from classified calls: L1, reads: reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">mod-firewall reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 12</li><li>API methods referenced: 15</li><li>Access from classified calls: L1, reads: reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install mod-firewall --marketplace bbarney7/claude-code-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads files, reads env vars, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=firewall|mod-firewall:firewall}, plugin.register, http.fetch, fs.read, fs.write, env.get, process.run, process.spawn, session.messages, ui.message</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=firewall|mod-firewall:firewall}, plugin.register, http.fetch, fs.read, fs.write, env.get, process.run, process.spawn, session.messages, ui.message, ui.render {component=Pane, requestId=mod-firewall}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.env.get, $.fs.read, $.session.root, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.ask, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/pane.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

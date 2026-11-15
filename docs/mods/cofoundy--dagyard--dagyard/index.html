@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/cofoundy/dagyard">cofoundy/dagyard</a></p>
 <p class="lede">Dagyard en Claude Code: lo que te espera y lo que está para tomar sobre el prompt, el menú /dagyard, un aviso cuando algo nuevo te espera, el CLI dagyard en el PATH y la skill del protocolo para agentes</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">dagyard reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 12</li><li>Access from classified calls: L3, network: network, runs processes, drives Claude, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">dagyard reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 12</li><li>Access from classified calls: L3, network: network, runs processes, drives Claude, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install dagyard --marketplace cofoundy/dagyard</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, drives Claude, reads files, reads env vars, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=dagyard}, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=dagyard}, turn.complete, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=dagyard-menu}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.sleep, $.command.register, $.command.run, $.env.get, $.fs.read, $.http.fetch, $.process.run, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

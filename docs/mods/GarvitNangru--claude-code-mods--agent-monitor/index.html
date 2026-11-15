@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__agent-monitor__progress calls, subagent spawns, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=agent-monitor}, tool.describe {tool=mcp__agent-monitor__progress}, tool.check {tool=mcp__agent-monitor__progress}, prompt.compose, tool.call {tool=mcp__agent-monitor__progress}, turn.start, agent.spawn, turn.step, turn.complete, prompt.submit, ui.render {component=ToolUse, props has {tool=mcp__agent-monitor__progress}}, ui.render {component=ToolResult, props has {tool=mcp__agent-monitor__progress}}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=agent-monitor}, tool.describe {tool=mcp__agent-monitor__progress}, tool.check {tool=mcp__agent-monitor__progress}, prompt.compose, tool.call {tool=mcp__agent-monitor__progress}, turn.start, agent.spawn, turn.step, turn.complete, prompt.submit, ui.render {component=ToolUse, props has {tool=mcp__agent-monitor__progress}}, ui.render {component=ToolResult, props has {tool=mcp__agent-monitor__progress}}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=agent-monitor}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.every, $.clock.now, $.command.register, $.state.get, $.state.set, $.tool.register, $.ui.close, $.ui.open, $.ui.panes, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

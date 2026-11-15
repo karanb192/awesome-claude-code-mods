@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=lingo}, prompt.submit, prompt.edit, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}, prompt.submit {origin=?}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=lingo}, ui.render {component=Pane, requestId=?}, prompt.submit, prompt.edit, ui.render {component=AbovePrompt}, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}, ui.render {component=Pane, requestId=?}, prompt.submit {origin=?}</code></dd>
     <dt>API calls</dt><dd><code>$.audio.speak, $.clock.after, $.clock.now, $.command.list, $.command.register, $.model.complete, $.prompt.fill, $.prompt.read, $.session.surfaces, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/ui/ticker/ticker-client.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

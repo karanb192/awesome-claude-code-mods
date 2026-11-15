@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/nullphase-net/enfurbish">nullphase-net/enfurbish</a></p>
 <p class="lede">Ambient language learning. Hooks weave vocabulary into ordinary Claude Code sessions: stale items you are forgetting, a small budget of new terms drawn from the work itself, and anything you use unprompted recorded rather than taught back at you. The ledger is a markdown file you own, written by a CLI rather than by hand.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">pastiche reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 5</li><li>Access from classified calls: L2, writes or runs: runs processes, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">pastiche reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 5</li><li>Access from classified calls: L2, writes or runs: runs processes, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt</dd>
-    <dt>Hooks</dt><dd><code>classic.SessionStart, prompt.submit</code></dd>
+    <dt>Hooks</dt><dd><code>classic.SessionStart, prompt.submit, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.process.run, $.session.id, $.state.get, $.state.set, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

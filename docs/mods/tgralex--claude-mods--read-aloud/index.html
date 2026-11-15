@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, prompt.attachment, command.run {command=read-aloud}, ui.render {component=AssistantMessage}, ui.render {component=ToolUse, props has {tool=ExitPlanMode}}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, prompt.attachment, command.run {command=read-aloud}, ui.render {component=AssistantMessage}, ui.render {component=ToolUse, props has {tool=ExitPlanMode}}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.audio.speak, $.clock.every, $.command.register, $.env.get, $.fs.read, $.process.run, $.process.spawn, $.session.messages, $.state.get, $.state.set, $.ui.resolve, $.ui.selection, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=rich}, ui.message {requestId=rich-input-pane}, ui.close {id=rich-input-pane}, prompt.autocomplete {token=/&quot;^@&quot;/}, prompt.edit, ui.render {component=SessionMode}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=rich}, ui.render {component=Pane, requestId=rich-input-pane}, ui.message {requestId=rich-input-pane}, ui.close {id=rich-input-pane}, prompt.autocomplete {token=/&quot;^@&quot;/}, prompt.edit, ui.render {component=SessionMode}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.write, $.process.run, $.prompt.fill, $.prompt.read, $.session.cwd, $.state.get, $.state.set, $.ui.close, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/editor.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

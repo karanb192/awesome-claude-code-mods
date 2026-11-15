@@ -15,17 +15,17 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/itsArnavPrasad/pixel-office">itsArnavPrasad/pixel-office</a></p>
 <p class="lede">Every Claude Code session as a pixel character in a shared office you can click and talk to</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">pixel-office reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 18</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads files, reads the transcript, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">pixel-office reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 32</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, reads files, reads env vars, reads the transcript, reads mod state, plays audio, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
-<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads files, reads the transcript, reads mod state, persists state, draws</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, drives Claude, reads files, reads env vars, reads the transcript, reads mod state, plays audio, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
 <p class="actions"><a class="source" href="https://github.com/itsArnavPrasad/pixel-office/tree/main/pixel-office">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#itsArnavPrasad--pixel-office--pixel-office">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=office}, ui.close, prompt.submit, tool.call, classic.PermissionRequest, classic.Notification, turn.complete</code></dd>
-    <dt>API calls</dt><dd><code>$.prompt.submit, $.session.id, $.session.messages, $.session.model, $.session.repo, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.blit, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=office}, ui.close, prompt.submit, tool.call, classic.PermissionRequest, classic.Notification, turn.complete, ui.render {component=Pane, requestId=pixel-office}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>API calls</dt><dd><code>$.agent.list, $.audio.play, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.write, $.model.complete, $.model.fork, $.process.run, $.prompt.submit, $.session.id, $.session.messages, $.session.model, $.session.repo, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.blit, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 

@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.measure, command.run {command=usage-lens}, ui.close {id=usage-lens}, ui.render {component=SessionMode}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.measure, command.run {command=usage-lens}, ui.close {id=usage-lens}, ui.render {component=SessionMode}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=usage-lens}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.http.fetch, $.process.run, $.session.authorize, $.session.id, $.session.usage, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

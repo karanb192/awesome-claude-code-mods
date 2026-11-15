@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/xyc/plushie">xyc/plushie</a></p>
 <p class="lede">A plush Clawd above the prompt that reacts to what Claude is doing: works, celebrates, wobbles, blushes, naps, and can be patted and dragged.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">plushie reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: changes config, reads files, reads settings, plays audio, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">plushie reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: changes config, reads files, reads settings, plays audio, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install plushie --marketplace xyc/plushie</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">changes config, reads files, reads settings, plays audio, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, every prompt, subagent spawns, compaction</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=plushie}, turn.start, turn.complete, tool.call, prompt.submit, agent.spawn, session.compact, ui.message {element=grab}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=plushie}, turn.start, turn.complete, tool.call, prompt.submit, agent.spawn, session.compact, ui.message {element=grab}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.audio.play, $.clock.every, $.clock.now, $.command.register, $.config.list, $.config.set, $.fs.read, $.session.usage, $.store.get, $.store.set, $.ui.blit, $.ui.invalidate, $.ui.log, $.ui.resolve</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/grab.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

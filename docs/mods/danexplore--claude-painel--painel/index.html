@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, subagent spawns, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, ui.close, command.run {command=painel}, session.measure, prompt.submit, turn.complete, agent.spawn, tool.call, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=ToolGroup}, ui.render {component=ToolProgress}, ui.status, ui.scroll {component=Pane, requestId=painel}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, ui.close, command.run {command=painel}, session.measure, prompt.submit, turn.complete, agent.spawn, tool.call, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=ToolGroup}, ui.render {component=ToolProgress}, ui.status, ui.render {component=AbovePrompt}, ui.scroll {component=Pane, requestId=painel}, ui.render {component=Pane, requestId=painel}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.env.get, $.process.run, $.session.messages, $.session.usage, $.state.get, $.state.set, $.ui.close, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

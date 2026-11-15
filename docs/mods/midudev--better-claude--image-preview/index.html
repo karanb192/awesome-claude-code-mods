@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, prompt.edit, prompt.submit, ui.message, ui.render {component=UserMessage|AssistantMessage|ToolUse|ToolResult|ToolGroup|CommandOutput|TurnDuration|InfoNotice}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, prompt.edit, prompt.submit, ui.message, ui.render {component=UserMessage|AssistantMessage|ToolUse|ToolResult|ToolGroup|CommandOutput|TurnDuration|InfoNotice}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.sleep, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.process.run, $.process.spawn, $.prompt.read, $.session.cwd, $.session.id, $.session.root, $.state.get, $.state.set, $.ui.log, $.ui.resolve</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/chip.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

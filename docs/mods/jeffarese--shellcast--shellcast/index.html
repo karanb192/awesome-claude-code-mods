@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Bash calls, TaskStop calls, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=Bash}, tool.call {tool=TaskStop}, classic.Stop, session.append, ui.render {component=ToolUse, props has {tool=Bash}}, ui.render {component=ToolResult, props has {tool=Bash}}, ui.render {component=ToolResult, props has {tool=Write}}, ui.render {component=ToolGroup}, ui.render {component=PromptHint}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=Bash}, tool.call {tool=TaskStop}, classic.Stop, session.append, ui.render {component=ToolUse, props has {tool=Bash}}, ui.render {component=ToolResult, props has {tool=Bash}}, ui.render {component=ToolResult, props has {tool=Write}}, ui.render {component=ToolGroup}, ui.render {component=AbovePrompt}, ui.render {component=PromptHint}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.process.run, $.session.cwd, $.session.id, $.session.messages, $.session.root, $.state.get, $.state.set, $.ui.log, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

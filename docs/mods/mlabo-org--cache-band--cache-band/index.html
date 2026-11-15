@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/mlabo-org/cache-band">mlabo-org/cache-band</a></p>
 <p class="lede">Claude Code mod: one line above the prompt with the prompt-cache read rate of the last turn, this session and the whole Mac over the last hour. macOS only; the session and Mac-wide figures need Mini System Monitor (github.com/mlabo-org/mini-system-monitor-rs) with --claude-cache-json.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">cache-band reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads files, reads env vars, reads settings, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">cache-band reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 16</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads files, reads env vars, reads settings, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, reads files, reads env vars, reads settings, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -25,7 +25,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, config.set, turn.complete</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, config.set, turn.complete, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.env.get, $.fs.exists, $.fs.read, $.fs.stat, $.model.complete, $.process.run, $.session.id, $.settings.read, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.set, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

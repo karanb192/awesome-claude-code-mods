@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=colors}, command.run {command=color}, turn.start, turn.complete, ui.render {component=PromptHint}, ui.message</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=colors}, command.run {command=color}, turn.start, turn.complete, ui.render {component=AbovePrompt}, ui.render {component=PromptHint}, ui.render {component=Pane, requestId=color-chooser}, ui.message</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.command.run, $.config.set, $.env.get, $.prompt.fill, $.prompt.read, $.state.get, $.state.set, $.ui.close, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/tile.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/yonatangross/orchestkit">yonatangross/orchestkit</a></p>
 <p class="lede">Review enhanced prompts before sending them: short, stack-aware rewrites</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">prompt-enhancer reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads files, reads env vars, reads the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">prompt-enhancer reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads files, reads env vars, reads the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, writes the prompt box, reads files, reads env vars, reads the prompt box, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,13 +24,13 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>prompt.submit, prompt.change</code></dd>
+    <dt>Hooks</dt><dd><code>prompt.submit, prompt.change, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.env.get, $.fs.exists, $.fs.read, $.model.complete, $.prompt.fill, $.prompt.read, $.prompt.submit, $.state.get, $.state.set, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/yonatangross/orchestkit/tree/67ee502376efeee10e8959bd17fdbda9550c3ea7"><code>67ee502376ef</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/yonatangross/orchestkit/tree/2284988804298c0520ee3a5c7628a118d9adb408"><code>228498880429</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from yonatangross/orchestkit</h2><ul><li><a href="/mods/yonatangross--orchestkit--lesson-cards/">lesson-cards</a><span>Displays lesson hint cards when tool calls match known patterns. Advisory only: a lesson never blocks a tool…</span></li><li><a href="/mods/yonatangross--orchestkit--memory-lens/">memory-lens</a><span>Recalls the few memories related to each prompt you send (never on automated turns or file tool calls): one l…</span></li><li><a href="/mods/yonatangross--orchestkit--promote-lights/">promote-lights</a><span>Shows CI status lights above the prompt while a promote PR (base main) is open. One REST page per minute, PR-…</span></li><li><a href="/mods/yonatangross--orchestkit--secrets-veil/">secrets-veil</a><span>Masks secret values in tool results before the model reads them: named vendor variables, value-shape patterns…</span></li></ul></section>

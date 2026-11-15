@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/UlongChaS2/learn-trail-mods">UlongChaS2/learn-trail-mods</a></p>
 <p class="lede">설명의 목차·현재 위치·곁가지를 패널에 띄우고, 항목별 설명을 저장해 /recall 로 그대로 다시 본다</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">learn-trail reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">learn-trail reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: drives Claude, writes the prompt box, reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install learn-trail --marketplace UlongChaS2/learn-trail-mods</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, writes the prompt box, reads files, reads env vars, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__learn-trail__trail calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.compose, session.append, command.run {command=trail}, command.run {command=recall|trail-recall}, tool.call {tool=mcp__learn-trail__trail}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.compose, session.append, command.run {command=trail}, command.run {command=recall|trail-recall}, tool.call {tool=mcp__learn-trail__trail}, ui.render {component=Pane, requestId=learn-trail}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.env.get, $.fs.read, $.prompt.fill, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.register, $.ui.close, $.ui.notify, $.ui.open, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

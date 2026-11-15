@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>subagent spawns, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, config.set {key=theme}, turn.start, agent.spawn, turn.step, prompt.compose, tool.call, turn.complete, command.run {command=?}, ui.render {component=AssistantMessage}, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=ToolGroup}, ui.render {component=PromptHint}, ui.render {component=CommandOutput}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, config.set {key=theme}, turn.start, agent.spawn, turn.step, prompt.compose, tool.call, turn.complete, command.run {command=?}, ui.render {component=AbovePrompt}, ui.render {component=AssistantMessage}, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=ToolGroup}, ui.render {component=PromptHint}, ui.render {component=CommandOutput}, ui.render {component=Pane, requestId=plain-view-settings}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.clock.now, $.command.list, $.command.register, $.command.run, $.config.list, $.config.set, $.env.get, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.ask, $.ui.close, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

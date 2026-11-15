@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, AskUserQuestion calls</dd>
-    <dt>Hooks</dt><dd><code>config.set {key=&quot;halftime.enabled&quot;}, session.start, command.run {command=halftime}, ui.render {component=CommandOutput, props has {command=halftime}}, ui.render {component=PromptHint}, ui.message, turn.start, turn.complete, classic.PermissionRequest, classic.Elicitation, classic.Notification, tool.call {tool=AskUserQuestion}, classic.PostToolBatch, session.end</code></dd>
+    <dt>Hooks</dt><dd><code>config.set {key=&quot;halftime.enabled&quot;}, session.start, command.run {command=halftime}, ui.render {component=AbovePrompt}, ui.render {component=CommandOutput, props has {command=halftime}}, ui.render {component=PromptHint}, ui.message, turn.start, turn.complete, classic.PermissionRequest, classic.Elicitation, classic.Notification, tool.call {tool=AskUserQuestion}, classic.PostToolBatch, session.end</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.session.surfaces, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.copy, $.ui.invalidate, $.ui.log, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/board.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

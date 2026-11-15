@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/lperezmo/topic-filter-mod">lperezmo/topic-filter-mod</a></p>
 <p class="lede">Keep unrelated topics from pulling Claude off your code: listed terms become stable placeholder names (or their lines are dropped) in tool output, prompts, CLAUDE.md and skills before the model reads them. The system prompt is never changed.</p>
 <p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">topic-filter reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 11</li><li>API methods referenced: 15</li><li>Access from classified calls: L1, reads: reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">topic-filter reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 12</li><li>API methods referenced: 15</li><li>Access from classified calls: L1, reads: reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install topic-filter --marketplace lperezmo/topic-filter-mod</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads files, reads env vars, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, every prompt, the system prompt, every skill</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, tool.call, prompt.submit, prompt.context, prompt.attachment, skill.prompt, tool.describe, session.receive, command.run, ui.render {component=SessionMode}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, tool.call, prompt.submit, prompt.context, prompt.attachment, skill.prompt, tool.describe, session.receive, command.run, ui.render {component=SessionMode}, ui.render {component=Pane}, ui.press</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.command.register, $.env.get, $.fs.list, $.fs.read, $.fs.stat, $.store.get, $.store.set, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

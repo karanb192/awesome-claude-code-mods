@@ -15,9 +15,9 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/WingedGuardian/GENesis-AGI">WingedGuardian/GENesis-AGI</a></p>
 <p class="lede">Keeps this install's secrets.env values out of what a Claude Code session reads and stores: tool results, transcript rows, saved large outputs and typed prompts. Needs Claude Code 2.1.287 or later (mods).</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">genesis-secret-redact reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 5</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, reads files, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">genesis-secret-redact reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 7</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
-<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, reads files, draws</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, reads files, reads env vars, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
 <p class="actions"><a class="source" href="https://github.com/WingedGuardian/GENesis-AGI/tree/main/plugins/genesis-secret-redact">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#WingedGuardian--GENesis-AGI--genesis-secret-redact">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
@@ -25,13 +25,13 @@
 
     <dt>Observed events</dt><dd>every prompt, every tool call</dd>
     <dt>Hooks</dt><dd><code>session.start, prompt.submit, tool.call, session.append</code></dd>
-    <dt>API calls</dt><dd><code>$.fs.read, $.fs.stat, $.fs.write, $.process.run, $.ui.log</code></dd>
+    <dt>API calls</dt><dd><code>$.env.get, $.fs.read, $.fs.stat, $.fs.write, $.process.run, $.session.id, $.ui.log</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/WingedGuardian/GENesis-AGI/tree/c0594b7620a900cb384ce16aa44251095c30bd43"><code>c0594b7620a9</code></a></dd>
-    </dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/WingedGuardian/GENesis-AGI/tree/9eaa6aba016aed4e16397cbcd365a8080e8d975a"><code>9eaa6aba016a</code></a></dd>
+    <dt>Marketplace warnings</dt><dd><a href="https://github.com/WingedGuardian/GENesis-AGI/blob/9eaa6aba016aed4e16397cbcd365a8080e8d975a/plugins/.claude-plugin/marketplace.json">genesis</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from WingedGuardian/GENesis-AGI</h2><ul><li><a href="/mods/WingedGuardian--GENesis-AGI--genesis-web-override/">genesis-web-override</a><span>Answers Claude Code's built-in WebSearch with Genesis's web_search chain, falling back to the built-in on any…</span></li></ul></section>
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/WingedGuardian--GENesis-AGI--genesis-secret-redact-reach.svg" alt="Reach badge for genesis-secret-redact"> <img src="/badges/WingedGuardian--GENesis-AGI--genesis-secret-redact-validates.svg" alt="Validation badge for genesis-secret-redact"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/WingedGuardian--GENesis-AGI--genesis-secret-redact-reach.svg)](https://mods.aidojo.si/mods/WingedGuardian--GENesis-AGI--genesis-secret-redact/)

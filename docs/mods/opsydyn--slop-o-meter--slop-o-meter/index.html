@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>the system prompt, every tool call, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.context, turn.start, tool.call, turn.complete, command.run {command=slop}, prompt.edit, prompt.change, prompt.submit, ui.render {component=Placed}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.context, turn.start, tool.call, turn.complete, command.run {command=slop}, prompt.edit, prompt.change, prompt.submit, ui.render {component=Placed}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=slop}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.fs.read, $.process.run, $.prompt.paint, $.prompt.submit, $.session.append, $.session.id, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.set, $.ui.blit, $.ui.notify, $.ui.open, $.ui.place, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, tool.call, turn.start, turn.complete, turn.step, ui.render {component=SessionMode}, command.run {command=kaiwa}, command.run {command=kaigi}, session.end, command.run {command=namae}, command.run {command=tell}, command.run {command=sessions}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.submit, tool.call, turn.start, turn.complete, turn.step, ui.render {component=SessionMode}, command.run {command=kaiwa}, command.run {command=kaigi}, session.end, command.run {command=namae}, command.run {command=tell}, command.run {command=sessions}, ui.render {component=Pane, requestId=sessions}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.fs.write, $.prompt.submit, $.session.cwd, $.session.id, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

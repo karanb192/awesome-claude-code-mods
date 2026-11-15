@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, command.run {command=clawdify}, ui.render {component=Spinner}, ui.render {component=TurnDuration}, ui.render {component=PromptHint}, ui.render {component=SessionMode}, ui.render {component=ToolProgress}, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}, ui.render {component=ToolGroup}, ui.render {component=InfoNotice}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, command.run {command=clawdify}, ui.render {component=Pane, requestId=clawdify}, ui.render {component=Spinner}, ui.render {component=TurnDuration}, ui.render {component=PromptHint}, ui.render {component=SessionMode}, ui.render {component=ToolProgress}, ui.render {component=AbovePrompt}, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}, ui.render {component=ToolGroup}, ui.render {component=InfoNotice}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.list, $.fs.read, $.model.complete, $.session.model, $.session.usage, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.copy, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt, subagent spawns, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear|resume|fork}, prompt.submit, agent.spawn, tool.call, tool.check, classic.PermissionRequest, turn.complete, command.run {command=lk-attention}, ui.render {component=AskUserQuestion}, ui.render {component=ToolProgress}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear|resume|fork}, prompt.submit, agent.spawn, tool.call, tool.check, classic.PermissionRequest, turn.complete, command.run {command=lk-attention}, ui.render {component=AskUserQuestion}, ui.render {component=ToolProgress}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=attention}</code></dd>
     <dt>API calls</dt><dd><code>$.audio.play, $.clock.after, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.read, $.process.run, $.session.cwd, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.check, $.ui.close, $.ui.notify, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

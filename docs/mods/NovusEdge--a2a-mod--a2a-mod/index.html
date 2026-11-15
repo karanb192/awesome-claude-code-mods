@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, mcp__a2a-mod__workers calls, mcp__a2a-mod__add_worker calls, mcp__a2a-mod__remove_worker calls, mcp__a2a-mod__send calls, mcp__a2a-mod__task calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=a2a}, prompt.submit, ui.render {component=ToolUse, props has {tool=mcp__a2a-mod__send}}, ui.render {component=ToolResult, props has {tool=mcp__a2a-mod__send}}, ui.message, tool.call {tool=mcp__a2a-mod__workers}, tool.call {tool=mcp__a2a-mod__add_worker}, tool.call {tool=mcp__a2a-mod__remove_worker}, tool.call {tool=mcp__a2a-mod__send}, tool.call {tool=mcp__a2a-mod__task}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=a2a}, prompt.submit, ui.render {component=ToolUse, props has {tool=mcp__a2a-mod__send}}, ui.render {component=ToolResult, props has {tool=mcp__a2a-mod__send}}, ui.render {component=AbovePrompt}, ui.message, ui.render {component=Pane, requestId=a2a-workers}, tool.call {tool=mcp__a2a-mod__workers}, tool.call {tool=mcp__a2a-mod__add_worker}, tool.call {tool=mcp__a2a-mod__remove_worker}, tool.call {tool=mcp__a2a-mod__send}, tool.call {tool=mcp__a2a-mod__task}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.config.list, $.fs.read, $.http.fetch, $.process.run, $.prompt.submit, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.register, $.ui.ask, $.ui.close, $.ui.copy, $.ui.focus, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/ui/row.tsx, hooks/ui/runbar.tsx, hooks/ui/typewriter.tsx, hooks/ui/wire.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

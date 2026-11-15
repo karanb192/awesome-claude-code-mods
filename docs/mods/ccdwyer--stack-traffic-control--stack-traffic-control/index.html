@@ -14,8 +14,8 @@
 <h1>stack-traffic-control</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/ccdwyer/stack-traffic-control">ccdwyer/stack-traffic-control</a></p>
 <p class="lede">A departure board for gh stack: live stack pane, a one-line status above the prompt, and raw force-pushes, rebases and PR base edits on stacked branches redirected to gh stack</p>
-
-<section class="summary" aria-label="Scan summary"><p class="summary-line">stack-traffic-control reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: runs processes, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<p class="compatibility">review UI rewrite</p>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">stack-traffic-control reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: runs processes, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>Bash calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=stack}, turn.complete, tool.call {tool=Bash}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=stack}, turn.complete, tool.call {tool=Bash}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=stack-board}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.env.get, $.process.run, $.state.get, $.state.set, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
     <dt>Scanned revision</dt><dd><a href="https://github.com/ccdwyer/stack-traffic-control/tree/273549fb1b9733318199b0d356ebbee46370b687"><code>273549fb1b97</code></a></dd>
-    </dl>
+    <dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/ccdwyer/stack-traffic-control/blob/273549fb1b9733318199b0d356ebbee46370b687/hooks/shell.ts#L6">hooks/shell.ts:6</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/ccdwyer--stack-traffic-control--stack-traffic-control-reach.svg" alt="Reach badge for stack-traffic-control"> <img src="/badges/ccdwyer--stack-traffic-control--stack-traffic-control-validates.svg" alt="Validation badge for stack-traffic-control"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/ccdwyer--stack-traffic-control--stack-traffic-control-reach.svg)](https://mods.aidojo.si/mods/ccdwyer--stack-traffic-control--stack-traffic-control/)

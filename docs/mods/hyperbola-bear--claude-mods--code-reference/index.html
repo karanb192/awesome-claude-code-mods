@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, prompt.submit, turn.step, turn.complete, command.run {command=code-reference}, command.run {command=code-reference-setup}, ui.message, ui.close, ui.render {component=AssistantMessage}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, prompt.submit, turn.step, turn.complete, command.run {command=code-reference}, command.run {command=code-reference-setup}, ui.message, ui.close, ui.render {component=AssistantMessage}, ui.render {component=Pane, requestId=code-reference}</code></dd>
     <dt>API calls</dt><dd><code>$.browser.open, $.clock.after, $.command.list, $.command.register, $.env.get, $.fs.read, $.fs.stat, $.fs.write, $.process.run, $.prompt.submit, $.session.messages, $.session.root, $.session.surfaces, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.call, $.tool.list, $.ui.ask, $.ui.copy, $.ui.log, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/pane.view.tsx, hooks/reply.view.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>

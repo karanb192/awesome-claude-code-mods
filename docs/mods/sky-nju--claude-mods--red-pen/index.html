@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=redpen}, prompt.compose, turn.complete, ui.render {component=AssistantMessage}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=redpen}, prompt.compose, turn.complete, ui.render {component=AssistantMessage}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=red-pen}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.env.get, $.fs.read, $.model.complete, $.model.fork, $.prompt.submit, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.close, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

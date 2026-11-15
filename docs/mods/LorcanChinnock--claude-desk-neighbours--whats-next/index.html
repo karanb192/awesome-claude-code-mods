@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=whats-next}, turn.complete, ui.render {component=PromptHint}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=whats-next}, turn.complete, ui.render {component=AbovePrompt}, ui.render {component=PromptHint}, ui.render {component=Pane, requestId=whats-next}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.command.run, $.model.complete, $.model.fork, $.process.run, $.prompt.fill, $.prompt.submit, $.session.append, $.session.id, $.session.model, $.session.usage, $.state.get, $.state.set, $.ui.close, $.ui.copy, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

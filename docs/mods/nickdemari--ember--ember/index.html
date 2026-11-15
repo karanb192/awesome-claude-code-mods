@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, subagent spawns, every tool call, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=ember}, prompt.submit, turn.start, agent.spawn, tool.call, classic.PermissionRequest, turn.complete, ui.render {component=Spinner, surface=terminal}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=ember}, prompt.submit, turn.start, agent.spawn, tool.call, classic.PermissionRequest, turn.complete, ui.render {component=Spinner, surface=terminal}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=ember}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.audio.play, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.close, $.ui.log, $.ui.open, $.ui.panes, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__tag-team__notify calls, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>tool.call {tool=mcp__tag-team__notify}, tool.check, classic.PermissionRequest, classic.SessionStart, classic.UserPromptSubmit, session.start, turn.complete, command.run {command=tag-team}, command.run {command=tag-in}, command.run {command=tag-out}, command.run {command=roster}, command.run {command=blind-tag}, ui.render {component=CommandOutput, props has {command=tag-team}}</code></dd>
+    <dt>Hooks</dt><dd><code>tool.call {tool=mcp__tag-team__notify}, tool.check, classic.PermissionRequest, classic.SessionStart, classic.UserPromptSubmit, session.start, turn.complete, command.run {command=tag-team}, command.run {command=tag-in}, command.run {command=tag-out}, command.run {command=roster}, command.run {command=blind-tag}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=tag-team}, ui.render {component=CommandOutput, props has {command=tag-team}}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.command.run, $.env.get, $.fs.exists, $.process.run, $.session.id, $.state.get, $.state.set, $.tool.register, $.ui.notify, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>

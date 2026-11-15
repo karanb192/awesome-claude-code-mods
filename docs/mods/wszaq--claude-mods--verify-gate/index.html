@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>Edit calls, Write calls, NotebookEdit calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.attach, tool.call {tool=Edit}, tool.call {tool=Write}, tool.call {tool=NotebookEdit}, turn.complete, command.run {command=verify-gate}, ui.render {component=SessionMode}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.attach, tool.call {tool=Edit}, tool.call {tool=Write}, tool.call {tool=NotebookEdit}, turn.complete, command.run {command=verify-gate}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=verify-gate-log}, ui.render {component=SessionMode}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.read, $.process.run, $.process.spawn, $.session.append, $.session.id, $.session.surfaces, $.state.get, $.state.set, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

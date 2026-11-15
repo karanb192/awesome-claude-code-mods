@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=simple}, prompt.compose, prompt.submit, tool.call, turn.complete, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=ToolGroup}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=simple}, prompt.compose, prompt.submit, tool.call, turn.complete, ui.render {component=ToolUse}, ui.render {component=ToolResult}, ui.render {component=ToolGroup}, ui.render {component=Pane, requestId=simple-mode}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.env.get, $.fs.exists, $.fs.read, $.fs.write, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.close, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

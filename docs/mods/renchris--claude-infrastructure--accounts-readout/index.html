@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt, Bash calls</dd>
-    <dt>Hooks</dt><dd><code>classic.SessionStart, prompt.submit, tool.call {tool=Bash}, ui.render {component=ToolGroup}, ui.render {component=ToolUse}</code></dd>
+    <dt>Hooks</dt><dd><code>classic.SessionStart, prompt.submit, ui.render {component=AbovePrompt}, tool.call {tool=Bash}, ui.render {component=ToolGroup}, ui.render {component=ToolUse}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.env.get, $.fs.read, $.fs.stat, $.fs.write, $.session.id, $.session.surfaces, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.set, $.ui.invalidate, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

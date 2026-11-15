@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call, subagent spawns</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, prompt.submit, tool.call, turn.complete, agent.spawn, session.attach, command.run {command=shiori}, ui.open {id=shiori}, ui.close {id=shiori}, ui.render {component=AssistantMessage}, ui.render {component=UserMessage}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, prompt.submit, tool.call, turn.complete, agent.spawn, session.attach, command.run {command=shiori}, ui.open {id=shiori}, ui.close {id=shiori}, ui.render {component=AssistantMessage}, ui.render {component=UserMessage}, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=shiori}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.model.complete, $.session.cwd, $.session.id, $.session.messages, $.session.surfaces, $.settings.read, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.close, $.ui.copy, $.ui.log, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.scroll, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>

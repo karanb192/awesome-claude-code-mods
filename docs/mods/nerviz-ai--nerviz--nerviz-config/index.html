@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/nerviz-ai/nerviz">nerviz-ai/nerviz</a></p>
 <p class="lede">A pane over `ArchHook.jar config`: the settings a project owns in its own .claude/, in the nerviz identity, changed only through `config set` and `config unset` after a dialog.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">nerviz-config reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, writes the prompt box, reads files, reads settings, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">nerviz-config reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, writes the prompt box, reads files, reads settings, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes the prompt box, reads files, reads settings, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=nerviz-config}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=nerviz-config}, ui.render {component=Pane}</code></dd>
     <dt>API calls</dt><dd><code>$.command.register, $.config.list, $.fs.exists, $.process.run, $.prompt.fill, $.session.root, $.session.surfaces, $.ui.ask, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/nerviz-ai/nerviz/tree/238ddf65f4983a9ed49d511d931fdb4a317e89e6"><code>238ddf65f498</code></a></dd>
-    <dt>Marketplace warnings</dt><dd><a href="https://github.com/nerviz-ai/nerviz/blob/238ddf65f4983a9ed49d511d931fdb4a317e89e6/.claude/mods/.claude-plugin/marketplace.json">nerviz-mods</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/nerviz-ai/nerviz/tree/2514daf085d4e3c00464655ca26458b44802bc87"><code>2514daf085d4</code></a></dd>
+    <dt>Marketplace warnings</dt><dd><a href="https://github.com/nerviz-ai/nerviz/blob/2514daf085d4e3c00464655ca26458b44802bc87/.claude/mods/.claude-plugin/marketplace.json">nerviz-mods</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from nerviz-ai/nerviz</h2><ul><li><a href="/mods/nerviz-ai--nerviz--nerviz-cockpit/">nerviz-cockpit</a><span>Draws what ArchHook already decides: the open skill phase and its write territory above the prompt, /nerviz-d…</span></li></ul></section>
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/nerviz-ai--nerviz--nerviz-config-reach.svg" alt="Reach badge for nerviz-config"> <img src="/badges/nerviz-ai--nerviz--nerviz-config-validates.svg" alt="Validation badge for nerviz-config"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/nerviz-ai--nerviz--nerviz-config-reach.svg)](https://mods.aidojo.si/mods/nerviz-ai--nerviz--nerviz-config/)

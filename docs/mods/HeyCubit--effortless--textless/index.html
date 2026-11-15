@@ -15,17 +15,17 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/HeyCubit/effortless">HeyCubit/effortless</a></p>
 <p class="lede">While Claude works, the chat shows one tall pixel-art card of Clawd instead of every step. Its buttons sit on the card, which minimizes to one line, and under the newest answer; /textless toggles it too.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">textless reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 13</li><li>Access from classified calls: L3, network: network, runs processes, drives Claude, writes the prompt box, writes the clipboard, reads the prompt box, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">textless reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 23</li><li>Access from classified calls: L3, network: network, runs processes, writes files, drives Claude, writes the prompt box, writes the clipboard, reads files, reads env vars, reads settings, reads the prompt box, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
-<div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, drives Claude, writes the prompt box, writes the clipboard, reads the prompt box, persists state, draws</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, writes files, drives Claude, writes the prompt box, writes the clipboard, reads files, reads env vars, reads settings, reads the prompt box, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
 <p class="actions"><a class="source" href="https://github.com/HeyCubit/effortless/tree/main/textless/plugin">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#HeyCubit--effortless--textless">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run, prompt.submit, turn.step, classic.UserPromptSubmit, classic.SessionStart, classic.Stop, turn.complete, ui.render {component=ToolUse}, ui.render {component=ToolGroup}, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}, ui.render {component=CommandOutput}</code></dd>
-    <dt>API calls</dt><dd><code>$.http.fetch, $.process.run, $.prompt.fill, $.prompt.read, $.prompt.submit, $.session.id, $.store.get, $.store.set, $.ui.copy, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run, prompt.submit, turn.step, classic.UserPromptSubmit, classic.SessionStart, classic.Stop, turn.complete, ui.render {component=ToolUse}, ui.render {component=ToolGroup}, ui.render {component=Pane, requestId=textless-settings}, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}, ui.render {component=CommandOutput}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.command.run, $.config.list, $.env.get, $.fs.list, $.fs.read, $.fs.write, $.http.fetch, $.process.run, $.prompt.fill, $.prompt.read, $.prompt.submit, $.session.id, $.store.get, $.store.set, $.ui.copy, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 

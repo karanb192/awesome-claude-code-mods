@@ -24,7 +24,7 @@
 <dl>
 
     <dt>Observed events</dt><dd>mcp__cheap-worker__workers calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=mcp__cheap-worker__workers}, command.run {command=worker}, session.receive, command.run {command=workers}, ui.render {component=PromptHint}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=mcp__cheap-worker__workers}, command.run {command=worker}, session.receive, command.run {command=workers}, ui.render {component=PromptHint}, ui.render {component=Pane, requestId=cheap-worker}, ui.render {component=Pane, requestId=cheap-workers}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.read, $.fs.write, $.http.fetch, $.process.run, $.session.cwd, $.session.send, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.call, $.tool.register, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
