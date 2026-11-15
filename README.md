@@ -92,5 +92,6 @@ Maintained by [Karan Bansal](https://karanbansal.in/), who writes [engineering a
 
 - [claude-code-hooks](https://github.com/karanb192/claude-code-hooks) - Shell-hook plugins for safety, cost, observability and productivity, the layer mods are replacing.
 - [awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) - The general Claude Code list.
+- [No Stairs Please MCP](https://nostairsplease.com/mcp) - Remote MCP server for searching independent US live-music venues, load-in specs, stage dimensions, and drive-time tour routing.
 
 [catalogue]: https://mods.aidojo.si/#directory
