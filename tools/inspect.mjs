@@ -89,6 +89,7 @@ export async function inspect(repo, dir, clones, claudeVersion) {
   const roots = [dir, join(clones, repo.replace('/', '__')), realpathSync(clones), clones]
   let complete = true, unsettled = false
   const found = [...pluginFiles(dir)]
+  const pluginTrees = new Map(found.map(f => [relative(dir, f.root) || '.', null]))
   // Plugins with a hooks/hooks.json go first, in walk order, since the first of two duplicates is the one kept.
   for (const root of new Set([...found.filter(f => f.hooks), ...found].map(f => f.root))) {
     const manifestPath = join(root, '.claude-plugin', 'plugin.json')
@@ -106,6 +107,9 @@ export async function inspect(repo, dir, clones, claudeVersion) {
     if (!named.length) continue
     const modules = named.length === 1 ? named[0].modules : named.flatMap(n => n.modules)
     const rel = relative(dir, root) || '.'
+    const tree = await spawnAsync('git', ['-C', dir, 'rev-parse', '--verify', rel === '.' ? 'HEAD^{tree}' : `HEAD:${rel}`])
+    const sourceTree = tree.status === 0 && /^[a-f0-9]{40}$/.test(tree.stdout.trim()) ? tree.stdout.trim() : null
+    pluginTrees.set(rel, sourceTree)
     const id = `${repo}:${rel}`
     if (seen.has(id)) continue
     seen.add(id)
@@ -131,6 +135,7 @@ export async function inspect(repo, dir, clones, claudeVersion) {
     if (warnings.some(w => w.code === 'ui-review-incomplete')) { complete = false; unsettled = true }
     plugins.push({
       rel,
+      sourceTree,
       manifestName: manifest?.name ?? null,
       manifestDescription: manifest?.description ?? null,
       author: manifest?.author?.name ?? null,
@@ -146,5 +151,5 @@ export async function inspect(repo, dir, clones, claudeVersion) {
       warnings,
     })
   }
-  return unsettled ? { revision, complete, plugins, unsettled } : { revision, complete, plugins }
+  return { revision, complete, plugins, pluginTrees: Object.fromEntries(pluginTrees), ...(unsettled ? { unsettled } : {}) }
 }

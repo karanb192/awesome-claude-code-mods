@@ -108,6 +108,7 @@ const BADGE_DIRS = ['badges', 'docs/badges']
 for (const dir of BADGE_DIRS) mkdirSync(dir, { recursive: true })
 const badgeOwners = new Map([...mods, ...builtins].map(m => [slug(m), m]))
 const pageOwners = new Map([...identity.pages].map(([m, page]) => [page, m]))
+for (const [page, m] of pageOwners) if (!badgeOwners.has(page)) badgeOwners.set(page, m)
 for (const [from, to] of identity.redirects) if (!badgeOwners.has(from) && pageOwners.has(to)) badgeOwners.set(from, pageOwners.get(to))
 const expectedBadges = new Set([...badgeOwners.keys()].flatMap(key => [`${key}-reach.svg`, `${key}-validates.svg`]))
 for (const dir of BADGE_DIRS) {

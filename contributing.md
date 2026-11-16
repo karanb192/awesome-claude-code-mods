@@ -46,6 +46,8 @@ Publication runs share a separate queue and never scan in parallel with each oth
 
 Missing plugins stay listed as unverified during scheduled scans. Weekly retirement proposals require a fresh successful checkout and record the revision used to establish that a hook module is gone. Clone failures and failed validation are not removal evidence. Curated descriptions need a separate human review when an upstream project changes.
 
+A retained mod is counted as a duplicate when a complete scan finds exactly one mod with the same name and identical Git tree at another path in the same repository, and the old plugin path is no longer present. The scan records the tree hash for future comparisons; older records without it still need a confirmed pair in `data/duplicates.txt`. Changed content, multiple possible matches and failed inspections remain review candidates. Existing page paths remain owned by their original records and redirect after a confirmed move is published. Repository-specific test packages are excluded by the fixture rules in `tools/kind.mjs`; a library path or failed validation alone does not make a package a fixture.
+
 The count in `README.md` and the statistics and tables in [catalogue.md](catalogue.md) are generated. Do not edit anything between `<!-- scan:start -->` and `<!-- scan:end -->`, `<!-- builtin:start -->` and `<!-- builtin:end -->`, or `<!-- stats:start -->` and `<!-- stats:end -->`. The renderer would overwrite your change.
 
 ## Auto-merge for maintainers

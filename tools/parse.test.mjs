@@ -225,7 +225,7 @@ test('visibility names what a hook can observe', () => {
 })
 
 import { fingerprint, describeChange, looksPartial, summarize } from './changed.mjs'
-import { applyDuplicates, applyDuplicatesWithRenames, suspectDuplicates, readDuplicates, renamePairs, appliesWithoutRescan, currentNames } from './dedupe.mjs'
+import { applyDuplicates, applyDuplicatesWithRenames, suspectDuplicates, readDuplicates, renamePairs, exactMovePairs, appliesWithoutRescan, currentNames } from './dedupe.mjs'
 import { toMeta } from './meta.mjs'
 import { mergeRepos } from './candidates.mjs'
 import { assignPages, readRegistry } from './pages.mjs'
@@ -276,6 +276,34 @@ test('a listed duplicate collapses onto its successor; an unlisted same-owner sa
   assert.deepEqual(listed[0], ['galElmalah/claude-queue-plugin:.', 'galElmalah/claude-mods:claude-queue'])
   for (const pair of listed) assert.ok(pair.length === 2 && pair.every(id => /^[\w.-]+\/[\w.-]+:\S+$/.test(id)) && pair[0] !== pair[1], pair.join(' '))
   assert.deepEqual([...readDuplicates('data/no-such-file.txt')], [])
+})
+
+test('an automatic path move needs a unique identical tree and a complete scan without the old plugin', () => {
+  const record = path => ({ id: `o/repo:${path}`, repo: 'o/repo', path, name: 'meter', kind: 'mod', sourceTree: 'a'.repeat(40) })
+  const old = record('old'), fresh = record('new')
+  const checked = new Map([['o/repo', 'b'.repeat(40)]])
+  const trees = new Map([['o/repo', new Map([['new', fresh.sourceTree]])]])
+  const match = (mods, complete = checked, observed = trees) => exactMovePairs(mods, new Set(mods.filter(m => m !== old).map(m => m.id)), complete, observed)
+  assert.deepEqual([...match([old, fresh])], [[old.id, fresh.id]])
+  for (const change of [
+    { sourceTree: undefined }, { sourceTree: 'b'.repeat(40) }, { name: 'another' },
+    { repo: 'o/elsewhere' }, { kind: 'fixture' }, { kind: 'catalog' }, { kind: 'duplicate' },
+  ]) assert.equal(match([old, { ...fresh, ...change }]).size, 0, JSON.stringify(change))
+  assert.equal(match([old, fresh], new Map()).size, 0, 'failed or incomplete inspection')
+  assert.equal(match([old, fresh], checked, new Map()).size, 0, 'old cache without tree evidence')
+  assert.equal(match([old, fresh], checked, new Map([['o/repo', new Map([...trees.get('o/repo'), ['old', null]])]])).size, 0, 'present plugin omitted by inspection')
+  assert.equal(match([old, fresh], checked, new Map([['o/repo', new Map([...trees.get('o/repo'), ['other', fresh.sourceTree]])]])).size, 0, 'second identical tree omitted by footprint deduplication')
+  assert.equal(match([old, fresh, record('other')]).size, 0, 'multiple successors')
+  assert.equal(exactMovePairs([old, record('older'), fresh], new Set([fresh.id]), checked, trees).size, 0, 'multiple retained copies')
+  assert.equal(exactMovePairs([{ ...old, kind: 'fixture' }, fresh], new Set([fresh.id]), checked, trees).size, 0, 'a moved fixture needs classification review')
+})
+
+test('the unpublished test kit is a fixture without excluding library mods', () => {
+  assert.equal(kindOf('tinesoft/claude-mods', 'libs/mod-kit', {}), 'fixture')
+  assert.equal(kindOf('tinesoft/claude-mods', 'libs/mod-kit/nested', {}), 'fixture')
+  assert.equal(kindOf('tinesoft/claude-mods', 'libs/mod-kit-extra', {}), 'mod')
+  assert.equal(kindOf('other/repo', 'libs/mod-kit', {}), 'mod')
+  assert.equal(kindOf('tinesoft/claude-mods', 'mods/meter', {}), 'mod')
 })
 
 test('a retained duplicate follows an explicit keeper move only when the new keeper is counted', () => {
@@ -426,6 +454,35 @@ test('the scan summary titles the count and lists only what needs a decision', (
   assert.equal(summary.lines[0], '**4 to 8 counted mods.** 5 new records (5 counted), 1 gone, 0 reclassified.')
   const big = { mods: Array.from({ length: 1234 }, (_, i) => one(`o/r${i}:.`, { name: `m${i}` })) }
   assert.equal(summarize(base, big).title, 'Scan: 1 to 1,234 mods (1,234 new records, 2 gone)')
+})
+
+test('the scan summary omits resolved directory moves but still flags a duplicate pointing elsewhere', () => {
+  const old = { ...clone().mods[0], id: 'o/r:old', repo: 'o/r', path: 'old', sourceTree: 'a'.repeat(40) }
+  const fresh = { ...old, id: 'o/r:new', path: 'new' }
+  const left = { ...old, validate: { status: 'unknown', errors: ['Not found in this scan; retained pending weekly retirement review.'] } }
+  const before = { mods: [old] }, after = { mods: [left, fresh] }
+  const pairs = exactMovePairs(after.mods, new Set([fresh.id]), new Map([['o/r', 'b'.repeat(40)]]), new Map([['o/r', new Map([['new', fresh.sourceTree]])]]))
+  assert.deepEqual([...pairs], [[old.id, fresh.id]])
+  applyDuplicates(after.mods, pairs)
+  const summary = summarize(before, after)
+  assert.deepEqual(summary.decisions, [])
+  assert.match(summary.lines[0], /1 new records \(1 counted\), 0 gone, 1 reclassified/)
+  assert.doesNotMatch(summary.lines.join('\n'), /possible move|rule needs the new path/)
+  left.duplicateOf = 'o/r:other'
+  assert.equal(summarize(before, after).decisions.length, 1)
+  assert.match(summarize(before, after).decisions[0], /its duplicate rule needs the new path/)
+})
+
+test('the scan summary omits repository renames resolved by renamePairs', () => {
+  const old = { ...clone().mods[0], id: 'o/old:.', repo: 'o/old', path: '.' }
+  const fresh = { ...old, id: 'o/new:.', repo: 'o/new' }
+  const left = { ...old, validate: { status: 'unknown', errors: ['Not found in this scan; retained pending weekly retirement review.'] } }
+  const before = { mods: [old] }, after = { mods: [left, fresh] }
+  const pairs = renamePairs(after.mods, new Map([['o/old', 'o/new']]), new Set([fresh.id]))
+  assert.deepEqual([...pairs], [[old.id, fresh.id]])
+  applyDuplicatesWithRenames(after.mods, new Map(), pairs)
+  assert.deepEqual(summarize(before, after).decisions, [])
+  assert.match(summarize(before, after).lines[0], /0 gone, 1 reclassified/)
 })
 
 test('kindOf files built-ins, fixtures, mirrors and catalogue copies, and counts the rest', () => {

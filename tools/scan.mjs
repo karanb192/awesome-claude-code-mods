@@ -18,7 +18,7 @@ import { tmpdir } from 'node:os'
 import { spawnAsync } from './validate.mjs'
 import { clone, inspect, findingsKey } from './inspect.mjs'
 import { grade, regrade, visibility, drawsOn } from './grade.mjs'
-import { readDuplicates, applyDuplicatesWithRenames, suspectDuplicates, renamePairs, currentNames } from './dedupe.mjs'
+import { readDuplicates, applyDuplicates, applyDuplicatesWithRenames, suspectDuplicates, renamePairs, exactMovePairs, currentNames } from './dedupe.mjs'
 import { kindOf, readCatalogs, readFixtureExceptions } from './kind.mjs'
 import { parseArgs } from 'node:util'
 import { readRepos, mergeRepos } from './candidates.mjs'
@@ -45,6 +45,7 @@ const listed = mergeRepos(readRepos(REPOS))
 const previous = existsSync(OUT) ? JSON.parse(readFileSync(OUT, 'utf8')).mods : []
 if (!Array.isArray(previous)) throw new Error(`invalid previous inventory: ${OUT}`)
 const checkedRepos = new Map()
+const pluginTrees = new Map()
 const catalogs = readCatalogs()
 const fixtureExceptions = readFixtureExceptions()
 mkdirSync(CLONES, { recursive: true })
@@ -111,8 +112,9 @@ function records(repo, found, m) {
   if (settled(found)) findings[key] = found
   if (m.fullName) currentName.set(key, m.fullName)
   if (found.complete) checkedRepos.set(key, found.revision)
+  if (found.pluginTrees) pluginTrees.set(key, new Map(Object.entries(found.pluginTrees)))
   return found.plugins.map(p => ({
-    id: `${repo}:${p.rel}`, repo, path: p.rel, sourceCommit: found.revision,
+    id: `${repo}:${p.rel}`, repo, path: p.rel, sourceCommit: found.revision, sourceTree: p.sourceTree ?? null,
     name: p.manifestName ?? p.rel.split('/').pop(),
     description: p.manifestDescription ?? m.description ?? '',
     author: p.author,
@@ -179,6 +181,9 @@ if (args.retire) {
 }
 const renames = renamePairs(mods, currentName, freshIds)
 applyDuplicatesWithRenames(mods, readDuplicates(), renames)
+const moves = exactMovePairs(mods, freshIds, checkedRepos, pluginTrees)
+applyDuplicates(mods, moves)
+for (const [old, current] of moves) console.log(`moved    ${old} has the identical plugin tree at ${current}`)
 for (const [old, current] of renames) console.log(`renamed  ${old} is ${current}`)
 for (const pair of suspectDuplicates(mods)) console.log(`possible duplicate: ${pair.join(' and ')} share an owner and a name; if they are one mod, add the pair to data/duplicates.txt`)
 // Which mods Anthropic's plugin directory lists. A failed read leaves each mod's earlier answer.

@@ -108,6 +108,27 @@ test('two plugins with one name in one repo get separate badges and anchors', t 
   assert.ok(ids.includes('example--mods--clip') && ids.includes('example--mods--clip--plugins-more-clip'))
 })
 
+test('collapsing a moved plugin preserves both published badge paths through retirement', t => {
+  const old = { ...mod(0), id: 'example/mods:old', path: 'old', name: 'meter' }
+  const keeper = { ...mod(2), id: 'example/mods:plugins/new', path: 'plugins/new', name: 'meter' }
+  const dir = fixture(t, [old, keeper])
+  render(dir)
+  const badges = readdirSync(join(dir, 'badges')).filter(p => p.endsWith('.svg'))
+  assert.equal(badges.length, 4)
+  const dataPath = join(dir, 'data/mods.json')
+  const data = JSON.parse(readFileSync(dataPath, 'utf8'))
+  data.mods[0] = { ...old, kind: 'duplicate', duplicateOf: keeper.id }
+  for (const retire of [false, true]) {
+    if (retire) data.mods = [keeper]
+    writeFileSync(dataPath, JSON.stringify(data))
+    render(dir)
+    for (const folder of ['badges', 'docs/badges']) for (const file of badges) {
+      assert.ok(existsSync(join(dir, folder, file)), file)
+      if (file.endsWith('-reach.svg')) assert.match(readFileSync(join(dir, folder, file), 'utf8'), /L2/)
+    }
+  }
+})
+
 test('generated descriptions preserve literal replacement tokens', t => {
   const description = "Literal $& and $` and $' and $$ stay in the description."
   const dir = fixture(t, [{ ...mod(0), description }])
