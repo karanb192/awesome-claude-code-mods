@@ -1152,7 +1152,7 @@
   "Krs7N--context-meter--context-meter": {"id":"Krs7N/context-meter:.","indexed":true},
   "Kruhlikau--subagent-tuner--subagent-tuner": {"id":"Kruhlikau/subagent-tuner:.","indexed":true},
   "KubaSempire--angielski-w-tle--angielski-w-tle": {"id":"KubaSempire/angielski-w-tle:."},
-  "Kuddev--pebrel--pebrel-prompt-suggestions": {"id":"Kuddev/pebrel:nebula_app/res/prompt-suggestions/claude","indexed":true},
+  "Kuddev--pebrel--pebrel-prompt-suggestions": {"id":"Kuddev/pebrel:nebula_app/res/prompt-suggestions/claude","to":"Kuddev--pebrel--pebrel-prompt-suggestions--pebrel_app-res-prompt-suggestions-claude"},
   "Kuddev--pebrel--pebrel-prompt-suggestions--pebrel_app-res-prompt-suggestions-claude": {"id":"Kuddev/pebrel:pebrel_app/res/prompt-suggestions/claude","indexed":true},
   "KuiyiGao--deepcrew--deepcrew": {"id":"KuiyiGao/deepcrew:mod","indexed":true},
   "KunalKumarkkr01--prompt-rewriter--prompt-rewriter": {"id":"KunalKumarkkr01/prompt-rewriter:.","indexed":true},
