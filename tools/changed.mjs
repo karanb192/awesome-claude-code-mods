@@ -84,6 +84,7 @@ export function summarize(before, after) {
     if (fresh.kind !== 'mod') continue
     for (const left of after.mods) {
       if (left.id === fresh.id || !missing(left) || left.name !== fresh.name || left.repo.toLowerCase() !== fresh.repo.toLowerCase()) continue
+      if (left.kind === 'duplicate' && left.duplicateOf === fresh.id) continue
       moved.add(left.id).add(fresh.id)
       decisions.push(left.kind === 'mod'
         ? `possible move: ${left.id} was not found and ${fresh.id} is new in the same repository under the same name; if they are one mod, both count until the pair is in data/duplicates.txt`

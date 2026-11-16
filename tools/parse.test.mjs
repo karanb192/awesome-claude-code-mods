@@ -456,6 +456,35 @@ test('the scan summary titles the count and lists only what needs a decision', (
   assert.equal(summarize(base, big).title, 'Scan: 1 to 1,234 mods (1,234 new records, 2 gone)')
 })
 
+test('the scan summary omits resolved directory moves but still flags a duplicate pointing elsewhere', () => {
+  const old = { ...clone().mods[0], id: 'o/r:old', repo: 'o/r', path: 'old', sourceTree: 'a'.repeat(40) }
+  const fresh = { ...old, id: 'o/r:new', path: 'new' }
+  const left = { ...old, validate: { status: 'unknown', errors: ['Not found in this scan; retained pending weekly retirement review.'] } }
+  const before = { mods: [old] }, after = { mods: [left, fresh] }
+  const pairs = exactMovePairs(after.mods, new Set([fresh.id]), new Map([['o/r', 'b'.repeat(40)]]), new Map([['o/r', new Map([['new', fresh.sourceTree]])]]))
+  assert.deepEqual([...pairs], [[old.id, fresh.id]])
+  applyDuplicates(after.mods, pairs)
+  const summary = summarize(before, after)
+  assert.deepEqual(summary.decisions, [])
+  assert.match(summary.lines[0], /1 new records \(1 counted\), 0 gone, 1 reclassified/)
+  assert.doesNotMatch(summary.lines.join('\n'), /possible move|rule needs the new path/)
+  left.duplicateOf = 'o/r:other'
+  assert.equal(summarize(before, after).decisions.length, 1)
+  assert.match(summarize(before, after).decisions[0], /its duplicate rule needs the new path/)
+})
+
+test('the scan summary omits repository renames resolved by renamePairs', () => {
+  const old = { ...clone().mods[0], id: 'o/old:.', repo: 'o/old', path: '.' }
+  const fresh = { ...old, id: 'o/new:.', repo: 'o/new' }
+  const left = { ...old, validate: { status: 'unknown', errors: ['Not found in this scan; retained pending weekly retirement review.'] } }
+  const before = { mods: [old] }, after = { mods: [left, fresh] }
+  const pairs = renamePairs(after.mods, new Map([['o/old', 'o/new']]), new Set([fresh.id]))
+  assert.deepEqual([...pairs], [[old.id, fresh.id]])
+  applyDuplicatesWithRenames(after.mods, new Map(), pairs)
+  assert.deepEqual(summarize(before, after).decisions, [])
+  assert.match(summarize(before, after).lines[0], /0 gone, 1 reclassified/)
+})
+
 test('kindOf files built-ins, fixtures, mirrors and catalogue copies, and counts the rest', () => {
   const catalogs = new Set(['cat/templates'])
   assert.equal(kindOf('anthropics/claude-code', 'mods/diff', { name: 'diff' }), 'builtin')
