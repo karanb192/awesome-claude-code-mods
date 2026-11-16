@@ -1,8 +1,7 @@
 // A mod moved or copied by its author, or copied by someone else, can appear twice. Confirmed
 // pairs are recorded by hand in data/duplicates.txt; the scanner applies that
-// list and flags same-owner same-name candidates for review. It collapses on its own only a
-// repository GitHub reports under a new name, because owner plus manifest name is not a
-// durable identity and a wrong match hides a mod.
+// list and flags same-owner same-name candidates for review. Automatic matches require a
+// GitHub repository rename or an unchanged plugin tree moved within a repository.
 
 import { readFileSync } from 'node:fs'
 
@@ -53,6 +52,25 @@ export function suspectDuplicates(mods) {
     groups.set(key, [...(groups.get(key) ?? []), m.id])
   }
   return [...groups.values()].filter(g => g.length > 1).map(g => g.sort())
+}
+
+export function exactMovePairs(mods, freshIds, checkedRepos, pluginTrees) {
+  const groups = new Map()
+  for (const m of mods) {
+    if (m.kind !== 'mod' || !m.name || !/^[a-f0-9]{40}$/.test(m.sourceTree ?? '')) continue
+    const repo = m.repo.toLowerCase()
+    const trees = pluginTrees.get(repo)
+    if (!checkedRepos.has(repo) || !trees) continue
+    const fresh = freshIds.has(m.id)
+    // A plugin omitted by footprint deduplication is still present, not evidence of a move.
+    if (!fresh && trees.has(m.path)) continue
+    if ([...trees.values()].filter(tree => tree === m.sourceTree).length !== 1) continue
+    const key = JSON.stringify([repo, m.name, m.sourceTree])
+    if (!groups.has(key)) groups.set(key, { old: [], fresh: [] })
+    groups.get(key)[fresh ? 'fresh' : 'old'].push(m)
+  }
+  return new Map([...groups.values()].filter(g => g.old.length === 1 && g.fresh.length === 1)
+    .map(g => [g.old[0].id, g.fresh[0].id]))
 }
 
 // GitHub answers an old repository name with the renamed repository, and discovery can miss the

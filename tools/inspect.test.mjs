@@ -105,3 +105,40 @@ test('a malformed declared hooks file leaves the inspection incomplete, and a pl
   assert.equal(found.complete, false)
   assert.deepEqual(found.plugins.map(p => [p.rel, p.modules, p.footprint.status, p.validate.status]), [['twice', ['./a.ts', './b.ts'], 'reported', 'failed']])
 })
+
+test('plugin tree evidence survives a directory move and changes with non-hook content', async t => {
+  const { dir, clones } = checkout(t, {
+    'old/.claude-plugin/plugin.json': manifest('meter'),
+    'old/hooks/hooks.json': { modules: ['./register.ts'] },
+    'old/hooks/register.ts': 'export default () => {}',
+    'old/README.md': 'First instructions',
+    'old/.validator-output': reported('./register.ts'),
+  })
+  const git = (...args) => execFileSync('git', ['-C', dir, ...args], { stdio: 'pipe' })
+  const commit = () => { git('add', '-A'); git('-c', 'user.name=t', '-c', 'user.email=t@t', 'commit', '-qm', 'move') }
+  const first = await inspect('o/repo', dir, clones, 'test')
+  const hash = first.plugins[0].sourceTree
+  assert.match(hash, /^[a-f0-9]{40}$/)
+  assert.deepEqual(first.pluginTrees, { old: hash })
+  git('mv', 'old', 'new'); commit()
+  const moved = await inspect('o/repo', dir, clones, 'test')
+  assert.deepEqual(moved.pluginTrees, { new: hash })
+  assert.equal(moved.plugins[0].sourceTree, hash)
+  writeFileSync(join(dir, 'new/README.md'), 'Different instructions'); commit()
+  const changed = await inspect('o/repo', dir, clones, 'test')
+  assert.notEqual(changed.plugins[0].sourceTree, hash)
+})
+
+test('identical trees filtered by footprint deduplication remain in the move evidence', async t => {
+  const files = {}
+  for (const path of ['one', 'two']) {
+    files[`${path}/.claude-plugin/plugin.json`] = manifest('meter')
+    files[`${path}/hooks/hooks.json`] = { modules: ['./register.ts'] }
+    files[`${path}/.validator-output`] = reported('./register.ts')
+  }
+  const { dir, clones } = checkout(t, files)
+  const found = await inspect('o/repo', dir, clones, 'test')
+  assert.equal(found.plugins.length, 1)
+  assert.deepEqual(Object.keys(found.pluginTrees).sort(), ['one', 'two'])
+  assert.equal(found.pluginTrees.one, found.pluginTrees.two)
+})

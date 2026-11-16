@@ -9,6 +9,7 @@ import { findingsModules, findingsPackages, findingsKey } from './inspect.mjs'
 import { buildIndex, search, getMod } from '../finder/search.mjs'
 import { appendSeeds, reviewSeed } from './seed-publication.mjs'
 import { regrade } from './grade.mjs'
+import { assignPages } from './pages.mjs'
 
 const scanner = fileURLToPath(new URL('./scan.mjs', import.meta.url))
 
@@ -35,14 +36,15 @@ if (args[0] === 'clone') {
   }
   if (state.twins) { plugin(p.join(dir, 'plugins/a'), 'twin'); plugin(p.join(dir, 'plugins/b'), 'twin') }
   else {
-    plugin(dir, 'cache-fixture')
+    plugin(p.join(dir, state.pluginPath ?? '.'), 'cache-fixture')
+    fs.mkdirSync(p.join(dir, '.claude-plugin'), { recursive: true })
     fs.writeFileSync(p.join(dir, '.claude-plugin/marketplace.json'), JSON.stringify({ name: 'cache-fixture', plugins: [{ name: 'cache-fixture', source: './' }] }))
   }
 } else if (args[0] === '-C') {
   if (state.inspectionFailure && args[1].endsWith('fixture__mod') && !args.includes('--verify')) {
     fs.rmSync(args[1], { recursive: true, force: true }); fs.writeFileSync(args[1], 'unreadable checkout')
   }
-  console.log(state.revision)
+  console.log(args.at(-1).startsWith('HEAD:') || args.at(-1) === 'HEAD^{tree}' ? state.sourceTree ?? state.revision : state.revision)
 }
 else process.exit(1)
 `)
@@ -89,6 +91,33 @@ test('a cached repository needs no clone and records what a fresh scan records',
   assert.deepEqual(cached.calls, [])
   assert.deepEqual(cached.data, fresh.data)
   assert.deepEqual(f.run({ cache: false }).data, fresh.data)
+})
+
+test('the scan counts a moved tree once, including cached scans, and preserves the old page after retirement', t => {
+  const f = fixture(t)
+  f.state.pluginPath = 'old'
+  f.state.sourceTree = 'c'.repeat(40)
+  const before = f.run().data
+  const pages = assignPages(before.mods, {}, before.mods)
+  const oldSlug = pages.pages.get(before.mods[0])
+  f.state.pluginPath = 'new'
+  f.state.revision = 'b'.repeat(40)
+  const moved = f.run({ previous: before }).data
+  assert.deepEqual(moved.mods.map(m => [m.id, m.kind, m.duplicateOf]), [
+    ['fixture/mod:new', 'mod', undefined], ['fixture/mod:old', 'duplicate', 'fixture/mod:new'],
+  ])
+  const cached = f.run({ previous: before })
+  assert.deepEqual(cached.calls, [])
+  assert.deepEqual(cached.data, moved)
+  const redirected = assignPages(moved.mods.filter(m => m.kind === 'mod'), pages.registry, moved.mods)
+  const newSlug = redirected.pages.get(moved.mods[0])
+  assert.equal(redirected.registry[oldSlug].to, newSlug)
+  const retired = f.run({ previous: moved, retire: true, cache: false }).data
+  assert.deepEqual(retired.mods.map(m => m.id), ['fixture/mod:new'])
+  assert.equal(assignPages(retired.mods, redirected.registry, retired.mods).registry[oldSlug].to, newSlug)
+  f.state.sourceTree = 'd'.repeat(40)
+  f.state.revision = 'd'.repeat(40)
+  assert.equal(f.run({ previous: before }).data.mods.filter(m => m.kind === 'mod').length, 2, 'same name with changed content still needs review')
 })
 
 test('a candidate listed only under an old name is also scanned under its current name, which keeps the record', t => {

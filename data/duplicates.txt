@@ -183,3 +183,4 @@ samuelbirocchi/ai-tools:plugins/pr-tracker samuelbirocchi/ai-tools:archive/pr-tr
 marulimo/ask-codex:. marulimo/claude-code-mods:mods/ask-codex
 Leechael/claude-code-mod-agent-skills:. Leechael/claude-code-mod-agent-skills:plugins/agents-skills
 ThingsLikeClaude/ani-steer-public:plugins/jev-steer ThingsLikeClaude/ani-steer:plugins/jev-steer
+Kuddev/pebrel:nebula_app/res/prompt-suggestions/claude Kuddev/pebrel:pebrel_app/res/prompt-suggestions/claude
