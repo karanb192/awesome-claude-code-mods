@@ -5,6 +5,7 @@ import { readFileSync } from 'node:fs'
 import { SCAN_PATHS, globToRegExp, needsScan } from './pr-scope.mjs'
 
 const read = path => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8')
+const files = (...names) => names.map(filename => ({ filename }))
 const nightly = read('.github/workflows/nightly.yml')
 const job = name => {
   const start = nightly.indexOf(`\n  ${name}:\n`)
@@ -23,17 +24,25 @@ test('paths follow GitHub filter rules: ** crosses folders, * does not, dots are
 })
 
 test('the scan runs for tooling, seeds and rule lists, and not for README or website-only changes', () => {
-  assert.equal(needsScan(['README.md'], 1), false)
-  assert.equal(needsScan(['README.md', 'docs/index.html', 'contributing.md', '.github/ISSUE_TEMPLATE/x.yml'], 4), false)
-  assert.equal(needsScan(['data/seeds.txt'], 1), true)
-  assert.equal(needsScan(['README.md', 'tools/kind.mjs'], 2), true)
-  assert.equal(needsScan(['finder/.claude-plugin/plugin.json'], 1), true)
-  assert.equal(needsScan(['.github/workflows/nightly.yml'], 1), true)
-  assert.equal(needsScan(['data/mods.json'], 1), false)
+  assert.equal(needsScan(files('README.md'), 1), false)
+  assert.equal(needsScan(files('README.md', 'docs/index.html', 'contributing.md', '.github/ISSUE_TEMPLATE/x.yml'), 4), false)
+  assert.equal(needsScan(files('data/seeds.txt'), 1), true)
+  assert.equal(needsScan(files('README.md', 'tools/kind.mjs'), 2), true)
+  assert.equal(needsScan(files('finder/.claude-plugin/plugin.json'), 1), true)
+  assert.equal(needsScan(files('.github/workflows/nightly.yml'), 1), true)
+  assert.equal(needsScan(files('data/mods.json'), 1), false)
 })
 
 test('a file list cut short by the API cap runs the scan', () => {
-  assert.equal(needsScan(['README.md'], 3500), true)
+  assert.equal(needsScan(files('README.md'), 3500), true)
+})
+
+test('renames check both paths without treating two paths as two changed files', () => {
+  assert.equal(needsScan([{ filename: 'docs/kind.mjs', previous_filename: 'tools/kind.mjs' }], 1), true)
+  assert.equal(needsScan([{ filename: 'tools/kind.mjs', previous_filename: 'docs/kind.mjs' }], 1), true)
+  assert.equal(needsScan([{ filename: 'docs/new.md', previous_filename: 'docs/old.md' }], 1), false)
+  assert.equal(needsScan([{ filename: 'docs/new.md', previous_filename: 'docs/old.md' }], 2), true)
+  assert.equal(needsScan([{ filename: 'tools/kind.mjs', status: 'removed' }], 1), true)
 })
 
 test('every pull request runs the workflow, and the scan job waits for the scope decision', () => {

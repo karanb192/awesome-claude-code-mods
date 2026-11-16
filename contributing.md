@@ -58,6 +58,7 @@ Every pull request reports one check, `ci-gate`, which branch protection require
 - GitHub turns auto-merge off when someone without write access pushes to the PR branch, so a contributor's later commits need another review. A push by a workflow, such as a scan PR refresh, keeps it on; the refreshed commit merges once its run reports `ci-gate`.
 - A first-time contributor's workflows wait for a maintainer's approval. Until then `ci-gate` does not report and the PR stays open.
 
+## Nominate a Featured mod
 
 The generated catalogue lists discovered mods, including failed and unverified results. Featured entries are recommendations for useful tasks, with a clear install path, accurate access disclosure and evidence of the main behavior.
 

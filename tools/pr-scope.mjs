@@ -19,7 +19,7 @@ export function globToRegExp(pattern) {
 export function needsScan(files, total, patterns = SCAN_PATHS) {
   if (files.length < total) return true
   const regexps = patterns.map(globToRegExp)
-  return files.some(file => regexps.some(regexp => regexp.test(file)))
+  return files.some(({ filename, previous_filename }) => [filename, previous_filename].some(path => path && regexps.some(regexp => regexp.test(path))))
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
@@ -27,7 +27,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   if (!repo || !pr || !output) throw new Error('GITHUB_REPOSITORY, PR and GITHUB_OUTPUT are required')
   const gh = (...args) => execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 })
   const total = Number(gh('api', `repos/${repo}/pulls/${pr}`, '--jq', '.changed_files'))
-  const files = gh('api', '--paginate', `repos/${repo}/pulls/${pr}/files?per_page=100`, '--jq', '.[].filename').split('\n').filter(Boolean)
+  const files = gh('api', '--paginate', `repos/${repo}/pulls/${pr}/files?per_page=100`, '--jq', '.[] | {filename, previous_filename} | @json').split('\n').filter(Boolean).map(line => JSON.parse(line))
   const scan = needsScan(files, total)
   console.log(`${files.length} of ${total} changed files listed; scan ${scan ? 'needed' : 'not needed'}`)
   appendFileSync(output, `scan=${scan}\n`)
