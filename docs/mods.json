@@ -10112,7 +10112,7 @@
       "author": "Pebrel contributors",
       "homepage": "https://github.com/Kuddev/pebrel",
       "url": "https://github.com/Kuddev/pebrel/tree/main/nebula_app/res/prompt-suggestions/claude",
-      "kind": "mod",
+      "kind": "duplicate",
       "hasManifest": true,
       "modules": [
         "./prompt.js"
@@ -10203,7 +10203,8 @@
         "status": "passed",
         "claudeVersion": "2.1.325",
         "errors": []
-      }
+      },
+      "duplicateOf": "Kuddev/pebrel:pebrel_app/res/prompt-suggestions/claude"
     },
     {
       "id": "alexgreensh/token-optimizer:desktop/token-optimizer-desktop",
@@ -549424,7 +549425,7 @@
       "author": null,
       "homepage": "https://github.com/tinesoft/claude-mods",
       "url": "https://github.com/tinesoft/claude-mods/tree/develop/libs/mod-kit",
-      "kind": "mod",
+      "kind": "fixture",
       "hasManifest": true,
       "modules": [
         "./register.ts"
