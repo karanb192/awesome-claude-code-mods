@@ -22,6 +22,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      statuses: write
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -57,9 +58,18 @@ jobs:
           git checkout -- .
           git ls-files --error-unmatch data/retirements.json >/dev/null 2>&1 || rm -f data/retirements.json
       - uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        id: proposal
         with:
           branch: weekly-retirement
           title: "Weekly review: retire missing hook modules"
           commit-message: "Retire hook modules absent from fresh checkouts"
           body: "Fresh successful checkouts no longer contain the recorded hook modules. Review data/retirements.json for repository revisions and removal reasons. Failed clones and validation failures are not removal evidence. This refresh includes the accompanying scan results and generated files. Merge only after reviewing the evidence."
           labels: scan
+      # The workflow token opens this PR, so no workflow reports the required check on it. Tests, render and
+      # lint above passed for this commit.
+      - name: Report the required check on the proposal
+        if: steps.removals.outputs.found == 'true' && (steps.proposal.outputs.pull-request-operation == 'created' || steps.proposal.outputs.pull-request-operation == 'updated')
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ steps.proposal.outputs.pull-request-head-sha }}
+        run: bash tools/report-gate.sh "$HEAD_SHA"

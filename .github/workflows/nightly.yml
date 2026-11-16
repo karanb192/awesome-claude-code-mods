@@ -24,8 +24,9 @@ on:
         description: "Run the full GitHub code search"
         type: boolean
         default: false
+  # Every pull request runs, so the required ci-gate check always reports. The changes job decides whether
+  # the scan job is needed, using the path list in tools/pr-scope.mjs.
   pull_request:
-    paths: ["tools/**", "finder/**", "data/seeds.txt", "data/duplicates.txt", "data/catalogs.txt", "data/fixture-exceptions.txt", "data/pages.json", "data/topics.json", "package.json", "package-lock.json", ".github/workflows/nightly.yml", ".github/workflows/weekly-retirement.yml", ".github/workflows/publish-seeds.yml"]
 
 permissions:
   contents: read
@@ -41,6 +42,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      statuses: write
     timeout-minutes: 30
     concurrency:
       group: scan
@@ -67,8 +69,29 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: bash tools/publish-scan.sh --refresh
-  scan:
+  changes:
     if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      scan: ${{ steps.scope.outputs.scan }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          sparse-checkout: tools
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - name: Check whether the pull request needs the scan
+        id: scope
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: node tools/pr-scope.mjs
+  scan:
+    needs: changes
+    if: github.event_name == 'pull_request' && needs.changes.outputs.scan == 'true'
     runs-on: ubuntu-latest
     concurrency:
       group: scan-pr-${{ github.event.pull_request.number }}
@@ -196,12 +219,31 @@ jobs:
           export SCAN_FORCE="$FORCE"
           if [ "$MODE" = full ] && [ "$(date -u +%u)" = 7 ]; then export SCAN_FORCE=true; fi
           bash tools/publish-scan.sh
+  # The check branch protection requires. It runs even when an earlier job failed or the run was cancelled,
+  # because a skipped job would report success. Pull requests opened with the workflow token start no
+  # workflows; the runs that produce them report this context through tools/report-gate.sh.
+  ci-gate:
+    needs: [changes, scan]
+    if: always() && github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Pass only when the scan passed, or when it was not needed
+        env:
+          CHANGES: ${{ needs.changes.result }}
+          NEEDED: ${{ needs.changes.outputs.scan }}
+          SCAN: ${{ needs.scan.result }}
+        run: |
+          echo "changes: $CHANGES, scan needed: $NEEDED, scan: $SCAN"
+          if [ "$CHANGES" = success ] && { { [ "$NEEDED" = true ] && [ "$SCAN" = success ]; } || { [ "$NEEDED" = false ] && [ "$SCAN" = skipped ]; }; }; then exit 0; fi
+          exit 1
   discover:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
+      statuses: write
     concurrency:
       group: scan
       queue: max

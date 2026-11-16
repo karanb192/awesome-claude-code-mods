@@ -73,6 +73,7 @@ for attempt in {1..8}; do
   fi
   git push "--force-with-lease=refs/heads/$branch:$remote_head" origin "HEAD:refs/heads/$branch"
   remote_head=$(git rev-parse HEAD)
+  bash tools/report-gate.sh "$remote_head"
   if [ -z "$pr" ]; then
     gh pr create --base main --head "$branch" --title "$title" --body-file "$body" --label scan
     pr=$(gh pr list --head "$branch" --base main --state open --json number --jq '.[0].number')
