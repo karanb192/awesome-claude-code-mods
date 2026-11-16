@@ -41,7 +41,6 @@
 2bo/pr-inbox
 34823/remind-pane
 34823/tg-pane
-3DMolier/3D-Models
 3dnow/claude-mods
 404Mayank/cachebeat
 416rehman/spinlings
@@ -571,7 +570,6 @@ BjoernSchotte/ccmod-amp
 Black-coffe/litopys
 blackironj/claude-mods
 blackmath88/routing-mod-claude
-blauwtje/exo
 Bleach-Mods/bleach-mods
 Blind3y3Design/agents-panel
 BlinkToolsJP/claude-code-usage-meter-plus
@@ -866,8 +864,6 @@ corydorning/heads-up-claude-mod
 cosmin220304/claude-mods
 CosminBd/claude-git-file-tree
 costello88/tiabwft
-cpeaustriajc/cj-stack
-cpeaustriajc/dotfiles
 cprentice9/ccmods
 cprussin/claude-code-mods
 craftimru/status-bars
@@ -2613,7 +2609,6 @@ minhnhattonthat/claude-finish-notify
 minhtran3124/cc-ste-mod
 minipai/claudecafe
 Minithena/Claude-Code-Ballet
-minjun0219/rocky
 minsubb13/claude-hud-mod
 Mint-Security/open-kitchen
 mintopia/cc-acp-mod
@@ -2725,7 +2720,6 @@ msworks-it/claude-mods
 mtalhasahin/claude-runner
 mtami/terminal-tab-title
 mteusbarbosa/usage-buddy
-mthds-ai/mthds-plugins
 mthli/cc-shorts
 mtmtian/cc-mods
 mucida-claude-mods/critical-decisions
@@ -3392,6 +3386,7 @@ rodbegbie/rod-claude-mods
 rodrigocamargo/usage-meter
 rodrigofaerman/claude-mods
 rodrigozan/mod-claude-barra-contexto
+rogadev/paceline
 rogadev/paceline-mod
 rohit-adak/burnbaby
 rohit3a/usage-meter
@@ -3910,7 +3905,6 @@ TFoxik/claude-model-router
 tg-bomze/editable-diff
 tgralex/claude-mods
 Th3-W6rst/claude-realce
-thaithienvanid/aidd
 thangdo19/claude-code-mods
 thangnguyen-69/claude-mods
 thangvofastboy/claude-mods
@@ -3997,7 +3991,6 @@ togishima/better-ask-picker
 tohshima115/claude-desktop-pet
 Tolsee/dotfiles
 tomada1114/clawd-band
-tomada1114/tomada-claude-plugins
 tomas-schmieder/clawd-run
 tomasvarga/claude-code-diagrams
 tomato3017/tomato-claude-mods

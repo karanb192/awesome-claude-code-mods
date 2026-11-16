@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/AraneaDev/timestamps">AraneaDev/timestamps</a></p>
 <p class="lede">Time awareness for coding agents, in Claude Code and Codex: in Claude Code, stamps every message with the local time and how long the turn took; in both, tells the agent when a turn runs long, a tool call is slow or work resumes after a gap, remembers how long each command usually takes in a project, and reports where a session's time went.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">timestamps reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 10</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">timestamps reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,13 +24,13 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, turn.start, turn.complete, tool.call, classic.PermissionRequest, ui.render {component=SessionMode}, ui.render {component=ToolProgress}, ui.render {component=AbovePrompt}</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.env.get, $.fs.read, $.process.run, $.session.id, $.state.get, $.state.set, $.ui.invalidate, $.ui.resolve</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=timestamps}, ui.render {component=Pane, requestId=timestamps}, session.end, turn.start, turn.complete, tool.call, classic.PermissionRequest, ui.render {component=SessionMode}, ui.render {component=ToolProgress}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.read, $.process.run, $.session.id, $.state.get, $.state.set, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.panes, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/AraneaDev/timestamps/tree/383b2d9c13096f67c436fb24917876a58b91d5d6"><code>383b2d9c1309</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/AraneaDev/timestamps/tree/57e3b72fb022a949a04489616a8b7cc21ec70be4"><code>57e3b72fb022</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
