@@ -24,13 +24,13 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt, compaction, Read calls</dd>
-    <dt>Hooks</dt><dd><code>classic.SubagentStart, classic.SubagentStop, classic.SessionEnd, ui.render {component=AbovePrompt}, ui.render {component=Pane}, session.measure, ui.render {component=AbovePrompt}, classic.PostToolUse, classic.PostToolUseFailure, classic.PreToolUse, prompt.submit, session.compact, turn.complete, prompt.compose, prompt.submit {text=&quot;\u2693 Codex quota renewed \u2713&quot;}, turn.complete {isAborted=false}, prompt.submit {text=&quot;\u2693 Claude usage renewed \u2713&quot;}, classic.StopFailure, tool.call {tool=Read}, classic.UserPromptSubmit, classic.SessionStart, classic.PreCompact, classic.Stop</code></dd>
+    <dt>Hooks</dt><dd><code>classic.SubagentStart, classic.SubagentStop, classic.SessionEnd, session.measure, ui.render {component=AbovePrompt}, ui.render {component=AbovePrompt}, ui.render {component=Pane}, classic.PostToolUse, classic.PostToolUseFailure, classic.PreToolUse, prompt.submit, session.compact, turn.complete, prompt.compose, prompt.submit {text=&quot;\u2693 Codex quota renewed \u2713&quot;}, turn.complete {isAborted=false}, prompt.submit {text=&quot;\u2693 Claude usage renewed \u2713&quot;}, classic.StopFailure, tool.call {tool=Read}, classic.UserPromptSubmit, classic.SessionStart, classic.PreCompact, classic.Stop</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.run, $.env.get, $.fs.list, $.fs.read, $.fs.write, $.process.run, $.prompt.submit, $.session.compact, $.session.cwd, $.session.id, $.session.messages, $.session.usage, $.settings.read, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/neurot1ca/purser-claude-orchestrator/tree/c3ad67040a54a902314972dc791af2ba29c03dcc"><code>c3ad67040a54</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/neurot1ca/purser-claude-orchestrator/tree/43333de58142f176ef660b33ddffc1615aefe042"><code>43333de58142</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
