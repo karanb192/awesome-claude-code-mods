@@ -146,6 +146,7 @@ kiankhooban/open-paths
 KitTran1307/kit-claude-mods
 KitTran1307/kit-cloud-pilot
 kiycoh/silica-core
+Kolibee-GmbH/m2b
 kongyo2/context-view
 krika2810/agent-trace
 Kruhlikau/subagent-tuner
