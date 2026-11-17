@@ -2237,6 +2237,7 @@ koenvdheide/prep-compact
 kokko-ng/claude-context-bar
 kokko-ng/kokko-claude-mods
 kolezka/self-improvement-loop
+Kolibee-GmbH/m2b
 Komeyl94/claude-learning-companion
 kongyo2/context-view
 konnokai/claude-mods
