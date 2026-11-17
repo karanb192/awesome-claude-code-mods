@@ -147,6 +147,7 @@ KitTran1307/kit-claude-mods
 KitTran1307/kit-cloud-pilot
 kiycoh/silica-core
 kohey127/cc-immerse
+Kolibee-GmbH/m2b
 kongyo2/context-view
 krika2810/agent-trace
 Kruhlikau/subagent-tuner
