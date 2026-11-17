@@ -2234,6 +2234,7 @@ koenrohrer/hearth-band
 koenvdheide/better-compact
 koenvdheide/cys
 koenvdheide/prep-compact
+kohey127/cc-immerse
 kokko-ng/claude-context-bar
 kokko-ng/kokko-claude-mods
 kolezka/self-improvement-loop

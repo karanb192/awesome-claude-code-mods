@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-17T00:04:23.702Z",
   "claudeVersion": "2.1.325",
-  "repos": 4598,
+  "repos": 4599,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -1103834,6 +1103834,149 @@
       "stars": 2,
       "pushedAt": "2026-11-17T07:11:02Z",
       "createdAt": "2026-11-09T11:31:05Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "kohey127/cc-immerse:plugin",
+      "repo": "kohey127/cc-immerse",
+      "path": "plugin",
+      "sourceCommit": "ed5933c1a37be5c5f068540d92f94175d7bca9d6",
+      "sourceTree": "d6d1b56873e92eac57fa7acd31f7cf51bb15f30a",
+      "name": "cc-immerse",
+      "description": "Learn a language while you work in Claude Code: pick how much of the conversation is in the language you are learning, from your own language with a translation beside it to the learned language with your own one click away.",
+      "author": "kohey127",
+      "homepage": "https://github.com/kohey127/cc-immerse",
+      "url": "https://github.com/kohey127/cc-immerse/tree/main/plugin",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.attach",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "immerse"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.edit",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.change",
+          "matcher": {}
+        },
+        {
+          "event": "ui.focus",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "UserMessage"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AssistantMessage"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.config.set",
+        "$.model.complete",
+        "$.prompt.fill",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.focus",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.325",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "cc-immerse",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "changes config",
+          "drives Claude",
+          "writes the prompt box",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt"
+      ],
+      "draws": [
+        "AbovePrompt",
+        "UserMessage",
+        "AssistantMessage"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-11-17T08:21:13Z",
+      "createdAt": "2026-11-15T10:07:31Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
