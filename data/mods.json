@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-17T00:04:23.702Z",
   "claudeVersion": "2.1.325",
-  "repos": 4597,
+  "repos": 4598,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -1103619,6 +1103619,221 @@
       "stars": 0,
       "pushedAt": "2026-10-17T02:40:48Z",
       "createdAt": "2026-09-21T03:30:37Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "Kolibee-GmbH/m2b:plugins/m2b",
+      "repo": "Kolibee-GmbH/m2b",
+      "path": "plugins/m2b",
+      "sourceCommit": "ef86e61053999f1f81fba25af535057c1ec6a076",
+      "sourceTree": "9f48fc89ea19f8db3f371bbe418b6e829ed36c93",
+      "name": "m2b",
+      "description": "Your second brain for Claude Code, one store across all your projects and machines: capture notes, search them, see your tasks, get a small curated distillate in every session, see in a band above the prompt what waits for your answer, and keep or drop what curation proposes in the m2b pane. One add-on, off until set up: a worklog of your agent sessions in herdr.",
+      "author": "Kolibee GmbH",
+      "homepage": "https://github.com/Kolibee-GmbH/m2b",
+      "url": "https://github.com/Kolibee-GmbH/m2b/tree/main/plugins/m2b",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "session.compact",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "?"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "?"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "?"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "?"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "?"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "?"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "?"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "?"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "?"
+          }
+        },
+        {
+          "event": "tool.check",
+          "matcher": {
+            "tool": "?"
+          }
+        },
+        {
+          "event": "tool.check",
+          "matcher": {
+            "tool": "?"
+          }
+        },
+        {
+          "event": "tool.check",
+          "matcher": {
+            "tool": "?"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {
+            "id": "?"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "?"
+          }
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "PromptHint"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.fs.write",
+        "$.process.run",
+        "$.session.id",
+        "$.session.root",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.set",
+        "$.tool.check",
+        "$.tool.register",
+        "$.ui.close",
+        "$.ui.focus",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.325",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "m2b",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "writes files",
+          "drives Claude",
+          "reads files",
+          "reads env vars",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "compaction",
+        "? calls",
+        "every prompt"
+      ],
+      "draws": [
+        "Pane",
+        "AbovePrompt",
+        "PromptHint"
+      ],
+      "stars": 2,
+      "pushedAt": "2026-11-17T07:11:02Z",
+      "createdAt": "2026-11-09T11:31:05Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
