@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/nightlab-agent/prompt-state">nightlab-agent/prompt-state</a></p>
 <p class="lede">Shows under the prompt what Claude Code is doing (working, done, asking you, needs permission) and which skill it loaded last.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">prompt-state reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 4</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">prompt-state reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 7</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install prompt-state --marketplace nightlab-agent/prompt-state</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,16 +24,16 @@
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, every skill</dd>
-    <dt>Hooks</dt><dd><code>turn.start, turn.complete, tool.check, tool.call, ui.render {component=PromptHint}, session.start, session.end, command.run {command=skills-used}, skill.prompt</code></dd>
-    <dt>API calls</dt><dd><code>$.command.register, $.state.get, $.state.set, $.ui.status</code></dd>
+    <dt>Hooks</dt><dd><code>turn.start, turn.complete, tool.check, tool.call, ui.render {component=Spinner}, ui.render {component=PromptHint}, session.start, session.end, command.run {command=skills-used}, skill.prompt</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.state.get, $.state.set, $.ui.invalidate, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/nightlab-agent/prompt-state/tree/4eb8dee9dc8ff004574525dedd10e629d7757577"><code>4eb8dee9dc8f</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/nightlab-agent/prompt-state/blob/4eb8dee9dc8ff004574525dedd10e629d7757577/.claude-plugin/marketplace.json">nightlab-prompt-state</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/nightlab-agent/prompt-state/tree/1f774d6b648f0d8589b6ae151538b95fe881d4d0"><code>1f774d6b648f</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/nightlab-agent/prompt-state/blob/1f774d6b648f0d8589b6ae151538b95fe881d4d0/.claude-plugin/marketplace.json">nightlab-prompt-state</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
-
+<section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from nightlab-agent/prompt-state</h2><ul><li><a href="/mods/nightlab-agent--prompt-state--query-plugin/">query-plugin</a><span>Preview only: another plugin that asks the permission decision without making a call.</span></li></ul></section>
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/nightlab-agent--prompt-state--prompt-state-reach.svg" alt="Reach badge for prompt-state"> <img src="/badges/nightlab-agent--prompt-state--prompt-state-validates.svg" alt="Validation badge for prompt-state"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/nightlab-agent--prompt-state--prompt-state-reach.svg)](https://mods.aidojo.si/mods/nightlab-agent--prompt-state--prompt-state/)
 [![validates](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/nightlab-agent--prompt-state--prompt-state-validates.svg)](https://mods.aidojo.si/mods/nightlab-agent--prompt-state--prompt-state/)</code></pre></section>
 </main>
