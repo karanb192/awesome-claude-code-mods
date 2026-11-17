@@ -15,19 +15,18 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/IT-Shelter-Labs/Claude-Mods">IT-Shelter-Labs/Claude-Mods</a></p>
 <p class="lede">No description provided by the author.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">The scan could not record a complete footprint for session-hub, so its access is unknown; it fails <code>claude plugin validate</code>: directory: No manifest found in directory. Expected .claude-plugin/marketplace.json or .claude-plugin/plugin.json.</p><ul><li>Access: unknown, the footprint is incomplete</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">session-hub reaches L3 (network) and fails <code>claude plugin validate</code>: directory: No manifest found in directory. Expected .claude-plugin/marketplace.json or .claude-plugin/plugin.json.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 25</li><li>Access from classified calls: L3, network: MCP servers, runs processes, writes files, drives Claude, reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
-<div class="facts"><div><h2>Access</h2><span class="level">Unknown access</span><span class="track" aria-label="Unknown access"><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span class="labels">The footprint is unavailable or incomplete.</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">MCP servers, runs processes, writes files, drives Claude, reads files, reads env vars, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status bad">Fails</span></div></div>
 <p class="actions"><a class="source" href="https://github.com/IT-Shelter-Labs/Claude-Mods/tree/main/plugins/session-hub">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#IT-Shelter-Labs--Claude-Mods--session-hub">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Footprint</dt><dd>Unavailable or incomplete. Recorded events and calls below may omit access.</dd>
-    <dt>Observed events</dt><dd>unknown</dd>
-    <dt>Hooks</dt><dd><code>not reported</code></dd>
-    <dt>API calls</dt><dd><code>not reported</code></dd>
-
+    <dt>Observed events</dt><dd>Only what it hooks</dd>
+    <dt>Hooks</dt><dd><code>session.start, session.attach, command.run {command=sessions}, ui.close, turn.start, turn.complete, ui.message, ui.press {plugin=session-hub}, ui.render {component=Pane, requestId=session-hub}</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.env.get, $.fs.read, $.fs.stat, $.fs.write, $.mcp.call, $.process.run, $.session.id, $.session.surfaces, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.tool.call, $.ui.close, $.ui.log, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
+    <dt>Surface modules</dt><dd><code>hooks/live.tsx</code></dd>
     <dt>Validation</dt><dd>Fails</dd>
 
     <dt>Validator output</dt><dd>directory: No manifest found in directory. Expected .claude-plugin/marketplace.json or .claude-plugin/plugin.json</dd>
