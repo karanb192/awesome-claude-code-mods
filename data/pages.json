@@ -5894,6 +5894,7 @@
   "koenvdheide--better-compact--better-compact": {"id":"koenvdheide/better-compact:."},
   "koenvdheide--cys--cys": {"id":"koenvdheide/cys:."},
   "koenvdheide--prep-compact--better-compact": {"id":"koenvdheide/prep-compact:.","to":"koenvdheide--better-compact--better-compact"},
+  "kohey127--cc-immerse--cc-immerse": {"id":"kohey127/cc-immerse:plugin"},
   "kokko-ng--kokko-claude-mods--context-bar": {"id":"kokko-ng/kokko-claude-mods:plugins/context-bar"},
   "kokko-ng--kokko-claude-mods--memory-sync": {"id":"kokko-ng/kokko-claude-mods:plugins/memory-sync"},
   "kolezka--self-improvement-loop--self-improvement-loop": {"id":"kolezka/self-improvement-loop:."},
