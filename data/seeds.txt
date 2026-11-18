@@ -239,6 +239,7 @@ RANDSUM/randsum
 rapha-rodrigues/cc-esol
 ray-manaloto/dotfiles-legacy
 razorback16/cc-intelligent-ui
+Red-Center-Studio/agent-tollbooth-402
 reporails/arcade
 rittmananalytics/wire-plugin
 RobinNorberg/oh-my-copilot
