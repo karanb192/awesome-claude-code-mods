@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/starlabs007/claude-mod-usage-tracker">starlabs007/claude-mod-usage-tracker</a></p>
 <p class="lede">Shows 5-hour and weekly plan usage and the context window above the prompt</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">usage-tracker reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 6</li><li>Access from classified calls: L2, writes or runs: runs processes, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">usage-tracker reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: runs processes, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -25,13 +25,13 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.measure, ui.render {component=AbovePrompt}</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.now, $.process.run, $.session.usage, $.state.get, $.state.set, $.ui.resolve</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.step, session.measure, ui.render {component=AbovePrompt}</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.process.run, $.session.usage, $.state.get, $.state.set, $.ui.invalidate, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/starlabs007/claude-mod-usage-tracker/tree/fe4b56b026a6a6d600fb7d09f3e733f0670fa88a"><code>fe4b56b026a6</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/starlabs007/claude-mod-usage-tracker/tree/09958e0f8bb90bee37f13a65ae899b50f97c5d55"><code>09958e0f8bb9</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 

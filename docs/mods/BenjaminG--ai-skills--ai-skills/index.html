@@ -15,22 +15,22 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/BenjaminG/ai-skills">BenjaminG/ai-skills</a></p>
 <p class="lede">Benjamin's collection of Claude Code skills: daily workflow, code quality, dev tools, and specialist agents.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">ai-skills reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 27</li><li>Access from classified calls: L3, network: MCP servers, runs processes, writes files, drives Claude, writes the prompt box, reads files, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">ai-skills reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 24</li><li>Access from classified calls: L3, network: MCP servers, runs processes, writes files, drives Claude, writes the prompt box, reads files, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
-<div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">MCP servers, runs processes, writes files, drives Claude, writes the prompt box, reads files, persists state, draws</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">MCP servers, runs processes, writes files, drives Claude, writes the prompt box, reads files, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
 <p class="actions"><a class="source" href="https://github.com/BenjaminG/ai-skills">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#BenjaminG--ai-skills--ai-skills">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>every skill, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=prs}, ui.close {id=prs}, ui.render {component=Pane, requestId=prs}, command.run {command=wt}, ui.close {id=wt}, ui.render {component=Pane, requestId=wt}, skill.prompt, command.run {command=xray}, ui.close {id=xray}, ui.render {component=Pane, requestId=xray}, prompt.submit, turn.complete, prompt.suggest {origin has {kind=suggestion}}, command.run {command=shepherd}, turn.complete {agentId=/&quot;^a[0-9a-f]+$&quot;/}, command.run {command=slack-follow}, command.run {command=slack-unfollow}</code></dd>
-    <dt>API calls</dt><dd><code>$.agent.list, $.agent.spawn, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.fs.write, $.mcp.call, $.process.run, $.process.spawn, $.prompt.fill, $.prompt.submit, $.prompt.suggest, $.store.get, $.store.set, $.tool.call, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
+    <dt>Observed events</dt><dd>every prompt</dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=prs}, ui.close {id=prs}, ui.render {component=Pane, requestId=prs}, command.run {command=wt}, ui.close {id=wt}, ui.render {component=Pane, requestId=wt}, prompt.submit, turn.complete, prompt.suggest {origin has {kind=suggestion}}, command.run {command=shepherd}, turn.complete {agentId=/&quot;^a[0-9a-f]+$&quot;/}, command.run {command=slack-follow}, command.run {command=slack-unfollow}</code></dd>
+    <dt>API calls</dt><dd><code>$.agent.list, $.agent.spawn, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.fs.exists, $.fs.read, $.fs.stat, $.fs.write, $.mcp.call, $.process.run, $.process.spawn, $.prompt.fill, $.prompt.submit, $.prompt.suggest, $.tool.call, $.ui.close, $.ui.invalidate, $.ui.log, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/BenjaminG/ai-skills/tree/727255199059c973ae26bd4b06068fa4af1c9f03"><code>727255199059</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/BenjaminG/ai-skills/tree/eff8db1afb536bb1d2c61696edf9776df7683479"><code>eff8db1afb53</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 

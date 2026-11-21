@@ -15,9 +15,9 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/koslowskyj/tdd-mod">koslowskyj/tdd-mod</a></p>
 <p class="lede">Blocks file writes that break Red-Green-Refactor on coding tasks (port of probity's enforceTdd).</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">tdd-mod reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 10</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads files, reads the transcript, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">tdd-mod reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads files, reads env vars, reads the transcript, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install tdd-mod --marketplace koslowskyj/tdd-mod</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
-<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads files, reads the transcript, draws</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads files, reads env vars, reads the transcript, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
 <p class="actions"><a class="source" href="https://github.com/koslowskyj/tdd-mod">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#koslowskyj--tdd-mod--tdd-mod">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
@@ -25,13 +25,13 @@
 
     <dt>Observed events</dt><dd>every prompt, subagent spawns, Write calls, Edit calls, Bash calls, NotebookEdit calls</dd>
     <dt>Hooks</dt><dd><code>session.start, command.run {command=tdd-eval}, prompt.submit, agent.spawn, turn.complete, turn.step, tool.call {tool=Write}, tool.call {tool=Edit}, tool.call {tool=Bash}, tool.call {tool=NotebookEdit}</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.fs.exists, $.fs.read, $.model.complete, $.session.messages, $.session.root, $.ui.log, $.ui.status</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.read, $.model.complete, $.session.messages, $.session.root, $.ui.log, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/koslowskyj/tdd-mod/tree/92d908b3ef3fdfcf0424ce9b28035e5f8294d4e3"><code>92d908b3ef3f</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/koslowskyj/tdd-mod/blob/92d908b3ef3fdfcf0424ce9b28035e5f8294d4e3/.claude-plugin/marketplace.json">tdd-mod</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/koslowskyj/tdd-mod/tree/7f610ca151c9a1e3a3026e6f02fa0f4d86872792"><code>7f610ca151c9</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/koslowskyj/tdd-mod/blob/7f610ca151c9a1e3a3026e6f02fa0f4d86872792/.claude-plugin/marketplace.json">tdd-mod</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/koslowskyj--tdd-mod--tdd-mod-reach.svg" alt="Reach badge for tdd-mod"> <img src="/badges/koslowskyj--tdd-mod--tdd-mod-validates.svg" alt="Validation badge for tdd-mod"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/koslowskyj--tdd-mod--tdd-mod-reach.svg)](https://mods.aidojo.si/mods/koslowskyj--tdd-mod--tdd-mod/)

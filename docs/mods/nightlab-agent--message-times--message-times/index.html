@@ -15,9 +15,9 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/nightlab-agent/message-times">nightlab-agent/message-times</a></p>
 <p class="lede">Puts the time on each prompt and each reply in Claude Code's main transcript view, and keeps the times across a resume.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">message-times reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: writes files, reads files, reads mod state</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">message-times reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 9</li><li>Access from classified calls: L2, writes or runs: writes files, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install message-times --marketplace nightlab-agent/message-times</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
-<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">writes files, reads files, reads mod state</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">writes files, reads files, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
 <p class="actions"><a class="source" href="https://github.com/nightlab-agent/message-times">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#nightlab-agent--message-times--message-times">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
@@ -25,13 +25,13 @@
 
     <dt>Observed events</dt><dd>every prompt</dd>
     <dt>Hooks</dt><dd><code>session.start, session.end, session.append, prompt.submit, turn.step, ui.render {component=UserMessage}, ui.render {component=AssistantMessage}</code></dd>
-    <dt>API calls</dt><dd><code>$.fs.exists, $.fs.list, $.fs.read, $.fs.write, $.session.id, $.session.root, $.state.get, $.state.set</code></dd>
+    <dt>API calls</dt><dd><code>$.fs.exists, $.fs.list, $.fs.read, $.fs.write, $.session.id, $.session.root, $.state.get, $.state.set, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/nightlab-agent/message-times/tree/2d31d025e8181484957dcdd1d9f4db320f900595"><code>2d31d025e818</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/nightlab-agent/message-times/blob/2d31d025e8181484957dcdd1d9f4db320f900595/.claude-plugin/marketplace.json">nightlab-message-times</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/nightlab-agent/message-times/tree/0fc515132a971c011dad08bc29167b5f0e601896"><code>0fc515132a97</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/nightlab-agent/message-times/blob/0fc515132a971c011dad08bc29167b5f0e601896/.claude-plugin/marketplace.json">nightlab-message-times</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/nightlab-agent--message-times--message-times-reach.svg" alt="Reach badge for message-times"> <img src="/badges/nightlab-agent--message-times--message-times-validates.svg" alt="Validation badge for message-times"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/nightlab-agent--message-times--message-times-reach.svg)](https://mods.aidojo.si/mods/nightlab-agent--message-times--message-times/)

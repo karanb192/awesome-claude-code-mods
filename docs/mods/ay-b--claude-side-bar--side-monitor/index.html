@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/ay-b/claude-side-bar">ay-b/claude-side-bar</a></p>
 <p class="lede">Side panel: this session's share of the weekly limit, plus live agent and shell status</p>
 <p class="compatibility">review UI rewrite</p>
-<section class="summary" aria-label="Scan summary"><p class="summary-line">side-monitor reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 17</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads the transcript, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">side-monitor reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 11</li><li>API methods referenced: 17</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads the transcript, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, reads the transcript, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,15 +24,15 @@
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>classic hooks, every prompt, Agent calls, Bash calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=monitor}, session.measure, turn.complete, turn.step, ui.render {component=PromptHint}, classic.*, prompt.submit, tool.call {tool=Agent}, tool.call {tool=Bash}, ui.render {component=Pane, requestId=side-monitor}</code></dd>
+    <dt>Observed events</dt><dd>classic hooks, every prompt, every tool call</dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=monitor}, session.measure, turn.complete, turn.step, ui.render {component=PromptHint}, classic.*, prompt.submit, classic.Stop, classic.SubagentStop, tool.call, ui.render {component=Pane, requestId=side-monitor}</code></dd>
     <dt>API calls</dt><dd><code>$.agent.list, $.clock.after, $.clock.every, $.clock.now, $.command.register, $.process.run, $.session.compact, $.session.messages, $.session.usage, $.state.get, $.state.set, $.store.get, $.store.set, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/ay-b/claude-side-bar/tree/25c43e37689a7c04eacfb4a6646eee434c540452"><code>25c43e37689a</code></a></dd>
-    <dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/ay-b/claude-side-bar/blob/25c43e37689a7c04eacfb4a6646eee434c540452/hooks/register.tsx#L375">hooks/register.tsx:375</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/ay-b/claude-side-bar/tree/e639dcdd4d9bd0977a9e31ceaeebc592f4bf6ab3"><code>e639dcdd4d9b</code></a></dd>
+    <dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/ay-b/claude-side-bar/blob/e639dcdd4d9bd0977a9e31ceaeebc592f4bf6ab3/hooks/register.tsx#L485">hooks/register.tsx:485</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/ay-b--claude-side-bar--side-monitor-reach.svg" alt="Reach badge for side-monitor"> <img src="/badges/ay-b--claude-side-bar--side-monitor-validates.svg" alt="Validation badge for side-monitor"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/ay-b--claude-side-bar--side-monitor-reach.svg)](https://mods.aidojo.si/mods/ay-b--claude-side-bar--side-monitor/)

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Creeperprol/basic-mod">Creeperprol/basic-mod</a></p>
 <p class="lede">Side panes for Claude Code: a usage pane (context, limits, cost, tools) and session link (sessions message each other, host mode)</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">ai-link reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 12</li><li>API methods referenced: 19</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">ai-link reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 13</li><li>API methods referenced: 19</li><li>Access from classified calls: L2, writes or runs: drives Claude, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">drives Claude, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,14 +24,14 @@
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>mcp__ai-link__peers calls, mcp__ai-link__assign calls, mcp__ai-link__command calls, mcp__ai-link__rename calls, mcp__ai-link__report calls, classic hooks, every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=host}, command.run {command=assign}, command.run {command=setname}, command.run {command=run}, command.run {command=board}, tool.call {tool=mcp__ai-link__peers}, tool.call {tool=mcp__ai-link__assign}, tool.call {tool=mcp__ai-link__command}, tool.call {tool=mcp__ai-link__rename}, tool.call {tool=mcp__ai-link__report}, command.run {command=link}, command.run {command=sessions}, command.run {command=tell}, command.run {command=tellall}, prompt.compose, session.receive, command.run {command=rename}, classic.UserPromptSubmit, turn.complete, session.end, ui.render {component=Pane, requestId=ai-link}, command.run {command=usage-bar}, classic.SessionStart, prompt.submit, session.measure, tool.call, ui.render {component=Pane, requestId=usage-bar}</code></dd>
+    <dt>Observed events</dt><dd>mcp__ai-link__peers calls, mcp__ai-link__assign calls, mcp__ai-link__command calls, mcp__ai-link__rename calls, mcp__ai-link__report calls, the multi-window skill, the ai-link:multi-window skill, classic hooks, every prompt, every tool call</dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=host}, command.run {command=assign}, command.run {command=setname}, command.run {command=run}, command.run {command=board}, tool.call {tool=mcp__ai-link__peers}, tool.call {tool=mcp__ai-link__assign}, tool.call {tool=mcp__ai-link__command}, tool.call {tool=mcp__ai-link__rename}, tool.call {tool=mcp__ai-link__report}, command.run {command=link}, command.run {command=sessions}, command.run {command=tell}, command.run {command=tellall}, prompt.compose, skill.prompt {skill=multi-window}, skill.prompt {skill=ai-link:multi-window}, session.receive, command.run {command=rename}, classic.UserPromptSubmit, turn.complete, session.end, ui.render {component=Pane, requestId=ai-link}, command.run {command=usage-bar}, classic.SessionStart, prompt.submit, session.measure, tool.call, ui.render {component=Pane, requestId=usage-bar}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.command.run, $.prompt.submit, $.session.cwd, $.session.id, $.session.send, $.session.usage, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.tool.register, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/Creeperprol/basic-mod/tree/94eddc14ae1687d95f4fa6c45bdb639d4d00035e"><code>94eddc14ae16</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/Creeperprol/basic-mod/tree/5366ca1512ea7252efa5b4e18e751a13b66ec23a"><code>5366ca1512ea</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
