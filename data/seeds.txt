@@ -297,6 +297,7 @@ varunmoka7/reddit-watch
 vcdim/claude-code-sciplot
 vedant-shah/clawd-hq
 verdantran/code-city
+vibesenpai/vibesenpai
 vicmpen/mokkan
 vihrea1337/headroom
 VilelaAI/KairOS-Forge
