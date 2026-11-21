@@ -2,6 +2,7 @@
 0toshigami/claude-desktop-themes
 3dnow/claude-mods
 404Mayank/cachebeat
+Abdoul-sudo/worklog
 accodev/hairline
 Actera-AI/actera-claude-code
 actual-software/actual-skill
