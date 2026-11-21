@@ -15,9 +15,9 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Magithar/modboard">Magithar/modboard</a></p>
 <p class="lede">One board for every agent and every person. You decide what's on it: tasks, handoffs, CI, any command's output. Open it with /board</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">modboard reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 21</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the clipboard, reads env vars, reads settings, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">modboard reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 23</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, writes the clipboard, reads env vars, reads settings, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
-<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, writes the clipboard, reads env vars, reads settings, reads mod state, draws</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, writes the clipboard, reads env vars, reads settings, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
 <p class="actions"><a class="source" href="https://github.com/Magithar/modboard">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#Magithar--modboard--modboard">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
@@ -25,12 +25,12 @@
 
     <dt>Observed events</dt><dd>? calls, every tool call</dd>
     <dt>Hooks</dt><dd><code>session.start, tool.call {tool=?}, tool.call, turn.step, session.measure, session.end, command.run {command=board}, ui.close, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=modboard}</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.command.run, $.env.get, $.process.run, $.session.compact, $.session.id, $.session.model, $.session.usage, $.settings.read, $.state.get, $.state.set, $.tool.register, $.ui.close, $.ui.copy, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.clock.sleep, $.command.register, $.command.run, $.env.get, $.process.run, $.session.compact, $.session.id, $.session.model, $.session.usage, $.settings.read, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.register, $.ui.close, $.ui.copy, $.ui.open, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/Magithar/modboard/tree/23c6355aa539a337ac3842971089bad883835b80"><code>23c6355aa539</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/Magithar/modboard/tree/f449a3d5b3a69d9ff2c4b57ef329800251329cf5"><code>f449a3d5b3a6</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
