@@ -109,6 +109,7 @@
   "Abdallah-Abdelazim--usage-limits-cc-mod--usage-limits--2": {"id":"Abdallah-Abdelazim/usage-limits-cc-mod:plugins/usage-limits","to":"Abdallah-Abdelazim--claude-code-mods--usage-limits"},
   "AbdelrahmanMohamed-sa3oor--react-native-code-guardian--react-native-code-guardian": {"id":"AbdelrahmanMohamed-sa3oor/react-native-code-guardian:."},
   "Abdoul-sudo--prompt-enhancer--prompt-enhancer": {"id":"Abdoul-sudo/prompt-enhancer:."},
+  "Abdoul-sudo--worklog--worklog": {"id":"Abdoul-sudo/worklog:.","indexed":true},
   "AbelNavarro--clef-model-router--clef-model-router": {"id":"AbelNavarro/clef-model-router:.","indexed":true},
   "AbhiramDwivedi--claude-ops--foundry": {"id":"AbhiramDwivedi/claude-ops:plugins/foundry"},
   "AbhiramDwivedi--claude-ops--session-models": {"id":"AbhiramDwivedi/claude-ops:plugins/session-models","indexed":true},
