@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/codywilliamson/claude-mods">codywilliamson/claude-mods</a></p>
 <p class="lede">cost, context and git hud with an ember theme</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">devhud reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 9</li><li>Access from classified calls: L2, writes or runs: runs processes, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">devhud reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: runs processes, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -25,15 +25,15 @@
 
     <dt>Observed events</dt><dd>subagent spawns, every tool call</dd>
     <dt>Hooks</dt><dd><code>session.start, command.run {command=hud}, session.measure, turn.start, turn.complete, agent.spawn, tool.call, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=devhud}</code></dd>
-    <dt>API calls</dt><dd><code>$.agent.list, $.clock.now, $.command.register, $.process.run, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.status</code></dd>
+    <dt>API calls</dt><dd><code>$.agent.list, $.clock.now, $.command.register, $.process.run, $.state.get, $.state.set, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/codywilliamson/claude-mods/tree/4a2872c9d2e0daa9642ec40d0bf22265bd5a8f44"><code>4a2872c9d2e0</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/codywilliamson/claude-mods/tree/1c427c88726c59eaf16b6793ad6bae6155b95093"><code>1c427c88726c</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
-<section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from codywilliamson/claude-mods</h2><ul><li><a href="/mods/codywilliamson--claude-mods--shiplog/">shiplog</a><span>logs merges, releases and deploys across sessions and drafts build-in-public posts</span></li></ul></section>
+<section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from codywilliamson/claude-mods</h2><ul><li><a href="/mods/codywilliamson--claude-mods--after-hours/">after-hours</a><span>A dark, lamp-lit workspace theme: graphite, warm ivory and antique brass.</span></li><li><a href="/mods/codywilliamson--claude-mods--shiplog/">shiplog</a><span>logs merges, releases and deploys across sessions and drafts build-in-public posts</span></li></ul></section>
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/codywilliamson--claude-mods--devhud-reach.svg" alt="Reach badge for devhud"> <img src="/badges/codywilliamson--claude-mods--devhud-validates.svg" alt="Validation badge for devhud"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/codywilliamson--claude-mods--devhud-reach.svg)](https://mods.aidojo.si/mods/codywilliamson--claude-mods--devhud/)
 [![validates](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/codywilliamson--claude-mods--devhud-validates.svg)](https://mods.aidojo.si/mods/codywilliamson--claude-mods--devhud/)</code></pre></section>
 </main>

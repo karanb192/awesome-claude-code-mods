@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/llkhacquan/claude-mods">llkhacquan/claude-mods</a></p>
 <p class="lede">Mines every session for decisions, rules, root causes and gotchas, and files them in a topic tree per repo group, each item with the session quotes it came from</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">session-memory reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 20</li><li>Access from classified calls: L3, network: network, runs processes, writes files, drives Claude, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">session-memory reaches L3 (network) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 20</li><li>Access from classified calls: L3, network: network, runs processes, writes files, drives Claude, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">network, runs processes, writes files, drives Claude, reads files, reads env vars, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -23,17 +23,17 @@
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>? calls, every prompt, every tool call, compaction</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=memory-backfill}, command.run {command=memory-forget}, tool.call {tool=?}, prompt.submit, turn.step, tool.call, turn.start, turn.complete, session.compact, session.end</code></dd>
+    <dt>Observed events</dt><dd>every prompt, every tool call, compaction</dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=memory-backfill}, command.run {command=memory-forget}, tool.run {tool=?}, prompt.submit, turn.step, tool.call, turn.start, turn.complete, session.compact, session.end</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.clock.sleep, $.command.register, $.env.get, $.fs.exists, $.fs.list, $.fs.read, $.fs.stat, $.fs.write, $.http.fetch, $.model.complete, $.process.run, $.process.spawn, $.session.id, $.store.get, $.store.set, $.tool.register, $.ui.log, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/llkhacquan/claude-mods/tree/c88d87d7dab10929583869c412d7f70306d23271"><code>c88d87d7dab1</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/llkhacquan/claude-mods/tree/bb97f8e39b23251cd17d4e219dcd6bfbea74b992"><code>bb97f8e39b23</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
-<section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from llkhacquan/claude-mods</h2><ul><li><a href="/mods/llkhacquan--claude-mods--auto-approve/">auto-approve</a><span>Answers permission prompts for you: regex layers allow routine tool calls and always ask on pushes to protect…</span></li><li><a href="/mods/llkhacquan--claude-mods--sidebar/">sidebar</a><span>Shows every live Claude Code session as a card in a side pane: title, status, current tool, git branch, model…</span></li></ul></section>
+<section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from llkhacquan/claude-mods</h2><ul><li><a href="/mods/llkhacquan--claude-mods--auto-approve/">auto-approve</a><span>Answers permission prompts for you: regex layers allow routine tool calls and always ask on pushes to protect…</span></li><li><a href="/mods/llkhacquan--claude-mods--qboard/">qboard</a><span>Question board: Claude puts open questions on a side pane with stable Q&lt;n&gt; ids, you answer with a click or by…</span></li><li><a href="/mods/llkhacquan--claude-mods--sidebar/">sidebar</a><span>Shows every live Claude Code session as a card in a side pane: title, status, current tool, git branch, model…</span></li></ul></section>
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/llkhacquan--claude-mods--session-memory-reach.svg" alt="Reach badge for session-memory"> <img src="/badges/llkhacquan--claude-mods--session-memory-validates.svg" alt="Validation badge for session-memory"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/llkhacquan--claude-mods--session-memory-reach.svg)](https://mods.aidojo.si/mods/llkhacquan--claude-mods--session-memory/)
 [![validates](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/llkhacquan--claude-mods--session-memory-validates.svg)](https://mods.aidojo.si/mods/llkhacquan--claude-mods--session-memory/)</code></pre></section>
 </main>
