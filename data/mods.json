@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-21T04:08:24.209Z",
   "claudeVersion": "2.1.330",
-  "repos": 4698,
+  "repos": 4699,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -1156203,6 +1156203,168 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "Abdoul-sudo/worklog:.",
+      "repo": "Abdoul-sudo/worklog",
+      "path": ".",
+      "sourceCommit": "20413592ee148c62e8b215e40a00519c893858d9",
+      "sourceTree": "878ec2df23d1ec2e7f01ff982983bacd25ece892",
+      "name": "worklog",
+      "description": "Automatically track the time, tokens and API price of each project in Claude Code, with a yearly activity heatmap and 8 themes to choose from",
+      "author": "Abdoul-sudo",
+      "homepage": "https://github.com/Abdoul-sudo/worklog",
+      "url": "https://github.com/Abdoul-sudo/worklog",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "classic.Stop",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "worklog"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "worklog"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "PromptHint"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "SessionMode"
+          }
+        },
+        {
+          "event": "ui.focus",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        }
+      ],
+      "calls": [
+        "$.agent.list",
+        "$.clock.after",
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.read",
+        "$.fs.write",
+        "$.http.fetch",
+        "$.process.run",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.repo",
+        "$.session.surfaces",
+        "$.state.get",
+        "$.state.set",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.focus",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.330",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "worklog",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "network",
+          "runs processes",
+          "writes files",
+          "reads files",
+          "reads env vars",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt",
+        "every tool call",
+        "classic hooks"
+      ],
+      "draws": [
+        "Pane",
+        "PromptHint",
+        "SessionMode",
+        "AbovePrompt"
+      ],
+      "stars": 36,
+      "pushedAt": "2026-11-19T10:58:20Z",
+      "createdAt": "2026-11-12T10:45:57Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "master",
       "directory": null
     }
   ]

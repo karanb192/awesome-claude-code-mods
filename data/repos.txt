@@ -72,6 +72,7 @@ Abdallah-Abdelazim/claude-code-mods
 Abdallah-Abdelazim/usage-limits-cc-mod
 AbdelrahmanMohamed-sa3oor/react-native-code-guardian
 Abdoul-sudo/prompt-enhancer
+Abdoul-sudo/worklog
 ABDUAZIZX/env-guard
 ABDUAZIZX/script-gate
 abdul-raafai-asim/claude-code-mods
