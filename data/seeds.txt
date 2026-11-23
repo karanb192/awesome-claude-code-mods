@@ -260,6 +260,7 @@ SARTHAK2511/claude-combo
 scasella/claude-flightdeck
 scaso01/claude-risk-guardrails
 Sen-CaPoo/engram
+sendbird/sendbird-client-plugin
 shannonbay/Quarterdeck
 shimo4228/harness-scope
 shohamtal/cc-mod-mysql-client
