@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/sonichi/sutando">sonichi/sutando</a></p>
 <p class="lede">Runs the session's task watcher and starts a turn for each task it announces, in place of a Monitor</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">task-watch reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 4</li><li>API methods referenced: 8</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">task-watch reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 10</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, reads env vars, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -23,14 +23,14 @@
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, session.end</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.now, $.clock.sleep, $.env.get, $.process.run, $.process.spawn, $.prompt.submit, $.session.version, $.ui.log</code></dd>
+    <dt>Observed events</dt><dd>every tool call</dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, tool.call, session.end</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.now, $.clock.sleep, $.env.get, $.process.run, $.process.spawn, $.prompt.submit, $.session.version, $.ui.log, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/sonichi/sutando/tree/cbd82badd70cfc233adeebd3b7b0f2b798bd483f"><code>cbd82badd70c</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/sonichi/sutando/tree/e1d26ba06bc1a99286341c5aa434f68199e157bb"><code>e1d26ba06bc1</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from sonichi/sutando</h2><ul><li><a href="/mods/sonichi--sutando--ag2space-inbox/">ag2space-inbox</a><span>Feeds a Claude Code session from a Sparrow task inbox and writes its replies as Sparrow result files</span></li><li><a href="/mods/sonichi--sutando--pr-watch/">pr-watch</a><span>Turns GitHub pull request events from gh webhook forward into session turns, with no polling and no Monitor e…</span></li><li><a href="/mods/sonichi--sutando--sutando-observer/">sutando-observer</a><span>Observes the Claude main loop for HealthStatus and draws a compact status band above the prompt</span></li></ul></section>

@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/WahiduzzamanKhan/wahid-claude-tweaks">WahiduzzamanKhan/wahid-claude-tweaks</a></p>
 <p class="lede">Token, context window and quota meters above the prompt</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">token-meter reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 14</li><li>Access from classified calls: L1, reads: reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">token-meter reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 15</li><li>Access from classified calls: L1, reads: reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -24,14 +24,14 @@
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>classic hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, classic.SessionStart {source=clear|resume|fork}, session.measure, turn.step, command.run {command=token-meter}, ui.render {component=Pane, requestId=token-meter-settings}, ui.render {component=AbovePrompt}</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.session.id, $.session.usage, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
+    <dt>Observed events</dt><dd>Only what it hooks</dd>
+    <dt>Hooks</dt><dd><code>session.start, session.measure, turn.step, command.run {command=token-meter}, ui.render {component=Pane, requestId=token-meter-settings}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.session.id, $.session.usage, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/WahiduzzamanKhan/wahid-claude-tweaks/tree/9345fdfb1ea20202a1dc41ce678a78684052a836"><code>9345fdfb1ea2</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/WahiduzzamanKhan/wahid-claude-tweaks/tree/748f37f086efd4c67df792831fc2c641de623354"><code>748f37f086ef</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from WahiduzzamanKhan/wahid-claude-tweaks</h2><ul><li><a href="/mods/WahiduzzamanKhan--wahid-claude-tweaks--color-preview/">color-preview</a><span>Paints each colour code in Claude's replies with the colour it names</span></li></ul></section>
