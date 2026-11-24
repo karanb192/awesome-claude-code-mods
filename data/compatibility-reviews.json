@@ -251,5 +251,33 @@
     ],
     "reason": "The bundled renderer contains escape decoding, optional ANSI/hyperlink output and internal class-compartment separators. The Mermaid caller selects colorMode none and leaves hyperlinks disabled. It draws diagram lines as Text elements; its fallthrough calls pass the original event to next(), without rewriting props.text with these literals.",
     "source": "https://github.com/emergentai/claude-code-rich-ui/blob/4f4a848f5252d62b778db0a92868d74446349389/hooks/features/mermaid/render.ts#L19-L23"
+  },
+  {
+    "id": "chaufon/qol:plugins/file-links",
+    "sourceCommit": "1eb97633a1f5ef0f5b7fd31d667a5db00f75254f",
+    "claudeVersion": "2.1.331",
+    "warnings": [
+      {
+        "code": "ui-control-characters",
+        "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+        "evidence": [{ "file": "plugins/file-links/hooks/register.tsx", "line": 59 }, { "file": "plugins/file-links/hooks/register.tsx", "line": 211 }]
+      }
+    ],
+    "reason": "Both findings are NUL ('\\0') string literals used as parsers, not UI text. Line 59 splits the NUL-separated output of git ls-files -z into the file index; line 211 treats a file containing NUL as binary and shows a placeholder instead of its source. The AssistantMessage hook returns its own Markdown element and never calls next() with a rewritten props.text.",
+    "source": "https://github.com/chaufon/qol/blob/1eb97633a1f5ef0f5b7fd31d667a5db00f75254f/plugins/file-links/hooks/register.tsx#L54-L59"
+  },
+  {
+    "id": "dortort/claude-plugins:plugins/artifact-callbacks",
+    "sourceCommit": "fb03f6a2ff53d2499bdeae8e2c5a7370b202c365",
+    "claudeVersion": "2.1.331",
+    "warnings": [
+      {
+        "code": "ui-control-characters",
+        "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+        "evidence": [{ "file": "plugins/artifact-callbacks/hooks/lib/paths.ts", "line": 56 }]
+      }
+    ],
+    "reason": "The finding is the NUL-byte guard in normalizePage, which rejects a page argument containing a NUL character before it is used as a path for /callbacks open, trust, untrust and the page_token tool. It is a comparison string, not rendered text. The AbovePrompt hook returns its own component tree or passes the original event to next(e); it never forwards rewritten props.text.",
+    "source": "https://github.com/dortort/claude-plugins/blob/fb03f6a2ff53d2499bdeae8e2c5a7370b202c365/plugins/artifact-callbacks/hooks/lib/paths.ts#L48-L60"
   }
 ]
