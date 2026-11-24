@@ -1,7 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
-import { METHODS, TABLE_VERSION, grade, classified, regrade } from './grade.mjs'
+import { METHODS, TABLE_VERSION, LABEL_ORDER as LABELS, grade, classified, regrade } from './grade.mjs'
 import { fingerprint, describeChange } from './changed.mjs'
 
 const members = JSON.parse(readFileSync(new URL('./api-members.json', import.meta.url), 'utf8'))
@@ -21,12 +21,17 @@ test('members new in 2.1.330 take the grade their declaration supports', () => {
   assert.deepEqual(at('$.theme.clear'), [0, ['draws']])
   assert.deepEqual(at('$.ui.place'), [0, ['draws']])
   assert.deepEqual(at('$.prompt.paint'), [0, ['draws']])
-  assert.deepEqual(at('$.session.info'), [0, []])
+  assert.deepEqual(at('$.session.info'), [1, ['reads machine details']])
   assert.deepEqual(at('$.session.machine'), [1, ['reads machine details']])
-  assert.deepEqual(at('$.process.hookEnv'), [1, ['reads env vars']])
+  assert.deepEqual(at('$.process.hookEnv'), [1, ['reads env vars', 'persists state']])
   assert.deepEqual(at('$.vcs.diff'), [1, ['reads files']])
-  assert.deepEqual(at('$.vcs.isolate'), [2, ['runs processes']])
+  assert.deepEqual(at('$.vcs.isolate'), [2, ['runs processes', 'writes files']])
+  assert.deepEqual(at('$.vcs.release'), [2, ['runs processes', 'writes files']])
+  assert.deepEqual(at('$.vcs.status'), [2, ['runs processes', 'reads files']])
+  assert.deepEqual(at('$.vcs.list'), [2, ['runs processes', 'reads files']])
   assert.deepEqual(at('$.agent.call'), [2, ['drives Claude']])
+  // Every label a rule names is one the pages order and the finder can filter on.
+  for (const [, label] of Object.values(METHODS)) for (const one of [label].flat().filter(Boolean)) assert.ok(LABELS.includes(one), one)
   // A theme mod that only sets a look, redraws its own backdrop and keeps a setting draws and remembers.
   const theme = grade(['$.clock.after', '$.command.register', '$.store.get', '$.store.set', '$.theme.clear', '$.theme.set', '$.ui.invalidate', '$.ui.log', '$.ui.resolve'])
   assert.equal(theme.level, 0)

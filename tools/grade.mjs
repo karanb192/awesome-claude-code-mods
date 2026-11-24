@@ -4,7 +4,7 @@
 
 // Every member of the mods API in Claude Code 2.1.330, from the type declarations it writes for a mod
 // (claude-code/index.d.ts), with the level and label its description supports. tools/api-members.json lists
-// the same members, and a test keeps the two equal. A call outside this table is unclassified: either a
+// the same members, and a test keeps the two equal. A rule's label may be a list when one call does several things. A call outside this table is unclassified: either a
 // method in a namespace the table covers, or a namespace it does not cover, which could be an API another
 // mod adds, a different Claude Code version or a typo. Levels are this catalogue's ordering of what a mod's own code references, not limits on
 // what can follow from it.
@@ -26,7 +26,7 @@ export const METHODS = {
   'session.turns': [0, null], 'session.id': [0, null], 'session.repo': [1, 'reads files'], 'session.surfaces': [0, null], 'session.surface': [0, null],
   'session.usage': [0, null], 'session.version': [0, null], 'session.compact': [2, 'drives Claude'], 'session.send': [2, 'drives Claude'],
   'session.append': [2, 'drives Claude'], 'session.authorize': [1, 'requests an Anthropic credential handle'], 'session.identity': [1, 'reads your sign-in'],
-  'session.info': [0, null], 'session.machine': [1, 'reads machine details'],
+  'session.info': [1, 'reads machine details'], 'session.machine': [1, 'reads machine details'],
   'turn.abort': [2, 'drives Claude'],
   'prompt.submit': [2, 'drives Claude'], 'prompt.read': [1, 'reads the prompt box'], 'prompt.media': [1, 'reads prompt attachments'],
   'prompt.fill': [1, 'writes the prompt box'], 'prompt.suggest': [1, 'writes the prompt box'], 'prompt.compose': [1, 'reads the system prompt'], 'prompt.paint': [0, 'draws'],
@@ -39,15 +39,16 @@ export const METHODS = {
   'store.get': [0, 'persists state'], 'store.set': [0, 'persists state'], 'store.delete': [0, 'persists state'], 'store.keys': [0, 'persists state'],
   'state.get': [1, 'reads mod state'], 'state.set': [0, null],
   'clock.now': [0, null], 'clock.sleep': [0, null], 'clock.after': [0, null], 'clock.every': [0, null],
-  'http.fetch': [3, 'network'], 'process.run': [2, 'runs processes'], 'process.spawn': [2, 'runs processes'], 'process.hookEnv': [1, 'reads env vars'],
+  'http.fetch': [3, 'network'], 'process.run': [2, 'runs processes'], 'process.spawn': [2, 'runs processes'], 'process.hookEnv': [1, ['reads env vars', 'persists state']],
   'settings.read': [1, 'reads settings'], 'env.get': [1, 'reads env vars'], 'env.set': [2, 'sets env vars'],
-  'vcs.detect': [1, 'reads files'], 'vcs.diff': [1, 'reads files'], 'vcs.list': [2, 'runs processes'], 'vcs.status': [2, 'runs processes'],
-  'vcs.isolate': [2, 'runs processes'], 'vcs.release': [2, 'runs processes'],
+  'vcs.detect': [1, 'reads files'], 'vcs.diff': [1, 'reads files'], 'vcs.list': [2, ['runs processes', 'reads files']],
+  'vcs.status': [2, ['runs processes', 'reads files']], 'vcs.isolate': [2, ['runs processes', 'writes files']],
+  'vcs.release': [2, ['runs processes', 'writes files']],
   'wasm.compile': [0, null],
 }
 
 // Labels in the order pages and badges list them: widest reach first.
-const LABEL_ORDER = ['network', 'MCP servers', 'runs processes', 'writes files', 'sets env vars', 'changes config', 'drives Claude',
+export const LABEL_ORDER = ['network', 'MCP servers', 'runs processes', 'writes files', 'sets env vars', 'changes config', 'drives Claude',
   'writes the prompt box', 'writes the clipboard', 'reads files', 'reads env vars', 'reads settings', 'reads machine details', 'reads the transcript',
   'reads the selection', 'reads the prompt box', 'reads prompt attachments', 'reads the system prompt', 'reads mod state',
   'requests an Anthropic credential handle', 'reads your sign-in', 'telemetry', 'plays audio', 'persists state', 'draws']
@@ -90,7 +91,7 @@ export function grade(calls, complete = true) {
       continue
     }
     level = Math.max(level, rule[0])
-    if (rule[1]) labels.add(rule[1])
+    for (const label of [rule[1]].flat()) if (label) labels.add(label)
   }
   const order = label => label.startsWith('other: ') ? LABEL_ORDER.length : LABEL_ORDER.indexOf(label)
   return {

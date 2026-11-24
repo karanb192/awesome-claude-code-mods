@@ -3,7 +3,7 @@
 // the scan does; it never reads stars or push dates.
 
 import { esc, arrow, repo, site } from './site.mjs'
-import { LEVEL_NAMES, METHODS, classified, hasFootprint } from './grade.mjs'
+import { LEVEL_NAMES, METHODS, TABLE_VERSION, classified, hasFootprint } from './grade.mjs'
 import { shell } from './pages.mjs'
 
 export const ACCESS_PATH = 'access/'
@@ -60,7 +60,10 @@ const withShare = (n, of) => of ? `${number(n)} (${share(n, of)})` : number(n)
 // The API methods behind each level, grouped by the label they add, from the grading table itself.
 function levelMethods(level) {
   const groups = new Map()
-  for (const [member, [at, label]] of Object.entries(METHODS)) if (at === level) groups.set(label ?? 'no access label', [...(groups.get(label ?? 'no access label') ?? []), member])
+  for (const [member, [at, label]] of Object.entries(METHODS)) {
+    const key = [label].flat().filter(Boolean).join(', ') || 'no access label'
+    if (at === level) groups.set(key, [...(groups.get(key) ?? []), member])
+  }
   return [...groups].map(([label, members]) => `<li><span>${esc(label)}</span> ${members.map(member => `<code>${esc(member.startsWith('plugin.') ? member : '$.' + member)}</code>`).join(', ')}</li>`).join('')
 }
 
@@ -98,7 +101,7 @@ export function renderAccessPage(data) {
 <p>That is why a static scan works: <code>claude plugin validate</code> reports the events each mod hooks and the API methods its code references, and this catalogue records both for every mod.</p></section>
 
 <section aria-labelledby="levels"><h2 id="levels">What do the four levels mean?</h2>
-<p>Each mod gets the widest level of the API methods it references. Levels order what a mod’s own code calls; they are not safety ratings and not limits on what a started program can do. Counts are reported footprints by classified calls.</p>
+<p>Each mod gets the widest level of the API methods it references. Levels order what a mod’s own code calls; they are not safety ratings and not limits on what a started program can do. Counts are reported footprints by classified calls. The graded core table is the mods API of Claude Code ${esc(TABLE_VERSION)}.</p>
 <div class="levels">${[0, 1, 2, 3].map(level => `<section class="level-row"><h3>L${level}, ${esc(LEVEL_NAMES[level])}<span>${withShare(s.levels[level], of)} mods</span></h3><p>${LEVEL_TEXT[level]}</p><details><summary>API methods at L${level}</summary><ul>${levelMethods(level)}</ul></details></section>`).join('')}</div>
 <p>Shown apart, not as L0: ${number(s.noMethods)} reported footprints with no recorded API methods and ${number(s.onlyUnclassified)} whose methods the grader cannot classify.</p></section>
 

@@ -4,7 +4,7 @@
 // of the mod that replaced it, and the registry remembers that target after the copy's record is retired.
 
 import { esc, arrow, mark, star, repo, site, levels, reachText, track, recordDetails, validationResult, reviewNotes, lowerBound } from './site.mjs'
-import { hasFootprint, classified, TABLE_VERSION } from './grade.mjs'
+import { hasFootprint, classified } from './grade.mjs'
 import { install } from '../finder/install.mjs'
 import { slugs } from './slug.mjs'
 
@@ -175,7 +175,7 @@ export function accessFacts(mod) {
   return { calls, c, complete, kind, ungraded: c.unclassified.length + c.foreign.length, level: kind === 'graded' ? c.level : null, labels: kind === 'graded' ? c.labels : [], named }
 }
 
-const FOREIGN = `Calls in a namespace that is not in the Claude Code ${TABLE_VERSION} core table`
+const FOREIGN = 'Calls in a namespace that is not in the graded core table'
 const STATE_NOTE = 'the scan does not record whose state, so this does not show that it reads another mod’s values'
 
 // What the scan recorded, as one sentence and a short list, built only from scan fields so it never repeats
