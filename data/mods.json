@@ -460164,7 +460164,7 @@
       "author": "ChaseSunstrom",
       "homepage": "https://github.com/ChaseSunstrom/sampo",
       "url": "https://github.com/ChaseSunstrom/sampo/tree/main/mods/foreman-ui",
-      "kind": "mod",
+      "kind": "duplicate",
       "hasManifest": true,
       "modules": [
         "./register.tsx"
@@ -460432,7 +460432,8 @@
         "status": "warnings",
         "claudeVersion": "2.1.330",
         "errors": []
-      }
+      },
+      "duplicateOf": "ChaseSunstrom/sampo:mods/sampo-ui"
     },
     {
       "id": "ChaseSunstrom/sampo:mods/sampo-ui",
@@ -722643,7 +722644,7 @@
       "author": "Deluhathol",
       "homepage": "https://github.com/Deluha/council-of-elrond",
       "url": "https://github.com/Deluha/council-of-elrond/tree/main/mods/council-of-elrond",
-      "kind": "mod",
+      "kind": "duplicate",
       "hasManifest": true,
       "modules": [
         "./register.ts"
@@ -722837,7 +722838,8 @@
         "status": "passed",
         "claudeVersion": "2.1.330",
         "errors": []
-      }
+      },
+      "duplicateOf": "Deluha/council-of-elrond:."
     },
     {
       "id": "Demo-0416/claude-code-mods:plugins/prompt-queue",
