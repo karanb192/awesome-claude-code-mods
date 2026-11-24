@@ -8707,7 +8707,7 @@
   "takosasi-dev--claude-code-mods--project-board": {"id":"takosasi-dev/claude-code-mods:mods/project-board"},
   "takosasi-dev--claude-code-mods--prompt-book": {"id":"takosasi-dev/claude-code-mods:mods/prompt-book"},
   "takosasi-dev--claude-code-mods--release-draft": {"id":"takosasi-dev/claude-code-mods:mods/release-draft"},
-  "takosasi-dev--claude-code-mods--reply-frame": {"id":"takosasi-dev/claude-code-mods:mods/reply-frame"},
+  "takosasi-dev--claude-code-mods--reply-frame": {"id":"takosasi-dev/claude-code-mods:mods/reply-frame","to":"takosasi-dev--reply-frame--reply-frame"},
   "takosasi-dev--claude-code-mods--rule-switch": {"id":"takosasi-dev/claude-code-mods:mods/rule-switch"},
   "takosasi-dev--claude-code-mods--rule-watch": {"id":"takosasi-dev/claude-code-mods:mods/rule-watch"},
   "takosasi-dev--claude-code-mods--run-guard": {"id":"takosasi-dev/claude-code-mods:mods/run-guard"},
