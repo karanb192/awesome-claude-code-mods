@@ -8332,6 +8332,7 @@
   "seiya8bit--claude-mods--usage-status": {"id":"seiya8bit/claude-mods:plugins/usage-status"},
   "selmakcby--clawd-madenci--clawd-madenci": {"id":"selmakcby/clawd-madenci:plugin","indexed":true},
   "selvr0--harness-panel--harness-panel": {"id":"selvr0/harness-panel:."},
+  "sendbird--sendbird-client-plugin--sendbird-client": {"id":"sendbird/sendbird-client-plugin:plugins/sendbird-client"},
   "serafin-meshy--claude-mods--meshy-tray": {"id":"serafin-meshy/claude-mods:meshy-tray"},
   "serafin-meshy--claude-mods--meshy-viewer": {"id":"serafin-meshy/claude-mods:meshy-viewer"},
   "serg-yalosovetsky--integral--integral": {"id":"serg-yalosovetsky/integral:integral","to":"syalosovetskyi-org--integral--integral"},
