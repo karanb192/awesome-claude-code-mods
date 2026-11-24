@@ -803,6 +803,7 @@ charlie947/mod-maker
 ChaseSunstrom/foreman
 ChaseSunstrom/sampo
 ChaseWNorton/claude-doom
+chaufon/qol
 Chaveex/martians-mods-4-claude
 cheeky-amit/conductor-mod
 chenmochaos/naiwa_cc_mod
