@@ -19,7 +19,7 @@ const DEFAULT_LIMIT = 8
 const PER_REPO = 2
 
 export const ACCESS = ['network', 'MCP servers', 'runs processes', 'writes files', 'sets env vars', 'changes config', 'drives Claude',
-  'writes the prompt box', 'writes the clipboard', 'reads files', 'reads env vars', 'reads settings', 'reads the transcript',
+  'writes the prompt box', 'writes the clipboard', 'reads files', 'reads env vars', 'reads settings', 'reads machine details', 'reads the transcript',
   'reads the selection', 'reads the prompt box', 'reads prompt attachments', 'reads the system prompt', 'reads mod state',
   'requests an Anthropic credential handle', 'reads your sign-in', 'telemetry']
 export const SEES = ['everything', 'every prompt', 'every tool call', 'the system prompt']

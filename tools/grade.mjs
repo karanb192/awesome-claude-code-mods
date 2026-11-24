@@ -2,18 +2,23 @@
 // A footprint is what a mod can touch, read straight off the validator; it says
 // nothing about intent. Levels only order the rows.
 
-// Every member of the mods API in Claude Code 2.1.302, from the type declarations it writes for a mod
+// Every member of the mods API in Claude Code 2.1.330, from the type declarations it writes for a mod
 // (claude-code/index.d.ts), with the level and label its description supports. tools/api-members.json lists
 // the same members, and a test keeps the two equal. A call outside this table is unclassified: either a
 // method in a namespace the table covers, or a namespace it does not cover, which could be an API another
 // mod adds, a different Claude Code version or a typo. Levels are this catalogue's ordering of what a mod's own code references, not limits on
 // what can follow from it.
+// The release the table follows; tools/api-members.json records the same one, and a test keeps them equal.
+export const TABLE_VERSION = '2.1.330'
+
 export const METHODS = {
   'plugin.name': [0, null], 'plugin.root': [0, null],
   'ui.notice': [0, 'draws'], 'ui.invalidate': [0, 'draws'], 'ui.blit': [0, 'draws'], 'ui.resolve': [0, 'draws'], 'ui.log': [0, 'draws'],
   'ui.ask': [0, 'draws'], 'ui.toast': [0, 'draws'], 'ui.notify': [0, 'draws'], 'ui.status': [0, 'draws'], 'ui.open': [0, 'draws'],
   'ui.close': [0, 'draws'], 'ui.panes': [0, 'draws'], 'ui.scroll': [0, 'draws'], 'ui.focus': [0, 'draws'], 'ui.view': [0, 'draws'],
+  'ui.place': [0, 'draws'], 'ui.cancelNotify': [0, 'draws'],
   'ui.copy': [1, 'writes the clipboard'], 'ui.selection': [1, 'reads the selection'],
+  'theme.set': [0, 'draws'], 'theme.clear': [0, 'draws'],
   'model.complete': [2, 'drives Claude'], 'model.fork': [2, 'drives Claude'], 'model.classify': [2, 'drives Claude'],
   'audio.play': [0, 'plays audio'], 'audio.speak': [0, 'plays audio'],
   'mcp.call': [3, 'MCP servers'], 'mcp.connect': [3, 'MCP servers'],
@@ -21,25 +26,29 @@ export const METHODS = {
   'session.turns': [0, null], 'session.id': [0, null], 'session.repo': [1, 'reads files'], 'session.surfaces': [0, null], 'session.surface': [0, null],
   'session.usage': [0, null], 'session.version': [0, null], 'session.compact': [2, 'drives Claude'], 'session.send': [2, 'drives Claude'],
   'session.append': [2, 'drives Claude'], 'session.authorize': [1, 'requests an Anthropic credential handle'], 'session.identity': [1, 'reads your sign-in'],
+  'session.info': [0, null], 'session.machine': [1, 'reads machine details'],
   'turn.abort': [2, 'drives Claude'],
   'prompt.submit': [2, 'drives Claude'], 'prompt.read': [1, 'reads the prompt box'], 'prompt.media': [1, 'reads prompt attachments'],
-  'prompt.fill': [1, 'writes the prompt box'], 'prompt.suggest': [1, 'writes the prompt box'], 'prompt.compose': [1, 'reads the system prompt'],
+  'prompt.fill': [1, 'writes the prompt box'], 'prompt.suggest': [1, 'writes the prompt box'], 'prompt.compose': [1, 'reads the system prompt'], 'prompt.paint': [0, 'draws'],
   'tool.list': [0, null], 'tool.call': [2, 'drives Claude'], 'tool.check': [0, null], 'tool.register': [2, 'drives Claude'],
   'command.list': [0, null], 'command.run': [2, 'drives Claude'], 'command.register': [0, null],
   'config.list': [1, 'reads settings'], 'config.set': [2, 'changes config'],
   'telemetry.log': [1, 'telemetry'], 'telemetry.mark': [1, 'telemetry'],
-  'agent.spawn': [2, 'drives Claude'], 'agent.list': [0, null], 'agent.register': [2, 'drives Claude'],
+  'agent.spawn': [2, 'drives Claude'], 'agent.list': [0, null], 'agent.register': [2, 'drives Claude'], 'agent.call': [2, 'drives Claude'], 'agent.limits': [0, null],
   'fs.read': [1, 'reads files'], 'fs.write': [2, 'writes files'], 'fs.list': [1, 'reads files'], 'fs.exists': [1, 'reads files'], 'fs.stat': [1, 'reads files'], 'fs.ancestors': [1, 'reads files'],
   'store.get': [0, 'persists state'], 'store.set': [0, 'persists state'], 'store.delete': [0, 'persists state'], 'store.keys': [0, 'persists state'],
   'state.get': [1, 'reads mod state'], 'state.set': [0, null],
   'clock.now': [0, null], 'clock.sleep': [0, null], 'clock.after': [0, null], 'clock.every': [0, null],
-  'http.fetch': [3, 'network'], 'process.run': [2, 'runs processes'], 'process.spawn': [2, 'runs processes'],
+  'http.fetch': [3, 'network'], 'process.run': [2, 'runs processes'], 'process.spawn': [2, 'runs processes'], 'process.hookEnv': [1, 'reads env vars'],
   'settings.read': [1, 'reads settings'], 'env.get': [1, 'reads env vars'], 'env.set': [2, 'sets env vars'],
+  'vcs.detect': [1, 'reads files'], 'vcs.diff': [1, 'reads files'], 'vcs.list': [2, 'runs processes'], 'vcs.status': [2, 'runs processes'],
+  'vcs.isolate': [2, 'runs processes'], 'vcs.release': [2, 'runs processes'],
+  'wasm.compile': [0, null],
 }
 
 // Labels in the order pages and badges list them: widest reach first.
 const LABEL_ORDER = ['network', 'MCP servers', 'runs processes', 'writes files', 'sets env vars', 'changes config', 'drives Claude',
-  'writes the prompt box', 'writes the clipboard', 'reads files', 'reads env vars', 'reads settings', 'reads the transcript',
+  'writes the prompt box', 'writes the clipboard', 'reads files', 'reads env vars', 'reads settings', 'reads machine details', 'reads the transcript',
   'reads the selection', 'reads the prompt box', 'reads prompt attachments', 'reads the system prompt', 'reads mod state',
   'requests an Anthropic credential handle', 'reads your sign-in', 'telemetry', 'plays audio', 'persists state', 'draws']
 const CORE = new Set(Object.keys(METHODS).map(member => member.split('.')[0]))

@@ -10,7 +10,7 @@ export const ACCESS_PATH = 'access/'
 const DOCS = 'https://code.claude.com/docs/en/plugins/mods'
 const LEVEL_TEXT = [
   'Draws on screen, plays audio, keeps its own stored values and reads facts about the session such as the working directory or model.',
-  'Reads files, settings, environment variables, the transcript, the prompt box or other mods’ state, or writes the clipboard or the prompt box.',
+  'Reads files, settings, environment variables, machine details, the transcript, the prompt box or other mods’ state, or writes the clipboard or the prompt box.',
   'Writes files, runs processes, changes config or environment variables, or drives Claude by sending prompts, calling tools or starting agents.',
   'Makes HTTP requests with <code>$.http.fetch</code> or calls MCP servers.',
 ]

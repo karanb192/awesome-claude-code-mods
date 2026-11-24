@@ -1,17 +1,36 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
-import { METHODS, grade, classified, regrade } from './grade.mjs'
+import { METHODS, TABLE_VERSION, grade, classified, regrade } from './grade.mjs'
 import { fingerprint, describeChange } from './changed.mjs'
 
 const members = JSON.parse(readFileSync(new URL('./api-members.json', import.meta.url), 'utf8'))
 
 test('the table grades exactly the members Claude Code declares, and nothing else', () => {
-  assert.equal(members.claudeCode, '2.1.302')
+  assert.equal(members.claudeCode, '2.1.330')
+  assert.equal(TABLE_VERSION, members.claudeCode)
   assert.deepEqual(Object.keys(METHODS).sort(), [...members.methods, ...members.properties].sort())
-  assert.equal(members.methods.length, 83)
+  assert.equal(members.methods.length, 100)
   for (const property of members.properties) assert.deepEqual(METHODS[property], [0, null])
   assert.ok(!Object.keys(METHODS).some(key => /^(terminal|desktop|mobile|vscode)\./.test(key)), 'surface element constructors are not API calls')
+})
+
+test('members new in 2.1.330 take the grade their declaration supports', () => {
+  const at = call => { const { level, labels } = grade([call]); return [level, labels] }
+  assert.deepEqual(at('$.theme.set'), [0, ['draws']])
+  assert.deepEqual(at('$.theme.clear'), [0, ['draws']])
+  assert.deepEqual(at('$.ui.place'), [0, ['draws']])
+  assert.deepEqual(at('$.prompt.paint'), [0, ['draws']])
+  assert.deepEqual(at('$.session.info'), [0, []])
+  assert.deepEqual(at('$.session.machine'), [1, ['reads machine details']])
+  assert.deepEqual(at('$.process.hookEnv'), [1, ['reads env vars']])
+  assert.deepEqual(at('$.vcs.diff'), [1, ['reads files']])
+  assert.deepEqual(at('$.vcs.isolate'), [2, ['runs processes']])
+  assert.deepEqual(at('$.agent.call'), [2, ['drives Claude']])
+  // A theme mod that only sets a look, redraws its own backdrop and keeps a setting draws and remembers.
+  const theme = grade(['$.clock.after', '$.command.register', '$.store.get', '$.store.set', '$.theme.clear', '$.theme.set', '$.ui.invalidate', '$.ui.log', '$.ui.resolve'])
+  assert.equal(theme.level, 0)
+  assert.ok(!theme.labels.some(label => label.startsWith('other: ')))
 })
 
 test('methods the old rules missed or misgraded take the grade their declaration supports', () => {
