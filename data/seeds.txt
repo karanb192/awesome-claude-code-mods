@@ -76,6 +76,7 @@ deepaksinghcs14/deadeye-cc
 devsergioherrera/read-aloud-mod
 dominicrico/jev-router
 dophamine/claude-suggest
+dortort/claude-plugins
 dot-agi/arrester
 dot-agi/downrange
 dot-agi/high-command
