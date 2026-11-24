@@ -789670,7 +789670,7 @@
       "author": null,
       "homepage": "https://github.com/GomelHawk/VeroPlugins",
       "url": "https://github.com/GomelHawk/VeroPlugins/tree/main/shared",
-      "kind": "mod",
+      "kind": "fixture",
       "hasManifest": false,
       "modules": [
         "./harness.ts"
@@ -1044915,7 +1044915,7 @@
       "author": "Ryan Uesato",
       "homepage": "https://github.com/ruesato/claude-mods-fathom-progress",
       "url": "https://github.com/ruesato/claude-mods-fathom-progress/tree/main/plugins/fathom-probe",
-      "kind": "mod",
+      "kind": "fixture",
       "hasManifest": true,
       "modules": [
         "./scaffold-probe.ts"
@@ -1105648,7 +1105648,7 @@
       "author": "takosasi-dev",
       "homepage": "https://github.com/takosasi-dev/reply-frame",
       "url": "https://github.com/takosasi-dev/claude-code-mods/tree/main/mods/reply-frame",
-      "kind": "mod",
+      "kind": "duplicate",
       "hasManifest": true,
       "modules": [
         "./register.tsx"
@@ -1105709,7 +1105709,8 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
-      "directory": null
+      "directory": null,
+      "duplicateOf": "takosasi-dev/reply-frame:."
     },
     {
       "id": "takosasi-dev/claude-code-mods:mods/rule-switch",
