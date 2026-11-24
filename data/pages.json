@@ -4706,6 +4706,8 @@
   "dookers-code--dooks-mods--usage-bar": {"id":"dookers-code/dooks-mods:usage-bar"},
   "dophamine--claude-suggest--suggest": {"id":"dophamine/claude-suggest:.","indexed":true},
   "doricstack--llm-fleet--llm-fleet": {"id":"doricstack/llm-fleet:plugins/llm-fleet"},
+  "dortort--claude-plugins--artifact-callbacks": {"id":"dortort/claude-plugins:plugins/artifact-callbacks","indexed":true},
+  "dortort--claude-plugins--taint-guard": {"id":"dortort/claude-plugins:plugins/taint-guard","indexed":true},
   "dot-agi--arrester--arrester": {"id":"dot-agi/arrester:."},
   "dot-agi--downrange--downrange": {"id":"dot-agi/downrange:."},
   "dot-agi--high-command--high-command": {"id":"dot-agi/high-command:."},

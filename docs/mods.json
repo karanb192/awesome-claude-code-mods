@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-24T11:19:11.491Z",
   "claudeVersion": "2.1.331",
-  "repos": 4798,
+  "repos": 4799,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -1186853,6 +1186853,280 @@
       "stars": 0,
       "pushedAt": "2026-11-17T18:05:29Z",
       "createdAt": "2026-10-21T04:13:08Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "dortort/claude-plugins:plugins/artifact-callbacks",
+      "repo": "dortort/claude-plugins",
+      "path": "plugins/artifact-callbacks",
+      "sourceCommit": "fb03f6a2ff53d2499bdeae8e2c5a7370b202c365",
+      "sourceTree": "94a6858c23a1b7d48dd23cb6f643221ccbafa455",
+      "name": "artifact-callbacks",
+      "description": "Turn clicks on HTML pages Claude writes into follow-up prompts in the running session, through a loopback-only listener",
+      "author": "dortort",
+      "homepage": "https://github.com/dortort/claude-plugins",
+      "url": "https://github.com/dortort/claude-plugins/tree/main/plugins/artifact-callbacks",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.compose",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "mcp__artifact-callbacks__page_token"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "callbacks"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.list",
+        "$.fs.write",
+        "$.process.run",
+        "$.process.spawn",
+        "$.prompt.submit",
+        "$.session.append",
+        "$.session.id",
+        "$.state.get",
+        "$.state.set",
+        "$.tool.register",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.resolve",
+        "$.ui.status",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.331",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": [
+          {
+            "code": "ui-control-characters",
+            "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+            "evidence": [
+              {
+                "file": "plugins/artifact-callbacks/hooks/lib/paths.ts",
+                "line": 56
+              }
+            ]
+          }
+        ]
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "writes files",
+          "drives Claude",
+          "reads files",
+          "reads env vars",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt",
+        "mcp__artifact-callbacks__page_token calls"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 4,
+      "pushedAt": "2026-11-23T17:37:30Z",
+      "createdAt": "2026-02-25T12:40:57Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "dortort/claude-plugins:plugins/taint-guard",
+      "repo": "dortort/claude-plugins",
+      "path": "plugins/taint-guard",
+      "sourceCommit": "fb03f6a2ff53d2499bdeae8e2c5a7370b202c365",
+      "sourceTree": "fb7fc19ef7cd108756f69f67c831dad4900ee592",
+      "name": "taint-guard",
+      "description": "Remember which sensitive or untrusted sources entered a session and refuse risky tool calls once they have",
+      "author": "dortort",
+      "homepage": "https://github.com/dortort/claude-plugins",
+      "url": "https://github.com/dortort/claude-plugins/tree/main/plugins/taint-guard",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {}
+        },
+        {
+          "event": "classic.SessionStart",
+          "matcher": {
+            "source": "clear|resume|fork"
+          }
+        },
+        {
+          "event": "classic.Stop",
+          "matcher": {}
+        },
+        {
+          "event": "tool.describe",
+          "matcher": {}
+        },
+        {
+          "event": "session.end",
+          "matcher": {}
+        },
+        {
+          "event": "session.compact",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "taintguard"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.fs.exists",
+        "$.fs.read",
+        "$.fs.write",
+        "$.session.cwd",
+        "$.session.id",
+        "$.session.messages",
+        "$.settings.read",
+        "$.state.get",
+        "$.state.set",
+        "$.store.delete",
+        "$.store.get",
+        "$.store.keys",
+        "$.store.set",
+        "$.ui.ask",
+        "$.ui.log",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.331",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "writes files",
+          "reads files",
+          "reads env vars",
+          "reads settings",
+          "reads the transcript",
+          "reads mod state",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every tool call",
+        "classic hooks",
+        "compaction",
+        "every prompt"
+      ],
+      "draws": [
+        "AbovePrompt"
+      ],
+      "stars": 4,
+      "pushedAt": "2026-11-23T17:37:30Z",
+      "createdAt": "2026-02-25T12:40:57Z",
       "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
