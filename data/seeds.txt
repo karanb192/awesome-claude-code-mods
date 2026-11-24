@@ -136,6 +136,7 @@ jyooi/agent-simple-english
 k45sle/Claude-auto-pause
 karanb192/cache-tax
 karanb192/claude-code-mods
+karanb192/horcrux
 karanb192/time-blame
 kbrianps/claude-inline-images
 kbrianps/claude-latex-math
