@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-21T04:08:24.209Z",
   "claudeVersion": "2.1.330",
-  "repos": 4699,
+  "repos": 4700,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -1156365,6 +1156365,126 @@
       "license": "MIT",
       "archived": false,
       "defaultBranch": "master",
+      "directory": null
+    },
+    {
+      "id": "karanb192/horcrux:.",
+      "repo": "karanb192/horcrux",
+      "path": ".",
+      "sourceCommit": "e4442870bf373b3c4773f0986ef096fffe64688c",
+      "sourceTree": "c944db3ee6997114ee73f685142af83b33995081",
+      "name": "horcrux",
+      "description": "Turn Claude Code into Tom Riddle's diary. Write on an old page, your ink soaks in, and a second hand writes back. Floating candles, and stars at night. /lumos to open, /nox to close. Desktop app; draws only, no tokens.",
+      "author": "Karan Bansal",
+      "homepage": "https://github.com/karanb192/horcrux",
+      "url": "https://github.com/karanb192/horcrux",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "lumos"
+          }
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "nox"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Backdrop"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Spinner"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "TurnDuration"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.after",
+        "$.command.register",
+        "$.store.get",
+        "$.store.set",
+        "$.theme.clear",
+        "$.theme.set",
+        "$.ui.invalidate",
+        "$.ui.log",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.330",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "horcrux",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "persists state",
+          "draws",
+          "other: $.theme.clear",
+          "other: $.theme.set"
+        ],
+        "foreign": [
+          "$.theme.clear",
+          "$.theme.set"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "Backdrop",
+        "Spinner",
+        "TurnDuration"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-11-24T04:26:23Z",
+      "createdAt": "2026-11-22T14:48:40Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
       "directory": null
     }
   ]
