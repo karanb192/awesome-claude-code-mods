@@ -186,3 +186,4 @@ ThingsLikeClaude/ani-steer-public:plugins/jev-steer ThingsLikeClaude/ani-steer:p
 Kuddev/pebrel:nebula_app/res/prompt-suggestions/claude Kuddev/pebrel:pebrel_app/res/prompt-suggestions/claude
 ChaseSunstrom/sampo:mods/foreman-ui ChaseSunstrom/sampo:mods/sampo-ui
 Deluha/council-of-elrond:mods/council-of-elrond Deluha/council-of-elrond:.
+takosasi-dev/claude-code-mods:mods/reply-frame takosasi-dev/reply-frame:.
