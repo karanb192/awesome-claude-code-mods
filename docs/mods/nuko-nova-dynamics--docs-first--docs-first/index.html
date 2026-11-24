@@ -15,9 +15,9 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/nuko-nova-dynamics/docs-first">nuko-nova-dynamics/docs-first</a></p>
 <p class="lede">Holds back dependency changes, new imports and sensitive-file edits until the session has checked the registry or the official docs for them.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">docs-first reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 15</li><li>Access from classified calls: L1, reads: reads files, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">docs-first reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 16</li><li>Access from classified calls: L1, reads: reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
-<div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads files, reads mod state, persists state, draws</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads files, reads env vars, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
 <p class="actions"><a class="source" href="https://github.com/nuko-nova-dynamics/docs-first">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#nuko-nova-dynamics--docs-first--docs-first">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
@@ -25,12 +25,12 @@
 
     <dt>Observed events</dt><dd>classic hooks, every prompt, every tool call</dd>
     <dt>Hooks</dt><dd><code>session.start, classic.SessionStart, prompt.submit, tool.call, command.run {command=docs-gate}</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.fs.exists, $.fs.read, $.session.cwd, $.session.id, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.log, $.ui.status</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.after, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.read, $.session.cwd, $.session.id, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.log, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/nuko-nova-dynamics/docs-first/tree/876b0104ae1e9cd35d52e0d2b97fe459d710ba0f"><code>876b0104ae1e</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/nuko-nova-dynamics/docs-first/tree/6e1094c8ac2089bdf9ec16b503ab8d266dd66359"><code>6e1094c8ac20</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 

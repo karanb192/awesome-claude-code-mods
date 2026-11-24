@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/dvakatsiienko/frame">dvakatsiienko/frame</a></p>
 <p class="lede">no two sessions write the same file: a session's first edit of a file holds it until it is committed, the session ends or sits idle 30 min; another session's Edit, Write or Bash write to it is refused, naming the holder; dima's tick on an ask quoting the file lets the asking session write it until its next commit or turn end, and tells the holder</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">x-mod-holds reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">x-mod-holds reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: runs processes, reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, reads files, reads env vars, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
@@ -25,12 +25,12 @@
 
     <dt>Observed events</dt><dd>every prompt, /&quot;^(Edit|Write|NotebookEdit)$&quot;/ calls, Bash calls</dd>
     <dt>Hooks</dt><dd><code>session.start, prompt.submit, turn.complete, session.end, command.run, tool.call {tool=/&quot;^(Edit|Write|NotebookEdit)$&quot;/}, tool.call {tool=Bash}</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.now, $.env.get, $.fs.stat, $.process.run, $.session.id, $.state.get, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.log</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.now, $.env.get, $.fs.read, $.fs.stat, $.process.run, $.session.id, $.state.get, $.store.delete, $.store.get, $.store.keys, $.store.set, $.ui.log</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/dvakatsiienko/frame/tree/adf92e3db6b9e21a8f534edba0cf733e57b7599c"><code>adf92e3db6b9</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/dvakatsiienko/frame/tree/de9c30f27fe8360cd6742dbfcf3f6809407b86f1"><code>de9c30f27fe8</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from dvakatsiienko/frame</h2><ul><li><a href="/mods/dvakatsiienko--frame--x-mod-guard/">x-mod-guard</a><span>reads every Bash call before it runs and refuses only the destructive floor: rm, a kill by pattern, a git dis…</span></li><li><a href="/mods/dvakatsiienko--frame--x-mod-redact/">x-mod-redact</a><span>keeps secrets out of every transcript: api keys, tokens and private keys read as a stable placeholder in ever…</span></li><li><a href="/mods/dvakatsiienko--frame--x-mod-stash/">x-mod-stash</a><span>dima's command center above the prompt, one row: orbit 🪐 (the session's asks, ticked in the board instead of…</span></li></ul></section>
