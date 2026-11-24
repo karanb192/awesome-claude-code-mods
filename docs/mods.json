@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-24T11:19:11.491Z",
   "claudeVersion": "2.1.331",
-  "repos": 4797,
+  "repos": 4798,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -1186424,6 +1186424,436 @@
       "pushedAt": "2026-11-24T08:02:40Z",
       "createdAt": "2026-10-01T08:21:56Z",
       "license": "Apache-2.0",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "chaufon/qol:plugins/conversation-usage",
+      "repo": "chaufon/qol",
+      "path": "plugins/conversation-usage",
+      "sourceCommit": "1eb97633a1f5ef0f5b7fd31d667a5db00f75254f",
+      "sourceTree": "0ab81bd1427f9489a51164a3621421f9bc232390",
+      "name": "conversation-usage",
+      "description": "Shows the tokens and estimated cost of the current conversation and of past conversations",
+      "author": "Chaufon",
+      "homepage": "https://github.com/chaufon/qol",
+      "url": "https://github.com/chaufon/qol/tree/main/plugins/conversation-usage",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {
+            "command": "conversation-usage"
+          }
+        },
+        {
+          "event": "ui.close",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "conversation-usage"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.command.register",
+        "$.env.get",
+        "$.http.fetch",
+        "$.process.run",
+        "$.session.cwd",
+        "$.session.id",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.close",
+        "$.ui.open",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "warnings",
+        "claudeVersion": "2.1.331",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "qol",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 3,
+        "name": "network",
+        "labels": [
+          "network",
+          "runs processes",
+          "reads env vars",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-11-17T18:05:29Z",
+      "createdAt": "2026-10-21T04:13:08Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "chaufon/qol:plugins/file-links",
+      "repo": "chaufon/qol",
+      "path": "plugins/file-links",
+      "sourceCommit": "1eb97633a1f5ef0f5b7fd31d667a5db00f75254f",
+      "sourceTree": "b8c255bef82c13df81022880b617047714cbb4f5",
+      "name": "file-links",
+      "description": "Makes the file references in Claude's replies clickable and opens the file at that line in a side pane",
+      "author": "Chaufon",
+      "homepage": "https://github.com/chaufon/qol",
+      "url": "https://github.com/chaufon/qol/tree/main/plugins/file-links",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.close",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AssistantMessage"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "file-links"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.sleep",
+        "$.env.get",
+        "$.fs.read",
+        "$.fs.stat",
+        "$.process.run",
+        "$.session.cwd",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.open",
+        "$.ui.resolve",
+        "$.ui.scroll",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.331",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "qol",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": [
+          {
+            "code": "ui-control-characters",
+            "message": "UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call.",
+            "evidence": [
+              {
+                "file": "plugins/file-links/hooks/register.tsx",
+                "line": 59
+              },
+              {
+                "file": "plugins/file-links/hooks/register.tsx",
+                "line": 211
+              }
+            ]
+          }
+        ]
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "reads files",
+          "reads env vars",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "AssistantMessage",
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-11-17T18:05:29Z",
+      "createdAt": "2026-10-21T04:13:08Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "chaufon/qol:plugins/grammar-tracker",
+      "repo": "chaufon/qol",
+      "path": "plugins/grammar-tracker",
+      "sourceCommit": "1eb97633a1f5ef0f5b7fd31d667a5db00f75254f",
+      "sourceTree": "d5b25b167353c7f84962edf13531ec9e73c9f06f",
+      "name": "grammar-tracker",
+      "description": "Checks the English grammar of each prompt, counts repeated mistakes, and shows the check in a band and a pane",
+      "author": "Chaufon",
+      "homepage": "https://github.com/chaufon/qol",
+      "url": "https://github.com/chaufon/qol/tree/main/plugins/grammar-tracker",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "ui.close",
+          "matcher": {}
+        },
+        {
+          "event": "prompt.submit",
+          "matcher": {}
+        },
+        {
+          "event": "turn.start",
+          "matcher": {}
+        },
+        {
+          "event": "turn.step",
+          "matcher": {}
+        },
+        {
+          "event": "turn.complete",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AssistantMessage"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "AbovePrompt"
+          }
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "Pane",
+            "requestId": "grammar"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.now",
+        "$.process.run",
+        "$.session.cwd",
+        "$.session.id",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.close",
+        "$.ui.open",
+        "$.ui.panes",
+        "$.ui.resolve",
+        "$.ui.toast"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.331",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "qol",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [
+        "every prompt"
+      ],
+      "draws": [
+        "AssistantMessage",
+        "AbovePrompt",
+        "Pane"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-11-17T18:05:29Z",
+      "createdAt": "2026-10-21T04:13:08Z",
+      "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "chaufon/qol:plugins/usage-footer",
+      "repo": "chaufon/qol",
+      "path": "plugins/usage-footer",
+      "sourceCommit": "1eb97633a1f5ef0f5b7fd31d667a5db00f75254f",
+      "sourceTree": "1e9224407d5d50f0c7841f992309bc747582742f",
+      "name": "usage-footer",
+      "description": "Shows context usage, the 5-hour and 7-day rate-limit windows and their reset times at the right of the prompt footer",
+      "author": "Chaufon",
+      "homepage": "https://github.com/chaufon/qol",
+      "url": "https://github.com/chaufon/qol/tree/main/plugins/usage-footer",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.tsx"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.measure",
+          "matcher": {}
+        },
+        {
+          "event": "command.run",
+          "matcher": {}
+        },
+        {
+          "event": "ui.render",
+          "matcher": {
+            "component": "SessionMode"
+          }
+        }
+      ],
+      "calls": [
+        "$.clock.every",
+        "$.clock.now",
+        "$.session.usage",
+        "$.state.get",
+        "$.state.set",
+        "$.ui.resolve"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.331",
+        "errors": []
+      },
+      "marketplaces": [
+        {
+          "path": ".claude-plugin/marketplace.json",
+          "name": "qol",
+          "status": "passed",
+          "errors": []
+        }
+      ],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 1,
+        "name": "reads",
+        "labels": [
+          "reads mod state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [
+        "SessionMode"
+      ],
+      "stars": 0,
+      "pushedAt": "2026-11-17T18:05:29Z",
+      "createdAt": "2026-10-21T04:13:08Z",
+      "license": "MIT",
       "archived": false,
       "defaultBranch": "main",
       "directory": null
