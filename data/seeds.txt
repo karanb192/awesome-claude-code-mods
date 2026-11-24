@@ -57,6 +57,7 @@ bradtraversy/traversy-claude-mods
 cablate/model-relay
 candygoogy/notary
 ChanMeng666/echook
+chaufon/qol
 chenyuxiaojin/cyxj-notch
 chrisluo5311/Pixel-Play
 Civalski/claujev
