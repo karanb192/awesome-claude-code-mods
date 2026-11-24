@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-24T11:19:11.491Z",
   "claudeVersion": "2.1.331",
-  "repos": 4796,
+  "repos": 4797,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -1186356,6 +1186356,74 @@
       "pushedAt": "2026-11-23T05:11:51Z",
       "createdAt": "2026-11-23T02:35:06Z",
       "license": "NOASSERTION",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "sendbird/sendbird-client-plugin:plugins/sendbird-client",
+      "repo": "sendbird/sendbird-client-plugin",
+      "path": "plugins/sendbird-client",
+      "sourceCommit": "6807b6e78260b1eef890ead5a4e47ac36a2ad76d",
+      "sourceTree": "f1fead1cedeb2367963adfc04faa7065550b378f",
+      "name": "sendbird-client",
+      "description": "Add Sendbird Chat (including authentication and sessions), UIKit, and Calls to iOS, Android, React, and React Native apps from Claude Code or Codex, writing code from verified documentation and the Sendbird SDK you have installed. It runs local shell scripts as hooks. See \"What runs on your machine\" in the README.",
+      "author": "Sendbird",
+      "homepage": "https://tools.docs.sendbird.com/",
+      "url": "https://github.com/sendbird/sendbird-client-plugin/tree/main/plugins/sendbird-client",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./notice.js"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "session.attach",
+          "matcher": {}
+        }
+      ],
+      "calls": [
+        "$.env.set",
+        "$.process.run",
+        "$.session.surfaces",
+        "$.store.get",
+        "$.store.set",
+        "$.ui.log"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.331",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 2,
+        "name": "writes or runs",
+        "labels": [
+          "runs processes",
+          "sets env vars",
+          "persists state",
+          "draws"
+        ]
+      },
+      "sees": [],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-24T08:02:40Z",
+      "createdAt": "2026-10-01T08:21:56Z",
+      "license": "Apache-2.0",
       "archived": false,
       "defaultBranch": "main",
       "directory": null

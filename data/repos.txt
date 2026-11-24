@@ -3839,6 +3839,7 @@ SeKondBrainAILabs/kemory-panel
 selmakcby/clawd-madenci
 selvr0/harness-panel
 Sen-CaPoo/engram
+sendbird/sendbird-client-plugin
 Sennjen/claude-sdlc
 SenorKulka/claude-mods
 SentientNr6/claude-mods
