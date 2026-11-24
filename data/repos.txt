@@ -1167,6 +1167,7 @@ dontcallmejames/claude-usage-meter
 dookers-code/dooks-mods
 dophamine/claude-suggest
 doricstack/llm-fleet
+dortort/claude-plugins
 Dos2Locos/claude-code-mods
 dot-agi/arrester
 dot-agi/downrange
