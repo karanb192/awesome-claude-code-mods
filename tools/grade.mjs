@@ -42,8 +42,8 @@ export const METHODS = {
   'http.fetch': [3, 'network'], 'process.run': [2, 'runs processes'], 'process.spawn': [2, 'runs processes'], 'process.hookEnv': [1, ['reads env vars', 'persists state']],
   'settings.read': [1, 'reads settings'], 'env.get': [1, 'reads env vars'], 'env.set': [2, 'sets env vars'],
   'vcs.detect': [1, 'reads files'], 'vcs.diff': [1, 'reads files'], 'vcs.list': [2, ['runs processes', 'reads files']],
-  'vcs.status': [2, ['runs processes', 'reads files']], 'vcs.isolate': [2, ['runs processes', 'writes files']],
-  'vcs.release': [2, ['runs processes', 'writes files']],
+  'vcs.status': [2, ['runs processes', 'reads files']], 'vcs.isolate': [2, ['runs processes', 'writes files', 'reads files']],
+  'vcs.release': [2, ['runs processes', 'writes files', 'reads files']],
   'wasm.compile': [0, null],
 }
 

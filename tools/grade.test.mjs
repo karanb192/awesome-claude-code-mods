@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { METHODS, TABLE_VERSION, LABEL_ORDER as LABELS, grade, classified, regrade } from './grade.mjs'
 import { fingerprint, describeChange } from './changed.mjs'
+import { ACCESS } from '../finder/search.mjs'
 
 const members = JSON.parse(readFileSync(new URL('./api-members.json', import.meta.url), 'utf8'))
 
@@ -25,13 +26,16 @@ test('members new in 2.1.330 take the grade their declaration supports', () => {
   assert.deepEqual(at('$.session.machine'), [1, ['reads machine details']])
   assert.deepEqual(at('$.process.hookEnv'), [1, ['reads env vars', 'persists state']])
   assert.deepEqual(at('$.vcs.diff'), [1, ['reads files']])
-  assert.deepEqual(at('$.vcs.isolate'), [2, ['runs processes', 'writes files']])
-  assert.deepEqual(at('$.vcs.release'), [2, ['runs processes', 'writes files']])
+  assert.deepEqual(at('$.vcs.isolate'), [2, ['runs processes', 'writes files', 'reads files']])
+  assert.deepEqual(at('$.vcs.release'), [2, ['runs processes', 'writes files', 'reads files']])
   assert.deepEqual(at('$.vcs.status'), [2, ['runs processes', 'reads files']])
   assert.deepEqual(at('$.vcs.list'), [2, ['runs processes', 'reads files']])
   assert.deepEqual(at('$.agent.call'), [2, ['drives Claude']])
-  // Every label a rule names is one the pages order and the finder can filter on.
+  // Every label a rule names has a place in the page order, and every label a level 1 or higher call carries is one
+  // the finder accepts in --without, in the same order.
   for (const [, label] of Object.values(METHODS)) for (const one of [label].flat().filter(Boolean)) assert.ok(LABELS.includes(one), one)
+  const filterable = new Set(Object.values(METHODS).filter(([level]) => level > 0).flatMap(([, label]) => [label].flat().filter(Boolean)))
+  assert.deepEqual(ACCESS, LABELS.filter(label => filterable.has(label)))
   // A theme mod that only sets a look, redraws its own backdrop and keeps a setting draws and remembers.
   const theme = grade(['$.clock.after', '$.command.register', '$.store.get', '$.store.set', '$.theme.clear', '$.theme.set', '$.ui.invalidate', '$.ui.log', '$.ui.resolve'])
   assert.equal(theme.level, 0)
