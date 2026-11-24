@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-24T11:19:11.491Z",
   "claudeVersion": "2.1.331",
-  "repos": 4795,
+  "repos": 4796,
   "mods": [
     {
       "id": "anthropics/claude-code:mods/agents-md",
@@ -1186277,6 +1186277,84 @@
       "pushedAt": "2026-10-17T02:40:48Z",
       "createdAt": "2026-09-21T03:30:37Z",
       "license": "MIT",
+      "archived": false,
+      "defaultBranch": "main",
+      "directory": null
+    },
+    {
+      "id": "zColdWater/vibeshield-claude-mod:.",
+      "repo": "zColdWater/vibeshield-claude-mod",
+      "path": ".",
+      "sourceCommit": "f0fbfc9222dcd50107d730d45f5ec25e480874bd",
+      "sourceTree": "5aad299989df0e3a38d0c10d41fb15f469c7260f",
+      "name": "vibeshield-mod",
+      "description": "Pre-deploy secret-leak and client-bundle guardrail mod for Claude Code: blocks writing service-role keys, live Stripe/AWS secrets, or .env files into NEXT_PUBLIC_/VITE_ bundles and git commits.",
+      "author": "zColdWater",
+      "homepage": "https://vibe-checker.appwrite.network",
+      "url": "https://github.com/zColdWater/vibeshield-claude-mod",
+      "kind": "mod",
+      "hasManifest": true,
+      "modules": [
+        "./register.ts"
+      ],
+      "footprint": {
+        "status": "reported"
+      },
+      "hooks": [
+        {
+          "event": "session.start",
+          "matcher": {}
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Write"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Edit"
+          }
+        },
+        {
+          "event": "tool.call",
+          "matcher": {
+            "tool": "Bash"
+          }
+        }
+      ],
+      "calls": [
+        "$.ui.log"
+      ],
+      "surfaceModules": [],
+      "validate": {
+        "status": "passed",
+        "claudeVersion": "2.1.331",
+        "errors": []
+      },
+      "marketplaces": [],
+      "compatibility": {
+        "runtime": "not-tested",
+        "warnings": []
+      },
+      "reach": {
+        "level": 0,
+        "name": "draws and remembers",
+        "labels": [
+          "draws"
+        ]
+      },
+      "sees": [
+        "Write calls",
+        "Edit calls",
+        "Bash calls"
+      ],
+      "draws": [],
+      "stars": 0,
+      "pushedAt": "2026-11-23T05:11:51Z",
+      "createdAt": "2026-11-23T02:35:06Z",
+      "license": "NOASSERTION",
       "archived": false,
       "defaultBranch": "main",
       "directory": null

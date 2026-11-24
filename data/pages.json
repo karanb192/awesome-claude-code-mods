@@ -9638,6 +9638,7 @@
   "yyosifov--prompt-mods--model-tag": {"id":"yyosifov/prompt-mods:mods/model-tag"},
   "yyosifov--prompt-mods--stash-stack": {"id":"yyosifov/prompt-mods:mods/stash-stack"},
   "yzwooyi--claude-glance--glance": {"id":"yzwooyi/claude-glance:glance"},
+  "zColdWater--vibeshield-claude-mod--vibeshield-mod": {"id":"zColdWater/vibeshield-claude-mod:."},
   "zPeppOz--prompt-rewrite--prompt-rewrite": {"id":"zPeppOz/prompt-rewrite:."},
   "zaahiral--claude-latex--latex": {"id":"zaahiral/claude-latex:.","indexed":true},
   "zach-source--claude-factory--factory": {"id":"zach-source/claude-factory:mod","indexed":true},

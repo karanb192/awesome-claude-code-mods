@@ -4741,6 +4741,7 @@ Zaho92/claude-arcade
 zaripovfarrukh/claude-code-mods
 zcharef/session-topic
 zchee/claude-code-mods
+zColdWater/vibeshield-claude-mod
 zdanovichnick/dotnet-pilot
 zed-industries/delta-claude
 zenbu-labs/terminal-browser
