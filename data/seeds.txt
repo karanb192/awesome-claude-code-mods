@@ -320,6 +320,7 @@ yash-gadodia/claude-mods
 Yeachan-Heo/oh-my-claudecode
 ynqa/claude-convey
 yugabyte/meko
+zColdWater/vibeshield-claude-mod
 zed-industries/delta-claude
 zigansh1n/claude-focus-sidebar
 zirkelc/agent-journal
