@@ -175,7 +175,7 @@ export function accessFacts(mod) {
   return { calls, c, complete, kind, ungraded: c.unclassified.length + c.foreign.length, level: kind === 'graded' ? c.level : null, labels: kind === 'graded' ? c.labels : [], named }
 }
 
-const FOREIGN = 'Calls in a namespace that is not in the Claude Code 2.1.302 core table'
+const FOREIGN = 'Calls in a namespace that is not in the graded core table'
 const STATE_NOTE = 'the scan does not record whose state, so this does not show that it reads another mod’s values'
 
 // What the scan recorded, as one sentence and a short list, built only from scan fields so it never repeats
