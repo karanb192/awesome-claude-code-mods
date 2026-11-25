@@ -31,8 +31,9 @@ const REPO_FIXTURES = new Map([
   ['peterting/claude-mod', /^spikes\/crew(?:\/|$)/],
   ['robgruhl/claude-mod-learnings', /^experiments\/(?:e[1-7]-[^/]+|claude-lookalike|latency|live-probe)(?:\/|$)/],
   ['ruesato/claude-mods-fathom-progress', /^plugins\/fathom-probe(?:\/|$)/],
+  ['tatimblin/sub-human', /^scripts\/record-fixtures(?:\/|$)/],
   ['tinesoft/claude-mods', /^libs\/mod-kit(?:\/|$)/],
-  ...['xsyetopz/dotclaude', 'xsyetopz/claudetto'].map(repo => [repo, /^openspec\/changes\/(?:archive\/[^/]+-)?release-2-1-319\/evidence\/tmp\/(?:probe-141\/arm-reorder|probe-17-1-lab|probe-tui\/plug)(?:\/|$)/]),
+  ...['xsyetopz/dotclaude', 'xsyetopz/claudetto'].map(repo => [repo, /^(?:openspec\/changes\/(?:archive\/[^/]+-)?release-2-1-319\/evidence\/tmp\/(?:probe-141\/arm-reorder|probe-17-1-lab|probe-tui\/plug)|reports\/\d{4}-\d{2}-\d{2}-research)(?:\/|$)/]),
 ])
 
 const readList = path => {
