@@ -15,6 +15,7 @@ const REPO_FIXTURES = new Map([
   ['cyclopseyeteam/cyclops-fresheye', /^acceptance\/driver(?:\/|$)/],
   ['danielpg95/modster-hunter', /^spikes\/p5-39-desktop-art\/mod(?:\/|$)/],
   ['gaius-codius/ostrakon', /^tools\/(?:experiments\/(?:spc|spw|spx|spx0)|gallery|mockups)(?:\/|$)/],
+  ['gomelhawk/veroplugins', /^shared(?:\/|$)/],
   ['hwanyong/pane-grid', /^verification(?:\/|$)/],
   ['hwanyong/pending-questions', /^verification(?:\/|$)/],
   ['ivokund/claude-account-rotator', /^demo\/harness(?:\/|$)/],
@@ -29,6 +30,7 @@ const REPO_FIXTURES = new Map([
   ['partalemre/transceiver', /^spike\/tx-probe(?:\/|$)/],
   ['peterting/claude-mod', /^spikes\/crew(?:\/|$)/],
   ['robgruhl/claude-mod-learnings', /^experiments\/(?:e[1-7]-[^/]+|claude-lookalike|latency|live-probe)(?:\/|$)/],
+  ['ruesato/claude-mods-fathom-progress', /^plugins\/fathom-probe(?:\/|$)/],
   ['tinesoft/claude-mods', /^libs\/mod-kit(?:\/|$)/],
   ...['xsyetopz/dotclaude', 'xsyetopz/claudetto'].map(repo => [repo, /^openspec\/changes\/(?:archive\/[^/]+-)?release-2-1-319\/evidence\/tmp\/(?:probe-141\/arm-reorder|probe-17-1-lab|probe-tui\/plug)(?:\/|$)/]),
 ])

@@ -7,7 +7,7 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { loadSnapshot, buildIndex, search, getMod, InputError, MAX_LIMIT, REFRESH_AFTER_MS, MAX_STALE_MS } from './search.mjs'
 import { parseValidateOutput } from '../tools/parse.mjs'
-import { visibility } from '../tools/grade.mjs'
+import { grade, visibility } from '../tools/grade.mjs'
 
 const mod = (id, over = {}) => {
   const [repo, path] = id.split(':')
@@ -84,6 +84,15 @@ test('unavailable access stays unknown in search and details, including legacy f
   }
   assert.deepEqual(getMod(ix, 'b/partial:.').mod.calls, ['$.http.fetch'])
   assert.equal(getMod(ix, 'b/partial:.').mod.access.minimum_level, 3)
+})
+
+test('labels new with 2.1.330 filter through the finder: persists state and the worktree reads', () => {
+  const env = mod('n/env:.', { name: 'env-pane', description: 'Session env.', calls: ['$.process.hookEnv'], reach: grade(['$.process.hookEnv']) })
+  const tree = mod('o/tree:.', { name: 'tree-pane', description: 'Session worktree.', calls: ['$.vcs.isolate'], reach: grade(['$.vcs.isolate']) })
+  const plain = mod('p/plain:.', { name: 'plain-pane', description: 'Session clock.' })
+  const ix = buildIndex({ generated: DATA.generated, mods: [env, tree, plain] })
+  assert.deepEqual(ids(search(ix, { query: 'session', without: ['persists state'] })).sort(), ['o/tree:.', 'p/plain:.'])
+  assert.deepEqual(ids(search(ix, { query: 'session', without: ['reads files'] })).sort(), ['n/env:.', 'p/plain:.'])
 })
 
 test('access filters leave out mods with calls the scan could not classify', () => {

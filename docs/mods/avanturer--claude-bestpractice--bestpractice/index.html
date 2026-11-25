@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/avanturer/claude-bestpractice">avanturer/claude-bestpractice</a></p>
 <p class="lede">Enforcement, memory and parallel-session coordination for solo founders running several Claude Code sessions on one repository.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">bestpractice reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 7</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">bestpractice reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 11</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install bestpractice --marketplace avanturer/claude-bestpractice</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>Bash calls, WebSearch calls, ? calls, ListAgents calls, every skill, Read calls, subagent spawns</dd>
-    <dt>Hooks</dt><dd><code>tool.call {tool=Bash}, tool.call {tool=WebSearch}, tool.call {tool=?}, tool.call {tool=?}, tool.call {tool=ListAgents}, session.start, turn.complete, command.run {command=sessions}, ui.render {component=Pane, requestId=sessions}, skill.prompt, tool.call {tool=Read}, agent.spawn</code></dd>
+    <dt>Hooks</dt><dd><code>tool.call {tool=Bash}, tool.call {tool=WebSearch}, tool.call {tool=?}, tool.call {tool=?}, tool.call {tool=ListAgents}, session.start, turn.complete, command.run {command=sessions}, ui.render {component=Pane, requestId=sessions}, skill.prompt, tool.call {tool=Read}, prompt.attachment {type=nested_memory}, agent.spawn</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.process.run, $.session.cwd, $.session.id, $.tool.call, $.tool.list, $.ui.invalidate, $.ui.open, $.ui.resolve, $.ui.status</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/avanturer/claude-bestpractice/tree/0c8b0e34921a8c7c599b41e4c6bae6ff1dc1027d"><code>0c8b0e34921a</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/avanturer/claude-bestpractice/blob/0c8b0e34921a8c7c599b41e4c6bae6ff1dc1027d/.claude-plugin/marketplace.json">claude-bestpractice</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/avanturer/claude-bestpractice/tree/e0c41cf197b4b008a2a7cab180795563a954a2fa"><code>e0c41cf197b4</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/avanturer/claude-bestpractice/blob/e0c41cf197b4b008a2a7cab180795563a954a2fa/.claude-plugin/marketplace.json">claude-bestpractice</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/avanturer--claude-bestpractice--bestpractice-reach.svg" alt="Reach badge for bestpractice"> <img src="/badges/avanturer--claude-bestpractice--bestpractice-validates.svg" alt="Validation badge for bestpractice"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/avanturer--claude-bestpractice--bestpractice-reach.svg)](https://mods.aidojo.si/mods/avanturer--claude-bestpractice--bestpractice/)

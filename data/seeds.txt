@@ -57,6 +57,7 @@ bradtraversy/traversy-claude-mods
 cablate/model-relay
 candygoogy/notary
 ChanMeng666/echook
+chaufon/qol
 chenyuxiaojin/cyxj-notch
 chrisluo5311/Pixel-Play
 Civalski/claujev
@@ -75,6 +76,7 @@ deepaksinghcs14/deadeye-cc
 devsergioherrera/read-aloud-mod
 dominicrico/jev-router
 dophamine/claude-suggest
+dortort/claude-plugins
 dot-agi/arrester
 dot-agi/downrange
 dot-agi/high-command
@@ -136,6 +138,7 @@ jyooi/agent-simple-english
 k45sle/Claude-auto-pause
 karanb192/cache-tax
 karanb192/claude-code-mods
+karanb192/horcrux
 karanb192/time-blame
 kbrianps/claude-inline-images
 kbrianps/claude-latex-math
@@ -260,6 +263,7 @@ SARTHAK2511/claude-combo
 scasella/claude-flightdeck
 scaso01/claude-risk-guardrails
 Sen-CaPoo/engram
+sendbird/sendbird-client-plugin
 shannonbay/Quarterdeck
 shimo4228/harness-scope
 shohamtal/cc-mod-mysql-client
@@ -319,6 +323,7 @@ yash-gadodia/claude-mods
 Yeachan-Heo/oh-my-claudecode
 ynqa/claude-convey
 yugabyte/meko
+zColdWater/vibeshield-claude-mod
 zed-industries/delta-claude
 zigansh1n/claude-focus-sidebar
 zirkelc/agent-journal

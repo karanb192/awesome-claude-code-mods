@@ -128,12 +128,6 @@
       "reason": "hook module no longer present in a fresh checkout"
     },
     {
-      "id": "kuehn-lars/cc-graph:fixtures/sessions/wide-probe",
-      "repo": "kuehn-lars/cc-graph",
-      "revision": "92830d5c31337fa699a656a2465deda7243ff06d",
-      "reason": "hook module no longer present in a fresh checkout"
-    },
-    {
       "id": "kzarzycki/claude-mods:plugins/eval-kernel",
       "repo": "kzarzycki/claude-mods",
       "revision": "6c26f4c44a3c4ae5a5c27e87aacdf60f1a7049c4",
@@ -338,71 +332,5 @@
       "reason": "hook module no longer present in a fresh checkout"
     }
   ],
-  "repos": [
-    {
-      "repo": "3DMolier/3D-Models",
-      "revision": "78c4007c0184c9b02910c6e18f7b8f51d64fe4f4",
-      "reason": "no hook modules in a fresh checkout"
-    },
-    {
-      "repo": "blauwtje/exo",
-      "revision": "8d58210d538b8a750d024192cbb6a2f6e4a18ef3",
-      "reason": "no hook modules in a fresh checkout"
-    },
-    {
-      "repo": "cpeaustriajc/cj-stack",
-      "revision": "628e4eb5116f99ab8c7b4056aa0a463622034266",
-      "reason": "no hook modules in a fresh checkout"
-    },
-    {
-      "repo": "cpeaustriajc/dotfiles",
-      "revision": "628e4eb5116f99ab8c7b4056aa0a463622034266",
-      "reason": "no hook modules in a fresh checkout"
-    },
-    {
-      "repo": "daanqq/agent-config",
-      "revision": "8d780a4cb1023173e69b88a5d4b5e612deace6f1",
-      "reason": "no hook modules in a fresh checkout"
-    },
-    {
-      "repo": "hsuanshao/AgentMemory",
-      "revision": "ef0cf52e2c39367f2ebbe1f7efc08115b2d6ff20",
-      "reason": "no hook modules in a fresh checkout"
-    },
-    {
-      "repo": "hsuanshao/TeamAgentMemory",
-      "revision": "ef0cf52e2c39367f2ebbe1f7efc08115b2d6ff20",
-      "reason": "no hook modules in a fresh checkout"
-    },
-    {
-      "repo": "mthds-ai/mthds-plugins",
-      "revision": "4d31448867a069f7700cdc5f66891dbda777e357",
-      "reason": "no hook modules in a fresh checkout"
-    },
-    {
-      "repo": "qwang07/milestone-mod",
-      "revision": "57b3d00ec83ecc45fe68121b67c8ec3395e58d94",
-      "reason": "no hook modules in a fresh checkout"
-    },
-    {
-      "repo": "rjmurillo/ai-agents",
-      "revision": "eb4edfc336d0ce7f20fbc4d1674e41d4232279cc",
-      "reason": "no hook modules in a fresh checkout"
-    },
-    {
-      "repo": "superfly/sprites-claude-plugin",
-      "revision": "f610489b71dfe65f1aafb7ca72a9b4eebc7e023e",
-      "reason": "no hook modules in a fresh checkout"
-    },
-    {
-      "repo": "thaithienvanid/aidd",
-      "revision": "950ca1aedd4484d12af26134cf711f77f4e35611",
-      "reason": "no hook modules in a fresh checkout"
-    },
-    {
-      "repo": "tomada1114/tomada-claude-plugins",
-      "revision": "5cc1860d456872ffe8fccc76695ea84b7609b91e",
-      "reason": "no hook modules in a fresh checkout"
-    }
-  ]
+  "repos": []
 }
