@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, command.run {command=lumos}, command.run {command=nox}, ui.render {component=Backdrop}, ui.render {component=Spinner}, ui.render {component=TurnDuration}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.start, turn.complete, command.run {command=lumos}, command.run {command=nox}, ui.render {component=Backdrop}, ui.render {component=CommandOutput, surface=desktop|mobile, props has {command=lumos|nox|?|?, isErrored=false}}, ui.render {component=Spinner}, ui.render {component=TurnDuration}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.after, $.command.register, $.store.get, $.store.set, $.theme.clear, $.theme.set, $.ui.invalidate, $.ui.log, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/karanb192/horcrux/tree/bcac596e6b32d25b982861e6eda60fb49901d484"><code>bcac596e6b32</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/karanb192/horcrux/blob/bcac596e6b32d25b982861e6eda60fb49901d484/.claude-plugin/marketplace.json">horcrux</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/karanb192/horcrux/tree/db4cea44d56c8a689ba89c653344595ed9cf6632"><code>db4cea44d56c</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/karanb192/horcrux/blob/db4cea44d56c8a689ba89c653344595ed9cf6632/.claude-plugin/marketplace.json">horcrux</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/karanb192--horcrux--horcrux-reach.svg" alt="Reach badge for horcrux"> <img src="/badges/karanb192--horcrux--horcrux-validates.svg" alt="Validation badge for horcrux"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/karanb192--horcrux--horcrux-reach.svg)](https://mods.aidojo.si/mods/karanb192--horcrux--horcrux/)
