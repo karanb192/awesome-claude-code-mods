@@ -218,6 +218,7 @@ njp-coder/meanwhile
 NMenzel/claude-devtools-mod
 nouraraar91/while-you-wait
 nuromirzak/nibbl
+oficiallyAkshay/mission-status
 OG-Matcha/tessera
 ogxo-io/plugins
 OneWave-AI/claude-code-mods
