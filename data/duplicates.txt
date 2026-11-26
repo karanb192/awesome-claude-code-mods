@@ -187,3 +187,8 @@ Kuddev/pebrel:nebula_app/res/prompt-suggestions/claude Kuddev/pebrel:pebrel_app/
 ChaseSunstrom/sampo:mods/foreman-ui ChaseSunstrom/sampo:mods/sampo-ui
 Deluha/council-of-elrond:mods/council-of-elrond Deluha/council-of-elrond:.
 takosasi-dev/claude-code-mods:mods/reply-frame takosasi-dev/reply-frame:.
+netgfx/claude-clipboard-mod:plugins/clipboard-paste netgfx/claude-clipboard-mod:.
+thevibeworks/claude-code-docs:content/github/claude-plugins-official/plugins/claude-security anthropics/claude-plugins-official:plugins/claude-security
+thevibeworks/claude-code-docs:content/github/claude-plugins-official/plugins/code-modernization anthropics/claude-plugins-official:plugins/code-modernization
+thevibeworks/claude-code-docs:content/github/claude-plugins-official/plugins/theme-examples anthropics/claude-plugins-official:plugins/theme-examples
+GT1ONE/claude-mods:cache-tax karanb192/cache-tax:.
