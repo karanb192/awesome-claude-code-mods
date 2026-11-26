@@ -48,6 +48,7 @@ augiefra/claude-mods
 AxGord/claude-workflow
 axlaser/pitwall
 axtonliu/context-guard
+batanus/lip-dictation
 BatuhanCakmakk/wavy-usage
 beasaltfish/idle-arcade
 ben-rogerson/claude-counter-strike
