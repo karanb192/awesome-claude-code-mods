@@ -91,6 +91,7 @@ errhythm/ccswap
 francize/my-better-claude
 frankbria/codeframe
 FunJim/claude-code-add-to-chat
+fus3r/margincue
 gerricchaplin/pr-pulse
 ghosthat-studio/handoffs
 gorkamb/claude-session-outputs
