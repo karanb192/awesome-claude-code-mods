@@ -88,6 +88,8 @@ edtrackai/claude-code-guardrails-lite
 emergentai/claude-code-rich-ui
 ennovative-solutions/gitlab-pipeline-claude-mod
 errhythm/ccswap
+EzequielLech/chainguard-mcp
+EzequielLech/paygate-usdt
 francize/my-better-claude
 frankbria/codeframe
 FunJim/claude-code-add-to-chat
