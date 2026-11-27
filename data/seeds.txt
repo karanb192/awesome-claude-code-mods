@@ -125,6 +125,7 @@ ismoil77/claude-paste-thumb
 JakkapatB/open-effort
 jarrodwatts/intermission
 Jarvizx/hablo
+JCK-Sabords/token-maxxing
 JerryT2T/dotclaude
 JetBrains/roer
 jiang1997/Echo
