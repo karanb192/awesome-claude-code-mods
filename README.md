@@ -68,6 +68,8 @@ Read the mod's source and access details before installing. Validation checks th
 
 ## Every mod the scanner found
 
+- [Insomnia Security MCP (CQR Cybersecurity LLC)](https://github.com/CQR-Cybersecurity-LLC/insomnia-mcp) - 159 native cybersecurity, multi-language SAST/taint, live secret validation, SCA/SBOM, Web DAST, OSINT, 21,100+ 1-Day CVE verification, 29-protocol enumeration & Outbound Internal Network Tunnel v4.0 MCP tools (`https://mcp.insom.ai/mcp`, 50 free credits).
+
 The **[full catalogue][catalogue]** includes each discovered mod's description, access, observed events and validation result. [Built-in mods](https://mods.aidojo.si/#built-in-mods) are listed separately. You can also [download the catalogue as raw Markdown](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/catalogue.md).
 
 ## How the scan works
