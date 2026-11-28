@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Sennjen/claude-sdlc">Sennjen/claude-sdlc</a></p>
 <p class="lede">Hook-enforced approval gates for Claude Code: intent → spec → plan → build → verify → review, with a status bar and one-click approvals.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">ai-sdlc reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 5</li><li>API methods referenced: 17</li><li>Access from classified calls: L3, network: MCP servers, runs processes, drives Claude, writes the prompt box, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">ai-sdlc reaches L3 (network) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 17</li><li>Access from classified calls: L3, network: MCP servers, runs processes, drives Claude, writes the prompt box, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install ai-sdlc --marketplace Sennjen/claude-sdlc</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L3 Uses the network</span><span class="track" aria-label="Reach level 3: Uses the network"><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i><i class="on l3"></i></span><span class="labels">MCP servers, runs processes, drives Claude, writes the prompt box, reads files, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,14 +24,14 @@
 <dl>
 
     <dt>Observed events</dt><dd>every prompt, every tool call</dd>
-    <dt>Hooks</dt><dd><code>session.start, prompt.submit, tool.call, turn.complete, ui.render {component=SessionMode}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, prompt.submit, tool.call, turn.complete, prompt.autocomplete, ui.render {component=SessionMode}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.run, $.fs.read, $.fs.stat, $.mcp.call, $.process.run, $.prompt.fill, $.session.append, $.session.cwd, $.session.id, $.state.get, $.state.set, $.tool.call, $.tool.register, $.ui.notify, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/Sennjen/claude-sdlc/tree/2d4e36918be397c657bf417f3969dfb9fd0a7a4b"><code>2d4e36918be3</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/Sennjen/claude-sdlc/blob/2d4e36918be397c657bf417f3969dfb9fd0a7a4b/.claude-plugin/marketplace.json">ai-sdlc</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/Sennjen/claude-sdlc/tree/afb6440c918d8d82e00fbbe05731b3c3ff3e69b7"><code>afb6440c918d</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/Sennjen/claude-sdlc/blob/afb6440c918d8d82e00fbbe05731b3c3ff3e69b7/.claude-plugin/marketplace.json">ai-sdlc</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/Sennjen--claude-sdlc--ai-sdlc-reach.svg" alt="Reach badge for ai-sdlc"> <img src="/badges/Sennjen--claude-sdlc--ai-sdlc-validates.svg" alt="Validation badge for ai-sdlc"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/Sennjen--claude-sdlc--ai-sdlc-reach.svg)](https://mods.aidojo.si/mods/Sennjen--claude-sdlc--ai-sdlc/)

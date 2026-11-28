@@ -23,15 +23,15 @@
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>mcp__pr-watch__watch_pr calls, Bash calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=pr-watch}, tool.call {tool=mcp__pr-watch__watch_pr}, tool.call {tool=Bash}, ui.render {component=PromptHint}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Observed events</dt><dd>mcp__pr-watch__watch_pr calls, mcp__pr-watch__dismiss_pr_comments calls, Bash calls</dd>
+    <dt>Hooks</dt><dd><code>session.start, session.end, command.run {command=pr-watch}, tool.call {tool=mcp__pr-watch__watch_pr}, tool.call {tool=mcp__pr-watch__dismiss_pr_comments}, tool.call {tool=Bash}, ui.render {component=PromptHint}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.process.run, $.prompt.submit, $.session.cwd, $.state.get, $.state.set, $.store.get, $.store.set, $.tool.register, $.ui.notify, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/shaharz/pr-watch/tree/03d351207d4de251d7a87913717ab412618066e1"><code>03d351207d4d</code></a></dd>
-    <dt>Marketplace warnings</dt><dd><a href="https://github.com/shaharz/pr-watch/blob/03d351207d4de251d7a87913717ab412618066e1/.claude-plugin/marketplace.json">pr-watch</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/shaharz/pr-watch/tree/704749bec8b8b97c602c92aba7ad52b1bf7fbb82"><code>704749bec8b8</code></a></dd>
+    <dt>Marketplace warnings</dt><dd><a href="https://github.com/shaharz/pr-watch/blob/704749bec8b8b97c602c92aba7ad52b1bf7fbb82/.claude-plugin/marketplace.json">pr-watch</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/shaharz--pr-watch--pr-watch-reach.svg" alt="Reach badge for pr-watch"> <img src="/badges/shaharz--pr-watch--pr-watch-validates.svg" alt="Validation badge for pr-watch"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/shaharz--pr-watch--pr-watch-reach.svg)](https://mods.aidojo.si/mods/shaharz--pr-watch--pr-watch/)

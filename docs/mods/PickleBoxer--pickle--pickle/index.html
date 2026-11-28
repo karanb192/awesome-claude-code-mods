@@ -15,9 +15,9 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/PickleBoxer/pickle">PickleBoxer/pickle</a></p>
 <p class="lede">Engineering workflow skills for Claude Code, built on agent-skills and picked per task by one entry skill</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">pickle reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 8</li><li>Access from classified calls: L1, reads: writes the prompt box, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">pickle reaches L1 (reads) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 9</li><li>Access from classified calls: L1, reads: writes the prompt box, reads files, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
-<div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">writes the prompt box, reads mod state, draws</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">writes the prompt box, reads files, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
 <p class="actions"><a class="source" href="https://github.com/PickleBoxer/pickle">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#PickleBoxer--pickle--pickle">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
@@ -25,12 +25,12 @@
 
     <dt>Observed events</dt><dd>every prompt, every tool call</dd>
     <dt>Hooks</dt><dd><code>session.start, command.run {command=pickle-guide}, prompt.submit, tool.call, turn.complete, ui.render {component=AbovePrompt}, ui.render {component=Pane, requestId=guide}</code></dd>
-    <dt>API calls</dt><dd><code>$.command.register, $.prompt.fill, $.prompt.suggest, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
+    <dt>API calls</dt><dd><code>$.command.register, $.fs.read, $.prompt.fill, $.prompt.suggest, $.state.get, $.state.set, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/PickleBoxer/pickle/tree/c7ab55b975d29ce71911c5abba2d98c9b33387ae"><code>c7ab55b975d2</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/PickleBoxer/pickle/tree/6850c2d0b5e1573175ccad1c9eaed9a497f415ed"><code>6850c2d0b5e1</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 

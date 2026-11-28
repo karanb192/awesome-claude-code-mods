@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/cainrus/claude-cache-keeper">cainrus/claude-cache-keeper</a></p>
 <p class="lede">Keeps the prompt cache of an idle Claude Code session warm, only while someone is plausibly coming back. Pure hooks: no proxy, no MCP server, no dependencies.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">cache-keeper reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 6</li><li>API methods referenced: 12</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">cache-keeper reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 8</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: runs processes, drives Claude, reads files, reads env vars, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install cache-keeper --marketplace cainrus/claude-cache-keeper</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, drives Claude, reads files, reads env vars, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,15 +24,15 @@
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>AskUserQuestion calls, compaction</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.complete, turn.start, turn.step, tool.call {tool=AskUserQuestion}, session.compact</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.clock.sleep, $.env.get, $.fs.read, $.model.fork, $.process.run, $.prompt.submit, $.session.compact, $.session.id, $.ui.status</code></dd>
+    <dt>Observed events</dt><dd>every prompt, AskUserQuestion calls, compaction</dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.complete, prompt.submit, ui.render {component=AbovePrompt}, turn.start, turn.step, tool.call {tool=AskUserQuestion}, session.compact</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.clock.sleep, $.env.get, $.fs.read, $.model.fork, $.process.run, $.prompt.submit, $.session.compact, $.session.id, $.ui.invalidate, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/cainrus/claude-cache-keeper/tree/cf9935076db4a100bb5b4f404ce24e1f7ca9c54c"><code>cf9935076db4</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/cainrus/claude-cache-keeper/blob/cf9935076db4a100bb5b4f404ce24e1f7ca9c54c/.claude-plugin/marketplace.json">claude-cache-keeper</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/cainrus/claude-cache-keeper/tree/89fcd1077012d4a9c5fa46f052bbf6fed7374b93"><code>89fcd1077012</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/cainrus/claude-cache-keeper/blob/89fcd1077012d4a9c5fa46f052bbf6fed7374b93/.claude-plugin/marketplace.json">claude-cache-keeper</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/cainrus--claude-cache-keeper--cache-keeper-reach.svg" alt="Reach badge for cache-keeper"> <img src="/badges/cainrus--claude-cache-keeper--cache-keeper-validates.svg" alt="Validation badge for cache-keeper"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/cainrus--claude-cache-keeper--cache-keeper-reach.svg)](https://mods.aidojo.si/mods/cainrus--claude-cache-keeper--cache-keeper/)

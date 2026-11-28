@@ -15,22 +15,22 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/jagp/xray-mod">jagp/xray-mod</a></p>
 <p class="lede">Stare deeply into your contexts</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">xray-mod reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 10</li><li>Access from classified calls: L2, writes or runs: changes config, writes the clipboard, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">xray-mod reaches L2 (writes or runs) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 14</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: changes config, writes the clipboard, reads the transcript, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
-<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">changes config, writes the clipboard, reads mod state, draws</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">changes config, writes the clipboard, reads the transcript, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
 <p class="actions"><a class="source" href="https://github.com/jagp/xray-mod">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#jagp--xray-mod--xray-mod">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
     <dt>Observed events</dt><dd>every tool call, compaction</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=xray-mod-count}, command.run {command=xray-mod-viewport-demo}, ui.render {component=Pane, requestId=xray-mod-viewport-demo}, ui.message, ui.scroll {component=Pane, requestId=xray-mod-viewport-demo}, session.append, command.run {command=xray-mod-attribution}, command.run {command=xray-mod}, command.run {command=xrm}, tool.call, turn.step, session.measure, session.compact, ui.render {component=SessionMode}, ui.render {component=Pane, requestId=xray-mod}</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.config.set, $.session.usage, $.state.get, $.state.set, $.ui.copy, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
+    <dt>Hooks</dt><dd><code>session.start, command.run {command=xray-mod-count}, command.run {command=xray-mod-viewport-demo}, ui.render {component=Pane, requestId=xray-mod-viewport-demo}, ui.message, ui.render {component=Pane, requestId=xray-mod-view}, ui.close, ui.fault, ui.scroll {component=Pane, requestId=xray-mod-viewport-demo}, session.append, command.run {command=xray-mod-attribution}, command.run {command=xray-mod-turns}, command.run {command=xray-mod}, command.run {command=xrm}, tool.call, turn.start, turn.complete, turn.step, session.measure, session.compact, ui.scroll {component=Pane, requestId=xray-mod}, ui.render {component=SessionMode}, ui.render {component=Pane, requestId=xray-mod}</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.now, $.command.register, $.config.set, $.session.messages, $.session.usage, $.state.get, $.state.set, $.ui.close, $.ui.copy, $.ui.log, $.ui.open, $.ui.resolve, $.ui.toast</code></dd>
     <dt>Surface modules</dt><dd><code>hooks/viewport.tsx</code></dd>
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/jagp/xray-mod/tree/db48a1e55d7371c9c1190c507397cb2d6e56f948"><code>db48a1e55d73</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/jagp/xray-mod/tree/cc9e6b4350fa99d2633042057d7fc42b98c9b5a2"><code>cc9e6b4350fa</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 

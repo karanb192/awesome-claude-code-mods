@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Shin-junyeob/working_place">Shin-junyeob/working_place</a></p>
 <p class="lede">/mods 모드 허브: 세션의 컨텍스트·비용 게이지, claude agents 세션 상태·활동 피드, 메모·테트리스·포켓몬(도감·체육관·사천왕 배틀). tmux 패널·새 창·사용자 명령(cmux 등) 중 원하는 곳에 띄운다. Mods hub with gauges, memo and games, opened where you choose.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">pane-tools reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 2</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">pane-tools reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 14</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, reads files, reads env vars, persists state, draws</li><li>Static scan, not a runtime test</li></ul></section>
 <section class="install-hint" aria-labelledby="install-title"><h2 id="install-title">Install hint</h2><div class="command"><pre><code>/plugin install pane-tools --marketplace Shin-junyeob/working_place</code></pre><button type="button" class="copy" data-copy hidden>Copy</button></div><p>From the repository's own marketplace. Confirm the plugin name in the repository's README before installing. Mods need Claude Code 2.1.287 or later.</p></section><script>for(const b of document.querySelectorAll('[data-copy]')){b.hidden=false;b.onclick=()=>{const code=b.previousElementSibling,select=()=>{getSelection().selectAllChildren(code);b.textContent='Selected'};try{navigator.clipboard.writeText(code.textContent).then(()=>{b.textContent='Copied'},select)}catch{select()}}}</script>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, drives Claude, reads files, reads env vars, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -23,15 +23,15 @@
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>Only what it hooks</dd>
-    <dt>Hooks</dt><dd><code>session.start, command.run {command=mods}</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.every, $.command.register, $.env.get, $.fs.exists, $.fs.read, $.fs.write, $.process.run, $.prompt.submit, $.session.id, $.session.usage, $.store.get, $.store.set, $.ui.toast</code></dd>
+    <dt>Observed events</dt><dd>Bash calls</dd>
+    <dt>Hooks</dt><dd><code>tool.call {tool=Bash}, session.start, command.run {command=mods}</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.read, $.fs.write, $.process.run, $.prompt.submit, $.session.id, $.session.usage, $.store.get, $.store.set, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/Shin-junyeob/working_place/tree/8b0d4d955d3edf3d6e1df21ccc238a8295b932a7"><code>8b0d4d955d3e</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/Shin-junyeob/working_place/blob/8b0d4d955d3edf3d6e1df21ccc238a8295b932a7/.claude-plugin/marketplace.json">working-place</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/Shin-junyeob/working_place/tree/30318365b24f6f764363b0d83fc1129c7485c138"><code>30318365b24f</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/Shin-junyeob/working_place/blob/30318365b24f6f764363b0d83fc1129c7485c138/.claude-plugin/marketplace.json">working-place</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from Shin-junyeob/working_place</h2><ul><li><a href="/mods/Shin-junyeob--working_place--long-run-watch/">long-run-watch</a><span>작업마다 예상 소요 시간(지난 실행 기록·설명 속 '약 N분')을 상태줄에 보이고, 예상을 넘기면 알린다. 백그라운드는 예상 시간이 지나면 확인하라고 알린다 · Shows an estimate f…</span></li></ul></section>
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/Shin-junyeob--working_place--pane-tools-reach.svg" alt="Reach badge for pane-tools"> <img src="/badges/Shin-junyeob--working_place--pane-tools-validates.svg" alt="Validation badge for pane-tools"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/Shin-junyeob--working_place--pane-tools-reach.svg)](https://mods.aidojo.si/mods/Shin-junyeob--working_place--pane-tools/)

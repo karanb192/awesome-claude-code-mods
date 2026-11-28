@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/Kolibee-GmbH/m2b">Kolibee-GmbH/m2b</a></p>
 <p class="lede">Your second brain for Claude Code, one store across all your projects and machines: capture notes, search them, see your tasks, get a small curated distillate in every session, see in a band above the prompt what waits for your answer, and keep or drop what curation proposes in the m2b pane. One add-on, off until set up: a worklog of your agent sessions in herdr.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">m2b reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 10</li><li>API methods referenced: 25</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">m2b reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 9</li><li>API methods referenced: 26</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, reads files, reads env vars, reads mod state, persists state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, drives Claude, reads files, reads env vars, reads mod state, persists state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -23,14 +23,14 @@
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>compaction, ? calls, every prompt</dd>
-    <dt>Hooks</dt><dd><code>session.start, turn.complete, session.end, session.compact, command.run {command=?}, command.run {command=?}, command.run {command=?}, command.run {command=?}, command.run {command=?}, command.run {command=?}, tool.call {tool=?}, tool.call {tool=?}, tool.call {tool=?}, tool.check {tool=?}, tool.check {tool=?}, tool.check {tool=?}, ui.close {id=?}, ui.render {component=Pane, requestId=?}, prompt.submit, ui.render {component=AbovePrompt}, ui.render {component=PromptHint}</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.read, $.fs.write, $.process.run, $.session.id, $.session.root, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.set, $.tool.check, $.tool.register, $.ui.close, $.ui.focus, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
+    <dt>Observed events</dt><dd>? calls, every prompt</dd>
+    <dt>Hooks</dt><dd><code>session.start, turn.complete, session.end, command.run {command=?}, command.run {command=?}, command.run {command=?}, command.run {command=?}, command.run {command=?}, command.run {command=?}, tool.call {tool=?}, tool.call {tool=?}, tool.call {tool=?}, tool.check {tool=?}, tool.check {tool=?}, tool.check {tool=?}, ui.close {id=?}, ui.render {component=Pane, requestId=?}, prompt.submit, ui.render {component=AbovePrompt}, ui.render {component=PromptHint}</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.register, $.env.get, $.fs.exists, $.fs.read, $.fs.stat, $.fs.write, $.process.run, $.session.id, $.session.root, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.set, $.tool.check, $.tool.register, $.ui.close, $.ui.focus, $.ui.open, $.ui.panes, $.ui.resolve, $.ui.status, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/Kolibee-GmbH/m2b/tree/3694e7cf36fbfe8c888f5b4f2f898ad011adef55"><code>3694e7cf36fb</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/Kolibee-GmbH/m2b/tree/80f2c86d57130b2fb63ba871ad064ed5722d033e"><code>80f2c86d5713</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
