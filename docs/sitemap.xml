@@ -63,7 +63,16 @@
 <url><loc>https://mods.aidojo.si/mods/Ahmad8864--cc-side--cc-side/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Aitherium--awdk--awcompact/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Aitherium--awdk--awsh/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/Akash001uts--claude-mods--application-assistant/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/Akash001uts--claude-mods--assessment-marker/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/Akash001uts--claude-mods--auto-handoff/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Akash001uts--claude-mods--context-bar/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/Akash001uts--claude-mods--course-correct/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/Akash001uts--claude-mods--needs-you/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/Akash001uts--claude-mods--pinned-notes/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/Akash001uts--claude-mods--session-archive/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/Akash001uts--claude-mods--tool-guards/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/Akash001uts--claude-mods--voice-profile/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Akeuuh--claude-mods--ask-jev-file/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Akeuuh--claude-mods--ask-jev-files/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Akeuuh--claude-mods--ask-jev/</loc></url>
@@ -117,6 +126,7 @@
 <url><loc>https://mods.aidojo.si/mods/Boom-Vitt--boombignose-mods--agents-panel/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Boom-Vitt--boombignose-mods--context-bar/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Boom-Vitt--boombignose-mods--pdpa-thai/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/BordyV--brainrot-break--brainrot-break/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/BrianHuang813--clawd-actor--clawd-actor/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/BrunoL0M--claude-sesiones-mod--sesiones/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Bulls-Work--bullswarm--bullswarm/</loc></url>
@@ -201,6 +211,7 @@
 <url><loc>https://mods.aidojo.si/mods/HT0710--claudzilla--margin/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/HT0710--claudzilla--primer/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Halvanhelv--claude-ci-line--ci-line/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/Hanafubuki--ops-control--sidequest/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Hangghost--learning-hacker-claude-mod--dispatch-board/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Hangghost--learning-hacker-claude-mod--dispatch-relay/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Hangghost--learning-hacker-claude-mod--handoff-runner/</loc></url>
@@ -213,6 +224,7 @@
 <url><loc>https://mods.aidojo.si/mods/Heuwzen--claude-runway--star-pins/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/HeyCubit--effortless--effortless/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/HeyCubit--effortless--textless/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/HigorAlves--orc--orc/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Hnquangg123--kessoku-ultimate-bocchi--kessoku-ultimate-bocchi/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/HolyGrail--claude-mods--cache-meter/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/HolyGrail--claude-mods--notice-board/</loc></url>
@@ -232,6 +244,7 @@
 <url><loc>https://mods.aidojo.si/mods/Hula-Hoop-AI--supermods--tide/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Hula-Hoop-AI--supermods--trace/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Hula-Hoop-AI--supermods--worktrees/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/HyunjunJeon--claude-workflow-mods--dag-workflow/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/HyunjunJeon--jev-context--jev-context/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/IAmUnbounded--save-token-jev-clean--save-token-jev/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/IKnowJot--clawd-plugins--clawd-arcade/</loc></url>
@@ -817,7 +830,6 @@
 <url><loc>https://mods.aidojo.si/mods/NikiforovAll--claude-code-rules--gitlab-mr/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/NodarDavituri--fast-compact--fast-compact/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Nongfsq--frank-claude-cockpit--context-card/</loc></url>
-<url><loc>https://mods.aidojo.si/mods/Nongfsq--frank-claude-cockpit--pr-pane/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/NotTahaAli--sessclone--sessclone/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/NovusEdge--a2a-mod--a2a-mod/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/NovusEdge--glowup--glowup/</loc></url>
@@ -836,7 +848,6 @@
 <url><loc>https://mods.aidojo.si/mods/Oqura-ai--optim-jev--optim-jev/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/OrihuelaConde--cozy-clawd--cozy-clawd/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/PCIRCLE-AI--memesh--memesh/</loc></url>
-<url><loc>https://mods.aidojo.si/mods/Paradigm-Study--claude-share--shared-session/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/PiPercentHuman--agentjournal--agentjournal/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/PiPercentHuman--agentjournal--meter/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/PiPercentHuman--agentjournal--plain-cut/</loc></url>
@@ -1075,6 +1086,7 @@
 <url><loc>https://mods.aidojo.si/mods/Ryan-LT--claude-mods--idle-compact/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Ryan-LT--claude-mods--limits/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/Ryan-LT--claude-mods--quick-replies/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/RyanWeera--crab-progress--crab-progress/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/SSS135--claude-code-codex-plugin--codex/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/SaM-runtime--claude-console--console-status/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/SaharCarmel--linear-mod--linear/</loc></url>
@@ -1260,6 +1272,7 @@
 <url><loc>https://mods.aidojo.si/mods/alan890104--claude-code-paste-preview--paste-preview/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/alexandernicholson--agent-router--agent-router/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/alexandernicholson--agent-router--keepalive/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/alexcloudstar--statusline-pro--statusline-pro/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/alexcz-a11y--claude-mods--dispatch-pilot/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/alexcz-a11y--claude-mods--image-pane/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/alexcz-a11y--claude-mods--skill-pilot/</loc></url>
@@ -1279,7 +1292,6 @@
 <url><loc>https://mods.aidojo.si/mods/alinaqi--mixture-of-models-claude-mod--mixture-of-models/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/ambervdberg--smartcompact--smartcompact/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/amigoer--ccprogress--ccprogress/</loc></url>
-<url><loc>https://mods.aidojo.si/mods/amontlabs--lcu--lcu-approve/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/anantraghunath--claude-code-usage-quota-mod--usage-quota/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/andreichiritescu--claude-code-cache-keep-warm--cache-keep-warm/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/andrewbakercloudscale--claude-code-cost-sidebar--usage-panel/</loc></url>
@@ -1341,6 +1353,8 @@
 <url><loc>https://mods.aidojo.si/mods/augiefra--claude-mods--token-weather-usage/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/avanturer--claude-bestpractice--bestpractice/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/avestura--whiteboard-defense--whiteboard-defense/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/avtc--avtc-pi-session-owl--session-owl-subagent-support/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/avtc--avtc-pi-session-owl--session-owl/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/axlaser--pitwall--pitwall/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/axtonliu--context-guard--context-guard/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/ayagmar--claude-modmgr--modmgr/</loc></url>
@@ -1640,6 +1654,7 @@
 <url><loc>https://mods.aidojo.si/mods/coindef--waitroom--wait-anchor/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/coindef--waitroom--wait-breathe/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/coindef--waitroom--wait-cards/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/coindef--waitroom--wait-chore/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/coindef--waitroom--wait-focus/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/coindef--waitroom--wait-notify/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/coindef--waitroom--wait-ping/</loc></url>
@@ -1677,7 +1692,7 @@
 <url><loc>https://mods.aidojo.si/mods/davekiss--mods--ci-light/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/davekiss--mods--leaks/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/davidar--claude-idle-compact--idle-compact/</loc></url>
-<url><loc>https://mods.aidojo.si/mods/dayfinggg--anthropic-claude-code-agent-skills--concise/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/dayfinggg--anthropic-claude-code-agent-skills--vesper-sieve/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/dcglanton-stack--claude-clubhouse--clubhouse/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/declanbx--keepwarm--keepwarm/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/deejay-hub--sf-headless-band--sf-headless-band/</loc></url>
@@ -1967,7 +1982,6 @@
 <url><loc>https://mods.aidojo.si/mods/jiikko--dotfiles--ratelimit-warn/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/jiikko--dotfiles--tool-elapsed/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/jkf87--ide-mod--ide-mod/</loc></url>
-<url><loc>https://mods.aidojo.si/mods/jmgirard--cairn--cairn/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/joeldg--claude-mods--dev-servers/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/joeldg--claude-mods--docs-gardener/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/joeldg--claude-mods--downloads-drop/</loc></url>
@@ -1987,9 +2001,11 @@
 <url><loc>https://mods.aidojo.si/mods/joeldg--claude-mods--standing-orders/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/joeldg--claude-mods--test-gardener/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/joeldg--claude-mods--usage-meter/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/johnnyhelder--claude-model-super-power--model-super-power/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/jonathanlocks--usage-band-mod--usage-band-mod/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/jonpojonpo--cc-crayon--crayon/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/joonhyukyim--redpen--redpen/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/jos3duardo--je-claude-mods--je-mods/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/joshotws--desk-panel--desk-panel/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/jrlprost--claude-code-mods--jr-awake/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/jrlprost--claude-code-mods--jr-badge/</loc></url>
@@ -2056,6 +2072,7 @@
 <url><loc>https://mods.aidojo.si/mods/k45sle--Claude-auto-pause--auto-pause/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/kadaliao--claude-mods--ambience/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/kadaliao--claude-mods--danmaku/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/kadaliao--claude-mods--open-file/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/kadaliao--claude-mods--peek/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/kadaliao--claude-mods--prompt-en/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/kadaliao--claude-mods--statusline/</loc></url>
@@ -2071,6 +2088,11 @@
 <url><loc>https://mods.aidojo.si/mods/karanb192--horcrux--horcrux/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/karanb192--time-blame--time-blame/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/kargarisaac--session-state--session-state/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/katipally--modz--buddy/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/katipally--modz--cache-timer/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/katipally--modz--model-info/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/katipally--modz--orchestrator/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/katipally--modz--usage-limits/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/kbrianps--claude-inline-images--inline-images/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/kbrianps--claude-latex-math--latex-math/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/kesavreddy-commits--repoviewer--kesav/</loc></url>
@@ -2103,8 +2125,6 @@
 <url><loc>https://mods.aidojo.si/mods/kzarzycki--claude-mods--ttsr-rules/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/lakmadev--pixel-pet--pixel-pet/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/lcalmsky--deadhd--deadhd/</loc></url>
-<url><loc>https://mods.aidojo.si/mods/leeovery--portal--workflow-gates-rows/</loc></url>
-<url><loc>https://mods.aidojo.si/mods/leeovery--portal--workflow-gates/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/leeovery--tick--ledger-gates-rows/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/leeovery--tick--ledger-gates/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/legostin--wirepane--wirepane/</loc></url>
@@ -2146,6 +2166,7 @@
 <url><loc>https://mods.aidojo.si/mods/lucassimzq--claude-usage-mod--usage-hud/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/lucenity0--claude-familiar--familiar/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/luisfmontes--rainforest-mind--rainforest-mind/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/lurenxing628--claude-code-mod-statusline--session-hud/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/luucas42--agent-flow--agent-flow/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/luvpame--dotfiles--markdown-colors/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/luvpame--dotfiles--turn-timeline/</loc></url>
@@ -2181,6 +2202,7 @@
 <url><loc>https://mods.aidojo.si/mods/melodic-software--claude-code-plugins--display-redaction/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/melodic-software--claude-code-plugins--plugin-profiles/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/melodic-software--claude-code-plugins--rate-limits/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/melodic-software--claude-code-plugins--session-flow/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/melodic-software--claude-code-plugins--session-telemetry/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/melodic-software--claude-code-plugins--themes/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/mertkayacs--ultramod--ultramod/</loc></url>
@@ -2338,6 +2360,8 @@
 <url><loc>https://mods.aidojo.si/mods/nim-f--jev-pilot--jev-pilot/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/ninondev--cc-coco--coco/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/nison--claude-invaders--invaders/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/niuarque-br--mods-config--mods-config/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/niuarque-br--mods-jarvis--modo-conversa/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/nkapila6--sfx-gen--sfx-gen/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/no1cromo--claude-code-mod-for-github-issues--repo-issues/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/noam812--arch-diagram--arch-diagram/</loc></url>
@@ -2477,7 +2501,7 @@
 <url><loc>https://mods.aidojo.si/mods/omeerdvrn--o-mods--usage-bar/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/omeerdvrn--o-mods--usage-stats/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/overvac--usage-bar--usage-bar/</loc></url>
-<url><loc>https://mods.aidojo.si/mods/p2p2sp--viber--viber/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/oztrkemree--mochi--mochi-buddy/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/pablodiazjorge--impact-radius--impact-radius/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/pablodiazjorge--rea-casebook--rea-casebook/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/parodiniccolo--claude-3dgs-view--3dgs-view/</loc></url>
@@ -2494,6 +2518,7 @@
 <url><loc>https://mods.aidojo.si/mods/partalemre--MODZ--pr-card/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/partalemre--MODZ--projects/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/partalemre--MODZ--reflect-mod/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/partalemre--MODZ--refusal-card/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/partalemre--MODZ--replay-theater/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/partalemre--MODZ--savvy-progress/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/partalemre--MODZ--secret-guard/</loc></url>
@@ -2548,12 +2573,12 @@
 <url><loc>https://mods.aidojo.si/mods/pthexton--claude-sidebar-mod--sidebar/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/ptpmediabr--mods-manager--mods-manager/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/ptpmediabr--usage-weather--usage-weather/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/pvjbuilds--crab-buddy--crab-buddy/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/qorvyx--burn-baby-burn--burn-baby-burn/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/qrxcodes--qrx-mcp--qrx/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/qualixar--modstage--modstage/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/quaresc--cockpit--cockpit/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/r3al1tym--claude-review--review-pane/</loc></url>
-<url><loc>https://mods.aidojo.si/mods/r3dbars--transcripted--transcripted-live/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/rahimi--claude-code-swarm--agent-swarm/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/rapha-rodrigues--cc-esol--cc-esol/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/raresmun--claude-mods--clawd/</loc></url>
@@ -2590,6 +2615,7 @@
 <url><loc>https://mods.aidojo.si/mods/reporails--arcade--minefield/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/revenantworks--claude-skills--shroud/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/revenantworks--claude-skills--vigil/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/reylukakozlowski--limits-statusline--limits-statusline/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/rezk2ll--skills--context-hud/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/rezk2ll--skills--context-meter/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/rezk2ll--skills--gh-guard/</loc></url>
@@ -2612,6 +2638,7 @@
 <url><loc>https://mods.aidojo.si/mods/robinalexandre--claude-code-kit--recent-prompts/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/robinalexandre--claude-code-kit--reminders-handoffs/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/robonuggets--ribbon--ribbon/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/rogadev--paceline--paceline/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/rolottr--claude-mod-meatproxy--meatproxy/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/romiluz13--cc10x--cc10x/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/romnycristopher--claude-am-mods--am-context-bar/</loc></url>
@@ -2640,6 +2667,7 @@
 <url><loc>https://mods.aidojo.si/mods/ruvnet--ruflo--ruflo-browser/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/ruvnet--ruflo--ruflo-business-pods/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/ruvnet--ruflo--ruflo-chatgpt-federation/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/ruvnet--ruflo--ruflo-console/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/ruvnet--ruflo--ruflo-daa/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/ruvnet--ruflo--ruflo-ddd/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/ruvnet--ruflo--ruflo-deepseek-harness/</loc></url>
@@ -2739,7 +2767,6 @@
 <url><loc>https://mods.aidojo.si/mods/shahsanket2107--clarvis--clarvis/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/shalintripathi--saas-marketing-agents--campaign-board/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/shannonbay--Quarterdeck--quarterdeck-goals/</loc></url>
-<url><loc>https://mods.aidojo.si/mods/shannonbay--Quarterdeck--quarterdeck-guard/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/shengyy--ccoverhead--ccoverhead/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/sherbaev--claude-usage-tracker--usage-tracker-pane/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/shijieli708-ship-it--claude-mods--inline-next-steps/</loc></url>
@@ -2791,6 +2818,7 @@
 <url><loc>https://mods.aidojo.si/mods/steven-panxd--codex-pet-in-claude--codex-pet/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/stgoddv--session-pilot--session-pilot/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/stuinfla--ruvnet-brain--rnb-terminal-routing/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/svd--agent-skills--ctx-guard/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/swicken--tiller--tiller/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/swingerman--engineer--engineer/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/sxhmilyoyo--sundayhao-plugins--debrief/</loc></url>
@@ -2831,6 +2859,7 @@
 <url><loc>https://mods.aidojo.si/mods/thkt--dotclaude--redact/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/thnk2wn--trail--trail/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/tiger42--claude-mods--color-chooser/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/tiger42--claude-mods--skill-band/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/tiger42--claude-mods--usage-band/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/timoncool--angry-switcher--angry-switcher/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/timoncool--slapbox--slapbox/</loc></url>
@@ -2883,6 +2912,7 @@
 <url><loc>https://mods.aidojo.si/mods/ushironoko--dotfiles--agents-view/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/ushironoko--dotfiles--file-view/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/ushironoko--dotfiles--issue-view/</loc></url>
+<url><loc>https://mods.aidojo.si/mods/ushironoko--dotfiles--memory-view/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/ushironoko--dotfiles--pr-view/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/vadympetryshyn--effort-pilot--effort-pilot/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/vakovalskii--quote-reply--quote-reply/</loc></url>
@@ -3009,7 +3039,6 @@
 <url><loc>https://mods.aidojo.si/mods/xsyetopz--claudetto--claudetto-spec/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/xsyetopz--claudetto--claudetto-you-should-know/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/xsyetopz--claudetto--claudetto/</loc></url>
-<url><loc>https://mods.aidojo.si/mods/xsyetopz--claudetto--reloadprobe/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/xtrm-dev--specialists--specialists-ui/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/xtrm-dev--specialists--specialists/</loc></url>
 <url><loc>https://mods.aidojo.si/mods/xuanji86--claude-agentpane--agentpane/</loc></url>

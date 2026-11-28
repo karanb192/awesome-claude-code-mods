@@ -15,7 +15,7 @@
 <p class="byline">A Claude Code mod in <a href="https://github.com/gtapps/hermitd">gtapps/hermitd</a></p>
 <p class="lede">Test wrapper for the core chat harness mod.</p>
 
-<section class="summary" aria-label="Scan summary"><p class="summary-line">hermitd-mod-tests reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 12</li><li>API methods referenced: 13</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, reads files, reads env vars</li><li>Static scan, not a runtime test</li></ul></section>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">hermitd-mod-tests reaches L2 (writes or runs) and passed <code>claude plugin validate</code>.</p><ul><li>Events hooked: 13</li><li>API methods referenced: 15</li><li>Access from classified calls: L2, writes or runs: runs processes, writes files, drives Claude, reads files, reads env vars</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
 <div class="facts"><div><h2>Access</h2><span class="level">L2 Writes or runs</span><span class="track" aria-label="Reach level 2: Writes or runs"><i class="on l2"></i><i class="on l2"></i><i class="on l2"></i><i class=""></i></span><span class="labels">runs processes, writes files, drives Claude, reads files, reads env vars</span></div>
 <div><h2>Validation</h2><span class="status">Passed</span></div></div>
@@ -24,13 +24,13 @@
 <dl>
 
     <dt>Observed events</dt><dd>classic hooks, every prompt, compaction</dd>
-    <dt>Hooks</dt><dd><code>tool.check, classic.PermissionRequest, prompt.submit, classic.PreModelSwitch, classic.PostModelSwitch, session.append, session.compact, session.start, classic.SessionStart, turn.step, turn.start, turn.complete</code></dd>
-    <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.run, $.env.get, $.fs.list, $.fs.read, $.fs.write, $.process.run, $.prompt.submit, $.session.id, $.session.root, $.turn.abort</code></dd>
+    <dt>Hooks</dt><dd><code>tool.check, classic.PermissionRequest, prompt.submit, session.receive, classic.PreModelSwitch, classic.PostModelSwitch, session.append, session.compact, session.start, classic.SessionStart, turn.step, turn.start, turn.complete</code></dd>
+    <dt>API calls</dt><dd><code>$.clock.after, $.clock.every, $.clock.now, $.command.list, $.command.run, $.env.get, $.fs.list, $.fs.read, $.fs.write, $.process.run, $.prompt.submit, $.session.id, $.session.root, $.session.send, $.turn.abort</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/gtapps/hermitd/tree/cfcf04003dc1d3b8ca8f8813efaf6899f1e609fa"><code>cfcf04003dc1</code></a></dd>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/gtapps/hermitd/tree/7c96ad10e24269d05972a906e068313a107625d4"><code>7c96ad10e242</code></a></dd>
     </dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 <section class="siblings" aria-labelledby="siblings-title"><h2 id="siblings-title">More from gtapps/hermitd</h2><ul><li><a href="/mods/gtapps--hermitd--hermitd/">hermitd</a><span>Your own local Claude Tag, in the Claude app, Discord, Telegram, or a custom Claude Code channel.</span></li></ul></section>

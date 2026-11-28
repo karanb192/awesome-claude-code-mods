@@ -14,10 +14,10 @@
 <h1>tool-lines</h1>
 <p class="byline">A Claude Code mod in <a href="https://github.com/fgilio/tool-lines-mod">fgilio/tool-lines-mod</a></p>
 <p class="lede">Draws each tool call as one compact line; click a line to see its full input and result in a side pane</p>
-
-<section class="summary" aria-label="Scan summary"><p class="summary-line">tool-lines reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 6</li><li>Access from classified calls: L1, reads: reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
+<p class="compatibility">review UI rewrite</p>
+<section class="summary" aria-label="Scan summary"><p class="summary-line">tool-lines reaches L1 (reads) and passed <code>claude plugin validate</code> with warnings.</p><ul><li>Events hooked: 3</li><li>API methods referenced: 8</li><li>Access from classified calls: L1, reads: reads env vars, reads mod state, draws</li><li>Reads mod state: the scan does not record whose state, so this does not show that it reads another mod’s values</li><li>Static scan, not a runtime test</li></ul></section>
 <p class="install">To install it, open the repository and follow the author’s setup instructions. Mods need Claude Code 2.1.287 or later.</p>
-<div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads mod state, draws</span></div>
+<div class="facts"><div><h2>Access</h2><span class="level">L1 Reads</span><span class="track" aria-label="Reach level 1: Reads"><i class="on l1"></i><i class="on l1"></i><i class=""></i><i class=""></i></span><span class="labels">reads env vars, reads mod state, draws</span></div>
 <div><h2>Validation</h2><span class="status">Passed with warnings</span></div></div>
 <p class="actions"><a class="source" href="https://github.com/fgilio/tool-lines-mod">View the source on GitHub <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a><a href="/#fgilio--tool-lines-mod--tool-lines">Back to the list</a></p>
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
@@ -25,13 +25,13 @@
 
     <dt>Observed events</dt><dd>every tool call</dd>
     <dt>Hooks</dt><dd><code>ui.render {component=UserMessage, props.origin has {kind=composer}}, ui.render {component=ToolUse}, ui.render {component=ToolGroup}, ui.render {component=ToolResult}, tool.call, ui.close {id=tool-detail}, ui.render {component=Pane, requestId=tool-detail}</code></dd>
-    <dt>API calls</dt><dd><code>$.state.get, $.state.set, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.resolve</code></dd>
+    <dt>API calls</dt><dd><code>$.env.get, $.state.get, $.state.set, $.ui.close, $.ui.invalidate, $.ui.open, $.ui.panes, $.ui.resolve</code></dd>
 
     <dt>Validation</dt><dd>Passed with warnings</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/fgilio/tool-lines-mod/tree/4d122e8a0de8a66d14510834d3422676d2eabcdf"><code>4d122e8a0de8</code></a></dd>
-    </dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/fgilio/tool-lines-mod/tree/25120e3fc40852a4bee224d6aabc9b078bd8c64a"><code>25120e3fc408</code></a></dd>
+    <dt>UI rewrite review</dt><dd>UI hook source contains control-character strings. Review any values passed to next() as rewritten props.text; the scanner does not trace whether these strings reach that call. <a href="https://github.com/fgilio/tool-lines-mod/blob/25120e3fc40852a4bee224d6aabc9b078bd8c64a/hooks/detail.ts#L236">hooks/detail.ts:236</a>, <a href="https://github.com/fgilio/tool-lines-mod/blob/25120e3fc40852a4bee224d6aabc9b078bd8c64a/hooks/detail.ts#L239">hooks/detail.ts:239</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/fgilio--tool-lines-mod--tool-lines-reach.svg" alt="Reach badge for tool-lines"> <img src="/badges/fgilio--tool-lines-mod--tool-lines-validates.svg" alt="Validation badge for tool-lines"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/fgilio--tool-lines-mod--tool-lines-reach.svg)](https://mods.aidojo.si/mods/fgilio--tool-lines-mod--tool-lines/)

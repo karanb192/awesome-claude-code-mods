@@ -23,15 +23,15 @@
 <section class="record" aria-labelledby="record-title"><h2 id="record-title">What the scan recorded</h2>
 <dl>
 
-    <dt>Observed events</dt><dd>mcp__secret-mod__ask calls, mcp__secret-mod__delete calls, mcp__secret-mod__list calls, mcp__secret-mod__run calls</dd>
-    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=mcp__secret-mod__ask}, tool.call {tool=mcp__secret-mod__delete}, tool.call {tool=mcp__secret-mod__list}, tool.call {tool=mcp__secret-mod__run}, ui.render {component=AbovePrompt}</code></dd>
+    <dt>Observed events</dt><dd>mcp__secret-mod__ask calls, mcp__secret-mod__delete calls, mcp__secret-mod__list calls, every tool call, mcp__secret-mod__run calls</dd>
+    <dt>Hooks</dt><dd><code>session.start, tool.call {tool=mcp__secret-mod__ask}, tool.call {tool=mcp__secret-mod__delete}, tool.call {tool=mcp__secret-mod__list}, tool.call, tool.call {tool=mcp__secret-mod__run}, ui.render {component=AbovePrompt}</code></dd>
     <dt>API calls</dt><dd><code>$.process.run, $.prompt.submit, $.state.get, $.state.set, $.store.delete, $.store.get, $.store.set, $.tool.register, $.ui.ask, $.ui.focus, $.ui.resolve, $.ui.toast</code></dd>
 
     <dt>Validation</dt><dd>Passed</dd>
 
 
-    <dt>Scanned revision</dt><dd><a href="https://github.com/zyx1121/secret-mod/tree/f60399f2e88e36a256a3964396b08dd979e4548c"><code>f60399f2e88e</code></a></dd>
-    <dt>Marketplace passed</dt><dd><a href="https://github.com/zyx1121/secret-mod/blob/f60399f2e88e36a256a3964396b08dd979e4548c/.claude-plugin/marketplace.json">secret-mod</a></dd></dl>
+    <dt>Scanned revision</dt><dd><a href="https://github.com/zyx1121/secret-mod/tree/d14b5e2c940db96b247212a211c2ab9c52ebe2dc"><code>d14b5e2c940d</code></a></dd>
+    <dt>Marketplace passed</dt><dd><a href="https://github.com/zyx1121/secret-mod/blob/d14b5e2c940db96b247212a211c2ab9c52ebe2dc/.claude-plugin/marketplace.json">secret-mod</a></dd></dl>
 <p class="note">These are the hooks and API calls reported by <code>claude plugin validate</code>. Access levels describe the widest reach of those calls and are not safety ratings. Validation is a static check, not a runtime test, and a passing result does not prove that a mod works or is safe. <a href="/access/">What a mod can access and how the scan works</a>.</p></section>
 
 <section class="badge-snippet" aria-labelledby="badge-title"><h2 id="badge-title">Badge for your README</h2><p><img src="/badges/zyx1121--secret-mod--secret-mod-reach.svg" alt="Reach badge for secret-mod"> <img src="/badges/zyx1121--secret-mod--secret-mod-validates.svg" alt="Validation badge for secret-mod"></p><p>Authors can show the latest scan result in their README. Each badge links to this page.</p><pre><code>[![reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/zyx1121--secret-mod--secret-mod-reach.svg)](https://mods.aidojo.si/mods/zyx1121--secret-mod--secret-mod/)
