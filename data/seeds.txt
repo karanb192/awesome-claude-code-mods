@@ -271,6 +271,7 @@ shohamtal/cc-mod-opensearch-console
 Shuffzord/RoadRaven
 SimakovIgor/pixel-buddy
 Sma1lboy/claude-standup
+sofumel/reinwatch
 SmartAndPoint/ProjectStore
 SmelterLabs/claude-account-switcher
 somethingwentwell/cc-mod-banana-game
